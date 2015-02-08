@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <link href="" rel="alternate" type="application/rss+xml" title="dduan.net" />
-  <link href="http://localhost:1313/css/bootstrap.min.css" rel="stylesheet">
-  <link href="http://localhost:1313/css/hc.css" rel="stylesheet">
+  <link href="http://dduan.net/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://dduan.net/css/hc.css" rel="stylesheet">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   
     
@@ -32,9 +32,9 @@
           <ul class="nav navbar-nav">
 					
 					
-					<li><a href="http://localhost:1313/post/">Posts </a></li>
+					<li><a href="http://dduan.net/post/">Posts </a></li>
 					
-					<li><a href="http://localhost:1313/about/">About </a></li>
+					<li><a href="http://dduan.net/about/">About </a></li>
 					
           </ul>
         </div>
@@ -47,12 +47,12 @@
        <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
 					<img src="" />
-          <li class="sidebar-brand"><a href="http://localhost:1313/"><h1 class="brand">dduan.net</h1></a><h3></h3></li>
+          <li class="sidebar-brand"><a href="http://dduan.net/"><h1 class="brand">dduan.net</h1></a><h3></h3></li>
           <hr />
 					
-						<li><a href="http://localhost:1313/post/">Posts </a></li>
+						<li><a href="http://dduan.net/about/">About </a></li>
 					
-						<li><a href="http://localhost:1313/about/">About </a></li>
+						<li><a href="http://dduan.net/post/">Posts </a></li>
 					
           <hr />
           <div id="social-wrapper">
@@ -77,13 +77,80 @@
       
       <li><small><a class="meta" href="/tags/ios">iOS</a></small></li>
       
-      <li><small><a class="meta" href="/tags/tools">Tools</a></small></li>
+      <li><small><a class="meta" href="/tags/objective-c">Objective-C</a></small></li>
+      
+      <li><small><a class="meta" href="/tags/swift">Swift</a></small></li>
+      
+      <li><small><a class="meta" href="/tags/devtool">DevTool</a></small></li>
       
     </ul>
    <hr/>
    </div>
    <div class="post">
-     <p>test</p>
+     <p>Xcode is slow. Enough said. What&rsquo;s worse, sometimes I find myself
+relying too much on auto-completion with Cocoa Touch, a blessing and a curse!</p>
+
+<p>So I searched for an alternative workflow in command line. The result was
+rather confusing: there are posts about using <code>xctool</code> or <code>xcodebuild</code> to
+build Xcode targets, using <code>ios-sim</code>, <code>simctl</code>  or <code>instruments</code> to manage and
+manage or launch simulators. Most of the information is out of date.</p>
+
+<p>Eventually though, I was able to piece together an answer for my needs.
+That is, given an iOS project set up with Xcode 6, I want to</p>
+
+<ol>
+<li>build a target.</li>
+<li>launch a iOS simulator.</li>
+<li>install the built .app bundle to the launched simulator.</li>
+<li>run the installed app.</li>
+<li>uninstall the app from the simulator.</li>
+</ol>
+
+<p>All in command line, with Xcode <em>closed</em>.</p>
+
+<p>Before we proceed to the steps, you need to gather a few pieces of information:</p>
+
+<ol>
+<li>the Xcode build scheme of your choice (e.g. &ldquo;AwesomeApp&rdquo;).</li>
+<li>your app bundle ID (e.g. &ldquo;com.awesome.app&rdquo;).</li>
+<li>name of an existing simulator (e.g. &ldquo;iPhone 6 Plus&rdquo;). If you don&rsquo;t want to
+look it up in Xcode GUI, look for it in output of command <code>xcrun simctl
+list</code> .</li>
+</ol>
+
+<p>Ready? Here we go.</p>
+
+<p>(These commands should be run in the project folder).</p>
+
+<p>Build the target:</p>
+
+<pre><code>xcodebuild -scheme AwesomeApp -destination 'platform=iphonesimulator,name=iPhone 6 Plus' -derivedDataPath build
+</code></pre>
+
+<p>Launch the simulator:</p>
+
+<pre><code>xcrun instruments -w 'iPhone 6 Plus'
+</code></pre>
+
+<p>Install the bundle (after simulator is launched and target is built with
+previous commands):</p>
+
+<pre><code>xcrun simctl install booted build/Build/Products/Debug-iphonesimulator/AwesomeApp.app
+</code></pre>
+
+<p>Launch the app in simulator (after it&rsquo;s installed with the previous command):</p>
+
+<pre><code>xcrun simctl launch booted com.awesome.app
+</code></pre>
+
+<p>Uninstall the bundle:</p>
+
+<pre><code>xcrun simctl uninstall booted com.awesome.app
+</code></pre>
+
+<p>Quite a few parameters needs to be added for the build step if you have
+a comlex project. Please RTFMs. Write some script to automate the steps, if
+are a lazy typiest like me.</p>
 
  </div>
 <a href="https://news.ycombinator.com/submit" class="hn-button" data-style="twitter">Vote on Hacker News</a>
@@ -93,7 +160,7 @@
  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
    </div>
  <ul class="pager">
-      &nbsp;<li class="previous"><a href="http://localhost:1313/about/"> About Daniel Duan</a></li>
+      &nbsp;<li class="previous"><a href="http://dduan.net/about/"> About Daniel Duan</a></li>
      
 </ul>
 
@@ -108,10 +175,7 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script type="text/javascript" src="/js/hc.js"></script>
-<script>document.write('<script src="http://'
-        + (location.host || 'localhost').split(':')[0]
-		+ ':1313/livereload.js?mindelay=10"></'
-        + 'script>')</script></body>
+</body>
 
 </html>
 

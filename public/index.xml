@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Daniel Duan</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Daniel Duan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+    
+    
+    
+    <lastBuildDate>Sat, 07 Feb 2015 19:56:08 PST</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>stuff</title>
+      <link>http://localhost:1313/post/stuff/</link>
+      <pubDate>Sat, 07 Feb 2015 19:56:08 PST</pubDate>
+      
+      <guid>http://localhost:1313/post/stuff/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Sat, 07 Feb 2015 18:03:45 PST</pubDate>
+      
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m an iOS developer.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

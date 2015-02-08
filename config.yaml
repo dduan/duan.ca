@@ -1,6 +1,7 @@
 ---
 baseurl: "http://dduan.net"
 title: "dduan.net"
+theme: "herring-cove"
 params:
     AuthorName: "Daniel Duan"
     Copyright: true

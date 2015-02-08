@@ -1,8 +1,10 @@
 +++
 date = "2015-02-07T18:03:45-08:00"
-title = "about"
-
+title = "About Daniel Duan"
+weight = -1
 +++
 
 
-I'm an iOS developer.
+I'm a space enthusiasit.
+
+Currently, I work at [drchrono](drchrono.com) as the lead iOS engineer.

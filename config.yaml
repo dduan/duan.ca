@@ -1,11 +1,12 @@
 ---
 baseurl: "http://dduan.net"
-title: "Daniel Duan"
+title: "dduan.net"
 params:
     AuthorName: "Daniel Duan"
     Copyright: true
     github: "https://github.com/dduan"
     twitter: "https://twitter.com/daniel_duan"
+    appstore: "https://itunes.apple.com/us/artist/nan-duan/id619307372"
     links:
         Posts: "/post/"
         About: "/about/"

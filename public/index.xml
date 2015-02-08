@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Daniel Duan</title>
+    <title>dduan.net</title>
     <link>http://localhost:1313/</link>
-    <description>Recent content on Daniel Duan</description>
+    <description>Recent content on dduan.net</description>
     <generator>Hugo -- gohugo.io</generator>
     
     
     
     
-    <lastBuildDate>Sat, 07 Feb 2015 20:35:02 PST</lastBuildDate>
+    <lastBuildDate>Sat, 07 Feb 2015 18:03:45 PST</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About Daniel Duan</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Sat, 07 Feb 2015 18:03:45 PST</pubDate>
+      
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m a space enthusiasit.&lt;/p&gt;
+
+&lt;p&gt;Currently, I work at &lt;a href=&#34;drchrono.com&#34;&gt;drchrono&lt;/a&gt; as the lead iOS engineer.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Build And Run iOS Apps In Commmand Line</title>
@@ -19,16 +31,6 @@
       
       <guid>http://localhost:1313/post/2015/02/build-and-run-ios-apps-in-commmand-line/</guid>
       <description>&lt;p&gt;test&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>about</title>
-      <link>http://localhost:1313/about/</link>
-      <pubDate>Sat, 07 Feb 2015 18:03:45 PST</pubDate>
-      
-      <guid>http://localhost:1313/about/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m an iOS developer.&lt;/p&gt;
 </description>
     </item>
     

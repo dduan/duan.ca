@@ -3,10 +3,12 @@ baseurl: "http://dduan.net"
 title: "Daniel Duan"
 params:
     AuthorName: "Daniel Duan"
-    Copyright: "Daniel Duan"
+    Copyright: true
     github: "https://github.com/dduan"
     twitter: "https://twitter.com/daniel_duan"
     links:
-        Posts: "/posts/"
+        Posts: "/post/"
         About: "/about/"
+taxonomies:
+    tag: "tags"
 ...

@@ -1,16 +1,25 @@
 {{ template "theme/partials/header.html" . }}
   <div id="article">
    <div class="article-title">{{ .Title }}</div>
-   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> {{ .Date.Format  "2006-01-02" }}</small></p> <hr/>
+   <div class="meta">
+   <small>&nbsp;<i class="fa fa-calendar-o"></i> {{ .Date.Format  "2006-01-02" }}</small>
+    <ul id="tags">
+        <i class="fa fa-tags"></i> 
+      {{ range .Params.tags }}
+      <li><small><a class="meta" href="/tags/{{ . | urlize }}">{{ . }}</a></small></li>
+      {{ end }}
+    </ul>
+   <hr/>
+   </div>
    <div class="post">
      {{ .Content }}
-   </div>
  </div>
-
+<a href="https://news.ycombinator.com/submit" class="hn-button" data-style="twitter">Vote on Hacker News</a>
+<script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
 
  <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
+   </div>
  <ul class="pager">
      {{with .Prev}} &nbsp;<li class="previous"><a href="{{.Permalink}}"> {{.Title}}</a></li>{{end}}
      {{with .Next}} &nbsp;<li class="next"><a href="{{.Permalink}}"> {{.Title}}</a></li>{{end}}

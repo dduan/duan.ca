@@ -245,6 +245,21 @@ ul,ol
   font-weight:lighter
 }
 
+ul#tags {
+    list-style: none;
+    list-style-type: none;
+    display: inline;
+    padding: 0 0 0 8px;
+}
+
+ul#tags li {
+    display: inline;
+}
+
+span#article-time {
+    display: inline;
+}
+
 pre
 {
   background:#f5f5f8

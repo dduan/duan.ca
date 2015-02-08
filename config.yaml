@@ -1,0 +1,12 @@
+---
+baseurl: "http://dduan.net"
+title: "Daniel Duan"
+params:
+    AuthorName: "Daniel Duan"
+    Copyright: "Daniel Duan"
+    github: "https://github.com/dduan"
+    twitter: "https://twitter.com/daniel_duan"
+    links:
+        Posts: "/posts/"
+        About: "/about/"
+...

@@ -9,8 +9,42 @@
     
     
     
-    <lastBuildDate>Sat, 07 Feb 2015 20:35:02 PST</lastBuildDate>
+    <lastBuildDate>Tue, 10 Feb 2015 02:09:50 PST</lastBuildDate>
     <atom:link href="http://dduan.net/tags/devtool/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>My Xcode 6.2 And 6.3 Prediction</title>
+      <link>http://dduan.net/post/2015/02/my-xcode-62-and-63-prediction/</link>
+      <pubDate>Tue, 10 Feb 2015 02:09:50 PST</pubDate>
+      
+      <guid>http://dduan.net/post/2015/02/my-xcode-62-and-63-prediction/</guid>
+      <description>&lt;p&gt;We have a situation here: three versions of Xcode are available to devleopers as of this writing.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Xcode 6.1.1&lt;/li&gt;
+&lt;li&gt;Xcode 6.2 beta&lt;/li&gt;
+&lt;li&gt;Xcode 6.3 beta&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;6.2 is released with the purpose of making WatchKit availale.&lt;/p&gt;
+
+&lt;p&gt;6.3, so far, has been focused on Swift 1.2 and new Objective-C features, and a
+few non-language related features.&lt;/p&gt;
+
+&lt;p&gt;The fact that there are two betas indicates to me each will be followed up by
+an official release. So how?&lt;/p&gt;
+
+&lt;p&gt;My guess: there will be an official Xcode 6.2 release after Watch release. It doesn&amp;rsquo;t make much sense to skip a minor version.&lt;/p&gt;
+
+&lt;p&gt;Then things get interesting. Watch is coming out in April. Shortly after that, we&amp;rsquo;ll have WWDC. Usually, WWDC comes with major Xcode beta release. So &amp;hellip; what happens to version 6.3?&lt;/p&gt;
+
+&lt;p&gt;My guess: either we&amp;rsquo;ll never get Xcode 6.3, or we won&amp;rsquo;t get Xcode 7 this year.&lt;/p&gt;
+
+&lt;p&gt;The former make sense in the context that &lt;a href=&#34;http://9to5mac.com/2015/02/09/apples-ios-9-to-have-huge-stability-and-optimization-focus-after-years-of-feature-additions/&#34;&gt;Apple Is Focused on Stablity&lt;/a&gt;. Xcode needs some love on that front, let&amp;rsquo;s face it!&lt;/p&gt;
+
+&lt;p&gt;On the other hand, no harm would be done if Apple market 6.3 as version 7 come WWDC. Afterall, Swift 1.2 is significant enough to justify a major version.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Build And Run iOS Apps In Commmand Line</title>

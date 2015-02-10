@@ -9,8 +9,42 @@
     
     
     
-    <lastBuildDate>Sat, 07 Feb 2015 20:35:02 PST</lastBuildDate>
+    <lastBuildDate>Tue, 10 Feb 2015 02:09:50 PST</lastBuildDate>
     <atom:link href="http://dduan.net/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>My Xcode 6.2 And 6.3 Prediction</title>
+      <link>http://dduan.net/post/2015/02/my-xcode-62-and-63-prediction/</link>
+      <pubDate>Tue, 10 Feb 2015 02:09:50 PST</pubDate>
+      
+      <guid>http://dduan.net/post/2015/02/my-xcode-62-and-63-prediction/</guid>
+      <description>&lt;p&gt;We have a situation here: three versions of Xcode are available to devleopers as of this writing.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Xcode 6.1.1&lt;/li&gt;
+&lt;li&gt;Xcode 6.2 beta&lt;/li&gt;
+&lt;li&gt;Xcode 6.3 beta&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;6.2 is released with the purpose of making WatchKit availale.&lt;/p&gt;
+
+&lt;p&gt;6.3, so far, has been focused on Swift 1.2 and new Objective-C features, and a
+few non-language related features.&lt;/p&gt;
+
+&lt;p&gt;The fact that there are two betas indicates to me each will be followed up by
+an official release. So how?&lt;/p&gt;
+
+&lt;p&gt;My guess: there will be an official Xcode 6.2 release after Watch release. It doesn&amp;rsquo;t make much sense to skip a minor version.&lt;/p&gt;
+
+&lt;p&gt;Then things get interesting. Watch is coming out in April. Shortly after that, we&amp;rsquo;ll have WWDC. Usually, WWDC comes with major Xcode beta release. So &amp;hellip; what happens to version 6.3?&lt;/p&gt;
+
+&lt;p&gt;My guess: either we&amp;rsquo;ll never get Xcode 6.3, or we won&amp;rsquo;t get Xcode 7 this year.&lt;/p&gt;
+
+&lt;p&gt;The former make sense in the context that &lt;a href=&#34;http://9to5mac.com/2015/02/09/apples-ios-9-to-have-huge-stability-and-optimization-focus-after-years-of-feature-additions/&#34;&gt;Apple Is Focused on Stablity&lt;/a&gt;. Xcode needs some love on that front, let&amp;rsquo;s face it!&lt;/p&gt;
+
+&lt;p&gt;On the other hand, no harm would be done if Apple market 6.3 as version 7 come WWDC. Afterall, Swift 1.2 is significant enough to justify a major version.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Build And Run iOS Apps In Commmand Line</title>
@@ -850,56 +884,6 @@ provided by projects like &lt;code&gt;gitolite&lt;/code&gt; is only natural. But
 them, and want more creativity from your team, perhaps embracing the
 social aspect of Git by breaking the shackles on their hand is a good thing
 to try.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Windows 8 First Impression</title>
-      <link>http://dduan.net/post/2012/10/windows-8-first-impression/</link>
-      <pubDate>Sat, 27 Oct 2012 23:59:59 -0600</pubDate>
-      
-      <guid>http://dduan.net/post/2012/10/windows-8-first-impression/</guid>
-      <description>&lt;p&gt;I use KDE on Arch Linux for 80% of the time, OS X the other 20%. But I
-got a copy of Windows 8 Pro for free as student so I decided to install it
-along with Visual Studio 2012 Ultimate so that if I ever need to develop on any
-Microsoft platforms, I&amp;rsquo;ll have the environment ready. I jogged down these
-impression after about a 30 minutes trial.&lt;/p&gt;
-
-&lt;p&gt;What I didn&amp;rsquo;t like:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;I have to use a .iso file the hardway (in my case, burning it to an
-usb drive)even if I only wanted to upgrade from Windows 7.&lt;/li&gt;
-&lt;li&gt;When upgrading from Windows 7, only the free space is counted as usable
-for the new system, which means upgrading is not an option for I have a
-mere 26G partition reserved for Windows.&lt;/li&gt;
-&lt;li&gt;The old Mobile ATI graphic card driver stopped working after installation.&lt;/li&gt;
-&lt;li&gt;Apps don&amp;rsquo;t share same session between the tile and deskop interface.&lt;/li&gt;
-&lt;li&gt;Contacts from different accounts (in my case, facebook and twitter) are
-mixed together and there doesn&amp;rsquo;t seem to be an easy way to filter them.&lt;/li&gt;
-&lt;li&gt;I signed in with a Mircrosoft account for the operating system. But when
-I started Visual Studio, it asked me to sign in with the same account.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;What I did like:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The tile interface looked nice.&lt;/li&gt;
-&lt;li&gt;IE10 is fast. Looked particularly smooth under the tile interface.&lt;/li&gt;
-&lt;li&gt;For an old machine I installed it on, the whole system is very responsive.&lt;/li&gt;
-&lt;li&gt;The tile interface is not unintuitive. When in doubt, one of these actions
-always gets me where I wanted:
-
-&lt;ol&gt;
-&lt;li&gt;Mouse to upper-right corner.&lt;/li&gt;
-&lt;li&gt;Mouse to upper-left corner and then move down.&lt;/li&gt;
-&lt;li&gt;Press the Win key on keyboard.&lt;/li&gt;
-&lt;/ol&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I&amp;rsquo;m not going to speculate on whether the general public will love or hate
-this version of Windows. But one thing is for sure: there is going to be an
-reaction. I can see it go both ways.&lt;/p&gt;
 </description>
     </item>
     

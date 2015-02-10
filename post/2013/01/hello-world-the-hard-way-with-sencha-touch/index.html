@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>&#34;Hello, World!&#34; The Hard Way with Sencha Touch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <link href="" rel="alternate" type="application/rss+xml" title="dduan.net" />
+  <link href="http://dduan.net/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://dduan.net/css/hc.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  
+    
+    </head>
+    <body>
+<div class="nav-toggle"><i class="fa fa-bars fa-2x"></i> Herring Cove </div>
+      <div id = "wrapper">
+
+
+<div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <p class="navbar-brand">dduan.net</p>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+					
+					
+					<li><a href="http://dduan.net/about/">About </a></li>
+					
+					<li><a href="http://dduan.net/post/">Posts </a></li>
+					
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+       
+       <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+					<img src="" />
+          <li class="sidebar-brand"><a href="http://dduan.net/"><h1 class="brand">dduan.net</h1></a><h3></h3></li>
+          <hr />
+					
+						<li><a href="http://dduan.net/about/">About </a></li>
+					
+						<li><a href="http://dduan.net/post/">Posts </a></li>
+					
+          <hr />
+          <div id="social-wrapper">
+           <li> <a href="https://twitter.com/daniel_duan"><i class="fa fa-twitter-square"></i> Twitter</a></li>
+           <li> <a href="https://github.com/dduan"><i class="fa fa-github-square"></i> Github</a> </li>
+           <li> <a href="https://itunes.apple.com/us/artist/nan-duan/id619307372"><i class="fa fa-apple"></i> AppStore</a> </li>
+         </div>
+       </ul>
+     </div>
+
+
+
+     <div class="container">
+
+
+  <div id="article">
+   <div class="article-title">&#34;Hello, World!&#34; The Hard Way with Sencha Touch</div>
+   <div class="meta">
+   <small>&nbsp;<i class="fa fa-calendar-o"></i> 2013-01-11</small>
+    <ul id="tags">
+        <i class="fa fa-tags"></i> 
+      
+      <li><small><a class="meta" href="/tags/sencha-touch">Sencha Touch</a></small></li>
+      
+      <li><small><a class="meta" href="/tags/mobile-development">Mobile Development</a></small></li>
+      
+    </ul>
+   <hr/>
+   </div>
+   <div class="post">
+     <p>When I first got into the amazing Sencha Touch HTML5 framwork, it came across
+as a compilation of visual components that looks mobile, <a href="http://compass-style.org">easily themable</a>,
+leverage the latest HTML5 technology to be efficient and, best
+of all, are created within the Javascript code as oppose to being shoved
+in to an HTML file and demand DOM tinkering later.</p>
+
+<p>But a closer look would reveal a lot more goodies beyond those handy
+components in Sencha Touch. It offers <a href="http://docs.sencha.com/touch/2-1/#!/guide/class_system">a class system</a>, a <a href="http://www.sencha.com/learn/architecting-your-app-in-ext-js-4-part-1">M</a><a href="http://www.sencha.com/learn/architecting-your-app-in-ext-js-4-part-2">V</a><a href="http://www.sencha.com/learn/architecting-your-app-in-ext-js-4-part-3">C</a>
+<a href="http://www.sencha.com/blog/architecting-your-app-with-sencha-touch-2-mvc">pattern</a>, tools that handles code dependency, compression and native
+packaging, etc. Albeit daunting, learning and embracing all of those offerings
+makes a quite enjoyable coding experience and rewards me with development
+effieciency overall.</p>
+
+<p>Sometimes though, I need complete control of a visual component that doesn&rsquo;t
+exist in the framework. How to make this work with everything mentioned above
+is implied in various tutorials posted by the Sencha team, but I couldn&rsquo;t find
+a clear illustration of that, which is why I decided to write one here.</p>
+
+<p>Here&rsquo;s our goal: make a component that displays data from a model with our own
+custom HTML; manage it along with some provided components from the framework
+and follow the MVC pattern.</p>
+
+<p>I assume you have the basics set up. I&rsquo;m using Sencha Cmd 3.0.0.250, Sencha
+Touch SDK 2.1.0 and OS X Mountain Lion as of this writing.</p>
+
+<p>Let&rsquo;s start by generating a MVC-ready skeleton project called HelloWorld. Go to
+the SDK&rsquo;s folder and type:</p>
+
+<pre><code>    sencha generate app HelloWorld ~/helloworld
+</code></pre>
+
+<p>replace the last parameter with the path you would like for the project files
+to stay. We&rsquo;ll be working in this folder from now on.</p>
+
+<p>In the skeleton project, a main view was created under <code>app/view/Main.js</code> and
+declared as dependency for <code>app.js</code>. An instance of it is created when the app
+finished loading. We&rsquo;ll keep this setup as our main view. Let&rsquo;s reduce
+<code>app/view/Main.js</code> to a simplest possble form for our purposes:</p>
+
+<pre><code>    Ext.define('HelloWorld.view.Main', {
+      extend: 'Ext.Container',
+      config: {
+        items: [ { xtype: 'helloview' } ]
+      }
+    });
+</code></pre>
+
+<p>Following the convention, we name the class in corrispondance with its
+filepath within the <code>app</code> folder (&lsquo;view/Main.js&rsquo; =&gt; &lsquo;view.Main&rsquo;). All
+classes created with <code>Ext.define</code> should follow this convention so that Sencha
+tools can relate code dependencies to file structure and do its magic for us.
+We&rsquo;ll circle back to this.</p>
+
+<p>Our main view will be a plain container and has a <code>helloview</code> in it. An
+<code>Ext.Container</code> has the ability to &hellip; contain stuff. Specifically, it can
+organize <code>Ext.Component</code>s visually. <code>helloview</code> will be that component. Let&rsquo;s
+define it next.</p>
+
+<p>Create the file <code>app/view/HelloView.js</code> as the following:</p>
+
+<pre><code>    Ext.define('HelloWorld.view.HelloView', {
+      extend: 'Ext.Component',
+      xtype: 'helloview',
+      config: {
+        tpl: '&lt;div class=&quot;greeting&quot;&gt;Hello, {name}!&lt;/div&gt;'
+      }
+    });
+</code></pre>
+
+<p>As promised, <code>HelloWorld.view.HelloView</code> is a <code>Ext.Component</code>. We declare its
+<code>xtype</code> to be the one we used in the main view. The really interesting part is
+its <code>tpl</code> configuration. This is where our customization integrates with the
+rest of the Sencha Touch framework, so it&rsquo;s worth dive into a bit deeper.</p>
+
+<p>(<em>Caution</em>: <code>tpl</code> can not be mixed with <code>items</code>, if you want standard components
+mixed in with yours, make them share a container and arrange a proper layout
+there.)</p>
+
+<p>Take a look at the official <a href="http://docs.sencha.com/touch/2-1/#!/api/Ext.Component-cfg-tpl">documentation for <code>tpl</code></a>. It accepts an
+<a href="http://docs.sencha.com/touch/2-1/#!/api/Ext.XTemplate"><code>Ext.XTemplate</code></a>, which is basically free-range HTML plus some syntax to
+insert data provided to the component. Apply all your HTML skills here! For
+illustration purposes, we only throw in a basic <code>&lt;div&gt;</code>.</p>
+
+<p>The <code>{name}</code> part will be replaced by the actual data, which every
+<code>Ext.Component</code> has as a configuration option by default. Being such option
+means two things:</p>
+
+<pre><code>1. You can specify its value in the class definition, as we did for `tpl`.
+2. It gets a &quot;getter/setter&quot; that let you query/change its value at anytime
+    through the instance's existence.
+</code></pre>
+
+<p>We&rsquo;ll use the setter for <code>data</code> &ndash; <code>setData()</code> to populate this field in the
+template later. <code>setData()</code> accept one raw Javascript object and make its
+properties accessible to the template.</p>
+
+<p>Next, let&rsquo;s make a simplistic model in <code>app/model/Greetee.js</code>:</p>
+
+<pre><code>    Ext.define('HelloWorld.model.Greetee', {
+      extend: 'Ext.data.Model',
+      config: {
+        fields: ['name']
+      }
+    });
+</code></pre>
+
+<p>A model, with a field &lsquo;name&rsquo;. Hey, that&rsquo;s <code>as simple as possible, but no
+simpler</code>, Einstein would endorse it!</p>
+
+<p>We won&rsquo;t use any proxy or store in conjunction with the model because we
+only need to show how a customized view works within the Sencha Touch MVC
+pattern. Speaking of which, a controller does just that. So to tie everything
+togeter, here&rsquo;s <code>app/controller/Main.js</code>:</p>
+
+<pre><code>    Ext.define('HelloWorld.controller.Main', {
+      extend: 'Ext.app.Controller',
+      config: {
+        models: ['Greetee'],
+        views: ['HelloView'],
+        refs: {
+          helloView: '.helloview'
+        }
+      },
+      launch: function() {
+        var m = Ext.create('HelloWorld.model.Greetee', { name: 'World' });
+        return this.getHelloView().setData(m.getData());
+      }
+    });
+</code></pre>
+
+<p>To get reference to the view components, Sencha Touch provide <code>refs</code> in
+controllers, through which we map <code>hello</code> to our customized component&rsquo;s xtype.
+There are more details about this in the <a href="http://docs.sencha.com/touch/2-1/#!/guide/controllers">offical documentation</a>. We now
+can use <code>getHelloView()</code> in other methods. <code>launch()</code> gets invoked after
+everything gets loaded, and we tie the model and the view together here.</p>
+
+<p>Again, a little imagination might help. By that I mean the data source of the
+model could be from a RESTful network API, a picture from a phone camera via
+Phonegap, a record from browser&rsquo;s localstorage, etc. We simply created one in
+memory for illustration.</p>
+
+<p>We use <code>getHelloView()</code> to get reference to our <code>helloview</code> instance, then use
+its <code>setData()</code> to populate its template field. But we can&rsquo;t pass in the model
+object directly (as mentioned above, a raw Javascript object is needed), so
+we convert it with its <code>getData()</code> method.</p>
+
+<p>Finally, we specify the <code>models</code> and <code>views</code> involved with this controller in
+<code>config</code> so that the files of these classes gets loaded properly. For the same
+purpose, we need to open <code>app.js</code> and add the following line into the object
+passed to <code>Ext.application()</code> (which is a controller too):</p>
+
+<pre><code>    controllers: ['Main'],
+</code></pre>
+
+<p>This makes the framework aware of our <code>HelloWorld.controller.Main</code>. It&rsquo;s
+unnecessary to use the full class name becaue we followed the naming
+convention.</p>
+
+<p>At this point, our code is complete. Go to the project folder in terminal
+and fire up a web server:</p>
+
+<pre><code>    python -m SimpleHTTPServer
+</code></pre>
+
+<p>Open <a href="http://localhost:8000">http://localhost:8000</a> in your browser and take a gander!</p>
+
+<p>A screenshot of this app would be an overkill, if you follow along correctly,
+the phrase &ldquo;Hello, World!&rdquo; will show, and that&rsquo;s all.</p>
+
+<p>So this long-winded excercise results in not much. But I hope you won&rsquo;t find
+it pointless. When I try to construct my app UI with Sencha Touch, I first try
+my best to make the Senche component work with the design. When breaking out
+and customize is inevitable, I try to stay within the framwork as much as
+possible to make the most out of it. What&rsquo;s described in this article is a
+common way to do that.</p>
+
+ </div>
+<a href="https://news.ycombinator.com/submit" class="hn-button" data-style="twitter">Vote on Hacker News</a>
+<script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+
+ <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+   </div>
+ <ul class="pager">
+      &nbsp;<li class="previous"><a href="http://dduan.net/post/2013/01/windows-phone-8-theme-in-sencha-touch-22/"> Windows Phone 8 Theme in Sencha Touch 2.2</a></li>
+      &nbsp;<li class="next"><a href="http://dduan.net/post/2012/11/mongodb-php-and-mountain-lion/"> MongoDB, PHP And Mountain Lion</a></li>
+</ul>
+
+
+    </ul>
+    </div>
+    <footer>
+
+    </footer>
+ 
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/hc.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-59501714-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</body>
+
+</html>
+

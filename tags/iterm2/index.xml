@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Iterm2 on dduan.net</title>
+    <link>http://dduan.net/tags/iterm2/</link>
+    <description>Recent content in Iterm2 on dduan.net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+    
+    
+    
+    <lastBuildDate>Fri, 02 May 2014 10:25:00 -0600</lastBuildDate>
+    <atom:link href="http://dduan.net/tags/iterm2/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>One Weird Trick To Make Vim Go Faster On Your Mac</title>
+      <link>http://dduan.net/post/2014/05/one-weird-trick-to-make-vim-go-faster-on-your-mac/</link>
+      <pubDate>Fri, 02 May 2014 10:25:00 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2014/05/one-weird-trick-to-make-vim-go-faster-on-your-mac/</guid>
+      <description>&lt;p&gt;I noticed something strange today.&lt;/p&gt;
+
+&lt;p&gt;While playing with Ubuntu on a VirtualBox hosted by OS X Mavericks, Vim
+&lt;em&gt;seems&lt;/em&gt; much faster than it being in iTerms2. How could that be? So I took the
+following steps to test things out:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Installed exact configurations with Vundle on the VM.&lt;/li&gt;
+&lt;li&gt;Vim in Terminal.app&lt;/li&gt;
+&lt;li&gt;MacVim with GUI.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Nope, Vim is still more responsive on Ubuntu. In fact, text input seem more
+responsive on this VM than the host OS in general! I thought I came to the
+light switching to OS X after using Linux as desktop for years, and now this?
+&lt;em&gt;&lt;a href=&#34;http://developer.android.com/reference/android/util/Log.html#wtf(java.lang.String,%20java.lang.Throwable)&#34;&gt;WTF&lt;/a&gt;?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Defeat and confused, I went to the Internet, and found &lt;a href=&#34;http://stackoverflow.com/questions/4489885/how-can-i-increase-cursor-speed-in-terminal&#34;&gt;something close to an
+answer&lt;/a&gt;. Under &lt;em&gt;System Preferences-Keyboard&lt;/em&gt;, drag the two slide
+widget (&amp;ldquo;Key Repeat&amp;rdquo; and &amp;ldquo;Deley Until Repeat&amp;rdquo;) to the right most. Suddenly,
+Vim become faster!&lt;/p&gt;
+
+&lt;p&gt;Turns out, key repeating is very important for Vim users.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

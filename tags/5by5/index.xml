@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>5by5 on dduan.net</title>
+    <link>http://localhost:1313/tags/5by5/</link>
+    <description>Recent content in 5by5 on dduan.net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+    
+    
+    
+    <lastBuildDate>Tue, 23 Oct 2012 11:34:00 -0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/5by5/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Dan Benjamin vs Sarlacc Pit</title>
+      <link>http://localhost:1313/post/2012/10/dan-benjamin-vs-sarlacc-pit/</link>
+      <pubDate>Tue, 23 Oct 2012 11:34:00 -0600</pubDate>
+      
+      <guid>http://localhost:1313/post/2012/10/dan-benjamin-vs-sarlacc-pit/</guid>
+      <description>&lt;p&gt;Dan mentioned something, someone in the jackle room suggested it. So here
+it is:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/2012/10/23/dan_vs_sarlacc_pit.png&#34; alt=&#34;Dan vs. Sarlarcc Pit&#34; /&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -85,5 +85,34 @@ are a lazy typiest like me.&lt;/p&gt;
 </description>
     </item>
     
+    <item>
+      <title>tableView:didSelectRowAtIndexPath: In Two Lines</title>
+      <link>http://dduan.net/post/2014/05/tableview58didselectrowatindexpath58-in-two-lines/</link>
+      <pubDate>Sat, 03 May 2014 13:42:00 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2014/05/tableview58didselectrowatindexpath58-in-two-lines/</guid>
+      <description>&lt;p&gt;You have a &lt;code&gt;UITableViewController&lt;/code&gt; with a couple of static cells, you want to
+invoke some code for each cell in the delegate. Here&amp;rsquo;s a quick way to do it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+    {
+
+        SEL action = (SEL[]){@selector(method1), @selector(method2)}[indexPath.row];
+        ((void (*)(id, SEL))[self methodForSelector: action])(self, action);
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s got everything you love about C and Objective-C: array literals, function
+pointers, casting, selectors and something called &lt;a href=&#34;http://www.cocoawithlove.com/2008/02/imp-of-current-method.html&#34;&gt;IMPs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This piece of code maps selected cells to methods by putting methods by
+indexing selectors in a C array.&lt;/p&gt;
+
+&lt;p&gt;Why all the fuss on the second line? wouldn&amp;rsquo;t a simple &lt;code&gt;performSelector:&lt;/code&gt;
+work? The short answer is: to show the compiler that we are responsible
+adults. You can read more about it &lt;a href=&#34;SO Answer&#34;&gt;here&lt;/a&gt;;&lt;/p&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

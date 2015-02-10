@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Javascript on dduan.net</title>
+    <link>http://dduan.net/tags/javascript/</link>
+    <description>Recent content in Javascript on dduan.net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+    
+    
+    
+    <lastBuildDate>Sun, 30 Sep 2012 00:00:00 -0600</lastBuildDate>
+    <atom:link href="http://dduan.net/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Testing Method Within Constructor With Jasmine.js</title>
+      <link>http://dduan.net/post/2012/09/testing-method-within-constructor-with-jasminejs/</link>
+      <pubDate>Sun, 30 Sep 2012 00:00:00 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2012/09/testing-method-within-constructor-with-jasminejs/</guid>
+      <description>&lt;p&gt;How do you test whether a method is called witin the constructor of an object
+with Jasmine.js?&lt;/p&gt;
+
+&lt;p&gt;Turns out, you need to &lt;code&gt;spyOn()&lt;/code&gt; the &amp;ldquo;raw&amp;rdquo; reference of the &amp;ldquo;method&amp;rdquo;, which
+really just a function on the &lt;code&gt;prototype&lt;/code&gt; of your &amp;ldquo;class&amp;rdquo; object. An example
+will make it clear:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:::JavaScript
+// is &#39;load()&#39; getting called during construction?
+describe(&amp;quot;MyObject&amp;quot;, function() {
+  it(&amp;quot;should call load() during construction&amp;quot;, function() {
+    spyOn(MyObject.prototype, &#39;load&#39;);
+    new MyObject();
+    expect(MyObject.prototype.load).toHaveBeenCalled();
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

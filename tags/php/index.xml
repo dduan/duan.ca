@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Php on dduan.net</title>
+    <link>http://dduan.net/tags/php/</link>
+    <description>Recent content in Php on dduan.net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+    
+    
+    
+    <lastBuildDate>Thu, 29 Nov 2012 09:37:30 -0600</lastBuildDate>
+    <atom:link href="http://dduan.net/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>MongoDB, PHP And Mountain Lion</title>
+      <link>http://dduan.net/post/2012/11/mongodb-php-and-mountain-lion/</link>
+      <pubDate>Thu, 29 Nov 2012 09:37:30 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2012/11/mongodb-php-and-mountain-lion/</guid>
+      <description>&lt;p&gt;Here are the necessary steps to make PHP work with MongoDB on vanilla
+Mac OS X 10.8 (Mountain Lion):&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Install &lt;a href=&#34;https://developer.apple.com/downloads/index.action&#34;&gt;Command Lion Tools for Xcode&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install Homebrew:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ruby -e &amp;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Prioritize Homebrew&amp;rsquo;s binaries in $PATH:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo &amp;quot;export /usr/local/bin:$PATH&amp;quot; &amp;gt;&amp;gt; ~/.bash_profile
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install PHP 5.4 with Homebrew:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Setup the tap for dependencies
+brew tap homebrew/dupes
+# This is the best 
+brew tap josegonzalez/homebrew-php
+# And install
+brew install php54
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install MongoDB with Homebrew&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install mongodb
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install &amp;ldquo;PHP Driver&amp;rdquo; for MongoDB:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pecl install mongo
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Done.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now go run some PHP-MongoDB scripts with the build-in web server from
+PHP 5.4 like you normally would (don&amp;rsquo;t forget to start &lt;code&gt;mongod&lt;/code&gt;) and everything
+should work.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

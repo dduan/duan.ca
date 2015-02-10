@@ -92,8 +92,7 @@ with Jasmine.js?</p>
 really just a function on the <code>prototype</code> of your &ldquo;class&rdquo; object. An example
 will make it clear:</p>
 
-<pre><code>:::JavaScript
-// is 'load()' getting called during construction?
+<pre><code>// is 'load()' getting called during construction?
 describe(&quot;MyObject&quot;, function() {
   it(&quot;should call load() during construction&quot;, function() {
     spyOn(MyObject.prototype, 'load');

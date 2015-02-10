@@ -12,7 +12,6 @@ Turns out, you need to `spyOn()` the "raw" reference of the "method", which
 really just a function on the `prototype` of your "class" object. An example
 will make it clear:
 
-    :::JavaScript
     // is 'load()' getting called during construction?
     describe("MyObject", function() {
       it("should call load() during construction", function() {

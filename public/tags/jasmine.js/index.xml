@@ -25,8 +25,7 @@ with Jasmine.js?&lt;/p&gt;
 really just a function on the &lt;code&gt;prototype&lt;/code&gt; of your &amp;ldquo;class&amp;rdquo; object. An example
 will make it clear:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;:::JavaScript
-// is &#39;load()&#39; getting called during construction?
+&lt;pre&gt;&lt;code&gt;// is &#39;load()&#39; getting called during construction?
 describe(&amp;quot;MyObject&amp;quot;, function() {
   it(&amp;quot;should call load() during construction&amp;quot;, function() {
     spyOn(MyObject.prototype, &#39;load&#39;);

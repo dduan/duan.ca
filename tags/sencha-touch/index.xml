@@ -152,7 +152,7 @@ of different height, the list would look awkward.&lt;/p&gt;
 &lt;p&gt;Load up a Ext.List and inspect one of the item element with Chrome/Safari
 developer tool, you&amp;rsquo;ll find its &lt;code&gt;element.style&lt;/code&gt; has &lt;code&gt;height: 47px !important;&lt;/code&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/height.png&#34; alt=&#34;Default Height on List Item in Sencha Touch 2&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2013/05/height.png&#34; alt=&#34;Default Height on List Item in Sencha Touch 2&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;Here&amp;rsquo;s the key: CSS properties under &lt;code&gt;element.style&lt;/code&gt; are set by Javascript.
@@ -223,12 +223,12 @@ original theme and the Windows Phone 8 theme:&lt;/p&gt;
 
 &lt;p&gt;The Default Theme:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/original-theme.png&#34; alt=&#34;Sencha Touch 2.2 default theme&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2013/01/original-theme.png&#34; alt=&#34;Sencha Touch 2.2 default theme&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;WP8 Theme:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/wp8-theme.png&#34; alt=&#34;Sencha Touch 2.2 windows phone 8 theme&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2013/01/wp8-theme.png&#34; alt=&#34;Sencha Touch 2.2 windows phone 8 theme&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;And it only takes a minute or two to get to the second screen.

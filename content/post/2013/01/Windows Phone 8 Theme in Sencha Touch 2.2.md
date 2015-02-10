@@ -11,11 +11,11 @@ original theme and the Windows Phone 8 theme:
 
 The Default Theme:
 
-![Sencha Touch 2.2 default theme](/images/original-theme.png)
+![Sencha Touch 2.2 default theme](/images/2013/01/original-theme.png)
 
 WP8 Theme:
 
-![Sencha Touch 2.2 windows phone 8 theme](/images/wp8-theme.png)
+![Sencha Touch 2.2 windows phone 8 theme](/images/2013/01/wp8-theme.png)
 
 
 And it only takes a minute or two to get to the second screen.

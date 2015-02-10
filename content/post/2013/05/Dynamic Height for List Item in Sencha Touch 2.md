@@ -17,7 +17,7 @@ Fear not! Here's a solution (and its discovery).
 Load up a Ext.List and inspect one of the item element with Chrome/Safari
 developer tool, you'll find its `element.style` has `height: 47px !important;`:
 
-![Default Height on List Item in Sencha Touch 2](/images/height.png)
+![Default Height on List Item in Sencha Touch 2](/images/2013/05/height.png)
 
 Here's the key: CSS properties under `element.style` are set by Javascript.
 In other words, any attempt to override this property in stylesheet will fail.

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Integrating Sencha Touch 2 and Cordova (pre-2.0)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <link href="" rel="alternate" type="application/rss+xml" title="dduan.net" />
+  <link href="http://dduan.net/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://dduan.net/css/hc.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  
+    
+    </head>
+    <body>
+<div class="nav-toggle"><i class="fa fa-bars fa-2x"></i> Herring Cove </div>
+      <div id = "wrapper">
+
+
+<div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <p class="navbar-brand">dduan.net</p>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+					
+					
+					<li><a href="http://dduan.net/about/">About </a></li>
+					
+					<li><a href="http://dduan.net/post/">Posts </a></li>
+					
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+       
+       <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+					<img src="" />
+          <li class="sidebar-brand"><a href="http://dduan.net/"><h1 class="brand">dduan.net</h1></a><h3></h3></li>
+          <hr />
+					
+						<li><a href="http://dduan.net/post/">Posts </a></li>
+					
+						<li><a href="http://dduan.net/about/">About </a></li>
+					
+          <hr />
+          <div id="social-wrapper">
+           <li> <a href="https://twitter.com/daniel_duan"><i class="fa fa-twitter-square"></i> Twitter</a></li>
+           <li> <a href="https://github.com/dduan"><i class="fa fa-github-square"></i> Github</a> </li>
+           <li> <a href="https://itunes.apple.com/us/artist/nan-duan/id619307372"><i class="fa fa-apple"></i> AppStore</a> </li>
+         </div>
+       </ul>
+     </div>
+
+
+
+     <div class="container">
+
+
+  <div id="article">
+   <div class="article-title">Integrating Sencha Touch 2 and Cordova (pre-2.0)</div>
+   <div class="meta">
+   <small>&nbsp;<i class="fa fa-calendar-o"></i> 2012-08-20</small>
+    <ul id="tags">
+        <i class="fa fa-tags"></i> 
+      
+      <li><small><a class="meta" href="/tags/sencha-touch">Sencha Touch</a></small></li>
+      
+      <li><small><a class="meta" href="/tags/cordova">Cordova</a></small></li>
+      
+      <li><small><a class="meta" href="/tags/phonegap">PhoneGap</a></small></li>
+      
+      <li><small><a class="meta" href="/tags/mobile-development">Mobile Development</a></small></li>
+      
+    </ul>
+   <hr/>
+   </div>
+   <div class="post">
+     
+
+<h2 id="the-goals:ae823e1ecb8b3019ca89a6317b5cc1cd">&ldquo;The Goals</h2>
+
+<ol>
+<li><p>Use Sencha Command to create and package an MVC-structured Sencha Touch 2
+project.</p></li>
+
+<li><p>Use Cordova/PhoneGap (1.9) to wrap the project to deliver it in the App
+Store.</p></li>
+
+<li><p>Leverage the APIs provided by Cordova/PhoneGap to give Sencha Touch 2
+project more native capabilities.</p></li>
+</ol>
+
+<h2 id="the-process:ae823e1ecb8b3019ca89a6317b5cc1cd">The Process</h2>
+
+<p>Goal #1 and #2 can be achieved by <a href="http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova" title="&quot;Packaging Sencha Touch 2 with PhoneGap (Cordova)&quot;&quot;">these steps well described by Robert Dougan
+</a>. In essence, you need to create a normal Sencha Touch 2 project
+using Sencha Command; a Cordova (1.7 in Roberts post, but works fine with 1.9)
+project. Then tell Sencha Command to build in the <code>www</code> folder, where Cordova
+looks for the HTML5 assets to package. Finally, build and deploy the Cordova
+project the usual way.</p>
+
+<p>That, of course, is not the end of the story, otherwise you wouldn&rsquo;t be
+reading this. When you try to achive goal #3, that is, when you use the
+Cordova API in the Sencha Touch project, such as:</p>
+
+<pre><code>    navigator.notification.alert(
+        'Winter is coming!',
+        noted, // callback function
+        'be warned',
+        &quot;&quot;Yes M'lord&quot;&quot;
+    );
+</code></pre>
+
+<p>Sencha Command will report error and refuse to &ldquo;&ldquo;compile&rdquo;&rdquo; if you run</p>
+
+<pre><code>    sencha app build package
+</code></pre>
+
+<p>because of the unknown namespace introduced by Cordova.</p>
+
+<p>One way to workaround this problem is manually replacing the command, which
+involves compiling the SASS files, consolidate all Javascript dependencies
+into a single file, minify everything and move the result to the <code>www</code>
+folder.</p>
+
+<p>Doesn&rsquo;t sound fun, does it?</p>
+
+<p>So, here&rsquo;s a trick to put Sencha Command back on track, use</p>
+
+<pre><code>    if (!Ext.os.is.Desktop) {
+    }
+</code></pre>
+
+<p>to wrap around the Cordova API calls, so the previous example becomes</p>
+
+<pre><code>    if (!Ext.os.is.Desktop) {
+        navigator.notification.alert(
+            // ...
+        );
+    }
+</code></pre>
+
+<p>This way, Sencha Command will ignore the conditioned code block since its
+running on the desktop environment, therefore compiles like a charm. And the
+code will work as intended in emulator/device environment.</p>
+
+<p>You are welcome.</p>
+
+<h2 id="the-bonus:ae823e1ecb8b3019ca89a6317b5cc1cd">The Bonus</h2>
+
+<p>Now that you are using Sencha Touch 2 and Cordova API (like a boss!), here&rsquo;s
+another tip to improve your workflow. When I&rsquo;m developing hybrid apps, I spend
+the majority of time editing Java(Coffee)script/(S)CSS files. But surely
+enough, there will come a period where I have to debug the packaged app in the
+emulator. Switching from my text editor (Vim) to XCode and hitting ⌘r
+REALLY gets old.</p>
+
+<p>Luckily, Cordova provides some command line alternatives. If
+you generate a Cordova project as described in
+<a href="http://docs.phonegap.com/en/2.0.0/guide_command-line_index.md.html#Command-Line%20Usage" title="&quot;Cordova Command-Line Documentaion&quot;">Cordova&rsquo;s documentaion</a> like so:</p>
+
+<pre><code>./path/to/cordova-ios/bin/create /path/to/project com.example.name Project
+</code></pre>
+
+<p>There&rsquo;ll be a folder called <code>cordova</code> in the newly created project, which won&rsquo;t
+be in your project if you create it with XCode with <a href="http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova" title="&quot;Packaging Sencha Touch 2 with PhoneGap (Cordova)&quot;&quot;">Robert&rsquo;s method</a>.
+In <code>cordova</code> folder are three lovely Bash scripts that let&rsquo;s you compile the
+XCode project (<code>debug</code>, which also does the next thing), run the result in  an
+ios emulator (<code>emulate</code>) and watch the logging information (<code>log</code>).</p>
+
+<p>Copy the folder to the path of <code>YourProject.xcodeproj</code>, and boom! You can now
+quit XCode and run the scripts in there directly from your terminal. (What I like to
+do is to use GNU Make to combine Sencha commands with those scripts so that
+I could just hit ⌘b in MacVim to make my latest code run in the simulator.)</p>
+
+<p>Happy coding!</p>
+
+ </div>
+<a href="https://news.ycombinator.com/submit" class="hn-button" data-style="twitter">Vote on Hacker News</a>
+<script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+
+ <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+   </div>
+ <ul class="pager">
+      &nbsp;<li class="previous"><a href="http://dduan.net/post/2012/09/testing-method-within-constructor-with-jasminejs/"> Testing Method Within Constructor With Jasmine.js</a></li>
+     
+</ul>
+
+
+    </ul>
+    </div>
+    <footer>
+
+    </footer>
+ 
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/hc.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-59501714-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</body>
+
+</html>
+

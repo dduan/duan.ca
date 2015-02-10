@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tmux on dduan.net</title>
+    <link>http://dduan.net/tags/tmux/</link>
+    <description>Recent content in Tmux on dduan.net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+    
+    
+    
+    <lastBuildDate>Mon, 27 May 2013 15:00:00 -0600</lastBuildDate>
+    <atom:link href="http://dduan.net/tags/tmux/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Sencha Touch Workflow with GNU Make and Tmux</title>
+      <link>http://dduan.net/post/2013/05/sencha-touch-workflow-with-gnu-make-and-tmux/</link>
+      <pubDate>Mon, 27 May 2013 15:00:00 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2013/05/sencha-touch-workflow-with-gnu-make-and-tmux/</guid>
+      <description>&lt;p&gt;I throw this Makefile to the root directory of my Sencha Touch 2 projects for
+workflow automation.&lt;/p&gt;
+
+&lt;p&gt;Assuming you write in CoffeeScript and run Tmux in a terminal:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;make develop&lt;/code&gt; will put &lt;code&gt;compass&lt;/code&gt; and &lt;code&gt;coffee&lt;/code&gt; to watch mode, in addition to
+spawning a local web server with Python 3. The three commands will run in three
+separate Tmux panes.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;make watch&lt;/code&gt; does the same thing sans the server spawning.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;make&lt;/code&gt; simply compile coffee script files and sass files.&lt;/p&gt;
+
+&lt;p&gt;You can figure out the granular commands with some minimal knowledge of GNU
+Make.&lt;/p&gt;
+
+&lt;script src=&#34;https://gist.github.com/DaNmarner/5659003.js&#34;&gt;&lt;/script&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

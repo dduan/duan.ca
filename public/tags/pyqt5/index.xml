@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pyqt5 on dduan.net</title>
+    <link>http://dduan.net/tags/pyqt5/</link>
+    <description>Recent content in Pyqt5 on dduan.net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+    
+    
+    
+    <lastBuildDate>Wed, 23 Apr 2014 10:36:00 -0600</lastBuildDate>
+    <atom:link href="http://dduan.net/tags/pyqt5/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Installing PyQt5 with Python 3 On OS X</title>
+      <link>http://dduan.net/post/2014/04/installing-pyqt5-with-python-3-on-os-x/</link>
+      <pubDate>Wed, 23 Apr 2014 10:36:00 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2014/04/installing-pyqt5-with-python-3-on-os-x/</guid>
+      <description>&lt;p&gt;Today I installed PyQt5 on OS X 10.9. Turns out, it&amp;rsquo;s not as straight-forward
+as one would think.&lt;/p&gt;
+
+&lt;p&gt;Using &lt;code&gt;homebrew&lt;/code&gt; will &lt;strong&gt;not&lt;/strong&gt; work:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    brew install PyQt5 --with-python3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is because of &lt;a href=&#34;https://github.com/Homebrew/homebrew/issues/25735&#34;&gt;an unfortunate choice&lt;/a&gt; made by the
+homebrew maintainer regarding Python 3.&lt;/p&gt;
+
+&lt;p&gt;So installing from &lt;a href=&#34;http://pyqt.sourceforge.net/Docs/PyQt5/installation.html&#34;&gt;source&lt;/a&gt; is the way to go. Following the
+installing instruction, you would download and install &lt;a href=&#34;http://pyqt.sourceforge.net/Docs/sip4/installation.html&#34;&gt;sip&lt;/a&gt;
+first, the install &lt;a href=&#34;http://pyqt.sourceforge.net/Docs/PyQt5/installation.html&#34;&gt;PyQt5&lt;/a&gt; itself.&lt;/p&gt;
+
+&lt;p&gt;Except that&amp;rsquo;s not enough. When you run &lt;code&gt;python configure.py&lt;/code&gt;, you see this
+error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    error: Use the --qmake argument to explicitly specify a working Qt
+    qmake.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s pretty self-explanatory. &lt;code&gt;qmake&lt;/code&gt;, the build tool for qt is needed here.
+Install qt5 with homebrew and proceed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    brew install qt5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Afterwards, you should be able to import &lt;code&gt;PyQt5&lt;/code&gt; in a Python 3 REPL.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

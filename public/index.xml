@@ -97,5 +97,773 @@ are a lazy typiest like me.&lt;/p&gt;
 </description>
     </item>
     
+    <item>
+      <title>tableView:didSelectRowAtIndexPath: In Two Lines</title>
+      <link>http://dduan.net/post/2014/05/tableview58didselectrowatindexpath58-in-two-lines/</link>
+      <pubDate>Sat, 03 May 2014 13:42:00 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2014/05/tableview58didselectrowatindexpath58-in-two-lines/</guid>
+      <description>&lt;p&gt;You have a &lt;code&gt;UITableViewController&lt;/code&gt; with a couple of static cells, you want to
+invoke some code for each cell in the delegate. Here&amp;rsquo;s a quick way to do it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+    {
+
+        SEL action = (SEL[]){@selector(method1), @selector(method2)}[indexPath.row];
+        ((void (*)(id, SEL))[self methodForSelector: action])(self, action);
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s got everything you love about C and Objective-C: array literals, function
+pointers, casting, selectors and something called &lt;a href=&#34;http://www.cocoawithlove.com/2008/02/imp-of-current-method.html&#34;&gt;IMPs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This piece of code maps selected cells to methods by putting methods by
+indexing selectors in a C array.&lt;/p&gt;
+
+&lt;p&gt;Why all the fuss on the second line? wouldn&amp;rsquo;t a simple &lt;code&gt;performSelector:&lt;/code&gt;
+work? The short answer is: to show the compiler that we are responsible
+adults. You can read more about it &lt;a href=&#34;SO Answer&#34;&gt;here&lt;/a&gt;;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>One Weird Trick To Make Vim Go Faster On Your Mac</title>
+      <link>http://dduan.net/post/2014/05/one-weird-trick-to-make-vim-go-faster-on-your-mac/</link>
+      <pubDate>Fri, 02 May 2014 10:25:00 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2014/05/one-weird-trick-to-make-vim-go-faster-on-your-mac/</guid>
+      <description>&lt;p&gt;I noticed something strange today.&lt;/p&gt;
+
+&lt;p&gt;While playing with Ubuntu on a VirtualBox hosted by OS X Mavericks, Vim
+&lt;em&gt;seems&lt;/em&gt; much faster than it being in iTerms2. How could that be? So I took the
+following steps to test things out:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Installed exact configurations with Vundle on the VM.&lt;/li&gt;
+&lt;li&gt;Vim in Terminal.app&lt;/li&gt;
+&lt;li&gt;MacVim with GUI.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Nope, Vim is still more responsive on Ubuntu. In fact, text input seem more
+responsive on this VM than the host OS in general! I thought I came to the
+light switching to OS X after using Linux as desktop for years, and now this?
+&lt;em&gt;&lt;a href=&#34;http://developer.android.com/reference/android/util/Log.html#wtf(java.lang.String,%20java.lang.Throwable)&#34;&gt;WTF&lt;/a&gt;?&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Defeat and confused, I went to the Internet, and found &lt;a href=&#34;http://stackoverflow.com/questions/4489885/how-can-i-increase-cursor-speed-in-terminal&#34;&gt;something close to an
+answer&lt;/a&gt;. Under &lt;em&gt;System Preferences-Keyboard&lt;/em&gt;, drag the two slide
+widget (&amp;ldquo;Key Repeat&amp;rdquo; and &amp;ldquo;Deley Until Repeat&amp;rdquo;) to the right most. Suddenly,
+Vim become faster!&lt;/p&gt;
+
+&lt;p&gt;Turns out, key repeating is very important for Vim users.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Installing PyQt5 with Python 3 On OS X</title>
+      <link>http://dduan.net/post/2014/04/installing-pyqt5-with-python-3-on-os-x/</link>
+      <pubDate>Wed, 23 Apr 2014 10:36:00 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2014/04/installing-pyqt5-with-python-3-on-os-x/</guid>
+      <description>&lt;p&gt;Today I installed PyQt5 on OS X 10.9. Turns out, it&amp;rsquo;s not as straight-forward
+as one would think.&lt;/p&gt;
+
+&lt;p&gt;Using &lt;code&gt;homebrew&lt;/code&gt; will &lt;strong&gt;not&lt;/strong&gt; work:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    brew install PyQt5 --with-python3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is because of &lt;a href=&#34;https://github.com/Homebrew/homebrew/issues/25735&#34;&gt;an unfortunate choice&lt;/a&gt; made by the
+homebrew maintainer regarding Python 3.&lt;/p&gt;
+
+&lt;p&gt;So installing from &lt;a href=&#34;http://pyqt.sourceforge.net/Docs/PyQt5/installation.html&#34;&gt;source&lt;/a&gt; is the way to go. Following the
+installing instruction, you would download and install &lt;a href=&#34;http://pyqt.sourceforge.net/Docs/sip4/installation.html&#34;&gt;sip&lt;/a&gt;
+first, the install &lt;a href=&#34;http://pyqt.sourceforge.net/Docs/PyQt5/installation.html&#34;&gt;PyQt5&lt;/a&gt; itself.&lt;/p&gt;
+
+&lt;p&gt;Except that&amp;rsquo;s not enough. When you run &lt;code&gt;python configure.py&lt;/code&gt;, you see this
+error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    error: Use the --qmake argument to explicitly specify a working Qt
+    qmake.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s pretty self-explanatory. &lt;code&gt;qmake&lt;/code&gt;, the build tool for qt is needed here.
+Install qt5 with homebrew and proceed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    brew install qt5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Afterwards, you should be able to import &lt;code&gt;PyQt5&lt;/code&gt; in a Python 3 REPL.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Generating Xcode Build Number From Git</title>
+      <link>http://dduan.net/post/2013/09/generating-xcode-build-number-from-git/</link>
+      <pubDate>Sun, 29 Sep 2013 15:50:50 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2013/09/generating-xcode-build-number-from-git/</guid>
+      <description>&lt;p&gt;The build version number in an Xcode project (CFBundleVersion in Info.plist)
+must be a monotonically increasing string for each archive submitted to the
+App Store. Neglection of this requirement will result in an error during the
+binary upload. Some automation will help avoiding this issue.&lt;/p&gt;
+
+&lt;p&gt;First, we want to generate this version number from our version (&lt;em&gt;duh&lt;/em&gt;)
+control system (VCS) each time our target gets built. My VCS of choice is Git,
+users of other systems just need to get a increasing number from their code
+history. On a *nix system, this command will count the number of commits on
+&amp;lsquo;develop&amp;rsquo; branch up until HEAD:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    git rev-list develop | wc -l
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is a very good candidate for our build number, for longer history
+generally correlates to later builds.&lt;/p&gt;
+
+&lt;p&gt;Next, we make Xcode automatically run this command and use its result as the
+build number.&lt;/p&gt;
+
+&lt;p&gt;Go to project navigator, select your build target under the project icon,
+click &lt;em&gt;Build Phases&lt;/em&gt;, select &lt;em&gt;Editor→Add Build Phase→Add Run Script Build
+Phase&lt;/em&gt; in the menu. Remove the content in editor of the new &lt;em&gt;Run Script&lt;/em&gt;
+phase and replace it with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;revnum=`git rev-list develop | wc -l`
+echo &amp;quot;#define BUILD_NUMBER $revnum&amp;quot; &amp;gt; InfoPlist.h
+touch InfoPlist.h
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Go to build settings, change value of &lt;em&gt;Preprocess Info.plist File&lt;/em&gt; to &amp;ldquo;YES&amp;rdquo;.
+Add &amp;ldquo;InfoPlist.h&amp;rdquo; to &lt;em&gt;Info.plist Preprocessor Prefix File→release&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;We ask Xcode to run our command and save its result as a &amp;ldquo;#define&amp;rdquo; in a header
+file when it builds the project. This is done so that we can replace the
+&amp;ldquo;hardcoded&amp;rdquo; build number with the name of the constant:&lt;/p&gt;
+
+&lt;p&gt;Open Info.plist, Double click the value of &lt;em&gt;Bundle Version&lt;/em&gt; and replace it with&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;BUILD_NUMBER
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There&amp;rsquo;s only one issue left: &lt;code&gt;BUILD_NUMBER&lt;/code&gt; is now saved in &lt;em&gt;InfoPlist.h&lt;/em&gt;. Its
+value comes from our commit history. So we want to exclude this piece of
+information as part of our commit history (I&amp;rsquo;ll leave the reason as an exercise
+for the reader). Ignore this file by adding &amp;ldquo;InfoPlist.h&amp;rdquo; to &lt;em&gt;.gitignore&lt;/em&gt; (or
+that of your other VCS).&lt;/p&gt;
+
+&lt;p&gt;To recap, when you build the project now, Xcode will find out how many commits
+are in the history, define it in a header file as &lt;code&gt;BUILD_NUMBER&lt;/code&gt;, which gets
+used as the build number. As long as you keep with with version control, the
+build number problem goes away.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sencha Touch 2 and PhoneGap integration</title>
+      <link>http://dduan.net/post/2013/05/sencha-touch-2-and-phonegap-integration/</link>
+      <pubDate>Tue, 28 May 2013 15:24:30 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2013/05/sencha-touch-2-and-phonegap-integration/</guid>
+      <description>&lt;p&gt;As one of my pet Sencha Touch project gets close to finish, I started
+looking into distribute it as native apps with Phonegap/Cordova.&lt;/p&gt;
+
+&lt;p&gt;One of the concerns in do so is the &amp;lsquo;deviceready&amp;rsquo; event provided by Phonegap,
+according to the documentation:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This is a very important event that every Cordova application should use.&lt;br /&gt;
+&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;The Cordova deviceready event fires once Cordova has fully loaded.
+After the device has fired, you can safely make calls to Cordova function.&lt;/p&gt;
+
+&lt;p&gt;Typically, you will want to attach an event listener with
+document.addEventListener once the HTML document&amp;rsquo;s DOM has loaded.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In particular, the nice Sencha Touch microloader complicate the matter by
+being the sole Javascript file that&amp;rsquo;s supposed to be included in &lt;code&gt;index.html&lt;/code&gt;
+and is in charge of starting the actual code of our apps. Yet we need the
+starting point of the code be a response to the &lt;code&gt;deviceready&lt;/code&gt; event.&lt;/p&gt;
+
+&lt;p&gt;After some googling, I found that most information on this matter is either
+inaccurate, incomplete or outdated, that is until I found &lt;a href=&#34;http://stackoverflow.com/a/10457158/243798&#34;&gt;this answer&lt;/a&gt; by
+&lt;a href=&#34;http://dougan.me&#34;&gt;Robert Dougan&lt;/a&gt; on StackOverflow:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Sencha Touch 2 will listen to that event and call your onReady/launch methods
+- therefore if you try listening to them in the launch method,
+it has already been fired.&lt;/p&gt;
+
+&lt;p&gt;Just put your logic inside the launch method in your application.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To verify this claim, I dug into &lt;code&gt;sencha-touch-debug.js&lt;/code&gt; distributed with
+Sencha Touch 2.2 and found the following code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (Ext.browser.is.PhoneGap &amp;amp;&amp;amp; !Ext.os.is.Desktop) {
+    if (!Ext.readyListenerAttached) {
+        Ext.readyListenerAttached = true;
+        document.addEventListener(&#39;deviceready&#39;, triggerFn, false);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It appears that the &lt;code&gt;deviceready&lt;/code&gt; event is taken into account here as long as
+&lt;code&gt;Ext.browser.is.PhoneGap&lt;/code&gt; is true in a mobile browser envronment, which, in the
+same source code, means:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (typeof window.PhoneGap != &#39;undefined&#39; ||
+    typeof window.Cordova != &#39;undefined&#39;  ||
+    typeof window.cordova != &#39;undefined&#39;) {
+    isWebView = true;
+    this.setFlag(&#39;PhoneGap&#39;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here, the global variable PhoneGap, cordova or Cordova needs to be defined to
+satisfy Sencha Touch 2&amp;rsquo;s expectation of PhoneGap environment. Those globals
+are defined in the &lt;code&gt;cordova-x.y.x.js&lt;/code&gt; file included in the PhoneGap/Cordova
+project files.&lt;/p&gt;
+
+&lt;p&gt;So what needs to be done for the integration is simple (if not clear):&lt;/p&gt;
+
+&lt;p&gt;include &lt;code&gt;cordova-x.y.x.js&lt;/code&gt; in the js section of &lt;code&gt;app.json&lt;/code&gt; project file so that
+the microloader knows to load it up early:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;quot;js&amp;quot;: [
+    {
+        &amp;quot;path&amp;quot;: &amp;quot;path/to/cordova-x.y.z.js&amp;quot;,
+    },
+    {
+        &amp;quot;path&amp;quot;: &amp;quot;touch/sencha-touch.js&amp;quot;,
+        &amp;quot;x-bootstrap&amp;quot;: true
+    },
+    {
+        &amp;quot;path&amp;quot;: &amp;quot;app.js&amp;quot;,
+        &amp;quot;bundle&amp;quot;: true, 
+        &amp;quot;update&amp;quot;: &amp;quot;delta&amp;quot;
+    }
+],
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run &lt;code&gt;sencha app build package&lt;/code&gt; and drop the files it produces to the &lt;code&gt;www&lt;/code&gt;
+folder in the PhoneGap project.&lt;/p&gt;
+
+&lt;p&gt;Compile, ship.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sencha Touch Workflow with GNU Make and Tmux</title>
+      <link>http://dduan.net/post/2013/05/sencha-touch-workflow-with-gnu-make-and-tmux/</link>
+      <pubDate>Mon, 27 May 2013 15:00:00 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2013/05/sencha-touch-workflow-with-gnu-make-and-tmux/</guid>
+      <description>&lt;p&gt;I throw this Makefile to the root directory of my Sencha Touch 2 projects for
+workflow automation.&lt;/p&gt;
+
+&lt;p&gt;Assuming you write in CoffeeScript and run Tmux in a terminal:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;make develop&lt;/code&gt; will put &lt;code&gt;compass&lt;/code&gt; and &lt;code&gt;coffee&lt;/code&gt; to watch mode, in addition to
+spawning a local web server with Python 3. The three commands will run in three
+separate Tmux panes.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;make watch&lt;/code&gt; does the same thing sans the server spawning.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;make&lt;/code&gt; simply compile coffee script files and sass files.&lt;/p&gt;
+
+&lt;p&gt;You can figure out the granular commands with some minimal knowledge of GNU
+Make.&lt;/p&gt;
+
+&lt;script src=&#34;https://gist.github.com/DaNmarner/5659003.js&#34;&gt;&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dynamic Height for List Item in Sencha Touch 2</title>
+      <link>http://dduan.net/post/2013/05/dynamic-height-for-list-item-in-sencha-touch-2/</link>
+      <pubDate>Sun, 19 May 2013 16:03:30 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2013/05/dynamic-height-for-list-item-in-sencha-touch-2/</guid>
+      <description>&lt;p&gt;tl;dr: Set the &lt;code&gt;itemHeight&lt;/code&gt; value to &lt;code&gt;auto&lt;/code&gt; and you&amp;rsquo;ll get list items
+with dynamic height in Sencha Touch 2.&lt;/p&gt;
+
+&lt;p&gt;In the Ext.List component provided by Sencha Touch 2, all SimpleListItem
+(or ListItem) has the same height. This means if your items each has content
+of different height, the list would look awkward.&lt;/p&gt;
+
+&lt;p&gt;Fear not! Here&amp;rsquo;s a solution (and its discovery).&lt;/p&gt;
+
+&lt;p&gt;Load up a Ext.List and inspect one of the item element with Chrome/Safari
+developer tool, you&amp;rsquo;ll find its &lt;code&gt;element.style&lt;/code&gt; has &lt;code&gt;height: 47px !important;&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/height.png&#34; alt=&#34;Default Height on List Item in Sencha Touch 2&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the key: CSS properties under &lt;code&gt;element.style&lt;/code&gt; are set by Javascript.
+In other words, any attempt to override this property in stylesheet will fail.
+(Try it by specifying a height value on &lt;code&gt;div.x-list-item&lt;/code&gt;, or any other class
+you suspect, if you need some convincing).&lt;/p&gt;
+
+&lt;p&gt;So, how do we fix this with Javascript? If you examine the documentaion,
+Ext.List has a config option &lt;code&gt;itemHeight&lt;/code&gt; with a default value. You can set it
+to a value that works best with all potential heights of your item content,
+resulting in items with identical heights. Setting &lt;code&gt;itemHeight&lt;/code&gt; to &lt;code&gt;auto&lt;/code&gt;,
+however, will make each item container flow with its inner element, thus
+achive dynamic height.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sencha Touch 2.2 Alpha Sass Bug Workaround</title>
+      <link>http://dduan.net/post/2013/01/sencha-touch-22-alpha-sass-bug-workaround/</link>
+      <pubDate>Mon, 14 Jan 2013 13:47:00 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2013/01/sencha-touch-22-alpha-sass-bug-workaround/</guid>
+      <description>&lt;p&gt;Sencha &lt;a href=&#34;http://cdn.sencha.com/touch/alpha/touch-2.2.0-alpha.zip&#34;&gt;released&lt;/a&gt; a new version Sencha Touch with Windows Phone 8 support.
+But since it&amp;rsquo;s an alpha, there are a few more things to do than what the
+&lt;a href=&#34;http://cdn.sencha.com/touch/alpha/2.2.0.52/release-notes.html&#34;&gt;release note&lt;/a&gt; says to get it working.&lt;/p&gt;
+
+&lt;p&gt;One thing I&amp;rsquo;ve noticed is that when you generate a new app with&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sencha generate app Foo path/to/foo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and make the changes to &lt;code&gt;resources/sass/app.scss&lt;/code&gt; according to the release
+note, &lt;code&gt;compass compile path/to/foo/resources/sass&lt;/code&gt; fails complaining a font
+file is missing:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;File not found or cannot be read: path/to/foo/resources/sass/stylesheets/fonts/pictos/pictos-web.woff
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To fix this, copy the needed fonts to where it supposed to be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd path/to/foo
+mkdir -p resources/sass/stylesheets/fonts/pictos
+cp touch/resources/themes/fonts/pictos/pictos-web.* resources/sass/stylesheets/fonts/pictos/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The next error you&amp;rsquo;ll see from &lt;code&gt;compass compile&lt;/code&gt; is caused by the name changes
+to a few sass files in the framework. Long-story short, you need to change
+&lt;code&gt;resources/sass/app.scss&lt;/code&gt; to the following:&lt;/p&gt;
+
+&lt;script src=&#34;https://gist.github.com/4533833.js&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;and &lt;code&gt;compass&lt;/code&gt; should be happy from there.&lt;/p&gt;
+
+&lt;p&gt;While you are at it, why not checkout the magical Windows Phone 8 theme
+included in Sencha Touch 2.2 alpha.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Windows Phone 8 Theme in Sencha Touch 2.2</title>
+      <link>http://dduan.net/post/2013/01/windows-phone-8-theme-in-sencha-touch-22/</link>
+      <pubDate>Mon, 14 Jan 2013 13:45:00 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2013/01/windows-phone-8-theme-in-sencha-touch-22/</guid>
+      <description>&lt;p&gt;Sencha Touch 2.2 Alpha shipped with Windows Phone 8/IE 10 support.
+And it&amp;rsquo;s pretty impressive! Just take a look at the starter app under the
+original theme and the Windows Phone 8 theme:&lt;/p&gt;
+
+&lt;p&gt;The Default Theme:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/original-theme.png&#34; alt=&#34;Sencha Touch 2.2 default theme&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;WP8 Theme:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/wp8-theme.png&#34; alt=&#34;Sencha Touch 2.2 windows phone 8 theme&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;And it only takes a minute or two to get to the second screen.
+(if you have Sencha Cmd and Sencha Touch SDK 2.2 alpha ready). Here&amp;rsquo;s how.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;In SDK folder, generate the app with &lt;code&gt;sencha generate app Foo path/to/foo&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://dduan.net/2013/01/14/Sencha-Touch-22-Alpha-Sass-Bug-Workaround.html&#34;&gt;Workaround&lt;/a&gt; the bug shipped in this alpha version. This won&amp;rsquo;t be
+necessary once the bug has been fixed in the next release&lt;/li&gt;
+&lt;li&gt;Open &lt;code&gt;resources/sass/app.scss&lt;/code&gt; in the generated project folder )it should
+look like &lt;a href=&#34;https://gist.github.com/4533833&#34;&gt;this&lt;/a&gt; after step 2).
+Replace every appearance of the word &lt;em&gt;default&lt;/em&gt; to &amp;ldquo;windows&amp;rdquo;. Then run
+&lt;code&gt;compass compile resources/sass&lt;/code&gt; in the project root.&lt;/li&gt;
+&lt;li&gt;Serve the project in a web server (I usually do
+&lt;code&gt;python -m SimpleHTTPServer&lt;/code&gt;), fire up its url (localhost:800) and&amp;hellip;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Boom!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>&#34;Hello, World!&#34; The Hard Way with Sencha Touch</title>
+      <link>http://dduan.net/post/2013/01/hello-world-the-hard-way-with-sencha-touch/</link>
+      <pubDate>Fri, 11 Jan 2013 21:28:59 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2013/01/hello-world-the-hard-way-with-sencha-touch/</guid>
+      <description>&lt;p&gt;When I first got into the amazing Sencha Touch HTML5 framwork, it came across
+as a compilation of visual components that looks mobile, &lt;a href=&#34;http://compass-style.org&#34;&gt;easily themable&lt;/a&gt;,
+leverage the latest HTML5 technology to be efficient and, best
+of all, are created within the Javascript code as oppose to being shoved
+in to an HTML file and demand DOM tinkering later.&lt;/p&gt;
+
+&lt;p&gt;But a closer look would reveal a lot more goodies beyond those handy
+components in Sencha Touch. It offers &lt;a href=&#34;http://docs.sencha.com/touch/2-1/#!/guide/class_system&#34;&gt;a class system&lt;/a&gt;, a &lt;a href=&#34;http://www.sencha.com/learn/architecting-your-app-in-ext-js-4-part-1&#34;&gt;M&lt;/a&gt;&lt;a href=&#34;http://www.sencha.com/learn/architecting-your-app-in-ext-js-4-part-2&#34;&gt;V&lt;/a&gt;&lt;a href=&#34;http://www.sencha.com/learn/architecting-your-app-in-ext-js-4-part-3&#34;&gt;C&lt;/a&gt;
+&lt;a href=&#34;http://www.sencha.com/blog/architecting-your-app-with-sencha-touch-2-mvc&#34;&gt;pattern&lt;/a&gt;, tools that handles code dependency, compression and native
+packaging, etc. Albeit daunting, learning and embracing all of those offerings
+makes a quite enjoyable coding experience and rewards me with development
+effieciency overall.&lt;/p&gt;
+
+&lt;p&gt;Sometimes though, I need complete control of a visual component that doesn&amp;rsquo;t
+exist in the framework. How to make this work with everything mentioned above
+is implied in various tutorials posted by the Sencha team, but I couldn&amp;rsquo;t find
+a clear illustration of that, which is why I decided to write one here.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s our goal: make a component that displays data from a model with our own
+custom HTML; manage it along with some provided components from the framework
+and follow the MVC pattern.&lt;/p&gt;
+
+&lt;p&gt;I assume you have the basics set up. I&amp;rsquo;m using Sencha Cmd 3.0.0.250, Sencha
+Touch SDK 2.1.0 and OS X Mountain Lion as of this writing.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s start by generating a MVC-ready skeleton project called HelloWorld. Go to
+the SDK&amp;rsquo;s folder and type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    sencha generate app HelloWorld ~/helloworld
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;replace the last parameter with the path you would like for the project files
+to stay. We&amp;rsquo;ll be working in this folder from now on.&lt;/p&gt;
+
+&lt;p&gt;In the skeleton project, a main view was created under &lt;code&gt;app/view/Main.js&lt;/code&gt; and
+declared as dependency for &lt;code&gt;app.js&lt;/code&gt;. An instance of it is created when the app
+finished loading. We&amp;rsquo;ll keep this setup as our main view. Let&amp;rsquo;s reduce
+&lt;code&gt;app/view/Main.js&lt;/code&gt; to a simplest possble form for our purposes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    Ext.define(&#39;HelloWorld.view.Main&#39;, {
+      extend: &#39;Ext.Container&#39;,
+      config: {
+        items: [ { xtype: &#39;helloview&#39; } ]
+      }
+    });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Following the convention, we name the class in corrispondance with its
+filepath within the &lt;code&gt;app&lt;/code&gt; folder (&amp;lsquo;view/Main.js&amp;rsquo; =&amp;gt; &amp;lsquo;view.Main&amp;rsquo;). All
+classes created with &lt;code&gt;Ext.define&lt;/code&gt; should follow this convention so that Sencha
+tools can relate code dependencies to file structure and do its magic for us.
+We&amp;rsquo;ll circle back to this.&lt;/p&gt;
+
+&lt;p&gt;Our main view will be a plain container and has a &lt;code&gt;helloview&lt;/code&gt; in it. An
+&lt;code&gt;Ext.Container&lt;/code&gt; has the ability to &amp;hellip; contain stuff. Specifically, it can
+organize &lt;code&gt;Ext.Component&lt;/code&gt;s visually. &lt;code&gt;helloview&lt;/code&gt; will be that component. Let&amp;rsquo;s
+define it next.&lt;/p&gt;
+
+&lt;p&gt;Create the file &lt;code&gt;app/view/HelloView.js&lt;/code&gt; as the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    Ext.define(&#39;HelloWorld.view.HelloView&#39;, {
+      extend: &#39;Ext.Component&#39;,
+      xtype: &#39;helloview&#39;,
+      config: {
+        tpl: &#39;&amp;lt;div class=&amp;quot;greeting&amp;quot;&amp;gt;Hello, {name}!&amp;lt;/div&amp;gt;&#39;
+      }
+    });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As promised, &lt;code&gt;HelloWorld.view.HelloView&lt;/code&gt; is a &lt;code&gt;Ext.Component&lt;/code&gt;. We declare its
+&lt;code&gt;xtype&lt;/code&gt; to be the one we used in the main view. The really interesting part is
+its &lt;code&gt;tpl&lt;/code&gt; configuration. This is where our customization integrates with the
+rest of the Sencha Touch framework, so it&amp;rsquo;s worth dive into a bit deeper.&lt;/p&gt;
+
+&lt;p&gt;(&lt;em&gt;Caution&lt;/em&gt;: &lt;code&gt;tpl&lt;/code&gt; can not be mixed with &lt;code&gt;items&lt;/code&gt;, if you want standard components
+mixed in with yours, make them share a container and arrange a proper layout
+there.)&lt;/p&gt;
+
+&lt;p&gt;Take a look at the official &lt;a href=&#34;http://docs.sencha.com/touch/2-1/#!/api/Ext.Component-cfg-tpl&#34;&gt;documentation for &lt;code&gt;tpl&lt;/code&gt;&lt;/a&gt;. It accepts an
+&lt;a href=&#34;http://docs.sencha.com/touch/2-1/#!/api/Ext.XTemplate&#34;&gt;&lt;code&gt;Ext.XTemplate&lt;/code&gt;&lt;/a&gt;, which is basically free-range HTML plus some syntax to
+insert data provided to the component. Apply all your HTML skills here! For
+illustration purposes, we only throw in a basic &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;{name}&lt;/code&gt; part will be replaced by the actual data, which every
+&lt;code&gt;Ext.Component&lt;/code&gt; has as a configuration option by default. Being such option
+means two things:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1. You can specify its value in the class definition, as we did for `tpl`.
+2. It gets a &amp;quot;getter/setter&amp;quot; that let you query/change its value at anytime
+    through the instance&#39;s existence.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We&amp;rsquo;ll use the setter for &lt;code&gt;data&lt;/code&gt; &amp;ndash; &lt;code&gt;setData()&lt;/code&gt; to populate this field in the
+template later. &lt;code&gt;setData()&lt;/code&gt; accept one raw Javascript object and make its
+properties accessible to the template.&lt;/p&gt;
+
+&lt;p&gt;Next, let&amp;rsquo;s make a simplistic model in &lt;code&gt;app/model/Greetee.js&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    Ext.define(&#39;HelloWorld.model.Greetee&#39;, {
+      extend: &#39;Ext.data.Model&#39;,
+      config: {
+        fields: [&#39;name&#39;]
+      }
+    });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A model, with a field &amp;lsquo;name&amp;rsquo;. Hey, that&amp;rsquo;s &lt;code&gt;as simple as possible, but no
+simpler&lt;/code&gt;, Einstein would endorse it!&lt;/p&gt;
+
+&lt;p&gt;We won&amp;rsquo;t use any proxy or store in conjunction with the model because we
+only need to show how a customized view works within the Sencha Touch MVC
+pattern. Speaking of which, a controller does just that. So to tie everything
+togeter, here&amp;rsquo;s &lt;code&gt;app/controller/Main.js&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    Ext.define(&#39;HelloWorld.controller.Main&#39;, {
+      extend: &#39;Ext.app.Controller&#39;,
+      config: {
+        models: [&#39;Greetee&#39;],
+        views: [&#39;HelloView&#39;],
+        refs: {
+          helloView: &#39;.helloview&#39;
+        }
+      },
+      launch: function() {
+        var m = Ext.create(&#39;HelloWorld.model.Greetee&#39;, { name: &#39;World&#39; });
+        return this.getHelloView().setData(m.getData());
+      }
+    });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To get reference to the view components, Sencha Touch provide &lt;code&gt;refs&lt;/code&gt; in
+controllers, through which we map &lt;code&gt;hello&lt;/code&gt; to our customized component&amp;rsquo;s xtype.
+There are more details about this in the &lt;a href=&#34;http://docs.sencha.com/touch/2-1/#!/guide/controllers&#34;&gt;offical documentation&lt;/a&gt;. We now
+can use &lt;code&gt;getHelloView()&lt;/code&gt; in other methods. &lt;code&gt;launch()&lt;/code&gt; gets invoked after
+everything gets loaded, and we tie the model and the view together here.&lt;/p&gt;
+
+&lt;p&gt;Again, a little imagination might help. By that I mean the data source of the
+model could be from a RESTful network API, a picture from a phone camera via
+Phonegap, a record from browser&amp;rsquo;s localstorage, etc. We simply created one in
+memory for illustration.&lt;/p&gt;
+
+&lt;p&gt;We use &lt;code&gt;getHelloView()&lt;/code&gt; to get reference to our &lt;code&gt;helloview&lt;/code&gt; instance, then use
+its &lt;code&gt;setData()&lt;/code&gt; to populate its template field. But we can&amp;rsquo;t pass in the model
+object directly (as mentioned above, a raw Javascript object is needed), so
+we convert it with its &lt;code&gt;getData()&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;p&gt;Finally, we specify the &lt;code&gt;models&lt;/code&gt; and &lt;code&gt;views&lt;/code&gt; involved with this controller in
+&lt;code&gt;config&lt;/code&gt; so that the files of these classes gets loaded properly. For the same
+purpose, we need to open &lt;code&gt;app.js&lt;/code&gt; and add the following line into the object
+passed to &lt;code&gt;Ext.application()&lt;/code&gt; (which is a controller too):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    controllers: [&#39;Main&#39;],
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This makes the framework aware of our &lt;code&gt;HelloWorld.controller.Main&lt;/code&gt;. It&amp;rsquo;s
+unnecessary to use the full class name becaue we followed the naming
+convention.&lt;/p&gt;
+
+&lt;p&gt;At this point, our code is complete. Go to the project folder in terminal
+and fire up a web server:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    python -m SimpleHTTPServer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Open &lt;a href=&#34;http://localhost:8000&#34;&gt;http://localhost:8000&lt;/a&gt; in your browser and take a gander!&lt;/p&gt;
+
+&lt;p&gt;A screenshot of this app would be an overkill, if you follow along correctly,
+the phrase &amp;ldquo;Hello, World!&amp;rdquo; will show, and that&amp;rsquo;s all.&lt;/p&gt;
+
+&lt;p&gt;So this long-winded excercise results in not much. But I hope you won&amp;rsquo;t find
+it pointless. When I try to construct my app UI with Sencha Touch, I first try
+my best to make the Senche component work with the design. When breaking out
+and customize is inevitable, I try to stay within the framwork as much as
+possible to make the most out of it. What&amp;rsquo;s described in this article is a
+common way to do that.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>MongoDB, PHP And Mountain Lion</title>
+      <link>http://dduan.net/post/2012/11/mongodb-php-and-mountain-lion/</link>
+      <pubDate>Thu, 29 Nov 2012 09:37:30 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2012/11/mongodb-php-and-mountain-lion/</guid>
+      <description>&lt;p&gt;Here are the necessary steps to make PHP work with MongoDB on vanilla
+Mac OS X 10.8 (Mountain Lion):&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Install &lt;a href=&#34;https://developer.apple.com/downloads/index.action&#34;&gt;Command Lion Tools for Xcode&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install Homebrew:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ruby -e &amp;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Prioritize Homebrew&amp;rsquo;s binaries in $PATH:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo &amp;quot;export /usr/local/bin:$PATH&amp;quot; &amp;gt;&amp;gt; ~/.bash_profile
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install PHP 5.4 with Homebrew:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Setup the tap for dependencies
+brew tap homebrew/dupes
+# This is the best 
+brew tap josegonzalez/homebrew-php
+# And install
+brew install php54
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install MongoDB with Homebrew&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install mongodb
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install &amp;ldquo;PHP Driver&amp;rdquo; for MongoDB:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo pecl install mongo
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Done.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now go run some PHP-MongoDB scripts with the build-in web server from
+PHP 5.4 like you normally would (don&amp;rsquo;t forget to start &lt;code&gt;mongod&lt;/code&gt;) and everything
+should work.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CoffeeScript And Mountain Lion</title>
+      <link>http://dduan.net/post/2012/11/coffeescript-and-mountain-lion/</link>
+      <pubDate>Wed, 28 Nov 2012 15:11:00 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2012/11/coffeescript-and-mountain-lion/</guid>
+      <description>&lt;p&gt;Here are the necessary steps to install CoffeeScript on
+Mac OS X 10.8 (Mountain Lion):&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Install &lt;a href=&#34;https://developer.apple.com/downloads/index.action&#34;&gt;Command Lion Tools for Xcode&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install Homebrew:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ruby -e &amp;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install Node.js with Homebrew:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install node
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install npm (the version comes with node doesn&amp;rsquo;t install CoffeeScript
+properly for some reason):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl https://npmjs.org/install.sh | sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Install CoffeeScript with npm:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install -g coffee-script
+# add environment variable to ~/.bashrc
+echo &amp;quot;export NODE_PATH=/usr/local/lib/node_modules&amp;quot;
+. ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Done!&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I had to google around to figure out the environment variable and the issue
+with npm. Hopefully this will help some folks in the similar need.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Keep Git Social</title>
+      <link>http://dduan.net/post/2012/10/keep-git-social/</link>
+      <pubDate>Wed, 31 Oct 2012 10:02:30 -0600</pubDate>
+      
+      <guid>http://dduan.net/post/2012/10/keep-git-social/</guid>
+      <description>&lt;p&gt;&lt;em&gt;A project I&amp;rsquo;m working on uses &lt;a href=&#34;http://gitlabhq.com&#34;&gt;GitlabHQ&lt;/a&gt;, I think it is a cool open source
+project and the developers are doing an excellent job of making a sweet web
+interface for Git projects. However, as I found out today, &lt;a href=&#34;https://github.com/gitlabhq/gitlabhq/issues/1298&#34; title=&#34;Gitlab Issue: Closed&#34;&gt;my one issue&lt;/a&gt;
+with it was closed without fixing. And that&amp;rsquo;s what finally propelled me to
+writing this airticle.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Do you know, the Linux kernel is broken by hundreds of commited patches
+everyday?&lt;/p&gt;
+
+&lt;p&gt;That, of course, is a trick question. Yes, &lt;em&gt;technically&lt;/em&gt;, hundreds (if not
+thousands) of patches were commited to &lt;em&gt;a&lt;/em&gt; git repository of the Linux kernel
+that isn&amp;rsquo;t different in anyway from &lt;em&gt;the&lt;/em&gt; repository. What makes the
+repository &amp;ldquo;conanical&amp;rdquo; is the fact that Linus Torvalds owns it. If the world
+lost access to his hard drive because Linus was hit by a bus (I would never
+wish this to happen) today, all the Linux community need to do is figure out
+who is next BDFL. Then his/hers would become &lt;em&gt;the&lt;/em&gt; Linux repository.&lt;/p&gt;
+
+&lt;p&gt;In other words, what makes the difference is purely social.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Not trying to fit the social structure of a software project into a
+repository is the biggest strength of git.&lt;/strong&gt; This is why I frown everytime
+I see a discussion about locking down branches of a Git repository.&lt;/p&gt;
+
+&lt;p&gt;Making developers &amp;ldquo;own&amp;rdquo; branches on a shared repository is a pratice
+inheritated from the days of centralized version control. Git doesn&amp;rsquo;t provide
+built-in support for this, for good reasons.&lt;/p&gt;
+
+&lt;p&gt;With Subversion, the ultimate goal of branch-wise access control is to keep out
+bad changes made by developers while give them the benefits of version
+control, namely:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;provide a backup of the change history&lt;/li&gt;
+&lt;li&gt;let others to follow his/her progress so that they can contribute via
+patches or collaborate if they have write access.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;With Git, these are easily achieved by a personal repository read-accessible
+for the team.&lt;/p&gt;
+
+&lt;p&gt;Meanwhile, write access is granted at the repository level, but only to very
+few or, more preferably, one person. This is possible because each team member
+can have and only push to his/her own repositories. No change made by others
+will make their way to the &amp;ldquo;conanical&amp;rdquo; repository unless its owner(s) activaly
+pulls them in. Bad changes therefore is kept out.&lt;/p&gt;
+
+&lt;p&gt;Additionally, Git has &lt;a href=&#34;http://git-scm.com/book/en/Git-Branching&#34;&gt;features&lt;/a&gt; flexible enough to
+support all kinds of &lt;a href=&#34;http://nvie.com/posts/a-successful-git-branching-model&#34;&gt;development process&lt;/a&gt;es, partially because
+its branches, by design, are not responsible for enforcing access
+permissions.&lt;/p&gt;
+
+&lt;p&gt;Consider developer John working on a shared git repository with
+locked branches: where would he push his temporary branch to for backup,
+if he can only write to &lt;code&gt;feature42&lt;/code&gt; and &lt;code&gt;johns_branch&lt;/code&gt;? How does he get
+&lt;code&gt;emergency_bugfix_14159&lt;/code&gt; pair reviewed at 4am? If he uses his own repo
+for those, does it mean he has to force the whole team to know about it?
+How does it affect work when a &lt;code&gt;git branch --all&lt;/code&gt; produces a phone book?&lt;/p&gt;
+
+&lt;p&gt;Break Git&amp;rsquo;s design gets you no where nice.&lt;/p&gt;
+
+&lt;p&gt;And no, Git&amp;rsquo;s social model doesn&amp;rsquo;t add work to the owner of the &amp;ldquo;official&amp;rdquo;
+repository. Afterall, Git was designed with he linux kernel in mind!
+Linus himself explains it the best (summary provided below):&lt;/p&gt;
+
+&lt;iframe width=&#34;420&#34; height=&#34;315&#34;
+src=&#34;http://www.youtube.com/embed/4XpnKHJAok8&#34;
+frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;In short, Linus only review pull requests from a few &amp;ldquo;lieutenants&amp;rdquo; he
+trusts, and they each follow the same process with their trusted few.
+And the pyramid trickles all the way down. Here agian, Git solves a
+problem by getting out of the way of the project&amp;rsquo;s social stucture,
+instead of trying to encapsulate it.&lt;/p&gt;
+
+&lt;p&gt;Git was the first version control system I&amp;rsquo;ve ever used starting in 2008.
+I&amp;rsquo;ve since gradually realized that not everyone is lucky like me, in the
+sense that svn has been working just fine for a lot of people. When their
+project switches to Git, emulating the svn/old workflow with functionality
+provided by projects like &lt;code&gt;gitolite&lt;/code&gt; is only natural. But if you are one of
+them, and want more creativity from your team, perhaps embracing the
+social aspect of Git by breaking the shackles on their hand is a good thing
+to try.&lt;/p&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

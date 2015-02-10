@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Windows Phone 8 Theme in Sencha Touch 2.2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <link href="" rel="alternate" type="application/rss+xml" title="dduan.net" />
+  <link href="http://dduan.net/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://dduan.net/css/hc.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  
+    
+    </head>
+    <body>
+<div class="nav-toggle"><i class="fa fa-bars fa-2x"></i> Herring Cove </div>
+      <div id = "wrapper">
+
+
+<div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <p class="navbar-brand">dduan.net</p>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+					
+					
+					<li><a href="http://dduan.net/post/">Posts </a></li>
+					
+					<li><a href="http://dduan.net/about/">About </a></li>
+					
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+       
+       <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+					<img src="" />
+          <li class="sidebar-brand"><a href="http://dduan.net/"><h1 class="brand">dduan.net</h1></a><h3></h3></li>
+          <hr />
+					
+						<li><a href="http://dduan.net/post/">Posts </a></li>
+					
+						<li><a href="http://dduan.net/about/">About </a></li>
+					
+          <hr />
+          <div id="social-wrapper">
+           <li> <a href="https://twitter.com/daniel_duan"><i class="fa fa-twitter-square"></i> Twitter</a></li>
+           <li> <a href="https://github.com/dduan"><i class="fa fa-github-square"></i> Github</a> </li>
+           <li> <a href="https://itunes.apple.com/us/artist/nan-duan/id619307372"><i class="fa fa-apple"></i> AppStore</a> </li>
+         </div>
+       </ul>
+     </div>
+
+
+
+     <div class="container">
+
+
+  <div id="article">
+   <div class="article-title">Windows Phone 8 Theme in Sencha Touch 2.2</div>
+   <div class="meta">
+   <small>&nbsp;<i class="fa fa-calendar-o"></i> 2013-01-14</small>
+    <ul id="tags">
+        <i class="fa fa-tags"></i> 
+      
+      <li><small><a class="meta" href="/tags/sencha-touch">Sencha Touch</a></small></li>
+      
+      <li><small><a class="meta" href="/tags/windows-phone-8">Windows Phone 8</a></small></li>
+      
+    </ul>
+   <hr/>
+   </div>
+   <div class="post">
+     <p>Sencha Touch 2.2 Alpha shipped with Windows Phone 8/IE 10 support.
+And it&rsquo;s pretty impressive! Just take a look at the starter app under the
+original theme and the Windows Phone 8 theme:</p>
+
+<p>The Default Theme:</p>
+
+<p><img src="/images/original-theme.png" alt="Sencha Touch 2.2 default theme" />
+</p>
+
+<p>WP8 Theme:</p>
+
+<p><img src="/images/wp8-theme.png" alt="Sencha Touch 2.2 windows phone 8 theme" />
+</p>
+
+<p>And it only takes a minute or two to get to the second screen.
+(if you have Sencha Cmd and Sencha Touch SDK 2.2 alpha ready). Here&rsquo;s how.</p>
+
+<ol>
+<li>In SDK folder, generate the app with <code>sencha generate app Foo path/to/foo</code></li>
+<li><a href="/2013/01/14/Sencha-Touch-22-Alpha-Sass-Bug-Workaround.html">Workaround</a> the bug shipped in this alpha version. This won&rsquo;t be
+necessary once the bug has been fixed in the next release</li>
+<li>Open <code>resources/sass/app.scss</code> in the generated project folder )it should
+look like <a href="https://gist.github.com/4533833">this</a> after step 2).
+Replace every appearance of the word <em>default</em> to &ldquo;windows&rdquo;. Then run
+<code>compass compile resources/sass</code> in the project root.</li>
+<li>Serve the project in a web server (I usually do
+<code>python -m SimpleHTTPServer</code>), fire up its url (localhost:800) and&hellip;</li>
+</ol>
+
+<p>Boom!</p>
+
+ </div>
+<a href="https://news.ycombinator.com/submit" class="hn-button" data-style="twitter">Vote on Hacker News</a>
+<script type="text/javascript">var HN=[];HN.factory=function(e){return function(){HN.push([e].concat(Array.prototype.slice.call(arguments,0)))};},HN.on=HN.factory("on"),HN.once=HN.factory("once"),HN.off=HN.factory("off"),HN.emit=HN.factory("emit"),HN.load=function(){var e="hn-button.js";if(document.getElementById(e))return;var t=document.createElement("script");t.id=e,t.src="//hn-button.herokuapp.com/hn-button.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)},HN.load();</script>
+
+ <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+   </div>
+ <ul class="pager">
+      &nbsp;<li class="previous"><a href="http://dduan.net/post/2013/01/sencha-touch-22-alpha-sass-bug-workaround/"> Sencha Touch 2.2 Alpha Sass Bug Workaround</a></li>
+      &nbsp;<li class="next"><a href="http://dduan.net/post/2013/01/hello-world-the-hard-way-with-sencha-touch/"> &#34;Hello, World!&#34; The Hard Way with Sencha Touch</a></li>
+</ul>
+
+
+    </ul>
+    </div>
+    <footer>
+
+    </footer>
+ 
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/hc.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-59501714-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+</body>
+
+</html>
+

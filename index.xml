@@ -132,6 +132,8 @@ let post = methodFactory(&amp;quot;POST&amp;quot;)
 &lt;p&gt;Turns out, this manual form of currying only works when default arguments aren&amp;rsquo;t involved!&lt;/p&gt;
 
 &lt;p&gt;Now, you hate Swift.&lt;/p&gt;
+
+&lt;p&gt;(Hi HN, just to be clear, I don&amp;rsquo;t really hate Swift as in, uh, &lt;em&gt;hate&lt;/em&gt; Swift. Judgning from some comments, I might have failed to convey the lightheartedness that I felt writing this up. It&amp;rsquo;s really like saying to a friend &amp;ldquo;I hate you&amp;rdquo; after he/she pulls a prank on you.)&lt;/p&gt;
 </description>
     </item>
     

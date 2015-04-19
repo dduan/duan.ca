@@ -101,4 +101,4 @@ Turns out, this manual form of currying only works when default arguments aren't
 
 Now, you hate Swift.
 
-
+(Hi HN, just to be clear, I don't really hate Swift as in, uh, *hate* Swift. Judgning from some comments, I might have failed to convey the lightheartedness that I felt writing this up. It's really like saying to a friend "I hate you" after he/she pulls a prank on you.)

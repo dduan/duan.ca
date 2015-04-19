@@ -25,6 +25,117 @@
     </item>
     
     <item>
+      <title>Swift Function Fun Facts</title>
+      <link>http://dduan.net/post/2015/04/swift-function-fun-facts/</link>
+      <pubDate>Sat, 18 Apr 2015 16:20:16 PDT</pubDate>
+      
+      <guid>http://dduan.net/post/2015/04/swift-function-fun-facts/</guid>
+      <description>&lt;p&gt;You love Swift. You want to write a class that does HTTP, it might have methods like the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func get(URLString:String, params:[String:AnyObject], headers:[String:String])
+func post(URLString:String, params:[String:AnyObject], headers:[String:String])
+func put(URLString:String, params:[String:AnyObject], headers:[String:String])
+// and more for HEAD, OPTIONS …
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But you don&amp;rsquo;t want to force your user to supply all arguments each time. You know that Swift supports default arguments, so you added some. Take GET as an example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func get(URLString:String, params:[String:AnyObject]=[:], headers:[String:String]=[:])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now users can do things like&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;get(&amp;quot;http://github.com&amp;quot;)
+get(&amp;quot;http://httpbin.org/get&amp;quot;, headers:[&amp;quot;Answer&amp;quot;:42])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;rsquo;s flexible! Woohoo!&lt;/p&gt;
+
+&lt;p&gt;After you thought about implementing these, though, you realize that &lt;code&gt;HTTPMethod&lt;/code&gt; is merely a property on &lt;code&gt;NSURLRequest&lt;/code&gt;. In other words, all of the previous methods can share the same implementation. In honor of the DRY principle, you write a function that accepts the method as an arguments and the previous functions each forwards the arguments to this function:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func impl(method:String, URLString:String, params:[String:AnyObject], headers:[String:String]) { // … }
+
+func get(URLString:String, params:[String:AnyObject]=[:], headers:[String:String]=[:])
+    impl(&amp;quot;GET&amp;quot;, URLString:URLString, params:params, headers:headers)
+}
+
+func post(URLString:String, params:[String:AnyObject]=[:], headers:[String:String]=[:])
+    impl(&amp;quot;POST&amp;quot;, URLString:URLString, params:params, headers:headers)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This seems like a sensible solution. Except that later you realize that there needs to be more parameters for each function, so in the end, each function looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func post(
+    URLString              : String,
+    params                 : [String:AnyObject]       = [:],
+    json                   : [String:AnyObject]?      = nil,
+    headers                : [String:AnyObject]       = [:],
+    auth                   : (String,String)?         = nil,
+    allowRedirects         : Bool                     = true,
+    requestBody            : NSData?                  = nil,
+    URLQuery               : String?                  = nil,
+    asyncCompletionHandler : ((HTTPResult!) -&amp;gt; Void)? = nil
+    ) -&amp;gt; HTTPResult {
+    return impl(
+        &amp;quot;POST&amp;quot;,
+        URLString              : URLString,
+        params                 : params,
+        json                   : json,
+        headers                : headers,
+        auth                   : auth,
+        data                   : requestBody,
+        URLQuery               : URLQuery,
+        redirects              : allowRedirects,
+        asyncCompletionHandler : asyncCompletionHandler
+    )
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Remembering that your goal is to respect DRY, and there are now giant blocks of code that all look the same except that first argument to &lt;code&gt;impl()&lt;/code&gt;, you became determined to find a better alternative.&lt;/p&gt;
+
+&lt;p&gt;Well, why not give currying a try? This example of currying with Swift comes to your mind:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func add(a:Int)(b:Int) -&amp;gt; Int { return a + b }
+let add3 = add(3)
+add3(b:2) // 5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If we apply this technique and put &lt;code&gt;method&lt;/code&gt; in &lt;code&gt;impl()&lt;/code&gt; the same place, we would get:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func impl(method:String)(URLString:String, params:[String:AnyObject], headers:[String:String], …) { // … }
+let get = impl(&amp;quot;GET&amp;quot;)
+let post = impl(&amp;quot;POST&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;right?  However, you are forcing users to supply each argument again. To make things worse, the number of arguments is a lot larger.&lt;/p&gt;
+
+&lt;p&gt;Hmm, but that&amp;rsquo;s a solved problem, just add default values to &lt;code&gt;impl()&lt;/code&gt;&amp;rsquo;s parameters:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func impl(method:String)(URLString:String, params:[String:AnyObject] = [:], headers:[String:String] = [:], …) { // … }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ta-da! Wait a minute, Xcode now refuse to compile you code! &lt;code&gt;Default argument is only permitted for a non-curried function parameter&lt;/code&gt;, it saids.&lt;/p&gt;
+
+&lt;p&gt;Stubborn as you are, you decide that perhaps the Swift team hasn&amp;rsquo;t got around to implementing this feature for curry syntax yet. Functions are first-class citizens! Surely if you return a function with default arguments?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func methodFactory(method:String) -&amp;gt; (params:[String:AnyObject] = [:], headers:[String:String] = [:], …) -&amp;gt; Void {
+    return {(params, headers, …) in
+        impl(method, params:params, headers:headers, …)
+    }
+}
+
+let get = methodFactory(&amp;quot;GET&amp;quot;)
+let post = methodFactory(&amp;quot;POST&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Turns out, this manual form of currying only works when default arguments aren&amp;rsquo;t involved!&lt;/p&gt;
+
+&lt;p&gt;Now, you hate Swift.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>My Xcode 6.2 And 6.3 Prediction</title>
       <link>http://dduan.net/post/2015/02/my-xcode-62-and-63-prediction/</link>
       <pubDate>Tue, 10 Feb 2015 02:09:50 PST</pubDate>
@@ -761,50 +872,6 @@ brew install php54
 &lt;p&gt;Now go run some PHP-MongoDB scripts with the build-in web server from
 PHP 5.4 like you normally would (don&amp;rsquo;t forget to start &lt;code&gt;mongod&lt;/code&gt;) and everything
 should work.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>CoffeeScript And Mountain Lion</title>
-      <link>http://dduan.net/post/2012/11/coffeescript-and-mountain-lion/</link>
-      <pubDate>Wed, 28 Nov 2012 15:11:00 -0600</pubDate>
-      
-      <guid>http://dduan.net/post/2012/11/coffeescript-and-mountain-lion/</guid>
-      <description>&lt;p&gt;Here are the necessary steps to install CoffeeScript on
-Mac OS X 10.8 (Mountain Lion):&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Install &lt;a href=&#34;https://developer.apple.com/downloads/index.action&#34;&gt;Command Lion Tools for Xcode&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Install Homebrew:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ruby -e &amp;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Install Node.js with Homebrew:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;brew install node
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Install npm (the version comes with node doesn&amp;rsquo;t install CoffeeScript
-properly for some reason):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl https://npmjs.org/install.sh | sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Install CoffeeScript with npm:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;npm install -g coffee-script
-# add environment variable to ~/.bashrc
-echo &amp;quot;export NODE_PATH=/usr/local/lib/node_modules&amp;quot;
-. ~/.bashrc
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Done!&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;I had to google around to figure out the environment variable and the issue
-with npm. Hopefully this will help some folks in the similar need.&lt;/p&gt;
 </description>
     </item>
     

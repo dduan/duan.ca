@@ -71,7 +71,7 @@ Well, why not give currying a try? This example of currying with Swift comes to 
     let add3 = add(3)
     add3(b:2) // 5
 
-If we apply this technique and put `method` in `impl()` the same place, we would get:
+If we apply this technique and treat `method` in `impl()` as `a` in the example, we would get:
 
     func impl(method:String)(URLString:String, params:[String:AnyObject], headers:[String:String], …) { // … }
     let get = impl("GET")

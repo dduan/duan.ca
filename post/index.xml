@@ -105,7 +105,7 @@ let post = impl(&amp;quot;POST&amp;quot;)
 
 &lt;p&gt;Ta-da! Wait a minute, Xcode now refuse to compile you code! &lt;code&gt;Default argument is only permitted for a non-curried function parameter&lt;/code&gt;, it saids.&lt;/p&gt;
 
-&lt;p&gt;Stubborn as you are, you decide that perhaps the Swift team hasn&amp;rsquo;t got around to implementing this feature for curry syntax yet. Functions are first-class citizens! Surely if you return a function with default arguments?&lt;/p&gt;
+&lt;p&gt;Stubborn as you are, you decide that perhaps the Swift team hasn&amp;rsquo;t got around to implementing this feature for curry syntax yet. Functions are first-class citizens! Surely if you return a function with default arguments…?&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;func methodFactory(method:String) -&amp;gt; (params:[String:AnyObject] = [:], headers:[String:String] = [:], …) -&amp;gt; Void {
     return {(params, headers, …) in

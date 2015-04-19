@@ -152,7 +152,7 @@ let add3 = add(3)
 add3(b:2) // 5
 </code></pre>
 
-<p>If we apply this technique and put <code>method</code> in <code>impl()</code> the same place, we would get:</p>
+<p>If we apply this technique and treat <code>method</code> in <code>impl()</code> as <code>a</code> in the example, we would get:</p>
 
 <pre><code>func impl(method:String)(URLString:String, params:[String:AnyObject], headers:[String:String], …) { // … }
 let get = impl(&quot;GET&quot;)

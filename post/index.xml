@@ -89,7 +89,7 @@ let add3 = add(3)
 add3(b:2) // 5
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;If we apply this technique and put &lt;code&gt;method&lt;/code&gt; in &lt;code&gt;impl()&lt;/code&gt; the same place, we would get:&lt;/p&gt;
+&lt;p&gt;If we apply this technique and treat &lt;code&gt;method&lt;/code&gt; in &lt;code&gt;impl()&lt;/code&gt; as &lt;code&gt;a&lt;/code&gt; in the example, we would get:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;func impl(method:String)(URLString:String, params:[String:AnyObject], headers:[String:String], …) { // … }
 let get = impl(&amp;quot;GET&amp;quot;)

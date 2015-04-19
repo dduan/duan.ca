@@ -50,9 +50,9 @@
           <li class="sidebar-brand"><a href="http://dduan.net/"><h1 class="brand">dduan.net</h1></a><h3></h3></li>
           <hr />
 					
-						<li><a href="http://dduan.net/post/">Posts </a></li>
-					
 						<li><a href="http://dduan.net/about/">About </a></li>
+					
+						<li><a href="http://dduan.net/post/">Posts </a></li>
 					
           <hr />
           <div id="social-wrapper">
@@ -168,7 +168,7 @@ let post = impl(&quot;POST&quot;)
 
 <p>Ta-da! Wait a minute, Xcode now refuse to compile you code! <code>Default argument is only permitted for a non-curried function parameter</code>, it saids.</p>
 
-<p>Stubborn as you are, you decide that perhaps the Swift team hasn&rsquo;t got around to implementing this feature for curry syntax yet. Functions are first-class citizens! Surely if you return a function with default arguments?</p>
+<p>Stubborn as you are, you decide that perhaps the Swift team hasn&rsquo;t got around to implementing this feature for curry syntax yet. Functions are first-class citizens! Surely if you return a function with default arguments…?</p>
 
 <pre><code>func methodFactory(method:String) -&gt; (params:[String:AnyObject] = [:], headers:[String:String] = [:], …) -&gt; Void {
     return {(params, headers, …) in

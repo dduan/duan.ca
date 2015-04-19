@@ -86,7 +86,7 @@ Hmm, but that's a solved problem, just add default values to `impl()`'s paramete
 
 Ta-da! Wait a minute, Xcode now refuse to compile you code! `Default argument is only permitted for a non-curried function parameter`, it saids.
 
-Stubborn as you are, you decide that perhaps the Swift team hasn't got around to implementing this feature for curry syntax yet. Functions are first-class citizens! Surely if you return a function with default arguments?
+Stubborn as you are, you decide that perhaps the Swift team hasn't got around to implementing this feature for curry syntax yet. Functions are first-class citizens! Surely if you return a function with default arguments…?
 
     func methodFactory(method:String) -> (params:[String:AnyObject] = [:], headers:[String:String] = [:], …) -> Void {
         return {(params, headers, …) in

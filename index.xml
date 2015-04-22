@@ -25,6 +25,55 @@
     </item>
     
     <item>
+      <title>NeoVim, Swift and Make</title>
+      <link>http://dduan.net/post/2015/04/neovim-swift-and-make/</link>
+      <pubDate>Wed, 22 Apr 2015 11:46:17 PDT</pubDate>
+      
+      <guid>http://dduan.net/post/2015/04/neovim-swift-and-make/</guid>
+      <description>&lt;p&gt;When it comes to Swift source code editing, nothing beats Xcode 6.3! That
+includes Xcode 6.2, which drove me to good&amp;rsquo;O Vim for a while.&lt;/p&gt;
+
+&lt;p&gt;Except it&amp;rsquo;s not the old Vim, I&amp;rsquo;m trying out &lt;a href=&#34;http://neovim.org&#34;&gt;NeoVim&lt;/a&gt;. The
+most noticable difference in NeoVim compared to Good&amp;rsquo;O Vim is its recent
+addition of a built in terminal.&lt;/p&gt;
+
+&lt;p&gt;With the help of syntax highlighting and a Makefile, working with Swift this
+way turns out to be a fine alternative.&lt;/p&gt;
+
+&lt;p&gt;(As a side benefit, I&amp;rsquo;m forced to use only local-context autocompletion. Now
+I can actually spell out full UIKit APIs 😉.)&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a gif:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2015/04/demo.gif&#34; alt=&#34;Make Swift NeoVim Demo&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s easy to miss some detail. I pressed &lt;code&gt;,m&lt;/code&gt;, &lt;code&gt;,&lt;/code&gt; being my binding for
+&lt;code&gt;&amp;lt;leader&amp;gt;&lt;/code&gt;. A terminal session launched with the &lt;code&gt;make&lt;/code&gt; command running. When
+that&amp;rsquo;s done, I could press any key and the terminal pane was dismissed. Since
+&lt;code&gt;test&lt;/code&gt; is the default target in my &lt;code&gt;Makefile&lt;/code&gt;, the test suit for my Swift
+codes actually ran.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s how the shortcut is set in &lt;code&gt;.nvimrc&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if has(&#39;nvim&#39;) nnoremap &amp;lt;leader&amp;gt;m :rightbelow vertical split &amp;lt;bar&amp;gt; :term make&amp;lt;cr&amp;gt; endif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The makefile is pretty straightforword if you&amp;rsquo;ve worked with &lt;code&gt;xcodebuild&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;test : @xcodebuild test -project ProjectName.xcodeproj -scheme SchemeName -destination &#39;platform=iOS Simulator,name=iPhone 6&#39; | xcpretty
+
+clean : @xcodebuild clean
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/supermarin/xcpretty&#34;&gt;xcpretty&lt;/a&gt; is a nifty script that
+makes &lt;code&gt;xcodebuild&lt;/code&gt;s output much more readable.&lt;/p&gt;
+
+&lt;p&gt;Happy vimming, Swifties :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Swift Function Fun Facts</title>
       <link>http://dduan.net/post/2015/04/swift-function-fun-facts/</link>
       <pubDate>Sat, 18 Apr 2015 16:20:16 PDT</pubDate>
@@ -823,57 +872,6 @@ my best to make the Senche component work with the design. When breaking out
 and customize is inevitable, I try to stay within the framwork as much as
 possible to make the most out of it. What&amp;rsquo;s described in this article is a
 common way to do that.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>MongoDB, PHP And Mountain Lion</title>
-      <link>http://dduan.net/post/2012/11/mongodb-php-and-mountain-lion/</link>
-      <pubDate>Thu, 29 Nov 2012 09:37:30 -0600</pubDate>
-      
-      <guid>http://dduan.net/post/2012/11/mongodb-php-and-mountain-lion/</guid>
-      <description>&lt;p&gt;Here are the necessary steps to make PHP work with MongoDB on vanilla
-Mac OS X 10.8 (Mountain Lion):&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Install &lt;a href=&#34;https://developer.apple.com/downloads/index.action&#34;&gt;Command Lion Tools for Xcode&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Install Homebrew:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ruby -e &amp;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Prioritize Homebrew&amp;rsquo;s binaries in $PATH:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;echo &amp;quot;export /usr/local/bin:$PATH&amp;quot; &amp;gt;&amp;gt; ~/.bash_profile
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Install PHP 5.4 with Homebrew:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Setup the tap for dependencies
-brew tap homebrew/dupes
-# This is the best 
-brew tap josegonzalez/homebrew-php
-# And install
-brew install php54
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Install MongoDB with Homebrew&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;brew install mongodb
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Install &amp;ldquo;PHP Driver&amp;rdquo; for MongoDB:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo pecl install mongo
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Done.&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Now go run some PHP-MongoDB scripts with the build-in web server from
-PHP 5.4 like you normally would (don&amp;rsquo;t forget to start &lt;code&gt;mongod&lt;/code&gt;) and everything
-should work.&lt;/p&gt;
 </description>
     </item>
     

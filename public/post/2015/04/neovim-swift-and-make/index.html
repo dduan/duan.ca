@@ -32,9 +32,9 @@
           <ul class="nav navbar-nav">
 					
 					
-					<li><a href="http://dduan.net/about/">About </a></li>
-					
 					<li><a href="http://dduan.net/post/">Posts </a></li>
+					
+					<li><a href="http://dduan.net/about/">About </a></li>
 					
           </ul>
         </div>
@@ -91,8 +91,8 @@
 includes Xcode 6.2, which drove me to good&rsquo;O Vim for a while.</p>
 
 <p>Except it&rsquo;s not the old Vim, I&rsquo;m trying out <a href="http://neovim.org">NeoVim</a>. The
-most noticable difference in NeoVim compared to Good&rsquo;O Vim is its recent
-addition of a built in terminal.</p>
+most noticable difference in NeoVim compared to Vim is its recent
+addition of a built-in terminal.</p>
 
 <p>With the help of syntax highlighting and a Makefile, working with Swift this
 way turns out to be a fine alternative.</p>
@@ -105,7 +105,7 @@ I can actually spell out full UIKit APIs 😉.)</p>
 <p><img src="/images/2015/04/demo.gif" alt="Make Swift NeoVim Demo" />
 </p>
 
-<p>It&rsquo;s easy to miss some detail. I pressed <code>,m</code>, <code>,</code> being my binding for
+<p>Some details are easy to miss. I pressed <code>,m</code>, <code>,</code> being my binding for
 <code>&lt;leader&gt;</code>. A terminal session launched with the <code>make</code> command running. When
 that&rsquo;s done, I could press any key and the terminal pane was dismissed. Since
 <code>test</code> is the default target in my <code>Makefile</code>, the test suit for my Swift
@@ -113,7 +113,9 @@ codes actually ran.</p>
 
 <p>Here&rsquo;s how the shortcut is set in <code>.nvimrc</code>:</p>
 
-<pre><code>if has('nvim') nnoremap &lt;leader&gt;m :rightbelow vertical split &lt;bar&gt; :term make&lt;cr&gt; endif
+<pre><code>if has('nvim')
+    nnoremap &lt;leader&gt;m :rightbelow vertical split &lt;bar&gt; :term make&lt;cr&gt;
+endif
 </code></pre>
 
 <p>The makefile is pretty straightforword if you&rsquo;ve worked with <code>xcodebuild</code>.</p>

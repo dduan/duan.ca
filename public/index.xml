@@ -34,8 +34,8 @@
 includes Xcode 6.2, which drove me to good&amp;rsquo;O Vim for a while.&lt;/p&gt;
 
 &lt;p&gt;Except it&amp;rsquo;s not the old Vim, I&amp;rsquo;m trying out &lt;a href=&#34;http://neovim.org&#34;&gt;NeoVim&lt;/a&gt;. The
-most noticable difference in NeoVim compared to Good&amp;rsquo;O Vim is its recent
-addition of a built in terminal.&lt;/p&gt;
+most noticable difference in NeoVim compared to Vim is its recent
+addition of a built-in terminal.&lt;/p&gt;
 
 &lt;p&gt;With the help of syntax highlighting and a Makefile, working with Swift this
 way turns out to be a fine alternative.&lt;/p&gt;
@@ -48,7 +48,7 @@ I can actually spell out full UIKit APIs 😉.)&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2015/04/demo.gif&#34; alt=&#34;Make Swift NeoVim Demo&#34; /&gt;
 &lt;/p&gt;
 
-&lt;p&gt;It&amp;rsquo;s easy to miss some detail. I pressed &lt;code&gt;,m&lt;/code&gt;, &lt;code&gt;,&lt;/code&gt; being my binding for
+&lt;p&gt;Some details are easy to miss. I pressed &lt;code&gt;,m&lt;/code&gt;, &lt;code&gt;,&lt;/code&gt; being my binding for
 &lt;code&gt;&amp;lt;leader&amp;gt;&lt;/code&gt;. A terminal session launched with the &lt;code&gt;make&lt;/code&gt; command running. When
 that&amp;rsquo;s done, I could press any key and the terminal pane was dismissed. Since
 &lt;code&gt;test&lt;/code&gt; is the default target in my &lt;code&gt;Makefile&lt;/code&gt;, the test suit for my Swift
@@ -56,7 +56,9 @@ codes actually ran.&lt;/p&gt;
 
 &lt;p&gt;Here&amp;rsquo;s how the shortcut is set in &lt;code&gt;.nvimrc&lt;/code&gt;:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;if has(&#39;nvim&#39;) nnoremap &amp;lt;leader&amp;gt;m :rightbelow vertical split &amp;lt;bar&amp;gt; :term make&amp;lt;cr&amp;gt; endif
+&lt;pre&gt;&lt;code&gt;if has(&#39;nvim&#39;)
+    nnoremap &amp;lt;leader&amp;gt;m :rightbelow vertical split &amp;lt;bar&amp;gt; :term make&amp;lt;cr&amp;gt;
+endif
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The makefile is pretty straightforword if you&amp;rsquo;ve worked with &lt;code&gt;xcodebuild&lt;/code&gt;.&lt;/p&gt;

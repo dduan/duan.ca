@@ -37,9 +37,11 @@ Here's how the shortcut is set in `.nvimrc`:
 The makefile is pretty straightforword if you've worked with `xcodebuild`.
 
 
-    test : @xcodebuild test -project ProjectName.xcodeproj -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 6' | xcpretty
+    test :
+        @xcodebuild test -project ProjectName.xcodeproj -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 6' | xcpretty
 
-    clean : @xcodebuild clean
+    clean :
+        @xcodebuild clean
 
 [xcpretty](https://github.com/supermarin/xcpretty) is a nifty script that
 makes `xcodebuild`s output much more readable.

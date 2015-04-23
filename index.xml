@@ -63,9 +63,11 @@ endif
 
 &lt;p&gt;The makefile is pretty straightforword if you&amp;rsquo;ve worked with &lt;code&gt;xcodebuild&lt;/code&gt;.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;test : @xcodebuild test -project ProjectName.xcodeproj -scheme SchemeName -destination &#39;platform=iOS Simulator,name=iPhone 6&#39; | xcpretty
+&lt;pre&gt;&lt;code&gt;test :
+    @xcodebuild test -project ProjectName.xcodeproj -scheme SchemeName -destination &#39;platform=iOS Simulator,name=iPhone 6&#39; | xcpretty
 
-clean : @xcodebuild clean
+clean :
+    @xcodebuild clean
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/supermarin/xcpretty&#34;&gt;xcpretty&lt;/a&gt; is a nifty script that

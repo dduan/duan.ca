@@ -32,9 +32,9 @@
           <ul class="nav navbar-nav">
 					
 					
-					<li><a href="http://dduan.net/post/">Posts </a></li>
-					
 					<li><a href="http://dduan.net/about/">About </a></li>
+					
+					<li><a href="http://dduan.net/post/">Posts </a></li>
 					
           </ul>
         </div>
@@ -120,9 +120,11 @@ endif
 
 <p>The makefile is pretty straightforword if you&rsquo;ve worked with <code>xcodebuild</code>.</p>
 
-<pre><code>test : @xcodebuild test -project ProjectName.xcodeproj -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 6' | xcpretty
+<pre><code>test :
+    @xcodebuild test -project ProjectName.xcodeproj -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 6' | xcpretty
 
-clean : @xcodebuild clean
+clean :
+    @xcodebuild clean
 </code></pre>
 
 <p><a href="https://github.com/supermarin/xcpretty">xcpretty</a> is a nifty script that

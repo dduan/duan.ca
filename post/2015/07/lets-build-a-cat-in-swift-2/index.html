@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>NeoVim, Swift and Make</title>
+  <title>Let&#39;s Build A &#39;cat&#39; In Swift 2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <link href="" rel="alternate" type="application/rss+xml" title="dduan.net" />
@@ -69,68 +69,110 @@
 
 
   <div id="article">
-   <div class="article-title">NeoVim, Swift and Make</div>
+   <div class="article-title">Let&#39;s Build A &#39;cat&#39; In Swift 2</div>
    <div class="meta">
-   <small>&nbsp;<i class="fa fa-calendar-o"></i> 2015-04-22</small>
+   <small>&nbsp;<i class="fa fa-calendar-o"></i> 2015-07-04</small>
     <ul id="tags">
         <i class="fa fa-tags"></i> 
-      
-      <li><small><a class="meta" href="/tags/neovim">NeoVim</a></small></li>
-      
-      <li><small><a class="meta" href="/tags/vim">Vim</a></small></li>
-      
-      <li><small><a class="meta" href="/tags/swift">Swift</a></small></li>
-      
-      <li><small><a class="meta" href="/tags/make">Make</a></small></li>
       
     </ul>
    <hr/>
    </div>
    <div class="post">
-     <p>When it comes to Swift source code editing, nothing beats Xcode 6.3! That
-includes Xcode 6.2, which drove me to good&rsquo;O Vim for a while.</p>
+     <p>As a homework in one of the early college classes, I was asked to write unix
+commands such as <code>cat</code> in C. Let&rsquo;s do that in Swift today! To make things
+interesting, let&rsquo;s pretend we are on Linux. That means no Xcode nor Foundation
+can be used.</p>
 
-<p>Except it&rsquo;s not the old Vim, I&rsquo;m trying out <a href="http://neovim.org">NeoVim</a>. The
-most noticable difference in NeoVim compared to Vim is its recent
-addition of a built-in terminal.</p>
+<p>It&rsquo;s hard to find a simpler unix program than <code>cat</code>: It takes a list of file
+names from the shell and write the content of each file to <code>stdout</code>. When no
+argument is given, it uses <code>stdin</code> as the source of its output.</p>
 
-<p>With the help of syntax highlighting and a Makefile, working with Swift this
-way turns out to be a fine alternative.</p>
+<p>Writing it in C is trivial. Swift has exellent support for leveraging C. But
+to call even the standard C functions, we need to import them first.</p>
 
-<p>(As a side benefit, I&rsquo;m forced to use only local-context autocompletion. Now
-I can actually spell out full UIKit APIs 😉.)</p>
+<p>The <code>swiftc</code> command can compile a pure Swift source file like this:</p>
 
-<p>Here&rsquo;s a gif:</p>
+<pre><code>swiftc cat.swift -o cat
+</code></pre>
 
-<p><img src="/images/2015/04/demo.gif" alt="Make Swift NeoVim Demo" />
+<p>We can add Objective-C bridging headers with the argument <code>-import-objc-header</code>.
+But to import the standard C functions, we also need to specify path to an SDK:</p>
+
+<pre><code>swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\ 
+       -import-objc-header bridge.h\
+       cat.swift\
+       -o cat
+</code></pre>
+
+<p>Instead of typing/coping that command, save this <code>Makefile</code> to the same
+directory as the <code>cat.swift</code>:</p>
+
+<pre><code>SDKPATH = $(shell xcrun --show-sdk-path --sdk macosx)
+CBRIDGEHEADER = bridge.h
+TARGETS := cat
+
+.PHONY : all $(TARGETS)
+
+all: $(TARGETS)
+
+$(TARGETS):
+    swiftc -sdk $(SDKPATH) $@.swift -import-objc-header $(CBRIDGEHEADER) -o $@
+</code></pre>
+
+<p>Now <code>make cat</code> will take care of the compilation.</p>
+
+<p>Since file I/O is the only concern, we&rsquo;ll need C APIs from <code>stdio.h</code>, so
+<code>bridge.h</code> is a one liner:</p>
+
+<pre><code>#import &lt;stdio.h&gt;
+</code></pre>
+
+<p>The standard C function for opening a file is <code>fopen</code>:</p>
+
+<pre><code>FILE * fopen ( const char *filename, const char *mode );
+</code></pre>
+
+<p>Hmmmm, how do we deal with all those pesky &lsquo;*&rsquo;s?</p>
+
+<p>To reference a certain C <code>Type</code> in Swift, we can use <code>UnsafePointer&lt;Type&gt;</code> or
+<code>UnsafeMutablePointer&lt;Type&gt;</code>. To make our lives easier, Swift <code>String</code>s
+automatically bridge to <code>const char *</code>. In other words, we can treat the signature of
+<code>fopen</code> as the following:</p>
+
+<pre><code>func fopen( filename: String, mode: String ) -&gt; UnsafeMutablePointer&lt;FILE&gt;
+</code></pre>
+
+<p>A character in C is represented by a byte in memory. Therefore Swift sees a <code>char</code>
+as of type <code>Int8</code> (8-bit integer).  So a <code>char *</code> would be referenced as
+<code>UnsafeMutablePointer&lt;Int8&gt;</code> in Swift. So <code>getline</code>, a function from POSIX</p>
+
+<pre><code>ssize_t getline( char **lineptr, size_t *n, FILE *stream );
+</code></pre>
+
+<p>would look like this in Swift:</p>
+
+<pre><code>func getline(
+    inout lineptr: UnsafeMutablePointer&lt;Int8&gt;, 
+    inout n: UInt,
+    stream: UnsafeMutablePointer&lt;FILE&gt;
+) -&gt; Int
+</code></pre>
+
+<p>It returns the number if characters it finds.</p>
+
+<p>We now can open a file, read and print its content line by line, and close it with:</p>
+
+<pre><code>func fclose(stream: UnsafeMutablePointer&lt;FILE&gt;)
+</code></pre>
+
+<p>Repeat this on each file specified in <code>Process.arguments</code>, or simply read from
+<code>stdin</code>, and we have a <code>cat</code>! Here&rsquo;s a screenshot of it displaying its own code:</p>
+
+<p><img src="/images/2015/07/swift-cat.png" alt="Swift cat" />
 </p>
 
-<p>Some details are easy to miss. I pressed <code>,m</code>, <code>,</code> being my binding for
-<code>&lt;leader&gt;</code>. A terminal session launched with the <code>make</code> command running. When
-that&rsquo;s done, I could press any key and the terminal pane was dismissed. Since
-<code>test</code> is the default target in my <code>Makefile</code>, the test suit for my Swift
-codes actually ran.</p>
-
-<p>Here&rsquo;s how the shortcut is set in <code>.nvimrc</code>:</p>
-
-<pre><code>if has('nvim')
-    nnoremap &lt;leader&gt;m :rightbelow vertical split &lt;bar&gt; :term make&lt;cr&gt;
-endif
-</code></pre>
-
-<p>The makefile is pretty straightforword if you&rsquo;ve worked with <code>xcodebuild</code>.</p>
-
-<pre><code>test :
-    @xcodebuild test -project ProjectName.xcodeproj -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 6' | xcpretty
-
-clean :
-    @xcodebuild clean
-</code></pre>
-
-<p><a href="https://github.com/supermarin/xcpretty">xcpretty</a> is a nifty script that
-makes <code>xcodebuild</code>s output much more readable.</p>
-
-<p>Happy vimming, Swifties :)</p>
+<p>The code is also available in this <a href="https://gist.github.com/dduan/f6d359019db8b0b55962">gist</a>.</p>
 
  </div>
 <a href="https://news.ycombinator.com/submit" class="hn-button" data-style="twitter">Vote on Hacker News</a>
@@ -140,8 +182,8 @@ makes <code>xcodebuild</code>s output much more readable.</p>
  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
    </div>
  <ul class="pager">
-      &nbsp;<li class="previous"><a href="http://dduan.net/post/2015/07/lets-build-a-cat-in-swift-2/"> Let&#39;s Build A &#39;cat&#39; In Swift 2</a></li>
-      &nbsp;<li class="next"><a href="http://dduan.net/post/2015/04/swift-function-fun-facts/"> Swift Function Fun Facts</a></li>
+      &nbsp;<li class="previous"><a href="http://dduan.net/about/"> About Daniel Duan</a></li>
+      &nbsp;<li class="next"><a href="http://dduan.net/post/2015/04/neovim-swift-and-make/"> NeoVim, Swift and Make</a></li>
 </ul>
 
 

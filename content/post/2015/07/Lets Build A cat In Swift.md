@@ -18,69 +18,69 @@ to call even the standard C functions, we need to import them first.
 
 The `swiftc` command can compile a pure Swift source file like this:
 
-	swiftc cat.swift -o cat
+    swiftc cat.swift -o cat
 
 We can add Objective-C bridging headers with the argument `-import-objc-header`.
 But to import the standard C functions, we also need to specify path to an SDK:
 
-	swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\ 
-	       -import-objc-header bridge.h\
-		   cat.swift\
-		   -o cat
+    swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\
+           -import-objc-header bridge.h\
+           cat.swift\
+           -o cat
 
 Instead of typing/coping that command, save this `Makefile` to the same
-directory as the `cat.swift`:
+directory as `cat.swift`:
 
-	SDKPATH = $(shell xcrun --show-sdk-path --sdk macosx)
-	CBRIDGEHEADER = bridge.h
-	TARGETS := cat
- 
-	.PHONY : all $(TARGETS)
- 
-	all: $(TARGETS)
- 
-	$(TARGETS):
-		swiftc -sdk $(SDKPATH) $@.swift -import-objc-header $(CBRIDGEHEADER) -o $@
- 
-Now `make cat` will take care of the compilation.
+    SDKPATH = $(shell xcrun --show-sdk-path --sdk macosx)
+    CBRIDGEHEADER = bridge.h
+    TARGETS := cat
+
+    .PHONY : all $(TARGETS)
+
+    all: $(TARGETS)
+
+    $(TARGETS):
+        swiftc -sdk $(SDKPATH) $@.swift -import-objc-header $(CBRIDGEHEADER) -o $@
+
+Now `make cat` should take care of the compilation.
 
 Since file I/O is the only concern, we'll need C APIs from `stdio.h`, so
 `bridge.h` is a one liner:
 
-	#import <stdio.h>
+    #import <stdio.h>
 
 The standard C function for opening a file is `fopen`:
 
-	FILE * fopen ( const char *filename, const char *mode );
+    FILE * fopen ( const char *filename, const char *mode );
 
-Hmmmm, how do we deal with all those pesky '*'s? 
+Hmmmm, how do we deal with all those pesky '*'s?
 
 To reference a certain C `Type` in Swift, we can use `UnsafePointer<Type>` or
 `UnsafeMutablePointer<Type>`. To make our lives easier, Swift `String`s
 automatically bridge to `const char *`. In other words, we can treat the signature of
 `fopen` as the following:
 
-	func fopen( filename: String, mode: String ) -> UnsafeMutablePointer<FILE>
+    func fopen( filename: String, mode: String ) -> UnsafeMutablePointer<FILE>
 
 A character in C is represented by a byte in memory. Therefore Swift sees a `char`
 as of type `Int8` (8-bit integer).  So a `char *` would be referenced as
-`UnsafeMutablePointer<Int8>` in Swift. So `getline`, a function from POSIX 
+`UnsafeMutablePointer<Int8>` in Swift. So `getline`, a function from POSIX
 
-	ssize_t getline( char **lineptr, size_t *n, FILE *stream );
+    ssize_t getline( char **lineptr, size_t *n, FILE *stream );
 
 would look like this in Swift:
 
-	func getline(
-		inout lineptr: UnsafeMutablePointer<Int8>, 
-		inout n: UInt,
-		stream: UnsafeMutablePointer<FILE>
-	) -> Int
+    func getline(
+        inout lineptr: UnsafeMutablePointer<Int8>,
+        inout n: UInt,
+        stream: UnsafeMutablePointer<FILE>
+    ) -> Int
 
 It returns the number if characters it finds.
 
 We now can open a file, read and print its content line by line, and close it with:
 
-	func fclose(stream: UnsafeMutablePointer<FILE>)
+    func fclose(stream: UnsafeMutablePointer<FILE>)
 
 Repeat this on each file specified in `Process.arguments`, or simply read from
 `stdin`, and we have a `cat`! Here's a screenshot of it displaying its own code:

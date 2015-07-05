@@ -38,14 +38,14 @@ to call even the standard C functions, we need to import them first.&lt;/p&gt;
 &lt;p&gt;We can add Objective-C bridging headers with the argument &lt;code&gt;-import-objc-header&lt;/code&gt;.
 But to import the standard C functions, we also need to specify path to an SDK:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\ 
+&lt;pre&gt;&lt;code&gt;swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\
        -import-objc-header bridge.h\
        cat.swift\
        -o cat
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Instead of typing/coping that command, save this &lt;code&gt;Makefile&lt;/code&gt; to the same
-directory as the &lt;code&gt;cat.swift&lt;/code&gt;:&lt;/p&gt;
+directory as &lt;code&gt;cat.swift&lt;/code&gt;:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;SDKPATH = $(shell xcrun --show-sdk-path --sdk macosx)
 CBRIDGEHEADER = bridge.h
@@ -59,7 +59,7 @@ $(TARGETS):
     swiftc -sdk $(SDKPATH) $@.swift -import-objc-header $(CBRIDGEHEADER) -o $@
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Now &lt;code&gt;make cat&lt;/code&gt; will take care of the compilation.&lt;/p&gt;
+&lt;p&gt;Now &lt;code&gt;make cat&lt;/code&gt; should take care of the compilation.&lt;/p&gt;
 
 &lt;p&gt;Since file I/O is the only concern, we&amp;rsquo;ll need C APIs from &lt;code&gt;stdio.h&lt;/code&gt;, so
 &lt;code&gt;bridge.h&lt;/code&gt; is a one liner:&lt;/p&gt;
@@ -92,7 +92,7 @@ as of type &lt;code&gt;Int8&lt;/code&gt; (8-bit integer).  So a &lt;code&gt;char
 &lt;p&gt;would look like this in Swift:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;func getline(
-    inout lineptr: UnsafeMutablePointer&amp;lt;Int8&amp;gt;, 
+    inout lineptr: UnsafeMutablePointer&amp;lt;Int8&amp;gt;,
     inout n: UInt,
     stream: UnsafeMutablePointer&amp;lt;FILE&amp;gt;
 ) -&amp;gt; Int

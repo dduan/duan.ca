@@ -99,14 +99,14 @@ to call even the standard C functions, we need to import them first.</p>
 <p>We can add Objective-C bridging headers with the argument <code>-import-objc-header</code>.
 But to import the standard C functions, we also need to specify path to an SDK:</p>
 
-<pre><code>swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\ 
+<pre><code>swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\
        -import-objc-header bridge.h\
        cat.swift\
        -o cat
 </code></pre>
 
 <p>Instead of typing/coping that command, save this <code>Makefile</code> to the same
-directory as the <code>cat.swift</code>:</p>
+directory as <code>cat.swift</code>:</p>
 
 <pre><code>SDKPATH = $(shell xcrun --show-sdk-path --sdk macosx)
 CBRIDGEHEADER = bridge.h
@@ -120,7 +120,7 @@ $(TARGETS):
     swiftc -sdk $(SDKPATH) $@.swift -import-objc-header $(CBRIDGEHEADER) -o $@
 </code></pre>
 
-<p>Now <code>make cat</code> will take care of the compilation.</p>
+<p>Now <code>make cat</code> should take care of the compilation.</p>
 
 <p>Since file I/O is the only concern, we&rsquo;ll need C APIs from <code>stdio.h</code>, so
 <code>bridge.h</code> is a one liner:</p>
@@ -153,7 +153,7 @@ as of type <code>Int8</code> (8-bit integer).  So a <code>char *</code> would be
 <p>would look like this in Swift:</p>
 
 <pre><code>func getline(
-    inout lineptr: UnsafeMutablePointer&lt;Int8&gt;, 
+    inout lineptr: UnsafeMutablePointer&lt;Int8&gt;,
     inout n: UInt,
     stream: UnsafeMutablePointer&lt;FILE&gt;
 ) -&gt; Int

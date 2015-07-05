@@ -29,7 +29,7 @@ to specify path to an SDK:
            cat.swift\
            -o cat
 
-Instead of typing/coping that command, save this `Makefile` to the same
+Instead of typing/copying that command, save this `Makefile` to the same
 directory as `cat.swift`:
 
     SDKPATH = $(shell xcrun --show-sdk-path --sdk macosx)

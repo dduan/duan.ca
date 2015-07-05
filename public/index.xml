@@ -57,7 +57,7 @@ to specify path to an SDK:&lt;/p&gt;
        -o cat
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Instead of typing/coping that command, save this &lt;code&gt;Makefile&lt;/code&gt; to the same
+&lt;p&gt;Instead of typing/copying that command, save this &lt;code&gt;Makefile&lt;/code&gt; to the same
 directory as &lt;code&gt;cat.swift&lt;/code&gt;:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;SDKPATH = $(shell xcrun --show-sdk-path --sdk macosx)

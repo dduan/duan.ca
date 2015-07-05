@@ -47,8 +47,9 @@ to call even the standard C functions, we need to import them first.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;swiftc cat.swift -o cat
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;We can add Objective-C bridging headers with the argument &lt;code&gt;-import-objc-header&lt;/code&gt;.
-But to import the standard C functions, we also need to specify path to an SDK:&lt;/p&gt;
+&lt;p&gt;We can add Objective-C bridging headers with the argument
+&lt;code&gt;-import-objc-header&lt;/code&gt;.  But to import the standard C functions, we also need
+to specify path to an SDK:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\
        -import-objc-header bridge.h\
@@ -88,15 +89,15 @@ $(TARGETS):
 
 &lt;p&gt;To reference a certain C &lt;code&gt;Type&lt;/code&gt; in Swift, we can use &lt;code&gt;UnsafePointer&amp;lt;Type&amp;gt;&lt;/code&gt; or
 &lt;code&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;/code&gt;. To make our lives easier, Swift &lt;code&gt;String&lt;/code&gt;s
-automatically bridge to &lt;code&gt;const char *&lt;/code&gt;. In other words, we can treat the signature of
-&lt;code&gt;fopen&lt;/code&gt; as the following:&lt;/p&gt;
+automatically bridge to &lt;code&gt;const char *&lt;/code&gt;. In other words, we can treat the
+signature of &lt;code&gt;fopen&lt;/code&gt; as if it&amp;rsquo;s the following:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;func fopen( filename: String, mode: String ) -&amp;gt; UnsafeMutablePointer&amp;lt;FILE&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;A character in C is represented by a byte in memory. Therefore Swift sees a &lt;code&gt;char&lt;/code&gt;
-as of type &lt;code&gt;Int8&lt;/code&gt; (8-bit integer).  So a &lt;code&gt;char *&lt;/code&gt; would be referenced as
-&lt;code&gt;UnsafeMutablePointer&amp;lt;Int8&amp;gt;&lt;/code&gt; in Swift. So &lt;code&gt;getline&lt;/code&gt;, a function from POSIX&lt;/p&gt;
+&lt;p&gt;A character in C is represented by a byte in memory. Therefore Swift sees
+a &lt;code&gt;char&lt;/code&gt; as of type &lt;code&gt;Int8&lt;/code&gt; (8-bit integer).  So a &lt;code&gt;char *&lt;/code&gt; would be referenced
+as &lt;code&gt;UnsafeMutablePointer&amp;lt;Int8&amp;gt;&lt;/code&gt; in Swift. So &lt;code&gt;getline&lt;/code&gt;, a function from POSIX&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;ssize_t getline( char **lineptr, size_t *n, FILE *stream );
 &lt;/code&gt;&lt;/pre&gt;
@@ -112,13 +113,15 @@ as of type &lt;code&gt;Int8&lt;/code&gt; (8-bit integer).  So a &lt;code&gt;char
 
 &lt;p&gt;It returns the number if characters it finds.&lt;/p&gt;
 
-&lt;p&gt;We now can open a file, read and print its content line by line, and close it with:&lt;/p&gt;
+&lt;p&gt;We now can open a file, read and print its content line by line, and close it
+with:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;func fclose(stream: UnsafeMutablePointer&amp;lt;FILE&amp;gt;)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Repeat this on each file specified in &lt;code&gt;Process.arguments&lt;/code&gt;, or simply read from
-&lt;code&gt;stdin&lt;/code&gt;, and we have a &lt;code&gt;cat&lt;/code&gt;! Here&amp;rsquo;s a screenshot of it displaying its own code:&lt;/p&gt;
+&lt;code&gt;stdin&lt;/code&gt;, and we have a &lt;code&gt;cat&lt;/code&gt;! Here&amp;rsquo;s a screenshot of it displaying its own
+code:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2015/07/swift-cat.png&#34; alt=&#34;Swift cat&#34; /&gt;
 &lt;/p&gt;

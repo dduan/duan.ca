@@ -20,8 +20,9 @@ The `swiftc` command can compile a pure Swift source file like this:
 
     swiftc cat.swift -o cat
 
-We can add Objective-C bridging headers with the argument `-import-objc-header`.
-But to import the standard C functions, we also need to specify path to an SDK:
+We can add Objective-C bridging headers with the argument
+`-import-objc-header`.  But to import the standard C functions, we also need
+to specify path to an SDK:
 
     swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\
            -import-objc-header bridge.h\
@@ -57,14 +58,14 @@ Hmmmm, how do we deal with all those pesky '*'s?
 
 To reference a certain C `Type` in Swift, we can use `UnsafePointer<Type>` or
 `UnsafeMutablePointer<Type>`. To make our lives easier, Swift `String`s
-automatically bridge to `const char *`. In other words, we can treat the signature of
-`fopen` as the following:
+automatically bridge to `const char *`. In other words, we can treat the
+signature of `fopen` as if it's the following:
 
     func fopen( filename: String, mode: String ) -> UnsafeMutablePointer<FILE>
 
-A character in C is represented by a byte in memory. Therefore Swift sees a `char`
-as of type `Int8` (8-bit integer).  So a `char *` would be referenced as
-`UnsafeMutablePointer<Int8>` in Swift. So `getline`, a function from POSIX
+A character in C is represented by a byte in memory. Therefore Swift sees
+a `char` as of type `Int8` (8-bit integer).  So a `char *` would be referenced
+as `UnsafeMutablePointer<Int8>` in Swift. So `getline`, a function from POSIX
 
     ssize_t getline( char **lineptr, size_t *n, FILE *stream );
 
@@ -78,12 +79,14 @@ would look like this in Swift:
 
 It returns the number if characters it finds.
 
-We now can open a file, read and print its content line by line, and close it with:
+We now can open a file, read and print its content line by line, and close it
+with:
 
     func fclose(stream: UnsafeMutablePointer<FILE>)
 
 Repeat this on each file specified in `Process.arguments`, or simply read from
-`stdin`, and we have a `cat`! Here's a screenshot of it displaying its own code:
+`stdin`, and we have a `cat`! Here's a screenshot of it displaying its own
+code:
 
 ![Swift cat](/images/2015/07/swift-cat.png)
 

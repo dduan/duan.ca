@@ -96,8 +96,9 @@ to call even the standard C functions, we need to import them first.</p>
 <pre><code>swiftc cat.swift -o cat
 </code></pre>
 
-<p>We can add Objective-C bridging headers with the argument <code>-import-objc-header</code>.
-But to import the standard C functions, we also need to specify path to an SDK:</p>
+<p>We can add Objective-C bridging headers with the argument
+<code>-import-objc-header</code>.  But to import the standard C functions, we also need
+to specify path to an SDK:</p>
 
 <pre><code>swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\
        -import-objc-header bridge.h\
@@ -137,15 +138,15 @@ $(TARGETS):
 
 <p>To reference a certain C <code>Type</code> in Swift, we can use <code>UnsafePointer&lt;Type&gt;</code> or
 <code>UnsafeMutablePointer&lt;Type&gt;</code>. To make our lives easier, Swift <code>String</code>s
-automatically bridge to <code>const char *</code>. In other words, we can treat the signature of
-<code>fopen</code> as the following:</p>
+automatically bridge to <code>const char *</code>. In other words, we can treat the
+signature of <code>fopen</code> as if it&rsquo;s the following:</p>
 
 <pre><code>func fopen( filename: String, mode: String ) -&gt; UnsafeMutablePointer&lt;FILE&gt;
 </code></pre>
 
-<p>A character in C is represented by a byte in memory. Therefore Swift sees a <code>char</code>
-as of type <code>Int8</code> (8-bit integer).  So a <code>char *</code> would be referenced as
-<code>UnsafeMutablePointer&lt;Int8&gt;</code> in Swift. So <code>getline</code>, a function from POSIX</p>
+<p>A character in C is represented by a byte in memory. Therefore Swift sees
+a <code>char</code> as of type <code>Int8</code> (8-bit integer).  So a <code>char *</code> would be referenced
+as <code>UnsafeMutablePointer&lt;Int8&gt;</code> in Swift. So <code>getline</code>, a function from POSIX</p>
 
 <pre><code>ssize_t getline( char **lineptr, size_t *n, FILE *stream );
 </code></pre>
@@ -161,13 +162,15 @@ as of type <code>Int8</code> (8-bit integer).  So a <code>char *</code> would be
 
 <p>It returns the number if characters it finds.</p>
 
-<p>We now can open a file, read and print its content line by line, and close it with:</p>
+<p>We now can open a file, read and print its content line by line, and close it
+with:</p>
 
 <pre><code>func fclose(stream: UnsafeMutablePointer&lt;FILE&gt;)
 </code></pre>
 
 <p>Repeat this on each file specified in <code>Process.arguments</code>, or simply read from
-<code>stdin</code>, and we have a <code>cat</code>! Here&rsquo;s a screenshot of it displaying its own code:</p>
+<code>stdin</code>, and we have a <code>cat</code>! Here&rsquo;s a screenshot of it displaying its own
+code:</p>
 
 <p><img src="/images/2015/07/swift-cat.png" alt="Swift cat" />
 </p>

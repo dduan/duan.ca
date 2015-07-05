@@ -9,8 +9,114 @@
     
     
     
-    <lastBuildDate>Wed, 22 Apr 2015 11:46:17 PDT</lastBuildDate>
+    <lastBuildDate>Sat, 04 Jul 2015 20:56:19 PDT</lastBuildDate>
     <atom:link href="http://dduan.net/tags/swift/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Let&#39;s Build A &#39;cat&#39; In Swift 2</title>
+      <link>http://dduan.net/post/2015/07/lets-build-a-cat-in-swift-2/</link>
+      <pubDate>Sat, 04 Jul 2015 20:56:19 PDT</pubDate>
+      
+      <guid>http://dduan.net/post/2015/07/lets-build-a-cat-in-swift-2/</guid>
+      <description>&lt;p&gt;As a homework in one of the early college classes, I was asked to write unix
+commands such as &lt;code&gt;cat&lt;/code&gt; in C. Let&amp;rsquo;s do that in Swift today! To make things
+interesting, let&amp;rsquo;s pretend we are on Linux. That means no Xcode nor Foundation
+can be used.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s hard to find a simpler unix program than &lt;code&gt;cat&lt;/code&gt;: It takes a list of file
+names from the shell and write the content of each file to &lt;code&gt;stdout&lt;/code&gt;. When no
+argument is given, it uses &lt;code&gt;stdin&lt;/code&gt; as the source of its output.&lt;/p&gt;
+
+&lt;p&gt;Writing it in C is trivial. Swift has exellent support for leveraging C. But
+to call even the standard C functions, we need to import them first.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;swiftc&lt;/code&gt; command can compile a pure Swift source file like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;swiftc cat.swift -o cat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can add Objective-C bridging headers with the argument
+&lt;code&gt;-import-objc-header&lt;/code&gt;.  But to import the standard C functions, we also need
+to specify path to an SDK:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\
+       -import-objc-header bridge.h\
+       cat.swift\
+       -o cat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Instead of typing/copying that command, save this &lt;code&gt;Makefile&lt;/code&gt; to the same
+directory as &lt;code&gt;cat.swift&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SDKPATH = $(shell xcrun --show-sdk-path --sdk macosx)
+CBRIDGEHEADER = bridge.h
+TARGETS := cat
+
+.PHONY : all $(TARGETS)
+
+all: $(TARGETS)
+
+$(TARGETS):
+    swiftc -sdk $(SDKPATH) $@.swift -import-objc-header $(CBRIDGEHEADER) -o $@
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now &lt;code&gt;make cat&lt;/code&gt; should take care of the compilation.&lt;/p&gt;
+
+&lt;p&gt;Since file I/O is the only concern, we&amp;rsquo;ll need C APIs from &lt;code&gt;stdio.h&lt;/code&gt;, so
+&lt;code&gt;bridge.h&lt;/code&gt; is a one liner:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;lt;stdio.h&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The standard C function for opening a file is &lt;code&gt;fopen&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FILE * fopen ( const char *filename, const char *mode );
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hmmmm, how do we deal with all those pesky &amp;lsquo;*&amp;rsquo;s?&lt;/p&gt;
+
+&lt;p&gt;To reference a certain C &lt;code&gt;Type&lt;/code&gt; in Swift, we can use &lt;code&gt;UnsafePointer&amp;lt;Type&amp;gt;&lt;/code&gt; or
+&lt;code&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;/code&gt;. To make our lives easier, Swift &lt;code&gt;String&lt;/code&gt;s
+automatically bridge to &lt;code&gt;const char *&lt;/code&gt;. In other words, we can treat the
+signature of &lt;code&gt;fopen&lt;/code&gt; as if it&amp;rsquo;s the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func fopen( filename: String, mode: String ) -&amp;gt; UnsafeMutablePointer&amp;lt;FILE&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A character in C is represented by a byte in memory. Therefore Swift sees
+a &lt;code&gt;char&lt;/code&gt; as of type &lt;code&gt;Int8&lt;/code&gt; (8-bit integer).  So a &lt;code&gt;char *&lt;/code&gt; would be referenced
+as &lt;code&gt;UnsafeMutablePointer&amp;lt;Int8&amp;gt;&lt;/code&gt; in Swift. So &lt;code&gt;getline&lt;/code&gt;, a function from POSIX&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ssize_t getline( char **lineptr, size_t *n, FILE *stream );
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;would look like this in Swift:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func getline(
+    inout lineptr: UnsafeMutablePointer&amp;lt;Int8&amp;gt;,
+    inout n: UInt,
+    stream: UnsafeMutablePointer&amp;lt;FILE&amp;gt;
+) -&amp;gt; Int
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It returns the number if characters it finds.&lt;/p&gt;
+
+&lt;p&gt;We now can open a file, read and print its content line by line, and close it
+with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func fclose(stream: UnsafeMutablePointer&amp;lt;FILE&amp;gt;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Repeat this on each file specified in &lt;code&gt;Process.arguments&lt;/code&gt;, or simply read from
+&lt;code&gt;stdin&lt;/code&gt;, and we have a &lt;code&gt;cat&lt;/code&gt;! Here&amp;rsquo;s a screenshot of it displaying its own
+code:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2015/07/swift-cat.png&#34; alt=&#34;Swift cat&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The code is also available in this &lt;a href=&#34;https://gist.github.com/dduan/f6d359019db8b0b55962&#34;&gt;gist&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>NeoVim, Swift and Make</title>

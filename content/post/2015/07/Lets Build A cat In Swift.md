@@ -2,6 +2,7 @@
 date = "2015-07-04T20:56:19.429925-07:00"
 title = "Let's Build A 'cat' In Swift 2"
 slug = "lets-build-a-cat-in-swift-2"
+tags = [ "Swift" ]
 +++
 
 As a homework in one of the early college classes, I was asked to write unix

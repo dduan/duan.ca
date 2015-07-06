@@ -9,8 +9,42 @@
     
     
     
-    <lastBuildDate>Sat, 04 Jul 2015 20:56:19 PDT</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jul 2015 22:36:09 PDT</lastBuildDate>
     <atom:link href="http://dduan.net/tags/swift/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Dynamic Swift Framework Without Xcode</title>
+      <link>http://dduan.net/post/2015/07/dynamic-swift-framework-without-xcode/</link>
+      <pubDate>Sun, 05 Jul 2015 22:36:09 PDT</pubDate>
+      
+      <guid>http://dduan.net/post/2015/07/dynamic-swift-framework-without-xcode/</guid>
+      <description>&lt;p&gt;I came up with this question recently:&lt;/p&gt;
+
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; lang=&#34;en&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Can we even use Frameworks with &lt;a href=&#34;https://twitter.com/hashtag/Swiftlang?src=hash&#34;&gt;#Swiftlang&lt;/a&gt; on Linux?&lt;/p&gt;&amp;mdash; Daniel Duan (@daniel_duan) &lt;a href=&#34;https://twitter.com/daniel_duan/status/617470929241706496&#34;&gt;July 4, 2015&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;And I&amp;rsquo;m going to give the answer in this post (spoiler alert: yes, sort of).&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the content of a framework created by Xcode:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;images/2015/07/just-framework-structure.png&#34; alt=&#34;Just Framework Structure&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Some of the files, such as &lt;code&gt;Info.plist&lt;/code&gt;, are obviously construct of Xcode.
+Play with &lt;code&gt;swiftc&lt;/code&gt; long enough, one would find that the &lt;code&gt;.swiftdoc&lt;/code&gt;s, the
+&lt;code&gt;.swiftmodule&lt;/code&gt;s and the one binary file came from the Swift compiler.&lt;/p&gt;
+
+&lt;p&gt;Instead of listing the relevant &lt;code&gt;swiftc&lt;/code&gt; command options, I&amp;rsquo;ve created a &lt;a href=&#34;https://github.com/dduan/Swift-Framework-Without-Xcode&#34;&gt;sample project&lt;/a&gt; to demonstrate how one can complie and link to frameworks so that they can be &lt;code&gt;import&lt;/code&gt;ed in the application code. The key ingredient for achieving it lies in &lt;em&gt;Makefile&lt;/em&gt;. In summary, &lt;code&gt;swiftc&lt;/code&gt; can do these for us:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;generate a binary as a library/framework&lt;/li&gt;
+&lt;li&gt;emit a &lt;code&gt;.swiftmodule&lt;/code&gt; file, which Swift needs to understand that binary.&lt;/li&gt;
+&lt;li&gt;assign a path the Swift runtime needs to locate this framework.&lt;/li&gt;
+&lt;li&gt;compile source code that imports the framework, given that they exist in the paths relative to the app binary in step 3.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Based on these observations, it&amp;rsquo;s not hard to imagine more sophisticated build systems, such as IDEs and package/dependency management systems.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Let&#39;s Build A &#39;cat&#39; In Swift 2</title>
@@ -111,7 +145,7 @@ with:&lt;/p&gt;
 &lt;code&gt;stdin&lt;/code&gt;, and we have a &lt;code&gt;cat&lt;/code&gt;! Here&amp;rsquo;s a screenshot of it displaying its own
 code:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2015/07/swift-cat.png&#34; alt=&#34;Swift cat&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/images/2015/07/swift-cat.png&#34; alt=&#34;Swift cat&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;The code is also available in this &lt;a href=&#34;https://gist.github.com/dduan/f6d359019db8b0b55962&#34;&gt;gist&lt;/a&gt;.&lt;/p&gt;
@@ -139,7 +173,7 @@ I can actually spell out full UIKit APIs 😉.)&lt;/p&gt;
 
 &lt;p&gt;Here&amp;rsquo;s a gif:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2015/04/demo.gif&#34; alt=&#34;Make Swift NeoVim Demo&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/images/2015/04/demo.gif&#34; alt=&#34;Make Swift NeoVim Demo&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;Some details are easy to miss. I pressed &lt;code&gt;,m&lt;/code&gt;, &lt;code&gt;,&lt;/code&gt; being my binding for

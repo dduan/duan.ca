@@ -13,7 +13,7 @@ And I'm going to give the answer in this post (spoiler alert: yes, sort of).
 
 Here's the content of a framework created by Xcode:
 
-![Just Framework Structure](images/2015/07/just-framework-structure.png)
+![Just Framework Structure](/images/2015/07/just-framework-structure.png)
 
 Some of the files, such as `Info.plist`, are obviously construct of Xcode.
 Play with `swiftc` long enough, one would find that the `.swiftdoc`s, the

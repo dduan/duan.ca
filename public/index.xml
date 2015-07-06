@@ -38,7 +38,7 @@
 
 &lt;p&gt;Here&amp;rsquo;s the content of a framework created by Xcode:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;images/2015/07/just-framework-structure.png&#34; alt=&#34;Just Framework Structure&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/images/2015/07/just-framework-structure.png&#34; alt=&#34;Just Framework Structure&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;Some of the files, such as &lt;code&gt;Info.plist&lt;/code&gt;, are obviously construct of Xcode.

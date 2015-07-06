@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>MongoDB, PHP And Mountain Lion</title>
+  <title>Dynamic Swift Framework Without Xcode</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <link href="" rel="alternate" type="application/rss+xml" title="dduan.net" />
@@ -69,66 +69,45 @@
 
 
   <div id="article">
-   <div class="article-title">MongoDB, PHP And Mountain Lion</div>
+   <div class="article-title">Dynamic Swift Framework Without Xcode</div>
    <div class="meta">
-   <small>&nbsp;<i class="fa fa-calendar-o"></i> 2012-11-29</small>
+   <small>&nbsp;<i class="fa fa-calendar-o"></i> 2015-07-05</small>
     <ul id="tags">
         <i class="fa fa-tags"></i> 
       
-      <li><small><a class="meta" href="/tags/php">PHP</a></small></li>
+      <li><small><a class="meta" href="/tags/swift">Swift</a></small></li>
       
-      <li><small><a class="meta" href="/tags/mongodb">MongoDB</a></small></li>
-      
-      <li><small><a class="meta" href="/tags/mac">Mac</a></small></li>
-      
-      <li><small><a class="meta" href="/tags/os-x-mountain-lion">OS X Mountain Lion</a></small></li>
+      <li><small><a class="meta" href="/tags/xcode">Xcode</a></small></li>
       
     </ul>
    <hr/>
    </div>
    <div class="post">
-     <p>Here are the necessary steps to make PHP work with MongoDB on vanilla
-Mac OS X 10.8 (Mountain Lion):</p>
+     <p>I came up with this question recently:</p>
+
+<p><blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Can we even use Frameworks with <a href="https://twitter.com/hashtag/Swiftlang?src=hash">#Swiftlang</a> on Linux?</p>&mdash; Daniel Duan (@daniel_duan) <a href="https://twitter.com/daniel_duan/status/617470929241706496">July 4, 2015</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p>And I&rsquo;m going to give the answer in this post (spoiler alert: yes, sort of).</p>
+
+<p>Here&rsquo;s the content of a framework created by Xcode:</p>
+
+<p><img src="images/2015/07/just-framework-structure.png" alt="Just Framework Structure" />
+</p>
+
+<p>Some of the files, such as <code>Info.plist</code>, are obviously construct of Xcode.
+Play with <code>swiftc</code> long enough, one would find that the <code>.swiftdoc</code>s, the
+<code>.swiftmodule</code>s and the one binary file came from the Swift compiler.</p>
+
+<p>Instead of listing the relevant <code>swiftc</code> command options, I&rsquo;ve created a <a href="https://github.com/dduan/Swift-Framework-Without-Xcode">sample project</a> to demonstrate how one can complie and link to frameworks so that they can be <code>import</code>ed in the application code. The key ingredient for achieving it lies in <em>Makefile</em>. In summary, <code>swiftc</code> can do these for us:</p>
 
 <ol>
-<li>Install <a href="https://developer.apple.com/downloads/index.action">Command Lion Tools for Xcode</a></li>
-
-<li><p>Install Homebrew:</p>
-
-<pre><code>ruby -e &quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&quot;
-</code></pre></li>
-
-<li><p>Prioritize Homebrew&rsquo;s binaries in $PATH:</p>
-
-<pre><code>echo &quot;export /usr/local/bin:$PATH&quot; &gt;&gt; ~/.bash_profile
-</code></pre></li>
-
-<li><p>Install PHP 5.4 with Homebrew:</p>
-
-<pre><code># Setup the tap for dependencies
-brew tap homebrew/dupes
-# This is the best 
-brew tap josegonzalez/homebrew-php
-# And install
-brew install php54
-</code></pre></li>
-
-<li><p>Install MongoDB with Homebrew</p>
-
-<pre><code>brew install mongodb
-</code></pre></li>
-
-<li><p>Install &ldquo;PHP Driver&rdquo; for MongoDB:</p>
-
-<pre><code>sudo pecl install mongo
-</code></pre></li>
-
-<li><p>Done.</p></li>
+<li>generate a binary as a library/framework</li>
+<li>emit a <code>.swiftmodule</code> file, which Swift needs to understand that binary.</li>
+<li>assign a path the Swift runtime needs to locate this framework.</li>
+<li>compile source code that imports the framework, given that they exist in the paths relative to the app binary in step 3.</li>
 </ol>
 
-<p>Now go run some PHP-MongoDB scripts with the build-in web server from
-PHP 5.4 like you normally would (don&rsquo;t forget to start <code>mongod</code>) and everything
-should work.</p>
+<p>Based on these observations, it&rsquo;s not hard to imagine more sophisticated build systems, such as IDEs and package/dependency management systems.</p>
 
  </div>
 <a href="https://news.ycombinator.com/submit" class="hn-button" data-style="twitter">Vote on Hacker News</a>
@@ -138,8 +117,8 @@ should work.</p>
  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
    </div>
  <ul class="pager">
-      &nbsp;<li class="previous"><a href="http://dduan.net/post/2013/01/hello-world-the-hard-way-with-sencha-touch/"> &#34;Hello, World!&#34; The Hard Way with Sencha Touch</a></li>
-      &nbsp;<li class="next"><a href="http://dduan.net/post/2012/11/coffeescript-and-mountain-lion/"> CoffeeScript And Mountain Lion</a></li>
+      &nbsp;<li class="previous"><a href="http://dduan.net/about/"> About Daniel Duan</a></li>
+      &nbsp;<li class="next"><a href="http://dduan.net/post/2015/07/lets-build-a-cat-in-swift-2/"> Let&#39;s Build A &#39;cat&#39; In Swift 2</a></li>
 </ul>
 
 

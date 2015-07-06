@@ -1,6 +1,6 @@
 +++
 date = "2015-07-05T22:36:09.242959-07:00"
-title = "Dynamic Swift Framework Without Xcode
+title = "Dynamic Swift Framework Without Xcode"
 slug = "dynamic-swift-framework-without-xcode"
 tags = [ "Swift", "Xcode" ]
 +++

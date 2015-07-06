@@ -25,6 +25,40 @@
     </item>
     
     <item>
+      <title>Dynamic Swift Framework Without Xcode</title>
+      <link>http://dduan.net/post/2015/07/dynamic-swift-framework-without-xcode/</link>
+      <pubDate>Sun, 05 Jul 2015 22:36:09 PDT</pubDate>
+      
+      <guid>http://dduan.net/post/2015/07/dynamic-swift-framework-without-xcode/</guid>
+      <description>&lt;p&gt;I came up with this question recently:&lt;/p&gt;
+
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; lang=&#34;en&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Can we even use Frameworks with &lt;a href=&#34;https://twitter.com/hashtag/Swiftlang?src=hash&#34;&gt;#Swiftlang&lt;/a&gt; on Linux?&lt;/p&gt;&amp;mdash; Daniel Duan (@daniel_duan) &lt;a href=&#34;https://twitter.com/daniel_duan/status/617470929241706496&#34;&gt;July 4, 2015&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;And I&amp;rsquo;m going to give the answer in this post (spoiler alert: yes, sort of).&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the content of a framework created by Xcode:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;images/2015/07/just-framework-structure.png&#34; alt=&#34;Just Framework Structure&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Some of the files, such as &lt;code&gt;Info.plist&lt;/code&gt;, are obviously construct of Xcode.
+Play with &lt;code&gt;swiftc&lt;/code&gt; long enough, one would find that the &lt;code&gt;.swiftdoc&lt;/code&gt;s, the
+&lt;code&gt;.swiftmodule&lt;/code&gt;s and the one binary file came from the Swift compiler.&lt;/p&gt;
+
+&lt;p&gt;Instead of listing the relevant &lt;code&gt;swiftc&lt;/code&gt; command options, I&amp;rsquo;ve created a &lt;a href=&#34;https://github.com/dduan/Swift-Framework-Without-Xcode&#34;&gt;sample project&lt;/a&gt; to demonstrate how one can complie and link to frameworks so that they can be &lt;code&gt;import&lt;/code&gt;ed in the application code. The key ingredient for achieving it lies in &lt;em&gt;Makefile&lt;/em&gt;. In summary, &lt;code&gt;swiftc&lt;/code&gt; can do these for us:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;generate a binary as a library/framework&lt;/li&gt;
+&lt;li&gt;emit a &lt;code&gt;.swiftmodule&lt;/code&gt; file, which Swift needs to understand that binary.&lt;/li&gt;
+&lt;li&gt;assign a path the Swift runtime needs to locate this framework.&lt;/li&gt;
+&lt;li&gt;compile source code that imports the framework, given that they exist in the paths relative to the app binary in step 3.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Based on these observations, it&amp;rsquo;s not hard to imagine more sophisticated build systems, such as IDEs and package/dependency management systems.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Let&#39;s Build A &#39;cat&#39; In Swift 2</title>
       <link>http://dduan.net/post/2015/07/lets-build-a-cat-in-swift-2/</link>
       <pubDate>Sat, 04 Jul 2015 20:56:19 PDT</pubDate>
@@ -123,7 +157,7 @@ with:&lt;/p&gt;
 &lt;code&gt;stdin&lt;/code&gt;, and we have a &lt;code&gt;cat&lt;/code&gt;! Here&amp;rsquo;s a screenshot of it displaying its own
 code:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2015/07/swift-cat.png&#34; alt=&#34;Swift cat&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/images/2015/07/swift-cat.png&#34; alt=&#34;Swift cat&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;The code is also available in this &lt;a href=&#34;https://gist.github.com/dduan/f6d359019db8b0b55962&#34;&gt;gist&lt;/a&gt;.&lt;/p&gt;
@@ -151,7 +185,7 @@ I can actually spell out full UIKit APIs 😉.)&lt;/p&gt;
 
 &lt;p&gt;Here&amp;rsquo;s a gif:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2015/04/demo.gif&#34; alt=&#34;Make Swift NeoVim Demo&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/images/2015/04/demo.gif&#34; alt=&#34;Make Swift NeoVim Demo&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;Some details are easy to miss. I pressed &lt;code&gt;,m&lt;/code&gt;, &lt;code&gt;,&lt;/code&gt; being my binding for
@@ -703,7 +737,7 @@ of different height, the list would look awkward.&lt;/p&gt;
 &lt;p&gt;Load up a Ext.List and inspect one of the item element with Chrome/Safari
 developer tool, you&amp;rsquo;ll find its &lt;code&gt;element.style&lt;/code&gt; has &lt;code&gt;height: 47px !important;&lt;/code&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2013/05/height.png&#34; alt=&#34;Default Height on List Item in Sencha Touch 2&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;/images/2013/05/height.png&#34; alt=&#34;Default Height on List Item in Sencha Touch 2&#34; /&gt;
 &lt;/p&gt;
 
 &lt;p&gt;Here&amp;rsquo;s the key: CSS properties under &lt;code&gt;element.style&lt;/code&gt; are set by Javascript.
@@ -759,45 +793,6 @@ to a few sass files in the framework. Long-story short, you need to change
 
 &lt;p&gt;While you are at it, why not checkout the magical Windows Phone 8 theme
 included in Sencha Touch 2.2 alpha.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Windows Phone 8 Theme in Sencha Touch 2.2</title>
-      <link>http://dduan.net/post/2013/01/windows-phone-8-theme-in-sencha-touch-22/</link>
-      <pubDate>Mon, 14 Jan 2013 13:45:00 -0600</pubDate>
-      
-      <guid>http://dduan.net/post/2013/01/windows-phone-8-theme-in-sencha-touch-22/</guid>
-      <description>&lt;p&gt;Sencha Touch 2.2 Alpha shipped with Windows Phone 8/IE 10 support.
-And it&amp;rsquo;s pretty impressive! Just take a look at the starter app under the
-original theme and the Windows Phone 8 theme:&lt;/p&gt;
-
-&lt;p&gt;The Default Theme:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2013/01/original-theme.png&#34; alt=&#34;Sencha Touch 2.2 default theme&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;WP8 Theme:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://dduan.net/images/2013/01/wp8-theme.png&#34; alt=&#34;Sencha Touch 2.2 windows phone 8 theme&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;And it only takes a minute or two to get to the second screen.
-(if you have Sencha Cmd and Sencha Touch SDK 2.2 alpha ready). Here&amp;rsquo;s how.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;In SDK folder, generate the app with &lt;code&gt;sencha generate app Foo path/to/foo&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://dduan.net/2013/01/14/Sencha-Touch-22-Alpha-Sass-Bug-Workaround.html&#34;&gt;Workaround&lt;/a&gt; the bug shipped in this alpha version. This won&amp;rsquo;t be
-necessary once the bug has been fixed in the next release&lt;/li&gt;
-&lt;li&gt;Open &lt;code&gt;resources/sass/app.scss&lt;/code&gt; in the generated project folder )it should
-look like &lt;a href=&#34;https://gist.github.com/4533833&#34;&gt;this&lt;/a&gt; after step 2).
-Replace every appearance of the word &lt;em&gt;default&lt;/em&gt; to &amp;ldquo;windows&amp;rdquo;. Then run
-&lt;code&gt;compass compile resources/sass&lt;/code&gt; in the project root.&lt;/li&gt;
-&lt;li&gt;Serve the project in a web server (I usually do
-&lt;code&gt;python -m SimpleHTTPServer&lt;/code&gt;), fire up its url (localhost:800) and&amp;hellip;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Boom!&lt;/p&gt;
 </description>
     </item>
     

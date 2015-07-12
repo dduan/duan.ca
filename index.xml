@@ -25,6 +25,139 @@
     </item>
     
     <item>
+      <title>Swift Algebraic Data Types</title>
+      <link>http://dduan.net/post/2015/07/swift-algebraic-data-types/</link>
+      <pubDate>Sun, 12 Jul 2015 15:51:27 PDT</pubDate>
+      
+      <guid>http://dduan.net/post/2015/07/swift-algebraic-data-types/</guid>
+      <description>
+
+&lt;h2 id=&#34;the-basics:4f5e1fa087d5cae149dabfbcf54f13c6&#34;&gt;The Basics&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Algebraic_data_type&#34;&gt;Algebraic Data Type&lt;/a&gt; is a fancy name for &amp;ldquo;a type creaded by combining other
+types&amp;rdquo; in programming languages. One aspect of the &amp;ldquo;algebraic-ness&amp;rdquo; is how
+many potential new values there are for the new type, given a set of type as
+its building block.&lt;/p&gt;
+
+&lt;p&gt;To better illustrate this, consider the following example in Swift.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;enum StarkChild { case Rickon, Bran, Arya, Sansa, Robb, Jon }
+
+enum Direwolf { case Shaggydog, Summer, Nymeria, Lady, Greywind, Ghost }
+
+enum Actor {
+    case Wolf(Direwolf)
+    case Person(StarkChild)
+}
+
+struct Parters {
+    var wolf: Direwolf
+    var person: StarkChild
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;StarkChild&lt;/code&gt; and &lt;code&gt;Direwolf&lt;/code&gt; each has 6 potential values. Combining them, we
+get two new types.&lt;/p&gt;
+
+&lt;p&gt;Question: how many potentiol values are there for &lt;code&gt;Actor&lt;/code&gt;? How many for
+&lt;code&gt;Parters&lt;/code&gt;?&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;An &lt;code&gt;Actor&lt;/code&gt; can be either a &lt;code&gt;StarkChild&lt;/code&gt; or a &lt;code&gt;DireWolf&lt;/code&gt;, therefore it has &lt;code&gt;6
++ 6 = 12&lt;/code&gt; potential values – the &lt;em&gt;sum&lt;/em&gt; of &lt;code&gt;Child&lt;/code&gt;&amp;rsquo;s and &lt;code&gt;DireWolf&lt;/code&gt;&amp;rsquo;s values.&lt;/p&gt;
+
+&lt;p&gt;A &lt;code&gt;Partners&lt;/code&gt; requires us to select one value from &lt;code&gt;Child&lt;/code&gt; and one from
+&lt;code&gt;DireWolf&lt;/code&gt;, resulting in &lt;code&gt;6 * 6 = 36&lt;/code&gt; potential values – the &lt;em&gt;product&lt;/em&gt; of
+&lt;code&gt;Child&lt;/code&gt;&amp;rsquo;s and &lt;code&gt;DireWolf&lt;/code&gt;&amp;rsquo;s values.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Actor&lt;/code&gt;, an &lt;code&gt;enum&lt;/code&gt;, is a &lt;em&gt;sum&lt;/em&gt; type. &lt;code&gt;Parters&lt;/code&gt;, a &lt;code&gt;struct&lt;/code&gt;, is a &lt;em&gt;product&lt;/em&gt;
+type. Here, &lt;code&gt;Parters&lt;/code&gt; could easily be defined as a &lt;code&gt;class&lt;/code&gt; or a &lt;code&gt;tuple&lt;/code&gt; and
+remain a &lt;em&gt;product&lt;/em&gt; type. Because we can create product or sum types in these
+direct ways, we can say Swift has first class support for Algebraic Data
+Types.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-crossovers:4f5e1fa087d5cae149dabfbcf54f13c6&#34;&gt;The Crossovers&lt;/h2&gt;
+
+&lt;p&gt;However, the story doesn&amp;rsquo;t stop here. In Swift, an &lt;code&gt;enum&lt;/code&gt;&amp;rsquo;s option can have
+multiple values. If it happens to be the only option, then this
+&lt;code&gt;enum&lt;/code&gt;effectively becomes a &lt;em&gt;product&lt;/em&gt; type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;// there are 6 * 6 = 36 potential values for Parters
+enum Parters {
+    case Value(wolf: DireWolf, person: StarkChild)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Incidentally, this makes &lt;code&gt;enum&lt;/code&gt; similar to &lt;code&gt;data&lt;/code&gt; in Haskell, where &lt;em&gt;product&lt;/em&gt;
+and &lt;em&gt;sum&lt;/em&gt; types can be created with a unified construct – &lt;code&gt;data&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In C and C++, &lt;code&gt;union&lt;/code&gt;s are the closest thing to &lt;em&gt;sum&lt;/em&gt; types. However, &lt;code&gt;union&lt;/code&gt;
+is hardly used to combine arbitrary types due to its lack of associated
+values. What do people do in need of &lt;em&gt;sum&lt;/em&gt; types? They make do with product
+types. Here&amp;rsquo;s one way to achive that in Swift:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;// Actor.value can have only 6 + 6 = 12 potential values thanks to
+// manual enforcement
+class Actor {
+    var child: StarkChild?
+    var wolf: Direwolf?
+
+    var value: Any {
+        get {
+            return child == nil ? wolf! : child!
+        }
+        set(newValue) {
+            if newValue is StarkChild {
+                child = (newValue as! StarkChild)
+                wolf = nil
+            }
+            if newValue is Direwolf {
+                wolf = (newValue as! Direwolf)
+                child = nil
+            }
+        }
+    }
+
+    init(wolf: Direwolf) {
+        self.wolf = wolf
+    }
+    init(child: StarkChild) {
+        self.child = child
+    }
+    init() {
+        fatalError(&amp;quot;must initialize with a child or a wolf&amp;quot;)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s… ugly.&lt;/p&gt;
+
+&lt;h2 id=&#34;recursion-types:4f5e1fa087d5cae149dabfbcf54f13c6&#34;&gt;Recursion Types&lt;/h2&gt;
+
+&lt;p&gt;Besides &lt;em&gt;sum&lt;/em&gt; and &lt;em&gt;product&lt;/em&gt;, another common class of algebraic type is
+recursion types. The interesting bit here is that Swift struggles to support
+it. In WWDC 2015, it was announced that &lt;code&gt;enum&lt;/code&gt;s can be defined recursively in
+Swift 2:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;enum Tree {
+    case Empty
+    indirect case Node(Tree, Tree)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As of this writing, Xcode 7 beta 3 has not delivered this feature yet.
+Also, it&amp;rsquo;s a good bet that &lt;code&gt;indirect&lt;/code&gt; is not going to be available in tuple
+aliases, such as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-swift&#34;&gt;typealias Node = (indirect Node, indirect Node)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I hope this is on the Swift team&amp;rsquo;s (understandably) gigantic todo list 😉.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Dynamic Swift Framework Without Xcode</title>
       <link>http://dduan.net/post/2015/07/dynamic-swift-framework-without-xcode/</link>
       <pubDate>Sun, 05 Jul 2015 22:36:09 PDT</pubDate>
@@ -751,48 +884,6 @@ to a value that works best with all potential heights of your item content,
 resulting in items with identical heights. Setting &lt;code&gt;itemHeight&lt;/code&gt; to &lt;code&gt;auto&lt;/code&gt;,
 however, will make each item container flow with its inner element, thus
 achive dynamic height.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Sencha Touch 2.2 Alpha Sass Bug Workaround</title>
-      <link>http://dduan.net/post/2013/01/sencha-touch-22-alpha-sass-bug-workaround/</link>
-      <pubDate>Mon, 14 Jan 2013 13:47:00 -0600</pubDate>
-      
-      <guid>http://dduan.net/post/2013/01/sencha-touch-22-alpha-sass-bug-workaround/</guid>
-      <description>&lt;p&gt;Sencha &lt;a href=&#34;http://cdn.sencha.com/touch/alpha/touch-2.2.0-alpha.zip&#34;&gt;released&lt;/a&gt; a new version Sencha Touch with Windows Phone 8 support.
-But since it&amp;rsquo;s an alpha, there are a few more things to do than what the
-&lt;a href=&#34;http://cdn.sencha.com/touch/alpha/2.2.0.52/release-notes.html&#34;&gt;release note&lt;/a&gt; says to get it working.&lt;/p&gt;
-
-&lt;p&gt;One thing I&amp;rsquo;ve noticed is that when you generate a new app with&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sencha generate app Foo path/to/foo
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and make the changes to &lt;code&gt;resources/sass/app.scss&lt;/code&gt; according to the release
-note, &lt;code&gt;compass compile path/to/foo/resources/sass&lt;/code&gt; fails complaining a font
-file is missing:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;File not found or cannot be read: path/to/foo/resources/sass/stylesheets/fonts/pictos/pictos-web.woff
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To fix this, copy the needed fonts to where it supposed to be:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cd path/to/foo
-mkdir -p resources/sass/stylesheets/fonts/pictos
-cp touch/resources/themes/fonts/pictos/pictos-web.* resources/sass/stylesheets/fonts/pictos/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The next error you&amp;rsquo;ll see from &lt;code&gt;compass compile&lt;/code&gt; is caused by the name changes
-to a few sass files in the framework. Long-story short, you need to change
-&lt;code&gt;resources/sass/app.scss&lt;/code&gt; to the following:&lt;/p&gt;
-
-&lt;script src=&#34;https://gist.github.com/4533833.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;and &lt;code&gt;compass&lt;/code&gt; should be happy from there.&lt;/p&gt;
-
-&lt;p&gt;While you are at it, why not checkout the magical Windows Phone 8 theme
-included in Sencha Touch 2.2 alpha.&lt;/p&gt;
 </description>
     </item>
     

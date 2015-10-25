@@ -9,8 +9,140 @@
     
     
     
-    <lastBuildDate>Sun, 12 Jul 2015 15:51:27 PDT</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2015 11:53:15 PDT</lastBuildDate>
     <atom:link href="http://dduan.net/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Let&#39;s Play LLVM in Swift: Setup</title>
+      <link>http://dduan.net/post/2015/10/lets-play-llvm-in-swift-setup/</link>
+      <pubDate>Sun, 25 Oct 2015 11:53:15 PDT</pubDate>
+      
+      <guid>http://dduan.net/post/2015/10/lets-play-llvm-in-swift-setup/</guid>
+      <description>
+
+&lt;p&gt;&lt;em&gt;The prospect of Swift being open-source excites me. In preparation for it, I
+decided to learn a little bit about LLVM. In the offical &lt;a href=&#34;http://llvm.org/docs/tutorial/index.html&#34;&gt;tutorial&lt;/a&gt;, C++
+and OCaml are used to create a programming language. So I asked myself: why not
+Swift? As you&amp;rsquo;ll see in this post, Swift is as good as any language when it
+comes to leveraging LLVM.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;LLVM is an &amp;ldquo;compiler infrastructure&amp;rdquo;. As a user, that translates to &amp;ldquo;a set of
+libraries to help us create programming language and tools&amp;rdquo;. Since this is
+not an introduction to the LLVM project, it suffices to say that LLVM makes
+creating programming language easy: give your language in &lt;a href=&#34;http://llvm.org/docs/LangRef.html&#34;&gt;LLVM IR&lt;/a&gt; form
+and you get the rest of a native/JIT language for free, optimization included!&lt;/p&gt;
+
+&lt;p&gt;LLVM&amp;rsquo;s default API is in C++. In addition, it officially offers a C wrapper.
+Lucky for us, Swift is C-interoperable – no bridging necessary :)&lt;/p&gt;
+
+&lt;p&gt;Now we arrive at our goal for this post: create an Xcode project that can make
+calls into LLVM&amp;rsquo;s C API, aka to compile this single line of code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let module = LLVMModuleCreateWithName(&amp;quot;my_module&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I assume you have Xcode 7.1 installed on OS X 10.11, but no more.&lt;/p&gt;
+
+&lt;h2 id=&#34;1-getting-llvm:59bf6fe233ce6d0b61b7817ce0d2f9aa&#34;&gt;1. Getting LLVM&lt;/h2&gt;
+
+&lt;p&gt;There are a lot of materials on the internet dedicated to setting up an LLVM
+environment. As we are not working &lt;em&gt;on&lt;/em&gt; LLVM itself, and we are not on some
+crazy custom Linux environment (to be fair, it&amp;rsquo;s trivial to set LLVM up on
+most major Linux distributions), the &lt;a href=&#34;http://llvm.org/releases/download.html&#34;&gt;pre-built Clang binaries&lt;/a&gt; is good
+enough. Download and unpack the .tar file somewhere handy in on your hard
+drive. For example, I put it at &lt;code&gt;$(HOME)/usr/local/clang-3.4&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Aaaand we&amp;rsquo;re done. We have LLVM.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Sidenote: Xcode installs clang the compiler, but a lot of LLVM tools are
+missing. That&amp;rsquo;s why we need a separate LLVM/Clang setup.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;2-create-an-xcode-project:59bf6fe233ce6d0b61b7817ce0d2f9aa&#34;&gt;2. Create an Xcode Project&lt;/h2&gt;
+
+&lt;p&gt;Create a new OS X - Command Line Tool Xcode project, choose Swift as it&amp;rsquo;s
+language.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/2015/10/llvm-swift-01-create-cmd-project.png&#34; alt=&#34;Create A Command Line Xcode Project For LLVM&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Accessing C stuff in Swift is the same as using your Objective-C
+classes. So we need to &lt;a href=&#34;https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html&#34;&gt;create a bridging header&lt;/a&gt;. (I usually create
+a Objective-C class so that Xcode prompts me for creating the header, then I
+delete the .h and .m files). The project layout is now:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/2015/10/llvm-swift-02-bridging-header.png&#34; alt=&#34;Create a bridging header to import LLVM C libraries&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Import the LLVM headers for its C interface. For our example, this is the
+entire bridging header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#import &amp;lt;llvm-c/Core.h&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It&amp;rsquo;s probably a good time to replace content of &lt;code&gt;main.swift&lt;/code&gt; with our awesome
+LLVM IR-generating code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;let module = LLVMModuleCreateWithName(&amp;quot;my_module&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3-teach-xcode-about-llvm:59bf6fe233ce6d0b61b7817ce0d2f9aa&#34;&gt;3. Teach Xcode About LLVM&lt;/h2&gt;
+
+&lt;p&gt;Our code would not compile at this point. Xcode complains that the LLVM header
+can not be found. Before you jump to the target build settings, allow me
+introduce &lt;code&gt;llvm-config&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;It turns out that the compliler flags for building a compiler can get complex
+pretty quickly. So LLVM comes with a command that generates them. For me it
+lives under &lt;code&gt;$(HOME)/usr/local/clang-3.4/bin&lt;/code&gt;. We can ask it for flags that
+compiles standard C++, links standard and core libraries like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;llvm-config --cxxflags --ldflags --system-libs --libs core
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(As we use more and more LLVM libraries in the future, the list following
+&lt;code&gt;--libs&lt;/code&gt; will grow. &lt;code&gt;core&lt;/code&gt; is all we need to compile our example). To anyone
+who&amp;rsquo;s used GCC/Clang in command line, the output should be pretty
+self-explanatory:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-I/Users/drchrono/local/clang-3.4/include  -DNDEBUG -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -O3  -std=c++11 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -fno-common -Wcast-qual
+-L/Users/drchrono/local/clang-3.4/lib 
+-lLLVMCore -lLLVMSupport
+-lz -lpthread -ledit -lcurses -lm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I&amp;rsquo;ll walk through how to ask Xcode to respect these.&lt;/p&gt;
+
+&lt;p&gt;First, go to build settings and set search paths for header files and
+libraries according to output from &lt;code&gt;llvm-config&lt;/code&gt;. For me that means:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/2015/10/llvm-swift-03-header-search-path.png&#34; alt=&#34;Set LLVM header search path in Xcode&#34; /&gt;
+
+&lt;img src=&#34;/images/2015/10/llvm-swift-04-library-search-path.png&#34; alt=&#34;Set LLVM library search path in Xcode&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;If you try to compile, now Xcode tells you some #define is missing. Again,
+we can find them in &lt;code&gt;llvm-config&lt;/code&gt;&amp;rsquo;s result. Navigate to &amp;ldquo;Preprocessing&amp;rdquo; in
+build setting and add those values starting with &lt;code&gt;-D&lt;/code&gt;, with out the &lt;code&gt;-D&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/2015/10/llvm-swift-05-macros.png&#34; alt=&#34;Set preprocessor macros&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Remember to add these for both &amp;ldquo;Debug&amp;rdquo; and &amp;ldquo;Release&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;The last step is asking Xcode to link againt the LLVM libraries. Paste in the
+&lt;code&gt;-l&lt;/code&gt; flags from &lt;code&gt;llvm-config&lt;/code&gt; at &amp;ldquo;Other Linker Flags&amp;rdquo;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/2015/10/llvm-swift-06-link-libraries.png&#34; alt=&#34;Ask Xcode to link against LLVM libraries&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;4-conclusion:59bf6fe233ce6d0b61b7817ce0d2f9aa&#34;&gt;4. Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Now our Swift LLVM code compiles! Looking back, setting LLVM up with Xcode is
+no more special than setting up with any C libraries. Hopefully this post will
+cut down research time for some. Now go create awesome natively languages in
+Swift!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Swift Algebraic Data Types</title>
@@ -872,48 +1004,6 @@ to a value that works best with all potential heights of your item content,
 resulting in items with identical heights. Setting &lt;code&gt;itemHeight&lt;/code&gt; to &lt;code&gt;auto&lt;/code&gt;,
 however, will make each item container flow with its inner element, thus
 achive dynamic height.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Sencha Touch 2.2 Alpha Sass Bug Workaround</title>
-      <link>http://dduan.net/post/2013/01/sencha-touch-22-alpha-sass-bug-workaround/</link>
-      <pubDate>Mon, 14 Jan 2013 13:47:00 -0600</pubDate>
-      
-      <guid>http://dduan.net/post/2013/01/sencha-touch-22-alpha-sass-bug-workaround/</guid>
-      <description>&lt;p&gt;Sencha &lt;a href=&#34;http://cdn.sencha.com/touch/alpha/touch-2.2.0-alpha.zip&#34;&gt;released&lt;/a&gt; a new version Sencha Touch with Windows Phone 8 support.
-But since it&amp;rsquo;s an alpha, there are a few more things to do than what the
-&lt;a href=&#34;http://cdn.sencha.com/touch/alpha/2.2.0.52/release-notes.html&#34;&gt;release note&lt;/a&gt; says to get it working.&lt;/p&gt;
-
-&lt;p&gt;One thing I&amp;rsquo;ve noticed is that when you generate a new app with&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sencha generate app Foo path/to/foo
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and make the changes to &lt;code&gt;resources/sass/app.scss&lt;/code&gt; according to the release
-note, &lt;code&gt;compass compile path/to/foo/resources/sass&lt;/code&gt; fails complaining a font
-file is missing:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;File not found or cannot be read: path/to/foo/resources/sass/stylesheets/fonts/pictos/pictos-web.woff
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To fix this, copy the needed fonts to where it supposed to be:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cd path/to/foo
-mkdir -p resources/sass/stylesheets/fonts/pictos
-cp touch/resources/themes/fonts/pictos/pictos-web.* resources/sass/stylesheets/fonts/pictos/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The next error you&amp;rsquo;ll see from &lt;code&gt;compass compile&lt;/code&gt; is caused by the name changes
-to a few sass files in the framework. Long-story short, you need to change
-&lt;code&gt;resources/sass/app.scss&lt;/code&gt; to the following:&lt;/p&gt;
-
-&lt;script src=&#34;https://gist.github.com/4533833.js&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;and &lt;code&gt;compass&lt;/code&gt; should be happy from there.&lt;/p&gt;
-
-&lt;p&gt;While you are at it, why not checkout the magical Windows Phone 8 theme
-included in Sencha Touch 2.2 alpha.&lt;/p&gt;
 </description>
     </item>
     

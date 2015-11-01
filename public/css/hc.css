@@ -69,6 +69,7 @@ p
 
 .posts
 {
+  font-family:-apple-system, ".SFNSText-Regular", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
   font-size:18px;
   list-style:none;
   line-height:1.5em;

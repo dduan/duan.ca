@@ -745,8 +745,8 @@ time
 }
 
 #wrapper.active #sidebar-wrapper {
-  left: 250px;
-  width: 250px;
+  left: 200px;
+  width: 200px;
   transition: all 0.7s ease 0s;
 }
 

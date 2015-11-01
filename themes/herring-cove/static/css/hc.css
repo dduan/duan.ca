@@ -74,7 +74,8 @@ p
   font-weight:lighter;
   line-height:1.5;
   padding-bottom:30px;
-  letter-spacing: -0.004em
+  letter-spacing: -0.004em;
+  margin-left:0
 }
 
 .homepage-posts

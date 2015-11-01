@@ -97,7 +97,7 @@ p
 
 #wrapper
 {
-  padding-left:250px;
+  padding-left:200px;
   transition:all .5s ease 0
 }
 
@@ -114,9 +114,9 @@ p
 
 #sidebar-wrapper
 {
-  margin-left:-250px;
-  left:250px;
-  width:250px;
+  margin-left:-200px;
+  left:200px;
+  width:200px;
   background:#f8f8f8;
   position:fixed;
   height:100%;
@@ -131,7 +131,7 @@ p
 {
   position:absolute;
   top:0;
-  width:250px;
+  width:200px;
   list-style:none;
   margin:0;
   padding:0 0 0
@@ -741,7 +741,7 @@ time
   }
 #wrapper.active {
   position: relative;
-  left: 250px;
+  left: 200px;
 }
 
 #wrapper.active #sidebar-wrapper {

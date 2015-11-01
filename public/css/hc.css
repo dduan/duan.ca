@@ -434,7 +434,8 @@ img
 
 .post
 {
-  padding-bottom:30px
+  padding-bottom:30px;
+  font-family:-apple-system, ".SFNSText-Regular", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
 }
 
 .user-social

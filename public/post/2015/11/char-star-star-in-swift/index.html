@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>tableView:didSelectRowAtIndexPath: In Two Lines</title>
+  <title>char ** in Swift</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <link href="" rel="alternate" type="application/rss+xml" title="dduan.net" />
@@ -69,44 +69,94 @@
 
 
   <div id="article">
-   <div class="article-title">tableView:didSelectRowAtIndexPath: In Two Lines</div>
+   <div class="article-title">char ** in Swift</div>
    <div class="meta">
-   <small>&nbsp;<i class="fa fa-calendar-o"></i> 2014-05-03</small>
+   <small>&nbsp;<i class="fa fa-calendar-o"></i> 2015-11-01</small>
     <ul id="tags">
         <i class="fa fa-tags"></i> 
       
-      <li><small><a class="meta" href="/tags/cocoa">Cocoa</a></small></li>
+      <li><small><a class="meta" href="/tags/swift">Swift</a></small></li>
       
-      <li><small><a class="meta" href="/tags/objective-c">Objective-C</a></small></li>
-      
-      <li><small><a class="meta" href="/tags/cocoa-touch">Cocoa Touch</a></small></li>
-      
-      <li><small><a class="meta" href="/tags/ios">iOS</a></small></li>
+      <li><small><a class="meta" href="/tags/c">C</a></small></li>
       
     </ul>
    <hr/>
    </div>
    <div class="post">
-     <p>You have a <code>UITableViewController</code> with a couple of static cells, you want to
-invoke some code for each cell in the delegate. Here&rsquo;s a quick way to do it:</p>
+     <p>A &ldquo;string&rdquo; in C is just a continuous chunk of <code>char</code> values in memory with
+<code>\0</code> at the end. To reference it, a variable of type <code>char *</code> is used to store
+the address of the first <code>char</code> (commonly known as a pointer 😉).  It&rsquo;s common
+to have string manipulating functions take this form:</p>
 
-<pre><code>    - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-    {
-
-        SEL action = (SEL[]){@selector(method1), @selector(method2)}[indexPath.row];
-        ((void (*)(id, SEL))[self methodForSelector: action])(self, action);
-    }
+<pre><code>void foo(char **errorMessage) { // ... }
 </code></pre>
 
-<p>It&rsquo;s got everything you love about C and Objective-C: array literals, function
-pointers, casting, selectors and something called <a href="http://www.cocoawithlove.com/2008/02/imp-of-current-method.html">IMPs</a>.</p>
+<p>To mutate the arugment <code>errorMessage</code> of type <code>char *</code>, <code>foo</code> takes a pointer
+to it, <code>(char *)*</code>.</p>
 
-<p>This piece of code maps selected cells to methods by putting methods by
-indexing selectors in a C array.</p>
+<hr />
 
-<p>Why all the fuss on the second line? wouldn&rsquo;t a simple <code>performSelector:</code>
-work? The short answer is: to show the compiler that we are responsible
-adults. You can read more about it <a href="SO Answer">here</a>;</p>
+<p>How do we call <code>foo</code> in Swift?</p>
+
+<p>Here&rsquo;s the tl;dr. We can wrap it in a Swift function that have the same
+interface:</p>
+
+<pre><code>func fooSwift(inout errorMessage: String?) {
+    var message: UnsafeMutablePointer&lt;CChar&gt; = nil
+
+    foo(&amp;message)
+    errorMessage = String.fromCString(message)
+}
+</code></pre>
+
+<p><code>errorMessage</code> will contain whatever our C function <code>foo</code> assigns to it.</p>
+
+<hr />
+
+<p>So, what&rsquo;s really going on here?</p>
+
+<p>Inspecting <code>foo</code>&rsquo;s signature in Swift, we see</p>
+
+<pre><code>func foo(errorMessage: UnsafeMutablePointer&lt;UnsafeMutablePointer&lt;CChar&gt;&gt;)
+</code></pre>
+
+<p>… okey, <code>errorMessage</code>&rsquo;s type is little intimidating to someone who doesn&rsquo;t
+use C functions in Swift everyday (like me)!</p>
+
+<p>Let&rsquo;s break it down. Swift does a ton of work for us to interoperate with C:</p>
+
+<ol>
+<li><p><code>CChar</code> is Swift&rsquo;s name for <em><code>char</code> in C</em> (shocking, amiright?)</p></li>
+
+<li><p><code>UnsafeMutablePointer&lt;Type&gt;</code> roughly translates to <code>Type *</code>, so
+syntactically, we can see why
+<code>UnsafeMutablePointer&lt;UnsafeMutablePointer&lt;CChar&gt;&gt;</code> is used to bridge the
+C type <code>(char *)*</code>.</p></li>
+
+<li><p>A function that takes <code>UnsafeMutablePointer&lt;Type&gt;</code> argument accepts
+<code>inout Type</code> values. Therefore, we can look at <code>foo</code> as</p>
+
+<pre><code>`foo(inout errorMessage: UnsafeMutablePointer&lt;CChar&gt;)`.
+</code></pre></li>
+
+<li><p>Swift acknowledge C&rsquo;s string representation and provides convenient
+methods for converting <code>char *</code> / <code>UnsafeMutablePointer&lt;CChar&gt;</code> to its own
+<code>String</code> type (<code>String.fromCString()</code>).</p></li>
+</ol>
+
+<p>Hopefully you can see how <code>fooSwift</code> works now.</p>
+
+<hr />
+
+<p>Taking a step back, to deal with <code>char **</code> in Swift, we overcame 2 obstacles:</p>
+
+<ol>
+<li><p>The difference in string representation between C and Swift.</p></li>
+
+<li><p>Compared to C pointers, Swift&rsquo;s <code>inout</code> expresses mutability of function
+arguments in a more restricted way. We can&rsquo;t nest <code>inout</code>s to represent
+the infinite layers of indirections that pointers achieve.</p></li>
+</ol>
 
  </div>
 <a href="https://news.ycombinator.com/submit" class="hn-button" data-style="twitter">Vote on Hacker News</a>
@@ -116,8 +166,8 @@ adults. You can read more about it <a href="SO Answer">here</a>;</p>
  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
    </div>
  <ul class="pager">
-      &nbsp;<li class="previous"><a href="http://dduan.net/post/2015/02/build-and-run-ios-apps-in-commmand-line/"> Build And Run iOS Apps In Commmand Line</a></li>
-      &nbsp;<li class="next"><a href="http://dduan.net/post/2014/05/one-weird-trick-to-make-vim-go-faster-on-your-mac/"> One Weird Trick To Make Vim Go Faster On Your Mac</a></li>
+      &nbsp;<li class="previous"><a href="http://dduan.net/about/"> About Daniel Duan</a></li>
+      &nbsp;<li class="next"><a href="http://dduan.net/post/2015/10/lets-play-llvm-in-swift-setup/"> Let&#39;s Play LLVM in Swift: Setup</a></li>
 </ul>
 
 

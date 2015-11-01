@@ -25,6 +25,89 @@
     </item>
     
     <item>
+      <title>char ** in Swift</title>
+      <link>http://dduan.net/post/2015/11/char-star-star-in-swift/</link>
+      <pubDate>Sun, 01 Nov 2015 11:18:40 PST</pubDate>
+      
+      <guid>http://dduan.net/post/2015/11/char-star-star-in-swift/</guid>
+      <description>&lt;p&gt;A &amp;ldquo;string&amp;rdquo; in C is just a continuous chunk of &lt;code&gt;char&lt;/code&gt; values in memory with
+&lt;code&gt;\0&lt;/code&gt; at the end. To reference it, a variable of type &lt;code&gt;char *&lt;/code&gt; is used to store
+the address of the first &lt;code&gt;char&lt;/code&gt; (commonly known as a pointer 😉).  It&amp;rsquo;s common
+to have string manipulating functions take this form:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void foo(char **errorMessage) { // ... }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To mutate the arugment &lt;code&gt;errorMessage&lt;/code&gt; of type &lt;code&gt;char *&lt;/code&gt;, &lt;code&gt;foo&lt;/code&gt; takes a pointer
+to it, &lt;code&gt;(char *)*&lt;/code&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;How do we call &lt;code&gt;foo&lt;/code&gt; in Swift?&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the tl;dr. We can wrap it in a Swift function that have the same
+interface:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func fooSwift(inout errorMessage: String?) {
+    var message: UnsafeMutablePointer&amp;lt;CChar&amp;gt; = nil
+
+    foo(&amp;amp;message)
+    errorMessage = String.fromCString(message)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;errorMessage&lt;/code&gt; will contain whatever our C function &lt;code&gt;foo&lt;/code&gt; assigns to it.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;So, what&amp;rsquo;s really going on here?&lt;/p&gt;
+
+&lt;p&gt;Inspecting &lt;code&gt;foo&lt;/code&gt;&amp;rsquo;s signature in Swift, we see&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func foo(errorMessage: UnsafeMutablePointer&amp;lt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&amp;gt;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;… okey, &lt;code&gt;errorMessage&lt;/code&gt;&amp;rsquo;s type is little intimidating to someone who doesn&amp;rsquo;t
+use C functions in Swift everyday (like me)!&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s break it down. Swift does a ton of work for us to interoperate with C:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;CChar&lt;/code&gt; is Swift&amp;rsquo;s name for &lt;em&gt;&lt;code&gt;char&lt;/code&gt; in C&lt;/em&gt; (shocking, amiright?)&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;/code&gt; roughly translates to &lt;code&gt;Type *&lt;/code&gt;, so
+syntactically, we can see why
+&lt;code&gt;UnsafeMutablePointer&amp;lt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&amp;gt;&lt;/code&gt; is used to bridge the
+C type &lt;code&gt;(char *)*&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;A function that takes &lt;code&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;/code&gt; argument accepts
+&lt;code&gt;inout Type&lt;/code&gt; values. Therefore, we can look at &lt;code&gt;foo&lt;/code&gt; as&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;`foo(inout errorMessage: UnsafeMutablePointer&amp;lt;CChar&amp;gt;)`.
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Swift acknowledge C&amp;rsquo;s string representation and provides convenient
+methods for converting &lt;code&gt;char *&lt;/code&gt; / &lt;code&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;/code&gt; to its own
+&lt;code&gt;String&lt;/code&gt; type (&lt;code&gt;String.fromCString()&lt;/code&gt;).&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Hopefully you can see how &lt;code&gt;fooSwift&lt;/code&gt; works now.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Taking a step back, to deal with &lt;code&gt;char **&lt;/code&gt; in Swift, we overcame 2 obstacles:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The difference in string representation between C and Swift.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Compared to C pointers, Swift&amp;rsquo;s &lt;code&gt;inout&lt;/code&gt; expresses mutability of function
+arguments in a more restricted way. We can&amp;rsquo;t nest &lt;code&gt;inout&lt;/code&gt;s to represent
+the infinite layers of indirections that pointers achieve.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Let&#39;s Play LLVM in Swift: Setup</title>
       <link>http://dduan.net/post/2015/10/lets-play-llvm-in-swift-setup/</link>
       <pubDate>Sun, 25 Oct 2015 11:53:15 PDT</pubDate>
@@ -955,32 +1038,6 @@ the microloader knows to load it up early:&lt;/p&gt;
 folder in the PhoneGap project.&lt;/p&gt;
 
 &lt;p&gt;Compile, ship.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Sencha Touch Workflow with GNU Make and Tmux</title>
-      <link>http://dduan.net/post/2013/05/sencha-touch-workflow-with-gnu-make-and-tmux/</link>
-      <pubDate>Mon, 27 May 2013 15:00:00 -0600</pubDate>
-      
-      <guid>http://dduan.net/post/2013/05/sencha-touch-workflow-with-gnu-make-and-tmux/</guid>
-      <description>&lt;p&gt;I throw this Makefile to the root directory of my Sencha Touch 2 projects for
-workflow automation.&lt;/p&gt;
-
-&lt;p&gt;Assuming you write in CoffeeScript and run Tmux in a terminal:&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;make develop&lt;/code&gt; will put &lt;code&gt;compass&lt;/code&gt; and &lt;code&gt;coffee&lt;/code&gt; to watch mode, in addition to
-spawning a local web server with Python 3. The three commands will run in three
-separate Tmux panes.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;make watch&lt;/code&gt; does the same thing sans the server spawning.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;make&lt;/code&gt; simply compile coffee script files and sass files.&lt;/p&gt;
-
-&lt;p&gt;You can figure out the granular commands with some minimal knowledge of GNU
-Make.&lt;/p&gt;
-
-&lt;script src=&#34;https://gist.github.com/DaNmarner/5659003.js&#34;&gt;&lt;/script&gt;
 </description>
     </item>
     

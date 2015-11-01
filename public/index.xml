@@ -83,7 +83,7 @@ C type &lt;code&gt;(char *)*&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;A function that takes &lt;code&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;/code&gt; argument accepts
 &lt;code&gt;inout Type&lt;/code&gt; values. Therefore, we can look at &lt;code&gt;foo&lt;/code&gt; as&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;`foo(inout errorMessage: UnsafeMutablePointer&amp;lt;CChar&amp;gt;)`.
+&lt;pre&gt;&lt;code&gt;foo(inout errorMessage: UnsafeMutablePointer&amp;lt;CChar&amp;gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Swift acknowledge C&amp;rsquo;s string representation and provides convenient

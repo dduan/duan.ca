@@ -54,7 +54,7 @@ Let's break it down. Swift does a ton of work for us to interoperate with C:
 3.  A function that takes `UnsafeMutablePointer<Type>` argument accepts
     `inout Type` values. Therefore, we can look at `foo` as
 
-        `foo(inout errorMessage: UnsafeMutablePointer<CChar>)`.
+        foo(inout errorMessage: UnsafeMutablePointer<CChar>)
 
 4.  Swift acknowledge C's string representation and provides convenient
     methods for converting `char *` / `UnsafeMutablePointer<CChar>` to its own

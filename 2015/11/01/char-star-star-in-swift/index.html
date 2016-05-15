@@ -3,27 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Daniel Duan</title>
+  <title>char ** in Swift</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
   <!-- Begin Jekyll SEO tag v1.4.0 -->
-<title>Daniel Duan - Daniel Duan thinks.</title>
-<meta property="og:title" content="Daniel Duan" />
-<meta name="description" content="Daniel Duan thinks." />
-<meta property="og:description" content="Daniel Duan thinks." />
+<title>char ** in Swift - Daniel Duan</title>
+<meta property="og:title" content="char ** in Swift" />
+<meta name="description" content="A “string” in C is just a continuous chunk of char values in memory with\0 at the end. To reference it, a variable of type char * is used to storethe address of the first char (commonly known as a pointer 😉).  It’s commonto have string manipulating functions take this form:" />
+<meta property="og:description" content="A “string” in C is just a continuous chunk of char values in memory with\0 at the end. To reference it, a variable of type char * is used to storethe address of the first char (commonly known as a pointer 😉).  It’s commonto have string manipulating functions take this form:" />
 <meta property="og:site_name" content="Daniel Duan" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-11-01T00:00:00-07:00" />
+<link rel="prev" href="/2015/07/12/swift-algebraic-data-types/" title="Swift Algebraic Data Types" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
-    "@type": "WebSite",
-    "name": "Daniel Duan",
-    "headline": "Daniel Duan",
-    "description": "Daniel Duan thinks.",
-    "url": "/"
+    "@type": "BlogPosting",
+    "headline": "char ** in Swift",
+    "datePublished": "2015-11-01T00:00:00-07:00",
+    "description": "A “string” in C is just a continuous chunk of char values in memory with\\0 at the end. To reference it, a variable of type char * is used to storethe address of the first char (commonly known as a pointer 😉).  It’s commonto have string manipulating functions take this form:",
+    "url": "/2015/11/01/char-star-star-in-swift/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -31,35 +34,25 @@
 <body>
   <div class="container">
     <header class="masthead">
-  <h1 class="masthead-title">
-    <a href="/">Daniel Duan<span>&#39;s blog</span></a>
+  <h1 class="masthead-title--small">
+    <a href="/archive">Daniel Duan</a>
   </h1>
-  <nav class="masthead-nav">
-    
-    <a href="/about">About</a>
-    
-    <a href="/projects">Projects</a>
-    
-    <a href="/archive">Archive</a>
-    
-  </nav>
 </header>
-<div class="content page">
-  <h3 class="page-title"></h3>
-  
 <div class="content post">
   <h1 class="post-title">char ** in Swift</h1>
   <div class="post-date">
     <time>01 Nov 2015</time>
-     |
-    <div class="post-tags">
-    
-      <a href="/tag/Swift">Swift</a>,
-    
-      <a href="/tag/C">C</a>
-    
-    </div>
-    
+     | 
+
+<div class="post-tags">
+
+  <a href="/tag/Swift">Swift</a>,
+
+  <a href="/tag/C">C</a>
+
+</div>
+
+
   </div>
   <p>A “string” in C is just a continuous chunk of <code class="highlighter-rouge">char</code> values in memory with
 <code class="highlighter-rouge">\0</code> at the end. To reference it, a variable of type <code class="highlighter-rouge">char *</code> is used to store
@@ -149,23 +142,6 @@ arguments in a more restricted way. We can’t nest <code class="highlighter-rou
 the infinite layers of indirections that pointers achieve.</p>
   </li>
 </ol>
-
-</div>
-
-
-<hr />
-<footer class="masthead">
-<h4>Read More:</h4>
-<nav class="masthead-nav">
-  
-  <a href="/about">About</a>
-  
-  <a href="/projects">Projects</a>
-  
-  <a href="/archive">Archive</a>
-  
-</nav>
-</footer>
 
 </div>
 

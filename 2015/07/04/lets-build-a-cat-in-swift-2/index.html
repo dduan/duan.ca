@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Let's Build A 'cat' In Swift 2</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
+  <!-- Begin Jekyll SEO tag v1.4.0 -->
+<title>Let’s Build A ‘cat’ In Swift 2 - Daniel Duan</title>
+<meta property="og:title" content="Let’s Build A ‘cat’ In Swift 2" />
+<meta name="description" content="As a homework in one of the early college classes, I was asked to write unixcommands such as cat in C. Let’s do that in Swift today! To make thingsinteresting, let’s pretend we are on Linux. That means no Xcode nor Foundationcan be used." />
+<meta property="og:description" content="As a homework in one of the early college classes, I was asked to write unixcommands such as cat in C. Let’s do that in Swift today! To make thingsinteresting, let’s pretend we are on Linux. That means no Xcode nor Foundationcan be used." />
+<meta property="og:site_name" content="Daniel Duan" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-07-04T00:00:00-07:00" />
+<link rel="next" href="/2015/07/12/swift-algebraic-data-types/" title="Swift Algebraic Data Types" />
+<link rel="prev" href="/2015/04/18/swift-function-fun-facts/" title="Swift Function Fun Facts" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@daniel_duan" />
+<meta name="twitter:creator" content="@Daniel Duan" />
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Let’s Build A ‘cat’ In Swift 2",
+    "datePublished": "2015-07-04T00:00:00-07:00",
+    "description": "As a homework in one of the early college classes, I was asked to write unixcommands such as cat in C. Let’s do that in Swift today! To make thingsinteresting, let’s pretend we are on Linux. That means no Xcode nor Foundationcan be used.",
+    "url": "/2015/07/04/lets-build-a-cat-in-swift-2/"
+  }
+</script>
+<!-- End Jekyll SEO tag -->
+</head>
+<body>
+  <div class="container">
+    <header class="masthead">
+  <h1 class="masthead-title--small">
+    <a href="/archive">Daniel Duan</a>
+  </h1>
+</header>
+<div class="content post">
+  <h1 class="post-title">Let's Build A 'cat' In Swift 2</h1>
+  <div class="post-date">
+    <time>04 Jul 2015</time>
+     | 
+
+<div class="post-tags">
+
+  <a href="/tag/Swift">Swift</a>
+
+</div>
+
+
+  </div>
+  <p>As a homework in one of the early college classes, I was asked to write unix
+commands such as <code class="highlighter-rouge">cat</code> in C. Let’s do that in Swift today! To make things
+interesting, let’s pretend we are on Linux. That means no Xcode nor Foundation
+can be used.</p>
+
+<p>It’s hard to find a simpler unix program than <code class="highlighter-rouge">cat</code>: It takes a list of file
+names from the shell and write the content of each file to <code class="highlighter-rouge">stdout</code>. When no
+argument is given, it uses <code class="highlighter-rouge">stdin</code> as the source of its output.</p>
+
+<p>Writing it in C is trivial. Swift has exellent support for leveraging C. But
+to call even the standard C functions, we need to import them first.</p>
+
+<p>The <code class="highlighter-rouge">swiftc</code> command can compile a pure Swift source file like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>swiftc cat.swift -o cat
+</code></pre>
+</div>
+
+<p>We can add Objective-C bridging headers with the argument
+<code class="highlighter-rouge">-import-objc-header</code>.  But to import the standard C functions, we also need
+to specify path to an SDK:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\
+       -import-objc-header bridge.h\
+       cat.swift\
+       -o cat
+</code></pre>
+</div>
+
+<p>Instead of typing/copying that command, save this <code class="highlighter-rouge">Makefile</code> to the same
+directory as <code class="highlighter-rouge">cat.swift</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>SDKPATH = $(shell xcrun --show-sdk-path --sdk macosx)
+CBRIDGEHEADER = bridge.h
+TARGETS := cat
+
+.PHONY : all $(TARGETS)
+
+all: $(TARGETS)
+
+$(TARGETS):
+    swiftc -sdk $(SDKPATH) $@.swift -import-objc-header $(CBRIDGEHEADER) -o $@
+</code></pre>
+</div>
+
+<p>Now <code class="highlighter-rouge">make cat</code> should take care of the compilation.</p>
+
+<p>Since file I/O is the only concern, we’ll need C APIs from <code class="highlighter-rouge">stdio.h</code>, so
+<code class="highlighter-rouge">bridge.h</code> is a one liner:</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="cp">#import &lt;stdio.h&gt;
+</span></code></pre>
+</div>
+
+<p>The standard C function for opening a file is <code class="highlighter-rouge">fopen</code>:</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="kt">FILE</span> <span class="o">*</span> <span class="n">fopen</span> <span class="p">(</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">mode</span> <span class="p">);</span>
+</code></pre>
+</div>
+
+<p>Hmmmm, how do we deal with all those pesky ‘*’s?</p>
+
+<p>To reference a certain C <code class="highlighter-rouge">Type</code> in Swift, we can use <code class="highlighter-rouge">UnsafePointer&lt;Type&gt;</code> or
+<code class="highlighter-rouge">UnsafeMutablePointer&lt;Type&gt;</code>. To make our lives easier, Swift <code class="highlighter-rouge">String</code>s
+automatically bridge to <code class="highlighter-rouge">const char *</code>. In other words, we can treat the
+signature of <code class="highlighter-rouge">fopen</code> as if it’s the following:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>func fopen( filename: String, mode: String ) -&gt; UnsafeMutablePointer&lt;FILE&gt;
+</code></pre>
+</div>
+
+<p>A character in C is represented by a byte in memory. Therefore Swift sees
+a <code class="highlighter-rouge">char</code> as of type <code class="highlighter-rouge">Int8</code> (8-bit integer).  So a <code class="highlighter-rouge">char *</code> would be referenced
+as <code class="highlighter-rouge">UnsafeMutablePointer&lt;Int8&gt;</code> in Swift. So <code class="highlighter-rouge">getline</code>, a function from POSIX</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="kt">ssize_t</span> <span class="n">getline</span><span class="p">(</span> <span class="kt">char</span> <span class="o">**</span><span class="n">lineptr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="kt">FILE</span> <span class="o">*</span><span class="n">stream</span> <span class="p">);</span>
+</code></pre>
+</div>
+
+<p>would look like this in Swift:</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">func</span> <span class="n">getline</span><span class="p">(</span>
+    <span class="n">inout</span> <span class="n">lineptr</span><span class="o">:</span> <span class="n">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="n">Int8</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">inout</span> <span class="n">n</span><span class="o">:</span> <span class="n">UInt</span><span class="p">,</span>
+    <span class="n">stream</span><span class="o">:</span> <span class="n">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">FILE</span><span class="o">&gt;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Int</span>
+</code></pre>
+</div>
+
+<p>It returns the number if characters it finds.</p>
+
+<p>We now can open a file, read and print its content line by line, and close it
+with:</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">func</span> <span class="n">fclose</span><span class="p">(</span><span class="n">stream</span><span class="o">:</span> <span class="n">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">FILE</span><span class="o">&gt;</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Repeat this on each file specified in <code class="highlighter-rouge">Process.arguments</code>, or simply read from
+<code class="highlighter-rouge">stdin</code>, and we have a <code class="highlighter-rouge">cat</code>! Here’s a screenshot of it displaying its own
+code:</p>
+
+<p><img src="/assets/2015/07/swift-cat.png" alt="Swift cat" /></p>
+
+<p>The code is also available in this <a href="https://gist.github.com/dduan/f6d359019db8b0b55962">gist</a>.</p>
+
+
+</div>
+
+  </div>
+</body>
+</html>

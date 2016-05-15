@@ -45,8 +45,8 @@ deploy:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Drop it into root of your Jekyll project, commit all changes (including) the
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;. And type &lt;code class=&quot;highlighter-rouge&quot;&gt;make deploy&lt;/code&gt;. BOOM, done.&lt;/p&gt;
+&lt;p&gt;Drop it into root of your Jekyll project, commit all changes (including the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;). And type &lt;code class=&quot;highlighter-rouge&quot;&gt;make deploy&lt;/code&gt;. BOOM, done.&lt;/p&gt;
 
 &lt;p&gt;There are a couple of assumptions:&lt;/p&gt;
 

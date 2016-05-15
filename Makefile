@@ -13,5 +13,5 @@ deploy:
 	cp -R .git ${DEPLOY_PATH}
 	cd ${DEPLOY_PATH}; git checkout gh-pages; git clean -d -x -f
 	cp -R _site/* ${DEPLOY_PATH}
-	cd ${DEPLOY_PATH}; git commit -am "`curl whatthecommit.com/index.txt`"
+	cd ${DEPLOY_PATH}; git add .; git commit -m "`curl whatthecommit.com/index.txt`"
 	cd ${DEPLOY_PATH}; git push -f origin gh-pages

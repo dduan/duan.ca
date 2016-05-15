@@ -1,0 +1,17 @@
+---
+layout: page
+---
+<h3 class="tag-name" id="#{{ page.tag | slugize }}">TAG: {{ page.tag }}</h3>
+<div class="content list">
+{% for post in page.posts %}
+  <div class="list-item">
+    <h2 class="list-post-title">
+      <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+    </h2>
+    <div class="list-post-date">
+      <time>{{ post.date | date_to_string }}</time>
+      {% if post.tags.size > 0 %} | {% include post-tags.html %}{% endif %}
+    </div>
+  </div>
+{% endfor %}
+</div>

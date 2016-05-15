@@ -1,0 +1,54 @@
+# Basic
+name:               "Daniel Duan"
+description:        "Daniel Duan thinks."
+
+# jekyll-seo-tag, see: http://www.rubydoc.info/gems/jekyll-seo-tag/1.2.0
+url:                ""
+author:             "Daniel Duan"
+twitter:
+  username:         "daniel_duan"
+#facebook:
+#  app_id:           1234
+#    publisher:      1234
+
+# URL
+baseurl:            ""
+#baseurl:            "" #For Root Domain
+permalink:          /:year/:month/:day/:title/
+
+# Markdown
+markdown:           kramdown
+
+# Navigation
+nav:
+  - name:           "About"
+    href:           "/about"
+  - name:           "Projects"
+    href:           "/projects"
+  - name:           "Archive"
+    href:           "/archive"
+
+# Sass
+sass:
+  style:            :compressed
+
+# Scopes
+defaults:
+  -
+    scope:
+      path:         ""
+      type:         "pages"
+    values:
+      layout:       "page"
+  -
+    scope:
+      path:         ""
+      type:         "posts"
+    values:
+      layout:       "post"
+
+tag_page_layout: tag
+tag_page_dir: tag
+
+gems:
+  - jekyll-seo-tag

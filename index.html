@@ -1,0 +1,32 @@
+---
+layout: page
+---
+
+{% if site.posts.size == 0 %}
+  <h2>No post found</h2>
+{% else %}
+<div class="content post">
+  <h1 class="post-title">{{ site.posts.first.title }}</h1>
+  <div class="post-date">
+    <time>{{ site.posts.first.date | date_to_string }}</time>
+    {% if site.posts.first.tags.size > 0 %} |
+    <div class="post-tags">
+    {% for tag in site.posts.first.tags %}
+      <a href="/tag/{{tag|slugize}}">{{tag}}</a>{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {{ site.posts.first.content }}
+</div>
+{% endif %}
+
+<hr />
+<footer class="masthead">
+<h4>Read More:</h4>
+<nav class="masthead-nav">
+  {% for nav in site.nav %}
+  <a href="{{ nav.href }}">{{ nav.name }}</a>
+  {% endfor %}
+</nav>
+</footer>

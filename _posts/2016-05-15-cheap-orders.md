@@ -2,6 +2,7 @@
 title: Cheap Orders
 category: Swift Delights
 tags: [Swift]
+date: 2016-05-15 17:42:27-0700
 ---
 
 How to create order? If the second law of thermal dynamics tells us anything,

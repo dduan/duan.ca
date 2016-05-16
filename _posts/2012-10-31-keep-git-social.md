@@ -1,7 +1,7 @@
 ---
 title: Keep Git Social
-tags:
-- Git
+tags: [Git]
+date: 2012-10-31 10:02:30-06:00
 ---
 
 *A project I'm working on uses [GitlabHQ][4], I think it is a cool open source

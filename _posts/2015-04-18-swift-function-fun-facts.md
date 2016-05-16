@@ -1,8 +1,7 @@
 ---
 title: Swift Function Fun Facts
-# jekyll-seo-tag
-tags:
-    - Swift
+tags: [Swift]
+date: 2015-04-18 16:20:16.078786-07:00
 ---
 
 You love Swift. You want to write a class that does HTTP, it might have

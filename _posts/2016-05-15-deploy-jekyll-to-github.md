@@ -1,9 +1,7 @@
 ---
 title: Deploy Jekyll Site To Github With Make
-tags:
-- Jekyll
-- Github
-- Make
+tags: [Jekyll, Github, Make]
+date: 2016-05-15 01:00:00-0700
 ---
 
 At risks of being too meta, I want to talk about how this post is going to go

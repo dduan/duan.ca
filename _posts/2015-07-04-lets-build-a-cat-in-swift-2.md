@@ -1,7 +1,7 @@
 ---
 title: Let's Build A 'cat' In Swift 2
-tags:
-    - Swift
+tags: [Swift]
+date: 2015-07-04 20:56:19.429925-07:00
 ---
 
 As a homework in one of the early college classes, I was asked to write unix

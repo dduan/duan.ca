@@ -1,7 +1,7 @@
 ---
 title: Swift Algebraic Data Types
-tags:
-    - Swift
+tags: [Swift]
+date: 2015-07-12 15:51:27.020057-07:00
 ---
 
 ## The Basics

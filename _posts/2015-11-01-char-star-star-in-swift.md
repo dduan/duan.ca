@@ -1,8 +1,7 @@
 ---
 title: char ** in Swift
-tags:
-    - Swift
-    - C
+tags: [Swift, C]
+date: 2015-11-01 11:18:40.010887-08:00
 ---
 
 A "string" in C is just a continuous chunk of `char` values in memory with

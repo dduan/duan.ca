@@ -1,4 +1,8 @@
 DEPLOY_PATH=/tmp/jekyll_deploy
+
+serve:
+	jekyll serve --host=0.0.0.0
+
 build:
 	jekyll build
 

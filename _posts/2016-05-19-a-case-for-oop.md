@@ -5,7 +5,7 @@ date: 2016-05-19 12:03:02-0700
 ---
 
 Python's standard library includes a very handy `defaultdict`. It behaves
-almost exactly like the default dictionary except it'll supply a pre-defined
+almost exactly like the standard dictionary except it'll supply a pre-defined
 value for any non-existence keys. It is, unsurpringly, a subclass of `dict`.
 
 I find my self missing this handy container in Swift. Especially when I use

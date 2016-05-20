@@ -6,7 +6,7 @@ layout: page
   <h2>No post found</h2>
 {% else %}
 <div class="content post">
-  <h1 class="post-title">{{ site.posts.first.title }}</h1>
+  <h1 class="post-title"><a href="{{ site.baseurl }}{{ site.posts.first.url }}">{{ site.posts.first.title }}</a></h1>
   <div class="post-date">
     <time>{{ site.posts.first.date | date_to_string }}</time>
     {% if site.posts.first.tags.size > 0 %} |

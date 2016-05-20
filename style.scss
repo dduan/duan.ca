@@ -374,6 +374,17 @@ tbody tr:nth-child(odd) th {
   }
 }
 
+.post-title {
+  margin-bottom: .25rem;
+  a {
+    color: #333;
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}
+
 .list {
   &-post-title {
     margin-bottom: .25rem;

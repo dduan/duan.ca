@@ -7,7 +7,7 @@
 		
 			<item>
 				<title>Distribution Tests</title>
-        <description>&lt;p&gt;There are several ways to build dependencies for a Swift 3 projects:
+        <description>&lt;p&gt;There are several ways to build dependencies for a Swift 3 project:
 Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which
 is the best choice for their projects. As a library author who want to help as
 many people as possible, however, they can’t ignore any of them.&lt;/p&gt;
@@ -27,10 +27,10 @@ their project.&lt;/p&gt;
 &lt;p&gt;The steps to verify can be triggered with commands: fetch and build
 dependencies, build Xcode/Swift project. To automate the process, put these
 commands in a script or a Makefile. But wait, there’s more! One shouldn’t have
-to create these dummy projects each time they create a new library. If all
+to create these dummy projects every time they create a new library. If all
 these projects do is importing a library and attempt to build, they should
-work for any library. The config in &lt;code class=&quot;highlighter-rouge&quot;&gt;Package.swift&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;Cocoapods&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;Cartfile&lt;/code&gt; and
-the &lt;code class=&quot;highlighter-rouge&quot;&gt;import&lt;/code&gt; statements just needs some strings replaced: name of the next
+work for &lt;em&gt;any&lt;/em&gt; library. The config in &lt;code class=&quot;highlighter-rouge&quot;&gt;Package.swift&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;Cocoapods&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;Cartfile&lt;/code&gt;
+and the &lt;code class=&quot;highlighter-rouge&quot;&gt;import&lt;/code&gt; statements just needs some strings replaced: name of the next
 library, URL for its git repository, etc. And that’s a scriptable process as
 well!&lt;/p&gt;
 
@@ -513,7 +513,7 @@ Swift 2:&lt;/p&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Tree&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Empty&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;indirect&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;indirect&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -522,7 +522,7 @@ Swift 2:&lt;/p&gt;
 Also, it’s a good bet that &lt;code class=&quot;highlighter-rouge&quot;&gt;indirect&lt;/code&gt; is not going to be available in tuple
 aliases, such as:&lt;/p&gt;
 
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;typealias&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;indirect&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;indirect&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;typealias&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;indirect&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;indirect&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -535,7 +535,7 @@ aliases, such as:&lt;/p&gt;
 			</item>
 		
 			<item>
-				<title>Let's Build A 'cat' In Swift 2</title>
+				<title>Let&#39;s Build A &#39;cat&#39; In Swift 2</title>
         <description>&lt;p&gt;As a homework in one of the early college classes, I was asked to write unix
 commands such as &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt; in C. Let’s do that in Swift today! To make things
 interesting, let’s pretend we are on Linux. That means no Xcode nor Foundation
@@ -723,7 +723,7 @@ looks like this:&lt;/p&gt;
     &lt;span class=&quot;nv&quot;&gt;allowRedirects&lt;/span&gt;        &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt;                     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nv&quot;&gt;requestBody&lt;/span&gt;           &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;NSData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;                  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;kt&quot;&gt;URLQuery&lt;/span&gt;              &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;                  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;asyncCompletionHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;HTTPResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;yncCompletionHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;HTTPResult&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;HTTPResult&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;impl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
         &lt;span class=&quot;s&quot;&gt;&quot;POST&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -735,7 +735,7 @@ looks like this:&lt;/p&gt;
         &lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;                  &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requestBody&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;kt&quot;&gt;URLQuery&lt;/span&gt;              &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;URLQuery&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;nv&quot;&gt;redirects&lt;/span&gt;             &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;allowRedirects&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;asyncCompletionHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asyncCompletionHandler&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;yncCompletionHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yncCompletionHandler&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;

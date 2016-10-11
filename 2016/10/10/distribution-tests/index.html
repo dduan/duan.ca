@@ -7,14 +7,15 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.0.0 -->
+  <!-- Begin Jekyll SEO tag v1.4.0 -->
 <title>Distribution Tests - Daniel Duan</title>
 <meta property="og:title" content="Distribution Tests" />
-<meta name="description" content="There are several ways to build dependencies for a Swift 3 projects:Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on whichis the best choice for their projects. As a library author who want to help asmany people as possible, however, they can’t ignore any of them." />
-<meta property="og:description" content="There are several ways to build dependencies for a Swift 3 projects:Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on whichis the best choice for their projects. As a library author who want to help asmany people as possible, however, they can’t ignore any of them." />
+<meta name="description" content="There are several ways to build dependencies for a Swift 3 project:Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on whichis the best choice for their projects. As a library author who want to help asmany people as possible, however, they can’t ignore any of them." />
+<meta property="og:description" content="There are several ways to build dependencies for a Swift 3 project:Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on whichis the best choice for their projects. As a library author who want to help asmany people as possible, however, they can’t ignore any of them." />
 <meta property="og:site_name" content="Daniel Duan" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-10T10:34:49-07:00" />
+<link rel="prev" href="/2016/05/19/a-case-for-oop/" title="A Case For OOP?" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
@@ -24,7 +25,7 @@
     "@type": "BlogPosting",
     "headline": "Distribution Tests",
     "datePublished": "2016-10-10T10:34:49-07:00",
-    "description": "There are several ways to build dependencies for a Swift 3 projects:Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on whichis the best choice for their projects. As a library author who want to help asmany people as possible, however, they can’t ignore any of them.",
+    "description": "There are several ways to build dependencies for a Swift 3 project:Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on whichis the best choice for their projects. As a library author who want to help asmany people as possible, however, they can’t ignore any of them.",
     "url": "/2016/10/10/distribution-tests/"
   }
 </script>
@@ -59,7 +60,7 @@
 
 
   </div>
-  <p>There are several ways to build dependencies for a Swift 3 projects:
+  <p>There are several ways to build dependencies for a Swift 3 project:
 Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which
 is the best choice for their projects. As a library author who want to help as
 many people as possible, however, they can’t ignore any of them.</p>
@@ -79,10 +80,10 @@ their project.</p>
 <p>The steps to verify can be triggered with commands: fetch and build
 dependencies, build Xcode/Swift project. To automate the process, put these
 commands in a script or a Makefile. But wait, there’s more! One shouldn’t have
-to create these dummy projects each time they create a new library. If all
+to create these dummy projects every time they create a new library. If all
 these projects do is importing a library and attempt to build, they should
-work for any library. The config in <code class="highlighter-rouge">Package.swift</code>/<code class="highlighter-rouge">Cocoapods</code>/<code class="highlighter-rouge">Cartfile</code> and
-the <code class="highlighter-rouge">import</code> statements just needs some strings replaced: name of the next
+work for <em>any</em> library. The config in <code class="highlighter-rouge">Package.swift</code>/<code class="highlighter-rouge">Cocoapods</code>/<code class="highlighter-rouge">Cartfile</code>
+and the <code class="highlighter-rouge">import</code> statements just needs some strings replaced: name of the next
 library, URL for its git repository, etc. And that’s a scriptable process as
 well!</p>
 

@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.0.0 -->
+  <!-- Begin Jekyll SEO tag v1.4.0 -->
 <title>Daniel Duan - Daniel Duan thinks.</title>
 <meta property="og:title" content="Daniel Duan" />
 <meta name="description" content="Daniel Duan thinks." />
@@ -67,7 +67,7 @@
     </div>
     
   </div>
-  <p>There are several ways to build dependencies for a Swift 3 projects:
+  <p>There are several ways to build dependencies for a Swift 3 project:
 Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which
 is the best choice for their projects. As a library author who want to help as
 many people as possible, however, they can’t ignore any of them.</p>
@@ -87,10 +87,10 @@ their project.</p>
 <p>The steps to verify can be triggered with commands: fetch and build
 dependencies, build Xcode/Swift project. To automate the process, put these
 commands in a script or a Makefile. But wait, there’s more! One shouldn’t have
-to create these dummy projects each time they create a new library. If all
+to create these dummy projects every time they create a new library. If all
 these projects do is importing a library and attempt to build, they should
-work for any library. The config in <code class="highlighter-rouge">Package.swift</code>/<code class="highlighter-rouge">Cocoapods</code>/<code class="highlighter-rouge">Cartfile</code> and
-the <code class="highlighter-rouge">import</code> statements just needs some strings replaced: name of the next
+work for <em>any</em> library. The config in <code class="highlighter-rouge">Package.swift</code>/<code class="highlighter-rouge">Cocoapods</code>/<code class="highlighter-rouge">Cartfile</code>
+and the <code class="highlighter-rouge">import</code> statements just needs some strings replaced: name of the next
 library, URL for its git repository, etc. And that’s a scriptable process as
 well!</p>
 

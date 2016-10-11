@@ -4,7 +4,7 @@ tags: [Swift, Cocoapods, Carthage, Swift Package Manager, Make]
 date: 2016-10-10 10:34:49-0700
 ---
 
-There are several ways to build dependencies for a Swift 3 projects:
+There are several ways to build dependencies for a Swift 3 project:
 Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which
 is the best choice for their projects. As a library author who want to help as
 many people as possible, however, they can't ignore any of them.
@@ -24,10 +24,10 @@ their project.
 The steps to verify can be triggered with commands: fetch and build
 dependencies, build Xcode/Swift project. To automate the process, put these
 commands in a script or a Makefile. But wait, there's more! One shouldn't have
-to create these dummy projects each time they create a new library. If all
+to create these dummy projects every time they create a new library. If all
 these projects do is importing a library and attempt to build, they should
-work for any library. The config in `Package.swift`/`Cocoapods`/`Cartfile` and
-the `import` statements just needs some strings replaced: name of the next
+work for *any* library. The config in `Package.swift`/`Cocoapods`/`Cartfile`
+and the `import` statements just needs some strings replaced: name of the next
 library, URL for its git repository, etc. And that's a scriptable process as
 well!
 

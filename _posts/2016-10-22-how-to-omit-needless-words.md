@@ -149,7 +149,7 @@ it's simply better to keep the qualifying postfix:
 update(forControlState: .automatic) // better
 ```
 
-In the guideline's words, this is called [compensate for weak type
+In the guideline's parlance, this is [compensate for weak type
 information][weak type information].
 
 [weak type information]: https://swift.org/documentation/api-design-guidelines/#weak-type-information

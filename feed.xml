@@ -147,7 +147,7 @@ it’s simply better to keep the qualifying postfix:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;In the guideline’s words, this is called &lt;a href=&quot;https://swift.org/documentation/api-design-guidelines/#weak-type-information&quot;&gt;compensate for weak type
+&lt;p&gt;In the guideline’s parlance, this is &lt;a href=&quot;https://swift.org/documentation/api-design-guidelines/#weak-type-information&quot;&gt;compensate for weak type
 information&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Other arugment labels needs updates too&lt;/strong&gt;. A function at call site should read

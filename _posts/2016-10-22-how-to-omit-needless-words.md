@@ -49,8 +49,8 @@ doStuff(with: someThing)
 
 It's clear at both declaration and use site what we are doing stuff to.
 
-So … you should go through you code base and make this change! In this post,
-we'll discuss one way to make this change.
+So … you should go through you code base and make this change! In the next
+section, we'll discuss one way to make it happen.
 
 [Guidelines]: https://swift.org/documentation/api-design-guidelines/
 [Omit needless words]: https://swift.org/documentation/api-design-guidelines/#omit-needless-words

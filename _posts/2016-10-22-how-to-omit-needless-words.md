@@ -154,7 +154,7 @@ information][weak type information].
 
 [weak type information]: https://swift.org/documentation/api-design-guidelines/#weak-type-information
 
-__Other arugment labels needs updates too__. A function at call site should read
+__Other argument labels needs updates too__. A function at call site should read
 like a sentence as much as possible. We removed words at beginning of the
 "sentence", it's important to take a look at labels for the rest of the sentence
 and ensure the whole thing fits together.
@@ -167,7 +167,7 @@ API Design Guidelines that are worth conforming to. There will be much much bike
 shedding among your team members.
 
 Just remember, the API guidelines don't provide an answer to every naming
-desicion. Following it means your code base will fit in with the rest of the
+decision. Following it means your code base will fit in with the rest of the
 community and APIs from Foundation/Swift standard library. But find what feels
 right for your team is the most important thing. In the end, you should be glad
 that everyone cares so much about your code base's "Swiftness" and it'll be all

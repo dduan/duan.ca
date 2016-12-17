@@ -21,12 +21,12 @@ markdown:           kramdown
 
 # Navigation
 nav:
-  - name:           "About"
-    href:           "/about"
-  - name:           "Projects"
-    href:           "/projects"
   - name:           "Archive"
     href:           "/archive"
+  - name:           "Projects"
+    href:           "/projects"
+  - name:           "About"
+    href:           "/about"
 
 # Sass
 sass:

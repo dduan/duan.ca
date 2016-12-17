@@ -166,7 +166,7 @@ Swift 2:</p>
 
 <div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Tree</span> <span class="p">{</span>
     <span class="k">case</span> <span class="kt">Empty</span>
-    <span class="n">indirect</span> <span class="k">case</span> <span class="kt">Node</span><span class="p">(</span><span class="kt">Tree</span><span class="p">,</span> <span class="kt">Tree</span><span class="p">)</span>
+    <span class="kd">indirect</span> <span class="k">case</span> <span class="kt">Node</span><span class="p">(</span><span class="kt">Tree</span><span class="p">,</span> <span class="kt">Tree</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 </div>
@@ -175,7 +175,7 @@ Swift 2:</p>
 Also, it’s a good bet that <code class="highlighter-rouge">indirect</code> is not going to be available in tuple
 aliases, such as:</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">Node</span> <span class="o">=</span> <span class="p">(</span><span class="n">indirect</span> <span class="kt">Node</span><span class="p">,</span> <span class="n">indirect</span> <span class="kt">Node</span><span class="p">)</span>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">Node</span> <span class="o">=</span> <span class="p">(</span><span class="kd">indirect</span> <span class="kt">Node</span><span class="p">,</span> <span class="kd">indirect</span> <span class="kt">Node</span><span class="p">)</span>
 </code></pre>
 </div>
 

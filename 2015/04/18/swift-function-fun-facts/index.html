@@ -126,7 +126,7 @@ looks like this:</p>
     <span class="nv">allowRedirects</span>        <span class="p">:</span> <span class="kt">Bool</span>                     <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nv">requestBody</span>           <span class="p">:</span> <span class="kt">NSData</span><span class="p">?</span>                  <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="kt">URLQuery</span>              <span class="p">:</span> <span class="kt">String</span><span class="p">?</span>                  <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="k">as</span><span class="nv">yncCompletionHandler</span><span class="p">:</span> <span class="p">((</span><span class="kt">HTTPResult</span><span class="o">!</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="nv">asyncCompletionHandler</span><span class="p">:</span> <span class="p">((</span><span class="kt">HTTPResult</span><span class="o">!</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">HTTPResult</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nf">impl</span><span class="p">(</span>
         <span class="s">"POST"</span><span class="p">,</span>
@@ -138,7 +138,7 @@ looks like this:</p>
         <span class="nv">data</span>                  <span class="p">:</span> <span class="n">requestBody</span><span class="p">,</span>
         <span class="kt">URLQuery</span>              <span class="p">:</span> <span class="kt">URLQuery</span><span class="p">,</span>
         <span class="nv">redirects</span>             <span class="p">:</span> <span class="n">allowRedirects</span><span class="p">,</span>
-        <span class="k">as</span><span class="nv">yncCompletionHandler</span><span class="p">:</span> <span class="k">as</span><span class="n">yncCompletionHandler</span>
+        <span class="nv">asyncCompletionHandler</span><span class="p">:</span> <span class="n">asyncCompletionHandler</span>
     <span class="p">)</span>
 <span class="p">}</span>
 </code></pre>

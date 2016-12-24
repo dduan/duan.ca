@@ -1,5 +1,5 @@
 ---
-title: Rebase Multiple Git Commits With Signing
+title: Rebase And Sign Multiple Git Commits
 tags: [Git]
 date: 2016-12-24 01:31:14-0800
 ---

@@ -6,7 +6,7 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>Rebase Multiple Git Commits With Signing</title>
+				<title>Rebase And Sign Multiple Git Commits</title>
         <description>&lt;p&gt;I never bothered &lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work&quot;&gt;signing&lt;/a&gt; my git commits until Github started putting
 those shiny badges on them. Since then I’ve encountered a problem: rebased
 commits lose their hash and their signed-ness.&lt;/p&gt;

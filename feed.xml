@@ -6,6 +6,48 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Rebase Multiple Git Commits With Signing</title>
+        <description>&lt;p&gt;I never bothered &lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work&quot;&gt;signing&lt;/a&gt; my git commits until Github started putting
+those shiny badges on them. Since then I’ve encountered a problem: rebased
+commits lose their hash and their signed-ness.&lt;/p&gt;
+
+&lt;p&gt;That’s not a big deal for a single commit. Just run &lt;code class=&quot;highlighter-rouge&quot;&gt;git commit -S --amend
+--no-edit&lt;/code&gt; after rebase. And that commit, which is at &lt;code class=&quot;highlighter-rouge&quot;&gt;HEAD&lt;/code&gt; will have a new
+hash and be signed.&lt;/p&gt;
+
+&lt;p&gt;What if we have more than one commit to rebase? My instinctive answer was sign
+the one on &lt;code class=&quot;highlighter-rouge&quot;&gt;HEAD&lt;/code&gt;, then use interactive rebase to rotate the next one on top and
+sign it, repeat until each one is signed and reorder them. But that doesn’t work
+at all because a commit’s position in history is part of its content. That means
+after a commit is rebased, it and every commits following it will have a new
+hash and git doesn’t give us an oppurtunity to say “include my signature,
+please”. You cannot rebase and keep the commits signed!&lt;/p&gt;
+
+&lt;p&gt;Well, that kind of sucks. But you are reading about it here, so I’d better give
+you something to help, right?&lt;/p&gt;
+
+&lt;p&gt;There is, at least, one way to achieve &lt;em&gt;rebase and sign multiple commits&lt;/em&gt;:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Run interactive rebase: &lt;code class=&quot;highlighter-rouge&quot;&gt;git rebase -i branch&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Mark all commits and “edit” or “e”.&lt;/li&gt;
+  &lt;li&gt;Git now stops at every commit for you to make changes. This is an oppurtunity
+to sign it! &lt;code class=&quot;highlighter-rouge&quot;&gt;git commit -S --amend --no-edit&lt;/code&gt;, just like how you would sign
+&lt;code class=&quot;highlighter-rouge&quot;&gt;HEAD&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git rebase --continue&lt;/code&gt;, move on the next commit until all every one is
+edited.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;There’s virtually nothing you cannot do with git. Hence the reputation for it’s
+glorious UI, ya know?&lt;/p&gt;
+
+</description>
+				<pubDate>Sat, 24 Dec 2016 01:31:14 -0800</pubDate>
+				<link>/2016/12/24/rebase-multiple-git-commits-with-signing/</link>
+				<guid isPermaLink="true">/2016/12/24/rebase-multiple-git-commits-with-signing/</guid>
+			</item>
+		
+			<item>
 				<title>How To Omit Needless Words</title>
         <description>&lt;p&gt;A typical experience in adopting Swift 3 may look like this:&lt;/p&gt;
 

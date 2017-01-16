@@ -7,7 +7,7 @@ date: 2016-12-26 21:39:05-0800
 One of my fondest memory in programming is writing the game Snake on one of
 these:
 
-![An Electronic/Digital Dictionary](/assets/2016/12/e-dictionary.jpg)
+![An Electronic/Digital Dictionary]({{site.url}}/assets/2016/12/e-dictionary.jpg)
 
 At the time, I was in a very restrictive school where a real computer wasn't
 permited in class. The actual thing (that's an "electronic dictionary" by the
@@ -32,7 +32,7 @@ use hotkeys to navigate menus, trigger functions and so on.  Sometimes you can
 use mouse, too. Their layout often resemble that of a GUI application running in
 it's own "window":
 
-![tig](/assets/2016/12/tig.png)
+![tig]({{site.url}}/assets/2016/12/tig.png)
 
 Just to make things painfully clear, these apps's interface is composed
 exclusively of text. We can vaguely categorize them as "Text-based User
@@ -67,7 +67,7 @@ mouse-clicks. And that's it!
 After making [a Swift wrapper][wrapper], I was able to build a painter app in
 [a handleful of lines][terminal-paint]:
 
-![terminal paint](/assets/2016/12/terminal-paint.png)
+![terminal paint]({{site.url}}/assets/2016/12/terminal-paint.png)
 
 So that's an TUI app drawing according to mouse clicks built with only a few
 primitives from termbox. Awww yeah! Here's the code with the comment stripped,

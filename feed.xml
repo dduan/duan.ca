@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
 	<channel>
 		<title>Daniel Duan</title>
-		<link>dduan.net</link>
-		<atom:link href="dduan.net/feed.xml" rel="self" type="application/rss+xml" />
+		<link>http://dduan.net</link>
+		<atom:link href="http://dduan.net/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
 				<title>Making TUI Applications In Swift</title>
@@ -165,8 +165,8 @@ have fun :)&lt;/p&gt;
 
 </description>
 				<pubDate>Mon, 26 Dec 2016 21:39:05 -0800</pubDate>
-				<link>dduan.net/2016/12/26/making-tui-programs-in-swift/</link>
-				<guid isPermaLink="true">dduan.net/2016/12/26/making-tui-programs-in-swift/</guid>
+				<link>http://dduan.net/2016/12/26/making-tui-programs-in-swift/</link>
+				<guid isPermaLink="true">http://dduan.net/2016/12/26/making-tui-programs-in-swift/</guid>
 			</item>
 		
 			<item>
@@ -207,8 +207,8 @@ glorious UI, ya know?&lt;/p&gt;
 
 </description>
 				<pubDate>Sat, 24 Dec 2016 01:31:14 -0800</pubDate>
-				<link>dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/</link>
-				<guid isPermaLink="true">dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/</guid>
+				<link>http://dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/</link>
+				<guid isPermaLink="true">http://dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/</guid>
 			</item>
 		
 			<item>
@@ -376,8 +376,8 @@ that everyone cares so much about your code base’s “Swiftness” and it’ll
 worth it!&lt;/p&gt;
 </description>
 				<pubDate>Sat, 22 Oct 2016 17:08:41 -0700</pubDate>
-				<link>dduan.net/2016/10/22/how-to-omit-needless-words/</link>
-				<guid isPermaLink="true">dduan.net/2016/10/22/how-to-omit-needless-words/</guid>
+				<link>http://dduan.net/2016/10/22/how-to-omit-needless-words/</link>
+				<guid isPermaLink="true">http://dduan.net/2016/10/22/how-to-omit-needless-words/</guid>
 			</item>
 		
 			<item>
@@ -436,8 +436,8 @@ a continuous integration server.&lt;/p&gt;
 
 </description>
 				<pubDate>Mon, 10 Oct 2016 10:34:49 -0700</pubDate>
-				<link>dduan.net/2016/10/10/distribution-tests/</link>
-				<guid isPermaLink="true">dduan.net/2016/10/10/distribution-tests/</guid>
+				<link>http://dduan.net/2016/10/10/distribution-tests/</link>
+				<guid isPermaLink="true">http://dduan.net/2016/10/10/distribution-tests/</guid>
 			</item>
 		
 			<item>
@@ -473,8 +473,8 @@ even mean? Is it simply a case that will go away when protocols become more
 powerful?&lt;/p&gt;
 </description>
 				<pubDate>Thu, 19 May 2016 12:03:02 -0700</pubDate>
-				<link>dduan.net/2016/05/19/a-case-for-oop/</link>
-				<guid isPermaLink="true">dduan.net/2016/05/19/a-case-for-oop/</guid>
+				<link>http://dduan.net/2016/05/19/a-case-for-oop/</link>
+				<guid isPermaLink="true">http://dduan.net/2016/05/19/a-case-for-oop/</guid>
 			</item>
 		
 			<item>
@@ -613,8 +613,8 @@ up with the erasure method. I discovered a series of small challenges and got
 help from Swift’s designers in each step. Everything fell together in the end.&lt;/p&gt;
 </description>
 				<pubDate>Sun, 15 May 2016 17:42:27 -0700</pubDate>
-				<link>dduan.net/2016/05/15/cheap-orders/</link>
-				<guid isPermaLink="true">dduan.net/2016/05/15/cheap-orders/</guid>
+				<link>http://dduan.net/2016/05/15/cheap-orders/</link>
+				<guid isPermaLink="true">http://dduan.net/2016/05/15/cheap-orders/</guid>
 			</item>
 		
 			<item>
@@ -673,8 +673,8 @@ deploy:
 additional software/scripts and there’s no restriction on plugins.&lt;/p&gt;
 </description>
 				<pubDate>Sun, 15 May 2016 01:00:00 -0700</pubDate>
-				<link>dduan.net/2016/05/15/deploy-jekyll-to-github/</link>
-				<guid isPermaLink="true">dduan.net/2016/05/15/deploy-jekyll-to-github/</guid>
+				<link>http://dduan.net/2016/05/15/deploy-jekyll-to-github/</link>
+				<guid isPermaLink="true">http://dduan.net/2016/05/15/deploy-jekyll-to-github/</guid>
 			</item>
 		
 			<item>
@@ -769,8 +769,8 @@ the infinite layers of indirections that pointers achieve.&lt;/p&gt;
 &lt;/ol&gt;
 </description>
 				<pubDate>Sun, 01 Nov 2015 11:18:40 -0800</pubDate>
-				<link>dduan.net/2015/11/01/char-star-star-in-swift/</link>
-				<guid isPermaLink="true">dduan.net/2015/11/01/char-star-star-in-swift/</guid>
+				<link>http://dduan.net/2015/11/01/char-star-star-in-swift/</link>
+				<guid isPermaLink="true">http://dduan.net/2015/11/01/char-star-star-in-swift/</guid>
 			</item>
 		
 			<item>
@@ -905,8 +905,8 @@ aliases, such as:&lt;/p&gt;
 
 </description>
 				<pubDate>Sun, 12 Jul 2015 15:51:27 -0700</pubDate>
-				<link>dduan.net/2015/07/12/swift-algebraic-data-types/</link>
-				<guid isPermaLink="true">dduan.net/2015/07/12/swift-algebraic-data-types/</guid>
+				<link>http://dduan.net/2015/07/12/swift-algebraic-data-types/</link>
+				<guid isPermaLink="true">http://dduan.net/2015/07/12/swift-algebraic-data-types/</guid>
 			</item>
 		
 			<item>
@@ -1013,14 +1013,14 @@ with:&lt;/p&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;stdin&lt;/code&gt;, and we have a &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt;! Here’s a screenshot of it displaying its own
 code:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;dduan.net/assets/2015/07/swift-cat.png&quot; alt=&quot;Swift cat&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dduan.net/assets/2015/07/swift-cat.png&quot; alt=&quot;Swift cat&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The code is also available in this &lt;a href=&quot;https://gist.github.com/dduan/f6d359019db8b0b55962&quot;&gt;gist&lt;/a&gt;.&lt;/p&gt;
 
 </description>
 				<pubDate>Sat, 04 Jul 2015 20:56:19 -0700</pubDate>
-				<link>dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/</link>
-				<guid isPermaLink="true">dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/</guid>
+				<link>http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/</link>
+				<guid isPermaLink="true">http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/</guid>
 			</item>
 		
 			<item>
@@ -1193,8 +1193,8 @@ I felt writing this up. It’s really like saying to a friend “I hate you” a
 he/she pulls a prank on you.)&lt;/p&gt;
 </description>
 				<pubDate>Sat, 18 Apr 2015 16:20:16 -0700</pubDate>
-				<link>dduan.net/2015/04/18/swift-function-fun-facts/</link>
-				<guid isPermaLink="true">dduan.net/2015/04/18/swift-function-fun-facts/</guid>
+				<link>http://dduan.net/2015/04/18/swift-function-fun-facts/</link>
+				<guid isPermaLink="true">http://dduan.net/2015/04/18/swift-function-fun-facts/</guid>
 			</item>
 		
 			<item>
@@ -1280,8 +1280,8 @@ breaking the shackles on their hand is a good thing to try.&lt;/p&gt;
 
 </description>
 				<pubDate>Wed, 31 Oct 2012 09:02:30 -0700</pubDate>
-				<link>dduan.net/2012/10/31/keep-git-social/</link>
-				<guid isPermaLink="true">dduan.net/2012/10/31/keep-git-social/</guid>
+				<link>http://dduan.net/2012/10/31/keep-git-social/</link>
+				<guid isPermaLink="true">http://dduan.net/2012/10/31/keep-git-social/</guid>
 			</item>
 		
 	</channel>

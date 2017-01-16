@@ -3,4 +3,3 @@ _site
 Gemfile.lock
 *.swp
 .DS_Store
-_site

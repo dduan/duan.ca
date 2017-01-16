@@ -10,7 +10,7 @@
         <description>&lt;p&gt;One of my fondest memory in programming is writing the game Snake on one of
 these:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/2016/12/e-dictionary.jpg&quot; alt=&quot;An Electronic/Digital Dictionary&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dduan.net/assets/2016/12/e-dictionary.jpg&quot; alt=&quot;An Electronic/Digital Dictionary&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;At the time, I was in a very restrictive school where a real computer wasn’t
 permited in class. The actual thing (that’s an “electronic dictionary” by the
@@ -35,7 +35,7 @@ use hotkeys to navigate menus, trigger functions and so on.  Sometimes you can
 use mouse, too. Their layout often resemble that of a GUI application running in
 it’s own “window”:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/2016/12/tig.png&quot; alt=&quot;tig&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dduan.net/assets/2016/12/tig.png&quot; alt=&quot;tig&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Just to make things painfully clear, these apps’s interface is composed
 exclusively of text. We can vaguely categorize them as “Text-based User
@@ -70,7 +70,7 @@ mouse-clicks. And that’s it!&lt;/p&gt;
 &lt;p&gt;After making &lt;a href=&quot;https://github.com/dduan/Termbox&quot;&gt;a Swift wrapper&lt;/a&gt;, I was able to build a painter app in
 &lt;a href=&quot;https://github.com/dduan/TerminalPaint&quot;&gt;a handleful of lines&lt;/a&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/2016/12/terminal-paint.png&quot; alt=&quot;terminal paint&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dduan.net/assets/2016/12/terminal-paint.png&quot; alt=&quot;terminal paint&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So that’s an TUI app drawing according to mouse clicks built with only a few
 primitives from termbox. Awww yeah! Here’s the code with the comment stripped,

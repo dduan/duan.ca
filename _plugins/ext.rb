@@ -4,12 +4,12 @@ module Jekyll
   module LinkBackFilter
     def link_back(input, base, url)
         total = input.scan(",").count
-        n = Random.rand(total)
+        n = input.length * 0.618 % total
         count = 0
         input.gsub(",") do |x|
             dot = x
             if n == count
-                dot = '<a rel="canonical" title="Originated from dduan.net" href=#{base}#{url}>.</a>'
+                dot = "<a class=\"backlink\" rel=\"canonical\" title=\"Originated from dduan.net\" href=#{base}#{url}>,</a>"
             end
             count += 1
             dot

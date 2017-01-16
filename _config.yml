@@ -12,7 +12,7 @@ twitter:
 #    publisher:      1234
 
 # URL
-baseurl:            "http://dduan.net"
+baseurl:            ""
 permalink:          /:year/:month/:day/:title/
 
 # Markdown

@@ -3,7 +3,7 @@ name:               "Daniel Duan"
 description:        "Daniel Duan thinks."
 
 # jekyll-seo-tag, see: http://www.rubydoc.info/gems/jekyll-seo-tag/1.2.0
-url:                "dduan.net"
+url:                "http://dduan.net"
 author:             "Daniel Duan"
 twitter:
   username:         "daniel_duan"
@@ -13,7 +13,6 @@ twitter:
 
 # URL
 baseurl:            "http://dduan.net"
-#baseurl:            "" #For Root Domain
 permalink:          /:year/:month/:day/:title/
 
 # Markdown

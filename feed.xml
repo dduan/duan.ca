@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
-	<channel>
-		<title>Daniel Duan</title>
-		<link>http://dduan.net</link>
-		<atom:link href="http://dduan.net/feed.xml" rel="self" type="application/rss+xml" />
-		
-			<item>
-				<title>Making TUI Applications In Swift</title>
-        <description>&lt;p&gt;One of my fondest memory in programming is writing the game Snake on one of
+    <channel>
+        <title>Daniel Duan</title>
+        <link>http://dduan.net</link>
+        <atom:link href="http://dduan.net/feed.xml" rel="self" type="application/rss+xml" />
+        
+            <item>
+                <title>Making TUI Applications In Swift</title>
+                <description>&lt;p&gt;One of my fondest memory in programming is writing the game Snake on one of
 these:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://dduan.net/assets/2016/12/e-dictionary.jpg&quot; alt=&quot;An Electronic/Digital Dictionary&quot; /&gt;&lt;/p&gt;
@@ -137,7 +137,7 @@ to give you a taste:&lt;/p&gt;
 
             &lt;span class=&quot;n&quot;&gt;drawingCharacter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;
 
-        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a href=http://dduan.net/2016/12/26/making-tui-programs-in-swift/&gt;.&lt;/a&gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
             &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;space&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
                 &lt;span class=&quot;n&quot;&gt;drawingCharacter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -164,14 +164,14 @@ to give you a taste:&lt;/p&gt;
 have fun :)&lt;/p&gt;
 
 </description>
-				<pubDate>Mon, 26 Dec 2016 21:39:05 -0800</pubDate>
-				<link>http://dduan.net/2016/12/26/making-tui-programs-in-swift/</link>
-				<guid isPermaLink="true">http://dduan.net/2016/12/26/making-tui-programs-in-swift/</guid>
-			</item>
-		
-			<item>
-				<title>Rebase And Sign Multiple Git Commits</title>
-        <description>&lt;p&gt;I never bothered &lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work&quot;&gt;signing&lt;/a&gt; my git commits until Github started putting
+                <pubDate>Mon, 26 Dec 2016 21:39:05 -0800</pubDate>
+                <link>http://dduan.net/2016/12/26/making-tui-programs-in-swift/</link>
+                <guid isPermaLink="true">http://dduan.net/2016/12/26/making-tui-programs-in-swift/</guid>
+            </item>
+        
+            <item>
+                <title>Rebase And Sign Multiple Git Commits</title>
+                <description>&lt;p&gt;I never bothered &lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work&quot;&gt;signing&lt;/a&gt; my git commits until Github started putting
 those shiny badges on them. Since then I’ve encountered a problem: rebased
 commits lose their hash and their signed-ness.&lt;/p&gt;
 
@@ -181,7 +181,7 @@ hash and be signed.&lt;/p&gt;
 
 &lt;p&gt;What if we have more than one commit to rebase? My instinctive answer was sign
 the one on &lt;code class=&quot;highlighter-rouge&quot;&gt;HEAD&lt;/code&gt;, then use interactive rebase to rotate the next one on top and
-sign it, repeat until each one is signed and reorder them. But that doesn’t work
+sign it&lt;a href=http://dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/&gt;.&lt;/a&gt; repeat until each one is signed and reorder them. But that doesn’t work
 at all because a commit’s position in history is part of its content. That means
 after a commit is rebased, it and every commits following it will have a new
 hash and git doesn’t give us an oppurtunity to say “include my signature,
@@ -206,14 +206,14 @@ edited.&lt;/li&gt;
 glorious UI, ya know?&lt;/p&gt;
 
 </description>
-				<pubDate>Sat, 24 Dec 2016 01:31:14 -0800</pubDate>
-				<link>http://dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/</link>
-				<guid isPermaLink="true">http://dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/</guid>
-			</item>
-		
-			<item>
-				<title>How To Omit Needless Words</title>
-        <description>&lt;p&gt;A typical experience in adopting Swift 3 may look like this:&lt;/p&gt;
+                <pubDate>Sat, 24 Dec 2016 01:31:14 -0800</pubDate>
+                <link>http://dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/</link>
+                <guid isPermaLink="true">http://dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/</guid>
+            </item>
+        
+            <item>
+                <title>How To Omit Needless Words</title>
+                <description>&lt;p&gt;A typical experience in adopting Swift 3 may look like this:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Run the migrator.&lt;/li&gt;
@@ -371,19 +371,19 @@ shedding among your team members.&lt;/p&gt;
 &lt;p&gt;Just remember, the API guidelines don’t provide an answer to every naming
 decision. Following it means your code base will fit in with the rest of the
 community and APIs from Foundation/Swift standard library. But find what feels
-right for your team is the most important thing. In the end, you should be glad
+right for your team is the most important thing. In the end&lt;a href=http://dduan.net/2016/10/22/how-to-omit-needless-words/&gt;.&lt;/a&gt; you should be glad
 that everyone cares so much about your code base’s “Swiftness” and it’ll be all
 worth it!&lt;/p&gt;
 </description>
-				<pubDate>Sat, 22 Oct 2016 17:08:41 -0700</pubDate>
-				<link>http://dduan.net/2016/10/22/how-to-omit-needless-words/</link>
-				<guid isPermaLink="true">http://dduan.net/2016/10/22/how-to-omit-needless-words/</guid>
-			</item>
-		
-			<item>
-				<title>Distribution Tests</title>
-        <description>&lt;p&gt;There are several ways to build dependencies for a Swift 3 project:
-Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which
+                <pubDate>Sat, 22 Oct 2016 17:08:41 -0700</pubDate>
+                <link>http://dduan.net/2016/10/22/how-to-omit-needless-words/</link>
+                <guid isPermaLink="true">http://dduan.net/2016/10/22/how-to-omit-needless-words/</guid>
+            </item>
+        
+            <item>
+                <title>Distribution Tests</title>
+                <description>&lt;p&gt;There are several ways to build dependencies for a Swift 3 project:
+Swift Package Manager, Cocoapods, Carthage&lt;a href=http://dduan.net/2016/10/10/distribution-tests/&gt;.&lt;/a&gt; etc. Many have an opinion on which
 is the best choice for their projects. As a library author who want to help as
 many people as possible, however, they can’t ignore any of them.&lt;/p&gt;
 
@@ -435,14 +435,14 @@ a continuous integration server.&lt;/p&gt;
 &lt;p&gt;Go forth and create fearlessly!&lt;/p&gt;
 
 </description>
-				<pubDate>Mon, 10 Oct 2016 10:34:49 -0700</pubDate>
-				<link>http://dduan.net/2016/10/10/distribution-tests/</link>
-				<guid isPermaLink="true">http://dduan.net/2016/10/10/distribution-tests/</guid>
-			</item>
-		
-			<item>
-				<title>A Case For OOP?</title>
-        <description>&lt;p&gt;Python’s standard library includes a very handy &lt;code class=&quot;highlighter-rouge&quot;&gt;defaultdict&lt;/code&gt;. It behaves
+                <pubDate>Mon, 10 Oct 2016 10:34:49 -0700</pubDate>
+                <link>http://dduan.net/2016/10/10/distribution-tests/</link>
+                <guid isPermaLink="true">http://dduan.net/2016/10/10/distribution-tests/</guid>
+            </item>
+        
+            <item>
+                <title>A Case For OOP?</title>
+                <description>&lt;p&gt;Python’s standard library includes a very handy &lt;code class=&quot;highlighter-rouge&quot;&gt;defaultdict&lt;/code&gt;. It behaves
 almost exactly like the standard dictionary except it’ll supply a pre-defined
 value for any non-existence keys. It is, unsurpringly, a subclass of &lt;code class=&quot;highlighter-rouge&quot;&gt;dict&lt;/code&gt;.&lt;/p&gt;
 
@@ -456,7 +456,7 @@ wrote my own:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;It does not conform to the &lt;code class=&quot;highlighter-rouge&quot;&gt;DictionaryLiteralConvertible&lt;/code&gt; protocol, for no
-good reasons, really. The initializer in this protocol takes a varadic
+good reasons&lt;a href=http://dduan.net/2016/05/19/a-case-for-oop/&gt;.&lt;/a&gt; really. The initializer in this protocol takes a varadic
 argument. There’s no conevient way to forward this array to a normal
 dictionary’s initializer (incidentally, this is a Swift feature I really
 want). Plus, I don’t need &lt;code class=&quot;highlighter-rouge&quot;&gt;DefaultDictionary&lt;/code&gt; to be a literal convertible.&lt;/li&gt;
@@ -472,14 +472,14 @@ inheritance.&lt;/p&gt;
 even mean? Is it simply a case that will go away when protocols become more
 powerful?&lt;/p&gt;
 </description>
-				<pubDate>Thu, 19 May 2016 12:03:02 -0700</pubDate>
-				<link>http://dduan.net/2016/05/19/a-case-for-oop/</link>
-				<guid isPermaLink="true">http://dduan.net/2016/05/19/a-case-for-oop/</guid>
-			</item>
-		
-			<item>
-				<title>Cheap Orders</title>
-        <description>&lt;p class=&quot;lead&quot;&gt;How to create order? If the second law of thermal dynamics tells us anything,
+                <pubDate>Thu, 19 May 2016 12:03:02 -0700</pubDate>
+                <link>http://dduan.net/2016/05/19/a-case-for-oop/</link>
+                <guid isPermaLink="true">http://dduan.net/2016/05/19/a-case-for-oop/</guid>
+            </item>
+        
+            <item>
+                <title>Cheap Orders</title>
+                <description>&lt;p class=&quot;lead&quot;&gt;How to create order? If the second law of thermal dynamics tells us anything,
 we’d better get to work, right?&lt;/p&gt;
 
 &lt;p&gt;Before going full existential, let’s limit “order” to Swift’s set and
@@ -594,7 +594,7 @@ code eventually end up like this:&lt;/p&gt;
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Token&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnySequence&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;kt&quot;&gt;AnySequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;group2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;group3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a href=http://dduan.net/2016/05/15/cheap-orders/&gt;.&lt;/a&gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;group2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;group3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
         &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;}()&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -612,14 +612,14 @@ along the way.&lt;/p&gt;
 up with the erasure method. I discovered a series of small challenges and got
 help from Swift’s designers in each step. Everything fell together in the end.&lt;/p&gt;
 </description>
-				<pubDate>Sun, 15 May 2016 17:42:27 -0700</pubDate>
-				<link>http://dduan.net/2016/05/15/cheap-orders/</link>
-				<guid isPermaLink="true">http://dduan.net/2016/05/15/cheap-orders/</guid>
-			</item>
-		
-			<item>
-				<title>Deploy Jekyll Site To Github With Make</title>
-        <description>&lt;p&gt;At risks of being too meta, I want to talk about how this post is going to go
+                <pubDate>Sun, 15 May 2016 17:42:27 -0700</pubDate>
+                <link>http://dduan.net/2016/05/15/cheap-orders/</link>
+                <guid isPermaLink="true">http://dduan.net/2016/05/15/cheap-orders/</guid>
+            </item>
+        
+            <item>
+                <title>Deploy Jekyll Site To Github With Make</title>
+                <description>&lt;p&gt;At risks of being too meta, I want to talk about how this post is going to go
 from my computer to a repository on Github on both the &lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;gh-pages&lt;/code&gt;
 branch. The former contains the file I’m typing, and the latter an updated
 HTML site generated by Jekyll.&lt;/p&gt;
@@ -657,7 +657,7 @@ deploy:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Drop it into root of your Jekyll project, commit all changes (including the
+&lt;p&gt;Drop it into root of your Jekyll project&lt;a href=http://dduan.net/2016/05/15/deploy-jekyll-to-github/&gt;.&lt;/a&gt; commit all changes (including the
 &lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;). And type &lt;code class=&quot;highlighter-rouge&quot;&gt;make deploy&lt;/code&gt;. BOOM, done.&lt;/p&gt;
 
 &lt;p&gt;There are a couple of assumptions:&lt;/p&gt;
@@ -672,14 +672,14 @@ deploy:
 &lt;p&gt;I like it better than other methods because it does not require installing
 additional software/scripts and there’s no restriction on plugins.&lt;/p&gt;
 </description>
-				<pubDate>Sun, 15 May 2016 01:00:00 -0700</pubDate>
-				<link>http://dduan.net/2016/05/15/deploy-jekyll-to-github/</link>
-				<guid isPermaLink="true">http://dduan.net/2016/05/15/deploy-jekyll-to-github/</guid>
-			</item>
-		
-			<item>
-				<title>char ** in Swift</title>
-        <description>&lt;p&gt;A “string” in C is just a continuous chunk of &lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt; values in memory with
+                <pubDate>Sun, 15 May 2016 01:00:00 -0700</pubDate>
+                <link>http://dduan.net/2016/05/15/deploy-jekyll-to-github/</link>
+                <guid isPermaLink="true">http://dduan.net/2016/05/15/deploy-jekyll-to-github/</guid>
+            </item>
+        
+            <item>
+                <title>char ** in Swift</title>
+                <description>&lt;p&gt;A “string” in C is just a continuous chunk of &lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt; values in memory with
 &lt;code class=&quot;highlighter-rouge&quot;&gt;\0&lt;/code&gt; at the end. To reference it, a variable of type &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt; is used to store
 the address of the first &lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt; (commonly known as a pointer 😉).  It’s common
 to have string manipulating functions take this form:&lt;/p&gt;
@@ -755,7 +755,7 @@ methods for converting &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt
 
 &lt;hr /&gt;
 
-&lt;p&gt;Taking a step back, to deal with &lt;code class=&quot;highlighter-rouge&quot;&gt;char **&lt;/code&gt; in Swift, we overcame 2 obstacles:&lt;/p&gt;
+&lt;p&gt;Taking a step back&lt;a href=http://dduan.net/2015/11/01/char-star-star-in-swift/&gt;.&lt;/a&gt; to deal with &lt;code class=&quot;highlighter-rouge&quot;&gt;char **&lt;/code&gt; in Swift, we overcame 2 obstacles:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -768,14 +768,14 @@ the infinite layers of indirections that pointers achieve.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 </description>
-				<pubDate>Sun, 01 Nov 2015 11:18:40 -0800</pubDate>
-				<link>http://dduan.net/2015/11/01/char-star-star-in-swift/</link>
-				<guid isPermaLink="true">http://dduan.net/2015/11/01/char-star-star-in-swift/</guid>
-			</item>
-		
-			<item>
-				<title>Swift Algebraic Data Types</title>
-        <description>&lt;h2 id=&quot;the-basics&quot;&gt;The Basics&lt;/h2&gt;
+                <pubDate>Sun, 01 Nov 2015 11:18:40 -0800</pubDate>
+                <link>http://dduan.net/2015/11/01/char-star-star-in-swift/</link>
+                <guid isPermaLink="true">http://dduan.net/2015/11/01/char-star-star-in-swift/</guid>
+            </item>
+        
+            <item>
+                <title>Swift Algebraic Data Types</title>
+                <description>&lt;h2 id=&quot;the-basics&quot;&gt;The Basics&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Algebraic_data_type&quot;&gt;Algebraic Data Type&lt;/a&gt; is a fancy name for “a type creaded by combining other
 types” in programming languages. One aspect of the “algebraic-ness” is how
@@ -823,7 +823,7 @@ Types.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-crossovers&quot;&gt;The Crossovers&lt;/h2&gt;
 
-&lt;p&gt;However, the story doesn’t stop here. In Swift, an &lt;code class=&quot;highlighter-rouge&quot;&gt;enum&lt;/code&gt;’s option can have
+&lt;p&gt;However&lt;a href=http://dduan.net/2015/07/12/swift-algebraic-data-types/&gt;.&lt;/a&gt; the story doesn’t stop here. In Swift, an &lt;code class=&quot;highlighter-rouge&quot;&gt;enum&lt;/code&gt;’s option can have
 multiple values. If it happens to be the only option, then this
 &lt;code class=&quot;highlighter-rouge&quot;&gt;enum&lt;/code&gt;effectively becomes a &lt;em&gt;product&lt;/em&gt; type:&lt;/p&gt;
 
@@ -904,14 +904,14 @@ aliases, such as:&lt;/p&gt;
 &lt;p&gt;I hope this is on the Swift team’s (understandably) gigantic todo list 😉.&lt;/p&gt;
 
 </description>
-				<pubDate>Sun, 12 Jul 2015 15:51:27 -0700</pubDate>
-				<link>http://dduan.net/2015/07/12/swift-algebraic-data-types/</link>
-				<guid isPermaLink="true">http://dduan.net/2015/07/12/swift-algebraic-data-types/</guid>
-			</item>
-		
-			<item>
-				<title>Let&#39;s Build A &#39;cat&#39; In Swift 2</title>
-        <description>&lt;p&gt;As a homework in one of the early college classes, I was asked to write unix
+                <pubDate>Sun, 12 Jul 2015 15:51:27 -0700</pubDate>
+                <link>http://dduan.net/2015/07/12/swift-algebraic-data-types/</link>
+                <guid isPermaLink="true">http://dduan.net/2015/07/12/swift-algebraic-data-types/</guid>
+            </item>
+        
+            <item>
+                <title>Let&#39;s Build A &#39;cat&#39; In Swift 2</title>
+                <description>&lt;p&gt;As a homework in one of the early college classes, I was asked to write unix
 commands such as &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt; in C. Let’s do that in Swift today! To make things
 interesting, let’s pretend we are on Linux. That means no Xcode nor Foundation
 can be used.&lt;/p&gt;
@@ -930,7 +930,7 @@ to call even the standard C functions, we need to import them first.&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;p&gt;We can add Objective-C bridging headers with the argument
-&lt;code class=&quot;highlighter-rouge&quot;&gt;-import-objc-header&lt;/code&gt;.  But to import the standard C functions, we also need
+&lt;code class=&quot;highlighter-rouge&quot;&gt;-import-objc-header&lt;/code&gt;.  But to import the standard C functions&lt;a href=http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/&gt;.&lt;/a&gt; we also need
 to specify path to an SDK:&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\
@@ -1018,14 +1018,14 @@ code:&lt;/p&gt;
 &lt;p&gt;The code is also available in this &lt;a href=&quot;https://gist.github.com/dduan/f6d359019db8b0b55962&quot;&gt;gist&lt;/a&gt;.&lt;/p&gt;
 
 </description>
-				<pubDate>Sat, 04 Jul 2015 20:56:19 -0700</pubDate>
-				<link>http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/</link>
-				<guid isPermaLink="true">http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/</guid>
-			</item>
-		
-			<item>
-				<title>Swift Function Fun Facts</title>
-        <description>&lt;p&gt;You love Swift. You want to write a class that does HTTP, it might have
+                <pubDate>Sat, 04 Jul 2015 20:56:19 -0700</pubDate>
+                <link>http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/</link>
+                <guid isPermaLink="true">http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/</guid>
+            </item>
+        
+            <item>
+                <title>Swift Function Fun Facts</title>
+                <description>&lt;p&gt;You love Swift. You want to write a class that does HTTP, it might have
 methods like the following:&lt;/p&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;URLString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;AnyObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
@@ -1185,21 +1185,21 @@ citizens! Surely if you return a function with default arguments…?&lt;/p&gt;
 &lt;p&gt;Turns out, this manual form of currying only works when default arguments
 aren’t involved!&lt;/p&gt;
 
-&lt;p&gt;Now, you hate Swift.&lt;/p&gt;
+&lt;p&gt;Now&lt;a href=http://dduan.net/2015/04/18/swift-function-fun-facts/&gt;.&lt;/a&gt; you hate Swift.&lt;/p&gt;
 
 &lt;p&gt;(Just to be clear, I don’t really hate Swift as in, uh, &lt;em&gt;hate&lt;/em&gt; Swift. Judgning
 from some comments, I might have failed to convey the lightheartedness that
 I felt writing this up. It’s really like saying to a friend “I hate you” after
 he/she pulls a prank on you.)&lt;/p&gt;
 </description>
-				<pubDate>Sat, 18 Apr 2015 16:20:16 -0700</pubDate>
-				<link>http://dduan.net/2015/04/18/swift-function-fun-facts/</link>
-				<guid isPermaLink="true">http://dduan.net/2015/04/18/swift-function-fun-facts/</guid>
-			</item>
-		
-			<item>
-				<title>Keep Git Social</title>
-        <description>&lt;p&gt;&lt;em&gt;A project I’m working on uses &lt;a href=&quot;http://gitlabhq.com&quot;&gt;GitlabHQ&lt;/a&gt;, I think it is a cool open source
+                <pubDate>Sat, 18 Apr 2015 16:20:16 -0700</pubDate>
+                <link>http://dduan.net/2015/04/18/swift-function-fun-facts/</link>
+                <guid isPermaLink="true">http://dduan.net/2015/04/18/swift-function-fun-facts/</guid>
+            </item>
+        
+            <item>
+                <title>Keep Git Social</title>
+                <description>&lt;p&gt;&lt;em&gt;A project I’m working on uses &lt;a href=&quot;http://gitlabhq.com&quot;&gt;GitlabHQ&lt;/a&gt;, I think it is a cool open source
 project and the developers are doing an excellent job of making a sweet web
 interface for Git projects. However, as I found out today, &lt;a href=&quot;https://github.com/gitlabhq/gitlabhq/issues/1298&quot; title=&quot;Gitlab Issue: Closed&quot;&gt;my one issue&lt;/a&gt;
 with it was closed without fixing. And that’s what finally propelled me to
@@ -1208,7 +1208,7 @@ writing this airticle.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Do you know, the Linux kernel is broken by hundreds of commited patches
 everyday?&lt;/p&gt;
 
-&lt;p&gt;That, of course, is a trick question. Yes, &lt;em&gt;technically&lt;/em&gt;, hundreds (if not
+&lt;p&gt;That, of course&lt;a href=http://dduan.net/2012/10/31/keep-git-social/&gt;.&lt;/a&gt; is a trick question. Yes, &lt;em&gt;technically&lt;/em&gt;, hundreds (if not
 thousands) of patches were commited to &lt;em&gt;a&lt;/em&gt; git repository of the Linux kernel
 that isn’t different in anyway from &lt;em&gt;the&lt;/em&gt; repository. What makes the
 repository “conanical” is the fact that Linus Torvalds owns it. If the world
@@ -1279,10 +1279,10 @@ more creativity from your team, perhaps embracing the social aspect of Git by
 breaking the shackles on their hand is a good thing to try.&lt;/p&gt;
 
 </description>
-				<pubDate>Wed, 31 Oct 2012 09:02:30 -0700</pubDate>
-				<link>http://dduan.net/2012/10/31/keep-git-social/</link>
-				<guid isPermaLink="true">http://dduan.net/2012/10/31/keep-git-social/</guid>
-			</item>
-		
-	</channel>
+                <pubDate>Wed, 31 Oct 2012 09:02:30 -0700</pubDate>
+                <link>http://dduan.net/2012/10/31/keep-git-social/</link>
+                <guid isPermaLink="true">http://dduan.net/2012/10/31/keep-git-social/</guid>
+            </item>
+        
+    </channel>
 </rss>

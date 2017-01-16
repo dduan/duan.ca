@@ -77,7 +77,7 @@ primitives from termbox. Awww yeah! Here’s the code with the comment stripped,
 to give you a taste:&lt;/p&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Termbox&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a rel=&quot;canonical&quot; title=&quot;Originated from dduan.net&quot; href=#{base}#{url}&gt;.&lt;/a&gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nv&quot;&gt;foreground&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nv&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -187,7 +187,7 @@ after a commit is rebased, it and every commits following it will have a new
 hash and git doesn’t give us an oppurtunity to say “include my signature,
 please”. You cannot rebase and keep the commits signed!&lt;/p&gt;
 
-&lt;p&gt;Well&lt;a rel=&quot;canonical&quot; title=&quot;Originated from dduan.net&quot; href=#{base}#{url}&gt;.&lt;/a&gt; that kind of sucks. But you are reading about it here, so I’d better give
+&lt;p&gt;Well, that kind of sucks. But you are reading about it here, so I’d better give
 you something to help, right?&lt;/p&gt;
 
 &lt;p&gt;There is, at least, one way to achieve &lt;em&gt;rebase and sign multiple commits&lt;/em&gt;:&lt;/p&gt;
@@ -363,7 +363,7 @@ and ensure the whole thing fits together.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;There are &lt;em&gt;many&lt;/em&gt;&lt;a rel=&quot;canonical&quot; title=&quot;Originated from dduan.net&quot; href=#{base}#{url}&gt;.&lt;/a&gt; &lt;em&gt;many&lt;/em&gt; other fallouts from mechanically omitting needless
+&lt;p&gt;There are &lt;em&gt;many&lt;/em&gt;, &lt;em&gt;many&lt;/em&gt; other fallouts from mechanically omitting needless
 words that I didn’t cover in this post. There are many many other things in the
 API Design Guidelines that are worth conforming to. There will be much much bike
 shedding among your team members.&lt;/p&gt;
@@ -406,7 +406,7 @@ to create these dummy projects every time they create a new library. If all
 these projects do is importing a library and attempt to build, they should
 work for &lt;em&gt;any&lt;/em&gt; library. The config in &lt;code class=&quot;highlighter-rouge&quot;&gt;Package.swift&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;Cocoapods&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;Cartfile&lt;/code&gt;
 and the &lt;code class=&quot;highlighter-rouge&quot;&gt;import&lt;/code&gt; statements just needs some strings replaced: name of the next
-library, URL for its git repository&lt;a rel=&quot;canonical&quot; title=&quot;Originated from dduan.net&quot; href=#{base}#{url}&gt;.&lt;/a&gt; etc. And that’s a scriptable process as
+library, URL for its git repository, etc. And that’s a scriptable process as
 well!&lt;/p&gt;
 
 &lt;p&gt;To recap, one could, in theory, copy in some dummy projects, run a command to
@@ -462,7 +462,7 @@ dictionary’s initializer (incidentally, this is a Swift feature I really
 want). Plus, I don’t need &lt;code class=&quot;highlighter-rouge&quot;&gt;DefaultDictionary&lt;/code&gt; to be a literal convertible.&lt;/li&gt;
   &lt;li&gt;Most of the code, including the imaginary &lt;code class=&quot;highlighter-rouge&quot;&gt;init&lt;/code&gt; mentioned in previous
 point, simply reuses stuff from &lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt;: asscociated type, indexes,
-generator, subscript&lt;a rel=&quot;canonical&quot; title=&quot;Originated from dduan.net&quot; href=#{base}#{url}&gt;.&lt;/a&gt; etc.&lt;/li&gt;
+generator, subscript, etc.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;In comparison, Python implements &lt;code class=&quot;highlighter-rouge&quot;&gt;defaultdict&lt;/code&gt; in a more intuitive way – via
@@ -536,7 +536,7 @@ group them by length and match from the longer group first. The groups became:&l
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Token&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;group1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a rel=&quot;canonical&quot; title=&quot;Originated from dduan.net&quot; href=#{base}#{url}&gt;.&lt;/a&gt;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;&quot;-&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Minus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;// more token mappings …&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
@@ -657,7 +657,7 @@ deploy:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Drop it into root of your Jekyll project&lt;a rel=&quot;canonical&quot; title=&quot;Originated from dduan.net&quot; href=#{base}#{url}&gt;.&lt;/a&gt; commit all changes (including the
+&lt;p&gt;Drop it into root of your Jekyll project, commit all changes (including the
 &lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;). And type &lt;code class=&quot;highlighter-rouge&quot;&gt;make deploy&lt;/code&gt;. BOOM, done.&lt;/p&gt;
 
 &lt;p&gt;There are a couple of assumptions:&lt;/p&gt;
@@ -762,7 +762,7 @@ methods for converting &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt
     &lt;p&gt;The difference in string representation between C and Swift.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Compared to C pointers&lt;a rel=&quot;canonical&quot; title=&quot;Originated from dduan.net&quot; href=#{base}#{url}&gt;.&lt;/a&gt; Swift’s &lt;code class=&quot;highlighter-rouge&quot;&gt;inout&lt;/code&gt; expresses mutability of function
+    &lt;p&gt;Compared to C pointers, Swift’s &lt;code class=&quot;highlighter-rouge&quot;&gt;inout&lt;/code&gt; expresses mutability of function
 arguments in a more restricted way. We can’t nest &lt;code class=&quot;highlighter-rouge&quot;&gt;inout&lt;/code&gt;s to represent
 the infinite layers of indirections that pointers achieve.&lt;/p&gt;
   &lt;/li&gt;
@@ -837,7 +837,7 @@ multiple values. If it happens to be the only option, then this
 &lt;p&gt;Incidentally, this makes &lt;code class=&quot;highlighter-rouge&quot;&gt;enum&lt;/code&gt; similar to &lt;code class=&quot;highlighter-rouge&quot;&gt;data&lt;/code&gt; in Haskell, where &lt;em&gt;product&lt;/em&gt;
 and &lt;em&gt;sum&lt;/em&gt; types can be created with a unified construct – &lt;code class=&quot;highlighter-rouge&quot;&gt;data&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;In C and C++, &lt;code class=&quot;highlighter-rouge&quot;&gt;union&lt;/code&gt;s are the closest thing to &lt;em&gt;sum&lt;/em&gt; types. However&lt;a rel=&quot;canonical&quot; title=&quot;Originated from dduan.net&quot; href=#{base}#{url}&gt;.&lt;/a&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;union&lt;/code&gt;
+&lt;p&gt;In C and C++, &lt;code class=&quot;highlighter-rouge&quot;&gt;union&lt;/code&gt;s are the closest thing to &lt;em&gt;sum&lt;/em&gt; types. However, &lt;code class=&quot;highlighter-rouge&quot;&gt;union&lt;/code&gt;
 is hardly used to combine arbitrary types due to its lack of associated
 values. What do people do in need of &lt;em&gt;sum&lt;/em&gt; types? They make do with product
 types. Here’s one way to achive that in Swift:&lt;/p&gt;
@@ -994,7 +994,7 @@ as &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;I
 
 &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;inout&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lineptr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UnsafeMutablePointer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Int8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;inout&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a rel=&quot;canonical&quot; title=&quot;Originated from dduan.net&quot; href=#{base}#{url}&gt;.&lt;/a&gt;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;inout&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;UnsafeMutablePointer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;FILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -1173,7 +1173,7 @@ citizens! Surely if you return a function with default arguments…?&lt;/p&gt;
     &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;…&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
-        &lt;span class=&quot;nf&quot;&gt;impl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a rel=&quot;canonical&quot; title=&quot;Originated from dduan.net&quot; href=#{base}#{url}&gt;.&lt;/a&gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;…&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;impl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;…&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
@@ -1260,7 +1260,7 @@ it affect work when a &lt;code class=&quot;highlighter-rouge&quot;&gt;git branch
 &lt;p&gt;Break Git’s design gets you no where nice.&lt;/p&gt;
 
 &lt;p&gt;And no, Git’s social model doesn’t add work to the owner of the “official”
-repository. Afterall&lt;a rel=&quot;canonical&quot; title=&quot;Originated from dduan.net&quot; href=#{base}#{url}&gt;.&lt;/a&gt; Git was designed with he linux kernel in mind!  Linus
+repository. Afterall, Git was designed with he linux kernel in mind!  Linus
 himself explains it the best (summary provided below):&lt;/p&gt;
 
 &lt;iframe width=&quot;420&quot; height=&quot;315&quot; src=&quot;http://www.youtube.com/embed/4XpnKHJAok8&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;

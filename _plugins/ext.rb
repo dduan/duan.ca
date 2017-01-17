@@ -4,6 +4,9 @@ module Jekyll
   module LinkBackFilter
     def link_back(input, base, url)
         total = input.scan(",").count
+        if total == 0
+            return input
+        end
         n = (input.length * 0.618 % total).round
         count = 0
         input.gsub(",") do |x|

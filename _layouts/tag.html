@@ -2,10 +2,10 @@
 layout: page
 ---
 {% assign all = site.documents | where: 'master', true | sort: 'date' | reverse %}
-
 <h3 class="tag-name" id="#{{ page.tag | slugize }}">{TAGGED : {{ page.tag }}}</h3>
 <div class="content list">
 {% for post in all %}
+  {% if post.tags contains page.tag %}
   <div class="list-item">
     <h2 class="list-post-title">
       {% if post.layout == 'post' %}
@@ -25,5 +25,6 @@ layout: page
       {% if post.tags.size > 0 %} | {% include post-tags.html %}{% endif %}
     </div>
   </div>
+  {% endif %}
 {% endfor %}
 </div>

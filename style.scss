@@ -378,6 +378,9 @@ tbody tr:nth-child(odd) th {
     margin-bottom: 2rem;
     font-size: .70rem;
     text-transform: uppercase;
+    a {
+      color: #515151
+    }
   }
   .tags {
     text-transform: uppercase;

@@ -418,6 +418,29 @@ tbody tr:nth-child(odd) th {
         color: #515151
     }
   }
+  &-link-title {
+    margin-bottom: 1rem;
+
+    a {
+      color: #333;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+  &-link-date {
+    display: inline;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    font-weight: 300;
+
+    a {
+        color: #515151
+    }
+  }
 }
 
 .projects-list {

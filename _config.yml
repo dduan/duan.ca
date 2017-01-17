@@ -20,8 +20,10 @@ markdown:           kramdown
 
 # Navigation
 nav:
-  - name:           "Archive"
+  - name:           "articles"
     href:           "/archive"
+  - name:           "Links"
+    href:           "/links"
   - name:           "Projects"
     href:           "/projects"
   - name:           "About"
@@ -45,9 +47,22 @@ defaults:
       type:         "posts"
     values:
       layout:       "post"
+      master:       true
+  -
+    scope:
+      path:         ""
+      type:         links
+    values:
+      layout:       "link"
+      master:       true
 
 tag_page_layout: tag
 tag_page_dir: tag
+
+collections:
+    links:
+        output: true
+        permalink: /linked/:year/:month/:title/
 
 gems:
   - jekyll-seo-tag

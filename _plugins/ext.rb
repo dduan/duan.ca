@@ -1,4 +1,4 @@
-#require 'jekyll/tagging'
+require 'jekyll/utils'
 
 module Jekyll
   module LinkBackFilter
@@ -20,22 +20,7 @@ module Jekyll
     end
   end
 
-  module Helpers
-
-    # call-seq:
-    #   jekyll_tagging_slug(str) => new_str
-    #
-    # Substitutes any diacritics in _str_ with their ASCII equivalents,
-    # whitespaces with dashes and converts _str_ to downcase.
-    def jekyll_tagging_slug(str)
-      str.to_s.downcase.gsub(/\s/, '-')
-    end
-
-  end
-
   class Tagger < Generator
-
-    include Helpers
 
     safe true
 
@@ -61,25 +46,41 @@ module Jekyll
     end
 
     def new_tag(tag, posts)
-      self.class.types.each { |type|
-        if layout = site.config["tag_#{type}_layout"]
-          data = { 'layout' => layout, 'posts' => posts.sort.reverse!, 'tag' => tag }
-          data.merge!(site.config["tag_#{type}_data"] || {})
+      if layout = site.config["tag_page_layout"]
+        data = { 'layout' => layout, 'posts' => posts.sort.reverse!, 'tag' => tag }
+        data.merge!(site.config["tag_page_data"] || {})
 
-          name = yield data if block_given?
-          name ||= tag
-          name = jekyll_tagging_slug(name)
+        name = yield data if block_given?
+        name ||= tag
+        name = Utils.slugify(name)
 
-          tag_dir = site.config["tag_#{type}_dir"]
-          tag_dir = File.join(tag_dir, (pretty? ? name : ''))
+        tag_dir = site.config["tag_page_dir"]
+        tag_dir = File.join(tag_dir, (pretty? ? name : ''))
 
-          page_name = "#{pretty? ? 'index' : name}#{site.layouts[data['layout']].ext}"
+        page_name = "#{pretty? ? 'index' : name}#{site.layouts[data['layout']].ext}"
 
-          site.pages << TagPage.new(
-            site, site.source, tag_dir, page_name, data
-          )
-        end
-      }
+        site.pages << TagPage.new(
+          site, site.source, tag_dir, page_name, data
+        )
+      end
+
+      if layout = site.config["tag_feed_layout"]
+        data = { 'layout' => layout, 'posts' => posts.sort.reverse!, 'tag' => tag }
+        data.merge!(site.config["tag_feed_data"] || {})
+
+        name = yield data if block_given?
+        name ||= tag
+        name = Utils.slugify(name)
+
+        tag_dir = site.config["tag_feed_dir"]
+        tag_dir = File.join(tag_dir, (pretty? ? name : ''))
+
+        page_name = "#{pretty? ? 'feed' : name}#{site.layouts[data['layout']].ext}"
+
+        site.pages << TagPage.new(
+          site, site.source, tag_dir, page_name, data
+        )
+      end
     end
 
     # Calculates the css class of every tag for a tag cloud. The possible
@@ -113,8 +114,6 @@ module Jekyll
   end
 
   module TaggingFilters
-
-    include Helpers
 
     def tag_link(tag, url = tag_url(tag), html_opts = nil)
       html_opts &&= ' ' << html_opts.map { |k, v| %Q{#{k}="#{v}"} }.join(' ')

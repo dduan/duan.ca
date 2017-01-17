@@ -8,6 +8,65 @@
         
             <item>
                 
+                <title>🔗Swift ABI In Layman&#39;s terms</title>
+                
+                <description>&lt;p&gt;An oldie but goodie from Swift Evelution.
+&lt;a href=&quot;https://twitter.com/slava_pestov&quot;&gt;Slava&lt;/a&gt;’s answer:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“when we talk about the ABI, we’re really talking about three orthogonal
+“axes” along which we would like to “move” without breaking compatibility with
+existing binaries:”&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;The first axis is the machine-level calling conventions and memory layout.
+For example, what registers to pass function arguments and returns in, the
+rules for alignment and padding of fields in an aggregate type, which entry
+points the Swift runtime exports and what their behavior should be. Once we
+commit to a stable ABI along this axis, you will get interoperability between
+&lt;em&gt;compiler versions&lt;/em&gt; – the same exact library built with one version of the
+compiler will remain compatible with clients after being recompiled with
+another version, because their conventions will match up. Note that this does
+not help you if the library itself changes in any way.&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;The second axis is the resilience work I called out in my previous e-mail.
+Here, we’re trying to define language features and implementation techniques
+that allow a library to evolve in a forward-compatible manner, as long as the
+developer follows certain guidelines. Here, the goal is if you should be able
+to compile your library, make some changes to add new APIs, and recompile it
+&lt;em&gt;with the same compiler&lt;/em&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/linked/2017/01/swift-abi-in-laymans-terms/&gt;,&lt;/a&gt; without breaking downstream clients, as long as you
+follow the library evolution guidelines (Also, you can imagine one day having
+an ‘ABI diff’ tool to automate this).  &amp;gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;The third axis is the standard library itself. Stability of runtime
+interfaces and the extra indirection to enable resilience is all great, but it
+won’t help you as long as the standard library API is evolving in a
+non-backwards compatible manner – for example, if we remove a method on
+String. So once the other two areas have been addressed, the last thing to lock
+down is the standard library interface itself.&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The rest of the thread is worth reading too. John McCall gave an high level
+&lt;a href=&quot;https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160808/026145.html&quot;&gt;description&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The definitive source for Slava’s third axes is the &lt;a href=&quot;https://github.com/apple/swift/blob/master/docs/LibraryEvolution.rst&quot;&gt;Library
+Evolution&lt;/a&gt;
+doc from the Swift repository.&lt;/p&gt;
+</description>
+                <pubDate>Mon, 16 Jan 2017 22:44:38 -0800</pubDate>
+                
+                <link>https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160808/026153.html</link>
+                
+                <guid isPermaLink="true">http://dduan.net/linked/2017/01/swift-abi-in-laymans-terms/</guid>
+            </item>
+        
+            <item>
+                
                 <title>Making TUI Applications In Swift</title>
                 
                 <description>&lt;p&gt;One of my fondest memory in programming is writing the game Snake on one of

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan - Naming</title>
+        <link>http://dduan.net/tag/Naming</link>
+        <atom:link href="http://dduan.net/tag/Naming/index.xml" rel="self" type="application/rss+xml" />
+        
+        
+            
+        
+            
+        
+            
+        
+            
+            <item>
+                <title>How To Omit Needless Words</title>
+                <description>&lt;p&gt;A typical experience in adopting Swift 3 may look like this:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Run the migrator.&lt;/li&gt;
+  &lt;li&gt;Fix up what the migrator left undone so your project complies.&lt;/li&gt;
+  &lt;li&gt;Remove artifacts that migrator added to ensure successful compilation (you
+know what this means if you finished previous step in a mildly sized code
+base).&lt;/li&gt;
+  &lt;li&gt;Fix bugs caused by mechanical changes.&lt;/li&gt;
+  &lt;li&gt;Try to adapt your code base to the new style: lowercased static members, etc.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The last step is particularly challenging in a team environment because it
+involves naming things. Luckily we have (IMHO) the best “features” in Swift
+3 for help: the &lt;a href=&quot;https://swift.org/documentation/api-design-guidelines/&quot;&gt;API Design Guidelines&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://swift.org/documentation/api-design-guidelines/#omit-needless-words&quot;&gt;Omit needless words&lt;/a&gt; is one of the most differentiating
+guideline for function names between Swift 2 and 3. In Swift 2 we used to name
+things like so…&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func doStuffWithThing(thing: Thing) { … }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;… and use it like …&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;doStuffWithThing(someThing)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;That’s a lot of “thing”s, have you noticed?&lt;/p&gt;
+
+&lt;p&gt;Since the word “Thing” is &lt;em&gt;merely repeating&lt;/em&gt; the type information, we can omit
+it in Swift 3:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// declare
+func doStuff(with thing: Thing) { … }
+
+// use
+doStuff(with: someThing)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;It’s clear at both declaration and use site what we are doing stuff to.&lt;/p&gt;
+
+&lt;p&gt;So … you should go through you code base and make this change! In the next
+section, we’ll discuss one way to make it happen.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;step-1-automate&quot;&gt;Step 1: Automate&lt;/h2&gt;
+
+&lt;p&gt;A good indicator of “merely repeating type information” is repetition of words.
+If you have been disciplined about naming your functions in Swift 2, finding
+such repetition should take no more than one or two good regular expressions.
+After the migrator, your code may contain a mixture of these:&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doStuffWithX&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;…&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doStuff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;forY&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;…&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In other words, the repeating word (&lt;code class=&quot;highlighter-rouge&quot;&gt;X&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;Y&lt;/code&gt;) is preceded by a
+&lt;a href=&quot;https://www.englishclub.com/grammar/prepositions-list.htm&quot;&gt;preposition&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Finding these in a large code base is quite fun. If you don’t feel like writing
+the scripts yourself, I’ve made a little tool for it &lt;a href=&quot;https://github.com/dduan/needless&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;(Sometimes the repeating words aren’t a exact match because of prefixes such as
+“CG” in &lt;code class=&quot;highlighter-rouge&quot;&gt;CGSize&lt;/code&gt;. That’s covered by the tool as well.)&lt;/p&gt;
+
+&lt;h2 id=&quot;step-2-update&quot;&gt;Step 2: Update&lt;/h2&gt;
+
+&lt;p&gt;You can further rearrange the pieces in function name mechanically to:&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;doStuff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;preposition&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;originalArgName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;…&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://github.com/dduan/needless&quot;&gt;tool&lt;/a&gt; I wrote can suggest alternatives like this. Applying them
+is technically automatable. But I find manually doing tasks such as fixing up
+indentation for multi-line functions or updating their use site to be easier.
+Your conclusion may depend the size of your code base and your patience.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-3-audit&quot;&gt;Step 3: Audit&lt;/h2&gt;
+
+&lt;p&gt;The main goal for the API Design Guidelines is “clarity at the point of use”.
+Our automated process will yield some undesirable results. I’ll list a few
+scenarios here.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Poorly named function name becomes poorer&lt;/strong&gt;. Example:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;alertForScreenSize(_ size CGRize)&lt;/code&gt; becomes &lt;code class=&quot;highlighter-rouge&quot;&gt;alert(forScreen size: CGSize)&lt;/code&gt;.
+Obviously, “for screen” is misleading since a &lt;code class=&quot;highlighter-rouge&quot;&gt;CGSize&lt;/code&gt; is not a screen. The
+problem here is the “alert” is not for a “size” to begin with. We as human
+intuitively pick up that it’s for a “screen with a certain size”. So the correct
+renaming here should be &lt;code class=&quot;highlighter-rouge&quot;&gt;alertForScreen(with size: CGSize)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Awkward literal values results in ungrammatical phrases&lt;/strong&gt;. Imagine our
+argument is a enum:&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Mode&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edit&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;… and we renamed a function &lt;code class=&quot;highlighter-rouge&quot;&gt;updateUIForMode(mode: Mode)&lt;/code&gt; to
+&lt;code class=&quot;highlighter-rouge&quot;&gt;update(for mode: Mode)&lt;/code&gt;. The call site, therefore, becomes
+&lt;code class=&quot;highlighter-rouge&quot;&gt;update(for: .add)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;What makes it feels wrong? Well&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2016/10/22/how-to-omit-needless-words/&gt;,&lt;/a&gt; a preposition followed by a verb (“for add”)
+is not very grammatical. Normally we would say “update UI for &lt;em&gt;adding&lt;/em&gt;”. So here
+we need to update the literals in that enum to “adding” and “editing”.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Type information becomes too weak&lt;/strong&gt;. This can happen very often with enum
+literals. We often name enum values with an adjective to qualify its name:&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIControlState&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;automatic&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// which state? the *automatic* state!&lt;/span&gt;
+    &lt;span class=&quot;err&quot;&gt;…&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;After renaming, we’ll have functions that simply becomes too generic and
+mysterious at call site:&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;automatic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// automatic what? 😂&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This is where we need to be flexible and use our own good judgement. Perhaps
+it’s simply better to keep the qualifying postfix:&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;forControlState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;automatic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// better&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In the guideline’s parlance, this is &lt;a href=&quot;https://swift.org/documentation/api-design-guidelines/#weak-type-information&quot;&gt;compensate for weak type
+information&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Other argument labels needs updates too&lt;/strong&gt;. A function at call site should read
+like a sentence as much as possible. We removed words at beginning of the
+“sentence”, it’s important to take a look at labels for the rest of the sentence
+and ensure the whole thing fits together.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;There are &lt;em&gt;many&lt;/em&gt;, &lt;em&gt;many&lt;/em&gt; other fallouts from mechanically omitting needless
+words that I didn’t cover in this post. There are many many other things in the
+API Design Guidelines that are worth conforming to. There will be much much bike
+shedding among your team members.&lt;/p&gt;
+
+&lt;p&gt;Just remember, the API guidelines don’t provide an answer to every naming
+decision. Following it means your code base will fit in with the rest of the
+community and APIs from Foundation/Swift standard library. But find what feels
+right for your team is the most important thing. In the end, you should be glad
+that everyone cares so much about your code base’s “Swiftness” and it’ll be all
+worth it!&lt;/p&gt;
+</description>
+                <pubDate>Sat, 22 Oct 2016 17:08:41 -0700</pubDate>
+                <link></link>
+                <guid isPermaLink="true">http://dduan.net/2016/10/22/how-to-omit-needless-words/</guid>
+            </item>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </channel>
+</rss>

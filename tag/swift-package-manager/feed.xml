@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan - Swift Package Manager</title>
+        <link>http://dduan.net/tag/Swift Package Manager</link>
+        <atom:link href="http://dduan.net/tag/Swift Package Manager/index.xml" rel="self" type="application/rss+xml" />
+        
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <item>
+                <title>Distribution Tests</title>
+                <description>&lt;p&gt;There are several ways to build dependencies for a Swift 3 project:
+Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which
+is the best choice for their projects. As a library author who want to help as
+many people as possible, however, they can’t ignore any of them.&lt;/p&gt;
+
+&lt;p&gt;I sometimes question the sanity of that conclusion: instead of becoming an
+export in each package manager, I find myself a novice of all. Did I break
+support for any of them with this project change? Is it still working on
+a particular platform, say, tvOS? Can I &lt;em&gt;really&lt;/em&gt; know?&lt;/p&gt;
+
+&lt;p&gt;The only way to &lt;em&gt;really&lt;/em&gt; know is to verify yourself: both Cocoapods and
+Carthage support four platforms – iOS, macOS, watchOS, tvOS; Swift Package
+Manager only works on Mac or Linux. So that’s 2*4+1=9 targets. All these
+targets need is have the library in question fetched and imported. Every Swift
+library author should have such verification before publishing updates of
+their project.&lt;/p&gt;
+
+&lt;p&gt;The steps to verify can be triggered with commands: fetch and build
+dependencies, build Xcode/Swift project. To automate the process, put these
+commands in a script or a Makefile. But wait, there’s more! One shouldn’t have
+to create these dummy projects every time they create a new library. If all
+these projects do is importing a library and attempt to build, they should
+work for &lt;em&gt;any&lt;/em&gt; library. The config in &lt;code class=&quot;highlighter-rouge&quot;&gt;Package.swift&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;Cocoapods&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;Cartfile&lt;/code&gt;
+and the &lt;code class=&quot;highlighter-rouge&quot;&gt;import&lt;/code&gt; statements just needs some strings replaced: name of the next
+library, URL for its git repository, etc. And that’s a scriptable process as
+well!&lt;/p&gt;
+
+&lt;p&gt;To recap, one could, in theory, copy in some dummy projects, run a command to
+inject information about a new library, run another command to build all these
+project, verifying that support for those package managers remain functional.&lt;/p&gt;
+
+&lt;p&gt;In reality, I have created &lt;a href=&quot;https://github.com/dduan/DistributionTests&quot;&gt;DistributionTests&lt;/a&gt; and put it
+on &lt;a href=&quot;https://github.com/dduan/DistributionTests&quot;&gt;Github&lt;/a&gt; 😉.&lt;/p&gt;
+
+&lt;p&gt;The script &lt;code class=&quot;highlighter-rouge&quot;&gt;customize&lt;/code&gt; requires 3 pieces of information of the library: its
+import name&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2016/10/10/distribution-tests/&gt;,&lt;/a&gt; its git repository URL and a major version number. The assumption
+here is the library generates uniformly named artifacts: the file name for
+&lt;code class=&quot;highlighter-rouge&quot;&gt;.framework&lt;/code&gt; and the name users use to import it are the same. Testing
+distribution of a library is as simple as:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;clone the project.&lt;/li&gt;
+  &lt;li&gt;customize the project with &lt;code class=&quot;highlighter-rouge&quot;&gt;customize&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;run &lt;code class=&quot;highlighter-rouge&quot;&gt;make&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you do step 1 and 2, include the projects in library’s repository, then
+only step 3 is necessary! This makes testing distribution methods trivial on
+a continuous integration server.&lt;/p&gt;
+
+&lt;p&gt;Go forth and create fearlessly!&lt;/p&gt;
+
+</description>
+                <pubDate>Mon, 10 Oct 2016 10:34:49 -0700</pubDate>
+                <link></link>
+                <guid isPermaLink="true">http://dduan.net/2016/10/10/distribution-tests/</guid>
+            </item>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </channel>
+</rss>

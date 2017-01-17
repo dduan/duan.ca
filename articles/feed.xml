@@ -1,74 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Daniel Duan</title>
-        <link>http://dduan.net</link>
+        <title>Daniel Duan Articles</title>
+        <link>http://dduan.net/articles/</link>
         <atom:link href="http://dduan.net/feed.xml" rel="self" type="application/rss+xml" />
         
         
-            <item>
-                
-                <title>🔗Swift ABI In Layman&#39;s terms</title>
-                
-                <description>&lt;p&gt;An oldie but goodie from Swift Evelution.
-&lt;a href=&quot;https://twitter.com/slava_pestov&quot;&gt;Slava&lt;/a&gt;’s answer:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“when we talk about the ABI, we’re really talking about three orthogonal
-“axes” along which we would like to “move” without breaking compatibility with
-existing binaries:”&lt;/p&gt;
-
-  &lt;ul&gt;
-    &lt;li&gt;
-      &lt;p&gt;The first axis is the machine-level calling conventions and memory layout.
-For example, what registers to pass function arguments and returns in, the
-rules for alignment and padding of fields in an aggregate type, which entry
-points the Swift runtime exports and what their behavior should be. Once we
-commit to a stable ABI along this axis, you will get interoperability between
-&lt;em&gt;compiler versions&lt;/em&gt; – the same exact library built with one version of the
-compiler will remain compatible with clients after being recompiled with
-another version, because their conventions will match up. Note that this does
-not help you if the library itself changes in any way.&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;p&gt;The second axis is the resilience work I called out in my previous e-mail.
-Here, we’re trying to define language features and implementation techniques
-that allow a library to evolve in a forward-compatible manner, as long as the
-developer follows certain guidelines. Here, the goal is if you should be able
-to compile your library, make some changes to add new APIs, and recompile it
-&lt;em&gt;with the same compiler&lt;/em&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/linked/2017/01/swift-abi-in-laymans-terms/&gt;,&lt;/a&gt; without breaking downstream clients, as long as you
-follow the library evolution guidelines (Also, you can imagine one day having
-an ‘ABI diff’ tool to automate this).  &amp;gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li&gt;
-      &lt;p&gt;The third axis is the standard library itself. Stability of runtime
-interfaces and the extra indirection to enable resilience is all great, but it
-won’t help you as long as the standard library API is evolving in a
-non-backwards compatible manner – for example, if we remove a method on
-String. So once the other two areas have been addressed, the last thing to lock
-down is the standard library interface itself.&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The rest of the thread is worth reading too. John McCall gave an high level
-&lt;a href=&quot;https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160808/026145.html&quot;&gt;description&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;The definitive source for Slava’s third axes is the &lt;a href=&quot;https://github.com/apple/swift/blob/master/docs/LibraryEvolution.rst&quot;&gt;Library
-Evolution&lt;/a&gt;
-doc from the Swift repository.&lt;/p&gt;
-</description>
-                <pubDate>Mon, 16 Jan 2017 22:44:38 -0800</pubDate>
-                
-                <link>https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160808/026153.html</link>
-                
-                <guid isPermaLink="true">http://dduan.net/linked/2017/01/swift-abi-in-laymans-terms/</guid>
-            </item>
+            
         
+            
             <item>
-                
                 <title>Making TUI Applications In Swift</title>
-                
                 <description>&lt;p&gt;One of my fondest memory in programming is writing the game Snake on one of
 these:&lt;/p&gt;
 
@@ -227,16 +169,14 @@ have fun :)&lt;/p&gt;
 
 </description>
                 <pubDate>Mon, 26 Dec 2016 21:39:05 -0800</pubDate>
-                
                 <link>http://dduan.net/2016/12/26/making-tui-programs-in-swift/</link>
-                
                 <guid isPermaLink="true">http://dduan.net/2016/12/26/making-tui-programs-in-swift/</guid>
             </item>
+            
         
+            
             <item>
-                
                 <title>Rebase And Sign Multiple Git Commits</title>
-                
                 <description>&lt;p&gt;I never bothered &lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work&quot;&gt;signing&lt;/a&gt; my git commits until Github started putting
 those shiny badges on them. Since then I’ve encountered a problem: rebased
 commits lose their hash and their signed-ness.&lt;/p&gt;
@@ -273,16 +213,14 @@ glorious UI, ya know?&lt;/p&gt;
 
 </description>
                 <pubDate>Sat, 24 Dec 2016 01:31:14 -0800</pubDate>
-                
                 <link>http://dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/</link>
-                
                 <guid isPermaLink="true">http://dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/</guid>
             </item>
+            
         
+            
             <item>
-                
                 <title>How To Omit Needless Words</title>
-                
                 <description>&lt;p&gt;A typical experience in adopting Swift 3 may look like this:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -446,16 +384,14 @@ that everyone cares so much about your code base’s “Swiftness” and it’ll
 worth it!&lt;/p&gt;
 </description>
                 <pubDate>Sat, 22 Oct 2016 17:08:41 -0700</pubDate>
-                
                 <link>http://dduan.net/2016/10/22/how-to-omit-needless-words/</link>
-                
                 <guid isPermaLink="true">http://dduan.net/2016/10/22/how-to-omit-needless-words/</guid>
             </item>
+            
         
+            
             <item>
-                
                 <title>Distribution Tests</title>
-                
                 <description>&lt;p&gt;There are several ways to build dependencies for a Swift 3 project:
 Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which
 is the best choice for their projects. As a library author who want to help as
@@ -510,16 +446,14 @@ a continuous integration server.&lt;/p&gt;
 
 </description>
                 <pubDate>Mon, 10 Oct 2016 10:34:49 -0700</pubDate>
-                
                 <link>http://dduan.net/2016/10/10/distribution-tests/</link>
-                
                 <guid isPermaLink="true">http://dduan.net/2016/10/10/distribution-tests/</guid>
             </item>
+            
         
+            
             <item>
-                
                 <title>A Case For OOP?</title>
-                
                 <description>&lt;p&gt;Python’s standard library includes a very handy &lt;code class=&quot;highlighter-rouge&quot;&gt;defaultdict&lt;/code&gt;. It behaves
 almost exactly like the standard dictionary except it’ll supply a pre-defined
 value for any non-existence keys. It is, unsurpringly, a subclass of &lt;code class=&quot;highlighter-rouge&quot;&gt;dict&lt;/code&gt;.&lt;/p&gt;
@@ -551,16 +485,14 @@ even mean? Is it simply a case that will go away when protocols become more
 powerful?&lt;/p&gt;
 </description>
                 <pubDate>Thu, 19 May 2016 12:03:02 -0700</pubDate>
-                
                 <link>http://dduan.net/2016/05/19/a-case-for-oop/</link>
-                
                 <guid isPermaLink="true">http://dduan.net/2016/05/19/a-case-for-oop/</guid>
             </item>
+            
         
+            
             <item>
-                
                 <title>Cheap Orders</title>
-                
                 <description>&lt;p class=&quot;lead&quot;&gt;How to create order? If the second law of thermal dynamics tells us anything,
 we’d better get to work, right?&lt;/p&gt;
 
@@ -695,16 +627,14 @@ up with the erasure method. I discovered a series of small challenges and got
 help from Swift’s designers in each step. Everything fell together in the end.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 15 May 2016 17:42:27 -0700</pubDate>
-                
                 <link>http://dduan.net/2016/05/15/cheap-orders/</link>
-                
                 <guid isPermaLink="true">http://dduan.net/2016/05/15/cheap-orders/</guid>
             </item>
+            
         
+            
             <item>
-                
                 <title>Deploy Jekyll Site To Github With Make</title>
-                
                 <description>&lt;p&gt;At risks of being too meta, I want to talk about how this post is going to go
 from my computer to a repository on Github on both the &lt;code class=&quot;highlighter-rouge&quot;&gt;master&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;gh-pages&lt;/code&gt;
 branch. The former contains the file I’m typing, and the latter an updated
@@ -759,16 +689,14 @@ deploy:
 additional software/scripts and there’s no restriction on plugins.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 15 May 2016 01:00:00 -0700</pubDate>
-                
                 <link>http://dduan.net/2016/05/15/deploy-jekyll-to-github/</link>
-                
                 <guid isPermaLink="true">http://dduan.net/2016/05/15/deploy-jekyll-to-github/</guid>
             </item>
+            
         
+            
             <item>
-                
                 <title>char ** in Swift</title>
-                
                 <description>&lt;p&gt;A “string” in C is just a continuous chunk of &lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt; values in memory with
 &lt;code class=&quot;highlighter-rouge&quot;&gt;\0&lt;/code&gt; at the end. To reference it, a variable of type &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt; is used to store
 the address of the first &lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt; (commonly known as a pointer 😉).  It’s common
@@ -859,16 +787,14 @@ the infinite layers of indirections that pointers achieve.&lt;/p&gt;
 &lt;/ol&gt;
 </description>
                 <pubDate>Sun, 01 Nov 2015 11:18:40 -0800</pubDate>
-                
                 <link>http://dduan.net/2015/11/01/char-star-star-in-swift/</link>
-                
                 <guid isPermaLink="true">http://dduan.net/2015/11/01/char-star-star-in-swift/</guid>
             </item>
+            
         
+            
             <item>
-                
                 <title>Swift Algebraic Data Types</title>
-                
                 <description>&lt;h2 id=&quot;the-basics&quot;&gt;The Basics&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Algebraic_data_type&quot;&gt;Algebraic Data Type&lt;/a&gt; is a fancy name for “a type creaded by combining other
@@ -999,16 +925,14 @@ aliases, such as:&lt;/p&gt;
 
 </description>
                 <pubDate>Sun, 12 Jul 2015 15:51:27 -0700</pubDate>
-                
                 <link>http://dduan.net/2015/07/12/swift-algebraic-data-types/</link>
-                
                 <guid isPermaLink="true">http://dduan.net/2015/07/12/swift-algebraic-data-types/</guid>
             </item>
+            
         
+            
             <item>
-                
                 <title>Let&#39;s Build A &#39;cat&#39; In Swift 2</title>
-                
                 <description>&lt;p&gt;As a homework in one of the early college classes, I was asked to write unix
 commands such as &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt; in C. Let’s do that in Swift today! To make things
 interesting, let’s pretend we are on Linux. That means no Xcode nor Foundation
@@ -1117,16 +1041,14 @@ code:&lt;/p&gt;
 
 </description>
                 <pubDate>Sat, 04 Jul 2015 20:56:19 -0700</pubDate>
-                
                 <link>http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/</link>
-                
                 <guid isPermaLink="true">http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/</guid>
             </item>
+            
         
+            
             <item>
-                
                 <title>Swift Function Fun Facts</title>
-                
                 <description>&lt;p&gt;You love Swift. You want to write a class that does HTTP, it might have
 methods like the following:&lt;/p&gt;
 
@@ -1295,16 +1217,14 @@ I felt writing this up. It’s really like saying to a friend “I hate you” a
 he/she pulls a prank on you.)&lt;/p&gt;
 </description>
                 <pubDate>Sat, 18 Apr 2015 16:20:16 -0700</pubDate>
-                
                 <link>http://dduan.net/2015/04/18/swift-function-fun-facts/</link>
-                
                 <guid isPermaLink="true">http://dduan.net/2015/04/18/swift-function-fun-facts/</guid>
             </item>
+            
         
+            
             <item>
-                
                 <title>Keep Git Social</title>
-                
                 <description>&lt;p&gt;&lt;em&gt;A project I’m working on uses &lt;a href=&quot;http://gitlabhq.com&quot;&gt;GitlabHQ&lt;/a&gt;, I think it is a cool open source
 project and the developers are doing an excellent job of making a sweet web
 interface for Git projects. However, as I found out today, &lt;a href=&quot;https://github.com/gitlabhq/gitlabhq/issues/1298&quot; title=&quot;Gitlab Issue: Closed&quot;&gt;my one issue&lt;/a&gt;
@@ -1386,11 +1306,10 @@ breaking the shackles on their hand is a good thing to try.&lt;/p&gt;
 
 </description>
                 <pubDate>Wed, 31 Oct 2012 09:02:30 -0700</pubDate>
-                
                 <link>http://dduan.net/2012/10/31/keep-git-social/</link>
-                
                 <guid isPermaLink="true">http://dduan.net/2012/10/31/keep-git-social/</guid>
             </item>
+            
         
     </channel>
 </rss>

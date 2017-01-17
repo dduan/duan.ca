@@ -56,6 +56,40 @@
   
   <div class="content post">
     
+    <h1 class="post-title"><a href="/2017/01/16/site-changes/">Site Improvements</a></h1>
+    
+    <div class="post-date">
+      
+      <time>16 Jan 2017</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/jekyll">Jekyll</a>
+      
+      </div>
+      
+    </div>
+    <p>I spent a whole day making changes to this site.</p>
+
+<p>You may notice a new section is now added: <a href="http://dduan.net/links">links</a>. Yes,
+I want a link list format for this site. Often I find stuff that’s insightful
+and not always visible. I want to collect those and bookmark them here.
+Modelling after <a href="daringfireball.net">Daring Fireball</a>, I’ve added a new
+<a href="http://dduan.net/articles/feed.xml">feed</a> which only contains long-form,
+original articles. I’ll be tagging the links so that they show up along side my
+normal posts in tag pages. Each tag page now gets its own feed! You can read
+about it in the <a href="http://dduan.net/about/">about page</a>.</p>
+
+<p>A few small issues has been fixed.</p>
+
+<p>I wrote the most Ruby in my life today. Yay?</p>
+
+  </div>
+  <hr />
+  
+  <div class="content post">
+    
     <h1 class="post-title"><a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160808/026153.html">🔗 Swift ABI In Layman's terms</a></h1>
     
     <div class="post-date">
@@ -298,60 +332,6 @@ to give you a taste:</p>
 
 <p><a href="https://github.com/dduan/Termbox">Library</a> and this <a href="https://github.com/dduan/TerminalPaint">app</a> are both on Github. Go and
 have fun :)</p>
-
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2016/12/24/rebase-multiple-git-commits-with-signing/">Rebase And Sign Multiple Git Commits</a></h1>
-    
-    <div class="post-date">
-      
-      <time>24 Dec 2016</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/git">Git</a>
-      
-      </div>
-      
-    </div>
-    <p>I never bothered <a href="https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work">signing</a> my git commits until Github started putting
-those shiny badges on them. Since then I’ve encountered a problem: rebased
-commits lose their hash and their signed-ness.</p>
-
-<p>That’s not a big deal for a single commit. Just run <code class="highlighter-rouge">git commit -S --amend
---no-edit</code> after rebase. And that commit, which is at <code class="highlighter-rouge">HEAD</code> will have a new
-hash and be signed.</p>
-
-<p>What if we have more than one commit to rebase? My instinctive answer was sign
-the one on <code class="highlighter-rouge">HEAD</code>, then use interactive rebase to rotate the next one on top and
-sign it, repeat until each one is signed and reorder them. But that doesn’t work
-at all because a commit’s position in history is part of its content. That means
-after a commit is rebased, it and every commits following it will have a new
-hash and git doesn’t give us an oppurtunity to say “include my signature,
-please”. You cannot rebase and keep the commits signed!</p>
-
-<p>Well, that kind of sucks. But you are reading about it here, so I’d better give
-you something to help, right?</p>
-
-<p>There is, at least, one way to achieve <em>rebase and sign multiple commits</em>:</p>
-
-<ol>
-  <li>Run interactive rebase: <code class="highlighter-rouge">git rebase -i branch</code>.</li>
-  <li>Mark all commits and “edit” or “e”.</li>
-  <li>Git now stops at every commit for you to make changes. This is an oppurtunity
-to sign it! <code class="highlighter-rouge">git commit -S --amend --no-edit</code>, just like how you would sign
-<code class="highlighter-rouge">HEAD</code>.</li>
-  <li><code class="highlighter-rouge">git rebase --continue</code>, move on the next commit until all every one is
-edited.</li>
-</ol>
-
-<p>There’s virtually nothing you cannot do with git. Hence the reputation for it’s
-glorious UI, ya know?</p>
 
 
   </div>

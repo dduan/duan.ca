@@ -23,6 +23,8 @@
             
         
             
+        
+            
             <item>
                 <title>char ** in Swift</title>
                 <description>&lt;p&gt;A “string” in C is just a continuous chunk of &lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt; values in memory with

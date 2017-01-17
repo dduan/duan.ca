@@ -7,9 +7,6 @@ url:                "http://dduan.net"
 author:             "Daniel Duan"
 twitter:
   username:         "daniel_duan"
-#facebook:
-#  app_id:           1234
-#    publisher:      1234
 
 # URL
 baseurl:            ""
@@ -21,7 +18,7 @@ markdown:           kramdown
 # Navigation
 nav:
   - name:           "articles"
-    href:           "/archive"
+    href:           "/articles"
   - name:           "Links"
     href:           "/links"
   - name:           "Projects"
@@ -58,6 +55,11 @@ defaults:
 
 tag_page_layout: tag
 tag_page_dir: tag
+
+tag_feed_layout: tagfeed
+tag_feed_dir: tag
+
+tag_permalink_style: pretty
 
 collections:
     links:

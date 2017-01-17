@@ -6,13 +6,29 @@ I'm a iOS engineer at Lyft. I also work on open source projects such as
 [Swift][swift] and [Just][just].
 {: .lead}
 
-This site has a [RSS feed][feed]. You can alse follow me on [twitter][twitter]
-and [github][github] for more frequent updates.
 
+## Syndicated Feeds ##
 
+There are a few ways to subscribe to this site.
+
+The main feed for everything:
+
+> [{{ site.url }}/feed.xml]({{ site.url }}/feed.xml)
+
+The article-only feed contains only the longer, feature articles:
+
+> [{{ site.url }}/articles/feed.xml]({{ site.url }}/articles/feed.xml)
+
+The tag-specific feed contains links and articles about a tag. You can
+subscribe by going to page for the desired tag and append "feed.xml" to the
+end of its URL. For example, the feed for everything tagged with "Swift" is:
+
+> [{{ site.url }}/tag/swift/feed.xml]({{ site.url }}/tag/swift/feed.xml)
+
+I post [twitter][twitter] and [github][github] way more frequently.
 
 [swift]: https://github.com/apple/swift/commits?author=dduan
 [just]: https://justhttp.net
 [twitter]: https://twitter.com/daniel_duan
 [github]: https://github.com/dduan
-[feed]: {{ site.url }}/feed/main.xml
+

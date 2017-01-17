@@ -15,4 +15,4 @@ and [github][github] for more frequent updates.
 [just]: https://justhttp.net
 [twitter]: https://twitter.com/daniel_duan
 [github]: https://github.com/dduan
-[feed]: /feed.xml
+[feed]: {{ site.url }}/feed.xml

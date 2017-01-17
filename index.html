@@ -38,7 +38,9 @@
   </h1>
   <nav class="masthead-nav">
     
-    <a href="/archive">Archive</a>
+    <a href="/archive">articles</a>
+    
+    <a href="/links">Links</a>
     
     <a href="/projects">Projects</a>
     
@@ -49,21 +51,28 @@
 <div class="content page">
   <h3 class="page-title"></h3>
   
-<div class="content post">
-  <h1 class="post-title"><a href="/2016/12/26/making-tui-programs-in-swift/">Making TUI Applications In Swift</a></h1>
-  <div class="post-date">
-    <time>26 Dec 2016</time>
-     |
-    <div class="post-tags">
+
+
+  
+  <div class="content post">
     
-      <a href="/tag/swift">Swift</a>,
+    <h1 class="post-title"><a href="/2016/12/26/making-tui-programs-in-swift/">Making TUI Applications In Swift</a></h1>
     
-      <a href="/tag/tui">TUI</a>
-    
+    <div class="post-date">
+      
+      <time>26 Dec 2016</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/swift">Swift</a>,
+      
+        <a href="/tag/tui">TUI</a>
+      
+      </div>
+      
     </div>
-    
-  </div>
-  <p>One of my fondest memory in programming is writing the game Snake on one of
+    <p>One of my fondest memory in programming is writing the game Snake on one of
 these:</p>
 
 <p><img src="http://dduan.net/assets/2016/12/e-dictionary.jpg" alt="An Electronic/Digital Dictionary" /></p>
@@ -220,15 +229,257 @@ to give you a taste:</p>
 have fun :)</p>
 
 
-</div>
+  </div>
+  <hr />
+  
+  <div class="content post">
+    
+    <h1 class="post-title"><a href="/2016/12/24/rebase-multiple-git-commits-with-signing/">Rebase And Sign Multiple Git Commits</a></h1>
+    
+    <div class="post-date">
+      
+      <time>24 Dec 2016</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/git">Git</a>
+      
+      </div>
+      
+    </div>
+    <p>I never bothered <a href="https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work">signing</a> my git commits until Github started putting
+those shiny badges on them. Since then I’ve encountered a problem: rebased
+commits lose their hash and their signed-ness.</p>
 
+<p>That’s not a big deal for a single commit. Just run <code class="highlighter-rouge">git commit -S --amend
+--no-edit</code> after rebase. And that commit, which is at <code class="highlighter-rouge">HEAD</code> will have a new
+hash and be signed.</p>
+
+<p>What if we have more than one commit to rebase? My instinctive answer was sign
+the one on <code class="highlighter-rouge">HEAD</code>, then use interactive rebase to rotate the next one on top and
+sign it, repeat until each one is signed and reorder them. But that doesn’t work
+at all because a commit’s position in history is part of its content. That means
+after a commit is rebased, it and every commits following it will have a new
+hash and git doesn’t give us an oppurtunity to say “include my signature,
+please”. You cannot rebase and keep the commits signed!</p>
+
+<p>Well, that kind of sucks. But you are reading about it here, so I’d better give
+you something to help, right?</p>
+
+<p>There is, at least, one way to achieve <em>rebase and sign multiple commits</em>:</p>
+
+<ol>
+  <li>Run interactive rebase: <code class="highlighter-rouge">git rebase -i branch</code>.</li>
+  <li>Mark all commits and “edit” or “e”.</li>
+  <li>Git now stops at every commit for you to make changes. This is an oppurtunity
+to sign it! <code class="highlighter-rouge">git commit -S --amend --no-edit</code>, just like how you would sign
+<code class="highlighter-rouge">HEAD</code>.</li>
+  <li><code class="highlighter-rouge">git rebase --continue</code>, move on the next commit until all every one is
+edited.</li>
+</ol>
+
+<p>There’s virtually nothing you cannot do with git. Hence the reputation for it’s
+glorious UI, ya know?</p>
+
+
+  </div>
+  <hr />
+  
+  <div class="content post">
+    
+    <h1 class="post-title"><a href="/2016/10/22/how-to-omit-needless-words/">How To Omit Needless Words</a></h1>
+    
+    <div class="post-date">
+      
+      <time>22 Oct 2016</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/swift">Swift</a>,
+      
+        <a href="/tag/api-design-guidelines">API Design Guidelines</a>,
+      
+        <a href="/tag/naming">Naming</a>
+      
+      </div>
+      
+    </div>
+    <p>A typical experience in adopting Swift 3 may look like this:</p>
+
+<ul>
+  <li>Run the migrator.</li>
+  <li>Fix up what the migrator left undone so your project complies.</li>
+  <li>Remove artifacts that migrator added to ensure successful compilation (you
+know what this means if you finished previous step in a mildly sized code
+base).</li>
+  <li>Fix bugs caused by mechanical changes.</li>
+  <li>Try to adapt your code base to the new style: lowercased static members, etc.</li>
+</ul>
+
+<p>The last step is particularly challenging in a team environment because it
+involves naming things. Luckily we have (IMHO) the best “features” in Swift
+3 for help: the <a href="https://swift.org/documentation/api-design-guidelines/">API Design Guidelines</a>.</p>
 
 <hr />
+
+<p><a href="https://swift.org/documentation/api-design-guidelines/#omit-needless-words">Omit needless words</a> is one of the most differentiating
+guideline for function names between Swift 2 and 3. In Swift 2 we used to name
+things like so…</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>func doStuffWithThing(thing: Thing) { … }
+</code></pre>
+</div>
+
+<p>… and use it like …</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>doStuffWithThing(someThing)
+</code></pre>
+</div>
+
+<p>That’s a lot of “thing”s, have you noticed?</p>
+
+<p>Since the word “Thing” is <em>merely repeating</em> the type information, we can omit
+it in Swift 3:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// declare
+func doStuff(with thing: Thing) { … }
+
+// use
+doStuff(with: someThing)
+</code></pre>
+</div>
+
+<p>It’s clear at both declaration and use site what we are doing stuff to.</p>
+
+<p>So … you should go through you code base and make this change! In the next
+section, we’ll discuss one way to make it happen.</p>
+
+<hr />
+
+<h2 id="step-1-automate">Step 1: Automate</h2>
+
+<p>A good indicator of “merely repeating type information” is repetition of words.
+If you have been disciplined about naming your functions in Swift 2, finding
+such repetition should take no more than one or two good regular expressions.
+After the migrator, your code may contain a mixture of these:</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">doStuffWithX</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">X</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
+<span class="kd">func</span> <span class="nf">doStuff</span><span class="p">(</span><span class="n">forY</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">Y</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>In other words, the repeating word (<code class="highlighter-rouge">X</code> or <code class="highlighter-rouge">Y</code>) is preceded by a
+<a href="https://www.englishclub.com/grammar/prepositions-list.htm">preposition</a>.</p>
+
+<p>Finding these in a large code base is quite fun. If you don’t feel like writing
+the scripts yourself, I’ve made a little tool for it <a href="https://github.com/dduan/needless">here</a>.</p>
+
+<p>(Sometimes the repeating words aren’t a exact match because of prefixes such as
+“CG” in <code class="highlighter-rouge">CGSize</code>. That’s covered by the tool as well.)</p>
+
+<h2 id="step-2-update">Step 2: Update</h2>
+
+<p>You can further rearrange the pieces in function name mechanically to:</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">doStuff</span><span class="p">(</span><span class="n">preposition</span> <span class="nv">originalArgName</span><span class="p">:</span> <span class="k">Type</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>The <a href="https://github.com/dduan/needless">tool</a> I wrote can suggest alternatives like this. Applying them
+is technically automatable. But I find manually doing tasks such as fixing up
+indentation for multi-line functions or updating their use site to be easier.
+Your conclusion may depend the size of your code base and your patience.</p>
+
+<h2 id="step-3-audit">Step 3: Audit</h2>
+
+<p>The main goal for the API Design Guidelines is “clarity at the point of use”.
+Our automated process will yield some undesirable results. I’ll list a few
+scenarios here.</p>
+
+<p><strong>Poorly named function name becomes poorer</strong>. Example:
+<code class="highlighter-rouge">alertForScreenSize(_ size CGRize)</code> becomes <code class="highlighter-rouge">alert(forScreen size: CGSize)</code>.
+Obviously, “for screen” is misleading since a <code class="highlighter-rouge">CGSize</code> is not a screen. The
+problem here is the “alert” is not for a “size” to begin with. We as human
+intuitively pick up that it’s for a “screen with a certain size”. So the correct
+renaming here should be <code class="highlighter-rouge">alertForScreen(with size: CGSize)</code>.</p>
+
+<p><strong>Awkward literal values results in ungrammatical phrases</strong>. Imagine our
+argument is a enum:</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Mode</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="n">add</span>
+  <span class="k">case</span> <span class="n">edit</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>… and we renamed a function <code class="highlighter-rouge">updateUIForMode(mode: Mode)</code> to
+<code class="highlighter-rouge">update(for mode: Mode)</code>. The call site, therefore, becomes
+<code class="highlighter-rouge">update(for: .add)</code>.</p>
+
+<p>What makes it feels wrong? Well, a preposition followed by a verb (“for add”)
+is not very grammatical. Normally we would say “update UI for <em>adding</em>”. So here
+we need to update the literals in that enum to “adding” and “editing”.</p>
+
+<p><strong>Type information becomes too weak</strong>. This can happen very often with enum
+literals. We often name enum values with an adjective to qualify its name:</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">UIControlState</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">automatic</span> <span class="c1">// which state? the *automatic* state!</span>
+    <span class="err">…</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+<p>After renaming, we’ll have functions that simply becomes too generic and
+mysterious at call site:</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="nf">update</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">automatic</span><span class="p">)</span> <span class="c1">// automatic what? 😂</span>
+</code></pre>
+</div>
+
+<p>This is where we need to be flexible and use our own good judgement. Perhaps
+it’s simply better to keep the qualifying postfix:</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="nf">update</span><span class="p">(</span><span class="nv">forControlState</span><span class="p">:</span> <span class="o">.</span><span class="n">automatic</span><span class="p">)</span> <span class="c1">// better</span>
+</code></pre>
+</div>
+
+<p>In the guideline’s parlance, this is <a href="https://swift.org/documentation/api-design-guidelines/#weak-type-information">compensate for weak type
+information</a>.</p>
+
+<p><strong>Other argument labels needs updates too</strong>. A function at call site should read
+like a sentence as much as possible. We removed words at beginning of the
+“sentence”, it’s important to take a look at labels for the rest of the sentence
+and ensure the whole thing fits together.</p>
+
+<hr />
+
+<p>There are <em>many</em>, <em>many</em> other fallouts from mechanically omitting needless
+words that I didn’t cover in this post. There are many many other things in the
+API Design Guidelines that are worth conforming to. There will be much much bike
+shedding among your team members.</p>
+
+<p>Just remember, the API guidelines don’t provide an answer to every naming
+decision. Following it means your code base will fit in with the rest of the
+community and APIs from Foundation/Swift standard library. But find what feels
+right for your team is the most important thing. In the end, you should be glad
+that everyone cares so much about your code base’s “Swiftness” and it’ll be all
+worth it!</p>
+
+  </div>
+  <hr />
+  
+
+
 <footer class="masthead">
 <h4>Read More:</h4>
 <nav class="masthead-nav">
   
-  <a href="/archive">Archive</a>
+  <a href="/archive">articles</a>
+  
+  <a href="/links">Links</a>
   
   <a href="/projects">Projects</a>
   

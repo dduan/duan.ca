@@ -12,24 +12,24 @@
                 
                 <description>&lt;p&gt;&lt;em&gt;One common complains on the Swift Evolution mailing list is about its
 inscrutable interface. If you see an inactive thread on the web archive but
-haven’t subscribed, then there seems to be no way to participate or “revive” it
+haven’t subscribed, there seems to be no way to participate or “revive” it
 since you never received any of its emails.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;With a &lt;a href=&quot;https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20170206/031537.html&quot;&gt;hint&lt;/a&gt; and some experimentation, I found that there is
+&lt;p&gt;&lt;em&gt;With a &lt;a href=&quot;https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20170206/031537.html&quot;&gt;hint&lt;/a&gt; and some experiments, I’ve discovered that there is
 a way. This post reveals the magic step by step (without commenting on the
 merits of email or this solution).&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Like HTTP, Email is a text based &lt;a href=&quot;https://tools.ietf.org/html/rfc2822&quot;&gt;protocol&lt;/a&gt;. Unlike HTTP&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/&gt;,&lt;/a&gt; we directly
+&lt;p&gt;Like HTTP, Email is a text-based &lt;a href=&quot;https://tools.ietf.org/html/rfc2822&quot;&gt;protocol&lt;/a&gt;. Unlike HTTP, we directly
 consume payloads of this protocol and, as a consequence, don’t think much about
 that very fact.&lt;/p&gt;
 
-&lt;p&gt;Like HTTP, each email includes headers hidden by normal email clients. These
-headers are essentially two strings, a key and a value, separated by a colon.
+&lt;p&gt;Like HTTP, each email includes headers hidden by normal email clients. Each
+header is essentially two strings, a key and a value, separated by a colon.
 Among these headers are &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt;. When we tell our email
-client applications to start a reply, they will take the value from &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt;
+client applications to start a reply, they take the value from &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt;
 and use it as value for &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt; automatically.&lt;/p&gt;
 
-&lt;p&gt;To observe all this in action, we can open up some email with our favorite text
+&lt;p&gt;To observe all this in action&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/&gt;,&lt;/a&gt; we can open some emails with our favorite text
 editors and look for these headers. Of course, this require us to know where the
 emails exist as files. On macOS, an easy thing to do is to drag from Mail.app to
 Finder/Desktop and open the resulting .eml file:&lt;/p&gt;
@@ -42,23 +42,23 @@ are looking for:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://dduan.net/assets/2017/02/email-headers.png&quot; alt=&quot;Email Headers Message-Id and
 In-Reply-To&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;… and I’ll leave the clients’ reply behavior regarding these fields for the
-reader to verify.&lt;/p&gt;
+&lt;p&gt;… I’ll leave the clients’ reply behavior regarding these fields for the reader
+to verify.&lt;/p&gt;
 
-&lt;p&gt;Mailing list software such as GNU Mailman, which is what &lt;a href=&quot;https://swift.org&quot;&gt;swift.org&lt;/a&gt; and
-&lt;a href=&quot;http://llvm.org&quot;&gt;llvm.org&lt;/a&gt; uses for various mailing lists, associate emails in threads by
-chaining them with the headers explained above, among other things. As long as
-we have a message’s &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt;, we can reply to it “officially” by adding its
-value to the &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt; header in our email, regardless of whether we have
-received that email ourselves previously!&lt;/p&gt;
+&lt;p&gt;Mailing list software such as GNU Mailman, which &lt;a href=&quot;https://swift.org&quot;&gt;swift.org&lt;/a&gt; and &lt;a href=&quot;http://llvm.org&quot;&gt;llvm.org&lt;/a&gt;
+use to host various mailing lists, associate emails in threads by chaining them
+with the headers explained above, among other things. As long as we have
+a message’s &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt;, we can reply to it “officially” by adding its value to
+the &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt; header in our email, regardless of whether we have received
+that email ourselves previously.&lt;/p&gt;
 
-&lt;p&gt;Let’s walk through the steps to do this:&lt;/p&gt;
+&lt;p&gt;So here are the steps to reply retroactively to a mailing list thread.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;find &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt; of the mailing list message we want to reply to.&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;p&gt;This value in contained in the mailing list web archive’s &lt;code class=&quot;highlighter-rouge&quot;&gt;mailto&lt;/code&gt; link.
+    &lt;p&gt;This value is contained in the mailing list web archive’s &lt;code class=&quot;highlighter-rouge&quot;&gt;mailto&lt;/code&gt; link.
 Unfortunately Mail.app doesn’t recognize it. It’s easy enough to find it
 ourselves though:&lt;/p&gt;
 

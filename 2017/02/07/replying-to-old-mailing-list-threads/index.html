@@ -10,8 +10,8 @@
   <!-- Begin Jekyll SEO tag v2.0.0 -->
 <title>Replying To Old Mailing List Threads - Daniel Duan</title>
 <meta property="og:title" content="Replying To Old Mailing List Threads" />
-<meta name="description" content="One common complains on the Swift Evolution mailing list is about itsinscrutable interface. If you see an inactive thread on the web archive buthaven’t subscribed, then there seems to be no way to participate or “revive” itsince you never received any of its emails." />
-<meta property="og:description" content="One common complains on the Swift Evolution mailing list is about itsinscrutable interface. If you see an inactive thread on the web archive buthaven’t subscribed, then there seems to be no way to participate or “revive” itsince you never received any of its emails." />
+<meta name="description" content="One common complains on the Swift Evolution mailing list is about itsinscrutable interface. If you see an inactive thread on the web archive buthaven’t subscribed, there seems to be no way to participate or “revive” itsince you never received any of its emails." />
+<meta property="og:description" content="One common complains on the Swift Evolution mailing list is about itsinscrutable interface. If you see an inactive thread on the web archive buthaven’t subscribed, there seems to be no way to participate or “revive” itsince you never received any of its emails." />
 <link rel="canonical" href="http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/" />
 <meta property="og:url" content="http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/" />
 <meta property="og:site_name" content="Daniel Duan" />
@@ -26,7 +26,7 @@
     "@type": "BlogPosting",
     "headline": "Replying To Old Mailing List Threads",
     "datePublished": "2017-02-07T10:21:19-08:00",
-    "description": "One common complains on the Swift Evolution mailing list is about itsinscrutable interface. If you see an inactive thread on the web archive buthaven’t subscribed, then there seems to be no way to participate or “revive” itsince you never received any of its emails.",
+    "description": "One common complains on the Swift Evolution mailing list is about itsinscrutable interface. If you see an inactive thread on the web archive buthaven’t subscribed, there seems to be no way to participate or “revive” itsince you never received any of its emails.",
     "url": "http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/"
   }
 </script>
@@ -57,24 +57,24 @@
   </div>
   <p><em>One common complains on the Swift Evolution mailing list is about its
 inscrutable interface. If you see an inactive thread on the web archive but
-haven’t subscribed, then there seems to be no way to participate or “revive” it
+haven’t subscribed, there seems to be no way to participate or “revive” it
 since you never received any of its emails.</em></p>
 
-<p><em>With a <a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20170206/031537.html">hint</a> and some experimentation, I found that there is
+<p><em>With a <a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20170206/031537.html">hint</a> and some experiments, I’ve discovered that there is
 a way. This post reveals the magic step by step (without commenting on the
 merits of email or this solution).</em></p>
 
-<p>Like HTTP, Email is a text based <a href="https://tools.ietf.org/html/rfc2822">protocol</a>. Unlike HTTP<a class="backlink" rel="canonical" title="From dduan.net" href=http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/>,</a> we directly
+<p>Like HTTP, Email is a text-based <a href="https://tools.ietf.org/html/rfc2822">protocol</a>. Unlike HTTP, we directly
 consume payloads of this protocol and, as a consequence, don’t think much about
 that very fact.</p>
 
-<p>Like HTTP, each email includes headers hidden by normal email clients. These
-headers are essentially two strings, a key and a value, separated by a colon.
+<p>Like HTTP, each email includes headers hidden by normal email clients. Each
+header is essentially two strings, a key and a value, separated by a colon.
 Among these headers are <code class="highlighter-rouge">Message-Id</code> and <code class="highlighter-rouge">In-Reply-To</code>. When we tell our email
-client applications to start a reply, they will take the value from <code class="highlighter-rouge">Message-Id</code>
+client applications to start a reply, they take the value from <code class="highlighter-rouge">Message-Id</code>
 and use it as value for <code class="highlighter-rouge">In-Reply-To</code> automatically.</p>
 
-<p>To observe all this in action, we can open up some email with our favorite text
+<p>To observe all this in action<a class="backlink" rel="canonical" title="From dduan.net" href=http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/>,</a> we can open some emails with our favorite text
 editors and look for these headers. Of course, this require us to know where the
 emails exist as files. On macOS, an easy thing to do is to drag from Mail.app to
 Finder/Desktop and open the resulting .eml file:</p>
@@ -87,23 +87,23 @@ are looking for:</p>
 <p><img src="http://dduan.net/assets/2017/02/email-headers.png" alt="Email Headers Message-Id and
 In-Reply-To" /></p>
 
-<p>… and I’ll leave the clients’ reply behavior regarding these fields for the
-reader to verify.</p>
+<p>… I’ll leave the clients’ reply behavior regarding these fields for the reader
+to verify.</p>
 
-<p>Mailing list software such as GNU Mailman, which is what <a href="https://swift.org">swift.org</a> and
-<a href="http://llvm.org">llvm.org</a> uses for various mailing lists, associate emails in threads by
-chaining them with the headers explained above, among other things. As long as
-we have a message’s <code class="highlighter-rouge">Message-Id</code>, we can reply to it “officially” by adding its
-value to the <code class="highlighter-rouge">In-Reply-To</code> header in our email, regardless of whether we have
-received that email ourselves previously!</p>
+<p>Mailing list software such as GNU Mailman, which <a href="https://swift.org">swift.org</a> and <a href="http://llvm.org">llvm.org</a>
+use to host various mailing lists, associate emails in threads by chaining them
+with the headers explained above, among other things. As long as we have
+a message’s <code class="highlighter-rouge">Message-Id</code>, we can reply to it “officially” by adding its value to
+the <code class="highlighter-rouge">In-Reply-To</code> header in our email, regardless of whether we have received
+that email ourselves previously.</p>
 
-<p>Let’s walk through the steps to do this:</p>
+<p>So here are the steps to reply retroactively to a mailing list thread.</p>
 
 <ol>
   <li>
     <p><strong>find <code class="highlighter-rouge">Message-Id</code> of the mailing list message we want to reply to.</strong></p>
 
-    <p>This value in contained in the mailing list web archive’s <code class="highlighter-rouge">mailto</code> link.
+    <p>This value is contained in the mailing list web archive’s <code class="highlighter-rouge">mailto</code> link.
 Unfortunately Mail.app doesn’t recognize it. It’s easy enough to find it
 ourselves though:</p>
 

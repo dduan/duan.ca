@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v1.4.0 -->
+  <!-- Begin Jekyll SEO tag v2.0.0 -->
 <title>Daniel Duan - Daniel Duan thinks.</title>
 <meta property="og:title" content="Daniel Duan" />
 <meta name="description" content="Daniel Duan thinks." />
@@ -53,6 +53,113 @@
   
 
 
+  
+  <div class="content post">
+    
+    <h1 class="post-title"><a href="/2017/02/07/replying-to-old-mailing-list-threads/">Replying To Old Mailing List Threads</a></h1>
+    
+    <div class="post-date">
+      
+      <time>07 Feb 2017</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/swift-evolution">Swift Evolution</a>,
+      
+        <a href="/tag/email">Email</a>
+      
+      </div>
+      
+    </div>
+    <p><em>One common complains on the Swift Evolution mailing list is about its
+inscrutable interface. If you see an inactive thread on the web archive but
+haven’t subscribed, then there seems to be no way to participate or “revive” it
+since you never received any of its emails.</em></p>
+
+<p><em>With a <a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20170206/031537.html">hint</a> and some experimentation, I found that there is
+a way. This post reveals the magic step by step (without commenting on the
+merits of email or this solution).</em></p>
+
+<p>Like HTTP, Email is a text based <a href="https://tools.ietf.org/html/rfc2822">protocol</a>. Unlike HTTP, we directly
+consume payloads of this protocol and, as a consequence, don’t think much about
+that very fact.</p>
+
+<p>Like HTTP, each email includes headers hidden by normal email clients. These
+headers are essentially two strings, a key and a value, separated by a colon.
+Among these headers are <code class="highlighter-rouge">Message-Id</code> and <code class="highlighter-rouge">In-Reply-To</code>. When we tell our email
+client applications to start a reply, they will take the value from <code class="highlighter-rouge">Message-Id</code>
+and use it as value for <code class="highlighter-rouge">In-Reply-To</code> automatically.</p>
+
+<p>To observe all this in action, we can open up some email with our favorite text
+editors and look for these headers. Of course, this require us to know where the
+emails exist as files. On macOS, an easy thing to do is to drag from Mail.app to
+Finder/Desktop and open the resulting .eml file:</p>
+
+<p><img src="http://dduan.net/assets/2017/02/open-email.gif" alt="Open an email in text editors" /></p>
+
+<p>Among the (perhaps overwhelming amount of) headers, we’ll find the two fields we
+are looking for:</p>
+
+<p><img src="http://dduan.net/assets/2017/02/email-headers.png" alt="Email Headers Message-Id and
+In-Reply-To" /></p>
+
+<p>… and I’ll leave the clients’ reply behavior regarding these fields for the
+reader to verify.</p>
+
+<p>Mailing list software such as GNU Mailman, which is what <a href="https://swift.org">swift.org</a> and
+<a href="http://llvm.org">llvm.org</a> uses for various mailing lists, associate emails in threads by
+chaining them with the headers explained above, among other things. As long as
+we have a message’s <code class="highlighter-rouge">Message-Id</code>, we can reply to it “officially” by adding its
+value to the <code class="highlighter-rouge">In-Reply-To</code> header in our email, regardless of whether we have
+received that email ourselves previously!</p>
+
+<p>Let’s walk through the steps to do this:</p>
+
+<ol>
+  <li>
+    <p><strong>find <code class="highlighter-rouge">Message-Id</code> of the mailing list message we want to reply to.</strong></p>
+
+    <p>This value in contained in the mailing list web archive’s <code class="highlighter-rouge">mailto</code> link.
+Unfortunately Mail.app doesn’t recognize it. It’s easy enough to find it
+ourselves though:</p>
+
+    <p><img src="http://dduan.net/assets/2017/02/find-message-id.gif" alt="Finding Message-Id on mailman
+archive" /></p>
+
+    <p>Note the <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">@</code> characters are percent-quoted. We have to recover the
+id values to the format
+<code class="highlighter-rouge">&lt;alphanumerics-potentially-separated-by-dash@address.com&gt;</code>.</p>
+
+    <p>Another way to acquire this value is from the gzip’d archive. There they
+just exist as plain text. The downside is you have to dig out the message
+itself first.</p>
+  </li>
+  <li>
+    <p><strong>Add <code class="highlighter-rouge">In-Reply-To</code> header to our email.</strong></p>
+
+    <p>Draft a new email, make its title the same as our email chain’s title (this
+is a good idea because lots of email <em>clients</em> do use the title to thread
+messages). Set the appropriate recipients, and CCs, including the mailing
+list’s address. Now save this email as draft and open it in a text editor as
+we did in our investigations.  Add in the line
+<code class="highlighter-rouge">In-Reply-To: &lt;id-we-found-in-step-one.address.com&gt;</code>, save it. Then send this
+email (for example, open it with Mail.app and use Message-&gt;Send Again in the
+menu).</p>
+
+    <p>Of course, some email client <a href="http://www.pixelbeat.org/docs/thunderbird-threading.html">supports</a> adding it
+from their GUI.</p>
+  </li>
+</ol>
+
+<p>You’ll find the in addition to functioning as an normal message to the
+recipients, the mailing list will properly put your message to the original
+thread (in the case of swift-evolution, only if your reply is within the same
+week).</p>
+
+
+  </div>
+  <hr />
   
   <div class="content post">
     
@@ -155,184 +262,6 @@ down is the standard library interface itself.</p>
 <p>The definitive source for Slava’s third axes is the <a href="https://github.com/apple/swift/blob/master/docs/LibraryEvolution.rst">Library
 Evolution</a>
 doc from the Swift repository.</p>
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2016/12/26/making-tui-programs-in-swift/">Making TUI Applications In Swift</a></h1>
-    
-    <div class="post-date">
-      
-      <time>26 Dec 2016</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/swift">Swift</a>,
-      
-        <a href="/tag/tui">TUI</a>
-      
-      </div>
-      
-    </div>
-    <p>One of my fondest memory in programming is writing the game Snake on one of
-these:</p>
-
-<p><img src="http://dduan.net/assets/2016/12/e-dictionary.jpg" alt="An Electronic/Digital Dictionary" /></p>
-
-<p>At the time, I was in a very restrictive school where a real computer wasn’t
-permited in class. The actual thing (that’s an “electronic dictionary” by the
-way) was probably older, slower and of a different brand than the one in the
-photo. In fact, I didn’t know how to make a copy of the code, and the device
-wasn’t even mine. So the game just stayed there when the device was returned to
-the owener and its fate unknown.</p>
-
-<p>But I love it nontheless. Design the game, write it, playing it, showing it off
-- everything.</p>
-
-<p><br /></p>
-
-<p>Fastforward to today. I use and write software applications for a living.
-Programs I use directly range from terminal commands to GUI apps and web apps in
-a browser.</p>
-
-<p>Some programs, however, don’t belong to those categories: vim, tig, irssi, etc.
-They run in a terminal like CLI commands. But unlike commands like <code class="highlighter-rouge">ls</code>, they
-take over the entire buffer to offer different modes of interaction. You can
-use hotkeys to navigate menus, trigger functions and so on.  Sometimes you can
-use mouse, too. Their layout often resemble that of a GUI application running in
-it’s own “window”:</p>
-
-<p><img src="http://dduan.net/assets/2016/12/tig.png" alt="tig" /></p>
-
-<p>Just to make things painfully clear, these apps’s interface is composed
-exclusively of text. We can vaguely categorize them as “Text-based User
-Interface(TUI)” application.</p>
-
-<p>There are many reasons to like TUI applications. Compared to a CLI program,
-they can display information in 2-dimentional, more organized layout (aka more
-like a GUI app). Unlike a GUI application, they almost only require a terminal
-to run. If you ssh onto a Linux server on your iPad, they’d work the same as
-running locally on a Mac. For people who live in terminal simulators, it’s nice
-to run apps that don’t open a new Window. Oh, they often tend to look the same
-no matter how your OS changes.</p>
-
-<p>Most importantly, they remind me of the programs I built on that electronic
-dictionary. I want to make them today, with my favorite programming language
-Swift!</p>
-
-<p><br /></p>
-
-<p>The go-to library for writing TUI apps is <a href="https://www.gnu.org/software/ncurses/">ncurses</a>. Classics such as vim,
-emacs and mutt were written with it to some degree. But I find it hard to dive
-into: it has a large number of strange legacy function names and offers
-pre-built UI elements like panels, menus, forms etc. The terminal in my mind is
-a spread of characters that can be updated by me. That sounds fun. Ncurses seems
-more like UIKit :P.</p>
-
-<p>Luckily, I found the fun library: <a href="https://github.com/nsf/termbox">termbox</a> by <a href="https://github.com/nsf">nsf</a>. Termbox offers around
-a dozen functions that gives us size of the terminal, a way to update text at
-a row/column coordinates, and user inputs in forms of key-presses and
-mouse-clicks. And that’s it!</p>
-
-<p>After making <a href="https://github.com/dduan/Termbox">a Swift wrapper</a>, I was able to build a painter app in
-<a href="https://github.com/dduan/TerminalPaint">a handleful of lines</a>:</p>
-
-<p><img src="http://dduan.net/assets/2016/12/terminal-paint.png" alt="terminal paint" /></p>
-
-<p>So that’s an TUI app drawing according to mouse clicks built with only a few
-primitives from termbox. Awww yeah! Here’s the code with the comment stripped,
-to give you a taste:</p>
-
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Termbox</span>
-<span class="kd">func</span> <span class="nf">printAt</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="kt">Int32</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">Int32</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">foreground</span><span class="p">:</span> <span class="kt">Attributes</span> <span class="o">=</span> <span class="o">.</span><span class="k">default</span><span class="p">,</span>
-    <span class="nv">background</span><span class="p">:</span> <span class="kt">Attributes</span> <span class="o">=</span> <span class="o">.</span><span class="k">default</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">let</span> <span class="nv">border</span> <span class="o">=</span> <span class="kt">Termbox</span><span class="o">.</span><span class="n">width</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span> <span class="k">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">unicodeScalars</span><span class="p">,</span> <span class="n">x</span> <span class="o">..&lt;</span> <span class="n">border</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">Termbox</span><span class="o">.</span><span class="nf">put</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="n">xi</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="nv">character</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span>
-            <span class="nv">foreground</span><span class="p">:</span> <span class="n">foreground</span><span class="p">,</span> <span class="nv">background</span><span class="p">:</span> <span class="n">background</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">updateHelp</span><span class="p">(</span><span class="nv">drawing</span><span class="p">:</span> <span class="kt">UnicodeScalar</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">lastY</span> <span class="o">=</span> <span class="kt">Termbox</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="k">let</span> <span class="nv">content</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s">"Drawing [</span><span class="se">\(</span><span class="n">drawing</span><span class="se">)</span><span class="s">]"</span><span class="p">,</span>
-        <span class="s">"Press other character to change"</span><span class="p">,</span>
-        <span class="s">"Use mouse to draw"</span><span class="p">,</span>
-        <span class="s">"Press 'q' to quit"</span>
-    <span class="p">]</span><span class="o">.</span><span class="nf">joined</span><span class="p">(</span><span class="nv">separator</span><span class="p">:</span> <span class="s">" | "</span><span class="p">)</span>
-
-    <span class="k">let</span> <span class="nv">filler</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">repeating</span><span class="p">:</span> <span class="s">" "</span><span class="p">,</span>
-        <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">(</span><span class="kt">Termbox</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="o">-</span> <span class="n">content</span><span class="o">.</span><span class="n">unicodeScalars</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
-
-    <span class="nf">printAt</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="n">lastY</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="n">content</span> <span class="o">+</span> <span class="n">filler</span><span class="p">,</span>
-        <span class="nv">foreground</span><span class="p">:</span> <span class="o">.</span><span class="n">white</span><span class="p">,</span> <span class="nv">background</span><span class="p">:</span> <span class="o">.</span><span class="n">blue</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">paint</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">do</span> <span class="p">{</span>
-        <span class="k">try</span> <span class="kt">Termbox</span><span class="o">.</span><span class="nf">initialize</span><span class="p">()</span>
-    <span class="p">}</span> <span class="k">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-        <span class="k">return</span>
-    <span class="p">}</span>
-    <span class="kt">Termbox</span><span class="o">.</span><span class="n">inputModes</span> <span class="o">=</span> <span class="p">[</span><span class="o">.</span><span class="n">esc</span><span class="p">,</span> <span class="o">.</span><span class="n">mouse</span><span class="p">]</span>
-
-    <span class="k">var</span> <span class="nv">drawingCharacter</span><span class="p">:</span> <span class="kt">UnicodeScalar</span> <span class="o">=</span> <span class="s">"."</span> <span class="p">{</span>
-        <span class="k">didSet</span> <span class="p">{</span>
-            <span class="nf">updateHelp</span><span class="p">(</span><span class="nv">drawing</span><span class="p">:</span> <span class="n">drawingCharacter</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="nf">updateHelp</span><span class="p">(</span><span class="nv">drawing</span><span class="p">:</span> <span class="n">drawingCharacter</span><span class="p">)</span>
-
-    <span class="kt">Termbox</span><span class="o">.</span><span class="nf">present</span><span class="p">()</span>
-
-    <span class="nv">outer</span><span class="p">:</span> <span class="k">while</span> <span class="kc">true</span> <span class="p">{</span>
-        <span class="k">guard</span> <span class="k">let</span> <span class="nv">event</span> <span class="o">=</span> <span class="kt">Termbox</span><span class="o">.</span><span class="nf">pollEvent</span><span class="p">()</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">continue</span>
-        <span class="p">}</span>
-
-        <span class="k">switch</span> <span class="n">event</span> <span class="p">{</span>
-        <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">character</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s">"q"</span> <span class="p">{</span>
-                <span class="k">break</span> <span class="n">outer</span>
-            <span class="p">}</span>
-
-            <span class="n">drawingCharacter</span> <span class="o">=</span> <span class="n">value</span>
-
-        <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">key</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="o">.</span><span class="n">space</span> <span class="p">{</span>
-                <span class="n">drawingCharacter</span> <span class="o">=</span> <span class="s">" "</span>
-            <span class="p">}</span>
-
-        <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">mouse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-            <span class="kt">Termbox</span><span class="o">.</span><span class="nf">put</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span>
-                <span class="nv">character</span><span class="p">:</span> <span class="n">drawingCharacter</span><span class="p">,</span>
-                <span class="nv">foreground</span><span class="p">:</span> <span class="o">.</span><span class="n">red</span><span class="p">)</span>
-        <span class="k">default</span><span class="p">:</span>
-            <span class="k">continue</span>
-        <span class="p">}</span>
-
-        <span class="kt">Termbox</span><span class="o">.</span><span class="nf">present</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="kt">Termbox</span><span class="o">.</span><span class="nf">shutdown</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="nf">paint</span><span class="p">()</span>
-</code></pre>
-</div>
-
-<p><a href="https://github.com/dduan/Termbox">Library</a> and this <a href="https://github.com/dduan/TerminalPaint">app</a> are both on Github. Go and
-have fun :)</p>
-
 
   </div>
   <hr />

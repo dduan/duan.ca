@@ -8,6 +8,101 @@
         
             
             <item>
+                <title>Replying To Old Mailing List Threads</title>
+                <description>&lt;p&gt;&lt;em&gt;One common complains on the Swift Evolution mailing list is about its
+inscrutable interface. If you see an inactive thread on the web archive but
+haven’t subscribed, then there seems to be no way to participate or “revive” it
+since you never received any of its emails.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;With a &lt;a href=&quot;https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20170206/031537.html&quot;&gt;hint&lt;/a&gt; and some experimentation, I found that there is
+a way. This post reveals the magic step by step (without commenting on the
+merits of email or this solution).&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Like HTTP, Email is a text based &lt;a href=&quot;https://tools.ietf.org/html/rfc2822&quot;&gt;protocol&lt;/a&gt;. Unlike HTTP&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/&gt;,&lt;/a&gt; we directly
+consume payloads of this protocol and, as a consequence, don’t think much about
+that very fact.&lt;/p&gt;
+
+&lt;p&gt;Like HTTP, each email includes headers hidden by normal email clients. These
+headers are essentially two strings, a key and a value, separated by a colon.
+Among these headers are &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt;. When we tell our email
+client applications to start a reply, they will take the value from &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt;
+and use it as value for &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt; automatically.&lt;/p&gt;
+
+&lt;p&gt;To observe all this in action, we can open up some email with our favorite text
+editors and look for these headers. Of course, this require us to know where the
+emails exist as files. On macOS, an easy thing to do is to drag from Mail.app to
+Finder/Desktop and open the resulting .eml file:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dduan.net/assets/2017/02/open-email.gif&quot; alt=&quot;Open an email in text editors&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Among the (perhaps overwhelming amount of) headers, we’ll find the two fields we
+are looking for:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://dduan.net/assets/2017/02/email-headers.png&quot; alt=&quot;Email Headers Message-Id and
+In-Reply-To&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;… and I’ll leave the clients’ reply behavior regarding these fields for the
+reader to verify.&lt;/p&gt;
+
+&lt;p&gt;Mailing list software such as GNU Mailman, which is what &lt;a href=&quot;https://swift.org&quot;&gt;swift.org&lt;/a&gt; and
+&lt;a href=&quot;http://llvm.org&quot;&gt;llvm.org&lt;/a&gt; uses for various mailing lists, associate emails in threads by
+chaining them with the headers explained above, among other things. As long as
+we have a message’s &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt;, we can reply to it “officially” by adding its
+value to the &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt; header in our email, regardless of whether we have
+received that email ourselves previously!&lt;/p&gt;
+
+&lt;p&gt;Let’s walk through the steps to do this:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;find &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt; of the mailing list message we want to reply to.&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;This value in contained in the mailing list web archive’s &lt;code class=&quot;highlighter-rouge&quot;&gt;mailto&lt;/code&gt; link.
+Unfortunately Mail.app doesn’t recognize it. It’s easy enough to find it
+ourselves though:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;http://dduan.net/assets/2017/02/find-message-id.gif&quot; alt=&quot;Finding Message-Id on mailman
+archive&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;Note the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;@&lt;/code&gt; characters are percent-quoted. We have to recover the
+id values to the format
+&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;alphanumerics-potentially-separated-by-dash@address.com&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+    &lt;p&gt;Another way to acquire this value is from the gzip’d archive. There they
+just exist as plain text. The downside is you have to dig out the message
+itself first.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Add &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt; header to our email.&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;Draft a new email, make its title the same as our email chain’s title (this
+is a good idea because lots of email &lt;em&gt;clients&lt;/em&gt; do use the title to thread
+messages). Set the appropriate recipients, and CCs, including the mailing
+list’s address. Now save this email as draft and open it in a text editor as
+we did in our investigations.  Add in the line
+&lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To: &amp;lt;id-we-found-in-step-one.address.com&amp;gt;&lt;/code&gt;, save it. Then send this
+email (for example, open it with Mail.app and use Message-&amp;gt;Send Again in the
+menu).&lt;/p&gt;
+
+    &lt;p&gt;Of course, some email client &lt;a href=&quot;http://www.pixelbeat.org/docs/thunderbird-threading.html&quot;&gt;supports&lt;/a&gt; adding it
+from their GUI.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You’ll find the in addition to functioning as an normal message to the
+recipients, the mailing list will properly put your message to the original
+thread (in the case of swift-evolution, only if your reply is within the same
+week).&lt;/p&gt;
+
+</description>
+                <pubDate>Tue, 07 Feb 2017 10:21:19 -0800</pubDate>
+                <link>http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/</link>
+                <guid isPermaLink="true">http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/</guid>
+            </item>
+            
+        
+            
+            <item>
                 <title>Site Improvements</title>
                 <description>&lt;p&gt;I spent a whole day making changes to this site.&lt;/p&gt;
 
@@ -123,7 +218,7 @@ to give you a taste:&lt;/p&gt;
         &lt;span class=&quot;s&quot;&gt;&quot;Drawing [&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;drawing&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;s&quot;&gt;&quot;Press other character to change&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;s&quot;&gt;&quot;Use mouse to draw&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&quot;Press &#39;q&#39; to quit&quot;&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;Press 'q' to quit&quot;&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;joined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;separator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; | &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
     &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;filler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;repeating&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -956,7 +1051,7 @@ aliases, such as:&lt;/p&gt;
         
             
             <item>
-                <title>Let&#39;s Build A &#39;cat&#39; In Swift 2</title>
+                <title>Let's Build A 'cat' In Swift 2</title>
                 <description>&lt;p&gt;As a homework in one of the early college classes, I was asked to write unix
 commands such as &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt; in C. Let’s do that in Swift today! To make things
 interesting, let’s pretend we are on Linux. That means no Xcode nor Foundation

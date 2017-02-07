@@ -9,8 +9,10 @@
             
         
             
+        
+            
             <item>
-                <title>Swift ABI In Layman&#39;s terms</title>
+                <title>Swift ABI In Layman's terms</title>
                 <description>&lt;p&gt;An oldie but goodie from Swift Evelution.
 &lt;a href=&quot;https://twitter.com/slava_pestov&quot;&gt;Slava&lt;/a&gt;’s answer:&lt;/p&gt;
 
@@ -156,7 +158,7 @@ to give you a taste:&lt;/p&gt;
         &lt;span class=&quot;s&quot;&gt;&quot;Drawing [&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;drawing&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;s&quot;&gt;&quot;Press other character to change&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;s&quot;&gt;&quot;Use mouse to draw&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&quot;Press &#39;q&#39; to quit&quot;&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;Press 'q' to quit&quot;&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;joined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;separator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; | &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
     &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;filler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;repeating&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -887,7 +889,7 @@ aliases, such as:&lt;/p&gt;
         
             
             <item>
-                <title>Let&#39;s Build A &#39;cat&#39; In Swift 2</title>
+                <title>Let's Build A 'cat' In Swift 2</title>
                 <description>&lt;p&gt;As a homework in one of the early college classes, I was asked to write unix
 commands such as &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt; in C. Let’s do that in Swift today! To make things
 interesting, let’s pretend we are on Linux. That means no Xcode nor Foundation

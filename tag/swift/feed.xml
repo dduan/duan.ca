@@ -30,7 +30,7 @@ Swift.org&lt;/a&gt;.&lt;/p&gt;
 flag &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;, where “X” is the &lt;em&gt;current&lt;/em&gt; major Swift version.&lt;/p&gt;
 
     &lt;p&gt;In project’s “Build Settings”, value for “Other Swift Flags” should
- contain &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;. This could mean setting it in Xcode, in
+ contain &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;. This could mean setting it in Xcode&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; in
  &lt;code class=&quot;highlighter-rouge&quot;&gt;.xcconfig&lt;/code&gt; files you are using and/or in your dependency managers such
  as Cocoapods.&lt;/p&gt;
 
@@ -40,8 +40,10 @@ flag &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&g
  &lt;code class=&quot;highlighter-rouge&quot;&gt;Podfile&lt;/code&gt; to compile 3rd party libraries in compatibility mode:&lt;/p&gt;
 
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; post_install do |installer|
-     target.build_configurations.each do |config|
-         config.build_settings[&quot;OTHER_SWIFT_FLAGS&quot;] = &quot;$(inherited) -swift-version 3&quot;
+     installer.pods_projects.targets.each do |target|
+         target.build_configurations.each do |config|
+             config.build_settings[&quot;OTHER_SWIFT_FLAGS&quot;] = &quot;$(inherited) -swift-version 3&quot;
+         end
      end
  end
 &lt;/code&gt;&lt;/pre&gt;
@@ -60,7 +62,7 @@ compiler previously. Fix them today!&lt;/p&gt;
 
     &lt;p&gt;The project should compile successfully in compatibility mode (despite
 warnings). This where you can stop reading. Go celebrate with your
-coworkers&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; friends, and family!&lt;/p&gt;
+coworkers, friends, and family!&lt;/p&gt;
 
     &lt;p&gt;Things could go wrong for compiler snapshots, of course. Read on if see
 errors or crashes (whaaaaat 😸).&lt;/p&gt;

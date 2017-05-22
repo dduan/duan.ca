@@ -4,7 +4,7 @@ tags: [Swift, Xcode]
 date: 2017-05-22 09:04:01-0700
 ---
 
-It's a few weeks before WWDC, so natually* it's time to try build your Swift
+It's a few weeks before WWDC, so naturally¹ it's time to try build your Swift
 projects in the compiler's compatibility mode!
 
 1. Download and install a snapshot for the next major version [on
@@ -69,6 +69,6 @@ projects in the compiler's compatibility mode!
 
 ---
 
-_Footnote *: source comptibility mode is a thing starting with Swift 4. As new
+¹ source comptibility mode is a thing starting with Swift 4. As new
 major version of Swift is released, code written in the previous version should
-compile without change in compatibility mode._
+compile without change in compatibility mode.

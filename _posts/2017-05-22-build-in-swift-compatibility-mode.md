@@ -44,7 +44,7 @@ projects in the compiler's compatibility mode!
 
    Improvement to the language or compiler usually means some of these
    warnings tell you problems in your code that has been ignored by the
-   compiler previous. Fix them today!
+   compiler previously. Fix them today!
 
    The project should compile successfully in compatibility mode (despite
    warnings). This where you can stop reading. Go celebrate with your

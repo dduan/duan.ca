@@ -12,8 +12,8 @@
 <meta property="og:title" content="Daniel Duan" />
 <meta name="description" content="Daniel Duan thinks." />
 <meta property="og:description" content="Daniel Duan thinks." />
-<link rel="canonical" href="http://0.0.0.0:4000/" />
-<meta property="og:url" content="http://0.0.0.0:4000/" />
+<link rel="canonical" href="http://dduan.net/" />
+<meta property="og:url" content="http://dduan.net/" />
 <meta property="og:site_name" content="Daniel Duan" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@daniel_duan" />
@@ -25,7 +25,7 @@
     "name": "Daniel Duan",
     "headline": "Daniel Duan",
     "description": "Daniel Duan thinks.",
-    "url": "http://0.0.0.0:4000/"
+    "url": "http://dduan.net/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -56,7 +56,7 @@
   
   <div class="content post">
     
-    <h1 class="post-title"><a href="/2017/05/22/build-in-swift-compatibility-mode/">Build Your App In Swift Compatibility Mode</a></h1>
+    <h1 class="post-title"><a href="/2017/05/22/build-in-swift-compatibility-mode/">Building Your App In Swift Compatibility Mode</a></h1>
     
     <div class="post-date">
       
@@ -112,7 +112,8 @@ flag <code class="highlighter-rouge">-swift-version X</code>, where “X” is t
     <p>Build your project! This is where things start to get exciting.</p>
 
     <p>You should expect some warnings. Hopefully they are self-explanatory
-enough. Most of them should correspond to a swift-evolution proposal.</p>
+enough. Most of them should correspond to <a href="https://apple.github.io/swift-evolution/">a swift-evolution
+proposal</a>.</p>
 
     <p>Improvement to the language or compiler usually means some of these
 warnings tell you problems in your code that has been ignored by the
@@ -128,9 +129,9 @@ errors or crashes (whaaaaat 😸).</p>
   <li>
     <p>It’s time to tell the compiler team about the error or crash you encountered.</p>
 
-    <p>Reduce the error or crash to a state that your are comfortable reporting
-in public. Then go to https://bugs.swift.org and file a JIRA ticket
-describing the error or compiler crash.</p>
+    <p>Reduce the error or crash to a state that your are comfortable reporting in
+public. Then go to [bugs.swift.org][https://bugs.swift.org] and file a JIRA
+ticket describing the error or compiler crash.</p>
 
     <p>During the process of code reduction you may find ways to work around the
 compile error or crash. Make the changes for the workaround and repeate
@@ -194,12 +195,12 @@ editors and look for these headers. Of course, this require us to know where the
 emails exist as files. On macOS, an easy thing to do is to drag from Mail.app to
 Finder/Desktop and open the resulting .eml file:</p>
 
-<p><img src="http://0.0.0.0:4000/assets/2017/02/open-email.gif" alt="Open an email in text editors" /></p>
+<p><img src="http://dduan.net/assets/2017/02/open-email.gif" alt="Open an email in text editors" /></p>
 
 <p>Among the (perhaps overwhelming amount of) headers, we’ll find the two fields we
 are looking for:</p>
 
-<p><img src="http://0.0.0.0:4000/assets/2017/02/email-headers.png" alt="Email Headers Message-Id and
+<p><img src="http://dduan.net/assets/2017/02/email-headers.png" alt="Email Headers Message-Id and
 In-Reply-To" /></p>
 
 <p>… I’ll leave the clients’ reply behavior regarding these fields for the reader
@@ -222,7 +223,7 @@ that email ourselves previously.</p>
 Unfortunately Mail.app doesn’t recognize it. It’s easy enough to find it
 ourselves though:</p>
 
-    <p><img src="http://0.0.0.0:4000/assets/2017/02/find-message-id.gif" alt="Finding Message-Id on mailman
+    <p><img src="http://dduan.net/assets/2017/02/find-message-id.gif" alt="Finding Message-Id on mailman
 archive" /></p>
 
     <p>Note the <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">@</code> characters are percent-quoted. We have to recover the
@@ -277,14 +278,14 @@ week).</p>
     </div>
     <p>I spent a whole day making changes to this site.</p>
 
-<p>You may notice a new section is now added: <a href="http://0.0.0.0:4000/links">links</a>. Yes,
+<p>You may notice a new section is now added: <a href="http://dduan.net/links">links</a>. Yes,
 I want a link list format for this site. Often I find stuff that’s insightful
 and not always visible. I want to collect those and bookmark them here.
 Modelling after <a href="http://daringfireball.net">Daring Fireball</a>, I’ve added a new
 <a href="http://dduan.net/articles/feed.xml">feed</a> which only contains long-form,
 original articles. I’ll be tagging the links so that they show up along side my
 normal posts in tag pages. Each tag page now gets its own feed! You can read
-about it in the <a href="http://0.0.0.0:4000/about/">about page</a>.</p>
+about it in the <a href="http://dduan.net/about/">about page</a>.</p>
 
 <p>A few small issues has been fixed.</p>
 

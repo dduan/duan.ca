@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Xcode</title>
-        <link>http://0.0.0.0:4000/tag/Xcode</link>
-        <atom:link href="http://0.0.0.0:4000/tag/Xcode/index.xml" rel="self" type="application/rss+xml" />
+        <link>http://dduan.net/tag/Xcode</link>
+        <atom:link href="http://dduan.net/tag/Xcode/index.xml" rel="self" type="application/rss+xml" />
         
         
             
             <item>
-                <title>Build Your App In Swift Compatibility Mode</title>
+                <title>Building Your App In Swift Compatibility Mode</title>
                 <description>&lt;p&gt;It’s a few weeks before WWDC, so natually* it’s time to try build your Swift
 projects in the compiler’s compatibility mode!&lt;/p&gt;
 
@@ -34,7 +34,7 @@ flag &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&g
  &lt;code class=&quot;highlighter-rouge&quot;&gt;.xcconfig&lt;/code&gt; files you are using and/or in your dependency managers such
  as Cocoapods.&lt;/p&gt;
 
-    &lt;p&gt;For example&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://0.0.0.0:4000/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; with Cocoapods, you’ll need to add the following in your
+    &lt;p&gt;For example, with Cocoapods, you’ll need to add the following in your
  &lt;code class=&quot;highlighter-rouge&quot;&gt;Podfile&lt;/code&gt; to compile 3rd party libraries in compatibility mode:&lt;/p&gt;
 
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; post_install do |installer|
@@ -49,7 +49,8 @@ flag &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&g
     &lt;p&gt;Build your project! This is where things start to get exciting.&lt;/p&gt;
 
     &lt;p&gt;You should expect some warnings. Hopefully they are self-explanatory
-enough. Most of them should correspond to a swift-evolution proposal.&lt;/p&gt;
+enough. Most of them should correspond to &lt;a href=&quot;https://apple.github.io/swift-evolution/&quot;&gt;a swift-evolution
+proposal&lt;/a&gt;.&lt;/p&gt;
 
     &lt;p&gt;Improvement to the language or compiler usually means some of these
 warnings tell you problems in your code that has been ignored by the
@@ -65,9 +66,9 @@ errors or crashes (whaaaaat 😸).&lt;/p&gt;
   &lt;li&gt;
     &lt;p&gt;It’s time to tell the compiler team about the error or crash you encountered.&lt;/p&gt;
 
-    &lt;p&gt;Reduce the error or crash to a state that your are comfortable reporting
-in public. Then go to https://bugs.swift.org and file a JIRA ticket
-describing the error or compiler crash.&lt;/p&gt;
+    &lt;p&gt;Reduce the error or crash to a state that your are comfortable reporting in
+public. Then go to [bugs.swift.org][https://bugs.swift.org] and file a JIRA
+ticket describing the error or compiler crash.&lt;/p&gt;
 
     &lt;p&gt;During the process of code reduction you may find ways to work around the
 compile error or crash. Make the changes for the workaround and repeate
@@ -83,12 +84,12 @@ to the Swift community 🎉!&lt;/p&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;&lt;em&gt;Footnote *: source comptibility mode is a thing starting with Swift 4. As new
-major version of Swift is released, code written in the previous version should
+major version of Swift is released&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; code written in the previous version should
 compile without change in compatibility mode.&lt;/em&gt;&lt;/p&gt;
 </description>
                 <pubDate>Mon, 22 May 2017 09:04:01 -0700</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/05/22/build-in-swift-compatibility-mode/</guid>
+                <guid isPermaLink="true">http://dduan.net/2017/05/22/build-in-swift-compatibility-mode/</guid>
             </item>
             
         

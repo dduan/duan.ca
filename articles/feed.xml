@@ -9,7 +9,7 @@
             
             <item>
                 <title>Building Swift Projects In Source Compatibility Mode</title>
-                <description>&lt;p&gt;It’s a few weeks before WWDC, so natually* it’s time to try build your Swift
+                <description>&lt;p&gt;It’s a few weeks before WWDC, so naturally¹ it’s time to try build your Swift
 projects in the compiler’s compatibility mode!&lt;/p&gt;
 
 &lt;ol&gt;
@@ -36,7 +36,7 @@ flag &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&g
 
     &lt;p&gt;&lt;img src=&quot;/assets/2017/05/compat-mode-flag.png&quot; alt=&quot;compatibility flag in xcode&quot; /&gt;&lt;/p&gt;
 
-    &lt;p&gt;For example, with Cocoapods, you’ll need to add the following in your
+    &lt;p&gt;For example, with Cocoapods&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; you’ll need to add the following in your
  &lt;code class=&quot;highlighter-rouge&quot;&gt;Podfile&lt;/code&gt; to compile 3rd party libraries in compatibility mode:&lt;/p&gt;
 
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; post_install do |installer|
@@ -60,7 +60,7 @@ compiler previous. Fix them today!&lt;/p&gt;
 
     &lt;p&gt;The project should compile successfull in compatibility mode (despite
 warnings). This where you can stop reading. Go celebrate with your
-coworkers&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; friends, and family!&lt;/p&gt;
+coworkers, friends, and family!&lt;/p&gt;
 
     &lt;p&gt;Things could go wrong for compiler snapshots, of course. Read on if see
 errors or crashes (whaaaaat 😸).&lt;/p&gt;
@@ -85,9 +85,9 @@ to the Swift community 🎉!&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;em&gt;Footnote *: source comptibility mode is a thing starting with Swift 4. As new
+&lt;p&gt;¹ source comptibility mode is a thing starting with Swift 4. As new
 major version of Swift is released, code written in the previous version should
-compile without change in compatibility mode.&lt;/em&gt;&lt;/p&gt;
+compile without change in compatibility mode.&lt;/p&gt;
 </description>
                 <pubDate>Mon, 22 May 2017 09:04:01 -0700</pubDate>
                 <link>http://dduan.net/2017/05/22/build-in-swift-compatibility-mode/</link>

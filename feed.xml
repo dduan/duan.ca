@@ -59,7 +59,7 @@ proposal&lt;/a&gt;.&lt;/p&gt;
 warnings tell you problems in your code that has been ignored by the
 compiler previous. Fix them today!&lt;/p&gt;
 
-    &lt;p&gt;The project should compile successfull in compatibility mode (despite
+    &lt;p&gt;The project should compile successfully in compatibility mode (despite
 warnings). This where you can stop reading. Go celebrate with your
 coworkers, friends, and family!&lt;/p&gt;
 
@@ -74,7 +74,7 @@ public. Then go to &lt;a href=&quot;https://bugs.swift.org&quot;&gt;bugs.swift.o
 ticket describing the error or compiler crash.&lt;/p&gt;
 
     &lt;p&gt;During the process of code reduction you may find ways to work around the
-compile error or crash. Make the changes for the workaround and repeate
+compile error or crash. Make the changes for the workaround and repeat
 steps 4-5. Maybe your project will compile this time.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -86,7 +86,7 @@ to the Swift community 🎉!&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;¹ source comptibility mode is a thing starting with Swift 4. As new
+&lt;p&gt;¹ source compatibility mode is a thing starting with Swift 4. As new
 major version of Swift is released, code written in the previous version should
 compile without change in compatibility mode.&lt;/p&gt;
 </description>

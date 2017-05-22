@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Building Your App In Swift Compatibility Mode</title>
+  <title>Building Swift Projects In Source Compatibility Mode</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
   <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Building Your App In Swift Compatibility Mode - Daniel Duan</title>
-<meta property="og:title" content="Building Your App In Swift Compatibility Mode" />
+<title>Building Swift Projects In Source Compatibility Mode - Daniel Duan</title>
+<meta property="og:title" content="Building Swift Projects In Source Compatibility Mode" />
 <meta name="description" content="It’s a few weeks before WWDC, so natually* it’s time to try build your Swiftprojects in the compiler’s compatibility mode!" />
 <meta property="og:description" content="It’s a few weeks before WWDC, so natually* it’s time to try build your Swiftprojects in the compiler’s compatibility mode!" />
 <link rel="canonical" href="http://dduan.net/2017/05/22/build-in-swift-compatibility-mode/" />
@@ -24,7 +24,7 @@
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "Building Your App In Swift Compatibility Mode",
+    "headline": "Building Swift Projects In Source Compatibility Mode",
     "datePublished": "2017-05-22T09:04:01-07:00",
     "description": "It’s a few weeks before WWDC, so natually* it’s time to try build your Swiftprojects in the compiler’s compatibility mode!",
     "url": "http://dduan.net/2017/05/22/build-in-swift-compatibility-mode/"
@@ -40,7 +40,7 @@
   </h1>
 </header>
 <div class="content post">
-  <h1 class="post-title">Building Your App In Swift Compatibility Mode</h1>
+  <h1 class="post-title">Building Swift Projects In Source Compatibility Mode</h1>
   <div class="post-date">
     <time>22 May 2017</time>
      | 
@@ -79,6 +79,8 @@ flag <code class="highlighter-rouge">-swift-version X</code>, where “X” is t
  contain <code class="highlighter-rouge">-swift-version X</code>. This could mean setting it in Xcode, in
  <code class="highlighter-rouge">.xcconfig</code> files you are using and/or in your dependency managers such
  as Cocoapods.</p>
+
+    <p><img src="/assets/2017/05/compat-mode-flag.png" alt="compatibility flag in xcode" /></p>
 
     <p>For example, with Cocoapods, you’ll need to add the following in your
  <code class="highlighter-rouge">Podfile</code> to compile 3rd party libraries in compatibility mode:</p>

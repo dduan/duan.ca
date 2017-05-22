@@ -8,7 +8,7 @@
         
             
             <item>
-                <title>Building Your App In Swift Compatibility Mode</title>
+                <title>Building Swift Projects In Source Compatibility Mode</title>
                 <description>&lt;p&gt;It’s a few weeks before WWDC, so natually* it’s time to try build your Swift
 projects in the compiler’s compatibility mode!&lt;/p&gt;
 
@@ -33,6 +33,8 @@ flag &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&g
  contain &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;. This could mean setting it in Xcode, in
  &lt;code class=&quot;highlighter-rouge&quot;&gt;.xcconfig&lt;/code&gt; files you are using and/or in your dependency managers such
  as Cocoapods.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/2017/05/compat-mode-flag.png&quot; alt=&quot;compatibility flag in xcode&quot; /&gt;&lt;/p&gt;
 
     &lt;p&gt;For example, with Cocoapods, you’ll need to add the following in your
  &lt;code class=&quot;highlighter-rouge&quot;&gt;Podfile&lt;/code&gt; to compile 3rd party libraries in compatibility mode:&lt;/p&gt;

@@ -46,7 +46,7 @@ projects in the compiler's compatibility mode!
    warnings tell you problems in your code that has been ignored by the
    compiler previous. Fix them today!
 
-   The project should compile successfull in compatibility mode (despite
+   The project should compile successfully in compatibility mode (despite
    warnings). This where you can stop reading. Go celebrate with your
    coworkers, friends, and family!
 
@@ -60,7 +60,7 @@ projects in the compiler's compatibility mode!
    ticket describing the error or compiler crash.
 
    During the process of code reduction you may find ways to work around the
-   compile error or crash. Make the changes for the workaround and repeate
+   compile error or crash. Make the changes for the workaround and repeat
    steps 4-5. Maybe your project will compile this time.
 
 6. The issue you discovered will be fixed in the official Swift release come
@@ -69,6 +69,6 @@ projects in the compiler's compatibility mode!
 
 ---
 
-¹ source comptibility mode is a thing starting with Swift 4. As new
+¹ source compatibility mode is a thing starting with Swift 4. As new
 major version of Swift is released, code written in the previous version should
 compile without change in compatibility mode.

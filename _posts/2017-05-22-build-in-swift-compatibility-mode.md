@@ -31,8 +31,10 @@ projects in the compiler's compatibility mode!
     `Podfile` to compile 3rd party libraries in compatibility mode:
 
         post_install do |installer|
-            target.build_configurations.each do |config|
-                config.build_settings["OTHER_SWIFT_FLAGS"] = "$(inherited) -swift-version 3"
+            installer.pods_projects.targets.each do |target|
+                target.build_configurations.each do |config|
+                    config.build_settings["OTHER_SWIFT_FLAGS"] = "$(inherited) -swift-version 3"
+                end
             end
         end
 

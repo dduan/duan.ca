@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Naming</title>
-        <link>http://dduan.net/tag/Naming</link>
-        <atom:link href="http://dduan.net/tag/Naming/index.xml" rel="self" type="application/rss+xml" />
+        <link>http://0.0.0.0:4000/tag/Naming</link>
+        <atom:link href="http://0.0.0.0:4000/tag/Naming/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -134,7 +134,7 @@ argument is a enum:&lt;/p&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;update(for mode: Mode)&lt;/code&gt;. The call site, therefore, becomes
 &lt;code class=&quot;highlighter-rouge&quot;&gt;update(for: .add)&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;What makes it feels wrong? Well&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2016/10/22/how-to-omit-needless-words/&gt;,&lt;/a&gt; a preposition followed by a verb (“for add”)
+&lt;p&gt;What makes it feels wrong? Well&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://0.0.0.0:4000/2016/10/22/how-to-omit-needless-words/&gt;,&lt;/a&gt; a preposition followed by a verb (“for add”)
 is not very grammatical. Normally we would say “update UI for &lt;em&gt;adding&lt;/em&gt;”. So here
 we need to update the literals in that enum to “adding” and “editing”.&lt;/p&gt;
 
@@ -185,7 +185,7 @@ worth it!&lt;/p&gt;
 </description>
                 <pubDate>Sat, 22 Oct 2016 17:08:41 -0700</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://dduan.net/2016/10/22/how-to-omit-needless-words/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2016/10/22/how-to-omit-needless-words/</guid>
             </item>
             
         

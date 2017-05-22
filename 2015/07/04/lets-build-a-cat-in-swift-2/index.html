@@ -12,8 +12,8 @@
 <meta property="og:title" content="Let’s Build A ‘cat’ In Swift 2" />
 <meta name="description" content="As a homework in one of the early college classes, I was asked to write unixcommands such as cat in C. Let’s do that in Swift today! To make thingsinteresting, let’s pretend we are on Linux. That means no Xcode nor Foundationcan be used." />
 <meta property="og:description" content="As a homework in one of the early college classes, I was asked to write unixcommands such as cat in C. Let’s do that in Swift today! To make thingsinteresting, let’s pretend we are on Linux. That means no Xcode nor Foundationcan be used." />
-<link rel="canonical" href="http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/" />
-<meta property="og:url" content="http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/" />
+<link rel="canonical" href="http://0.0.0.0:4000/2015/07/04/lets-build-a-cat-in-swift-2/" />
+<meta property="og:url" content="http://0.0.0.0:4000/2015/07/04/lets-build-a-cat-in-swift-2/" />
 <meta property="og:site_name" content="Daniel Duan" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2015-07-04T20:56:19-07:00" />
@@ -27,7 +27,7 @@
     "headline": "Let’s Build A ‘cat’ In Swift 2",
     "datePublished": "2015-07-04T20:56:19-07:00",
     "description": "As a homework in one of the early college classes, I was asked to write unixcommands such as cat in C. Let’s do that in Swift today! To make thingsinteresting, let’s pretend we are on Linux. That means no Xcode nor Foundationcan be used.",
-    "url": "http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/"
+    "url": "http://0.0.0.0:4000/2015/07/04/lets-build-a-cat-in-swift-2/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -100,7 +100,7 @@ $(TARGETS):
 
 <p>Now <code class="highlighter-rouge">make cat</code> should take care of the compilation.</p>
 
-<p>Since file I/O is the only concern, we’ll need C APIs from <code class="highlighter-rouge">stdio.h</code><a class="backlink" rel="canonical" title="From dduan.net" href=http://dduan.net/2015/07/04/lets-build-a-cat-in-swift-2/>,</a> so
+<p>Since file I/O is the only concern, we’ll need C APIs from <code class="highlighter-rouge">stdio.h</code>, so
 <code class="highlighter-rouge">bridge.h</code> is a one liner:</p>
 
 <div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="cp">#import &lt;stdio.h&gt;
@@ -113,7 +113,7 @@ $(TARGETS):
 </code></pre>
 </div>
 
-<p>Hmmmm, how do we deal with all those pesky ‘*’s?</p>
+<p>Hmmmm<a class="backlink" rel="canonical" title="From dduan.net" href=http://0.0.0.0:4000/2015/07/04/lets-build-a-cat-in-swift-2/>,</a> how do we deal with all those pesky ‘*’s?</p>
 
 <p>To reference a certain C <code class="highlighter-rouge">Type</code> in Swift, we can use <code class="highlighter-rouge">UnsafePointer&lt;Type&gt;</code> or
 <code class="highlighter-rouge">UnsafeMutablePointer&lt;Type&gt;</code>. To make our lives easier, Swift <code class="highlighter-rouge">String</code>s
@@ -155,7 +155,7 @@ with:</p>
 <code class="highlighter-rouge">stdin</code>, and we have a <code class="highlighter-rouge">cat</code>! Here’s a screenshot of it displaying its own
 code:</p>
 
-<p><img src="http://dduan.net/assets/2015/07/swift-cat.png" alt="Swift cat" /></p>
+<p><img src="http://0.0.0.0:4000/assets/2015/07/swift-cat.png" alt="Swift cat" /></p>
 
 <p>The code is also available in this <a href="https://gist.github.com/dduan/f6d359019db8b0b55962">gist</a>.</p>
 

@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - C</title>
-        <link>http://dduan.net/tag/C</link>
-        <atom:link href="http://dduan.net/tag/C/index.xml" rel="self" type="application/rss+xml" />
+        <link>http://0.0.0.0:4000/tag/C</link>
+        <atom:link href="http://0.0.0.0:4000/tag/C/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -65,7 +65,7 @@ interface:&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;So&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2015/11/01/char-star-star-in-swift/&gt;,&lt;/a&gt; what’s really going on here?&lt;/p&gt;
+&lt;p&gt;So&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/&gt;,&lt;/a&gt; what’s really going on here?&lt;/p&gt;
 
 &lt;p&gt;Inspecting &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt;’s signature in Swift, we see&lt;/p&gt;
 
@@ -122,7 +122,7 @@ the infinite layers of indirections that pointers achieve.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 01 Nov 2015 11:18:40 -0800</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://dduan.net/2015/11/01/char-star-star-in-swift/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/</guid>
             </item>
             
         

@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Python</title>
-        <link>http://dduan.net/tag/Python</link>
-        <atom:link href="http://dduan.net/tag/Python/index.xml" rel="self" type="application/rss+xml" />
+        <link>http://0.0.0.0:4000/tag/Python</link>
+        <atom:link href="http://0.0.0.0:4000/tag/Python/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -44,7 +44,7 @@ argument. There’s no conevient way to forward this array to a normal
 dictionary’s initializer (incidentally, this is a Swift feature I really
 want). Plus, I don’t need &lt;code class=&quot;highlighter-rouge&quot;&gt;DefaultDictionary&lt;/code&gt; to be a literal convertible.&lt;/li&gt;
   &lt;li&gt;Most of the code, including the imaginary &lt;code class=&quot;highlighter-rouge&quot;&gt;init&lt;/code&gt; mentioned in previous
-point&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2016/05/19/a-case-for-oop/&gt;,&lt;/a&gt; simply reuses stuff from &lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt;: asscociated type, indexes,
+point&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://0.0.0.0:4000/2016/05/19/a-case-for-oop/&gt;,&lt;/a&gt; simply reuses stuff from &lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt;: asscociated type, indexes,
 generator, subscript, etc.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -57,7 +57,7 @@ powerful?&lt;/p&gt;
 </description>
                 <pubDate>Thu, 19 May 2016 12:03:02 -0700</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://dduan.net/2016/05/19/a-case-for-oop/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2016/05/19/a-case-for-oop/</guid>
             </item>
             
         

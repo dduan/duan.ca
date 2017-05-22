@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Carthage</title>
-        <link>http://dduan.net/tag/Carthage</link>
-        <atom:link href="http://dduan.net/tag/Carthage/index.xml" rel="self" type="application/rss+xml" />
+        <link>http://0.0.0.0:4000/tag/Carthage</link>
+        <atom:link href="http://0.0.0.0:4000/tag/Carthage/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -58,7 +58,7 @@ project, verifying that support for those package managers remain functional.&lt
 on &lt;a href=&quot;https://github.com/dduan/DistributionTests&quot;&gt;Github&lt;/a&gt; 😉.&lt;/p&gt;
 
 &lt;p&gt;The script &lt;code class=&quot;highlighter-rouge&quot;&gt;customize&lt;/code&gt; requires 3 pieces of information of the library: its
-import name&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2016/10/10/distribution-tests/&gt;,&lt;/a&gt; its git repository URL and a major version number. The assumption
+import name&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://0.0.0.0:4000/2016/10/10/distribution-tests/&gt;,&lt;/a&gt; its git repository URL and a major version number. The assumption
 here is the library generates uniformly named artifacts: the file name for
 &lt;code class=&quot;highlighter-rouge&quot;&gt;.framework&lt;/code&gt; and the name users use to import it are the same. Testing
 distribution of a library is as simple as:&lt;/p&gt;
@@ -78,7 +78,7 @@ a continuous integration server.&lt;/p&gt;
 </description>
                 <pubDate>Mon, 10 Oct 2016 10:34:49 -0700</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://dduan.net/2016/10/10/distribution-tests/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2016/10/10/distribution-tests/</guid>
             </item>
             
         

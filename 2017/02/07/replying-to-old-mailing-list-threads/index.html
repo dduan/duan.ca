@@ -12,8 +12,8 @@
 <meta property="og:title" content="Replying To Old Mailing List Threads" />
 <meta name="description" content="One common complains on the Swift Evolution mailing list is about itsinscrutable interface. If you see an inactive thread on the web archive buthaven’t subscribed, there seems to be no way to participate or “revive” itsince you never received any of its emails." />
 <meta property="og:description" content="One common complains on the Swift Evolution mailing list is about itsinscrutable interface. If you see an inactive thread on the web archive buthaven’t subscribed, there seems to be no way to participate or “revive” itsince you never received any of its emails." />
-<link rel="canonical" href="http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/" />
-<meta property="og:url" content="http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/" />
+<link rel="canonical" href="http://0.0.0.0:4000/2017/02/07/replying-to-old-mailing-list-threads/" />
+<meta property="og:url" content="http://0.0.0.0:4000/2017/02/07/replying-to-old-mailing-list-threads/" />
 <meta property="og:site_name" content="Daniel Duan" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2017-02-07T10:21:19-08:00" />
@@ -27,7 +27,7 @@
     "headline": "Replying To Old Mailing List Threads",
     "datePublished": "2017-02-07T10:21:19-08:00",
     "description": "One common complains on the Swift Evolution mailing list is about itsinscrutable interface. If you see an inactive thread on the web archive buthaven’t subscribed, there seems to be no way to participate or “revive” itsince you never received any of its emails.",
-    "url": "http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/"
+    "url": "http://0.0.0.0:4000/2017/02/07/replying-to-old-mailing-list-threads/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -74,24 +74,24 @@ Among these headers are <code class="highlighter-rouge">Message-Id</code> and <c
 client applications to start a reply, they take the value from <code class="highlighter-rouge">Message-Id</code>
 and use it as value for <code class="highlighter-rouge">In-Reply-To</code> automatically.</p>
 
-<p>To observe all this in action<a class="backlink" rel="canonical" title="From dduan.net" href=http://dduan.net/2017/02/07/replying-to-old-mailing-list-threads/>,</a> we can open some emails with our favorite text
+<p>To observe all this in action, we can open some emails with our favorite text
 editors and look for these headers. Of course, this require us to know where the
 emails exist as files. On macOS, an easy thing to do is to drag from Mail.app to
 Finder/Desktop and open the resulting .eml file:</p>
 
-<p><img src="http://dduan.net/assets/2017/02/open-email.gif" alt="Open an email in text editors" /></p>
+<p><img src="http://0.0.0.0:4000/assets/2017/02/open-email.gif" alt="Open an email in text editors" /></p>
 
 <p>Among the (perhaps overwhelming amount of) headers, we’ll find the two fields we
 are looking for:</p>
 
-<p><img src="http://dduan.net/assets/2017/02/email-headers.png" alt="Email Headers Message-Id and
+<p><img src="http://0.0.0.0:4000/assets/2017/02/email-headers.png" alt="Email Headers Message-Id and
 In-Reply-To" /></p>
 
 <p>… I’ll leave the clients’ reply behavior regarding these fields for the reader
 to verify.</p>
 
 <p>Mailing list software such as GNU Mailman, which <a href="https://swift.org">swift.org</a> and <a href="http://llvm.org">llvm.org</a>
-use to host various mailing lists, associate emails in threads by chaining them
+use to host various mailing lists<a class="backlink" rel="canonical" title="From dduan.net" href=http://0.0.0.0:4000/2017/02/07/replying-to-old-mailing-list-threads/>,</a> associate emails in threads by chaining them
 with the headers explained above, among other things. As long as we have
 a message’s <code class="highlighter-rouge">Message-Id</code>, we can reply to it “officially” by adding its value to
 the <code class="highlighter-rouge">In-Reply-To</code> header in our email, regardless of whether we have received
@@ -107,7 +107,7 @@ that email ourselves previously.</p>
 Unfortunately Mail.app doesn’t recognize it. It’s easy enough to find it
 ourselves though:</p>
 
-    <p><img src="http://dduan.net/assets/2017/02/find-message-id.gif" alt="Finding Message-Id on mailman
+    <p><img src="http://0.0.0.0:4000/assets/2017/02/find-message-id.gif" alt="Finding Message-Id on mailman
 archive" /></p>
 
     <p>Note the <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">@</code> characters are percent-quoted. We have to recover the

@@ -1,5 +1,5 @@
 ---
-title: Build Your App In Swift Compatibility Mode
+title: Building Your App In Swift Compatibility Mode
 tags: [Swift, Xcode]
 date: 2017-05-22 09:04:01-0700
 ---
@@ -37,7 +37,8 @@ projects in the compiler's compatibility mode!
 4. Build your project! This is where things start to get exciting.
 
    You should expect some warnings. Hopefully they are self-explanatory
-   enough. Most of them should correspond to a swift-evolution proposal.
+   enough. Most of them should correspond to [a swift-evolution
+   proposal](https://apple.github.io/swift-evolution/).
 
    Improvement to the language or compiler usually means some of these
    warnings tell you problems in your code that has been ignored by the
@@ -52,9 +53,9 @@ projects in the compiler's compatibility mode!
 
 5. It's time to tell the compiler team about the error or crash you encountered.
 
-   Reduce the error or crash to a state that your are comfortable reporting
-   in public. Then go to https://bugs.swift.org and file a JIRA ticket
-   describing the error or compiler crash.
+   Reduce the error or crash to a state that your are comfortable reporting in
+   public. Then go to [bugs.swift.org][https://bugs.swift.org] and file a JIRA
+   ticket describing the error or compiler crash.
 
    During the process of code reduction you may find ways to work around the
    compile error or crash. Make the changes for the workaround and repeate

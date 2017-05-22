@@ -54,7 +54,7 @@ projects in the compiler's compatibility mode!
 5. It's time to tell the compiler team about the error or crash you encountered.
 
    Reduce the error or crash to a state that your are comfortable reporting in
-   public. Then go to [bugs.swift.org][https://bugs.swift.org] and file a JIRA
+   public. Then go to [bugs.swift.org](https://bugs.swift.org) and file a JIRA
    ticket describing the error or compiler crash.
 
    During the process of code reduction you may find ways to work around the

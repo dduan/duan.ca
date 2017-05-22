@@ -1,5 +1,5 @@
 ---
-title: Building Your App In Swift Compatibility Mode
+title: Building Swift Projects In Source Compatibility Mode
 tags: [Swift, Xcode]
 date: 2017-05-22 09:04:01-0700
 ---
@@ -24,6 +24,8 @@ projects in the compiler's compatibility mode!
     contain `-swift-version X`. This could mean setting it in Xcode, in
     `.xcconfig` files you are using and/or in your dependency managers such
     as Cocoapods.
+
+    ![compatibility flag in xcode](/assets/2017/05/compat-mode-flag.png)
 
     For example, with Cocoapods, you'll need to add the following in your
     `Podfile` to compile 3rd party libraries in compatibility mode:

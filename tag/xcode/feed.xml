@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan - Xcode</title>
+        <link>http://0.0.0.0:4000/tag/Xcode</link>
+        <atom:link href="http://0.0.0.0:4000/tag/Xcode/index.xml" rel="self" type="application/rss+xml" />
+        
+        
+            
+            <item>
+                <title>Build Your App In Swift Compatibility Mode</title>
+                <description>&lt;p&gt;It’s a few weeks before WWDC, so natually* it’s time to try build your Swift
+projects in the compiler’s compatibility mode!&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Download and install a snapshot for the next major version &lt;a href=&quot;https://swift.org/download/&quot;&gt;on
+Swift.org&lt;/a&gt;.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/2017/05/download-swift-snapshot.png&quot; alt=&quot;download swift toolchain&quot; /&gt;
+ &lt;img src=&quot;/assets/2017/05/install-swift-snapshot.png&quot; alt=&quot;install swift toolchain&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Choose the newly installed toolchain in Xcode.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/2017/05/choose-toolchain.png&quot; alt=&quot;choose swift toolchain in Xcode&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ask the compiler to use compatibility mode. This means using the complier
+flag &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;, where “X” is the &lt;em&gt;current&lt;/em&gt; major Swift version.&lt;/p&gt;
+
+    &lt;p&gt;In project’s “Build Settings”, value for “Other Swift Flags” should
+ contain &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;. This could mean setting it in Xcode, in
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;.xcconfig&lt;/code&gt; files you are using and/or in your dependency managers such
+ as Cocoapods.&lt;/p&gt;
+
+    &lt;p&gt;For example&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://0.0.0.0:4000/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; with Cocoapods, you’ll need to add the following in your
+ &lt;code class=&quot;highlighter-rouge&quot;&gt;Podfile&lt;/code&gt; to compile 3rd party libraries in compatibility mode:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; post_install do |installer|
+     target.build_configurations.each do |config|
+         config.build_settings[&quot;OTHER_SWIFT_FLAGS&quot;] = &quot;$(inherited) -swift-version 3&quot;
+     end
+ end
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Build your project! This is where things start to get exciting.&lt;/p&gt;
+
+    &lt;p&gt;You should expect some warnings. Hopefully they are self-explanatory
+enough. Most of them should correspond to a swift-evolution proposal.&lt;/p&gt;
+
+    &lt;p&gt;Improvement to the language or compiler usually means some of these
+warnings tell you problems in your code that has been ignored by the
+compiler previous. Fix them today!&lt;/p&gt;
+
+    &lt;p&gt;The project should compile successfull in compatibility mode (despite
+warnings). This where you can stop reading. Go celebrate with your
+coworkers, friends, and family!&lt;/p&gt;
+
+    &lt;p&gt;Things could go wrong for compiler snapshots, of course. Read on if see
+errors or crashes (whaaaaat 😸).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It’s time to tell the compiler team about the error or crash you encountered.&lt;/p&gt;
+
+    &lt;p&gt;Reduce the error or crash to a state that your are comfortable reporting
+in public. Then go to https://bugs.swift.org and file a JIRA ticket
+describing the error or compiler crash.&lt;/p&gt;
+
+    &lt;p&gt;During the process of code reduction you may find ways to work around the
+compile error or crash. Make the changes for the workaround and repeate
+steps 4-5. Maybe your project will compile this time.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The issue you discovered will be fixed in the official Swift release come
+fall. You’ve ensured a smooth Swift upgrade for your project and contributed
+to the Swift community 🎉!&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;em&gt;Footnote *: source comptibility mode is a thing starting with Swift 4. As new
+major version of Swift is released, code written in the previous version should
+compile without change in compatibility mode.&lt;/em&gt;&lt;/p&gt;
+</description>
+                <pubDate>Mon, 22 May 2017 09:04:01 -0700</pubDate>
+                <link></link>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2017/05/22/build-in-swift-compatibility-mode/</guid>
+            </item>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </channel>
+</rss>

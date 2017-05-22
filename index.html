@@ -12,8 +12,8 @@
 <meta property="og:title" content="Daniel Duan" />
 <meta name="description" content="Daniel Duan thinks." />
 <meta property="og:description" content="Daniel Duan thinks." />
-<link rel="canonical" href="http://dduan.net/" />
-<meta property="og:url" content="http://dduan.net/" />
+<link rel="canonical" href="http://0.0.0.0:4000/" />
+<meta property="og:url" content="http://0.0.0.0:4000/" />
 <meta property="og:site_name" content="Daniel Duan" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@daniel_duan" />
@@ -25,7 +25,7 @@
     "name": "Daniel Duan",
     "headline": "Daniel Duan",
     "description": "Daniel Duan thinks.",
-    "url": "http://dduan.net/"
+    "url": "http://0.0.0.0:4000/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -53,6 +53,104 @@
   
 
 
+  
+  <div class="content post">
+    
+    <h1 class="post-title"><a href="/2017/05/22/build-in-swift-compatibility-mode/">Build Your App In Swift Compatibility Mode</a></h1>
+    
+    <div class="post-date">
+      
+      <time>22 May 2017</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/swift">Swift</a>,
+      
+        <a href="/tag/xcode">Xcode</a>
+      
+      </div>
+      
+    </div>
+    <p>It’s a few weeks before WWDC, so natually* it’s time to try build your Swift
+projects in the compiler’s compatibility mode!</p>
+
+<ol>
+  <li>
+    <p>Download and install a snapshot for the next major version <a href="https://swift.org/download/">on
+Swift.org</a>.</p>
+
+    <p><img src="/assets/2017/05/download-swift-snapshot.png" alt="download swift toolchain" />
+ <img src="/assets/2017/05/install-swift-snapshot.png" alt="install swift toolchain" /></p>
+  </li>
+  <li>
+    <p>Choose the newly installed toolchain in Xcode.</p>
+
+    <p><img src="/assets/2017/05/choose-toolchain.png" alt="choose swift toolchain in Xcode" /></p>
+  </li>
+  <li>
+    <p>Ask the compiler to use compatibility mode. This means using the complier
+flag <code class="highlighter-rouge">-swift-version X</code>, where “X” is the <em>current</em> major Swift version.</p>
+
+    <p>In project’s “Build Settings”, value for “Other Swift Flags” should
+ contain <code class="highlighter-rouge">-swift-version X</code>. This could mean setting it in Xcode, in
+ <code class="highlighter-rouge">.xcconfig</code> files you are using and/or in your dependency managers such
+ as Cocoapods.</p>
+
+    <p>For example, with Cocoapods, you’ll need to add the following in your
+ <code class="highlighter-rouge">Podfile</code> to compile 3rd party libraries in compatibility mode:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> post_install do |installer|
+     target.build_configurations.each do |config|
+         config.build_settings["OTHER_SWIFT_FLAGS"] = "$(inherited) -swift-version 3"
+     end
+ end
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Build your project! This is where things start to get exciting.</p>
+
+    <p>You should expect some warnings. Hopefully they are self-explanatory
+enough. Most of them should correspond to a swift-evolution proposal.</p>
+
+    <p>Improvement to the language or compiler usually means some of these
+warnings tell you problems in your code that has been ignored by the
+compiler previous. Fix them today!</p>
+
+    <p>The project should compile successfull in compatibility mode (despite
+warnings). This where you can stop reading. Go celebrate with your
+coworkers, friends, and family!</p>
+
+    <p>Things could go wrong for compiler snapshots, of course. Read on if see
+errors or crashes (whaaaaat 😸).</p>
+  </li>
+  <li>
+    <p>It’s time to tell the compiler team about the error or crash you encountered.</p>
+
+    <p>Reduce the error or crash to a state that your are comfortable reporting
+in public. Then go to https://bugs.swift.org and file a JIRA ticket
+describing the error or compiler crash.</p>
+
+    <p>During the process of code reduction you may find ways to work around the
+compile error or crash. Make the changes for the workaround and repeate
+steps 4-5. Maybe your project will compile this time.</p>
+  </li>
+  <li>
+    <p>The issue you discovered will be fixed in the official Swift release come
+fall. You’ve ensured a smooth Swift upgrade for your project and contributed
+to the Swift community 🎉!</p>
+  </li>
+</ol>
+
+<hr />
+
+<p><em>Footnote *: source comptibility mode is a thing starting with Swift 4. As new
+major version of Swift is released, code written in the previous version should
+compile without change in compatibility mode.</em></p>
+
+  </div>
+  <hr />
   
   <div class="content post">
     
@@ -96,12 +194,12 @@ editors and look for these headers. Of course, this require us to know where the
 emails exist as files. On macOS, an easy thing to do is to drag from Mail.app to
 Finder/Desktop and open the resulting .eml file:</p>
 
-<p><img src="http://dduan.net/assets/2017/02/open-email.gif" alt="Open an email in text editors" /></p>
+<p><img src="http://0.0.0.0:4000/assets/2017/02/open-email.gif" alt="Open an email in text editors" /></p>
 
 <p>Among the (perhaps overwhelming amount of) headers, we’ll find the two fields we
 are looking for:</p>
 
-<p><img src="http://dduan.net/assets/2017/02/email-headers.png" alt="Email Headers Message-Id and
+<p><img src="http://0.0.0.0:4000/assets/2017/02/email-headers.png" alt="Email Headers Message-Id and
 In-Reply-To" /></p>
 
 <p>… I’ll leave the clients’ reply behavior regarding these fields for the reader
@@ -124,7 +222,7 @@ that email ourselves previously.</p>
 Unfortunately Mail.app doesn’t recognize it. It’s easy enough to find it
 ourselves though:</p>
 
-    <p><img src="http://dduan.net/assets/2017/02/find-message-id.gif" alt="Finding Message-Id on mailman
+    <p><img src="http://0.0.0.0:4000/assets/2017/02/find-message-id.gif" alt="Finding Message-Id on mailman
 archive" /></p>
 
     <p>Note the <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">@</code> characters are percent-quoted. We have to recover the
@@ -179,89 +277,18 @@ week).</p>
     </div>
     <p>I spent a whole day making changes to this site.</p>
 
-<p>You may notice a new section is now added: <a href="http://dduan.net/links">links</a>. Yes,
+<p>You may notice a new section is now added: <a href="http://0.0.0.0:4000/links">links</a>. Yes,
 I want a link list format for this site. Often I find stuff that’s insightful
 and not always visible. I want to collect those and bookmark them here.
 Modelling after <a href="http://daringfireball.net">Daring Fireball</a>, I’ve added a new
 <a href="http://dduan.net/articles/feed.xml">feed</a> which only contains long-form,
 original articles. I’ll be tagging the links so that they show up along side my
 normal posts in tag pages. Each tag page now gets its own feed! You can read
-about it in the <a href="http://dduan.net/about/">about page</a>.</p>
+about it in the <a href="http://0.0.0.0:4000/about/">about page</a>.</p>
 
 <p>A few small issues has been fixed.</p>
 
 <p>I wrote the most Ruby in my life today. Yay?</p>
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160808/026153.html">🔗 Swift ABI In Layman's terms</a></h1>
-    
-    <div class="post-date">
-      
-      <a href="/linked/2017/01/swift-abi-in-laymans-terms/">
-      
-      <time>16 Jan 2017</time>
-      
-      </a>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/swift">Swift</a>
-      
-      </div>
-      
-    </div>
-    <p>An oldie but goodie from Swift Evelution.
-<a href="https://twitter.com/slava_pestov">Slava</a>’s answer:</p>
-
-<blockquote>
-  <p>“when we talk about the ABI, we’re really talking about three orthogonal
-“axes” along which we would like to “move” without breaking compatibility with
-existing binaries:”</p>
-
-  <ul>
-    <li>
-      <p>The first axis is the machine-level calling conventions and memory layout.
-For example, what registers to pass function arguments and returns in, the
-rules for alignment and padding of fields in an aggregate type, which entry
-points the Swift runtime exports and what their behavior should be. Once we
-commit to a stable ABI along this axis, you will get interoperability between
-<em>compiler versions</em> – the same exact library built with one version of the
-compiler will remain compatible with clients after being recompiled with
-another version, because their conventions will match up. Note that this does
-not help you if the library itself changes in any way.</p>
-    </li>
-    <li>
-      <p>The second axis is the resilience work I called out in my previous e-mail.
-Here, we’re trying to define language features and implementation techniques
-that allow a library to evolve in a forward-compatible manner, as long as the
-developer follows certain guidelines. Here, the goal is if you should be able
-to compile your library, make some changes to add new APIs, and recompile it
-<em>with the same compiler</em>, without breaking downstream clients, as long as you
-follow the library evolution guidelines (Also, you can imagine one day having
-an ‘ABI diff’ tool to automate this).  &gt;</p>
-    </li>
-    <li>
-      <p>The third axis is the standard library itself. Stability of runtime
-interfaces and the extra indirection to enable resilience is all great, but it
-won’t help you as long as the standard library API is evolving in a
-non-backwards compatible manner – for example, if we remove a method on
-String. So once the other two areas have been addressed, the last thing to lock
-down is the standard library interface itself.</p>
-    </li>
-  </ul>
-</blockquote>
-
-<p>The rest of the thread is worth reading too. John McCall gave an high level
-<a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160808/026145.html">description</a>.</p>
-
-<p>The definitive source for Slava’s third axes is the <a href="https://github.com/apple/swift/blob/master/docs/LibraryEvolution.rst">Library
-Evolution</a>
-doc from the Swift repository.</p>
 
   </div>
   <hr />

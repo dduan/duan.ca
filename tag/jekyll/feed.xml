@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Jekyll</title>
-        <link>http://0.0.0.0:4000/tag/Jekyll</link>
-        <atom:link href="http://0.0.0.0:4000/tag/Jekyll/index.xml" rel="self" type="application/rss+xml" />
+        <link>http://dduan.net/tag/Jekyll</link>
+        <atom:link href="http://dduan.net/tag/Jekyll/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -15,14 +15,14 @@
                 <title>Site Improvements</title>
                 <description>&lt;p&gt;I spent a whole day making changes to this site.&lt;/p&gt;
 
-&lt;p&gt;You may notice a new section is now added: &lt;a href=&quot;http://0.0.0.0:4000/links&quot;&gt;links&lt;/a&gt;. Yes&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://0.0.0.0:4000/2017/01/16/site-changes/&gt;,&lt;/a&gt;
+&lt;p&gt;You may notice a new section is now added: &lt;a href=&quot;http://dduan.net/links&quot;&gt;links&lt;/a&gt;. Yes,
 I want a link list format for this site. Often I find stuff that’s insightful
 and not always visible. I want to collect those and bookmark them here.
 Modelling after &lt;a href=&quot;http://daringfireball.net&quot;&gt;Daring Fireball&lt;/a&gt;, I’ve added a new
-&lt;a href=&quot;http://dduan.net/articles/feed.xml&quot;&gt;feed&lt;/a&gt; which only contains long-form,
+&lt;a href=&quot;http://dduan.net/articles/feed.xml&quot;&gt;feed&lt;/a&gt; which only contains long-form&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2017/01/16/site-changes/&gt;,&lt;/a&gt;
 original articles. I’ll be tagging the links so that they show up along side my
 normal posts in tag pages. Each tag page now gets its own feed! You can read
-about it in the &lt;a href=&quot;http://0.0.0.0:4000/about/&quot;&gt;about page&lt;/a&gt;.&lt;/p&gt;
+about it in the &lt;a href=&quot;http://dduan.net/about/&quot;&gt;about page&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;A few small issues has been fixed.&lt;/p&gt;
 
@@ -30,7 +30,7 @@ about it in the &lt;a href=&quot;http://0.0.0.0:4000/about/&quot;&gt;about page&
 </description>
                 <pubDate>Mon, 16 Jan 2017 23:24:13 -0800</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/01/16/site-changes/</guid>
+                <guid isPermaLink="true">http://dduan.net/2017/01/16/site-changes/</guid>
             </item>
             
         
@@ -90,7 +90,7 @@ deploy:
 &lt;/div&gt;
 
 &lt;p&gt;Drop it into root of your Jekyll project, commit all changes (including the
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;). And type &lt;code class=&quot;highlighter-rouge&quot;&gt;make deploy&lt;/code&gt;. BOOM&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://0.0.0.0:4000/2016/05/15/deploy-jekyll-to-github/&gt;,&lt;/a&gt; done.&lt;/p&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;). And type &lt;code class=&quot;highlighter-rouge&quot;&gt;make deploy&lt;/code&gt;. BOOM&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2016/05/15/deploy-jekyll-to-github/&gt;,&lt;/a&gt; done.&lt;/p&gt;
 
 &lt;p&gt;There are a couple of assumptions:&lt;/p&gt;
 
@@ -106,7 +106,7 @@ additional software/scripts and there’s no restriction on plugins.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 15 May 2016 01:00:00 -0700</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2016/05/15/deploy-jekyll-to-github/</guid>
+                <guid isPermaLink="true">http://dduan.net/2016/05/15/deploy-jekyll-to-github/</guid>
             </item>
             
         

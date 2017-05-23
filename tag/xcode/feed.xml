@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Xcode</title>
-        <link>http://0.0.0.0:4000/tag/Xcode</link>
-        <atom:link href="http://0.0.0.0:4000/tag/Xcode/index.xml" rel="self" type="application/rss+xml" />
+        <link>http://dduan.net/tag/Xcode</link>
+        <atom:link href="http://dduan.net/tag/Xcode/index.xml" rel="self" type="application/rss+xml" />
         
         
             
             <item>
                 <title>Building Swift Projects In Source Compatibility Mode</title>
-                <description>&lt;p&gt;It’s a few weeks before WWDC, so naturally¹ it’s time to try build your Swift
+                <description>&lt;p&gt;It’s a few weeks before WWDC&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; so naturally¹ it’s time to try build your Swift
 projects in the compiler’s compatibility mode!&lt;/p&gt;
 
 &lt;ol&gt;
@@ -30,9 +30,9 @@ Swift.org&lt;/a&gt;.&lt;/p&gt;
 flag &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;, where “X” is the &lt;em&gt;current&lt;/em&gt; major Swift version.&lt;/p&gt;
 
     &lt;p&gt;In project’s “Build Settings”, value for “Other Swift Flags” should
- contain &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;. This could mean setting it in Xcode&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://0.0.0.0:4000/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; in
+ contain &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;. This could mean setting it in Xcode, in
  &lt;code class=&quot;highlighter-rouge&quot;&gt;.xcconfig&lt;/code&gt; files you are using and/or in your dependency managers such
- as Cocoapods.&lt;/p&gt;
+ as Cocoapods².&lt;/p&gt;
 
     &lt;p&gt;&lt;img src=&quot;/assets/2017/05/compat-mode-flag.png&quot; alt=&quot;compatibility flag in xcode&quot; /&gt;&lt;/p&gt;
 
@@ -90,10 +90,13 @@ to the Swift community 🎉!&lt;/p&gt;
 &lt;p&gt;¹ source compatibility mode is a thing starting with Swift 4. As new
 major version of Swift is released, code written in the previous version should
 compile without change in compatibility mode.&lt;/p&gt;
+
+&lt;p&gt;² don’t forget to reset these settings to normal when you are done 😃. I’d create
+a branch for this.&lt;/p&gt;
 </description>
                 <pubDate>Mon, 22 May 2017 09:04:01 -0700</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/05/22/build-in-swift-compatibility-mode/</guid>
+                <guid isPermaLink="true">http://dduan.net/2017/05/22/build-in-swift-compatibility-mode/</guid>
             </item>
             
         

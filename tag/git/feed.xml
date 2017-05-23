@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Git</title>
-        <link>http://0.0.0.0:4000/tag/Git</link>
-        <atom:link href="http://0.0.0.0:4000/tag/Git/index.xml" rel="self" type="application/rss+xml" />
+        <link>http://dduan.net/tag/Git</link>
+        <atom:link href="http://dduan.net/tag/Git/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -38,7 +38,7 @@ please”. You cannot rebase and keep the commits signed!&lt;/p&gt;
 &lt;p&gt;Well, that kind of sucks. But you are reading about it here, so I’d better give
 you something to help, right?&lt;/p&gt;
 
-&lt;p&gt;There is&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://0.0.0.0:4000/2016/12/24/rebase-multiple-git-commits-with-signing/&gt;,&lt;/a&gt; at least, one way to achieve &lt;em&gt;rebase and sign multiple commits&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;There is&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/&gt;,&lt;/a&gt; at least, one way to achieve &lt;em&gt;rebase and sign multiple commits&lt;/em&gt;:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Run interactive rebase: &lt;code class=&quot;highlighter-rouge&quot;&gt;git rebase -i branch&lt;/code&gt;.&lt;/li&gt;
@@ -56,7 +56,7 @@ glorious UI, ya know?&lt;/p&gt;
 </description>
                 <pubDate>Sat, 24 Dec 2016 01:31:14 -0800</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2016/12/24/rebase-multiple-git-commits-with-signing/</guid>
+                <guid isPermaLink="true">http://dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/</guid>
             </item>
             
         
@@ -110,7 +110,7 @@ deploy:
 &lt;/div&gt;
 
 &lt;p&gt;Drop it into root of your Jekyll project, commit all changes (including the
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;). And type &lt;code class=&quot;highlighter-rouge&quot;&gt;make deploy&lt;/code&gt;. BOOM&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://0.0.0.0:4000/2016/05/15/deploy-jekyll-to-github/&gt;,&lt;/a&gt; done.&lt;/p&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;). And type &lt;code class=&quot;highlighter-rouge&quot;&gt;make deploy&lt;/code&gt;. BOOM&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2016/05/15/deploy-jekyll-to-github/&gt;,&lt;/a&gt; done.&lt;/p&gt;
 
 &lt;p&gt;There are a couple of assumptions:&lt;/p&gt;
 
@@ -126,7 +126,7 @@ additional software/scripts and there’s no restriction on plugins.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 15 May 2016 01:00:00 -0700</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2016/05/15/deploy-jekyll-to-github/</guid>
+                <guid isPermaLink="true">http://dduan.net/2016/05/15/deploy-jekyll-to-github/</guid>
             </item>
             
         
@@ -166,7 +166,7 @@ I see a discussion about locking down branches of a Git repository.&lt;/p&gt;
 
 &lt;p&gt;Making developers “own” branches on a shared repository is a pratice
 inheritated from the days of centralized version control. Git doesn’t provide
-built-in support for this&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://0.0.0.0:4000/2012/10/31/keep-git-social/&gt;,&lt;/a&gt; for good reasons.&lt;/p&gt;
+built-in support for this&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From dduan.net&quot; href=http://dduan.net/2012/10/31/keep-git-social/&gt;,&lt;/a&gt; for good reasons.&lt;/p&gt;
 
 &lt;p&gt;With Subversion, the ultimate goal of branch-wise access control is to keep
 out
@@ -223,7 +223,7 @@ breaking the shackles on their hand is a good thing to try.&lt;/p&gt;
 </description>
                 <pubDate>Wed, 31 Oct 2012 09:02:30 -0700</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2012/10/31/keep-git-social/</guid>
+                <guid isPermaLink="true">http://dduan.net/2012/10/31/keep-git-social/</guid>
             </item>
             
         

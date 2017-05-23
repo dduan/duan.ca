@@ -7,16 +7,18 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.0.0 -->
+  <!-- Begin Jekyll SEO tag v1.4.0 -->
 <title>How To Omit Needless Words - Daniel Duan</title>
 <meta property="og:title" content="How To Omit Needless Words" />
 <meta name="description" content="A typical experience in adopting Swift 3 may look like this:" />
 <meta property="og:description" content="A typical experience in adopting Swift 3 may look like this:" />
-<link rel="canonical" href="http://0.0.0.0:4000/2016/10/22/how-to-omit-needless-words/" />
-<meta property="og:url" content="http://0.0.0.0:4000/2016/10/22/how-to-omit-needless-words/" />
+<link rel="canonical" href="http://dduan.net/2016/10/22/how-to-omit-needless-words/" />
+<meta property="og:url" content="http://dduan.net/2016/10/22/how-to-omit-needless-words/" />
 <meta property="og:site_name" content="Daniel Duan" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-10-22T17:08:41-07:00" />
+<link rel="next" href="http://dduan.net/2016/12/24/rebase-multiple-git-commits-with-signing/" title="Rebase And Sign Multiple Git Commits" />
+<link rel="prev" href="http://dduan.net/2016/10/10/distribution-tests/" title="Distribution Tests" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
@@ -27,7 +29,7 @@
     "headline": "How To Omit Needless Words",
     "datePublished": "2016-10-22T17:08:41-07:00",
     "description": "A typical experience in adopting Swift 3 may look like this:",
-    "url": "http://0.0.0.0:4000/2016/10/22/how-to-omit-needless-words/"
+    "url": "http://dduan.net/2016/10/22/how-to-omit-needless-words/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -170,7 +172,7 @@ argument is a enum:</p>
 <code class="highlighter-rouge">update(for mode: Mode)</code>. The call site, therefore, becomes
 <code class="highlighter-rouge">update(for: .add)</code>.</p>
 
-<p>What makes it feels wrong? Well<a class="backlink" rel="canonical" title="From dduan.net" href=http://0.0.0.0:4000/2016/10/22/how-to-omit-needless-words/>,</a> a preposition followed by a verb (“for add”)
+<p>What makes it feels wrong? Well<a class="backlink" rel="canonical" title="From dduan.net" href=http://dduan.net/2016/10/22/how-to-omit-needless-words/>,</a> a preposition followed by a verb (“for add”)
 is not very grammatical. Normally we would say “update UI for <em>adding</em>”. So here
 we need to update the literals in that enum to “adding” and “editing”.</p>
 

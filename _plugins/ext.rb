@@ -12,7 +12,7 @@ module Jekyll
         input.gsub(",") do |x|
             dot = x
             if n == count
-                dot = "<a class=\"backlink\" rel=\"canonical\" title=\"From dduan.net\" href=#{base}#{url}>,</a>"
+                dot = "<a class=\"backlink\" rel=\"canonical\" title=\"From duan.ca\" href=#{base}#{url}>,</a>"
             end
             count += 1
             dot

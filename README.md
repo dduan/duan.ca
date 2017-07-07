@@ -1,1 +1,1 @@
-http://dduan.net
+http://duan.ca

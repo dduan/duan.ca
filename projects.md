@@ -18,6 +18,6 @@ A Swift HTTP library for humans inspired by
 </h2>
 <a href="https://swift.org/documentation/api-design-guidelines/#omit-needless-words">
 omit needless words</a> is an API design guideline from swift.org. This tool
-<a href="http://dduan.net/2016/10/22/how-to-omit-needless-words/">helps</a>
+<a href="http://duan.ca/2016/10/22/how-to-omit-needless-words/">helps</a>
 finding needless words in Swift functions.
 </section>

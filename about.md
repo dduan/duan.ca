@@ -28,7 +28,7 @@ end of its URL. For example, the feed for everything tagged with "Swift" is:
 I post [twitter][twitter] and [github][github] way more frequently.
 
 [swift]: https://github.com/apple/swift/commits?author=dduan
-[just]: https://justhttp.net
+[just]: http://justhttp.net
 [twitter]: https://twitter.com/daniel_duan
 [github]: https://github.com/dduan
 

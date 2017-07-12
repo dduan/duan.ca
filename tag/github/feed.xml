@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Github</title>
-        <link>http://duan.ca/tag/Github</link>
-        <atom:link href="http://duan.ca/tag/Github/index.xml" rel="self" type="application/rss+xml" />
+        <link>https://duan.ca/tag/Github</link>
+        <atom:link href="https://duan.ca/tag/Github/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -68,7 +68,7 @@ deploy:
 &lt;/div&gt;
 
 &lt;p&gt;Drop it into root of your Jekyll project, commit all changes (including the
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;). And type &lt;code class=&quot;highlighter-rouge&quot;&gt;make deploy&lt;/code&gt;. BOOM&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://duan.ca/2016/05/15/deploy-jekyll-to-github/&gt;,&lt;/a&gt; done.&lt;/p&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;). And type &lt;code class=&quot;highlighter-rouge&quot;&gt;make deploy&lt;/code&gt;. BOOM&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/05/15/deploy-jekyll-to-github/&gt;,&lt;/a&gt; done.&lt;/p&gt;
 
 &lt;p&gt;There are a couple of assumptions:&lt;/p&gt;
 
@@ -84,7 +84,7 @@ additional software/scripts and there’s no restriction on plugins.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 15 May 2016 01:00:00 -0700</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://duan.ca/2016/05/15/deploy-jekyll-to-github/</guid>
+                <guid isPermaLink="true">https://duan.ca/2016/05/15/deploy-jekyll-to-github/</guid>
             </item>
             
         

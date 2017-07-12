@@ -7,16 +7,18 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.0.0 -->
+  <!-- Begin Jekyll SEO tag v1.4.0 -->
 <title>Making TUI Applications In Swift - Daniel Duan</title>
 <meta property="og:title" content="Making TUI Applications In Swift" />
 <meta name="description" content="One of my fondest memory in programming is writing the game Snake on one ofthese:" />
 <meta property="og:description" content="One of my fondest memory in programming is writing the game Snake on one ofthese:" />
-<link rel="canonical" href="http://duan.ca/2016/12/26/making-tui-programs-in-swift/" />
-<meta property="og:url" content="http://duan.ca/2016/12/26/making-tui-programs-in-swift/" />
+<link rel="canonical" href="https://duan.ca/2016/12/26/making-tui-programs-in-swift/" />
+<meta property="og:url" content="https://duan.ca/2016/12/26/making-tui-programs-in-swift/" />
 <meta property="og:site_name" content="Daniel Duan" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2016-12-26T21:39:05-08:00" />
+<link rel="next" href="https://duan.ca/2017/01/16/site-changes/" title="Site Improvements" />
+<link rel="prev" href="https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/" title="Rebase And Sign Multiple Git Commits" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
@@ -27,7 +29,7 @@
     "headline": "Making TUI Applications In Swift",
     "datePublished": "2016-12-26T21:39:05-08:00",
     "description": "One of my fondest memory in programming is writing the game Snake on one ofthese:",
-    "url": "http://duan.ca/2016/12/26/making-tui-programs-in-swift/"
+    "url": "https://duan.ca/2016/12/26/making-tui-programs-in-swift/"
   }
 </script>
 <!-- End Jekyll SEO tag -->
@@ -58,7 +60,7 @@
   <p>One of my fondest memory in programming is writing the game Snake on one of
 these:</p>
 
-<p><img src="http://duan.ca/assets/2016/12/e-dictionary.jpg" alt="An Electronic/Digital Dictionary" /></p>
+<p><img src="https://duan.ca/assets/2016/12/e-dictionary.jpg" alt="An Electronic/Digital Dictionary" /></p>
 
 <p>At the time, I was in a very restrictive school where a real computer wasn’t
 permited in class. The actual thing (that’s an “electronic dictionary” by the
@@ -83,7 +85,7 @@ use hotkeys to navigate menus, trigger functions and so on.  Sometimes you can
 use mouse, too. Their layout often resemble that of a GUI application running in
 it’s own “window”:</p>
 
-<p><img src="http://duan.ca/assets/2016/12/tig.png" alt="tig" /></p>
+<p><img src="https://duan.ca/assets/2016/12/tig.png" alt="tig" /></p>
 
 <p>Just to make things painfully clear, these apps’s interface is composed
 exclusively of text. We can vaguely categorize them as “Text-based User
@@ -118,7 +120,7 @@ mouse-clicks. And that’s it!</p>
 <p>After making <a href="https://github.com/dduan/Termbox">a Swift wrapper</a>, I was able to build a painter app in
 <a href="https://github.com/dduan/TerminalPaint">a handleful of lines</a>:</p>
 
-<p><img src="http://duan.ca/assets/2016/12/terminal-paint.png" alt="terminal paint" /></p>
+<p><img src="https://duan.ca/assets/2016/12/terminal-paint.png" alt="terminal paint" /></p>
 
 <p>So that’s an TUI app drawing according to mouse clicks built with only a few
 primitives from termbox. Awww yeah! Here’s the code with the comment stripped,
@@ -190,8 +192,8 @@ to give you a taste:</p>
                 <span class="n">drawingCharacter</span> <span class="o">=</span> <span class="s">" "</span>
             <span class="p">}</span>
 
-        <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">mouse</span><span class="p">(</span><span class="n">x</span><span class="p"><a class="backlink" rel="canonical" title="From duan.ca" href=http://duan.ca/2016/12/26/making-tui-programs-in-swift/>,</a></span> <span class="n">y</span><span class="p">):</span>
-            <span class="kt">Termbox</span><span class="o">.</span><span class="nf">put</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span>
+        <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">mouse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+            <span class="kt">Termbox</span><span class="o">.</span><span class="nf">put</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="n">x</span><span class="p"><a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2016/12/26/making-tui-programs-in-swift/>,</a></span> <span class="nv">y</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span>
                 <span class="nv">character</span><span class="p">:</span> <span class="n">drawingCharacter</span><span class="p">,</span>
                 <span class="nv">foreground</span><span class="p">:</span> <span class="o">.</span><span class="n">red</span><span class="p">)</span>
         <span class="k">default</span><span class="p">:</span>

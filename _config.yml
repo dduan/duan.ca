@@ -3,7 +3,7 @@ name:               "Daniel Duan"
 description:        "Daniel Duan thinks."
 
 # jekyll-seo-tag, see: http://www.rubydoc.info/gems/jekyll-seo-tag/1.2.0
-url:                "http://duan.ca"
+url:                "https://duan.ca"
 author:             "Daniel Duan"
 twitter:
   username:         "daniel_duan"

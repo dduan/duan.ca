@@ -7,9 +7,12 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v1.4.0 -->
-<title>Swift Algebraic Data Types - Daniel Duan</title>
+  <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Swift Algebraic Data Types | Daniel Duan</title>
+<meta name="generator" content="Jekyll v3.6.2" />
 <meta property="og:title" content="Swift Algebraic Data Types" />
+<meta name="author" content="Daniel Duan" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="The Basics" />
 <meta property="og:description" content="The Basics" />
 <link rel="canonical" href="https://duan.ca/2015/07/12/swift-algebraic-data-types/" />
@@ -17,22 +20,13 @@
 <meta property="og:site_name" content="Daniel Duan" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2015-07-12T15:51:27-07:00" />
-<link rel="next" href="https://duan.ca/2015/11/01/char-star-star-in-swift/" title="char ** in Swift" />
-<link rel="prev" href="https://duan.ca/2015/07/04/lets-build-a-cat-in-swift-2/" title="Let&#39;s Build A &#39;cat&#39; In Swift 2" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Swift Algebraic Data Types",
-    "datePublished": "2015-07-12T15:51:27-07:00",
-    "description": "The Basics",
-    "url": "https://duan.ca/2015/07/12/swift-algebraic-data-types/"
-  }
-</script>
+{"description":"The Basics","author":{"@type":"Person","name":"Daniel Duan"},"@type":"BlogPosting","url":"https://duan.ca/2015/07/12/swift-algebraic-data-types/","headline":"Swift Algebraic Data Types","dateModified":"2015-07-12T15:51:27-07:00","datePublished":"2015-07-12T15:51:27-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2015/07/12/swift-algebraic-data-types/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
 </head>
 <body>
   <div class="container">
@@ -64,7 +58,7 @@ its building block.</p>
 
 <p>To better illustrate this, consider the following example in Swift.</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">StarkChild</span> <span class="p">{</span> <span class="k">case</span> <span class="kt">Rickon</span><span class="p">,</span> <span class="kt">Bran</span><span class="p">,</span> <span class="kt">Arya</span><span class="p">,</span> <span class="kt">Sansa</span><span class="p">,</span> <span class="kt">Robb</span><span class="p">,</span> <span class="kt">Jon</span> <span class="p">}</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">StarkChild</span> <span class="p">{</span> <span class="k">case</span> <span class="kt">Rickon</span><span class="p">,</span> <span class="kt">Bran</span><span class="p">,</span> <span class="kt">Arya</span><span class="p">,</span> <span class="kt">Sansa</span><span class="p">,</span> <span class="kt">Robb</span><span class="p">,</span> <span class="kt">Jon</span> <span class="p">}</span>
 
 <span class="kd">enum</span> <span class="kt">Direwolf</span> <span class="p">{</span> <span class="k">case</span> <span class="kt">Shaggydog</span><span class="p">,</span> <span class="kt">Summer</span><span class="p">,</span> <span class="kt">Nymeria</span><span class="p">,</span> <span class="kt">Lady</span><span class="p">,</span> <span class="kt">Greywind</span><span class="p">,</span> <span class="kt">Ghost</span> <span class="p">}</span>
 
@@ -77,8 +71,7 @@ its building block.</p>
     <span class="k">var</span> <span class="nv">wolf</span><span class="p">:</span> <span class="kt">Direwolf</span>
     <span class="k">var</span> <span class="nv">person</span><span class="p">:</span> <span class="kt">StarkChild</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><code class="highlighter-rouge">StarkChild</code> and <code class="highlighter-rouge">Direwolf</code> each has 6 potential values. Combining them, we
 get two new types.</p>
@@ -88,14 +81,16 @@ get two new types.</p>
 
 <hr />
 
-<p>An <code class="highlighter-rouge">Actor</code> can be either a <code class="highlighter-rouge">StarkChild</code> or a <code class="highlighter-rouge">DireWolf</code>, therefore it has <code class="highlighter-rouge">6
-+ 6 = 12</code> potential values – the <em>sum</em> of <code class="highlighter-rouge">Child</code>’s and <code class="highlighter-rouge">DireWolf</code>’s values.</p>
+<p>An <code class="highlighter-rouge">Actor</code> can be either a <code class="highlighter-rouge">StarkChild</code> or a <code class="highlighter-rouge">DireWolf</code>, therefore it has `6</p>
+<ul>
+  <li>6 = 12<code class="highlighter-rouge"> potential values – the *sum* of </code>Child<code class="highlighter-rouge">'s and </code>DireWolf`’s values.</li>
+</ul>
 
 <p>A <code class="highlighter-rouge">Partners</code> requires us to select one value from <code class="highlighter-rouge">Child</code> and one from
 <code class="highlighter-rouge">DireWolf</code>, resulting in <code class="highlighter-rouge">6 * 6 = 36</code> potential values – the <em>product</em> of
 <code class="highlighter-rouge">Child</code>’s and <code class="highlighter-rouge">DireWolf</code>’s values.</p>
 
-<p><code class="highlighter-rouge">Actor</code>, an <code class="highlighter-rouge">enum</code><a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2015/07/12/swift-algebraic-data-types/>,</a> is a <em>sum</em> type. <code class="highlighter-rouge">Parters</code>, a <code class="highlighter-rouge">struct</code>, is a <em>product</em>
+<p><code class="highlighter-rouge">Actor</code><a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2015/07/12/swift-algebraic-data-types/>,</a> an <code class="highlighter-rouge">enum</code>, is a <em>sum</em> type. <code class="highlighter-rouge">Parters</code>, a <code class="highlighter-rouge">struct</code>, is a <em>product</em>
 type. Here, <code class="highlighter-rouge">Parters</code> could easily be defined as a <code class="highlighter-rouge">class</code> or a <code class="highlighter-rouge">tuple</code> and
 remain a <em>product</em> type. Because we can create product or sum types in these
 direct ways, we can say Swift has first class support for Algebraic Data
@@ -107,12 +102,11 @@ Types.</p>
 multiple values. If it happens to be the only option, then this
 <code class="highlighter-rouge">enum</code>effectively becomes a <em>product</em> type:</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">// there are 6 * 6 = 36 potential values for Parters</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// there are 6 * 6 = 36 potential values for Parters</span>
 <span class="kd">enum</span> <span class="kt">Parters</span> <span class="p">{</span>
     <span class="k">case</span> <span class="kt">Value</span><span class="p">(</span><span class="nv">wolf</span><span class="p">:</span> <span class="kt">DireWolf</span><span class="p">,</span> <span class="nv">person</span><span class="p">:</span> <span class="kt">StarkChild</span><span class="p">)</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Incidentally, this makes <code class="highlighter-rouge">enum</code> similar to <code class="highlighter-rouge">data</code> in Haskell, where <em>product</em>
 and <em>sum</em> types can be created with a unified construct – <code class="highlighter-rouge">data</code>.</p>
@@ -122,7 +116,7 @@ is hardly used to combine arbitrary types due to its lack of associated
 values. What do people do in need of <em>sum</em> types? They make do with product
 types. Here’s one way to achive that in Swift:</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">// Actor.value can have only 6 + 6 = 12 potential values thanks to</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Actor.value can have only 6 + 6 = 12 potential values thanks to</span>
 <span class="c1">// manual enforcement</span>
 <span class="kd">class</span> <span class="kt">Actor</span> <span class="p">{</span>
     <span class="k">var</span> <span class="nv">child</span><span class="p">:</span> <span class="kt">StarkChild</span><span class="p">?</span>
@@ -154,8 +148,7 @@ types. Here’s one way to achive that in Swift:</p>
         <span class="nf">fatalError</span><span class="p">(</span><span class="s">"must initialize with a child or a wolf"</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>It’s… ugly.</p>
 
@@ -166,20 +159,18 @@ recursion types. The interesting bit here is that Swift struggles to support
 it. In WWDC 2015, it was announced that <code class="highlighter-rouge">enum</code>s can be defined recursively in
 Swift 2:</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Tree</span> <span class="p">{</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Tree</span> <span class="p">{</span>
     <span class="k">case</span> <span class="kt">Empty</span>
     <span class="kd">indirect</span> <span class="k">case</span> <span class="kt">Node</span><span class="p">(</span><span class="kt">Tree</span><span class="p">,</span> <span class="kt">Tree</span><span class="p">)</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>As of this writing, Xcode 7 beta 3 has not delivered this feature yet.
 Also, it’s a good bet that <code class="highlighter-rouge">indirect</code> is not going to be available in tuple
 aliases, such as:</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">Node</span> <span class="o">=</span> <span class="p">(</span><span class="kd">indirect</span> <span class="kt">Node</span><span class="p">,</span> <span class="kd">indirect</span> <span class="kt">Node</span><span class="p">)</span>
-</code></pre>
-</div>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">Node</span> <span class="o">=</span> <span class="p">(</span><span class="kd">indirect</span> <span class="kt">Node</span><span class="p">,</span> <span class="kd">indirect</span> <span class="kt">Node</span><span class="p">)</span>
+</code></pre></div></div>
 
 <p>I hope this is on the Swift team’s (understandably) gigantic todo list 😉.</p>
 

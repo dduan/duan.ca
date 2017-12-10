@@ -149,7 +149,7 @@ Not all of these issues are temporary.
 Does list comprehension warrant a language change in Swift? Can you think of better ways to implement it
 with the current compiler?
 
-[0]: https://en.wikipedia.org/wiki/List_comprehensione
+[0]: https://en.wikipedia.org/wiki/List_comprehension
 [1]: https://en.wikipedia.org/wiki/Cartesian_product
 [2]: https://github.com/apple/swift/blob/master/docs/GenericsManifesto.md#variadic-generics
 [3]: https://github.com/dduan/Comprehension

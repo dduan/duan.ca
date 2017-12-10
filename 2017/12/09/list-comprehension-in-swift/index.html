@@ -125,7 +125,7 @@ up in day-to-day programming in your domain, it should be obvious that it’s al
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// going with order of appearance in Python/Haskell syntax</span>
 <span class="kd">func</span> <span class="n">comprehension</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">List</span><span class="p">,</span> <span class="kt">Result</span><span class="o">&gt;</span><span class="p">(</span>
     <span class="nv">predicate</span><span class="p">:</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">,</span>
-    <span class="nv">list</span><span class="p">:</span> <span class="kt">List</span><span class="p">,</span>
+    <span class="nv">list</span><span class="p">:</span> <span class="kt">List</span><span class="p"><a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/12/09/list-comprehension-in-swift/>,</a></span>
     <span class="nv">processor</span><span class="p">:</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span>
 <span class="p">)</span> <span class="k">where</span>
     <span class="kt">List</span><span class="p">:</span> <span class="kt">Sequence</span><span class="p">,</span> <span class="kt">List</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">Element</span>
@@ -145,7 +145,7 @@ up in day-to-day programming in your domain, it should be obvious that it’s al
 accept some temporary data structure and introduce/implement some operators, there’d be many possibilities.</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// Just an example of the infinite possibilities.</span>
-<span class="n">processor</span> <span class="o">|</span> <span class="n">list0</span> <span class="o">&amp;&amp;&amp;</span> <span class="n">list1</span> <span class="o">|</span> <span class="n">predicate</span> <span class="o">|</span>
+<span class="n">processor</span> <span class="o">|</span> <span class="n">list0</span> <span class="o">&amp;&amp;&amp;</span> <span class="n">list1</span> <span class="o">|</span> <span class="n">predicate</span>
 </code></pre></div></div>
 
 <p>I’ll leave the implementation of this example as an exercise to the reader.</p>
@@ -161,7 +161,7 @@ Swift, and requires no fancy syntax trickery.</p>
 along this line, it became obvious that using a “list”’s initializer is just natural:</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="mi">1</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span>
-<span class="c1">// [(2,3),(2<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/12/09/list-comprehension-in-swift/>,</a>4),(2,5) ...</span>
+<span class="c1">// [(2,3),(2,4),(2,5) ...</span>
 </code></pre></div></div>
 
 <p>The processing function is at the end to take advantage of the trailing closure syntax. It’s nicer when

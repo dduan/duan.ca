@@ -103,7 +103,7 @@ accept some temporary data structure and introduce/implement some operators, the
 
 ```swift
 /// Just an example of the infinite possibilities.
-processor | list0 &&& list1 | predicate |
+processor | list0 &&& list1 | predicate
 ```
 
 I'll leave the implementation of this example as an exercise to the reader.

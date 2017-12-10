@@ -14,7 +14,7 @@
 
 &lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/List_comprehensione&quot;&gt;List comprehension&lt;/a&gt; should be no stranger to a Python or (and?) Haskell user. It’s a really compact syntax
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/List_comprehension&quot;&gt;List comprehension&lt;/a&gt; should be no stranger to a Python or (and?) Haskell user. It’s a really compact syntax
 that deals with &lt;a href=&quot;https://en.wikipedia.org/wiki/Cartesian_product&quot;&gt;Cartesian product&lt;/a&gt; of lists. In the case of Python, it’s probably responsible for the lack
 of evolution of lambda expressions, since it’s much nicer to write one-liners with it in place of &lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;s and
 &lt;code class=&quot;highlighter-rouge&quot;&gt;filter&lt;/code&gt;s.&lt;/p&gt;
@@ -118,7 +118,7 @@ Swift, and requires no fancy syntax trickery.&lt;/p&gt;
 along this line, it became obvious that using a “list”’s initializer is just natural:&lt;/p&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// [(2,3),(2,4)&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/09/list-comprehension-in-swift/&gt;,&lt;/a&gt;(2,5) ...&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// [(2,3),(2&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/09/list-comprehension-in-swift/&gt;,&lt;/a&gt;4),(2,5) ...&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;The processing function is at the end to take advantage of the trailing closure syntax. It’s nicer when

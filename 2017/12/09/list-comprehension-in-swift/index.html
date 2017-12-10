@@ -57,7 +57,7 @@
 
 <h2 id="motivation">Motivation</h2>
 
-<p><a href="https://en.wikipedia.org/wiki/List_comprehensione">List comprehension</a> should be no stranger to a Python or (and?) Haskell user. It’s a really compact syntax
+<p><a href="https://en.wikipedia.org/wiki/List_comprehension">List comprehension</a> should be no stranger to a Python or (and?) Haskell user. It’s a really compact syntax
 that deals with <a href="https://en.wikipedia.org/wiki/Cartesian_product">Cartesian product</a> of lists. In the case of Python, it’s probably responsible for the lack
 of evolution of lambda expressions, since it’s much nicer to write one-liners with it in place of <code class="highlighter-rouge">map</code>s and
 <code class="highlighter-rouge">filter</code>s.</p>
@@ -161,7 +161,7 @@ Swift, and requires no fancy syntax trickery.</p>
 along this line, it became obvious that using a “list”’s initializer is just natural:</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="mi">1</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span>
-<span class="c1">// [(2,3),(2,4)<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/12/09/list-comprehension-in-swift/>,</a>(2,5) ...</span>
+<span class="c1">// [(2,3),(2<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/12/09/list-comprehension-in-swift/>,</a>4),(2,5) ...</span>
 </code></pre></div></div>
 
 <p>The processing function is at the end to take advantage of the trailing closure syntax. It’s nicer when

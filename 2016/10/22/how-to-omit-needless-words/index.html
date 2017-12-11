@@ -7,12 +7,9 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>How To Omit Needless Words | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.6.2" />
+  <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>How To Omit Needless Words - Daniel Duan</title>
 <meta property="og:title" content="How To Omit Needless Words" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
 <meta name="description" content="A typical experience in adopting Swift 3 may look like this:" />
 <meta property="og:description" content="A typical experience in adopting Swift 3 may look like this:" />
 <link rel="canonical" href="https://duan.ca/2016/10/22/how-to-omit-needless-words/" />
@@ -24,9 +21,16 @@
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
 <script type="application/ld+json">
-{"description":"A typical experience in adopting Swift 3 may look like this:","author":{"@type":"Person","name":"Daniel Duan"},"@type":"BlogPosting","url":"https://duan.ca/2016/10/22/how-to-omit-needless-words/","headline":"How To Omit Needless Words","dateModified":"2016-10-22T17:08:41-07:00","datePublished":"2016-10-22T17:08:41-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2016/10/22/how-to-omit-needless-words/"},"@context":"http://schema.org"}</script>
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How To Omit Needless Words",
+    "datePublished": "2016-10-22T17:08:41-07:00",
+    "description": "A typical experience in adopting Swift 3 may look like this:",
+    "url": "https://duan.ca/2016/10/22/how-to-omit-needless-words/"
+  }
+</script>
 <!-- End Jekyll SEO tag -->
-
 </head>
 <body>
   <div class="container">
@@ -75,25 +79,28 @@ involves naming things. Luckily we have (IMHO) the best “features” in Swift
 guideline for function names between Swift 2 and 3. In Swift 2 we used to name
 things like so…</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func doStuffWithThing(thing: Thing) { … }
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>func doStuffWithThing(thing: Thing) { … }
+</code></pre>
+</div>
 
 <p>… and use it like …</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>doStuffWithThing(someThing)
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>doStuffWithThing(someThing)
+</code></pre>
+</div>
 
 <p>That’s a lot of “thing”s, have you noticed?</p>
 
 <p>Since the word “Thing” is <em>merely repeating</em> the type information, we can omit
 it in Swift 3:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// declare
+<div class="highlighter-rouge"><pre class="highlight"><code>// declare
 func doStuff(with thing: Thing) { … }
 
 // use
 doStuff(with: someThing)
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>It’s clear at both declaration and use site what we are doing stuff to.</p>
 
@@ -105,13 +112,14 @@ section, we’ll discuss one way to make it happen.</p>
 <h2 id="step-1-automate">Step 1: Automate</h2>
 
 <p>A good indicator of “merely repeating type information” is repetition of words.
-If you have been disciplined about naming your functions in Swift 2<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2016/10/22/how-to-omit-needless-words/>,</a> finding
+If you have been disciplined about naming your functions in Swift 2, finding
 such repetition should take no more than one or two good regular expressions.
 After the migrator, your code may contain a mixture of these:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">doStuffWithX</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">X</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">doStuffWithX</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">X</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
 <span class="kd">func</span> <span class="nf">doStuff</span><span class="p">(</span><span class="n">forY</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">Y</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>In other words, the repeating word (<code class="highlighter-rouge">X</code> or <code class="highlighter-rouge">Y</code>) is preceded by a
 <a href="https://www.englishclub.com/grammar/prepositions-list.htm">preposition</a>.</p>
@@ -126,8 +134,9 @@ the scripts yourself, I’ve made a little tool for it <a href="https://github.c
 
 <p>You can further rearrange the pieces in function name mechanically to:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">doStuff</span><span class="p">(</span><span class="n">preposition</span> <span class="nv">originalArgName</span><span class="p">:</span> <span class="k">Type</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
-</code></pre></div></div>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">doStuff</span><span class="p">(</span><span class="n">preposition</span> <span class="nv">originalArgName</span><span class="p">:</span> <span class="k">Type</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
+</code></pre>
+</div>
 
 <p>The <a href="https://github.com/dduan/needless">tool</a> I wrote can suggest alternatives like this. Applying them
 is technically automatable. But I find manually doing tasks such as fixing up
@@ -150,39 +159,43 @@ renaming here should be <code class="highlighter-rouge">alertForScreen(with size
 <p><strong>Awkward literal values results in ungrammatical phrases</strong>. Imagine our
 argument is a enum:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Mode</span> <span class="p">{</span>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Mode</span> <span class="p">{</span>
   <span class="k">case</span> <span class="n">add</span>
   <span class="k">case</span> <span class="n">edit</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>… and we renamed a function <code class="highlighter-rouge">updateUIForMode(mode: Mode)</code> to
 <code class="highlighter-rouge">update(for mode: Mode)</code>. The call site, therefore, becomes
 <code class="highlighter-rouge">update(for: .add)</code>.</p>
 
-<p>What makes it feels wrong? Well, a preposition followed by a verb (“for add”)
+<p>What makes it feels wrong? Well<a class="backlink" rel="canonical" title="From duan.ca" href= https://duan.ca/2016/10/22/how-to-omit-needless-words/ >,</a> a preposition followed by a verb (“for add”)
 is not very grammatical. Normally we would say “update UI for <em>adding</em>”. So here
 we need to update the literals in that enum to “adding” and “editing”.</p>
 
 <p><strong>Type information becomes too weak</strong>. This can happen very often with enum
 literals. We often name enum values with an adjective to qualify its name:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">UIControlState</span> <span class="p">{</span>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">UIControlState</span> <span class="p">{</span>
     <span class="k">case</span> <span class="n">automatic</span> <span class="c1">// which state? the *automatic* state!</span>
     <span class="err">…</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 <p>After renaming, we’ll have functions that simply becomes too generic and
 mysterious at call site:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">update</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">automatic</span><span class="p">)</span> <span class="c1">// automatic what? 😂</span>
-</code></pre></div></div>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="nf">update</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">automatic</span><span class="p">)</span> <span class="c1">// automatic what? 😂</span>
+</code></pre>
+</div>
 
 <p>This is where we need to be flexible and use our own good judgement. Perhaps
 it’s simply better to keep the qualifying postfix:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">update</span><span class="p">(</span><span class="nv">forControlState</span><span class="p">:</span> <span class="o">.</span><span class="n">automatic</span><span class="p">)</span> <span class="c1">// better</span>
-</code></pre></div></div>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="nf">update</span><span class="p">(</span><span class="nv">forControlState</span><span class="p">:</span> <span class="o">.</span><span class="n">automatic</span><span class="p">)</span> <span class="c1">// better</span>
+</code></pre>
+</div>
 
 <p>In the guideline’s parlance, this is <a href="https://swift.org/documentation/api-design-guidelines/#weak-type-information">compensate for weak type
 information</a>.</p>

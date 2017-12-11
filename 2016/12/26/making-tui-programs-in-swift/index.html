@@ -7,14 +7,11 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>Making TUI Applications In Swift | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.6.2" />
+  <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>Making TUI Applications In Swift - Daniel Duan</title>
 <meta property="og:title" content="Making TUI Applications In Swift" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="One of my fondest memory in programming is writing the game Snake on one of these:" />
-<meta property="og:description" content="One of my fondest memory in programming is writing the game Snake on one of these:" />
+<meta name="description" content="One of my fondest memory in programming is writing the game Snake on one ofthese:" />
+<meta property="og:description" content="One of my fondest memory in programming is writing the game Snake on one ofthese:" />
 <link rel="canonical" href="https://duan.ca/2016/12/26/making-tui-programs-in-swift/" />
 <meta property="og:url" content="https://duan.ca/2016/12/26/making-tui-programs-in-swift/" />
 <meta property="og:site_name" content="Daniel Duan" />
@@ -24,9 +21,16 @@
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
 <script type="application/ld+json">
-{"description":"One of my fondest memory in programming is writing the game Snake on one of these:","author":{"@type":"Person","name":"Daniel Duan"},"@type":"BlogPosting","url":"https://duan.ca/2016/12/26/making-tui-programs-in-swift/","headline":"Making TUI Applications In Swift","dateModified":"2016-12-26T21:39:05-08:00","datePublished":"2016-12-26T21:39:05-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2016/12/26/making-tui-programs-in-swift/"},"@context":"http://schema.org"}</script>
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Making TUI Applications In Swift",
+    "datePublished": "2016-12-26T21:39:05-08:00",
+    "description": "One of my fondest memory in programming is writing the game Snake on one ofthese:",
+    "url": "https://duan.ca/2016/12/26/making-tui-programs-in-swift/"
+  }
+</script>
 <!-- End Jekyll SEO tag -->
-
 </head>
 <body>
   <div class="container">
@@ -63,10 +67,8 @@ photo. In fact, I didn’t know how to make a copy of the code, and the device
 wasn’t even mine. So the game just stayed there when the device was returned to
 the owener and its fate unknown.</p>
 
-<p>But I love it nontheless. Design the game, write it, playing it, showing it off</p>
-<ul>
-  <li>everything.</li>
-</ul>
+<p>But I love it nontheless. Design the game, write it, playing it, showing it off
+- everything.</p>
 
 <p><br /></p>
 
@@ -108,7 +110,7 @@ pre-built UI elements like panels, menus, forms etc. The terminal in my mind is
 a spread of characters that can be updated by me. That sounds fun. Ncurses seems
 more like UIKit :P.</p>
 
-<p>Luckily<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2016/12/26/making-tui-programs-in-swift/>,</a> I found the fun library: <a href="https://github.com/nsf/termbox">termbox</a> by <a href="https://github.com/nsf">nsf</a>. Termbox offers around
+<p>Luckily, I found the fun library: <a href="https://github.com/nsf/termbox">termbox</a> by <a href="https://github.com/nsf">nsf</a>. Termbox offers around
 a dozen functions that gives us size of the terminal, a way to update text at
 a row/column coordinates, and user inputs in forms of key-presses and
 mouse-clicks. And that’s it!</p>
@@ -122,7 +124,7 @@ mouse-clicks. And that’s it!</p>
 primitives from termbox. Awww yeah! Here’s the code with the comment stripped,
 to give you a taste:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Termbox</span>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Termbox</span>
 <span class="kd">func</span> <span class="nf">printAt</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="kt">Int32</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">Int32</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">foreground</span><span class="p">:</span> <span class="kt">Attributes</span> <span class="o">=</span> <span class="o">.</span><span class="k">default</span><span class="p">,</span>
     <span class="nv">background</span><span class="p">:</span> <span class="kt">Attributes</span> <span class="o">=</span> <span class="o">.</span><span class="k">default</span><span class="p">)</span>
@@ -189,7 +191,7 @@ to give you a taste:</p>
             <span class="p">}</span>
 
         <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">mouse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-            <span class="kt">Termbox</span><span class="o">.</span><span class="nf">put</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span>
+            <span class="kt">Termbox</span><span class="o">.</span><span class="nf">put</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="n">x</span><span class="p"><a class="backlink" rel="canonical" title="From duan.ca" href= https://duan.ca/2016/12/26/making-tui-programs-in-swift/ >,</a></span> <span class="nv">y</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span>
                 <span class="nv">character</span><span class="p">:</span> <span class="n">drawingCharacter</span><span class="p">,</span>
                 <span class="nv">foreground</span><span class="p">:</span> <span class="o">.</span><span class="n">red</span><span class="p">)</span>
         <span class="k">default</span><span class="p">:</span>
@@ -203,7 +205,8 @@ to give you a taste:</p>
 <span class="p">}</span>
 
 <span class="nf">paint</span><span class="p">()</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p><a href="https://github.com/dduan/Termbox">Library</a> and this <a href="https://github.com/dduan/TerminalPaint">app</a> are both on Github. Go and
 have fun :)</p>

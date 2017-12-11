@@ -7,12 +7,9 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>List Comprehension In Swift | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.6.2" />
+  <!-- Begin Jekyll SEO tag v2.0.0 -->
+<title>List Comprehension In Swift - Daniel Duan</title>
 <meta property="og:title" content="List Comprehension In Swift" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
 <meta name="description" content="Let’s explore ways to add list comprehension to Swift." />
 <meta property="og:description" content="Let’s explore ways to add list comprehension to Swift." />
 <link rel="canonical" href="https://duan.ca/2017/12/09/list-comprehension-in-swift/" />
@@ -24,9 +21,16 @@
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
 <script type="application/ld+json">
-{"description":"Let’s explore ways to add list comprehension to Swift.","author":{"@type":"Person","name":"Daniel Duan"},"@type":"BlogPosting","url":"https://duan.ca/2017/12/09/list-comprehension-in-swift/","headline":"List Comprehension In Swift","dateModified":"2017-12-09T12:26:30-08:00","datePublished":"2017-12-09T12:26:30-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2017/12/09/list-comprehension-in-swift/"},"@context":"http://schema.org"}</script>
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "List Comprehension In Swift",
+    "datePublished": "2017-12-09T12:26:30-08:00",
+    "description": "Let’s explore ways to add list comprehension to Swift.",
+    "url": "https://duan.ca/2017/12/09/list-comprehension-in-swift/"
+  }
+</script>
 <!-- End Jekyll SEO tag -->
-
 </head>
 <body>
   <div class="container">
@@ -64,38 +68,44 @@ of evolution of lambda expressions, since it’s much nicer to write one-liners 
 
 <p>Here’s an example of an list comprehension in Haskell from Wikipedia:</p>
 
-<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">3</span><span class="o">..</span><span class="mi">5</span><span class="p">]]</span>
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">3</span><span class="o">..</span><span class="mi">5</span><span class="p">]]</span>
 <span class="c1">-- [(1,3),(1,4),(1,5),(2,3),(2,4) ...</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>In this example, a list of pair of integers is constructed from 2 lists of integers.</p>
 
 <p>Here is what that example would be in Python:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
 <span class="c"># [(1, 3), (1, 4), (1, 5), (2, 3), (2, 4) ...</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Here’s what it would be in mathematics (except we are dealing with sets, not lists, but I’ll only refer to
 lists from here on.):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Let (a, b) be an ordered list of elements
+<div class="highlighter-rouge"><pre class="highlight"><code>Let (a, b) be an ordered list of elements
 
-{(x, y)|x ∈ {1,2,3,4,5}, y ∈ {3,4,5}}
-</code></pre></div></div>
+{(x, y)|x ∈ {1,2,3,4<a class="backlink" rel="canonical" title="From duan.ca" href= https://duan.ca/2017/12/09/list-comprehension-in-swift/ >,</a>5}, y ∈ {3,4,5}}
+</code></pre>
+</div>
 
 <p>One can filter out unwanted elements with predicates, and apply arbitrary functions to elements of the
 result. Let’s say we only want even numbers from the first list, and we want the sum of x and y, continuing on
 our examples:</p>
 
-<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="n">y</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">3</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">x</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-</code></pre></div></div>
+<div class="language-haskell highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="n">y</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">3</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">x</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+</code></pre>
+</div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-</code></pre></div></div>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+</code></pre>
+</div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{x+y|x ∈ {1,2,3,4,5}, y ∈ {3,4,5}, x is even}
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">x+y|x</span><span class="w"> </span><span class="err">∈</span><span class="w"> </span><span class="err">{1,2,3,4,5</span><span class="p">}</span><span class="err">,</span><span class="w"> </span><span class="err">y</span><span class="w"> </span><span class="err">∈</span><span class="w"> </span><span class="p">{</span><span class="err">3,4,5</span><span class="p">}</span><span class="err">,</span><span class="w"> </span><span class="err">x</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">even}</span><span class="w">
+</span></code></pre>
+</div>
 
 <p>In theory, this syntax can be applied to an arbitrary number of lists. Putting aside how often this need comes
 up in day-to-day programming in your domain, it should be obvious that it’s alternative, be it nested loops or
@@ -113,8 +123,9 @@ up in day-to-day programming in your domain, it should be obvious that it’s al
 
 <p>In Swift, if our input is only one list, there’s a pretty sweet way to achieve that:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list</span><span class="o">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span><span class="o">.</span><span class="nf">map</span><span class="p">(</span><span class="n">processor</span><span class="p">)</span>
-</code></pre></div></div>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="n">list</span><span class="o">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span><span class="o">.</span><span class="nf">map</span><span class="p">(</span><span class="n">processor</span><span class="p">)</span>
+</code></pre>
+</div>
 
 <p>To make comprehension work with more lists, we have some syntax options.</p>
 
@@ -122,10 +133,10 @@ up in day-to-day programming in your domain, it should be obvious that it’s al
 
 <p>The “brute force” option would be a function that parameterize all 3 parts of the comprehension. Such as</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// going with order of appearance in Python/Haskell syntax</span>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">// going with order of appearance in Python/Haskell syntax</span>
 <span class="kd">func</span> <span class="n">comprehension</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">List</span><span class="p">,</span> <span class="kt">Result</span><span class="o">&gt;</span><span class="p">(</span>
     <span class="nv">predicate</span><span class="p">:</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">,</span>
-    <span class="nv">list</span><span class="p">:</span> <span class="kt">List</span><span class="p"><a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/12/09/list-comprehension-in-swift/>,</a></span>
+    <span class="nv">list</span><span class="p">:</span> <span class="kt">List</span><span class="p">,</span>
     <span class="nv">processor</span><span class="p">:</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span>
 <span class="p">)</span> <span class="k">where</span>
     <span class="kt">List</span><span class="p">:</span> <span class="kt">Sequence</span><span class="p">,</span> <span class="kt">List</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">Element</span>
@@ -133,7 +144,8 @@ up in day-to-day programming in your domain, it should be obvious that it’s al
 <span class="p">{</span>
     <span class="c1">// implementation</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>To supporting more than one list, just add more parameters to both types and the function itself.</p>
 
@@ -144,9 +156,10 @@ up in day-to-day programming in your domain, it should be obvious that it’s al
 <p>Deploy more syntax tricks. Somehow make it visually similar to the math/Haskell/Python notation. If we can
 accept some temporary data structure and introduce/implement some operators, there’d be many possibilities.</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// Just an example of the infinite possibilities.</span>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">/// Just an example of the infinite possibilities.</span>
 <span class="n">processor</span> <span class="o">|</span> <span class="n">list0</span> <span class="o">&amp;&amp;&amp;</span> <span class="n">list1</span> <span class="o">|</span> <span class="n">predicate</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>I’ll leave the implementation of this example as an exercise to the reader.</p>
 
@@ -160,16 +173,18 @@ Swift, and requires no fancy syntax trickery.</p>
 <p>The result of list comprehension is a list. The goal of this operation is to <em>construct</em> a list. Yep, thinking
 along this line, it became obvious that using a “list”’s initializer is just natural:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="mi">1</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="mi">1</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span>
 <span class="c1">// [(2,3),(2,4),(2,5) ...</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>The processing function is at the end to take advantage of the trailing closure syntax. It’s nicer when
 there’s not predicate:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="mi">1</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span>
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="mi">1</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span>
 <span class="c1">// [(1,3),(1,4),(1,5),(2,3),(2,4) ...</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>This syntax seems both succinct and Swift-y.</p>
 

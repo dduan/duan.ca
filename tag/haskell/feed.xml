@@ -7,6 +7,8 @@
         
         
             
+        
+            
             <item>
                 <title>List Comprehension In Swift</title>
                 <description>&lt;p&gt;Let’s explore ways to add list comprehension to Swift.&lt;/p&gt;
@@ -39,7 +41,7 @@ lists from here on.):&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Let (a, b) be an ordered list of elements
 
-{(x, y)|x ∈ {1,2,3,4&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2017/12/09/list-comprehension-in-swift/ &gt;,&lt;/a&gt;5}, y ∈ {3,4,5}}
+{(x, y)|x ∈ {1,2,3,4&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/09/list-comprehension-in-swift/&gt;,&lt;/a&gt;5}, y ∈ {3,4,5}}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 

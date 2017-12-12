@@ -19,6 +19,8 @@
             
         
             
+        
+            
             <item>
                 <title>Rebase And Sign Multiple Git Commits</title>
                 <description>&lt;p&gt;I never bothered &lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work&quot;&gt;signing&lt;/a&gt; my git commits until Github started putting
@@ -40,7 +42,7 @@ please”. You cannot rebase and keep the commits signed!&lt;/p&gt;
 &lt;p&gt;Well, that kind of sucks. But you are reading about it here, so I’d better give
 you something to help, right?&lt;/p&gt;
 
-&lt;p&gt;There is&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/ &gt;,&lt;/a&gt; at least, one way to achieve &lt;em&gt;rebase and sign multiple commits&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;There is&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/&gt;,&lt;/a&gt; at least, one way to achieve &lt;em&gt;rebase and sign multiple commits&lt;/em&gt;:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Run interactive rebase: &lt;code class=&quot;highlighter-rouge&quot;&gt;git rebase -i branch&lt;/code&gt;.&lt;/li&gt;
@@ -112,7 +114,7 @@ deploy:
 &lt;/div&gt;
 
 &lt;p&gt;Drop it into root of your Jekyll project, commit all changes (including the
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;). And type &lt;code class=&quot;highlighter-rouge&quot;&gt;make deploy&lt;/code&gt;. BOOM&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2016/05/15/deploy-jekyll-to-github/ &gt;,&lt;/a&gt; done.&lt;/p&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;). And type &lt;code class=&quot;highlighter-rouge&quot;&gt;make deploy&lt;/code&gt;. BOOM&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/05/15/deploy-jekyll-to-github/&gt;,&lt;/a&gt; done.&lt;/p&gt;
 
 &lt;p&gt;There are a couple of assumptions:&lt;/p&gt;
 
@@ -168,7 +170,7 @@ I see a discussion about locking down branches of a Git repository.&lt;/p&gt;
 
 &lt;p&gt;Making developers “own” branches on a shared repository is a pratice
 inheritated from the days of centralized version control. Git doesn’t provide
-built-in support for this&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2012/10/31/keep-git-social/ &gt;,&lt;/a&gt; for good reasons.&lt;/p&gt;
+built-in support for this&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2012/10/31/keep-git-social/&gt;,&lt;/a&gt; for good reasons.&lt;/p&gt;
 
 &lt;p&gt;With Subversion, the ultimate goal of branch-wise access control is to keep
 out

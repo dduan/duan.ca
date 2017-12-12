@@ -31,6 +31,8 @@
             
         
             
+        
+            
             <item>
                 <title>char ** in Swift</title>
                 <description>&lt;p&gt;A “string” in C is just a continuous chunk of &lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt; values in memory with
@@ -67,7 +69,7 @@ interface:&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;So&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2015/11/01/char-star-star-in-swift/ &gt;,&lt;/a&gt; what’s really going on here?&lt;/p&gt;
+&lt;p&gt;So&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2015/11/01/char-star-star-in-swift/&gt;,&lt;/a&gt; what’s really going on here?&lt;/p&gt;
 
 &lt;p&gt;Inspecting &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt;’s signature in Swift, we see&lt;/p&gt;
 

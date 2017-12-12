@@ -11,6 +11,8 @@
             
         
             
+        
+            
             <item>
                 <title>Replying To Old Mailing List Threads</title>
                 <description>&lt;p&gt;&lt;em&gt;One common complains on the Swift Evolution mailing list is about its
@@ -27,7 +29,7 @@ consume payloads of this protocol and, as a consequence, don’t think much abou
 that very fact.&lt;/p&gt;
 
 &lt;p&gt;Like HTTP, each email includes headers hidden by normal email clients. Each
-header is essentially two strings, a key and a value&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/ &gt;,&lt;/a&gt; separated by a colon.
+header is essentially two strings, a key and a value&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/&gt;,&lt;/a&gt; separated by a colon.
 Among these headers are &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt;. When we tell our email
 client applications to start a reply, they take the value from &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt;
 and use it as value for &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt; automatically.&lt;/p&gt;

@@ -56,6 +56,29 @@
   
   <div class="content post">
     
+    <h1 class="post-title"><a href="">🔗 </a></h1>
+    
+    <div class="post-date">
+      
+      <a href="/linked/2017/12/2017-12-11-c-and-swift/">
+      
+      <time>11 Dec 2017</time>
+      
+      </a>
+      
+      
+    </div>
+    <p>This is an article I wish I had writen. It has everything about Swift and C, as stated in the title. It’s
+going to be a useful reference to me. I also wish I’d discovered it earlier.</p>
+
+<p>Follow the author <a href="https://twitter.com/uraimo">Umberto Raimondi</a> on Twitter!</p>
+
+
+  </div>
+  <hr />
+  
+  <div class="content post">
+    
     <h1 class="post-title"><a href="/2017/12/09/list-comprehension-in-swift/">List Comprehension In Swift</a></h1>
     
     <div class="post-date">
@@ -324,113 +347,6 @@ to the Swift community 🎉!</p>
 <p>¹ source compatibility mode is a thing starting with Swift 4. As new
 major version of Swift is released, code written in the previous version should
 compile without change in compatibility mode.</p>
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2017/02/07/replying-to-old-mailing-list-threads/">Replying To Old Mailing List Threads</a></h1>
-    
-    <div class="post-date">
-      
-      <time>07 Feb 2017</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/swift-evolution">Swift Evolution</a>,
-      
-        <a href="/tag/email">Email</a>
-      
-      </div>
-      
-    </div>
-    <p><em>One common complains on the Swift Evolution mailing list is about its
-inscrutable interface. If you see an inactive thread on the web archive but
-haven’t subscribed, there seems to be no way to participate or “revive” it
-since you never received any of its emails.</em></p>
-
-<p><em>With a <a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20170206/031537.html">hint</a> and some experiments, I’ve discovered that there is
-a way. This post reveals the magic step by step (without commenting on the
-merits of email or this solution).</em></p>
-
-<p>Like HTTP, Email is a text-based <a href="https://tools.ietf.org/html/rfc2822">protocol</a>. Unlike HTTP, we directly
-consume payloads of this protocol and, as a consequence, don’t think much about
-that very fact.</p>
-
-<p>Like HTTP, each email includes headers hidden by normal email clients. Each
-header is essentially two strings, a key and a value, separated by a colon.
-Among these headers are <code class="highlighter-rouge">Message-Id</code> and <code class="highlighter-rouge">In-Reply-To</code>. When we tell our email
-client applications to start a reply, they take the value from <code class="highlighter-rouge">Message-Id</code>
-and use it as value for <code class="highlighter-rouge">In-Reply-To</code> automatically.</p>
-
-<p>To observe all this in action, we can open some emails with our favorite text
-editors and look for these headers. Of course, this require us to know where the
-emails exist as files. On macOS, an easy thing to do is to drag from Mail.app to
-Finder/Desktop and open the resulting .eml file:</p>
-
-<p><img src="https://duan.ca/assets/2017/02/open-email.gif" alt="Open an email in text editors" /></p>
-
-<p>Among the (perhaps overwhelming amount of) headers, we’ll find the two fields we
-are looking for:</p>
-
-<p><img src="https://duan.ca/assets/2017/02/email-headers.png" alt="Email Headers Message-Id and
-In-Reply-To" /></p>
-
-<p>… I’ll leave the clients’ reply behavior regarding these fields for the reader
-to verify.</p>
-
-<p>Mailing list software such as GNU Mailman, which <a href="https://swift.org">swift.org</a> and <a href="http://llvm.org">llvm.org</a>
-use to host various mailing lists, associate emails in threads by chaining them
-with the headers explained above, among other things. As long as we have
-a message’s <code class="highlighter-rouge">Message-Id</code>, we can reply to it “officially” by adding its value to
-the <code class="highlighter-rouge">In-Reply-To</code> header in our email, regardless of whether we have received
-that email ourselves previously.</p>
-
-<p>So here are the steps to reply retroactively to a mailing list thread.</p>
-
-<ol>
-  <li>
-    <p><strong>find <code class="highlighter-rouge">Message-Id</code> of the mailing list message we want to reply to.</strong></p>
-
-    <p>This value is contained in the mailing list web archive’s <code class="highlighter-rouge">mailto</code> link.
-Unfortunately Mail.app doesn’t recognize it. It’s easy enough to find it
-ourselves though:</p>
-
-    <p><img src="https://duan.ca/assets/2017/02/find-message-id.gif" alt="Finding Message-Id on mailman
-archive" /></p>
-
-    <p>Note the <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">@</code> characters are percent-quoted. We have to recover the
-id values to the format
-<code class="highlighter-rouge">&lt;alphanumerics-potentially-separated-by-dash@address.com&gt;</code>.</p>
-
-    <p>Another way to acquire this value is from the gzip’d archive. There they
-just exist as plain text. The downside is you have to dig out the message
-itself first.</p>
-  </li>
-  <li>
-    <p><strong>Add <code class="highlighter-rouge">In-Reply-To</code> header to our email.</strong></p>
-
-    <p>Draft a new email, make its title the same as our email chain’s title (this
-is a good idea because lots of email <em>clients</em> do use the title to thread
-messages). Set the appropriate recipients, and CCs, including the mailing
-list’s address. Now save this email as draft and open it in a text editor as
-we did in our investigations.  Add in the line
-<code class="highlighter-rouge">In-Reply-To: &lt;id-we-found-in-step-one.address.com&gt;</code>, save it. Then send this
-email (for example, open it with Mail.app and use Message-&gt;Send Again in the
-menu).</p>
-
-    <p>Of course, some email client <a href="http://www.pixelbeat.org/docs/thunderbird-threading.html">supports</a> adding it
-from their GUI.</p>
-  </li>
-</ol>
-
-<p>You’ll find the in addition to functioning as an normal message to the
-recipients, the mailing list will properly put your message to the original
-thread (in the case of swift-evolution, only if your reply is within the same
-week).</p>
-
 
   </div>
   <hr />

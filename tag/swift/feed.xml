@@ -7,6 +7,8 @@
         
         
             
+        
+            
             <item>
                 <title>List Comprehension In Swift</title>
                 <description>&lt;p&gt;Let’s explore ways to add list comprehension to Swift.&lt;/p&gt;
@@ -39,7 +41,7 @@ lists from here on.):&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Let (a, b) be an ordered list of elements
 
-{(x, y)|x ∈ {1,2,3,4&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2017/12/09/list-comprehension-in-swift/ &gt;,&lt;/a&gt;5}, y ∈ {3,4,5}}
+{(x, y)|x ∈ {1,2,3,4&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/09/list-comprehension-in-swift/&gt;,&lt;/a&gt;5}, y ∈ {3,4,5}}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -187,7 +189,7 @@ Swift.org&lt;/a&gt;.&lt;/p&gt;
 flag &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;, where “X” is the &lt;em&gt;current&lt;/em&gt; major Swift version.&lt;/p&gt;
 
     &lt;p&gt;In project’s “Build Settings”, value for “Other Swift Flags” should
- contain &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;. This could mean setting it in Xcode&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/ &gt;,&lt;/a&gt; in
+ contain &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;. This could mean setting it in Xcode&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; in
  &lt;code class=&quot;highlighter-rouge&quot;&gt;.xcconfig&lt;/code&gt; files you are using and/or in your dependency managers such
  as Cocoapods.&lt;/p&gt;
 
@@ -287,7 +289,7 @@ Here, we’re trying to define language features and implementation techniques
 that allow a library to evolve in a forward-compatible manner, as long as the
 developer follows certain guidelines. Here, the goal is if you should be able
 to compile your library, make some changes to add new APIs, and recompile it
-&lt;em&gt;with the same compiler&lt;/em&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/linked/2017/01/swift-abi-in-laymans-terms/ &gt;,&lt;/a&gt; without breaking downstream clients, as long as you
+&lt;em&gt;with the same compiler&lt;/em&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/linked/2017/01/swift-abi-in-laymans-terms/&gt;,&lt;/a&gt; without breaking downstream clients, as long as you
 follow the library evolution guidelines (Also, you can imagine one day having
 an ‘ABI diff’ tool to automate this).  &amp;gt;&lt;/p&gt;
     &lt;/li&gt;
@@ -454,7 +456,7 @@ to give you a taste:&lt;/p&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
         &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mouse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-            &lt;span class=&quot;kt&quot;&gt;Termbox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2016/12/26/making-tui-programs-in-swift/ &gt;,&lt;/a&gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;Termbox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/12/26/making-tui-programs-in-swift/&gt;,&lt;/a&gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
                 &lt;span class=&quot;nv&quot;&gt;character&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;drawingCharacter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
                 &lt;span class=&quot;nv&quot;&gt;foreground&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
@@ -599,7 +601,7 @@ argument is a enum:&lt;/p&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;update(for mode: Mode)&lt;/code&gt;. The call site, therefore, becomes
 &lt;code class=&quot;highlighter-rouge&quot;&gt;update(for: .add)&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;What makes it feels wrong? Well&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2016/10/22/how-to-omit-needless-words/ &gt;,&lt;/a&gt; a preposition followed by a verb (“for add”)
+&lt;p&gt;What makes it feels wrong? Well&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/10/22/how-to-omit-needless-words/&gt;,&lt;/a&gt; a preposition followed by a verb (“for add”)
 is not very grammatical. Normally we would say “update UI for &lt;em&gt;adding&lt;/em&gt;”. So here
 we need to update the literals in that enum to “adding” and “editing”.&lt;/p&gt;
 
@@ -692,7 +694,7 @@ project, verifying that support for those package managers remain functional.&lt
 on &lt;a href=&quot;https://github.com/dduan/DistributionTests&quot;&gt;Github&lt;/a&gt; 😉.&lt;/p&gt;
 
 &lt;p&gt;The script &lt;code class=&quot;highlighter-rouge&quot;&gt;customize&lt;/code&gt; requires 3 pieces of information of the library: its
-import name&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2016/10/10/distribution-tests/ &gt;,&lt;/a&gt; its git repository URL and a major version number. The assumption
+import name&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/10/10/distribution-tests/&gt;,&lt;/a&gt; its git repository URL and a major version number. The assumption
 here is the library generates uniformly named artifacts: the file name for
 &lt;code class=&quot;highlighter-rouge&quot;&gt;.framework&lt;/code&gt; and the name users use to import it are the same. Testing
 distribution of a library is as simple as:&lt;/p&gt;
@@ -738,7 +740,7 @@ argument. There’s no conevient way to forward this array to a normal
 dictionary’s initializer (incidentally, this is a Swift feature I really
 want). Plus, I don’t need &lt;code class=&quot;highlighter-rouge&quot;&gt;DefaultDictionary&lt;/code&gt; to be a literal convertible.&lt;/li&gt;
   &lt;li&gt;Most of the code, including the imaginary &lt;code class=&quot;highlighter-rouge&quot;&gt;init&lt;/code&gt; mentioned in previous
-point&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2016/05/19/a-case-for-oop/ &gt;,&lt;/a&gt; simply reuses stuff from &lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt;: asscociated type, indexes,
+point&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/05/19/a-case-for-oop/&gt;,&lt;/a&gt; simply reuses stuff from &lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt;: asscociated type, indexes,
 generator, subscript, etc.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -788,7 +790,7 @@ expands to multiple characters:&lt;/p&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Token&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2016/05/15/cheap-orders/ &gt;,&lt;/a&gt;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Equal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/05/15/cheap-orders/&gt;,&lt;/a&gt;&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;&quot;-&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Minus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;// more token mappings …&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;&quot;==&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Equality&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -936,7 +938,7 @@ interface:&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;So&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2015/11/01/char-star-star-in-swift/ &gt;,&lt;/a&gt; what’s really going on here?&lt;/p&gt;
+&lt;p&gt;So&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2015/11/01/char-star-star-in-swift/&gt;,&lt;/a&gt; what’s really going on here?&lt;/p&gt;
 
 &lt;p&gt;Inspecting &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt;’s signature in Swift, we see&lt;/p&gt;
 
@@ -1040,7 +1042,7 @@ get two new types.&lt;/p&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;DireWolf&lt;/code&gt;, resulting in &lt;code class=&quot;highlighter-rouge&quot;&gt;6 * 6 = 36&lt;/code&gt; potential values – the &lt;em&gt;product&lt;/em&gt; of
 &lt;code class=&quot;highlighter-rouge&quot;&gt;Child&lt;/code&gt;’s and &lt;code class=&quot;highlighter-rouge&quot;&gt;DireWolf&lt;/code&gt;’s values.&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Actor&lt;/code&gt;, an &lt;code class=&quot;highlighter-rouge&quot;&gt;enum&lt;/code&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2015/07/12/swift-algebraic-data-types/ &gt;,&lt;/a&gt; is a &lt;em&gt;sum&lt;/em&gt; type. &lt;code class=&quot;highlighter-rouge&quot;&gt;Parters&lt;/code&gt;, a &lt;code class=&quot;highlighter-rouge&quot;&gt;struct&lt;/code&gt;, is a &lt;em&gt;product&lt;/em&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Actor&lt;/code&gt;, an &lt;code class=&quot;highlighter-rouge&quot;&gt;enum&lt;/code&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2015/07/12/swift-algebraic-data-types/&gt;,&lt;/a&gt; is a &lt;em&gt;sum&lt;/em&gt; type. &lt;code class=&quot;highlighter-rouge&quot;&gt;Parters&lt;/code&gt;, a &lt;code class=&quot;highlighter-rouge&quot;&gt;struct&lt;/code&gt;, is a &lt;em&gt;product&lt;/em&gt;
 type. Here, &lt;code class=&quot;highlighter-rouge&quot;&gt;Parters&lt;/code&gt; could easily be defined as a &lt;code class=&quot;highlighter-rouge&quot;&gt;class&lt;/code&gt; or a &lt;code class=&quot;highlighter-rouge&quot;&gt;tuple&lt;/code&gt; and
 remain a &lt;em&gt;product&lt;/em&gt; type. Because we can create product or sum types in these
 direct ways, we can say Swift has first class support for Algebraic Data
@@ -1185,7 +1187,7 @@ $(TARGETS):
 
 &lt;p&gt;Now &lt;code class=&quot;highlighter-rouge&quot;&gt;make cat&lt;/code&gt; should take care of the compilation.&lt;/p&gt;
 
-&lt;p&gt;Since file I/O is the only concern, we’ll need C APIs from &lt;code class=&quot;highlighter-rouge&quot;&gt;stdio.h&lt;/code&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2015/07/04/lets-build-a-cat-in-swift-2/ &gt;,&lt;/a&gt; so
+&lt;p&gt;Since file I/O is the only concern, we’ll need C APIs from &lt;code class=&quot;highlighter-rouge&quot;&gt;stdio.h&lt;/code&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2015/07/04/lets-build-a-cat-in-swift-2/&gt;,&lt;/a&gt; so
 &lt;code class=&quot;highlighter-rouge&quot;&gt;bridge.h&lt;/code&gt; is a one liner:&lt;/p&gt;
 
 &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#import &amp;lt;stdio.h&amp;gt;
@@ -1335,7 +1337,7 @@ looks like this:&lt;/p&gt;
         &lt;span class=&quot;nv&quot;&gt;params&lt;/span&gt;                &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;nv&quot;&gt;json&lt;/span&gt;                  &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;nv&quot;&gt;headers&lt;/span&gt;               &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;auth&lt;/span&gt;                  &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href= https://duan.ca/2015/04/18/swift-function-fun-facts/ &gt;,&lt;/a&gt;&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;auth&lt;/span&gt;                  &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2015/04/18/swift-function-fun-facts/&gt;,&lt;/a&gt;&lt;/span&gt;
         &lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;                  &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requestBody&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;kt&quot;&gt;URLQuery&lt;/span&gt;              &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;URLQuery&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;nv&quot;&gt;redirects&lt;/span&gt;             &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;allowRedirects&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;

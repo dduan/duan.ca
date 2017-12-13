@@ -11,9 +11,11 @@
             
         
             
+        
+            
             <item>
                 <title>Building Swift Projects In Source Compatibility Mode</title>
-                <description>&lt;p&gt;It’s a few weeks before WWDC, so naturally¹ it’s time to try build your Swift
+                <description>&lt;p&gt;It’s a few weeks before WWDC&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; so naturally¹ it’s time to try build your Swift
 projects in the compiler’s compatibility mode!&lt;/p&gt;
 
 &lt;ol&gt;
@@ -34,7 +36,7 @@ Swift.org&lt;/a&gt;.&lt;/p&gt;
 flag &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;, where “X” is the &lt;em&gt;current&lt;/em&gt; major Swift version.&lt;/p&gt;
 
     &lt;p&gt;In project’s “Build Settings”, value for “Other Swift Flags” should
- contain &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;. This could mean setting it in Xcode&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; in
+ contain &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&gt;. This could mean setting it in Xcode, in
  &lt;code class=&quot;highlighter-rouge&quot;&gt;.xcconfig&lt;/code&gt; files you are using and/or in your dependency managers such
  as Cocoapods.&lt;/p&gt;
 
@@ -43,15 +45,14 @@ flag &lt;code class=&quot;highlighter-rouge&quot;&gt;-swift-version X&lt;/code&g
     &lt;p&gt;For example, with Cocoapods, you’ll need to add the following in your
  &lt;code class=&quot;highlighter-rouge&quot;&gt;Podfile&lt;/code&gt; to compile 3rd party libraries in compatibility mode:&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; post_install do |installer|
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; post_install do |installer|
      installer.pods_projects.targets.each do |target|
          target.build_configurations.each do |config|
              config.build_settings[&quot;OTHER_SWIFT_FLAGS&quot;] = &quot;$(inherited) -swift-version 3&quot;
          end
      end
  end
-&lt;/code&gt;&lt;/pre&gt;
-    &lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Build your project! This is where things start to get exciting.&lt;/p&gt;

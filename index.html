@@ -7,9 +7,12 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.0.0 -->
-<title>Daniel Duan - Daniel Duan thinks.</title>
+  <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Daniel Duan | Daniel Duan thinks.</title>
+<meta name="generator" content="Jekyll v3.6.2" />
 <meta property="og:title" content="Daniel Duan" />
+<meta name="author" content="Daniel Duan" />
+<meta property="og:locale" content="en_US" />
 <meta name="description" content="Daniel Duan thinks." />
 <meta property="og:description" content="Daniel Duan thinks." />
 <link rel="canonical" href="https://duan.ca/" />
@@ -19,16 +22,9 @@
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "name": "Daniel Duan",
-    "headline": "Daniel Duan",
-    "description": "Daniel Duan thinks.",
-    "url": "https://duan.ca/"
-  }
-</script>
+{"name":"Daniel Duan","description":"Daniel Duan thinks.","author":{"@type":"Person","name":"Daniel Duan"},"@type":"WebSite","url":"https://duan.ca/","headline":"Daniel Duan","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
+
 </head>
 <body>
   <div class="container">
@@ -87,6 +83,36 @@ going to be a useful reference to me. I also wish I’d discovered it earlier.</
   
   <div class="content post">
     
+    <h1 class="post-title"><a href="/2017/12/09/lets-build-a-bitarray-in-swift/">Let's Build A BitArray In Swift</a></h1>
+    
+    <div class="post-date">
+      
+      <time>09 Dec 2017</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/swift">Swift</a>,
+      
+        <a href="/tag/youtube">YouTube</a>,
+      
+        <a href="/tag/let-s-build">Let's Build</a>
+      
+      </div>
+      
+    </div>
+    <p>In this video, I build a space-efficient BitArray that confirms to <code class="highlighter-rouge">RandomAccessCollection</code> in Swift in
+a playground. It involves some basic (but neat!) bitwise manipulation tricks.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-k_jrIoD56k" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
+
+<p>I guess I’m a YouTuber now.</p>
+
+  </div>
+  <hr />
+  
+  <div class="content post">
+    
     <h1 class="post-title"><a href="/2017/12/09/list-comprehension-in-swift/">List Comprehension In Swift</a></h1>
     
     <div class="post-date">
@@ -116,44 +142,38 @@ of evolution of lambda expressions, since it’s much nicer to write one-liners 
 
 <p>Here’s an example of an list comprehension in Haskell from Wikipedia:</p>
 
-<div class="language-haskell highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">3</span><span class="o">..</span><span class="mi">5</span><span class="p">]]</span>
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">3</span><span class="o">..</span><span class="mi">5</span><span class="p">]]</span>
 <span class="c1">-- [(1,3),(1,4),(1,5),(2,3),(2,4) ...</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In this example, a list of pair of integers is constructed from 2 lists of integers.</p>
 
 <p>Here is what that example would be in Python:</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
 <span class="c"># [(1, 3), (1, 4), (1, 5), (2, 3), (2, 4) ...</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Here’s what it would be in mathematics (except we are dealing with sets, not lists, but I’ll only refer to
 lists from here on.):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Let (a, b) be an ordered list of elements
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Let (a, b) be an ordered list of elements
 
 {(x, y)|x ∈ {1,2,3,4,5}, y ∈ {3,4,5}}
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>One can filter out unwanted elements with predicates, and apply arbitrary functions to elements of the
 result. Let’s say we only want even numbers from the first list, and we want the sum of x and y, continuing on
 our examples:</p>
 
-<div class="language-haskell highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="n">y</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">3</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">x</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-</code></pre>
-</div>
+<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="n">y</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">3</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">x</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-</code></pre>
-</div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="err">x+y|x</span><span class="w"> </span><span class="err">∈</span><span class="w"> </span><span class="err">{1,2,3,4,5</span><span class="p">}</span><span class="err">,</span><span class="w"> </span><span class="err">y</span><span class="w"> </span><span class="err">∈</span><span class="w"> </span><span class="p">{</span><span class="err">3,4,5</span><span class="p">}</span><span class="err">,</span><span class="w"> </span><span class="err">x</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">even}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{x+y|x ∈ {1,2,3,4,5}, y ∈ {3,4,5}, x is even}
+</code></pre></div></div>
 
 <p>In theory, this syntax can be applied to an arbitrary number of lists. Putting aside how often this need comes
 up in day-to-day programming in your domain, it should be obvious that it’s alternative, be it nested loops or
@@ -171,9 +191,8 @@ up in day-to-day programming in your domain, it should be obvious that it’s al
 
 <p>In Swift, if our input is only one list, there’s a pretty sweet way to achieve that:</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="n">list</span><span class="o">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span><span class="o">.</span><span class="nf">map</span><span class="p">(</span><span class="n">processor</span><span class="p">)</span>
-</code></pre>
-</div>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list</span><span class="o">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span><span class="o">.</span><span class="nf">map</span><span class="p">(</span><span class="n">processor</span><span class="p">)</span>
+</code></pre></div></div>
 
 <p>To make comprehension work with more lists, we have some syntax options.</p>
 
@@ -181,7 +200,7 @@ up in day-to-day programming in your domain, it should be obvious that it’s al
 
 <p>The “brute force” option would be a function that parameterize all 3 parts of the comprehension. Such as</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">// going with order of appearance in Python/Haskell syntax</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// going with order of appearance in Python/Haskell syntax</span>
 <span class="kd">func</span> <span class="n">comprehension</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">List</span><span class="p">,</span> <span class="kt">Result</span><span class="o">&gt;</span><span class="p">(</span>
     <span class="nv">predicate</span><span class="p">:</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">,</span>
     <span class="nv">list</span><span class="p">:</span> <span class="kt">List</span><span class="p">,</span>
@@ -192,8 +211,7 @@ up in day-to-day programming in your domain, it should be obvious that it’s al
 <span class="p">{</span>
     <span class="c1">// implementation</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>To supporting more than one list, just add more parameters to both types and the function itself.</p>
 
@@ -204,10 +222,9 @@ up in day-to-day programming in your domain, it should be obvious that it’s al
 <p>Deploy more syntax tricks. Somehow make it visually similar to the math/Haskell/Python notation. If we can
 accept some temporary data structure and introduce/implement some operators, there’d be many possibilities.</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">/// Just an example of the infinite possibilities.</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// Just an example of the infinite possibilities.</span>
 <span class="n">processor</span> <span class="o">|</span> <span class="n">list0</span> <span class="o">&amp;&amp;&amp;</span> <span class="n">list1</span> <span class="o">|</span> <span class="n">predicate</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>I’ll leave the implementation of this example as an exercise to the reader.</p>
 
@@ -221,18 +238,16 @@ Swift, and requires no fancy syntax trickery.</p>
 <p>The result of list comprehension is a list. The goal of this operation is to <em>construct</em> a list. Yep, thinking
 along this line, it became obvious that using a “list”’s initializer is just natural:</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="mi">1</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="mi">1</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span>
 <span class="c1">// [(2,3),(2,4),(2,5) ...</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The processing function is at the end to take advantage of the trailing closure syntax. It’s nicer when
 there’s not predicate:</p>
 
-<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="mi">1</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="mi">1</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span>
 <span class="c1">// [(1,3),(1,4),(1,5),(2,3),(2,4) ...</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This syntax seems both succinct and Swift-y.</p>
 
@@ -252,109 +267,6 @@ negatively affect compilation speed in large projects.</p>
 <p>Does list comprehension warrant a language change in Swift? Can you think of better ways to implement it
 with the current compiler?</p>
 
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2017/05/22/build-in-swift-compatibility-mode/">Building Swift Projects In Source Compatibility Mode</a></h1>
-    
-    <div class="post-date">
-      
-      <time>22 May 2017</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/swift">Swift</a>,
-      
-        <a href="/tag/xcode">Xcode</a>
-      
-      </div>
-      
-    </div>
-    <p>It’s a few weeks before WWDC, so naturally¹ it’s time to try build your Swift
-projects in the compiler’s compatibility mode!</p>
-
-<ol>
-  <li>
-    <p>Download and install a snapshot for the next major version <a href="https://swift.org/download/">on
-Swift.org</a>.</p>
-
-    <p><img src="/assets/2017/05/download-swift-snapshot.png" alt="download swift toolchain" />
- <img src="/assets/2017/05/install-swift-snapshot.png" alt="install swift toolchain" /></p>
-  </li>
-  <li>
-    <p>Choose the newly installed toolchain in Xcode.</p>
-
-    <p><img src="/assets/2017/05/choose-toolchain.png" alt="choose swift toolchain in Xcode" /></p>
-  </li>
-  <li>
-    <p>Ask the compiler to use compatibility mode. This means using the complier
-flag <code class="highlighter-rouge">-swift-version X</code>, where “X” is the <em>current</em> major Swift version.</p>
-
-    <p>In project’s “Build Settings”, value for “Other Swift Flags” should
- contain <code class="highlighter-rouge">-swift-version X</code>. This could mean setting it in Xcode, in
- <code class="highlighter-rouge">.xcconfig</code> files you are using and/or in your dependency managers such
- as Cocoapods.</p>
-
-    <p><img src="/assets/2017/05/compat-mode-flag.png" alt="compatibility flag in xcode" /></p>
-
-    <p>For example, with Cocoapods, you’ll need to add the following in your
- <code class="highlighter-rouge">Podfile</code> to compile 3rd party libraries in compatibility mode:</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> post_install do |installer|
-     installer.pods_projects.targets.each do |target|
-         target.build_configurations.each do |config|
-             config.build_settings["OTHER_SWIFT_FLAGS"] = "$(inherited) -swift-version 3"
-         end
-     end
- end
-</code></pre>
-    </div>
-  </li>
-  <li>
-    <p>Build your project! This is where things start to get exciting.</p>
-
-    <p>You should expect some warnings. Hopefully they are self-explanatory
-enough. Most of them should correspond to <a href="https://apple.github.io/swift-evolution/">a swift-evolution
-proposal</a>.</p>
-
-    <p>Improvement to the language or compiler usually means some of these
-warnings tell you problems in your code that has been ignored by the
-compiler previously. Fix them today!</p>
-
-    <p>The project should compile successfully in compatibility mode (despite
-warnings). This where you can stop reading. Go celebrate with your
-coworkers, friends, and family!</p>
-
-    <p>Things could go wrong for compiler snapshots, of course. Read on if see
-errors or crashes (whaaaaat 😸).</p>
-  </li>
-  <li>
-    <p>It’s time to tell the compiler team about the error or crash you encountered.</p>
-
-    <p>Reduce the error or crash to a state that your are comfortable reporting in
-public. Then go to <a href="https://bugs.swift.org">bugs.swift.org</a> and file a JIRA
-ticket describing the error or compiler crash.</p>
-
-    <p>During the process of code reduction you may find ways to work around the
-compile error or crash. Make the changes for the workaround and repeat
-steps 4-5. Maybe your project will compile this time.</p>
-  </li>
-  <li>
-    <p>The issue you discovered will be fixed in the official Swift release come
-fall. You’ve ensured a smooth Swift upgrade for your project and contributed
-to the Swift community 🎉!</p>
-  </li>
-</ol>
-
-<hr />
-
-<p>¹ source compatibility mode is a thing starting with Swift 4. As new
-major version of Swift is released, code written in the previous version should
-compile without change in compatibility mode.</p>
 
   </div>
   <hr />

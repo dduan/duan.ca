@@ -1,7 +1,7 @@
 ---
 title: Let's Build A BitArray In Swift
 tags: [Swift, YouTube, Let's Build]
-date: 2017-12-09 12:26:30-0800
+date: 2017-12-12 22:51:04-0800
 ---
 
 In this video, I build a space-efficient BitArray that confirms to `RandomAccessCollection` in Swift in

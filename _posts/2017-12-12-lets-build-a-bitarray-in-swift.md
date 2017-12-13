@@ -9,4 +9,6 @@ a playground. It involves some basic (but neat!) bitwise manipulation tricks.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-k_jrIoD56k" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 
-I guess I'm a YouTuber now.
+I guess I'm a YouTuber now. You can subscribe to my [channel][0] 😛.
+
+[0]: https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A

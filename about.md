@@ -6,6 +6,9 @@ I'm a iOS engineer at Lyft. I also work on open source projects such as
 [Swift][swift] and [Just][just].
 {: .lead}
 
+Sometimes I make videos and post them on [YouTube][youtube].
+
+I post on [Twitter][twitter] and [GitHub][github] way more frequently.
 
 ## Syndicated Feeds ##
 
@@ -25,10 +28,9 @@ end of its URL. For example, the feed for everything tagged with "Swift" is:
 
 > [{{ site.url }}/tag/swift/feed.xml]({{ site.url }}/tag/swift/feed.xml)
 
-I post [twitter][twitter] and [github][github] way more frequently.
-
 [swift]: https://github.com/apple/swift/commits?author=dduan
 [just]: http://justhttp.net
 [twitter]: https://twitter.com/daniel_duan
 [github]: https://github.com/dduan
+[youtube]: https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A
 

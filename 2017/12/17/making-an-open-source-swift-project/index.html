@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Making An Open-Source Swift Project</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
+  <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Making An Open-Source Swift Project | Daniel Duan</title>
+<meta name="generator" content="Jekyll v3.6.2" />
+<meta property="og:title" content="Making An Open-Source Swift Project" />
+<meta name="author" content="Daniel Duan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This video shows what it takes to open source a Swift project. Starting from some code in a playground, I created a framework that supports distribution via Swift Package Manager, CocoaPods, Xcode project and Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well." />
+<meta property="og:description" content="This video shows what it takes to open source a Swift project. Starting from some code in a playground, I created a framework that supports distribution via Swift Package Manager, CocoaPods, Xcode project and Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well." />
+<link rel="canonical" href="https://duan.ca/2017/12/17/making-an-open-source-swift-project/" />
+<meta property="og:url" content="https://duan.ca/2017/12/17/making-an-open-source-swift-project/" />
+<meta property="og:site_name" content="Daniel Duan" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-12-17T21:24:43-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@daniel_duan" />
+<meta name="twitter:creator" content="@Daniel Duan" />
+<script type="application/ld+json">
+{"description":"This video shows what it takes to open source a Swift project. Starting from some code in a playground, I created a framework that supports distribution via Swift Package Manager, CocoaPods, Xcode project and Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.","author":{"@type":"Person","name":"Daniel Duan"},"@type":"BlogPosting","url":"https://duan.ca/2017/12/17/making-an-open-source-swift-project/","headline":"Making An Open-Source Swift Project","dateModified":"2017-12-17T21:24:43-08:00","datePublished":"2017-12-17T21:24:43-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2017/12/17/making-an-open-source-swift-project/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+  <div class="container">
+    <header class="masthead">
+  <h1 class="masthead-title--small">
+    <a href="/">Daniel Duan</a>
+  </h1>
+</header>
+<div class="content post">
+  <h1 class="post-title">Making An Open-Source Swift Project</h1>
+  <div class="post-date">
+    <time>17 Dec 2017</time>
+     | 
+
+<div class="post-tags">
+
+  <a href="/tag/swift">Swift</a>,
+
+  <a href="/tag/youtube">YouTube</a>,
+
+  <a href="/tag/let-s-build">Let's Build</a>,
+
+  <a href="/tag/xcode">Xcode</a>,
+
+  <a href="/tag/cocoapods">CocoaPods</a>,
+
+  <a href="/tag/carthage">Carthage</a>,
+
+  <a href="/tag/swiftlint">SwiftLint</a>,
+
+  <a href="/tag/ios">iOS</a>,
+
+  <a href="/tag/tvos">tvOS</a>,
+
+  <a href="/tag/macos">macOS</a>,
+
+  <a href="/tag/watchos">watchOS</a>
+
+</div>
+
+
+  </div>
+  <p>This video shows what it takes to open source a Swift project. Starting from some code in a playground,
+I created a framework that supports distribution via Swift Package Manager, CocoaPods, Xcode project and
+Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
+SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
+Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pA0T1CdqMt8" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
+
+<p>This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
+the version tag, documentation generation<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/12/17/making-an-open-source-swift-project/>,</a> automatic Carthage binary generation, test coverage…</p>
+
+<p>Sample project from the video: https://github.com/dduan/BitArray
+Video of me writing the code in this project: https://www.youtube.com/watch?v=-k_jrIoD56k
+Swift Package Manager: https://swift.org/package-manager/
+CocoaPods: https://cocoapods.org
+Carthage: https://github.com/Carthage/Carthage
+Xcconfigs for universal framework: https://github.com/mrackwitz/xcconfigs
+SwiftLint: https://github.com/realm/SwiftLint
+Travis CI: https://travis-ci.org</p>
+
+</div>
+
+  </div>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)
+    },i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-59501714-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>

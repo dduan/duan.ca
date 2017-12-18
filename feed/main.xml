@@ -8,6 +8,37 @@
         
             <item>
                 
+                <title>Making An Open-Source Swift Project</title>
+                
+                <description>&lt;p&gt;This video shows what it takes to open source a Swift project. Starting from some code in a playground,
+I created a framework that supports distribution via Swift Package Manager, CocoaPods, Xcode project and
+Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
+SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
+Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
+the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/17/making-an-open-source-swift-project/&gt;,&lt;/a&gt; automatic Carthage binary generation, test coverage…&lt;/p&gt;
+
+&lt;p&gt;Sample project from the video: https://github.com/dduan/BitArray
+Video of me writing the code in this project: https://www.youtube.com/watch?v=-k_jrIoD56k
+Swift Package Manager: https://swift.org/package-manager/
+CocoaPods: https://cocoapods.org
+Carthage: https://github.com/Carthage/Carthage
+Xcconfigs for universal framework: https://github.com/mrackwitz/xcconfigs
+SwiftLint: https://github.com/realm/SwiftLint
+Travis CI: https://travis-ci.org&lt;/p&gt;
+</description>
+                <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
+                
+                <link>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</link>
+                
+                <guid isPermaLink="true">https://duan.ca/2017/12/17/making-an-open-source-swift-project/</guid>
+            </item>
+        
+            <item>
+                
                 <title>Let's Build A BitArray In Swift</title>
                 
                 <description>&lt;p&gt;In this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/&gt;,&lt;/a&gt; I build a space-efficient BitArray that confirms to &lt;code class=&quot;highlighter-rouge&quot;&gt;RandomAccessCollection&lt;/code&gt; in Swift in

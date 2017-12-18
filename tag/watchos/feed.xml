@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Daniel Duan - Let's Build</title>
-        <link>https://duan.ca/tag/Let's Build</link>
-        <atom:link href="https://duan.ca/tag/Let's Build/index.xml" rel="self" type="application/rss+xml" />
+        <title>Daniel Duan - watchOS</title>
+        <link>https://duan.ca/tag/watchOS</link>
+        <atom:link href="https://duan.ca/tag/watchOS/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -35,21 +35,6 @@ Travis CI: https://travis-ci.org&lt;/p&gt;
             </item>
             
         
-            
-            <item>
-                <title>Let's Build A BitArray In Swift</title>
-                <description>&lt;p&gt;In this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/&gt;,&lt;/a&gt; I build a space-efficient BitArray that confirms to &lt;code class=&quot;highlighter-rouge&quot;&gt;RandomAccessCollection&lt;/code&gt; in Swift in
-a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt;/p&gt;
-
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/-k_jrIoD56k&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-
-&lt;p&gt;I guess I’m a YouTuber now. You can subscribe to my &lt;a href=&quot;https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A&quot;&gt;channel&lt;/a&gt; 😛.&lt;/p&gt;
-
-</description>
-                <pubDate>Tue, 12 Dec 2017 22:51:04 -0800</pubDate>
-                <link></link>
-                <guid isPermaLink="true">https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/</guid>
-            </item>
             
         
             

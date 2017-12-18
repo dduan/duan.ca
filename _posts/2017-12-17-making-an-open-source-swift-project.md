@@ -15,11 +15,13 @@ Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.
 This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
 the version tag, documentation generation, automatic Carthage binary generation, test coverage...
 
-Sample project from the video: https://github.com/dduan/BitArray
-Video of me writing the code in this project: https://www.youtube.com/watch?v=-k_jrIoD56k
-Swift Package Manager: https://swift.org/package-manager/
-CocoaPods: https://cocoapods.org
-Carthage: https://github.com/Carthage/Carthage
-Xcconfigs for universal framework: https://github.com/mrackwitz/xcconfigs
-SwiftLint: https://github.com/realm/SwiftLint
-Travis CI: https://travis-ci.org
+Anyways, here's some stuff mentioned in the video:
+
+* Sample project from the video: <https://github.com/dduan/BitArray>
+* Video of me writing the code in this project: <https://www.youtube.com/watch?v=-k_jrIoD56k>
+* Swift Package Manager: <https://swift.org/package-manager/>
+* CocoaPods: <https://cocoapods.org>
+* Carthage: <https://github.com/Carthage/Carthage>
+* Xcconfigs for universal framework: <https://github.com/mrackwitz/xcconfigs>
+* SwiftLint: <https://github.com/realm/SwiftLint>
+* Travis CI: <https://travis-ci.org>

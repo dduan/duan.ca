@@ -20,14 +20,18 @@ Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;/p&gt;
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
 the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/17/making-an-open-source-swift-project/&gt;,&lt;/a&gt; automatic Carthage binary generation, test coverage…&lt;/p&gt;
 
-&lt;p&gt;Sample project from the video: https://github.com/dduan/BitArray
-Video of me writing the code in this project: https://www.youtube.com/watch?v=-k_jrIoD56k
-Swift Package Manager: https://swift.org/package-manager/
-CocoaPods: https://cocoapods.org
-Carthage: https://github.com/Carthage/Carthage
-Xcconfigs for universal framework: https://github.com/mrackwitz/xcconfigs
-SwiftLint: https://github.com/realm/SwiftLint
-Travis CI: https://travis-ci.org&lt;/p&gt;
+&lt;p&gt;Anyways, here’s some stuff mentioned in the video:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sample project from the video: &lt;a href=&quot;https://github.com/dduan/BitArray&quot;&gt;https://github.com/dduan/BitArray&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Video of me writing the code in this project: &lt;a href=&quot;https://www.youtube.com/watch?v=-k_jrIoD56k&quot;&gt;https://www.youtube.com/watch?v=-k_jrIoD56k&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Swift Package Manager: &lt;a href=&quot;https://swift.org/package-manager/&quot;&gt;https://swift.org/package-manager/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;CocoaPods: &lt;a href=&quot;https://cocoapods.org&quot;&gt;https://cocoapods.org&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Carthage: &lt;a href=&quot;https://github.com/Carthage/Carthage&quot;&gt;https://github.com/Carthage/Carthage&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Xcconfigs for universal framework: &lt;a href=&quot;https://github.com/mrackwitz/xcconfigs&quot;&gt;https://github.com/mrackwitz/xcconfigs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;SwiftLint: &lt;a href=&quot;https://github.com/realm/SwiftLint&quot;&gt;https://github.com/realm/SwiftLint&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Travis CI: &lt;a href=&quot;https://travis-ci.org&quot;&gt;https://travis-ci.org&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
                 <link>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</link>

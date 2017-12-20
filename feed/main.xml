@@ -8,6 +8,27 @@
         
             <item>
                 
+                <title>BitArray The Final Act</title>
+                
+                <description>&lt;p&gt;Alas, there’s the 3rd and last video about &lt;code class=&quot;highlighter-rouge&quot;&gt;BitArray&lt;/code&gt;, originated on my spark of inspiration on a Caltrain
+ride home. This makes my first YouTube playlist as well, even tho the first 2 videos were planned to be
+completely separate.&lt;/p&gt;
+
+&lt;p&gt;We added more standard library functionalities to BitArray (ExpressibleByArrayLiteral,
+CustomStringConvertible, Equatable, etc). Then, we added documentation and other open-source things left
+undone from “episode 2”.&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ckrd_FoFMl0&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+                <pubDate>Tue, 19 Dec 2017 12:17:49 -0800</pubDate>
+                
+                <link>https://duan.ca/2017/12/19/bitarray-final-act/</link>
+                
+                <guid isPermaLink="true">https://duan.ca/2017/12/19/bitarray-final-act/</guid>
+            </item>
+        
+            <item>
+                
                 <title>Making An Open-Source Swift Project</title>
                 
                 <description>&lt;p&gt;This video shows what it takes to open source a Swift project. Starting from some code in a playground,

@@ -12,7 +12,7 @@ date: 2017-12-20 13:17:44-0800
 
 ## Introduction
 
-Apple sneakily shipped an "dark mode" in iOS 11, native apps looks _gorgeous_ in this mode (especially on
+Apple sneakily shipped a "dark mode" in iOS 11, native apps looks _gorgeous_ in this mode (especially on
 iPhone X with it's OLED display):
 
 <img src="/assets/2017/12/native-ios-apps-with-smart-invert.png" srcset="/assets/2017/12/native-ios-apps-with-smart-invert.png 2x" alt="iOS 11 apps in smart invert mode"/>

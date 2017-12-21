@@ -52,6 +52,159 @@
   
   <div class="content post">
     
+    <h1 class="post-title"><a href="/2017/12/20/smart-invert-support-for-you-app/">Smart Color Invert And Your iOS Apps</a></h1>
+    
+    <div class="post-date">
+      
+      <time>20 Dec 2017</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/ios">iOS</a>,
+      
+        <a href="/tag/accessibility">Accessibility</a>,
+      
+        <a href="/tag/interface-builder">Interface Builder</a>
+      
+      </div>
+      
+    </div>
+    <ol>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#the-basics">The Basics</a></li>
+  <li><a href="#compatibility-with-older-ios-versions">Compatibility with older iOS versions</a></li>
+  <li><a href="#how-to-screenshot-with-inverted-color-settings">How to screenshot with inverted color settings</a></li>
+  <li><a href="#conclusion">Conclusion</a></li>
+</ol>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Apple sneakily shipped an “dark mode” in iOS 11, native apps looks <em>gorgeous</em> in this mode (especially on
+iPhone X with it’s OLED display):</p>
+
+<p><img src="/assets/2017/12/native-ios-apps-with-smart-invert.png" srcset="/assets/2017/12/native-ios-apps-with-smart-invert.png 2x" alt="iOS 11 apps in smart invert mode" /></p>
+
+<p>To see it for yourself, go to <em>Settings -&gt; General -&gt; Accessibility Display Accommodations -&gt; Invert Colors</em>
+and toggle the switch to on (I personally set triple tap of the power buttton to toggle this on/off):</p>
+
+<p><img src="/assets/2017/12/invert-color-settings.png" alt="turn on smart invert mode in Settings" /></p>
+
+<p>Note that in Apple’s first-party apps, not every view’s color is inverted (hence, “smart”). For apps that we
+built, that would not be the case automatically. Instead, we get the full color inversion under this setting:</p>
+
+<p><img src="/assets/2017/12/third-party-app-no-change.png" srcset="/assets/2017/12/third-party-app-no-change.png 2x" alt="default third party app before and after smart color" /></p>
+
+<p>In this article, we’ll see how to best adapt our apps so they look just as good as first-party iOS apps under
+the smart invert setting.</p>
+
+<h2 id="the-basics">The Basics</h2>
+
+<p><em>TL;DR: use <a href="https://developer.apple.com/documentation/uikit/uiview/2865843-accessibilityignoresinvertcolors">accessibilityIgnoresInvertColors</a> on your <code class="highlighter-rouge">UIView</code>s to prevent their color to be
+inverted.</em></p>
+
+<p>iOS 11 introduced <code class="highlighter-rouge">accessibilityIgnoresInvertColors</code>, a property on <code class="highlighter-rouge">UIView</code>. From the <a href="https://developer.apple.com/documentation/uikit/uiview/2865843-accessibilityignoresinvertcolors">offical
+documentation</a>:</p>
+
+<blockquote>
+  <p>If inverting the colors would have a negative impact on your view’s content, set this property to true to
+prevent it from inverting its colors. Setting the property to true prevents the system from inverting the
+colors of the view and all of its subviews.</p>
+</blockquote>
+
+<p>So, for views containing photos or videos with real-world content, we probably want to set it to <code class="highlighter-rouge">true</code>. In
+our sample app’s source code:</p>
+
+<p><img src="/assets/2017/12/setting-accessibilityIgnoresInvertColors-to-true-in-code.png" alt="setting accessibilityIgnoresInvertColors to true in code" /></p>
+
+<p>This gives us the desired effect for that view 🎉:</p>
+
+<p><img src="/assets/2017/12/smart-invert-in-code-result.png" srcset="/assets/2017/12/smart-invert-in-code-result.png 2x" alt="result of supporting invert color in code" /></p>
+
+<p>The same can be done in Interface Builder. Let’s fix the other view by setting a runtime attribute:</p>
+
+<p><img src="/assets/2017/12/setting-accessibilityIgnoresInvertColors-to-true-in-interface-builder.png" alt="setting accessibilityIgnoresInvertColors to true in Interface Builder" /></p>
+
+<p>Result:</p>
+
+<p><img src="/assets/2017/12/smart-invert-in-interface-builder-result.png" srcset="/assets/2017/12/smart-invert-in-interface-builder-result.png 2x" alt="result of supporting invert color in interface builder" /></p>
+
+<p>Tada!</p>
+
+<h2 id="compatibility-with-older-ios-versions">Compatibility with older iOS versions</h2>
+
+<p>The story gets slightly complicated when your app need to run on older iOS versions. For one, our code won’t
+compile:</p>
+
+<p><img src="/assets/2017/12/compile-error-on-older-oses.png" alt="compile error on older iOS versions" /></p>
+
+<p>But that’s nothing new to iOS developers, really. We can fix that with a <code class="highlighter-rouge">#available</code>:</p>
+
+<p><img src="/assets/2017/12/fix-compile-error.png" alt="fix compile error on older iOS versions" /></p>
+
+<p>When you run the app in older iOS devices or simulators, Xcode will complain about our runtime attribute as
+well:</p>
+
+<p><img src="/assets/2017/12/xcode-complain-about-runtime-attirbute.png" alt="Xcode complains about runtime attribute on older iOS" /></p>
+
+<p>If that bothers you, I recommend writing your own wrapper for this property as an extension to <code class="highlighter-rouge">UIView</code>. To
+put a cherry on top, make it <code class="highlighter-rouge">@IBInspectable</code>!</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">extension</span> <span class="kt">UIView</span> <span class="p">{</span>
+    <span class="c1">/// Whether or not to set accessibilityIgnoresInvertColors to true for iOS 11.</span>
+    <span class="c1">/// For older OS, this value is false and setting it has no effect.</span>
+    <span class="kd">@IBInspectable</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">ignoreColorInversion</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="k">get</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="kd">#available(iOS 11, *)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="k">self</span><span class="o">.</span><span class="n">accessibilityIgnoresInvertColors</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="kc">false</span>
+        <span class="p">}</span>
+
+        <span class="k">set</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="kd">#available(iOS 11, *)</span> <span class="p">{</span>
+                <span class="k">self</span><span class="o">.</span><span class="n">accessibilityIgnoresInvertColors</span> <span class="o">=</span> <span class="n">newValue</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Having this snippet in the project, we set it in interface builder to any view with a couple of clicks:</p>
+
+<p><img src="/assets/2017/12/set-custom-invert-property-in-interface-builder.png" alt="set custom invert color properties in Interface Builder" /></p>
+
+<h2 id="how-to-screenshot-with-inverted-color-settings">How to screenshot with inverted color settings</h2>
+
+<p>Here’s a bonus hint: screenshots taken on device won’t have their color inverted even if you have the setting
+set to “on”! Go ahead, try it :).</p>
+
+<p>To show off our handy work for supporting smart invert color, we’ll need
+some other means to take screenshots. All screenshots in this article is taken using QuickTime on a Mac. So
+plug in your iOS device, open QuickTime Player, in menu select <em>File -&gt; New Movie Recording</em> and select your
+device from the drop-down menu by clicking the arrow next to the record button:</p>
+
+<p><img src="/assets/2017/12/select-ios-device-in-quicktime-player.png" alt="Select iOS device for screenshots in QuickTime
+Player" /></p>
+
+<p>Now you can screen shot the QuickTime Player window the normal way.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>You can <a href="/assets/2017/12/SmartInvert.zip">download the sample project</a> and play with it.</p>
+
+<p>Smart invert is awesome and I personally wish all 3rd party apps will update their apps as time goes on. If
+your favorite 3rd party app (including your own!) doesn’t support it properly, please consider informing the
+developer about <a href="https://developer.apple.com/documentation/uikit/uiview/2865843-accessibilityignoresinvertcolors">accessibilityIgnoresInvertColors</a>, or just send this article their way!</p>
+
+
+  </div>
+  <hr />
+  
+  <div class="content post">
+    
     <h1 class="post-title"><a href="/2017/12/19/bitarray-final-act/">BitArray The Final Act</a></h1>
     
     <div class="post-date">
@@ -140,37 +293,6 @@ the version tag, documentation generation, automatic Carthage binary generation,
   <li>SwiftLint: <a href="https://github.com/realm/SwiftLint">https://github.com/realm/SwiftLint</a></li>
   <li>Travis CI: <a href="https://travis-ci.org">https://travis-ci.org</a></li>
 </ul>
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2017/12/12/lets-build-a-bitarray-in-swift/">Let's Build A BitArray In Swift</a></h1>
-    
-    <div class="post-date">
-      
-      <time>12 Dec 2017</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/swift">Swift</a>,
-      
-        <a href="/tag/youtube">YouTube</a>,
-      
-        <a href="/tag/let-s-build">Let's Build</a>
-      
-      </div>
-      
-    </div>
-    <p>In this video, I build a space-efficient BitArray that confirms to <code class="highlighter-rouge">RandomAccessCollection</code> in Swift in
-a playground. It involves some basic (but neat!) bitwise manipulation tricks.</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-k_jrIoD56k" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
-
-<p>I guess I’m a YouTuber now. You can subscribe to my <a href="https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A">channel</a> 😛.</p>
-
 
   </div>
   <hr />

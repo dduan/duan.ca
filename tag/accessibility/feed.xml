@@ -19,7 +19,7 @@
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
-&lt;p&gt;Apple sneakily shipped an “dark mode” in iOS 11, native apps looks &lt;em&gt;gorgeous&lt;/em&gt; in this mode (especially on
+&lt;p&gt;Apple sneakily shipped a “dark mode” in iOS 11, native apps looks &lt;em&gt;gorgeous&lt;/em&gt; in this mode (especially on
 iPhone X with it’s OLED display):&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/2017/12/native-ios-apps-with-smart-invert.png&quot; srcset=&quot;/assets/2017/12/native-ios-apps-with-smart-invert.png 2x&quot; alt=&quot;iOS 11 apps in smart invert mode&quot; /&gt;&lt;/p&gt;
@@ -111,14 +111,14 @@ put a cherry on top, make it &lt;code class=&quot;highlighter-rouge&quot;&gt;@IB
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Having this snippet in the project, we set it in interface builder to any view with a couple of clicks:&lt;/p&gt;
+&lt;p&gt;Having this snippet in the project&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/20/smart-invert-support-for-you-app/&gt;,&lt;/a&gt; we set it in interface builder to any view with a couple of clicks:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/2017/12/set-custom-invert-property-in-interface-builder.png&quot; alt=&quot;set custom invert color properties in Interface Builder&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;how-to-screenshot-with-inverted-color-settings&quot;&gt;How to screenshot with inverted color settings&lt;/h2&gt;
 
 &lt;p&gt;Here’s a bonus hint: screenshots taken on device won’t have their color inverted even if you have the setting
-set to “on”! Go ahead&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/20/smart-invert-support-for-you-app/&gt;,&lt;/a&gt; try it :).&lt;/p&gt;
+set to “on”! Go ahead, try it :).&lt;/p&gt;
 
 &lt;p&gt;To show off our handy work for supporting smart invert color, we’ll need
 some other means to take screenshots. All screenshots in this article is taken using QuickTime on a Mac. So

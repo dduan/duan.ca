@@ -17,10 +17,11 @@ layout: page
         </a>
       </div>
     </h3>
+    {% if forloop.index < 6 %}
+      {{ link.content }}
+      <hr>
+    {% endif %}
   </div>
-  {% if forloop.index < 6 %}
-  {{ link.content }}
-  {% endif %}
 {% endfor %}
 {% endif %}
 </div>

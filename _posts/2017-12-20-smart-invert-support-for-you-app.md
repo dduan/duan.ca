@@ -129,8 +129,8 @@ Now you can screen shot the QuickTime Player window the normal way.
 
 You can [download the sample project][1] and play with it.
 
-Smart invert is awesome and I personally wish all 3rd party apps will update their apps as time goes on. If
-your favorite 3rd party app (including your own!) doesn't support it properly, please consider informing the
+Smart invert is awesome and I personally wish all 3rd-party apps will update their apps for it as time goes
+on. If your favorite app (including your own!) doesn't support it properly, please consider informing the
 developer about [accessibilityIgnoresInvertColors][0], or just send this article their way!
 
 [0]: https://developer.apple.com/documentation/uikit/uiview/2865843-accessibilityignoresinvertcolors

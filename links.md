@@ -6,7 +6,8 @@ layout: page
 {% if site.links.size == 0 %}
   <h2>No post found</h2>
 {% else %}
-{% for link in site.links %}
+{% assign links = site.links | sort: 'date' | reverse %}
+{% for link in links %}
   <div class="list-item">
     <h3 class="list-link-title">
       <a href="{{ link.link }}">{{ link.title }}</a>

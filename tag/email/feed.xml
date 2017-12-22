@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Email</title>
-        <link>http://0.0.0.0:4000/tag/Email</link>
-        <atom:link href="http://0.0.0.0:4000/tag/Email/index.xml" rel="self" type="application/rss+xml" />
+        <link>https://duan.ca/tag/Email</link>
+        <atom:link href="https://duan.ca/tag/Email/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -37,7 +37,7 @@ consume payloads of this protocol and, as a consequence, don’t think much abou
 that very fact.&lt;/p&gt;
 
 &lt;p&gt;Like HTTP, each email includes headers hidden by normal email clients. Each
-header is essentially two strings, a key and a value, separated by a colon.
+header is essentially two strings, a key and a value&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/&gt;,&lt;/a&gt; separated by a colon.
 Among these headers are &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt;. When we tell our email
 client applications to start a reply, they take the value from &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt;
 and use it as value for &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt; automatically.&lt;/p&gt;
@@ -47,19 +47,19 @@ editors and look for these headers. Of course, this require us to know where the
 emails exist as files. On macOS, an easy thing to do is to drag from Mail.app to
 Finder/Desktop and open the resulting .eml file:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2017/02/open-email.gif&quot; alt=&quot;Open an email in text editors&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2017/02/open-email.gif&quot; alt=&quot;Open an email in text editors&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Among the (perhaps overwhelming amount of) headers, we’ll find the two fields we
 are looking for:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2017/02/email-headers.png&quot; alt=&quot;Email Headers Message-Id and
+&lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2017/02/email-headers.png&quot; alt=&quot;Email Headers Message-Id and
 In-Reply-To&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;… I’ll leave the clients’ reply behavior regarding these fields for the reader
 to verify.&lt;/p&gt;
 
 &lt;p&gt;Mailing list software such as GNU Mailman, which &lt;a href=&quot;https://swift.org&quot;&gt;swift.org&lt;/a&gt; and &lt;a href=&quot;http://llvm.org&quot;&gt;llvm.org&lt;/a&gt;
-use to host various mailing lists&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/02/07/replying-to-old-mailing-list-threads/&gt;,&lt;/a&gt; associate emails in threads by chaining them
+use to host various mailing lists, associate emails in threads by chaining them
 with the headers explained above, among other things. As long as we have
 a message’s &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt;, we can reply to it “officially” by adding its value to
 the &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt; header in our email, regardless of whether we have received
@@ -75,7 +75,7 @@ that email ourselves previously.&lt;/p&gt;
 Unfortunately Mail.app doesn’t recognize it. It’s easy enough to find it
 ourselves though:&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2017/02/find-message-id.gif&quot; alt=&quot;Finding Message-Id on mailman
+    &lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2017/02/find-message-id.gif&quot; alt=&quot;Finding Message-Id on mailman
 archive&quot; /&gt;&lt;/p&gt;
 
     &lt;p&gt;Note the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;@&lt;/code&gt; characters are percent-quoted. We have to recover the
@@ -111,7 +111,7 @@ week).&lt;/p&gt;
 </description>
                 <pubDate>Tue, 07 Feb 2017 10:21:19 -0800</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/02/07/replying-to-old-mailing-list-threads/</guid>
+                <guid isPermaLink="true">https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/</guid>
             </item>
             
         

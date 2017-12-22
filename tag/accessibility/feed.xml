@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Accessibility</title>
-        <link>http://0.0.0.0:4000/tag/Accessibility</link>
-        <atom:link href="http://0.0.0.0:4000/tag/Accessibility/index.xml" rel="self" type="application/rss+xml" />
+        <link>https://duan.ca/tag/Accessibility</link>
+        <atom:link href="https://duan.ca/tag/Accessibility/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -103,7 +103,7 @@ put a cherry on top, make it &lt;code class=&quot;highlighter-rouge&quot;&gt;@IB
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
         &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#available(iOS 11, *)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#available(iOS 11&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/20/smart-invert-support-for-you-app/&gt;,&lt;/a&gt; *)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
                 &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accessibilityIgnoresInvertColors&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newValue&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -111,7 +111,7 @@ put a cherry on top, make it &lt;code class=&quot;highlighter-rouge&quot;&gt;@IB
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Having this snippet in the project&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/20/smart-invert-support-for-you-app/&gt;,&lt;/a&gt; we set it in interface builder to any view with a couple of clicks:&lt;/p&gt;
+&lt;p&gt;Having this snippet in the project, we set it in interface builder to any view with a couple of clicks:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/2017/12/set-custom-invert-property-in-interface-builder.png&quot; alt=&quot;set custom invert color properties in Interface Builder&quot; /&gt;&lt;/p&gt;
 
@@ -134,14 +134,14 @@ Player&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You can &lt;a href=&quot;/assets/2017/12/SmartInvert.zip&quot;&gt;download the sample project&lt;/a&gt; and play with it.&lt;/p&gt;
 
-&lt;p&gt;Smart invert is awesome and I personally wish all 3rd party apps will update their apps as time goes on. If
-your favorite 3rd party app (including your own!) doesn’t support it properly, please consider informing the
+&lt;p&gt;Smart invert is awesome and I personally wish all 3rd-party apps will update their apps for it as time goes
+on. If your favorite app (including your own!) doesn’t support it properly, please consider informing the
 developer about &lt;a href=&quot;https://developer.apple.com/documentation/uikit/uiview/2865843-accessibilityignoresinvertcolors&quot;&gt;accessibilityIgnoresInvertColors&lt;/a&gt;, or just send this article their way!&lt;/p&gt;
 
 </description>
                 <pubDate>Wed, 20 Dec 2017 13:17:44 -0800</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/20/smart-invert-support-for-you-app/</guid>
+                <guid isPermaLink="true">https://duan.ca/2017/12/20/smart-invert-support-for-you-app/</guid>
             </item>
             
         

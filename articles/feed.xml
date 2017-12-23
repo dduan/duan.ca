@@ -8,6 +8,23 @@
         
             
             <item>
+                <title>Contributing To Open-Source Swift</title>
+                <description>&lt;p&gt;I discover, report&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/23/contributing-to-open-source-foundation/&gt;,&lt;/a&gt; fix and merge a bug in the open-source Foundation project. And why, yes, on YouTube.&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Pull request: https://github.com/apple/swift-coreli…
+SR-6647: https://bugs.swift.org/browse/SR-6647
+PathKit: https://github.com/kylef/PathKit&lt;/p&gt;
+</description>
+                <pubDate>Sat, 23 Dec 2017 13:21:10 -0800</pubDate>
+                <link>https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</link>
+                <guid isPermaLink="true">https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</guid>
+            </item>
+            
+        
+            
+            <item>
                 <title>Smart Color Invert And Your iOS Apps</title>
                 <description>&lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Building 'pwd' Under 1 Minute In Swift</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
+  <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Building ‘pwd’ Under 1 Minute In Swift | Daniel Duan</title>
+<meta name="generator" content="Jekyll v3.6.2" />
+<meta property="og:title" content="Building ‘pwd’ Under 1 Minute In Swift" />
+<meta name="author" content="Daniel Duan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I guess I’m starting a series of minute-long videos. In this first video, I built pwd out of getcwd. The code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift’s great C-interop capability." />
+<meta property="og:description" content="I guess I’m starting a series of minute-long videos. In this first video, I built pwd out of getcwd. The code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift’s great C-interop capability." />
+<link rel="canonical" href="https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/" />
+<meta property="og:url" content="https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/" />
+<meta property="og:site_name" content="Daniel Duan" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-12-27T01:13:07-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@daniel_duan" />
+<meta name="twitter:creator" content="@Daniel Duan" />
+<script type="application/ld+json">
+{"description":"I guess I’m starting a series of minute-long videos. In this first video, I built pwd out of getcwd. The code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift’s great C-interop capability.","author":{"@type":"Person","name":"Daniel Duan"},"@type":"BlogPosting","url":"https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/","headline":"Building ‘pwd’ Under 1 Minute In Swift","dateModified":"2017-12-27T01:13:07-08:00","datePublished":"2017-12-27T01:13:07-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+  <div class="container">
+    <header class="masthead">
+  <h1 class="masthead-title--small">
+    <a href="/">Daniel Duan</a>
+  </h1>
+</header>
+<div class="content post">
+  <h1 class="post-title">Building 'pwd' Under 1 Minute In Swift</h1>
+  <div class="post-date">
+    <time>27 Dec 2017</time>
+     | 
+
+<div class="post-tags">
+
+  <a href="/tag/swift">Swift</a>,
+
+  <a href="/tag/unix">Unix</a>,
+
+  <a href="/tag/c">C</a>,
+
+  <a href="/tag/youtube">YouTube</a>,
+
+  <a href="/tag/minute-swift">Minute Swift</a>
+
+</div>
+
+
+  </div>
+  <p>I guess I’m starting a series of minute-long videos. In this first video, I built <code class="highlighter-rouge">pwd</code> out of <code class="highlighter-rouge">getcwd</code>. The
+code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift’s great C-interop
+capability.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YR4MCcMnHrI" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
+
+<p>Some details are lost in this video, however. For example<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/>,</a> the fact that POSIX 1 standard actually say
+<code class="highlighter-rouge">getcwd</code>’s 2nd argument being <code class="highlighter-rouge">0</code> is undefined. Luckily both macOS and Linux define it the way we want
+(allocate as much memory as needed). Swift’s handling of <code class="highlighter-rouge">char *</code> aka <code class="highlighter-rouge">UnsafeMutablePointer&lt;CChar&gt;</code> in context
+of a <code class="highlighter-rouge">var</code> array is also very cool.</p>
+
+</div>
+
+  </div>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)
+    },i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-59501714-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>

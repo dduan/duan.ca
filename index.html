@@ -52,6 +52,44 @@
   
   <div class="content post">
     
+    <h1 class="post-title"><a href="/2017/12/27/building-pwd-under-1-minute-in-swift/">Building 'pwd' Under 1 Minute In Swift</a></h1>
+    
+    <div class="post-date">
+      
+      <time>27 Dec 2017</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/swift">Swift</a>,
+      
+        <a href="/tag/unix">Unix</a>,
+      
+        <a href="/tag/c">C</a>,
+      
+        <a href="/tag/youtube">YouTube</a>,
+      
+        <a href="/tag/minute-swift">Minute Swift</a>
+      
+      </div>
+      
+    </div>
+    <p>I guess I’m starting a series of minute-long videos. In this first video, I built <code class="highlighter-rouge">pwd</code> out of <code class="highlighter-rouge">getcwd</code>. The
+code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift’s great C-interop
+capability.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YR4MCcMnHrI" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
+
+<p>Some details are lost in this video, however. For example, the fact that POSIX 1 standard actually say
+<code class="highlighter-rouge">getcwd</code>’s 2nd argument being <code class="highlighter-rouge">0</code> is undefined. Luckily both macOS and Linux define it the way we want
+(allocate as much memory as needed). Swift’s handling of <code class="highlighter-rouge">char *</code> aka <code class="highlighter-rouge">UnsafeMutablePointer&lt;CChar&gt;</code> in context
+of a <code class="highlighter-rouge">var</code> array is also very cool.</p>
+
+  </div>
+  <hr />
+  
+  <div class="content post">
+    
     <h1 class="post-title"><a href="/2017/12/23/contributing-to-open-source-foundation/">Contributing To Open-Source Swift</a></h1>
     
     <div class="post-date">
@@ -231,37 +269,6 @@ Player" /></p>
 on. If your favorite app (including your own!) doesn’t support it properly, please consider informing the
 developer about <a href="https://developer.apple.com/documentation/uikit/uiview/2865843-accessibilityignoresinvertcolors">accessibilityIgnoresInvertColors</a>, or just send this article their way!</p>
 
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2017/12/19/bitarray-final-act/">BitArray The Final Act</a></h1>
-    
-    <div class="post-date">
-      
-      <time>19 Dec 2017</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/swift">Swift</a>,
-      
-        <a href="/tag/youtube">YouTube</a>
-      
-      </div>
-      
-    </div>
-    <p>Alas, there’s the 3rd and last video about <code class="highlighter-rouge">BitArray</code>, originated on my spark of inspiration on a Caltrain
-ride home. This makes my first YouTube playlist as well, even tho the first 2 videos were planned to be
-completely separate.</p>
-
-<p>We added more standard library functionalities to BitArray (ExpressibleByArrayLiteral,
-CustomStringConvertible, Equatable, etc). Then, we added documentation and other open-source things left
-undone from “episode 2”.</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ckrd_FoFMl0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
 
   </div>
   <hr />

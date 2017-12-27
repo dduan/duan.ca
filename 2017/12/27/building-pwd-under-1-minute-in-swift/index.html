@@ -63,10 +63,10 @@ capability.</p>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/YR4MCcMnHrI" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
 
-<p>Some details are lost in this video, however. For example<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/>,</a> the fact that POSIX 1 standard actually say
-<code class="highlighter-rouge">getcwd</code>’s 2nd argument being <code class="highlighter-rouge">0</code> is undefined. Luckily both macOS and Linux define it the way we want
-(allocate as much memory as needed). Swift’s handling of <code class="highlighter-rouge">char *</code> aka <code class="highlighter-rouge">UnsafeMutablePointer&lt;CChar&gt;</code> in context
-of a <code class="highlighter-rouge">var</code> array is also very cool.</p>
+<p>Some details are lost in this video<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/>,</a> however. For example, the POSIX standard actually says <code class="highlighter-rouge">getcwd</code>’s 2nd
+argument being <code class="highlighter-rouge">0</code> is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
+memory as needed). Swift’s handling of <code class="highlighter-rouge">char *</code> aka <code class="highlighter-rouge">UnsafeMutablePointer&lt;CChar&gt;</code> in context of a <code class="highlighter-rouge">var</code> array
+is also very cool.</p>
 
 </div>
 

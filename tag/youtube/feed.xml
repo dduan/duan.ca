@@ -15,10 +15,10 @@ capability.&lt;/p&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;Some details are lost in this video, however. For example&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/&gt;,&lt;/a&gt; the fact that POSIX 1 standard actually say
-&lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;’s 2nd argument being &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; is undefined. Luckily both macOS and Linux define it the way we want
-(allocate as much memory as needed). Swift’s handling of &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt; aka &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;/code&gt; in context
-of a &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; array is also very cool.&lt;/p&gt;
+&lt;p&gt;Some details are lost in this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/&gt;,&lt;/a&gt; however. For example, the POSIX standard actually says &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;’s 2nd
+argument being &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
+memory as needed). Swift’s handling of &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt; aka &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;/code&gt; in context of a &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; array
+is also very cool.&lt;/p&gt;
 </description>
                 <pubDate>Wed, 27 Dec 2017 01:13:07 -0800</pubDate>
                 <link></link>

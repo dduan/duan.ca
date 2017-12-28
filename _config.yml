@@ -19,6 +19,8 @@ markdown:           kramdown
 nav:
   - name:           "articles"
     href:           "/articles"
+  - name:           "videos"
+    href:           "https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A"
   - name:           "Links"
     href:           "/links"
   - name:           "Projects"

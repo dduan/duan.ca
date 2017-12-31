@@ -2,9 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - TUI</title>
-        <link>https://duan.ca/tag/TUI</link>
-        <atom:link href="https://duan.ca/tag/TUI/index.xml" rel="self" type="application/rss+xml" />
+        <link>http://0.0.0.0:4000/tag/TUI</link>
+        <atom:link href="http://0.0.0.0:4000/tag/TUI/index.xml" rel="self" type="application/rss+xml" />
         
+        
+            
         
             
         
@@ -36,7 +38,7 @@
                 <description>&lt;p&gt;One of my fondest memory in programming is writing the game Snake on one of
 these:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2016/12/e-dictionary.jpg&quot; alt=&quot;An Electronic/Digital Dictionary&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2016/12/e-dictionary.jpg&quot; alt=&quot;An Electronic/Digital Dictionary&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;At the time, I was in a very restrictive school where a real computer wasn’t
 permited in class. The actual thing (that’s an “electronic dictionary” by the
@@ -63,7 +65,7 @@ use hotkeys to navigate menus, trigger functions and so on.  Sometimes you can
 use mouse, too. Their layout often resemble that of a GUI application running in
 it’s own “window”:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2016/12/tig.png&quot; alt=&quot;tig&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2016/12/tig.png&quot; alt=&quot;tig&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Just to make things painfully clear, these apps’s interface is composed
 exclusively of text. We can vaguely categorize them as “Text-based User
@@ -90,7 +92,7 @@ pre-built UI elements like panels, menus, forms etc. The terminal in my mind is
 a spread of characters that can be updated by me. That sounds fun. Ncurses seems
 more like UIKit :P.&lt;/p&gt;
 
-&lt;p&gt;Luckily&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/12/26/making-tui-programs-in-swift/&gt;,&lt;/a&gt; I found the fun library: &lt;a href=&quot;https://github.com/nsf/termbox&quot;&gt;termbox&lt;/a&gt; by &lt;a href=&quot;https://github.com/nsf&quot;&gt;nsf&lt;/a&gt;. Termbox offers around
+&lt;p&gt;Luckily, I found the fun library: &lt;a href=&quot;https://github.com/nsf/termbox&quot;&gt;termbox&lt;/a&gt; by &lt;a href=&quot;https://github.com/nsf&quot;&gt;nsf&lt;/a&gt;. Termbox offers around
 a dozen functions that gives us size of the terminal, a way to update text at
 a row/column coordinates, and user inputs in forms of key-presses and
 mouse-clicks. And that’s it!&lt;/p&gt;
@@ -98,14 +100,14 @@ mouse-clicks. And that’s it!&lt;/p&gt;
 &lt;p&gt;After making &lt;a href=&quot;https://github.com/dduan/Termbox&quot;&gt;a Swift wrapper&lt;/a&gt;, I was able to build a painter app in
 &lt;a href=&quot;https://github.com/dduan/TerminalPaint&quot;&gt;a handleful of lines&lt;/a&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2016/12/terminal-paint.png&quot; alt=&quot;terminal paint&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2016/12/terminal-paint.png&quot; alt=&quot;terminal paint&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So that’s an TUI app drawing according to mouse clicks built with only a few
 primitives from termbox. Awww yeah! Here’s the code with the comment stripped,
 to give you a taste:&lt;/p&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Termbox&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2016/12/26/making-tui-programs-in-swift/&gt;,&lt;/a&gt;&lt;/span&gt;
     &lt;span class=&quot;nv&quot;&gt;foreground&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nv&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -193,7 +195,7 @@ have fun :)&lt;/p&gt;
 </description>
                 <pubDate>Mon, 26 Dec 2016 21:39:05 -0800</pubDate>
                 <link></link>
-                <guid isPermaLink="true">https://duan.ca/2016/12/26/making-tui-programs-in-swift/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2016/12/26/making-tui-programs-in-swift/</guid>
             </item>
             
         

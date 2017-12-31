@@ -3,75 +3,56 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Daniel Duan</title>
+  <title>Hello World In WebAssembly</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
   <!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>Daniel Duan | Daniel Duan thinks.</title>
+<title>Hello World In WebAssembly | Daniel Duan</title>
 <meta name="generator" content="Jekyll v3.6.2" />
-<meta property="og:title" content="Daniel Duan" />
+<meta property="og:title" content="Hello World In WebAssembly" />
 <meta name="author" content="Daniel Duan" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Daniel Duan thinks." />
-<meta property="og:description" content="Daniel Duan thinks." />
-<link rel="canonical" href="http://0.0.0.0:4000/" />
-<meta property="og:url" content="http://0.0.0.0:4000/" />
+<meta name="description" content="Every now and then, I check on the progress of Web Assembly. I did it again around the time of this post and finally found enough tutorials, examples, and working software to get myself started in this area. In doing so, I made a video to demo some progress. (this article includes all the same information and more, so just read on if you don’t have 15 minutes for YouTube)." />
+<meta property="og:description" content="Every now and then, I check on the progress of Web Assembly. I did it again around the time of this post and finally found enough tutorials, examples, and working software to get myself started in this area. In doing so, I made a video to demo some progress. (this article includes all the same information and more, so just read on if you don’t have 15 minutes for YouTube)." />
+<link rel="canonical" href="http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/" />
+<meta property="og:url" content="http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/" />
 <meta property="og:site_name" content="Daniel Duan" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-12-30T18:43:49-08:00" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
 <script type="application/ld+json">
-{"name":"Daniel Duan","description":"Daniel Duan thinks.","author":{"@type":"Person","name":"Daniel Duan"},"@type":"WebSite","url":"http://0.0.0.0:4000/","headline":"Daniel Duan","@context":"http://schema.org"}</script>
+{"description":"Every now and then, I check on the progress of Web Assembly. I did it again around the time of this post and finally found enough tutorials, examples, and working software to get myself started in this area. In doing so, I made a video to demo some progress. (this article includes all the same information and more, so just read on if you don’t have 15 minutes for YouTube).","author":{"@type":"Person","name":"Daniel Duan"},"@type":"BlogPosting","url":"http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/","headline":"Hello World In WebAssembly","dateModified":"2017-12-30T18:43:49-08:00","datePublished":"2017-12-30T18:43:49-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
 <body>
   <div class="container">
     <header class="masthead">
-  <h1 class="masthead-title">
-    <a href="/">Daniel Duan<span>&#39;s blog</span></a>
+  <h1 class="masthead-title--small">
+    <a href="/">Daniel Duan</a>
   </h1>
-  <nav class="masthead-nav">
-    
-    <a href="/articles">articles</a>
-    
-    <a href="https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A">videos</a>
-    
-    <a href="/links">Links</a>
-    
-    <a href="/projects">Projects</a>
-    
-    <a href="/about">About</a>
-    
-  </nav>
 </header>
-<div class="content page">
-  <h3 class="page-title"></h3>
-  
+<div class="content post">
+  <h1 class="post-title">Hello World In WebAssembly</h1>
+  <div class="post-date">
+    <time>30 Dec 2017</time>
+     | 
+
+<div class="post-tags">
+
+  <a href="/tag/webassembly">WebAssembly</a>,
+
+  <a href="/tag/youtube">YouTube</a>
+
+</div>
 
 
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2017/12/30/hello-world-in-webassembly/">Hello World In WebAssembly</a></h1>
-    
-    <div class="post-date">
-      
-      <time>30 Dec 2017</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/webassembly">WebAssembly</a>,
-      
-        <a href="/tag/youtube">YouTube</a>
-      
-      </div>
-      
-    </div>
-    <p>Every now and then, I check on the progress of Web Assembly. I did it again
-around the time of this post and finally found enough tutorials, examples, and
+  </div>
+  <p>Every now and then, I check on the progress of Web Assembly. I did it again
+around the time of this post and finally found enough tutorials, examples<a class="backlink" rel="canonical" title="From duan.ca" href=http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/>,</a> and
 working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (<em>this article includes all the same information and
 more, so just read on if you don’t have 15 minutes for YouTube</em>).</p>
@@ -248,98 +229,6 @@ of the typing. Here’s what I used for this demo:</p>
 code, compile, run on your (virtual, in browser) machine, repeat. That sounds like
 “assembly” to me!</p>
 
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2017/12/27/building-pwd-under-1-minute-in-swift/">Building 'pwd' Under 1 Minute In Swift</a></h1>
-    
-    <div class="post-date">
-      
-      <time>27 Dec 2017</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/swift">Swift</a>,
-      
-        <a href="/tag/unix">Unix</a>,
-      
-        <a href="/tag/c">C</a>,
-      
-        <a href="/tag/youtube">YouTube</a>,
-      
-        <a href="/tag/minute-swift">Minute Swift</a>
-      
-      </div>
-      
-    </div>
-    <p>I guess I’m starting a series of minute-long videos. In this first video, I built <code class="highlighter-rouge">pwd</code> out of <code class="highlighter-rouge">getcwd</code>. The
-code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift’s great C-interop
-capability.</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/YR4MCcMnHrI" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
-
-<p>Some details are lost in this video, however. For example, the POSIX standard actually says <code class="highlighter-rouge">getcwd</code>’s 2nd
-argument being <code class="highlighter-rouge">0</code> is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
-memory as needed). Swift’s handling of <code class="highlighter-rouge">char *</code> aka <code class="highlighter-rouge">UnsafeMutablePointer&lt;CChar&gt;</code> in context of a <code class="highlighter-rouge">var</code> array
-is also very cool.</p>
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2017/12/23/contributing-to-open-source-foundation/">Contributing To Open-Source Swift</a></h1>
-    
-    <div class="post-date">
-      
-      <time>23 Dec 2017</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/swift">Swift</a>,
-      
-        <a href="/tag/foundation">Foundation</a>,
-      
-        <a href="/tag/youtube">YouTube</a>
-      
-      </div>
-      
-    </div>
-    <p>I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes, on YouTube.</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rwuj80W8TtI" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
-
-<ul>
-  <li>Pull request: <a href="https://github.com/apple/swift-corelibs-foundation/pull/1376">https://github.com/apple/swift-corelibs-foundation/pull/1376</a></li>
-  <li>SR-6647: <a href="https://bugs.swift.org/browse/SR-6647">https://bugs.swift.org/browse/SR-6647</a></li>
-</ul>
-
-  </div>
-  <hr />
-  
-
-
-<footer class="masthead">
-<h4>Read More:</h4>
-<nav class="masthead-nav">
-  
-  <a href="/articles">articles</a>
-  
-  <a href="https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A">videos</a>
-  
-  <a href="/links">Links</a>
-  
-  <a href="/projects">Projects</a>
-  
-  <a href="/about">About</a>
-  
-</nav>
-</footer>
 
 </div>
 

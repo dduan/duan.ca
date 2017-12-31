@@ -2,9 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Carthage</title>
-        <link>https://duan.ca/tag/Carthage</link>
-        <atom:link href="https://duan.ca/tag/Carthage/index.xml" rel="self" type="application/rss+xml" />
+        <link>http://0.0.0.0:4000/tag/Carthage</link>
+        <atom:link href="http://0.0.0.0:4000/tag/Carthage/index.xml" rel="self" type="application/rss+xml" />
         
+        
+            
         
             
         
@@ -26,7 +28,7 @@ Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;/p&gt;
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
-the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/17/making-an-open-source-swift-project/&gt;,&lt;/a&gt; automatic Carthage binary generation, test coverage…&lt;/p&gt;
+the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/17/making-an-open-source-swift-project/&gt;,&lt;/a&gt; automatic Carthage binary generation, test coverage…&lt;/p&gt;
 
 &lt;p&gt;Anyways, here’s some stuff mentioned in the video:&lt;/p&gt;
 
@@ -43,7 +45,7 @@ the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&q
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
                 <link></link>
-                <guid isPermaLink="true">https://duan.ca/2017/12/17/making-an-open-source-swift-project/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/17/making-an-open-source-swift-project/</guid>
             </item>
             
         
@@ -105,7 +107,7 @@ project, verifying that support for those package managers remain functional.&lt
 on &lt;a href=&quot;https://github.com/dduan/DistributionTests&quot;&gt;Github&lt;/a&gt; 😉.&lt;/p&gt;
 
 &lt;p&gt;The script &lt;code class=&quot;highlighter-rouge&quot;&gt;customize&lt;/code&gt; requires 3 pieces of information of the library: its
-import name&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/10/10/distribution-tests/&gt;,&lt;/a&gt; its git repository URL and a major version number. The assumption
+import name&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2016/10/10/distribution-tests/&gt;,&lt;/a&gt; its git repository URL and a major version number. The assumption
 here is the library generates uniformly named artifacts: the file name for
 &lt;code class=&quot;highlighter-rouge&quot;&gt;.framework&lt;/code&gt; and the name users use to import it are the same. Testing
 distribution of a library is as simple as:&lt;/p&gt;
@@ -125,7 +127,7 @@ a continuous integration server.&lt;/p&gt;
 </description>
                 <pubDate>Mon, 10 Oct 2016 10:34:49 -0700</pubDate>
                 <link></link>
-                <guid isPermaLink="true">https://duan.ca/2016/10/10/distribution-tests/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2016/10/10/distribution-tests/</guid>
             </item>
             
         

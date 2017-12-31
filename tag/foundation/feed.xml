@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Foundation</title>
-        <link>http://0.0.0.0:4000/tag/Foundation</link>
-        <atom:link href="http://0.0.0.0:4000/tag/Foundation/index.xml" rel="self" type="application/rss+xml" />
+        <link>https://duan.ca/tag/Foundation</link>
+        <atom:link href="https://duan.ca/tag/Foundation/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -13,7 +13,7 @@
             
             <item>
                 <title>Contributing To Open-Source Swift</title>
-                <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/23/contributing-to-open-source-foundation/&gt;,&lt;/a&gt; on YouTube.&lt;/p&gt;
+                <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/23/contributing-to-open-source-foundation/&gt;,&lt;/a&gt; on YouTube.&lt;/p&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
@@ -24,7 +24,7 @@
 </description>
                 <pubDate>Sat, 23 Dec 2017 13:21:10 -0800</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/23/contributing-to-open-source-foundation/</guid>
+                <guid isPermaLink="true">https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</guid>
             </item>
             
         

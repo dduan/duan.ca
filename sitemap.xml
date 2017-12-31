@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    
+    
+    <url>
+        <loc>https://duan.ca/2017/12/30/hello-world-in-webassembly/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2017/12/20/smart-invert-support-for-you-app/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2017/12/19/bitarray-final-act/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/linked/2017/12/c-and-swift/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2017/12/09/list-comprehension-in-swift/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2017/01/16/site-changes/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/linked/2017/01/swift-abi-in-laymans-terms/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2016/12/26/making-tui-programs-in-swift/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2016/10/22/how-to-omit-needless-words/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2016/10/10/distribution-tests/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2016/05/19/a-case-for-oop/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2016/05/15/cheap-orders/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2016/05/15/deploy-jekyll-to-github/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2015/11/01/char-star-star-in-swift/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2015/07/12/swift-algebraic-data-types/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2015/07/04/lets-build-a-cat-in-swift-2/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2015/04/18/swift-function-fun-facts/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/2012/10/31/keep-git-social/</loc>
+    </url>
+    
+
+    
+    <url>
+        <loc>https://duan.ca/404.html</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/about/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/articles/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/articles/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/links/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/feed/main.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/projects/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/sitemap.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/style.css</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/git/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/git/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/swift/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/swift/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/c/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/c/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/jekyll/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/jekyll/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/github/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/github/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/make/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/make/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/python/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/python/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/oop/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/oop/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/cocoapods/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/cocoapods/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/carthage/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/carthage/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/swift-package-manager/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/swift-package-manager/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/api-design-guidelines/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/api-design-guidelines/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/naming/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/naming/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/tui/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/tui/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/swift-evolution/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/swift-evolution/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/email/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/email/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/xcode/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/xcode/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/haskell/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/haskell/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/youtube/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/youtube/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/let-s-build/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/let-s-build/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/cocoapods/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/cocoapods/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/swiftlint/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/swiftlint/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/ios/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/ios/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/tvos/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/tvos/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/macos/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/macos/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/watchos/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/watchos/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/accessibility/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/accessibility/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/interface-builder/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/interface-builder/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/foundation/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/foundation/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/unix/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/unix/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/minute-swift/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/minute-swift/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/webassembly/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/webassembly/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tweets/</loc>
+    </url>
+
+</urlset>

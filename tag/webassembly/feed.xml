@@ -2,15 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - WebAssembly</title>
-        <link>http://0.0.0.0:4000/tag/WebAssembly</link>
-        <atom:link href="http://0.0.0.0:4000/tag/WebAssembly/index.xml" rel="self" type="application/rss+xml" />
+        <link>https://duan.ca/tag/WebAssembly</link>
+        <atom:link href="https://duan.ca/tag/WebAssembly/index.xml" rel="self" type="application/rss+xml" />
         
         
             
             <item>
                 <title>Hello World In WebAssembly</title>
                 <description>&lt;p&gt;Every now and then, I check on the progress of Web Assembly. I did it again
-around the time of this post and finally found enough tutorials, examples&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/&gt;,&lt;/a&gt; and
+around the time of this post and finally found enough tutorials, examples&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/30/hello-world-in-webassembly/&gt;,&lt;/a&gt; and
 working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (&lt;em&gt;this article includes all the same information and
 more, so just read on if you don’t have 15 minutes for YouTube&lt;/em&gt;).&lt;/p&gt;
@@ -190,7 +190,7 @@ code, compile, run on your (virtual, in browser) machine, repeat. That sounds li
 </description>
                 <pubDate>Sat, 30 Dec 2017 18:43:49 -0800</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/</guid>
+                <guid isPermaLink="true">https://duan.ca/2017/12/30/hello-world-in-webassembly/</guid>
             </item>
             
         

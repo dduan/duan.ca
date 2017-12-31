@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - iOS</title>
-        <link>http://0.0.0.0:4000/tag/iOS</link>
-        <atom:link href="http://0.0.0.0:4000/tag/iOS/index.xml" rel="self" type="application/rss+xml" />
+        <link>https://duan.ca/tag/iOS</link>
+        <atom:link href="https://duan.ca/tag/iOS/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -109,7 +109,7 @@ put a cherry on top, make it &lt;code class=&quot;highlighter-rouge&quot;&gt;@IB
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
         &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#available(iOS 11&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/20/smart-invert-support-for-you-app/&gt;,&lt;/a&gt; *)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#available(iOS 11&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/20/smart-invert-support-for-you-app/&gt;,&lt;/a&gt; *)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
                 &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accessibilityIgnoresInvertColors&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newValue&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -147,7 +147,7 @@ developer about &lt;a href=&quot;https://developer.apple.com/documentation/uikit
 </description>
                 <pubDate>Wed, 20 Dec 2017 13:17:44 -0800</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/20/smart-invert-support-for-you-app/</guid>
+                <guid isPermaLink="true">https://duan.ca/2017/12/20/smart-invert-support-for-you-app/</guid>
             </item>
             
         
@@ -165,7 +165,7 @@ Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;/p&gt;
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
-the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/17/making-an-open-source-swift-project/&gt;,&lt;/a&gt; automatic Carthage binary generation, test coverage…&lt;/p&gt;
+the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/17/making-an-open-source-swift-project/&gt;,&lt;/a&gt; automatic Carthage binary generation, test coverage…&lt;/p&gt;
 
 &lt;p&gt;Anyways, here’s some stuff mentioned in the video:&lt;/p&gt;
 
@@ -182,7 +182,7 @@ the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&q
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
                 <link></link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/17/making-an-open-source-swift-project/</guid>
+                <guid isPermaLink="true">https://duan.ca/2017/12/17/making-an-open-source-swift-project/</guid>
             </item>
             
         

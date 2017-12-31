@@ -15,8 +15,8 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="A “string” in C is just a continuous chunk of char values in memory with \0 at the end. To reference it, a variable of type char * is used to store the address of the first char (commonly known as a pointer 😉). It’s common to have string manipulating functions take this form:" />
 <meta property="og:description" content="A “string” in C is just a continuous chunk of char values in memory with \0 at the end. To reference it, a variable of type char * is used to store the address of the first char (commonly known as a pointer 😉). It’s common to have string manipulating functions take this form:" />
-<link rel="canonical" href="http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/" />
-<meta property="og:url" content="http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/" />
+<link rel="canonical" href="https://duan.ca/2015/11/01/char-star-star-in-swift/" />
+<meta property="og:url" content="https://duan.ca/2015/11/01/char-star-star-in-swift/" />
 <meta property="og:site_name" content="Daniel Duan" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2015-11-01T11:18:40-08:00" />
@@ -24,7 +24,7 @@
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
 <script type="application/ld+json">
-{"description":"A “string” in C is just a continuous chunk of char values in memory with \\0 at the end. To reference it, a variable of type char * is used to store the address of the first char (commonly known as a pointer 😉). It’s common to have string manipulating functions take this form:","author":{"@type":"Person","name":"Daniel Duan"},"@type":"BlogPosting","url":"http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/","headline":"char ** in Swift","dateModified":"2015-11-01T11:18:40-08:00","datePublished":"2015-11-01T11:18:40-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/"},"@context":"http://schema.org"}</script>
+{"description":"A “string” in C is just a continuous chunk of char values in memory with \\0 at the end. To reference it, a variable of type char * is used to store the address of the first char (commonly known as a pointer 😉). It’s common to have string manipulating functions take this form:","author":{"@type":"Person","name":"Daniel Duan"},"@type":"BlogPosting","url":"https://duan.ca/2015/11/01/char-star-star-in-swift/","headline":"char ** in Swift","dateModified":"2015-11-01T11:18:40-08:00","datePublished":"2015-11-01T11:18:40-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2015/11/01/char-star-star-in-swift/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -100,7 +100,7 @@ use C functions in Swift everyday (like me)!</p>
     <p><code class="highlighter-rouge">CChar</code> is Swift’s name for <em><code class="highlighter-rouge">char</code> in C</em> (shocking, amiright?)</p>
   </li>
   <li>
-    <p><code class="highlighter-rouge">UnsafeMutablePointer&lt;Type&gt;</code> roughly translates to <code class="highlighter-rouge">Type *</code><a class="backlink" rel="canonical" title="From duan.ca" href=http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/>,</a> so
+    <p><code class="highlighter-rouge">UnsafeMutablePointer&lt;Type&gt;</code> roughly translates to <code class="highlighter-rouge">Type *</code><a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2015/11/01/char-star-star-in-swift/>,</a> so
 syntactically, we can see why
 <code class="highlighter-rouge">UnsafeMutablePointer&lt;UnsafeMutablePointer&lt;CChar&gt;&gt;</code> is used to bridge the
 C type <code class="highlighter-rouge">(char *)*</code>.</p>

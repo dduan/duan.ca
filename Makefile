@@ -4,14 +4,14 @@ serve:
 	jekyll serve --draft --host=0.0.0.0
 
 build:
-	jekyll build
+	jekyll build -I
 
 deploy:
 	git checkout -f gh-pages
 	git clean -d -x -f
 	git pull
 	git checkout master
-	jekyll build
+	jekyll build -I
 	rm -rf ${DEPLOY_PATH}
 	mkdir ${DEPLOY_PATH}
 	cp -R .git ${DEPLOY_PATH}

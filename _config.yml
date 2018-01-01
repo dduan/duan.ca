@@ -1,6 +1,6 @@
 # Basic
 name:               "Daniel Duan"
-description:        "Daniel Duan thinks."
+description:        "Daniel Duan's Thoughts And Works."
 
 # jekyll-seo-tag, see: http://www.rubydoc.info/gems/jekyll-seo-tag/1.2.0
 url:                "https://duan.ca"
@@ -68,5 +68,5 @@ collections:
         output: true
         permalink: /linked/:year/:month/:title/
 
-gems:
+plugins:
   - jekyll-seo-tag

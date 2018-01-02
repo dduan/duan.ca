@@ -1,5 +1,5 @@
 ---
-title: Lenses And Prisms In Swift, a pragmatic approach
+title: "Lenses And Prisms In Swift: a pragmatic approach"
 tags: [Swift, Lenses, Prisms]
 link: https://broomburgo.github.io/fun-ios/post/lenses-and-prisms-in-swift-a-pragmatic-approach/
 date: 2018-01-01 15:25:55-0800

@@ -193,7 +193,9 @@ code, compile, run on your (virtual, in browser) machine, repeat. That sounds li
 
 </description>
                 <pubDate>Sat, 30 Dec 2017 18:43:49 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/30/hello-world-in-webassembly/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/30/hello-world-in-webassembly/</guid>
             </item>
             
@@ -213,7 +215,9 @@ memory as needed). Swift’s handling of &lt;code class=&quot;highlighter-rouge&
 is also very cool.&lt;/p&gt;
 </description>
                 <pubDate>Wed, 27 Dec 2017 01:13:07 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</guid>
             </item>
             
@@ -231,7 +235,9 @@ is also very cool.&lt;/p&gt;
 &lt;/ul&gt;
 </description>
                 <pubDate>Sat, 23 Dec 2017 13:21:10 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</guid>
             </item>
             
@@ -252,7 +258,9 @@ undone from “episode 2”.&lt;/p&gt;
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ckrd_FoFMl0&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
                 <pubDate>Tue, 19 Dec 2017 12:17:49 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/19/bitarray-final-act/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/19/bitarray-final-act/</guid>
             </item>
             
@@ -285,7 +293,9 @@ the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&q
 &lt;/ul&gt;
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/17/making-an-open-source-swift-project/</guid>
             </item>
             
@@ -302,7 +312,9 @@ a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt
 
 </description>
                 <pubDate>Tue, 12 Dec 2017 22:51:04 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/</guid>
             </item>
             

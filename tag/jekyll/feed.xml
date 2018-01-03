@@ -51,7 +51,9 @@ about it in the &lt;a href=&quot;https://duan.ca/about/&quot;&gt;about page&lt;/
 &lt;p&gt;I wrote the most Ruby in my life today. Yay?&lt;/p&gt;
 </description>
                 <pubDate>Mon, 16 Jan 2017 23:24:13 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/01/16/site-changes/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/01/16/site-changes/</guid>
             </item>
             
@@ -126,7 +128,9 @@ deploy:
 additional software/scripts and there’s no restriction on plugins.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 15 May 2016 01:00:00 -0700</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2016/05/15/deploy-jekyll-to-github/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2016/05/15/deploy-jekyll-to-github/</guid>
             </item>
             

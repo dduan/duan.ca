@@ -193,7 +193,9 @@ code, compile, run on your (virtual, in browser) machine, repeat. That sounds li
 
 </description>
                 <pubDate>Sat, 30 Dec 2017 18:43:49 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/30/hello-world-in-webassembly/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/30/hello-world-in-webassembly/</guid>
             </item>
             

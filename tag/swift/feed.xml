@@ -19,7 +19,9 @@ lenses/prisms still can be useful in a concrete and approachable way.&lt;/p&gt;
 &lt;p&gt;I really enjoyed the bonus discussion about duality at the end&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/linked/2018/01/lenses-prisms-swift/&gt;,&lt;/a&gt; too!&lt;/p&gt;
 </description>
                 <pubDate>Mon, 01 Jan 2018 15:25:55 -0800</pubDate>
+                
                 <link>https://broomburgo.github.io/fun-ios/post/lenses-and-prisms-in-swift-a-pragmatic-approach/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/linked/2018/01/lenses-prisms-swift/</guid>
             </item>
             
@@ -41,7 +43,9 @@ memory as needed). Swift’s handling of &lt;code class=&quot;highlighter-rouge&
 is also very cool.&lt;/p&gt;
 </description>
                 <pubDate>Wed, 27 Dec 2017 01:13:07 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</guid>
             </item>
             
@@ -59,7 +63,9 @@ is also very cool.&lt;/p&gt;
 &lt;/ul&gt;
 </description>
                 <pubDate>Sat, 23 Dec 2017 13:21:10 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</guid>
             </item>
             
@@ -80,7 +86,9 @@ undone from “episode 2”.&lt;/p&gt;
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ckrd_FoFMl0&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
                 <pubDate>Tue, 19 Dec 2017 12:17:49 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/19/bitarray-final-act/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/19/bitarray-final-act/</guid>
             </item>
             
@@ -113,7 +121,9 @@ the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&q
 &lt;/ul&gt;
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/17/making-an-open-source-swift-project/</guid>
             </item>
             
@@ -130,7 +140,9 @@ a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt
 
 </description>
                 <pubDate>Tue, 12 Dec 2017 22:51:04 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/</guid>
             </item>
             
@@ -145,7 +157,9 @@ going to be a useful reference to me. I also wish I’d discovered it earlier.&l
 
 </description>
                 <pubDate>Mon, 11 Dec 2017 17:36:34 -0800</pubDate>
+                
                 <link>https://www.uraimo.com/2016/04/07/swift-and-c-everything-you-need-to-know/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/linked/2017/12/c-and-swift/</guid>
             </item>
             
@@ -291,7 +305,9 @@ with the current compiler?&lt;/p&gt;
 
 </description>
                 <pubDate>Sat, 09 Dec 2017 12:26:30 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/09/list-comprehension-in-swift/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/09/list-comprehension-in-swift/</guid>
             </item>
             
@@ -381,7 +397,9 @@ major version of Swift is released, code written in the previous version should
 compile without change in compatibility mode.&lt;/p&gt;
 </description>
                 <pubDate>Mon, 22 May 2017 09:04:01 -0700</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/</guid>
             </item>
             
@@ -442,7 +460,9 @@ Evolution&lt;/a&gt;
 doc from the Swift repository.&lt;/p&gt;
 </description>
                 <pubDate>Mon, 16 Jan 2017 22:44:38 -0800</pubDate>
+                
                 <link>https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160808/026153.html</link>
+                
                 <guid isPermaLink="true">https://duan.ca/linked/2017/01/swift-abi-in-laymans-terms/</guid>
             </item>
             
@@ -609,7 +629,9 @@ have fun :)&lt;/p&gt;
 
 </description>
                 <pubDate>Mon, 26 Dec 2016 21:39:05 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2016/12/26/making-tui-programs-in-swift/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2016/12/26/making-tui-programs-in-swift/</guid>
             </item>
             
@@ -773,7 +795,9 @@ that everyone cares so much about your code base’s “Swiftness” and it’ll
 worth it!&lt;/p&gt;
 </description>
                 <pubDate>Sat, 22 Oct 2016 17:08:41 -0700</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2016/10/22/how-to-omit-needless-words/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2016/10/22/how-to-omit-needless-words/</guid>
             </item>
             
@@ -835,7 +859,9 @@ a continuous integration server.&lt;/p&gt;
 
 </description>
                 <pubDate>Mon, 10 Oct 2016 10:34:49 -0700</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2016/10/10/distribution-tests/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2016/10/10/distribution-tests/</guid>
             </item>
             
@@ -874,7 +900,9 @@ even mean? Is it simply a case that will go away when protocols become more
 powerful?&lt;/p&gt;
 </description>
                 <pubDate>Thu, 19 May 2016 12:03:02 -0700</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2016/05/19/a-case-for-oop/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2016/05/19/a-case-for-oop/</guid>
             </item>
             
@@ -1009,7 +1037,9 @@ up with the erasure method. I discovered a series of small challenges and got
 help from Swift’s designers in each step. Everything fell together in the end.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 15 May 2016 17:42:27 -0700</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2016/05/15/cheap-orders/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2016/05/15/cheap-orders/</guid>
             </item>
             
@@ -1105,7 +1135,9 @@ the infinite layers of indirections that pointers achieve.&lt;/p&gt;
 &lt;/ol&gt;
 </description>
                 <pubDate>Sun, 01 Nov 2015 11:18:40 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2015/11/01/char-star-star-in-swift/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2015/11/01/char-star-star-in-swift/</guid>
             </item>
             
@@ -1240,7 +1272,9 @@ aliases, such as:&lt;/p&gt;
 
 </description>
                 <pubDate>Sun, 12 Jul 2015 15:51:27 -0700</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2015/07/12/swift-algebraic-data-types/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2015/07/12/swift-algebraic-data-types/</guid>
             </item>
             
@@ -1347,7 +1381,9 @@ code:&lt;/p&gt;
 
 </description>
                 <pubDate>Sat, 04 Jul 2015 20:56:19 -0700</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2015/07/04/lets-build-a-cat-in-swift-2/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2015/07/04/lets-build-a-cat-in-swift-2/</guid>
             </item>
             
@@ -1516,7 +1552,9 @@ I felt writing this up. It’s really like saying to a friend “I hate you” a
 he/she pulls a prank on you.)&lt;/p&gt;
 </description>
                 <pubDate>Sat, 18 Apr 2015 16:20:16 -0700</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2015/04/18/swift-function-fun-facts/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2015/04/18/swift-function-fun-facts/</guid>
             </item>
             

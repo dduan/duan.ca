@@ -48,7 +48,9 @@ the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&q
 &lt;/ul&gt;
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/12/17/making-an-open-source-swift-project/</guid>
             </item>
             
@@ -144,7 +146,9 @@ major version of Swift is released, code written in the previous version should
 compile without change in compatibility mode.&lt;/p&gt;
 </description>
                 <pubDate>Mon, 22 May 2017 09:04:01 -0700</pubDate>
-                <link></link>
+                
+                <link>https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/</link>
+                
                 <guid isPermaLink="true">https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/</guid>
             </item>
             

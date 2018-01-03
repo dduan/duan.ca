@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - YouTube</title>
-        <link>https://duan.ca/tag/YouTube/</link>
-        <atom:link href="https://duan.ca/tag/YouTube/index.xml" rel="self" type="application/rss+xml" />
+        <link>http://0.0.0.0:4000/tag/YouTube/</link>
+        <atom:link href="http://0.0.0.0:4000/tag/YouTube/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -14,7 +14,7 @@
             <item>
                 <title>Hello World In WebAssembly</title>
                 <description>&lt;p&gt;Every now and then, I check on the progress of Web Assembly. I did it again
-around the time of this post and finally found enough tutorials, examples&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/30/hello-world-in-webassembly/&gt;,&lt;/a&gt; and
+around the time of this post and finally found enough tutorials, examples&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/&gt;,&lt;/a&gt; and
 working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (&lt;em&gt;this article includes all the same information and
 more, so just read on if you don’t have 15 minutes for YouTube&lt;/em&gt;).&lt;/p&gt;
@@ -194,9 +194,9 @@ code, compile, run on your (virtual, in browser) machine, repeat. That sounds li
 </description>
                 <pubDate>Sat, 30 Dec 2017 18:43:49 -0800</pubDate>
                 
-                <link>https://duan.ca/2017/12/30/hello-world-in-webassembly/</link>
+                <link>http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/</link>
                 
-                <guid isPermaLink="true">https://duan.ca/2017/12/30/hello-world-in-webassembly/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/</guid>
             </item>
             
         
@@ -209,23 +209,23 @@ capability.&lt;/p&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;Some details are lost in this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/&gt;,&lt;/a&gt; however. For example, the POSIX standard actually says &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;’s 2nd
+&lt;p&gt;Some details are lost in this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/27/building-pwd-under-1-minute-in-swift/&gt;,&lt;/a&gt; however. For example, the POSIX standard actually says &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;’s 2nd
 argument being &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
 memory as needed). Swift’s handling of &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt; aka &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;/code&gt; in context of a &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; array
 is also very cool.&lt;/p&gt;
 </description>
                 <pubDate>Wed, 27 Dec 2017 01:13:07 -0800</pubDate>
                 
-                <link>https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</link>
+                <link>http://0.0.0.0:4000/2017/12/27/building-pwd-under-1-minute-in-swift/</link>
                 
-                <guid isPermaLink="true">https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/27/building-pwd-under-1-minute-in-swift/</guid>
             </item>
             
         
             
             <item>
                 <title>Contributing To Open-Source Swift</title>
-                <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/23/contributing-to-open-source-foundation/&gt;,&lt;/a&gt; on YouTube.&lt;/p&gt;
+                <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/23/contributing-to-open-source-foundation/&gt;,&lt;/a&gt; on YouTube.&lt;/p&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
@@ -236,9 +236,9 @@ is also very cool.&lt;/p&gt;
 </description>
                 <pubDate>Sat, 23 Dec 2017 13:21:10 -0800</pubDate>
                 
-                <link>https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</link>
+                <link>http://0.0.0.0:4000/2017/12/23/contributing-to-open-source-foundation/</link>
                 
-                <guid isPermaLink="true">https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/23/contributing-to-open-source-foundation/</guid>
             </item>
             
         
@@ -259,9 +259,9 @@ undone from “episode 2”.&lt;/p&gt;
 </description>
                 <pubDate>Tue, 19 Dec 2017 12:17:49 -0800</pubDate>
                 
-                <link>https://duan.ca/2017/12/19/bitarray-final-act/</link>
+                <link>http://0.0.0.0:4000/2017/12/19/bitarray-final-act/</link>
                 
-                <guid isPermaLink="true">https://duan.ca/2017/12/19/bitarray-final-act/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/19/bitarray-final-act/</guid>
             </item>
             
         
@@ -277,7 +277,7 @@ Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;/p&gt;
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
-the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/17/making-an-open-source-swift-project/&gt;,&lt;/a&gt; automatic Carthage binary generation, test coverage…&lt;/p&gt;
+the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/17/making-an-open-source-swift-project/&gt;,&lt;/a&gt; automatic Carthage binary generation, test coverage…&lt;/p&gt;
 
 &lt;p&gt;Anyways, here’s some stuff mentioned in the video:&lt;/p&gt;
 
@@ -294,16 +294,16 @@ the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&q
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
                 
-                <link>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</link>
+                <link>http://0.0.0.0:4000/2017/12/17/making-an-open-source-swift-project/</link>
                 
-                <guid isPermaLink="true">https://duan.ca/2017/12/17/making-an-open-source-swift-project/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/17/making-an-open-source-swift-project/</guid>
             </item>
             
         
             
             <item>
                 <title>Let's Build A BitArray In Swift</title>
-                <description>&lt;p&gt;In this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/&gt;,&lt;/a&gt; I build a space-efficient BitArray that confirms to &lt;code class=&quot;highlighter-rouge&quot;&gt;RandomAccessCollection&lt;/code&gt; in Swift in
+                <description>&lt;p&gt;In this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/12/lets-build-a-bitarray-in-swift/&gt;,&lt;/a&gt; I build a space-efficient BitArray that confirms to &lt;code class=&quot;highlighter-rouge&quot;&gt;RandomAccessCollection&lt;/code&gt; in Swift in
 a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt;/p&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/-k_jrIoD56k&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
@@ -313,9 +313,9 @@ a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt
 </description>
                 <pubDate>Tue, 12 Dec 2017 22:51:04 -0800</pubDate>
                 
-                <link>https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/</link>
+                <link>http://0.0.0.0:4000/2017/12/12/lets-build-a-bitarray-in-swift/</link>
                 
-                <guid isPermaLink="true">https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/12/lets-build-a-bitarray-in-swift/</guid>
             </item>
             
         

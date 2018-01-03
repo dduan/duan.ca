@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - C</title>
-        <link>https://duan.ca/tag/C/</link>
-        <atom:link href="https://duan.ca/tag/C/index.xml" rel="self" type="application/rss+xml" />
+        <link>http://0.0.0.0:4000/tag/C/</link>
+        <atom:link href="http://0.0.0.0:4000/tag/C/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -21,16 +21,16 @@ capability.&lt;/p&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;Some details are lost in this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/&gt;,&lt;/a&gt; however. For example, the POSIX standard actually says &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;’s 2nd
+&lt;p&gt;Some details are lost in this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/27/building-pwd-under-1-minute-in-swift/&gt;,&lt;/a&gt; however. For example, the POSIX standard actually says &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;’s 2nd
 argument being &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
 memory as needed). Swift’s handling of &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt; aka &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;/code&gt; in context of a &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; array
 is also very cool.&lt;/p&gt;
 </description>
                 <pubDate>Wed, 27 Dec 2017 01:13:07 -0800</pubDate>
                 
-                <link>https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</link>
+                <link>http://0.0.0.0:4000/2017/12/27/building-pwd-under-1-minute-in-swift/</link>
                 
-                <guid isPermaLink="true">https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/27/building-pwd-under-1-minute-in-swift/</guid>
             </item>
             
         
@@ -47,7 +47,7 @@ is also very cool.&lt;/p&gt;
             
             <item>
                 <title>Swift And C Everything You Need to Know on Types, Pointers and more</title>
-                <description>&lt;p&gt;This is an article I wish I had writen. It has everything about Swift and C&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/linked/2017/12/c-and-swift/&gt;,&lt;/a&gt; as stated in the title. It’s
+                <description>&lt;p&gt;This is an article I wish I had writen. It has everything about Swift and C&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/linked/2017/12/c-and-swift/&gt;,&lt;/a&gt; as stated in the title. It’s
 going to be a useful reference to me. I also wish I’d discovered it earlier.&lt;/p&gt;
 
 &lt;p&gt;Follow the author &lt;a href=&quot;https://twitter.com/uraimo&quot;&gt;Umberto Raimondi&lt;/a&gt; on Twitter!&lt;/p&gt;
@@ -57,7 +57,7 @@ going to be a useful reference to me. I also wish I’d discovered it earlier.&l
                 
                 <link>https://www.uraimo.com/2016/04/07/swift-and-c-everything-you-need-to-know/</link>
                 
-                <guid isPermaLink="true">https://duan.ca/linked/2017/12/c-and-swift/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/linked/2017/12/c-and-swift/</guid>
             </item>
             
         
@@ -137,7 +137,7 @@ use C functions in Swift everyday (like me)!&lt;/p&gt;
     &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CChar&lt;/code&gt; is Swift’s name for &lt;em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt; in C&lt;/em&gt; (shocking, amiright?)&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;/code&gt; roughly translates to &lt;code class=&quot;highlighter-rouge&quot;&gt;Type *&lt;/code&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2015/11/01/char-star-star-in-swift/&gt;,&lt;/a&gt; so
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;/code&gt; roughly translates to &lt;code class=&quot;highlighter-rouge&quot;&gt;Type *&lt;/code&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/&gt;,&lt;/a&gt; so
 syntactically, we can see why
 &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&amp;gt;&lt;/code&gt; is used to bridge the
 C type &lt;code class=&quot;highlighter-rouge&quot;&gt;(char *)*&lt;/code&gt;.&lt;/p&gt;
@@ -175,9 +175,9 @@ the infinite layers of indirections that pointers achieve.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 01 Nov 2015 11:18:40 -0800</pubDate>
                 
-                <link>https://duan.ca/2015/11/01/char-star-star-in-swift/</link>
+                <link>http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/</link>
                 
-                <guid isPermaLink="true">https://duan.ca/2015/11/01/char-star-star-in-swift/</guid>
+                <guid isPermaLink="true">http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/</guid>
             </item>
             
         

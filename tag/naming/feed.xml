@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan - Naming</title>
-        <link>http://0.0.0.0:4000/tag/Naming/</link>
-        <atom:link href="http://0.0.0.0:4000/tag/Naming/index.xml" rel="self" type="application/rss+xml" />
+        <link>https://duan.ca/tag/Naming/</link>
+        <atom:link href="https://duan.ca/tag/Naming/index.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -95,7 +95,7 @@ section, we’ll discuss one way to make it happen.&lt;/p&gt;
 &lt;h2 id=&quot;step-1-automate&quot;&gt;Step 1: Automate&lt;/h2&gt;
 
 &lt;p&gt;A good indicator of “merely repeating type information” is repetition of words.
-If you have been disciplined about naming your functions in Swift 2&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2016/10/22/how-to-omit-needless-words/&gt;,&lt;/a&gt; finding
+If you have been disciplined about naming your functions in Swift 2&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/10/22/how-to-omit-needless-words/&gt;,&lt;/a&gt; finding
 such repetition should take no more than one or two good regular expressions.
 After the migrator, your code may contain a mixture of these:&lt;/p&gt;
 
@@ -198,9 +198,9 @@ worth it!&lt;/p&gt;
 </description>
                 <pubDate>Sat, 22 Oct 2016 17:08:41 -0700</pubDate>
                 
-                <link>http://0.0.0.0:4000/2016/10/22/how-to-omit-needless-words/</link>
+                <link>https://duan.ca/2016/10/22/how-to-omit-needless-words/</link>
                 
-                <guid isPermaLink="true">http://0.0.0.0:4000/2016/10/22/how-to-omit-needless-words/</guid>
+                <guid isPermaLink="true">https://duan.ca/2016/10/22/how-to-omit-needless-words/</guid>
             </item>
             
         

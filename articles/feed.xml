@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan Articles</title>
-        <link>http://0.0.0.0:4000/articles/</link>
-        <atom:link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/rss+xml" />
+        <link>https://duan.ca/articles/</link>
+        <atom:link href="https://duan.ca/feed.xml" rel="self" type="application/rss+xml" />
         
         
             
@@ -14,7 +14,7 @@
             <item>
                 <title>Hello World In WebAssembly</title>
                 <description>&lt;p&gt;Every now and then, I check on the progress of Web Assembly. I did it again
-around the time of this post and finally found enough tutorials, examples&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/&gt;,&lt;/a&gt; and
+around the time of this post and finally found enough tutorials, examples&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/30/hello-world-in-webassembly/&gt;,&lt;/a&gt; and
 working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (&lt;em&gt;this article includes all the same information and
 more, so just read on if you don’t have 15 minutes for YouTube&lt;/em&gt;).&lt;/p&gt;
@@ -193,8 +193,8 @@ code, compile, run on your (virtual, in browser) machine, repeat. That sounds li
 
 </description>
                 <pubDate>Sat, 30 Dec 2017 18:43:49 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/30/hello-world-in-webassembly/</guid>
+                <link>https://duan.ca/2017/12/30/hello-world-in-webassembly/</link>
+                <guid isPermaLink="true">https://duan.ca/2017/12/30/hello-world-in-webassembly/</guid>
             </item>
             
         
@@ -207,21 +207,21 @@ capability.&lt;/p&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
-&lt;p&gt;Some details are lost in this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/27/building-pwd-under-1-minute-in-swift/&gt;,&lt;/a&gt; however. For example, the POSIX standard actually says &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;’s 2nd
+&lt;p&gt;Some details are lost in this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/&gt;,&lt;/a&gt; however. For example, the POSIX standard actually says &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;’s 2nd
 argument being &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
 memory as needed). Swift’s handling of &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt; aka &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;/code&gt; in context of a &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; array
 is also very cool.&lt;/p&gt;
 </description>
                 <pubDate>Wed, 27 Dec 2017 01:13:07 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2017/12/27/building-pwd-under-1-minute-in-swift/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/27/building-pwd-under-1-minute-in-swift/</guid>
+                <link>https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</link>
+                <guid isPermaLink="true">https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</guid>
             </item>
             
         
             
             <item>
                 <title>Contributing To Open-Source Swift</title>
-                <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/23/contributing-to-open-source-foundation/&gt;,&lt;/a&gt; on YouTube.&lt;/p&gt;
+                <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/23/contributing-to-open-source-foundation/&gt;,&lt;/a&gt; on YouTube.&lt;/p&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
@@ -231,8 +231,8 @@ is also very cool.&lt;/p&gt;
 &lt;/ul&gt;
 </description>
                 <pubDate>Sat, 23 Dec 2017 13:21:10 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2017/12/23/contributing-to-open-source-foundation/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/23/contributing-to-open-source-foundation/</guid>
+                <link>https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</link>
+                <guid isPermaLink="true">https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</guid>
             </item>
             
         
@@ -333,7 +333,7 @@ put a cherry on top, make it &lt;code class=&quot;highlighter-rouge&quot;&gt;@IB
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
         &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#available(iOS 11&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/20/smart-invert-support-for-you-app/&gt;,&lt;/a&gt; *)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#available(iOS 11&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/20/smart-invert-support-for-you-app/&gt;,&lt;/a&gt; *)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
                 &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;accessibilityIgnoresInvertColors&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newValue&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -370,8 +370,8 @@ developer about &lt;a href=&quot;https://developer.apple.com/documentation/uikit
 
 </description>
                 <pubDate>Wed, 20 Dec 2017 13:17:44 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2017/12/20/smart-invert-support-for-you-app/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/20/smart-invert-support-for-you-app/</guid>
+                <link>https://duan.ca/2017/12/20/smart-invert-support-for-you-app/</link>
+                <guid isPermaLink="true">https://duan.ca/2017/12/20/smart-invert-support-for-you-app/</guid>
             </item>
             
         
@@ -389,8 +389,8 @@ undone from “episode 2”.&lt;/p&gt;
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ckrd_FoFMl0&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
                 <pubDate>Tue, 19 Dec 2017 12:17:49 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2017/12/19/bitarray-final-act/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/19/bitarray-final-act/</guid>
+                <link>https://duan.ca/2017/12/19/bitarray-final-act/</link>
+                <guid isPermaLink="true">https://duan.ca/2017/12/19/bitarray-final-act/</guid>
             </item>
             
         
@@ -406,7 +406,7 @@ Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;/p&gt;
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
-the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/17/making-an-open-source-swift-project/&gt;,&lt;/a&gt; automatic Carthage binary generation, test coverage…&lt;/p&gt;
+the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/17/making-an-open-source-swift-project/&gt;,&lt;/a&gt; automatic Carthage binary generation, test coverage…&lt;/p&gt;
 
 &lt;p&gt;Anyways, here’s some stuff mentioned in the video:&lt;/p&gt;
 
@@ -422,15 +422,15 @@ the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&q
 &lt;/ul&gt;
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2017/12/17/making-an-open-source-swift-project/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/17/making-an-open-source-swift-project/</guid>
+                <link>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</link>
+                <guid isPermaLink="true">https://duan.ca/2017/12/17/making-an-open-source-swift-project/</guid>
             </item>
             
         
             
             <item>
                 <title>Let's Build A BitArray In Swift</title>
-                <description>&lt;p&gt;In this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/12/lets-build-a-bitarray-in-swift/&gt;,&lt;/a&gt; I build a space-efficient BitArray that confirms to &lt;code class=&quot;highlighter-rouge&quot;&gt;RandomAccessCollection&lt;/code&gt; in Swift in
+                <description>&lt;p&gt;In this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/&gt;,&lt;/a&gt; I build a space-efficient BitArray that confirms to &lt;code class=&quot;highlighter-rouge&quot;&gt;RandomAccessCollection&lt;/code&gt; in Swift in
 a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt;/p&gt;
 
 &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/-k_jrIoD56k&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
@@ -439,8 +439,8 @@ a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt
 
 </description>
                 <pubDate>Tue, 12 Dec 2017 22:51:04 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2017/12/12/lets-build-a-bitarray-in-swift/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/12/lets-build-a-bitarray-in-swift/</guid>
+                <link>https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/</link>
+                <guid isPermaLink="true">https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/</guid>
             </item>
             
         
@@ -521,7 +521,7 @@ up in day-to-day programming in your domain, it should be obvious that it’s al
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// going with order of appearance in Python/Haskell syntax&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;comprehension&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
     &lt;span class=&quot;nv&quot;&gt;predicate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/12/09/list-comprehension-in-swift/&gt;,&lt;/a&gt;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/09/list-comprehension-in-swift/&gt;,&lt;/a&gt;&lt;/span&gt;
     &lt;span class=&quot;nv&quot;&gt;processor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Result&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt;
     &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Sequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;
@@ -587,15 +587,15 @@ with the current compiler?&lt;/p&gt;
 
 </description>
                 <pubDate>Sat, 09 Dec 2017 12:26:30 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2017/12/09/list-comprehension-in-swift/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/12/09/list-comprehension-in-swift/</guid>
+                <link>https://duan.ca/2017/12/09/list-comprehension-in-swift/</link>
+                <guid isPermaLink="true">https://duan.ca/2017/12/09/list-comprehension-in-swift/</guid>
             </item>
             
         
             
             <item>
                 <title>Building Swift Projects In Source Compatibility Mode</title>
-                <description>&lt;p&gt;It’s a few weeks before WWDC&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; so naturally¹ it’s time to try build your Swift
+                <description>&lt;p&gt;It’s a few weeks before WWDC&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/&gt;,&lt;/a&gt; so naturally¹ it’s time to try build your Swift
 projects in the compiler’s compatibility mode!&lt;/p&gt;
 
 &lt;ol&gt;
@@ -677,8 +677,8 @@ major version of Swift is released, code written in the previous version should
 compile without change in compatibility mode.&lt;/p&gt;
 </description>
                 <pubDate>Mon, 22 May 2017 09:04:01 -0700</pubDate>
-                <link>http://0.0.0.0:4000/2017/05/22/build-in-swift-compatibility-mode/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/05/22/build-in-swift-compatibility-mode/</guid>
+                <link>https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/</link>
+                <guid isPermaLink="true">https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/</guid>
             </item>
             
         
@@ -699,7 +699,7 @@ consume payloads of this protocol and, as a consequence, don’t think much abou
 that very fact.&lt;/p&gt;
 
 &lt;p&gt;Like HTTP, each email includes headers hidden by normal email clients. Each
-header is essentially two strings, a key and a value, separated by a colon.
+header is essentially two strings, a key and a value&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/&gt;,&lt;/a&gt; separated by a colon.
 Among these headers are &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt;. When we tell our email
 client applications to start a reply, they take the value from &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt;
 and use it as value for &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt; automatically.&lt;/p&gt;
@@ -709,19 +709,19 @@ editors and look for these headers. Of course, this require us to know where the
 emails exist as files. On macOS, an easy thing to do is to drag from Mail.app to
 Finder/Desktop and open the resulting .eml file:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2017/02/open-email.gif&quot; alt=&quot;Open an email in text editors&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2017/02/open-email.gif&quot; alt=&quot;Open an email in text editors&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Among the (perhaps overwhelming amount of) headers, we’ll find the two fields we
 are looking for:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2017/02/email-headers.png&quot; alt=&quot;Email Headers Message-Id and
+&lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2017/02/email-headers.png&quot; alt=&quot;Email Headers Message-Id and
 In-Reply-To&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;… I’ll leave the clients’ reply behavior regarding these fields for the reader
 to verify.&lt;/p&gt;
 
 &lt;p&gt;Mailing list software such as GNU Mailman, which &lt;a href=&quot;https://swift.org&quot;&gt;swift.org&lt;/a&gt; and &lt;a href=&quot;http://llvm.org&quot;&gt;llvm.org&lt;/a&gt;
-use to host various mailing lists&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/02/07/replying-to-old-mailing-list-threads/&gt;,&lt;/a&gt; associate emails in threads by chaining them
+use to host various mailing lists, associate emails in threads by chaining them
 with the headers explained above, among other things. As long as we have
 a message’s &lt;code class=&quot;highlighter-rouge&quot;&gt;Message-Id&lt;/code&gt;, we can reply to it “officially” by adding its value to
 the &lt;code class=&quot;highlighter-rouge&quot;&gt;In-Reply-To&lt;/code&gt; header in our email, regardless of whether we have received
@@ -737,7 +737,7 @@ that email ourselves previously.&lt;/p&gt;
 Unfortunately Mail.app doesn’t recognize it. It’s easy enough to find it
 ourselves though:&lt;/p&gt;
 
-    &lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2017/02/find-message-id.gif&quot; alt=&quot;Finding Message-Id on mailman
+    &lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2017/02/find-message-id.gif&quot; alt=&quot;Finding Message-Id on mailman
 archive&quot; /&gt;&lt;/p&gt;
 
     &lt;p&gt;Note the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;@&lt;/code&gt; characters are percent-quoted. We have to recover the
@@ -772,8 +772,8 @@ week).&lt;/p&gt;
 
 </description>
                 <pubDate>Tue, 07 Feb 2017 10:21:19 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2017/02/07/replying-to-old-mailing-list-threads/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/02/07/replying-to-old-mailing-list-threads/</guid>
+                <link>https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/</link>
+                <guid isPermaLink="true">https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/</guid>
             </item>
             
         
@@ -782,22 +782,22 @@ week).&lt;/p&gt;
                 <title>Site Improvements</title>
                 <description>&lt;p&gt;I spent a whole day making changes to this site.&lt;/p&gt;
 
-&lt;p&gt;You may notice a new section is now added: &lt;a href=&quot;http://0.0.0.0:4000/links&quot;&gt;links&lt;/a&gt;. Yes,
+&lt;p&gt;You may notice a new section is now added: &lt;a href=&quot;https://duan.ca/links&quot;&gt;links&lt;/a&gt;. Yes,
 I want a link list format for this site. Often I find stuff that’s insightful
 and not always visible. I want to collect those and bookmark them here.
 Modelling after &lt;a href=&quot;http://daringfireball.net&quot;&gt;Daring Fireball&lt;/a&gt;, I’ve added a new
-&lt;a href=&quot;http://duan.ca/articles/feed.xml&quot;&gt;feed&lt;/a&gt; which only contains long-form&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2017/01/16/site-changes/&gt;,&lt;/a&gt;
+&lt;a href=&quot;http://duan.ca/articles/feed.xml&quot;&gt;feed&lt;/a&gt; which only contains long-form,
 original articles. I’ll be tagging the links so that they show up along side my
 normal posts in tag pages. Each tag page now gets its own feed! You can read
-about it in the &lt;a href=&quot;http://0.0.0.0:4000/about/&quot;&gt;about page&lt;/a&gt;.&lt;/p&gt;
+about it in the &lt;a href=&quot;https://duan.ca/about/&quot;&gt;about page&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;A few small issues has been fixed.&lt;/p&gt;
 
 &lt;p&gt;I wrote the most Ruby in my life today. Yay?&lt;/p&gt;
 </description>
                 <pubDate>Mon, 16 Jan 2017 23:24:13 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2017/01/16/site-changes/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2017/01/16/site-changes/</guid>
+                <link>https://duan.ca/2017/01/16/site-changes/</link>
+                <guid isPermaLink="true">https://duan.ca/2017/01/16/site-changes/</guid>
             </item>
             
         
@@ -809,7 +809,7 @@ about it in the &lt;a href=&quot;http://0.0.0.0:4000/about/&quot;&gt;about page&
                 <description>&lt;p&gt;One of my fondest memory in programming is writing the game Snake on one of
 these:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2016/12/e-dictionary.jpg&quot; alt=&quot;An Electronic/Digital Dictionary&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2016/12/e-dictionary.jpg&quot; alt=&quot;An Electronic/Digital Dictionary&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;At the time, I was in a very restrictive school where a real computer wasn’t
 permited in class. The actual thing (that’s an “electronic dictionary” by the
@@ -836,7 +836,7 @@ use hotkeys to navigate menus, trigger functions and so on.  Sometimes you can
 use mouse, too. Their layout often resemble that of a GUI application running in
 it’s own “window”:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2016/12/tig.png&quot; alt=&quot;tig&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2016/12/tig.png&quot; alt=&quot;tig&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Just to make things painfully clear, these apps’s interface is composed
 exclusively of text. We can vaguely categorize them as “Text-based User
@@ -863,7 +863,7 @@ pre-built UI elements like panels, menus, forms etc. The terminal in my mind is
 a spread of characters that can be updated by me. That sounds fun. Ncurses seems
 more like UIKit :P.&lt;/p&gt;
 
-&lt;p&gt;Luckily, I found the fun library: &lt;a href=&quot;https://github.com/nsf/termbox&quot;&gt;termbox&lt;/a&gt; by &lt;a href=&quot;https://github.com/nsf&quot;&gt;nsf&lt;/a&gt;. Termbox offers around
+&lt;p&gt;Luckily&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/12/26/making-tui-programs-in-swift/&gt;,&lt;/a&gt; I found the fun library: &lt;a href=&quot;https://github.com/nsf/termbox&quot;&gt;termbox&lt;/a&gt; by &lt;a href=&quot;https://github.com/nsf&quot;&gt;nsf&lt;/a&gt;. Termbox offers around
 a dozen functions that gives us size of the terminal, a way to update text at
 a row/column coordinates, and user inputs in forms of key-presses and
 mouse-clicks. And that’s it!&lt;/p&gt;
@@ -871,14 +871,14 @@ mouse-clicks. And that’s it!&lt;/p&gt;
 &lt;p&gt;After making &lt;a href=&quot;https://github.com/dduan/Termbox&quot;&gt;a Swift wrapper&lt;/a&gt;, I was able to build a painter app in
 &lt;a href=&quot;https://github.com/dduan/TerminalPaint&quot;&gt;a handleful of lines&lt;/a&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2016/12/terminal-paint.png&quot; alt=&quot;terminal paint&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2016/12/terminal-paint.png&quot; alt=&quot;terminal paint&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So that’s an TUI app drawing according to mouse clicks built with only a few
 primitives from termbox. Awww yeah! Here’s the code with the comment stripped,
 to give you a taste:&lt;/p&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Termbox&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2016/12/26/making-tui-programs-in-swift/&gt;,&lt;/a&gt;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nv&quot;&gt;foreground&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;nv&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Attributes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -965,8 +965,8 @@ have fun :)&lt;/p&gt;
 
 </description>
                 <pubDate>Mon, 26 Dec 2016 21:39:05 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2016/12/26/making-tui-programs-in-swift/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2016/12/26/making-tui-programs-in-swift/</guid>
+                <link>https://duan.ca/2016/12/26/making-tui-programs-in-swift/</link>
+                <guid isPermaLink="true">https://duan.ca/2016/12/26/making-tui-programs-in-swift/</guid>
             </item>
             
         
@@ -992,7 +992,7 @@ please”. You cannot rebase and keep the commits signed!&lt;/p&gt;
 &lt;p&gt;Well, that kind of sucks. But you are reading about it here, so I’d better give
 you something to help, right?&lt;/p&gt;
 
-&lt;p&gt;There is&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2016/12/24/rebase-multiple-git-commits-with-signing/&gt;,&lt;/a&gt; at least, one way to achieve &lt;em&gt;rebase and sign multiple commits&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;There is&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/&gt;,&lt;/a&gt; at least, one way to achieve &lt;em&gt;rebase and sign multiple commits&lt;/em&gt;:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Run interactive rebase: &lt;code class=&quot;highlighter-rouge&quot;&gt;git rebase -i branch&lt;/code&gt;.&lt;/li&gt;
@@ -1009,8 +1009,8 @@ glorious UI, ya know?&lt;/p&gt;
 
 </description>
                 <pubDate>Sat, 24 Dec 2016 01:31:14 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2016/12/24/rebase-multiple-git-commits-with-signing/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2016/12/24/rebase-multiple-git-commits-with-signing/</guid>
+                <link>https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/</link>
+                <guid isPermaLink="true">https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/</guid>
             </item>
             
         
@@ -1069,7 +1069,7 @@ section, we’ll discuss one way to make it happen.&lt;/p&gt;
 &lt;h2 id=&quot;step-1-automate&quot;&gt;Step 1: Automate&lt;/h2&gt;
 
 &lt;p&gt;A good indicator of “merely repeating type information” is repetition of words.
-If you have been disciplined about naming your functions in Swift 2&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2016/10/22/how-to-omit-needless-words/&gt;,&lt;/a&gt; finding
+If you have been disciplined about naming your functions in Swift 2&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/10/22/how-to-omit-needless-words/&gt;,&lt;/a&gt; finding
 such repetition should take no more than one or two good regular expressions.
 After the migrator, your code may contain a mixture of these:&lt;/p&gt;
 
@@ -1171,8 +1171,8 @@ that everyone cares so much about your code base’s “Swiftness” and it’ll
 worth it!&lt;/p&gt;
 </description>
                 <pubDate>Sat, 22 Oct 2016 17:08:41 -0700</pubDate>
-                <link>http://0.0.0.0:4000/2016/10/22/how-to-omit-needless-words/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2016/10/22/how-to-omit-needless-words/</guid>
+                <link>https://duan.ca/2016/10/22/how-to-omit-needless-words/</link>
+                <guid isPermaLink="true">https://duan.ca/2016/10/22/how-to-omit-needless-words/</guid>
             </item>
             
         
@@ -1214,7 +1214,7 @@ project, verifying that support for those package managers remain functional.&lt
 on &lt;a href=&quot;https://github.com/dduan/DistributionTests&quot;&gt;Github&lt;/a&gt; 😉.&lt;/p&gt;
 
 &lt;p&gt;The script &lt;code class=&quot;highlighter-rouge&quot;&gt;customize&lt;/code&gt; requires 3 pieces of information of the library: its
-import name&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2016/10/10/distribution-tests/&gt;,&lt;/a&gt; its git repository URL and a major version number. The assumption
+import name&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/10/10/distribution-tests/&gt;,&lt;/a&gt; its git repository URL and a major version number. The assumption
 here is the library generates uniformly named artifacts: the file name for
 &lt;code class=&quot;highlighter-rouge&quot;&gt;.framework&lt;/code&gt; and the name users use to import it are the same. Testing
 distribution of a library is as simple as:&lt;/p&gt;
@@ -1233,8 +1233,8 @@ a continuous integration server.&lt;/p&gt;
 
 </description>
                 <pubDate>Mon, 10 Oct 2016 10:34:49 -0700</pubDate>
-                <link>http://0.0.0.0:4000/2016/10/10/distribution-tests/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2016/10/10/distribution-tests/</guid>
+                <link>https://duan.ca/2016/10/10/distribution-tests/</link>
+                <guid isPermaLink="true">https://duan.ca/2016/10/10/distribution-tests/</guid>
             </item>
             
         
@@ -1260,7 +1260,7 @@ argument. There’s no conevient way to forward this array to a normal
 dictionary’s initializer (incidentally, this is a Swift feature I really
 want). Plus, I don’t need &lt;code class=&quot;highlighter-rouge&quot;&gt;DefaultDictionary&lt;/code&gt; to be a literal convertible.&lt;/li&gt;
   &lt;li&gt;Most of the code, including the imaginary &lt;code class=&quot;highlighter-rouge&quot;&gt;init&lt;/code&gt; mentioned in previous
-point&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2016/05/19/a-case-for-oop/&gt;,&lt;/a&gt; simply reuses stuff from &lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt;: asscociated type, indexes,
+point&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/05/19/a-case-for-oop/&gt;,&lt;/a&gt; simply reuses stuff from &lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt;: asscociated type, indexes,
 generator, subscript, etc.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1272,8 +1272,8 @@ even mean? Is it simply a case that will go away when protocols become more
 powerful?&lt;/p&gt;
 </description>
                 <pubDate>Thu, 19 May 2016 12:03:02 -0700</pubDate>
-                <link>http://0.0.0.0:4000/2016/05/19/a-case-for-oop/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2016/05/19/a-case-for-oop/</guid>
+                <link>https://duan.ca/2016/05/19/a-case-for-oop/</link>
+                <guid isPermaLink="true">https://duan.ca/2016/05/19/a-case-for-oop/</guid>
             </item>
             
         
@@ -1315,7 +1315,7 @@ expands to multiple characters:&lt;/p&gt;
     &lt;span class=&quot;s&quot;&gt;&quot;==&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Equality&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;&quot;-&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Arrow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;// more token mappings …&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;===&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Identity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2016/05/15/cheap-orders/&gt;,&lt;/a&gt;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;===&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Identity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/05/15/cheap-orders/&gt;,&lt;/a&gt;&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;// more token mappings …&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Equal&lt;/span&gt;
@@ -1407,8 +1407,8 @@ up with the erasure method. I discovered a series of small challenges and got
 help from Swift’s designers in each step. Everything fell together in the end.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 15 May 2016 17:42:27 -0700</pubDate>
-                <link>http://0.0.0.0:4000/2016/05/15/cheap-orders/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2016/05/15/cheap-orders/</guid>
+                <link>https://duan.ca/2016/05/15/cheap-orders/</link>
+                <guid isPermaLink="true">https://duan.ca/2016/05/15/cheap-orders/</guid>
             </item>
             
         
@@ -1424,7 +1424,7 @@ HTML site generated by Jekyll.&lt;/p&gt;
 repository.&lt;/p&gt;
 
 &lt;p&gt;I spent a day to set up a Jekyll site. The last part involves deploying it to
-Github&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2016/05/15/deploy-jekyll-to-github/&gt;,&lt;/a&gt; my preferred way to host a static site. There are a lot of posts and
+Github&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/05/15/deploy-jekyll-to-github/&gt;,&lt;/a&gt; my preferred way to host a static site. There are a lot of posts and
 scripts on how to achieve it. And Github seems to have an “afficial” support
 for Jekyll site that disables plugin scripts (understandably so).&lt;/p&gt;
 
@@ -1468,8 +1468,8 @@ deploy:
 additional software/scripts and there’s no restriction on plugins.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 15 May 2016 01:00:00 -0700</pubDate>
-                <link>http://0.0.0.0:4000/2016/05/15/deploy-jekyll-to-github/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2016/05/15/deploy-jekyll-to-github/</guid>
+                <link>https://duan.ca/2016/05/15/deploy-jekyll-to-github/</link>
+                <guid isPermaLink="true">https://duan.ca/2016/05/15/deploy-jekyll-to-github/</guid>
             </item>
             
         
@@ -1525,7 +1525,7 @@ use C functions in Swift everyday (like me)!&lt;/p&gt;
     &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CChar&lt;/code&gt; is Swift’s name for &lt;em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt; in C&lt;/em&gt; (shocking, amiright?)&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;/code&gt; roughly translates to &lt;code class=&quot;highlighter-rouge&quot;&gt;Type *&lt;/code&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/&gt;,&lt;/a&gt; so
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;/code&gt; roughly translates to &lt;code class=&quot;highlighter-rouge&quot;&gt;Type *&lt;/code&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2015/11/01/char-star-star-in-swift/&gt;,&lt;/a&gt; so
 syntactically, we can see why
 &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&amp;gt;&lt;/code&gt; is used to bridge the
 C type &lt;code class=&quot;highlighter-rouge&quot;&gt;(char *)*&lt;/code&gt;.&lt;/p&gt;
@@ -1562,8 +1562,8 @@ the infinite layers of indirections that pointers achieve.&lt;/p&gt;
 &lt;/ol&gt;
 </description>
                 <pubDate>Sun, 01 Nov 2015 11:18:40 -0800</pubDate>
-                <link>http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2015/11/01/char-star-star-in-swift/</guid>
+                <link>https://duan.ca/2015/11/01/char-star-star-in-swift/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/11/01/char-star-star-in-swift/</guid>
             </item>
             
         
@@ -1611,7 +1611,7 @@ get two new types.&lt;/p&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;DireWolf&lt;/code&gt;, resulting in &lt;code class=&quot;highlighter-rouge&quot;&gt;6 * 6 = 36&lt;/code&gt; potential values – the &lt;em&gt;product&lt;/em&gt; of
 &lt;code class=&quot;highlighter-rouge&quot;&gt;Child&lt;/code&gt;’s and &lt;code class=&quot;highlighter-rouge&quot;&gt;DireWolf&lt;/code&gt;’s values.&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Actor&lt;/code&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2015/07/12/swift-algebraic-data-types/&gt;,&lt;/a&gt; an &lt;code class=&quot;highlighter-rouge&quot;&gt;enum&lt;/code&gt;, is a &lt;em&gt;sum&lt;/em&gt; type. &lt;code class=&quot;highlighter-rouge&quot;&gt;Parters&lt;/code&gt;, a &lt;code class=&quot;highlighter-rouge&quot;&gt;struct&lt;/code&gt;, is a &lt;em&gt;product&lt;/em&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Actor&lt;/code&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2015/07/12/swift-algebraic-data-types/&gt;,&lt;/a&gt; an &lt;code class=&quot;highlighter-rouge&quot;&gt;enum&lt;/code&gt;, is a &lt;em&gt;sum&lt;/em&gt; type. &lt;code class=&quot;highlighter-rouge&quot;&gt;Parters&lt;/code&gt;, a &lt;code class=&quot;highlighter-rouge&quot;&gt;struct&lt;/code&gt;, is a &lt;em&gt;product&lt;/em&gt;
 type. Here, &lt;code class=&quot;highlighter-rouge&quot;&gt;Parters&lt;/code&gt; could easily be defined as a &lt;code class=&quot;highlighter-rouge&quot;&gt;class&lt;/code&gt; or a &lt;code class=&quot;highlighter-rouge&quot;&gt;tuple&lt;/code&gt; and
 remain a &lt;em&gt;product&lt;/em&gt; type. Because we can create product or sum types in these
 direct ways, we can say Swift has first class support for Algebraic Data
@@ -1697,8 +1697,8 @@ aliases, such as:&lt;/p&gt;
 
 </description>
                 <pubDate>Sun, 12 Jul 2015 15:51:27 -0700</pubDate>
-                <link>http://0.0.0.0:4000/2015/07/12/swift-algebraic-data-types/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2015/07/12/swift-algebraic-data-types/</guid>
+                <link>https://duan.ca/2015/07/12/swift-algebraic-data-types/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/07/12/swift-algebraic-data-types/</guid>
             </item>
             
         
@@ -1707,7 +1707,7 @@ aliases, such as:&lt;/p&gt;
                 <title>Let's Build A 'cat' In Swift 2</title>
                 <description>&lt;p&gt;As a homework in one of the early college classes, I was asked to write unix
 commands such as &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt; in C. Let’s do that in Swift today! To make things
-interesting, let’s pretend we are on Linux. That means no Xcode nor Foundation
+interesting&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2015/07/04/lets-build-a-cat-in-swift-2/&gt;,&lt;/a&gt; let’s pretend we are on Linux. That means no Xcode nor Foundation
 can be used.&lt;/p&gt;
 
 &lt;p&gt;It’s hard to find a simpler unix program than &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt;: It takes a list of file
@@ -1723,7 +1723,7 @@ to call even the standard C functions, we need to import them first.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;We can add Objective-C bridging headers with the argument
-&lt;code class=&quot;highlighter-rouge&quot;&gt;-import-objc-header&lt;/code&gt;.  But to import the standard C functions&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2015/07/04/lets-build-a-cat-in-swift-2/&gt;,&lt;/a&gt; we also need
+&lt;code class=&quot;highlighter-rouge&quot;&gt;-import-objc-header&lt;/code&gt;.  But to import the standard C functions, we also need
 to specify path to an SDK:&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;swiftc -sdk $(xcrun --show-sdk-path --sdk macosx)\
@@ -1798,14 +1798,14 @@ with:&lt;/p&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;stdin&lt;/code&gt;, and we have a &lt;code class=&quot;highlighter-rouge&quot;&gt;cat&lt;/code&gt;! Here’s a screenshot of it displaying its own
 code:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://0.0.0.0:4000/assets/2015/07/swift-cat.png&quot; alt=&quot;Swift cat&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://duan.ca/assets/2015/07/swift-cat.png&quot; alt=&quot;Swift cat&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The code is also available in this &lt;a href=&quot;https://gist.github.com/dduan/f6d359019db8b0b55962&quot;&gt;gist&lt;/a&gt;.&lt;/p&gt;
 
 </description>
                 <pubDate>Sat, 04 Jul 2015 20:56:19 -0700</pubDate>
-                <link>http://0.0.0.0:4000/2015/07/04/lets-build-a-cat-in-swift-2/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2015/07/04/lets-build-a-cat-in-swift-2/</guid>
+                <link>https://duan.ca/2015/07/04/lets-build-a-cat-in-swift-2/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/07/04/lets-build-a-cat-in-swift-2/</guid>
             </item>
             
         
@@ -1826,7 +1826,7 @@ methods like the following:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;But you don’t want to force your user to supply all arguments each time. You
-know that Swift supports default arguments&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2015/04/18/swift-function-fun-facts/&gt;,&lt;/a&gt; so you added some. Take GET as an
+know that Swift supports default arguments&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2015/04/18/swift-function-fun-facts/&gt;,&lt;/a&gt; so you added some. Take GET as an
 example:&lt;/p&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;URLString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;AnyObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:],&lt;/span&gt;
@@ -1973,8 +1973,8 @@ I felt writing this up. It’s really like saying to a friend “I hate you” a
 he/she pulls a prank on you.)&lt;/p&gt;
 </description>
                 <pubDate>Sat, 18 Apr 2015 16:20:16 -0700</pubDate>
-                <link>http://0.0.0.0:4000/2015/04/18/swift-function-fun-facts/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2015/04/18/swift-function-fun-facts/</guid>
+                <link>https://duan.ca/2015/04/18/swift-function-fun-facts/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/04/18/swift-function-fun-facts/</guid>
             </item>
             
         
@@ -2006,7 +2006,7 @@ I see a discussion about locking down branches of a Git repository.&lt;/p&gt;
 
 &lt;p&gt;Making developers “own” branches on a shared repository is a pratice
 inheritated from the days of centralized version control. Git doesn’t provide
-built-in support for this&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=http://0.0.0.0:4000/2012/10/31/keep-git-social/&gt;,&lt;/a&gt; for good reasons.&lt;/p&gt;
+built-in support for this&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2012/10/31/keep-git-social/&gt;,&lt;/a&gt; for good reasons.&lt;/p&gt;
 
 &lt;p&gt;With Subversion, the ultimate goal of branch-wise access control is to keep
 out
@@ -2062,8 +2062,8 @@ breaking the shackles on their hand is a good thing to try.&lt;/p&gt;
 
 </description>
                 <pubDate>Wed, 31 Oct 2012 09:02:30 -0700</pubDate>
-                <link>http://0.0.0.0:4000/2012/10/31/keep-git-social/</link>
-                <guid isPermaLink="true">http://0.0.0.0:4000/2012/10/31/keep-git-social/</guid>
+                <link>https://duan.ca/2012/10/31/keep-git-social/</link>
+                <guid isPermaLink="true">https://duan.ca/2012/10/31/keep-git-social/</guid>
             </item>
             
         

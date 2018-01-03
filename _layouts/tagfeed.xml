@@ -5,8 +5,8 @@ layout: null
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>{{ site.name | xml_escape }} - {{ page.tag }}</title>
-        <link>{{ site.url }}/tag/{{ page.tag }}</link>
-        <atom:link href="{{ site.url }}/tag/{{page.tag}}/index.xml" rel="self" type="application/rss+xml" />
+        <link>{{ site.url }}/tag/{{ page.tag | slugize }}/</link>
+        <atom:link href="{{ site.url }}/tag/{{page.tag | slugize }}/index.xml" rel="self" type="application/rss+xml" />
         {% assign all = site.documents | where: 'master', true | sort: 'date' | reverse %}
         {% for post in all %}
             {% if post.tags contains page.tag %}
@@ -14,7 +14,11 @@ layout: null
                 <title>{{ post.title | xml_escape }}</title>
                 <description>{{ post.content | link_back: site.url, post.url | xml_escape }}</description>
                 <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+                {% if post.layout == 'link' %}
                 <link>{{ post.link }}</link>
+                {% else %}
+                <link>{{ site.url }}{{ post.url }}</link>
+                {% endif %}
                 <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
             </item>
             {% endif %}

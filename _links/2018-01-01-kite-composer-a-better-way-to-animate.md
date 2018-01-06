@@ -1,6 +1,5 @@
 ---
 title: "Kite Compositor: A Better Way to Animate"
-tags: [iOS, macOS, Animation]
 link: https://calayer.com/miscellaneous/2018/01/01/kite-compositor-a-better-way-to-animate.html
 date: 2018-01-01 16:56:49-0800
 ---

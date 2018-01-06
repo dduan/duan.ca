@@ -1,6 +1,5 @@
 ---
 title: Swift ABI In Layman's terms
-tags: [Swift]
 link: https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160808/026153.html
 date: 2017-01-16 22:44:38-0800
 ---

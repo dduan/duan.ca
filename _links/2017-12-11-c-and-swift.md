@@ -1,6 +1,5 @@
 ---
 title: Swift And C Everything You Need to Know on Types, Pointers and more
-tags: [Swift, C]
 link: https://www.uraimo.com/2016/04/07/swift-and-c-everything-you-need-to-know/
 date: 2017-12-11 17:36:34-0800
 ---

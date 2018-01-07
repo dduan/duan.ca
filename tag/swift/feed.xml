@@ -9,6 +9,22 @@
             
         
             
+            <item>
+                <title>Lenses And Prisms In Swift: a pragmatic approach</title>
+                <description>&lt;p&gt;In my very limited reading-only experience about Lenses, this is the first
+article that acknoledges Swift’s value type and the fact that it makes
+getter/setter aspect of lenses kind of pointless. But it moves on to explain why
+lenses/prisms still can be useful in a concrete and approachable way.&lt;/p&gt;
+
+&lt;p&gt;I really enjoyed the bonus discussion about duality at the end&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/linked/2018/01/lenses-prisms-swift/&gt;,&lt;/a&gt; too!&lt;/p&gt;
+</description>
+                <pubDate>Mon, 01 Jan 2018 15:25:55 -0800</pubDate>
+                
+                <link>https://broomburgo.github.io/fun-ios/post/lenses-and-prisms-in-swift-a-pragmatic-approach/</link>
+                
+                <guid isPermaLink="true">https://duan.ca/linked/2018/01/lenses-prisms-swift/</guid>
+            </item>
+            
         
             
         
@@ -131,6 +147,21 @@ a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt
             </item>
             
         
+            
+            <item>
+                <title>Swift And C Everything You Need to Know on Types, Pointers and more</title>
+                <description>&lt;p&gt;This is an article I wish I had writen. It has everything about Swift and C&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/linked/2017/12/c-and-swift/&gt;,&lt;/a&gt; as stated in the title. It’s
+going to be a useful reference to me. I also wish I’d discovered it earlier.&lt;/p&gt;
+
+&lt;p&gt;Follow the author &lt;a href=&quot;https://twitter.com/uraimo&quot;&gt;Umberto Raimondi&lt;/a&gt; on Twitter!&lt;/p&gt;
+
+</description>
+                <pubDate>Mon, 11 Dec 2017 17:36:34 -0800</pubDate>
+                
+                <link>https://www.uraimo.com/2016/04/07/swift-and-c-everything-you-need-to-know/</link>
+                
+                <guid isPermaLink="true">https://duan.ca/linked/2017/12/c-and-swift/</guid>
+            </item>
             
         
             
@@ -377,6 +408,63 @@ compile without change in compatibility mode.&lt;/p&gt;
         
             
         
+            
+            <item>
+                <title>Swift ABI In Layman's terms</title>
+                <description>&lt;p&gt;An oldie but goodie from Swift Evelution.
+&lt;a href=&quot;https://twitter.com/slava_pestov&quot;&gt;Slava&lt;/a&gt;’s answer:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“when we talk about the ABI, we’re really talking about three orthogonal
+“axes” along which we would like to “move” without breaking compatibility with
+existing binaries:”&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;The first axis is the machine-level calling conventions and memory layout.
+For example, what registers to pass function arguments and returns in, the
+rules for alignment and padding of fields in an aggregate type, which entry
+points the Swift runtime exports and what their behavior should be. Once we
+commit to a stable ABI along this axis, you will get interoperability between
+&lt;em&gt;compiler versions&lt;/em&gt; – the same exact library built with one version of the
+compiler will remain compatible with clients after being recompiled with
+another version, because their conventions will match up. Note that this does
+not help you if the library itself changes in any way.&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;The second axis is the resilience work I called out in my previous e-mail.
+Here, we’re trying to define language features and implementation techniques
+that allow a library to evolve in a forward-compatible manner, as long as the
+developer follows certain guidelines. Here, the goal is if you should be able
+to compile your library, make some changes to add new APIs, and recompile it
+&lt;em&gt;with the same compiler&lt;/em&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/linked/2017/01/swift-abi-in-laymans-terms/&gt;,&lt;/a&gt; without breaking downstream clients, as long as you
+follow the library evolution guidelines (Also, you can imagine one day having
+an ‘ABI diff’ tool to automate this).  &amp;gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;The third axis is the standard library itself. Stability of runtime
+interfaces and the extra indirection to enable resilience is all great, but it
+won’t help you as long as the standard library API is evolving in a
+non-backwards compatible manner – for example, if we remove a method on
+String. So once the other two areas have been addressed, the last thing to lock
+down is the standard library interface itself.&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The rest of the thread is worth reading too. John McCall gave an high level
+&lt;a href=&quot;https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160808/026145.html&quot;&gt;description&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The definitive source for Slava’s third axes is the &lt;a href=&quot;https://github.com/apple/swift/blob/master/docs/LibraryEvolution.rst&quot;&gt;Library
+Evolution&lt;/a&gt;
+doc from the Swift repository.&lt;/p&gt;
+</description>
+                <pubDate>Mon, 16 Jan 2017 22:44:38 -0800</pubDate>
+                
+                <link>https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160808/026153.html</link>
+                
+                <guid isPermaLink="true">https://duan.ca/linked/2017/01/swift-abi-in-laymans-terms/</guid>
+            </item>
             
         
             

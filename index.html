@@ -54,6 +54,32 @@
   
   <div class="content post">
     
+    <h1 class="post-title"><a href="/2018/01/06/cat-under-1-minute/">Scripting A 'cat' Under 1 Minute</a></h1>
+    
+    <div class="post-date">
+      
+      <time>06 Jan 2018</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/swift">Swift</a>,
+      
+        <a href="/tag/youtube">YouTube</a>
+      
+      </div>
+      
+    </div>
+    <p>This video demonstrates a few things: the <code class="highlighter-rouge">readLine</code> standard library function, scripting with Swift, and
+pattern matching as loop conditions. Enjoy!</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8rAqzvChbak" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
+
+  </div>
+  <hr />
+  
+  <div class="content post">
+    
     <h1 class="post-title"><a href="https://calayer.com/miscellaneous/2018/01/01/kite-compositor-a-better-way-to-animate.html">🔗 Kite Compositor: A Better Way to Animate</a></h1>
     
     <div class="post-date">
@@ -95,206 +121,6 @@ getter/setter aspect of lenses kind of pointless. But it moves on to explain why
 lenses/prisms still can be useful in a concrete and approachable way.</p>
 
 <p>I really enjoyed the bonus discussion about duality at the end, too!</p>
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2017/12/30/hello-world-in-webassembly/">Hello World In WebAssembly</a></h1>
-    
-    <div class="post-date">
-      
-      <time>30 Dec 2017</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/webassembly">WebAssembly</a>,
-      
-        <a href="/tag/youtube">YouTube</a>
-      
-      </div>
-      
-    </div>
-    <p>Every now and then, I check on the progress of Web Assembly. I did it again
-around the time of this post and finally found enough tutorials, examples, and
-working software to get myself started in this area. In doing so, I made a video
-to demo some progress. (<em>this article includes all the same information and
-more, so just read on if you don’t have 15 minutes for YouTube</em>).</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yEYtwmI7bDg" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
-
-<p><br /></p>
-
-<h2 id="our-goal">Our goal:</h2>
-
-<ol>
-  <li>Use as much built-in tools on a Mac as possible. The web development
-toolchain scares me.</li>
-  <li>Target the browser. That’s where the value of WebAssembly is. (Node supports
-it as well. BUT, WHY THO?)</li>
-  <li>Build from scratch. In the video I started from <code class="highlighter-rouge">mkdir</code> a folder. We should
-strive to understand details on every level whenever possible. Boilerplates
-and dependencies should come later.</li>
-</ol>
-
-<h2 id="things-youll-need">Things you’ll need:</h2>
-
-<ol>
-  <li>Safari 11+</li>
-  <li>Xcode. More specifically, you should be able to run <code class="highlighter-rouge">clang</code> in a shell.</li>
-</ol>
-
-<h2 id="the-workflow">The Workflow</h2>
-
-<p>Having these things installed, get a copy of <a href="https://github.com/WebAssembly/wabt">The WebAssembly Binary
-Toolkit</a> (wabt). Build it. The README has detailed instructions. I just went
-into the folder and ran</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make clang-release
-</code></pre></div></div>
-
-<p>This will generate a bunch of binary files in <code class="highlighter-rouge">out/clang/Release</code> and you need
-to make sure you can run them from wherever you want to work on WebAssembly
-project (so either copy them into a folder included in your <code class="highlighter-rouge">PATH</code> environment
-variable or add the absolute path to <code class="highlighter-rouge">out/clang/Release</code> to <code class="highlighter-rouge">PATH</code>).</p>
-
-<p>Among the binaries “wabt” builds, <code class="highlighter-rouge">wat2wasm</code> takes a <code class="highlighter-rouge">.wat</code> file and compiles it
-to a WebAssembly binary. A <code class="highlighter-rouge">.wat</code> is a source file in the <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format">text format</a> for
-WebAssembly, which is in the form of S-expressions. So</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wat2wasm main.wat -o main.wasm
-</code></pre></div></div>
-
-<p>…will compile your WebAssembly module in <code class="highlighter-rouge">main.wat</code> to generate <code class="highlighter-rouge">main.wasm</code>, the
-binary file. For now, <code class="highlighter-rouge">main.wat</code> can be the simplest WebAssembly program:</p>
-
-<pre><code class="language-lisp">(module)
-</code></pre>
-
-<p>Running the binary in a browser demands the bulk of the work. First, we’ll need
-a web page. It doesn’t need any content other than invoking some JavaScript
-code.</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    <span class="c">&lt;!-- The only thing that matters is the following line,
-    although having a valid HTML5 page is nice. --&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"play.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div></div>
-
-<p>First, the Javascript logic needs to <em>fetch and instantiate the compiled
-WebAssembly module</em>. Since this is not a JS or WebAssembly tutorial, I’ll point
-you to the docmuntation for <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a>, and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly">the WebAssembly
-object</a> for details:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fetch</span><span class="p">(</span><span class="s2">"main.wasm"</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">reponse</span> <span class="o">=&gt;</span>
-    <span class="nx">reponse</span><span class="p">.</span><span class="nx">arrayBuffer</span><span class="p">()</span>
-<span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">bytes</span> <span class="o">=&gt;</span>
-    <span class="nx">WebAssembly</span><span class="p">.</span><span class="nx">instantiate</span><span class="p">(</span><span class="nx">bytes</span><span class="p">,</span> <span class="p">{})</span>
-<span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span>
-    <span class="nx">result</span><span class="p">.</span><span class="nx">instance</span>
-<span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">main</span><span class="p">);</span>
-
-</code></pre></div></div>
-
-<p>This snippet fetches <code class="highlighter-rouge">main.wasm</code> (adjust this URL according to your choosing),
-instantiate it, then pass it into a function named <code class="highlighter-rouge">main</code>, we can put
-a placeholder logic for it for now:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">wasm</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">wasm</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Before we move on, you’ll find that simply opending your HTML file in browser
-and looking at developer console won’t work. Safari would complain about
-cross-domain request error for <code class="highlighter-rouge">fetch</code>. So we need to serve these resources
-locally. I usually use the built in server module from Python standard library
-for this kind of things:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># In your source folder, run
-python -m SimpleHTTPServer
-</code></pre></div></div>
-
-<p>Now go to <a href="http://localhost:8000">http://localhost:8000</a> and click on your HTML file. If everything
-went well, you should see a WebAssembly instance logged in the developer
-console.</p>
-
-<p>Congratulations! You can start writing WebAssembly locally. Just remember to
-re-compile <code class="highlighter-rouge">main.wat</code> with <code class="highlighter-rouge">wat2wasm</code> whenever you want to test things out in
-browser.</p>
-
-<h2 id="an-actual-hello-world-implementation">An Actual “Hello, World!” Implementation</h2>
-
-<p>This is my implementation:</p>
-
-<pre><code class="language-lisp">(module
-  ;; Allocate a page of linear memory (64kb). Export it as "memory"
-  (memory (export "memory") 1)
-
-  ;; Write the string at the start of the linear memory.
-  (data (i32.const 0) "Hello, world!") ;; write string at location 0
-
-  ;; Export the position and length of the string.
-  (global (export "length") i32 (i32.const 12))
-  (global (export "position") i32 (i32.const 0)))
-</code></pre>
-
-<p>In other words, we expose information of the linear memory we manipulated to the
-JavaScript environment. Things that has been <code class="highlighter-rouge">export</code>ed will show up as
-properties of <code class="highlighter-rouge">exports</code> of the <code class="highlighter-rouge">WebAssembly</code> instance. We can access them in the
-<code class="highlighter-rouge">main</code> JavaScript functions:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">wasm</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">memory</span>   <span class="o">=</span> <span class="nx">wasm</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">memory</span><span class="p">;</span>
-    <span class="kd">const</span> <span class="nx">length</span>   <span class="o">=</span> <span class="nx">wasm</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-    <span class="kd">const</span> <span class="nx">position</span> <span class="o">=</span> <span class="nx">wasm</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">position</span><span class="p">;</span>
-    <span class="p">...</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Then it’s just plain-old Javascript (tho I had to steal it from tutorials).
-<code class="highlighter-rouge">memory.buffer</code> is of type <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a>. We need to convert it into a string
-and log it to the console:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">wasm</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">memory</span>   <span class="o">=</span> <span class="nx">wasm</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">memory</span><span class="p">;</span>
-    <span class="kd">const</span> <span class="nx">length</span>   <span class="o">=</span> <span class="nx">wasm</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-    <span class="kd">const</span> <span class="nx">position</span> <span class="o">=</span> <span class="nx">wasm</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">position</span><span class="p">;</span>
-
-    <span class="kd">const</span> <span class="nx">bytes</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="nx">memory</span><span class="p">.</span><span class="nx">buffer</span><span class="p">,</span> <span class="nx">position</span><span class="p">,</span> <span class="nx">length</span><span class="p">);</span>
-    <span class="kd">const</span> <span class="nx">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextDecoder</span><span class="p">(</span><span class="s1">'utf8'</span><span class="p">).</span><span class="nx">decode</span><span class="p">(</span><span class="nx">bytes</span><span class="p">);</span>
-
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Et, voilà! <code class="highlighter-rouge">Hello, World!</code> hot off a Web Assembly module in your developer
-console. To conclude, I personally like to use a <code class="highlighter-rouge">Makefile</code> to streamline some
-of the typing. Here’s what I used for this demo:</p>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">compile</span><span class="o">:</span>
-	wat2wasm main.wat <span class="nt">-o</span> main.wasm
-
-<span class="nl">serve</span><span class="o">:</span>
-	python <span class="nt">-m</span> SimpleHTTPServer
-</code></pre></div></div>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>No fancy schmancy Javascript build stack, no 3rd-party code dependency. Write
-code, compile, run on your (virtual, in browser) machine, repeat. That sounds like
-“assembly” to me!</p>
-
 
   </div>
   <hr />

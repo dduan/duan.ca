@@ -39,8 +39,6 @@
             
         
             
-        
-            
             <item>
                 <title>Rebase And Sign Multiple Git Commits</title>
                 <description>&lt;p&gt;I never bothered &lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work&quot;&gt;signing&lt;/a&gt; my git commits until Github started putting

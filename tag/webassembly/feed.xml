@@ -16,12 +16,14 @@
             <item>
                 <title>Hello World In WebAssembly</title>
                 <description>&lt;p&gt;Every now and then, I check on the progress of Web Assembly. I did it again
-around the time of this post and finally found enough tutorials, examples&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/30/hello-world-in-webassembly/&gt;,&lt;/a&gt; and
+around the time of this post and finally found enough tutorials, examples, and
 working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (&lt;em&gt;this article includes all the same information and
 more, so just read on if you don’t have 15 minutes for YouTube&lt;/em&gt;).&lt;/p&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/yEYtwmI7bDg&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/yEYtwmI7bDg&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -71,7 +73,7 @@ binary file. For now, &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wat&l
 &lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(module)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Running the binary in a browser demands the bulk of the work. First, we’ll need
+&lt;p&gt;Running the binary in a browser demands the bulk of the work. First&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/30/hello-world-in-webassembly/&gt;,&lt;/a&gt; we’ll need
 a web page. It doesn’t need any content other than invoking some JavaScript
 code.&lt;/p&gt;
 

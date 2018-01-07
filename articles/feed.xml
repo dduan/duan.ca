@@ -9,10 +9,10 @@
             
             <item>
                 <title>Scripting A 'cat' Under 1 Minute</title>
-                <description>&lt;p&gt;This video demonstrates a few things: the &lt;code class=&quot;highlighter-rouge&quot;&gt;readLine&lt;/code&gt; standard library function, scripting with Swift, and
+                <description>&lt;p&gt;This video demonstrates a few things: the &lt;code class=&quot;highlighter-rouge&quot;&gt;readLine&lt;/code&gt; standard library function&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2018/01/06/cat-under-1-minute/&gt;,&lt;/a&gt; scripting with Swift, and
 pattern matching as loop conditions. Enjoy!&lt;/p&gt;
 &lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/8rAqzvChbak&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/8rAqzvChbak&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;/div&gt;
 </description>
                 <pubDate>Sat, 06 Jan 2018 18:34:39 -0800</pubDate>
@@ -29,12 +29,14 @@ pattern matching as loop conditions. Enjoy!&lt;/p&gt;
             <item>
                 <title>Hello World In WebAssembly</title>
                 <description>&lt;p&gt;Every now and then, I check on the progress of Web Assembly. I did it again
-around the time of this post and finally found enough tutorials, examples&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/30/hello-world-in-webassembly/&gt;,&lt;/a&gt; and
+around the time of this post and finally found enough tutorials, examples, and
 working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (&lt;em&gt;this article includes all the same information and
 more, so just read on if you don’t have 15 minutes for YouTube&lt;/em&gt;).&lt;/p&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/yEYtwmI7bDg&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/yEYtwmI7bDg&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -84,7 +86,7 @@ binary file. For now, &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wat&l
 &lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(module)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Running the binary in a browser demands the bulk of the work. First, we’ll need
+&lt;p&gt;Running the binary in a browser demands the bulk of the work. First&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/30/hello-world-in-webassembly/&gt;,&lt;/a&gt; we’ll need
 a web page. It doesn’t need any content other than invoking some JavaScript
 code.&lt;/p&gt;
 
@@ -220,9 +222,11 @@ code, compile, run on your (virtual, in browser) machine, repeat. That sounds li
 code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift’s great C-interop
 capability.&lt;/p&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
 
-&lt;p&gt;Some details are lost in this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/&gt;,&lt;/a&gt; however. For example, the POSIX standard actually says &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;’s 2nd
+&lt;p&gt;Some details are lost in this video, however. For example&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/&gt;,&lt;/a&gt; the POSIX standard actually says &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;’s 2nd
 argument being &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
 memory as needed). Swift’s handling of &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt; aka &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;/code&gt; in context of a &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; array
 is also very cool.&lt;/p&gt;
@@ -236,9 +240,11 @@ is also very cool.&lt;/p&gt;
             
             <item>
                 <title>Contributing To Open-Source Swift</title>
-                <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/23/contributing-to-open-source-foundation/&gt;,&lt;/a&gt; on YouTube.&lt;/p&gt;
+                <description>&lt;p&gt;I discover, report&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/23/contributing-to-open-source-foundation/&gt;,&lt;/a&gt; fix and merge a bug in the open-source Foundation project. And why, yes, on YouTube.&lt;/p&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Pull request: &lt;a href=&quot;https://github.com/apple/swift-corelibs-foundation/pull/1376&quot;&gt;https://github.com/apple/swift-corelibs-foundation/pull/1376&lt;/a&gt;&lt;/li&gt;
@@ -397,11 +403,13 @@ developer about &lt;a href=&quot;https://developer.apple.com/documentation/uikit
 ride home. This makes my first YouTube playlist as well, even tho the first 2 videos were planned to be
 completely separate.&lt;/p&gt;
 
-&lt;p&gt;We added more standard library functionalities to BitArray (ExpressibleByArrayLiteral,
+&lt;p&gt;We added more standard library functionalities to BitArray (ExpressibleByArrayLiteral&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/19/bitarray-final-act/&gt;,&lt;/a&gt;
 CustomStringConvertible, Equatable, etc). Then, we added documentation and other open-source things left
 undone from “episode 2”.&lt;/p&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ckrd_FoFMl0&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/ckrd_FoFMl0&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
 </description>
                 <pubDate>Tue, 19 Dec 2017 12:17:49 -0800</pubDate>
                 <link>https://duan.ca/2017/12/19/bitarray-final-act/</link>
@@ -415,13 +423,15 @@ undone from “episode 2”.&lt;/p&gt;
                 <description>&lt;p&gt;This video shows what it takes to open source a Swift project. Starting from some code in a playground,
 I created a framework that supports distribution via Swift Package Manager, CocoaPods, Xcode project and
 Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
-SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
+SwiftLint to the project&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/17/making-an-open-source-swift-project/&gt;,&lt;/a&gt; added a Makefile, put everything on GitHub and set up continuous integration via
 Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;/p&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
 
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
-the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/17/making-an-open-source-swift-project/&gt;,&lt;/a&gt; automatic Carthage binary generation, test coverage…&lt;/p&gt;
+the version tag, documentation generation, automatic Carthage binary generation, test coverage…&lt;/p&gt;
 
 &lt;p&gt;Anyways, here’s some stuff mentioned in the video:&lt;/p&gt;
 
@@ -448,7 +458,9 @@ the version tag, documentation generation&lt;a class=&quot;backlink&quot; rel=&q
                 <description>&lt;p&gt;In this video&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/&gt;,&lt;/a&gt; I build a space-efficient BitArray that confirms to &lt;code class=&quot;highlighter-rouge&quot;&gt;RandomAccessCollection&lt;/code&gt; in Swift in
 a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt;/p&gt;
 
-&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/-k_jrIoD56k&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/-k_jrIoD56k&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
 
 &lt;p&gt;I guess I’m a YouTuber now. You can subscribe to my &lt;a href=&quot;https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A&quot;&gt;channel&lt;/a&gt; 😛.&lt;/p&gt;
 
@@ -2021,7 +2033,7 @@ I see a discussion about locking down branches of a Git repository.&lt;/p&gt;
 
 &lt;p&gt;Making developers “own” branches on a shared repository is a pratice
 inheritated from the days of centralized version control. Git doesn’t provide
-built-in support for this&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2012/10/31/keep-git-social/&gt;,&lt;/a&gt; for good reasons.&lt;/p&gt;
+built-in support for this, for good reasons.&lt;/p&gt;
 
 &lt;p&gt;With Subversion, the ultimate goal of branch-wise access control is to keep
 out
@@ -2044,7 +2056,7 @@ will make their way to the “conanical” repository unless its owner(s) activa
 pulls them in. Bad changes therefore is kept out.&lt;/p&gt;
 
 &lt;p&gt;Additionally, Git has &lt;a href=&quot;http://git-scm.com/book/en/Git-Branching&quot;&gt;features&lt;/a&gt; flexible enough to support all kinds of
-&lt;a href=&quot;http://nvie.com/posts/a-successful-git-branching-model&quot;&gt;development process&lt;/a&gt;es, partially because its branches, by design, are not
+&lt;a href=&quot;http://nvie.com/posts/a-successful-git-branching-model&quot;&gt;development process&lt;/a&gt;es, partially because its branches&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2012/10/31/keep-git-social/&gt;,&lt;/a&gt; by design, are not
 responsible for enforcing access permissions.&lt;/p&gt;
 
 &lt;p&gt;Consider developer John working on a shared git repository with locked
@@ -2060,7 +2072,9 @@ it affect work when a &lt;code class=&quot;highlighter-rouge&quot;&gt;git branch
 repository. Afterall, Git was designed with he linux kernel in mind!  Linus
 himself explains it the best (summary provided below):&lt;/p&gt;
 
-&lt;iframe width=&quot;420&quot; height=&quot;315&quot; src=&quot;http://www.youtube.com/embed/4XpnKHJAok8&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;http://www.youtube.com/embed/4XpnKHJAok8&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
 
 &lt;p&gt;In short, Linus only review pull requests from a few “lieutenants” he trusts,
 and they each follow the same process with their trusted few.  And the pyramid

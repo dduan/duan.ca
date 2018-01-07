@@ -74,7 +74,7 @@ I see a discussion about locking down branches of a Git repository.</p>
 
 <p>Making developers “own” branches on a shared repository is a pratice
 inheritated from the days of centralized version control. Git doesn’t provide
-built-in support for this<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2012/10/31/keep-git-social/>,</a> for good reasons.</p>
+built-in support for this, for good reasons.</p>
 
 <p>With Subversion, the ultimate goal of branch-wise access control is to keep
 out
@@ -97,7 +97,7 @@ will make their way to the “conanical” repository unless its owner(s) activa
 pulls them in. Bad changes therefore is kept out.</p>
 
 <p>Additionally, Git has <a href="http://git-scm.com/book/en/Git-Branching">features</a> flexible enough to support all kinds of
-<a href="http://nvie.com/posts/a-successful-git-branching-model">development process</a>es, partially because its branches, by design, are not
+<a href="http://nvie.com/posts/a-successful-git-branching-model">development process</a>es, partially because its branches<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2012/10/31/keep-git-social/>,</a> by design, are not
 responsible for enforcing access permissions.</p>
 
 <p>Consider developer John working on a shared git repository with locked
@@ -113,7 +113,9 @@ it affect work when a <code class="highlighter-rouge">git branch --all</code> pr
 repository. Afterall, Git was designed with he linux kernel in mind!  Linus
 himself explains it the best (summary provided below):</p>
 
-<iframe width="420" height="315" src="http://www.youtube.com/embed/4XpnKHJAok8" frameborder="0" allowfullscreen=""></iframe>
+<div class="video-container">
+    <iframe src="http://www.youtube.com/embed/4XpnKHJAok8" frameborder="0" allowfullscreen=""></iframe>
+</div>
 
 <p>In short, Linus only review pull requests from a few “lieutenants” he trusts,
 and they each follow the same process with their trusted few.  And the pyramid

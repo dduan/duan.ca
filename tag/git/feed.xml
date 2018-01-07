@@ -193,7 +193,7 @@ I see a discussion about locking down branches of a Git repository.&lt;/p&gt;
 
 &lt;p&gt;Making developers “own” branches on a shared repository is a pratice
 inheritated from the days of centralized version control. Git doesn’t provide
-built-in support for this&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2012/10/31/keep-git-social/&gt;,&lt;/a&gt; for good reasons.&lt;/p&gt;
+built-in support for this, for good reasons.&lt;/p&gt;
 
 &lt;p&gt;With Subversion, the ultimate goal of branch-wise access control is to keep
 out
@@ -216,7 +216,7 @@ will make their way to the “conanical” repository unless its owner(s) activa
 pulls them in. Bad changes therefore is kept out.&lt;/p&gt;
 
 &lt;p&gt;Additionally, Git has &lt;a href=&quot;http://git-scm.com/book/en/Git-Branching&quot;&gt;features&lt;/a&gt; flexible enough to support all kinds of
-&lt;a href=&quot;http://nvie.com/posts/a-successful-git-branching-model&quot;&gt;development process&lt;/a&gt;es, partially because its branches, by design, are not
+&lt;a href=&quot;http://nvie.com/posts/a-successful-git-branching-model&quot;&gt;development process&lt;/a&gt;es, partially because its branches&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2012/10/31/keep-git-social/&gt;,&lt;/a&gt; by design, are not
 responsible for enforcing access permissions.&lt;/p&gt;
 
 &lt;p&gt;Consider developer John working on a shared git repository with locked
@@ -232,7 +232,9 @@ it affect work when a &lt;code class=&quot;highlighter-rouge&quot;&gt;git branch
 repository. Afterall, Git was designed with he linux kernel in mind!  Linus
 himself explains it the best (summary provided below):&lt;/p&gt;
 
-&lt;iframe width=&quot;420&quot; height=&quot;315&quot; src=&quot;http://www.youtube.com/embed/4XpnKHJAok8&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;http://www.youtube.com/embed/4XpnKHJAok8&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
 
 &lt;p&gt;In short, Linus only review pull requests from a few “lieutenants” he trusts,
 and they each follow the same process with their trusted few.  And the pyramid

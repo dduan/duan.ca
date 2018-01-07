@@ -10,7 +10,9 @@ working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (_this article includes all the same information and
 more, so just read on if you don't have 15 minutes for YouTube_).
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yEYtwmI7bDg" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/yEYtwmI7bDg" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+</div>
 
 <br>
 

@@ -66,9 +66,9 @@ And no, Git's social model doesn't add work to the owner of the "official"
 repository. Afterall, Git was designed with he linux kernel in mind!  Linus
 himself explains it the best (summary provided below):
 
-<iframe width="420" height="315"
-src="http://www.youtube.com/embed/4XpnKHJAok8" frameborder="0"
-allowfullscreen></iframe>
+<div class="video-container">
+    <iframe src="http://www.youtube.com/embed/4XpnKHJAok8" frameborder="0" allowfullscreen></iframe>
+</div>
 
 In short, Linus only review pull requests from a few "lieutenants" he trusts,
 and they each follow the same process with their trusted few.  And the pyramid

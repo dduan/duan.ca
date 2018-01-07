@@ -10,7 +10,9 @@ Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. 
 SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
 Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pA0T1CdqMt8" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/pA0T1CdqMt8" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+</div>
 
 This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
 the version tag, documentation generation, automatic Carthage binary generation, test coverage...

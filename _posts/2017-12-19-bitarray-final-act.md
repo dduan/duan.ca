@@ -12,5 +12,6 @@ We added more standard library functionalities to BitArray (ExpressibleByArrayLi
 CustomStringConvertible, Equatable, etc). Then, we added documentation and other open-source things left
 undone from "episode 2".
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ckrd_FoFMl0" frameborder="0"
-gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/ckrd_FoFMl0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+</div>

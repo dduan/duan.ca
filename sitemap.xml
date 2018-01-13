@@ -3,6 +3,10 @@
     
     
     <url>
+        <loc>https://duan.ca/2018/01/13/coding-without-a-language/</loc>
+    </url>
+    
+    <url>
         <loc>https://duan.ca/2018/01/06/cat-under-1-minute/</loc>
     </url>
     
@@ -414,6 +418,30 @@
     
     <url>
         <loc>https://duan.ca/tag/webassembly/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/s-expression/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/s-expression/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/ast/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/ast/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/scheme/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/scheme/feed.xml</loc>
     </url>
     
     <url>

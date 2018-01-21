@@ -8,6 +8,23 @@
         
             <item>
                 
+                <title>Scope</title>
+                
+                <description>&lt;p&gt;A short video on the concept of static scope.&lt;/p&gt;
+
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/o0jwyd8nUK4&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+</description>
+                <pubDate>Sat, 20 Jan 2018 19:50:24 -0800</pubDate>
+                
+                <link>https://duan.ca/2018/01/20/scopes/</link>
+                
+                <guid isPermaLink="true">https://duan.ca/2018/01/20/scopes/</guid>
+            </item>
+        
+            <item>
+                
                 <title>Coding Without A Language</title>
                 
                 <description>&lt;div class=&quot;video-container&quot;&gt;

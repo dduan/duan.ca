@@ -8,6 +8,25 @@
         
             <item>
                 
+                <title>🔗Xiaodi's Notes On String Literals</title>
+                
+                <description>&lt;p&gt;In this awesome post, &lt;a href=&quot;https://twitter.com/xwu&quot;&gt;Xiaodi&lt;/a&gt; summarizes the design
+space for string literals with a focus on &lt;strong&gt;raw strings&lt;/strong&gt; and &lt;strong&gt;custom
+dilimiters&lt;/strong&gt;. Then he proceed to some conclusions in Swift’s potential design
+for raw string literals.&lt;/p&gt;
+
+&lt;p&gt;I had the feeling that this is one of those things I’d benefit from re-reading
+over and over in the future.&lt;/p&gt;
+</description>
+                <pubDate>Sun, 25 Mar 2018 16:06:48 -0700</pubDate>
+                
+                <link>https://forums.swift.org/t/se-0200-raw-mode-string-literals/11048/149</link>
+                
+                <guid isPermaLink="true">https://duan.ca/linked/2018/03/notes-on-string-literals/</guid>
+            </item>
+        
+            <item>
+                
                 <title>An Interpreter Without A Language</title>
                 
                 <description>&lt;p&gt;From the &lt;a href=&quot;https://duan.ca/2018/01/13/coding-without-a-language/&quot;&gt;AST&lt;/a&gt; and &lt;a href=&quot;https://duan.ca/2018/01/20/scopes/&quot;&gt;scopes&lt;/a&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2018/01/30/an-interpreter-without-a-language/&gt;,&lt;/a&gt; come a simple interpreter. This intepreter can “execute” the fibonacci

@@ -8,7 +8,7 @@ From the [AST][0] and [scopes][1], come a simple interpreter. This intepreter ca
 function AST and produce a correct results.
 
 <div class="video-container">
-    <iframe src="https://www.youtube.com/watch?v=C16PD44qyOY" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/C16PD44qyOY" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
 </div>
 
 [0]: {{ site.url }}/2018/01/13/coding-without-a-language/

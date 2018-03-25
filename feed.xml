@@ -29,11 +29,11 @@ over and over in the future.&lt;/p&gt;
                 
                 <title>An Interpreter Without A Language</title>
                 
-                <description>&lt;p&gt;From the &lt;a href=&quot;https://duan.ca/2018/01/13/coding-without-a-language/&quot;&gt;AST&lt;/a&gt; and &lt;a href=&quot;https://duan.ca/2018/01/20/scopes/&quot;&gt;scopes&lt;/a&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2018/01/30/an-interpreter-without-a-language/&gt;,&lt;/a&gt; come a simple interpreter. This intepreter can “execute” the fibonacci
+                <description>&lt;p&gt;From the &lt;a href=&quot;https://duan.ca/2018/01/13/coding-without-a-language/&quot;&gt;AST&lt;/a&gt; and &lt;a href=&quot;https://duan.ca/2018/01/20/scopes/&quot;&gt;scopes&lt;/a&gt;, come a simple interpreter. This intepreter can “execute” the fibonacci
 function AST and produce a correct results.&lt;/p&gt;
 
 &lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/watch?v=C16PD44qyOY&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/C16PD44qyOY&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 &lt;/div&gt;
 
 </description>

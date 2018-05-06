@@ -7,6 +7,23 @@
         
         
             
+            <item>
+                <title>Unix File Permissions In Swift</title>
+                <description>&lt;p&gt;Wrap file permissions from &lt;code class=&quot;highlighter-rouge&quot;&gt;stat&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod&lt;/code&gt; in an &lt;code class=&quot;highlighter-rouge&quot;&gt;OptionSet&lt;/code&gt; in Swift.&lt;/p&gt;
+
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/1ZrouR_F-AU&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+</description>
+                <pubDate>Sun, 06 May 2018 16:43:20 -0700</pubDate>
+                
+                <link>https://duan.ca/2018/05/06/unix-file-permissions-in-swift/</link>
+                
+                <guid isPermaLink="true">https://duan.ca/2018/05/06/unix-file-permissions-in-swift/</guid>
+            </item>
+            
+        
+            
         
             
             <item>

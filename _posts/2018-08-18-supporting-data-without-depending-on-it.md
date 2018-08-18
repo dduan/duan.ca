@@ -36,7 +36,12 @@ The only disadvantage of supporting `Data` in these ways is that it requires
 your user to discover it either via your excellent documentation, or through
 their super good knowledge of `Foundation`.
 
+_Update: this could also [be][2] [slower][3] than using Data directly. Luckily
+I'm only doing file I/O here._
+
 But this is pretty nice, regardless.
 
 [0]: https://github.com/dduan/Pathos
 [1]: https://developer.apple.com/documentation/foundation/data
+[2]: https://mastodon.social/@helge/100573358160444340
+[3]: https://twitter.com/daniel_dunbar/status/1030938273047179264

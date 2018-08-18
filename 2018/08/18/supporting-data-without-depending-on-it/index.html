@@ -53,7 +53,7 @@
   </div>
   <p>While implementing some file I/O APIs in <a href="https://github.com/dduan/Pathos">Pathos</a>, I decided reading/writing
 file content as <code class="highlighter-rouge">Foundation.Data</code> is kind of important (can you blame me?). But
-Pathos, by accident<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/>,</a> does not depend on Swift <code class="highlighter-rouge">Foundation</code>. Now what?</p>
+Pathos, by accident, does not depend on Swift <code class="highlighter-rouge">Foundation</code>. Now what?</p>
 
 <p>After browsing the <a href="https://developer.apple.com/documentation/foundation/data">documentation</a>, a pretty good solution emerged: <code class="highlighter-rouge">Data</code> is
 a sequence of bytes! Lets say we hand our users some bytes, they can easily
@@ -63,7 +63,7 @@ construct a <code class="highlighter-rouge">Data</code> from it:</p>
 <span class="kt">Data</span><span class="p">(</span><span class="nv">bytes</span><span class="p">:</span> <span class="n">content</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Okay, so this built-in initializer makes <code class="highlighter-rouge">[UInt8]</code> an acceptable substitute for
+<p>Okay<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/>,</a> so this built-in initializer makes <code class="highlighter-rouge">[UInt8]</code> an acceptable substitute for
 returning <code class="highlighter-rouge">Data</code>. What can we do about about <code class="highlighter-rouge">Data</code> as input? Well, turns out,
 <code class="highlighter-rouge">Data</code> is a <code class="highlighter-rouge">Collection</code> of <code class="highlighter-rouge">UInt8</code>s! So we can accept <code class="highlighter-rouge">Data</code> indirectly like
 so:</p>
@@ -80,6 +80,9 @@ so:</p>
 <p>The only disadvantage of supporting <code class="highlighter-rouge">Data</code> in these ways is that it requires
 your user to discover it either via your excellent documentation, or through
 their super good knowledge of <code class="highlighter-rouge">Foundation</code>.</p>
+
+<p><em>Update: this could also <a href="https://mastodon.social/@helge/100573358160444340">be</a> <a href="https://twitter.com/daniel_dunbar/status/1030938273047179264">slower</a> than using Data directly. Luckily
+I’m only doing file I/O here.</em></p>
 
 <p>But this is pretty nice, regardless.</p>
 

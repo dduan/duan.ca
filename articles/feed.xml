@@ -8,6 +8,47 @@
         
             
             <item>
+                <title>Supporting Foundation.Data Without Depending On It</title>
+                <description>&lt;p&gt;While implementing some file I/O APIs in &lt;a href=&quot;https://github.com/dduan/Pathos&quot;&gt;Pathos&lt;/a&gt;, I decided reading/writing
+file content as &lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation.Data&lt;/code&gt; is kind of important (can you blame me?). But
+Pathos, by accident, does not depend on Swift &lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation&lt;/code&gt;. Now what?&lt;/p&gt;
+
+&lt;p&gt;After browsing the &lt;a href=&quot;https://developer.apple.com/documentation/foundation/data&quot;&gt;documentation&lt;/a&gt;, a pretty good solution emerged: &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; is
+a sequence of bytes! Lets say we hand our users some bytes, they can easily
+construct a &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; from it:&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;UInt8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;readBytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fromPath&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/tmp/test&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Okay, so this built-in initializer makes &lt;code class=&quot;highlighter-rouge&quot;&gt;[UInt8]&lt;/code&gt; an acceptable substitute for
+returning &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt;. What can we do about about &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; as input? Well, turns out,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; is a &lt;code class=&quot;highlighter-rouge&quot;&gt;Collection&lt;/code&gt; of &lt;code class=&quot;highlighter-rouge&quot;&gt;UInt8&lt;/code&gt;s! So we can accept &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; indirectly like
+so:&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Bytes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bytes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UInt8&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// blah&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;User can pass in a &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; as argument and it just works™.&lt;/p&gt;
+
+&lt;p&gt;The only disadvantage of supporting &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; in these ways is that it requires
+your user to discover it either via your excellent documentation, or through
+their super good knowledge of &lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;But this is pretty nice&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/&gt;,&lt;/a&gt; regardless.&lt;/p&gt;
+
+</description>
+                <pubDate>Sat, 18 Aug 2018 11:00:41 -0700</pubDate>
+                <link>https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/</link>
+                <guid isPermaLink="true">https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/</guid>
+            </item>
+            
+        
+            
+            <item>
                 <title>Unix File Permissions In Swift</title>
                 <description>&lt;p&gt;Wrap file permissions from &lt;code class=&quot;highlighter-rouge&quot;&gt;stat&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod&lt;/code&gt; in an &lt;code class=&quot;highlighter-rouge&quot;&gt;OptionSet&lt;/code&gt; in Swift.&lt;/p&gt;
 

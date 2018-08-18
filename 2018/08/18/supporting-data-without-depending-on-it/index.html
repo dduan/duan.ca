@@ -68,7 +68,7 @@ returning <code class="highlighter-rouge">Data</code>. What can we do about abou
 <code class="highlighter-rouge">Data</code> is a <code class="highlighter-rouge">Collection</code> of <code class="highlighter-rouge">UInt8</code>s! So we can accept <code class="highlighter-rouge">Data</code> indirectly like
 so:</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">read</span><span class="o">&lt;</span><span class="kt">Bytes</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">bytes</span><span class="p">:</span> <span class="kt">Bytes</span><span class="p">)</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">write</span><span class="o">&lt;</span><span class="kt">Bytes</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">bytes</span><span class="p">:</span> <span class="kt">Bytes</span><span class="p">)</span>
     <span class="k">where</span> <span class="kt">Bytes</span><span class="p">:</span> <span class="kt">Collection</span><span class="p">,</span> <span class="kt">Bytes</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">UInt8</span>
 <span class="p">{</span>
     <span class="c1">// blah</span>

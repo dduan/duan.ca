@@ -23,7 +23,8 @@ returning `Data`. What can we do about about `Data` as input? Well, turns out,
 so:
 
 ```swift
-func read<Bytes>(_ bytes: Bytes) where Bytes: Collection, Bytes.Element == UInt8
+func read<Bytes>(_ bytes: Bytes)
+    where Bytes: Collection, Bytes.Element == UInt8
 {
     // blah
 }

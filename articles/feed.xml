@@ -11,8 +11,8 @@
                 <title>A Tale of Two Dates</title>
                 <description>&lt;p&gt;Recently, I discovered a curious thing about &lt;code class=&quot;highlighter-rouge&quot;&gt;Date&lt;/code&gt;s in two large projects
 I work on. Simply put, both projects receives, from various HTTP endpoints, the
-same object component: a timestamp&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2018/08/25/a-tale-of-two-dates/&gt;,&lt;/a&gt; and a duration. Combining these two pieces,
-both projects derives two &lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation.Date&lt;/code&gt;s to represent a time range. So far,
+same object component: a timestamp, and a duration. Combining these two pieces,
+both projects derives two &lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation.Date&lt;/code&gt;s to represent a time range. So far&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2018/08/25/a-tale-of-two-dates/&gt;,&lt;/a&gt;
 so good.&lt;/p&gt;
 
 &lt;p&gt;However, project &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; uses &lt;code class=&quot;highlighter-rouge&quot;&gt;Fonudation.DateInterval&lt;/code&gt; to represent this concept,
@@ -69,7 +69,7 @@ clear. What felt like a long time later, I realized my mistake.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Tests for &lt;code class=&quot;highlighter-rouge&quot;&gt;containerFactory&lt;/code&gt; failed. And here’s why: &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DateInterval.contains&lt;/code&gt;
-inclusive for its upper bound (&lt;code class=&quot;highlighter-rouge&quot;&gt;.end&lt;/code&gt;), whereas &lt;code class=&quot;highlighter-rouge&quot;&gt;Range.contains&lt;/code&gt; isn’t!&lt;/strong&gt; You
+is inclusive for its upper bound (&lt;code class=&quot;highlighter-rouge&quot;&gt;.end&lt;/code&gt;), whereas &lt;code class=&quot;highlighter-rouge&quot;&gt;Range.contains&lt;/code&gt; isn’t!&lt;/strong&gt; You
 can see it plainly by running the following&lt;/p&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Foundation&lt;/span&gt;

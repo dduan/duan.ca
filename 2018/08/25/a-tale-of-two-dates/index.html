@@ -53,8 +53,8 @@
   </div>
   <p>Recently, I discovered a curious thing about <code class="highlighter-rouge">Date</code>s in two large projects
 I work on. Simply put, both projects receives, from various HTTP endpoints, the
-same object component: a timestamp<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2018/08/25/a-tale-of-two-dates/>,</a> and a duration. Combining these two pieces,
-both projects derives two <code class="highlighter-rouge">Foundation.Date</code>s to represent a time range. So far,
+same object component: a timestamp, and a duration. Combining these two pieces,
+both projects derives two <code class="highlighter-rouge">Foundation.Date</code>s to represent a time range. So far<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2018/08/25/a-tale-of-two-dates/>,</a>
 so good.</p>
 
 <p>However, project <code class="highlighter-rouge">A</code> uses <code class="highlighter-rouge">Fonudation.DateInterval</code> to represent this concept,
@@ -111,7 +111,7 @@ clear. What felt like a long time later, I realized my mistake.</p>
 </code></pre></div></div>
 
 <p>Tests for <code class="highlighter-rouge">containerFactory</code> failed. And here’s why: <strong><code class="highlighter-rouge">DateInterval.contains</code>
-inclusive for its upper bound (<code class="highlighter-rouge">.end</code>), whereas <code class="highlighter-rouge">Range.contains</code> isn’t!</strong> You
+is inclusive for its upper bound (<code class="highlighter-rouge">.end</code>), whereas <code class="highlighter-rouge">Range.contains</code> isn’t!</strong> You
 can see it plainly by running the following</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Foundation</span>

@@ -66,7 +66,7 @@ func containerFactory(range: DateInterval, items: [Item]) -> Container {
 ```
 
 Tests for `containerFactory` failed. And here's why: **`DateInterval.contains`
-inclusive for its upper bound (`.end`), whereas `Range.contains` isn't!** You
+is inclusive for its upper bound (`.end`), whereas `Range.contains` isn't!** You
 can see it plainly by running the following
 
 ```swift

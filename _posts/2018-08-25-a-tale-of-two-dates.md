@@ -7,7 +7,7 @@ date: 2018-08-25 17:11:43-0700
 Recently, I discovered a curious thing about `Date`s in two large projects
 I work on. Simply put, both projects receives, from various HTTP endpoints, the
 same object component: a timestamp, and a duration. Combining these two pieces,
-both projects derives two `Foundation.Date`s two represent a time range. So far,
+both projects derives two `Foundation.Date`s to represent a time range. So far,
 so good.
 
 However, project `A` uses `Fonudation.DateInterval` to represent this concept,
@@ -20,7 +20,7 @@ So I set out to unify this thing. Wherever a `Range` literal is used, I swap in
 didn't take long to complete the conversion to `DateInterval` in project `B`,
 now it builds and runs!
 
-Oh, wait, why are some tests failing in probject `B`? Shouldn't this just be an
+Oh, wait, why are some tests failing in project `B`? Shouldn't this just be an
 mechanical change?
 
 I spent time investigating. The failing tests are for some very specific
@@ -67,7 +67,7 @@ func containerFactory(range: DateInterval, items: [Item]) -> Container {
 
 Tests for `containerFactory` failed. And here's why: **`DateInterval.contains`
 inclusive for its upper bound (`.end`), whereas `Range.contains` isn't!** You
-can see it plainly by runnig the following
+can see it plainly by running the following
 
 ```swift
 import Foundation

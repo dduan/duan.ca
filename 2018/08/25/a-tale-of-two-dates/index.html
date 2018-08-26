@@ -13,8 +13,8 @@
 <meta property="og:title" content="A Tale of Two Dates" />
 <meta name="author" content="Daniel Duan" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Recently, I discovered a curious thing about Dates in two large projects I work on. Simply put, both projects receives, from various HTTP endpoints, the same object component: a timestamp, and a duration. Combining these two pieces, both projects derives two Foundation.Dates two represent a time range. So far, so good." />
-<meta property="og:description" content="Recently, I discovered a curious thing about Dates in two large projects I work on. Simply put, both projects receives, from various HTTP endpoints, the same object component: a timestamp, and a duration. Combining these two pieces, both projects derives two Foundation.Dates two represent a time range. So far, so good." />
+<meta name="description" content="Recently, I discovered a curious thing about Dates in two large projects I work on. Simply put, both projects receives, from various HTTP endpoints, the same object component: a timestamp, and a duration. Combining these two pieces, both projects derives two Foundation.Dates to represent a time range. So far, so good." />
+<meta property="og:description" content="Recently, I discovered a curious thing about Dates in two large projects I work on. Simply put, both projects receives, from various HTTP endpoints, the same object component: a timestamp, and a duration. Combining these two pieces, both projects derives two Foundation.Dates to represent a time range. So far, so good." />
 <link rel="canonical" href="https://duan.ca/2018/08/25/a-tale-of-two-dates/" />
 <meta property="og:url" content="https://duan.ca/2018/08/25/a-tale-of-two-dates/" />
 <meta property="og:site_name" content="Daniel Duan" />
@@ -24,7 +24,7 @@
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
 <script type="application/ld+json">
-{"description":"Recently, I discovered a curious thing about Dates in two large projects I work on. Simply put, both projects receives, from various HTTP endpoints, the same object component: a timestamp, and a duration. Combining these two pieces, both projects derives two Foundation.Dates two represent a time range. So far, so good.","author":{"@type":"Person","name":"Daniel Duan"},"@type":"BlogPosting","url":"https://duan.ca/2018/08/25/a-tale-of-two-dates/","headline":"A Tale of Two Dates","dateModified":"2018-08-25T17:11:43-07:00","datePublished":"2018-08-25T17:11:43-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2018/08/25/a-tale-of-two-dates/"},"@context":"http://schema.org"}</script>
+{"description":"Recently, I discovered a curious thing about Dates in two large projects I work on. Simply put, both projects receives, from various HTTP endpoints, the same object component: a timestamp, and a duration. Combining these two pieces, both projects derives two Foundation.Dates to represent a time range. So far, so good.","author":{"@type":"Person","name":"Daniel Duan"},"@type":"BlogPosting","url":"https://duan.ca/2018/08/25/a-tale-of-two-dates/","headline":"A Tale of Two Dates","dateModified":"2018-08-25T17:11:43-07:00","datePublished":"2018-08-25T17:11:43-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2018/08/25/a-tale-of-two-dates/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -54,7 +54,7 @@
   <p>Recently, I discovered a curious thing about <code class="highlighter-rouge">Date</code>s in two large projects
 I work on. Simply put, both projects receives, from various HTTP endpoints, the
 same object component: a timestamp<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2018/08/25/a-tale-of-two-dates/>,</a> and a duration. Combining these two pieces,
-both projects derives two <code class="highlighter-rouge">Foundation.Date</code>s two represent a time range. So far,
+both projects derives two <code class="highlighter-rouge">Foundation.Date</code>s to represent a time range. So far,
 so good.</p>
 
 <p>However, project <code class="highlighter-rouge">A</code> uses <code class="highlighter-rouge">Fonudation.DateInterval</code> to represent this concept,
@@ -67,7 +67,7 @@ differently? What a gigantic waste of brain power for everyone on both projects!
 didn’t take long to complete the conversion to <code class="highlighter-rouge">DateInterval</code> in project <code class="highlighter-rouge">B</code>,
 now it builds and runs!</p>
 
-<p>Oh, wait, why are some tests failing in probject <code class="highlighter-rouge">B</code>? Shouldn’t this just be an
+<p>Oh, wait, why are some tests failing in project <code class="highlighter-rouge">B</code>? Shouldn’t this just be an
 mechanical change?</p>
 
 <p>I spent time investigating. The failing tests are for some very specific
@@ -112,7 +112,7 @@ clear. What felt like a long time later, I realized my mistake.</p>
 
 <p>Tests for <code class="highlighter-rouge">containerFactory</code> failed. And here’s why: <strong><code class="highlighter-rouge">DateInterval.contains</code>
 inclusive for its upper bound (<code class="highlighter-rouge">.end</code>), whereas <code class="highlighter-rouge">Range.contains</code> isn’t!</strong> You
-can see it plainly by runnig the following</p>
+can see it plainly by running the following</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Foundation</span>
 

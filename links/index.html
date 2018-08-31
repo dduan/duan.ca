@@ -54,6 +54,59 @@
 
   <div class="list-item">
     <h3 class="list-link-title">
+      <a href=""></a>
+      <div class="list-link-date">
+        <a href="/linked/2018/08/2018-08-30-se0225/">
+        <small><time>30 Aug 2018</time></small>
+        </a>
+      </div>
+    </h3>
+    
+      <p>This announcement comes with some answers to “what should be in the Swift
+standard library?”</p>
+
+<p>Notably:</p>
+
+<blockquote>
+  <p>Almost all library features can be composed from existing features with enough
+effort. To be considered for addition to the library, a proposed feature must
+satisfy two conditions: it must provide functionality that is useful to
+a substantial population of Swift programmers, and it must provide substantial
+advantages over the alternative ways of accomplishing that functionality.
+Potential advantages include:</p>
+
+  <p>It may be complex, challenging, or error-prone for users to implement
+themselves.  It may have substantial performance advantages over a user
+implementation, either because it has access to library internals or just
+because the library implementation will likely be more carefully tuned.  It may
+be substantially easier to work with because it composes better with other
+language or library features.  It may be substantially more “fluent”: that is,
+more natural to discover, use, and read in code. The implementation may involve
+composing primitives in a subtle or tricky way, or the primitives may be
+unfamiliar to many programmers. This is a more subjective criterion than the
+others, and people may reasonably differ about how to apply it.  For example,
+consider adding an method to rotate the elements of an array. This operation can
+be performed using a relatively simple composition of slicing and concatenation:</p>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array = array[amount...] + array[..&lt;amount]
+</code></pre></div>  </div>
+
+  <p>However, a method to rotate an array in-place would still be welcome: it would
+have substantial performance advantages, it would avoid several potential
+off-by-one errors, and it would be significantly easier for a reader to
+recognize as a rotation.</p>
+
+  <p>In contrast, a property like <code class="highlighter-rouge">isNotEmpty</code> offers no substantial advantages over
+<code class="highlighter-rouge">!isEmpty</code>, and adding it would open the door to adding trivial negations of
+essentially every predicate.</p>
+</blockquote>
+
+      <hr />
+    
+  </div>
+
+  <div class="list-item">
+    <h3 class="list-link-title">
       <a href="https://forums.swift.org/t/se-0200-raw-mode-string-literals/11048/149">Xiaodi's Notes On String Literals</a>
       <div class="list-link-date">
         <a href="/linked/2018/03/notes-on-string-literals/">
@@ -144,56 +197,6 @@ going to be a useful reference to me. I also wish I’d discovered it earlier.</
         </a>
       </div>
     </h3>
-    
-      <p>An oldie but goodie from Swift Evelution.
-<a href="https://twitter.com/slava_pestov">Slava</a>’s answer:</p>
-
-<blockquote>
-  <p>“when we talk about the ABI, we’re really talking about three orthogonal
-“axes” along which we would like to “move” without breaking compatibility with
-existing binaries:”</p>
-
-  <ul>
-    <li>
-      <p>The first axis is the machine-level calling conventions and memory layout.
-For example, what registers to pass function arguments and returns in, the
-rules for alignment and padding of fields in an aggregate type, which entry
-points the Swift runtime exports and what their behavior should be. Once we
-commit to a stable ABI along this axis, you will get interoperability between
-<em>compiler versions</em> – the same exact library built with one version of the
-compiler will remain compatible with clients after being recompiled with
-another version, because their conventions will match up. Note that this does
-not help you if the library itself changes in any way.</p>
-    </li>
-    <li>
-      <p>The second axis is the resilience work I called out in my previous e-mail.
-Here, we’re trying to define language features and implementation techniques
-that allow a library to evolve in a forward-compatible manner, as long as the
-developer follows certain guidelines. Here, the goal is if you should be able
-to compile your library, make some changes to add new APIs, and recompile it
-<em>with the same compiler</em>, without breaking downstream clients, as long as you
-follow the library evolution guidelines (Also, you can imagine one day having
-an ‘ABI diff’ tool to automate this).  &gt;</p>
-    </li>
-    <li>
-      <p>The third axis is the standard library itself. Stability of runtime
-interfaces and the extra indirection to enable resilience is all great, but it
-won’t help you as long as the standard library API is evolving in a
-non-backwards compatible manner – for example, if we remove a method on
-String. So once the other two areas have been addressed, the last thing to lock
-down is the standard library interface itself.</p>
-    </li>
-  </ul>
-</blockquote>
-
-<p>The rest of the thread is worth reading too. John McCall gave an high level
-<a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160808/026145.html">description</a>.</p>
-
-<p>The definitive source for Slava’s third axes is the <a href="https://github.com/apple/swift/blob/master/docs/LibraryEvolution.rst">Library
-Evolution</a>
-doc from the Swift repository.</p>
-
-      <hr />
     
   </div>
 

@@ -8,6 +8,56 @@
         
             <item>
                 
+                <title>🔗</title>
+                
+                <description>&lt;p&gt;This announcement comes with some answers to “what should be in the Swift
+standard library?”&lt;/p&gt;
+
+&lt;p&gt;Notably:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Almost all library features can be composed from existing features with enough
+effort. To be considered for addition to the library, a proposed feature must
+satisfy two conditions: it must provide functionality that is useful to
+a substantial population of Swift programmers, and it must provide substantial
+advantages over the alternative ways of accomplishing that functionality.
+Potential advantages include:&lt;/p&gt;
+
+  &lt;p&gt;It may be complex, challenging, or error-prone for users to implement
+themselves.  It may have substantial performance advantages over a user
+implementation, either because it has access to library internals or just
+because the library implementation will likely be more carefully tuned.  It may
+be substantially easier to work with because it composes better with other
+language or library features.  It may be substantially more “fluent”: that is,
+more natural to discover, use, and read in code. The implementation may involve
+composing primitives in a subtle or tricky way&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/linked/2018/08/2018-08-30-se0225/&gt;,&lt;/a&gt; or the primitives may be
+unfamiliar to many programmers. This is a more subjective criterion than the
+others, and people may reasonably differ about how to apply it.  For example,
+consider adding an method to rotate the elements of an array. This operation can
+be performed using a relatively simple composition of slicing and concatenation:&lt;/p&gt;
+
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;array = array[amount...] + array[..&amp;lt;amount]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;However, a method to rotate an array in-place would still be welcome: it would
+have substantial performance advantages, it would avoid several potential
+off-by-one errors, and it would be significantly easier for a reader to
+recognize as a rotation.&lt;/p&gt;
+
+  &lt;p&gt;In contrast, a property like &lt;code class=&quot;highlighter-rouge&quot;&gt;isNotEmpty&lt;/code&gt; offers no substantial advantages over
+&lt;code class=&quot;highlighter-rouge&quot;&gt;!isEmpty&lt;/code&gt;, and adding it would open the door to adding trivial negations of
+essentially every predicate.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+                <pubDate>Thu, 30 Aug 2018 18:02:05 -0700</pubDate>
+                
+                <link></link>
+                
+                <guid isPermaLink="true">https://duan.ca/linked/2018/08/2018-08-30-se0225/</guid>
+            </item>
+        
+            <item>
+                
                 <title>A Tale of Two Dates</title>
                 
                 <description>&lt;p&gt;Recently, I discovered a curious thing about &lt;code class=&quot;highlighter-rouge&quot;&gt;Date&lt;/code&gt;s in two large projects

@@ -8,7 +8,7 @@
         
             <item>
                 
-                <title>🔗</title>
+                <title>🔗[Accepted with Modifications] SE-0225</title>
                 
                 <description>&lt;p&gt;This announcement comes with some answers to “what should be in the Swift
 standard library?”&lt;/p&gt;
@@ -30,7 +30,7 @@ because the library implementation will likely be more carefully tuned.  It may
 be substantially easier to work with because it composes better with other
 language or library features.  It may be substantially more “fluent”: that is,
 more natural to discover, use, and read in code. The implementation may involve
-composing primitives in a subtle or tricky way&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/linked/2018/08/2018-08-30-se0225/&gt;,&lt;/a&gt; or the primitives may be
+composing primitives in a subtle or tricky way&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/linked/2018/08/se0225/&gt;,&lt;/a&gt; or the primitives may be
 unfamiliar to many programmers. This is a more subjective criterion than the
 others, and people may reasonably differ about how to apply it.  For example,
 consider adding an method to rotate the elements of an array. This operation can
@@ -49,11 +49,11 @@ recognize as a rotation.&lt;/p&gt;
 essentially every predicate.&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
-                <pubDate>Thu, 30 Aug 2018 18:02:05 -0700</pubDate>
+                <pubDate>Thu, 30 Aug 2018 17:59:01 -0700</pubDate>
                 
-                <link></link>
+                <link>https://forums.swift.org/t/accepted-with-modifications-se-0225-adding-iseven-isodd-ismultiple-to-binaryinteger/15689</link>
                 
-                <guid isPermaLink="true">https://duan.ca/linked/2018/08/2018-08-30-se0225/</guid>
+                <guid isPermaLink="true">https://duan.ca/linked/2018/08/se0225/</guid>
             </item>
         
             <item>

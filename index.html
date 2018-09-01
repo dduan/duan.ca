@@ -54,6 +54,93 @@
   
   <div class="content post">
     
+    <h1 class="post-title"><a href="/2018/09/01/magical-interaction/">Magical Interactions</a></h1>
+    
+    <div class="post-date">
+      
+      <time>01 Sep 2018</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/swift">Swift</a>,
+      
+        <a href="/tag/haskell">Haskell</a>
+      
+      </div>
+      
+    </div>
+    <p>I want to talk about this little function:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">interact</span><span class="p">(</span><span class="n">_</span> <span class="nv">process</span><span class="p">:</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">input</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">while</span> <span class="k">let</span> <span class="nv">line</span> <span class="o">=</span> <span class="nf">readLine</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">input</span> <span class="o">+=</span> <span class="n">line</span>
+    <span class="p">}</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="nf">process</span><span class="p">(</span><span class="n">input</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Brief explanation: it reads all the input from stdin as a <code class="highlighter-rouge">String</code>, feeds it
+into a closure <code class="highlighter-rouge">process</code>, which it takes in as its only argument, and prints
+<code class="highlighter-rouge">process</code>’s output.</p>
+
+<p>Here’s how one might use it:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// counts characters from stdin and prints result to stdout</span>
+<span class="n">interact</span> <span class="p">{</span> <span class="kt">String</span><span class="p">(</span><span class="nv">$0</span><span class="o">.</span><span class="n">count</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Got that? Well, now I’m going to rewrite it in a slightly less Swift-y way:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">count</span><span class="p">:</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kt">String</span><span class="p">(</span><span class="nv">$0</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nf">interact</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The argument for <code class="highlighter-rouge">interact</code> got defined with a name and an explicit type
+signature.</p>
+
+<p>So, what’s so special about this <code class="highlighter-rouge">interact</code> function? Two words: <em>side effects</em>.
+More precisely, it took away the concern of side-effects from the user. <code class="highlighter-rouge">count</code>
+belongs in the realm of <em>pure</em> functions. It has no worries about file handles
+or operating systems. It’s <code class="highlighter-rouge">(String) -&gt; String</code>. I wanted to emphasize this with
+the rewrite. Look at that empty line. Now you see a boundary between 2 worlds.</p>
+
+<p>This may all seem contrived. But when I learned about <a href="http://hackage.haskell.org/package/base-4.11.1.0/docs/Prelude.html#v:interact">this function in
+Haskell</a>, I was blown away.</p>
+
+<p>It’s like a great magic trick: you are presented a scenario, say, writing
+a little script. Maybe you need to process some CLI output and print out a CSV
+or JSON string (literally 90% of the script I write).  A Haskell programmer
+would jump into the bottom level of the problem and start writing these little
+pure functions: one to split the string, one to convert some numbers, one to
+manipulate a list, one to match some patterns…gradually the broken-down
+absractions get built back up via function composition. You can see the light at
+the end of the tunnel, yes, yes! If you feed this list into that function that
+returns a string you’ll have the right value to print out!  Okay, now the
+problem is solved in the pure functional world! The only thing left to do is…</p>
+
+<p>Now, the setup of the magic is complete. Now, you are onboard with the solution,
+you thought the problem through with the magician…you are distracted. The
+ending came so…quickly, but unexpected. What? You just feed your solution to
+this <code class="highlighter-rouge">interact</code> function and…that’s it? I was expecting some <code class="highlighter-rouge">readLine</code>s or
+<code class="highlighter-rouge">print</code>s (okay, at least 1 <code class="highlighter-rouge">print</code> statement)!</p>
+
+<p>That’s the thing: <code class="highlighter-rouge">interact</code> deals with <em>two</em> side effects, the input and the
+output. But its user deals with <em>zero</em>. It’s as if the two effects “cancel” each
+other out! It’s a <em>neat</em> trick, really. Small, low-key, easy to miss. But I’m
+glad I noticed it and come to appreciate its power and simplicity.</p>
+
+
+  </div>
+  <hr />
+  
+  <div class="content post">
+    
     <h1 class="post-title"><a href="https://forums.swift.org/t/accepted-with-modifications-se-0225-adding-iseven-isodd-ismultiple-to-binaryinteger/15689">🔗 [Accepted with Modifications] SE-0225</a></h1>
     
     <div class="post-date">
@@ -211,63 +298,6 @@ I didn’t not expect.</p>
 </ol>
 
 <p>Well, today I learned.</p>
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2018/08/18/supporting-data-without-depending-on-it/">Supporting Foundation.Data Without Depending On It</a></h1>
-    
-    <div class="post-date">
-      
-      <time>18 Aug 2018</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/swift">Swift</a>,
-      
-        <a href="/tag/foundation">Foundation</a>
-      
-      </div>
-      
-    </div>
-    <p>While implementing some file I/O APIs in <a href="https://github.com/dduan/Pathos">Pathos</a>, I decided reading/writing
-file content as <code class="highlighter-rouge">Foundation.Data</code> is kind of important (can you blame me?). But
-Pathos, by accident, does not depend on Swift <code class="highlighter-rouge">Foundation</code>. Now what?</p>
-
-<p>After browsing the <a href="https://developer.apple.com/documentation/foundation/data">documentation</a>, a pretty good solution emerged: <code class="highlighter-rouge">Data</code> is
-a sequence of bytes! Lets say we hand our users some bytes, they can easily
-construct a <code class="highlighter-rouge">Data</code> from it:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">content</span><span class="p">:</span> <span class="p">[</span><span class="kt">UInt8</span><span class="p">]</span> <span class="o">=</span> <span class="k">try</span> <span class="nf">readBytes</span><span class="p">(</span><span class="n">fromPath</span> <span class="s">"/tmp/test"</span><span class="p">)</span>
-<span class="kt">Data</span><span class="p">(</span><span class="nv">bytes</span><span class="p">:</span> <span class="n">content</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>Okay, so this built-in initializer makes <code class="highlighter-rouge">[UInt8]</code> an acceptable substitute for
-returning <code class="highlighter-rouge">Data</code>. What can we do about about <code class="highlighter-rouge">Data</code> as input? Well, turns out,
-<code class="highlighter-rouge">Data</code> is a <code class="highlighter-rouge">Collection</code> of <code class="highlighter-rouge">UInt8</code>s! So we can accept <code class="highlighter-rouge">Data</code> indirectly like
-so:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">write</span><span class="o">&lt;</span><span class="kt">Bytes</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">bytes</span><span class="p">:</span> <span class="kt">Bytes</span><span class="p">)</span>
-    <span class="k">where</span> <span class="kt">Bytes</span><span class="p">:</span> <span class="kt">Collection</span><span class="p">,</span> <span class="kt">Bytes</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">UInt8</span>
-<span class="p">{</span>
-    <span class="c1">// blah</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>User can pass in a <code class="highlighter-rouge">Data</code> as argument and it just works™.</p>
-
-<p>The only disadvantage of supporting <code class="highlighter-rouge">Data</code> in these ways is that it requires
-your user to discover it either via your excellent documentation, or through
-their super good knowledge of <code class="highlighter-rouge">Foundation</code>.</p>
-
-<p><em>Update: this could also <a href="https://mastodon.social/@helge/100573358160444340">be</a> <a href="https://twitter.com/daniel_dunbar/status/1030938273047179264">slower</a> than using Data directly. Luckily
-I’m only doing file I/O here.</em></p>
-
-<p>But this is pretty nice, regardless.</p>
-
 
   </div>
   <hr />

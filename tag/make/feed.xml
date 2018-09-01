@@ -61,6 +61,8 @@
             
         
             
+        
+            
             <item>
                 <title>Distribution Tests</title>
                 <description>&lt;p&gt;There are several ways to build dependencies for a Swift 3 project:

@@ -7,6 +7,83 @@
         
         
             
+            <item>
+                <title>Magical Interactions</title>
+                <description>&lt;p&gt;I want to talk about this little function:&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;interact&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;readLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Brief explanation: it reads all the input from stdin as a &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt;, feeds it
+into a closure &lt;code class=&quot;highlighter-rouge&quot;&gt;process&lt;/code&gt;, which it takes in as its only argument, and prints
+&lt;code class=&quot;highlighter-rouge&quot;&gt;process&lt;/code&gt;’s output.&lt;/p&gt;
+
+&lt;p&gt;Here’s how one might use it:&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// counts characters from stdin and prints result to stdout&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;interact&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Got that? Well, now I’m going to rewrite it in a slightly less Swift-y way:&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;interact&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The argument for &lt;code class=&quot;highlighter-rouge&quot;&gt;interact&lt;/code&gt; got defined with a name and an explicit type
+signature.&lt;/p&gt;
+
+&lt;p&gt;So, what’s so special about this &lt;code class=&quot;highlighter-rouge&quot;&gt;interact&lt;/code&gt; function? Two words: &lt;em&gt;side effects&lt;/em&gt;.
+More precisely, it took away the concern of side-effects from the user. &lt;code class=&quot;highlighter-rouge&quot;&gt;count&lt;/code&gt;
+belongs in the realm of &lt;em&gt;pure&lt;/em&gt; functions. It has no worries about file handles
+or operating systems. It’s &lt;code class=&quot;highlighter-rouge&quot;&gt;(String) -&amp;gt; String&lt;/code&gt;. I wanted to emphasize this with
+the rewrite. Look at that empty line. Now you see a boundary between 2 worlds.&lt;/p&gt;
+
+&lt;p&gt;This may all seem contrived. But when I learned about &lt;a href=&quot;http://hackage.haskell.org/package/base-4.11.1.0/docs/Prelude.html#v:interact&quot;&gt;this function in
+Haskell&lt;/a&gt;, I was blown away.&lt;/p&gt;
+
+&lt;p&gt;It’s like a great magic trick: you are presented a scenario, say, writing
+a little script. Maybe you need to process some CLI output and print out a CSV
+or JSON string (literally 90% of the script I write).  A Haskell programmer
+would jump into the bottom level of the problem and start writing these little
+pure functions: one to split the string, one to convert some numbers, one to
+manipulate a list, one to match some patterns…gradually the broken-down
+absractions get built back up via function composition. You can see the light at
+the end of the tunnel, yes, yes! If you feed this list into that function that
+returns a string you’ll have the right value to print out!  Okay, now the
+problem is solved in the pure functional world! The only thing left to do is…&lt;/p&gt;
+
+&lt;p&gt;Now, the setup of the magic is complete. Now&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2018/09/01/magical-interaction/&gt;,&lt;/a&gt; you are onboard with the solution,
+you thought the problem through with the magician…you are distracted. The
+ending came so…quickly, but unexpected. What? You just feed your solution to
+this &lt;code class=&quot;highlighter-rouge&quot;&gt;interact&lt;/code&gt; function and…that’s it? I was expecting some &lt;code class=&quot;highlighter-rouge&quot;&gt;readLine&lt;/code&gt;s or
+&lt;code class=&quot;highlighter-rouge&quot;&gt;print&lt;/code&gt;s (okay, at least 1 &lt;code class=&quot;highlighter-rouge&quot;&gt;print&lt;/code&gt; statement)!&lt;/p&gt;
+
+&lt;p&gt;That’s the thing: &lt;code class=&quot;highlighter-rouge&quot;&gt;interact&lt;/code&gt; deals with &lt;em&gt;two&lt;/em&gt; side effects, the input and the
+output. But its user deals with &lt;em&gt;zero&lt;/em&gt;. It’s as if the two effects “cancel” each
+other out! It’s a &lt;em&gt;neat&lt;/em&gt; trick, really. Small, low-key, easy to miss. But I’m
+glad I noticed it and come to appreciate its power and simplicity.&lt;/p&gt;
+
+</description>
+                <pubDate>Sat, 01 Sep 2018 11:08:57 -0700</pubDate>
+                
+                <link>https://duan.ca/2018/09/01/magical-interaction/</link>
+                
+                <guid isPermaLink="true">https://duan.ca/2018/09/01/magical-interaction/</guid>
+            </item>
+            
+        
+            
         
             
         

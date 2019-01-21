@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan - POSIX</title>
+        <link>https://duan.ca/tag/POSIX/</link>
+        <atom:link href="https://duan.ca/tag/POSIX/index.xml" rel="self" type="application/rss+xml" />
+        
+        
+            
+            <item>
+                <title>Kick-ass CLI Tools In Swift</title>
+                <description>&lt;p&gt;As someone who lives in a terminal simulator, I’m pleasantly surprised by the
+new toys we get in recent years such as &lt;a href=&quot;https://github.com/junegunn/fzf&quot;&gt;fzf&lt;/a&gt;, &lt;a href=&quot;https://github.com/BurntSushi/ripgrep&quot;&gt;ripgrep&lt;/a&gt;, &lt;a href=&quot;https://github.com/sharkdp/fd&quot;&gt;fd&lt;/a&gt;, etc.
+A great number of these are written in relatively young programming languages
+such as Go and Rust. But, noticibly, none of them are written in Swift.&lt;/p&gt;
+
+&lt;p&gt;In this post, I’ll try to explain why that is.&lt;/p&gt;
+
+&lt;h2 id=&quot;posix-ergonomics&quot;&gt;POSIX Ergonomics&lt;/h2&gt;
+
+&lt;p&gt;Unix-like virtual file systems has been around for decades. API that manupulates
+such systems has standardized a long time ago and exists in most computers
+running Linux/BSD/macOS today (and, to a large extend, smart phones). To Swift
+users, Using these APIs is straight-forward (&lt;code class=&quot;highlighter-rouge&quot;&gt;rmdir(&quot;path/to/dir&quot;)&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;So Swift programmers are all happy campers (re-)inventeing all sorts of file,
+system utilities&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2019/01/20/kick-ass-cli-tools-in-swift/&gt;,&lt;/a&gt; right?&lt;/p&gt;
+
+&lt;p&gt;Well, not quite.&lt;/p&gt;
+
+&lt;p&gt;Okay, I lied about POSIX APIs being “straight-forward” in Swift. Or rather, this
+is very subjective.&lt;/p&gt;
+
+&lt;p&gt;Continuing with the &lt;code class=&quot;highlighter-rouge&quot;&gt;rmdir&lt;/code&gt; example, we must first import it from either &lt;code class=&quot;highlighter-rouge&quot;&gt;Glibc&lt;/code&gt;
+or &lt;code class=&quot;highlighter-rouge&quot;&gt;Darwin&lt;/code&gt;, depending on your OS. To know whether the operation is successful,
+we need to see whether it returned integer 0. To learn &lt;em&gt;why&lt;/em&gt; 0 was not returned,
+we need to read the “magical” variable &lt;code class=&quot;highlighter-rouge&quot;&gt;errno&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;errno&lt;/code&gt; could be written to by
+other APIs so we’d better capture it in time…&lt;/p&gt;
+
+&lt;p&gt;And that’s one of the simpler APIs in POSIX calls!&lt;/p&gt;
+
+&lt;p&gt;Programmers whine about ergonomics partially because we are previlidged and
+spoiled. But mostly because our attention is a limited resources. Mixing API
+conventions distracts us from solving the problem at hand. Bad ergonomics,
+therefore, drives away a good potion of users who cares about quality of their
+tools.&lt;/p&gt;
+
+&lt;h2 id=&quot;culture-and-history&quot;&gt;Culture and History&lt;/h2&gt;
+
+&lt;p&gt;As of this writing, the release of Swift 5 is imminent. The vast majority of
+existing Swift code is written to run on iOS. The concept of a file, or the
+traditional virtal file system, is hidden to iOS users, and sandboxed for
+developers. I bet most Swift users rarely think about the fact that there’s
+a entire set of POSIX API at their disposal.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation&lt;/code&gt; alleviates the need to deal with files and directories: &lt;code class=&quot;highlighter-rouge&quot;&gt;Bundle&lt;/code&gt;
+locates the files; &lt;code class=&quot;highlighter-rouge&quot;&gt;CoreData&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;UserDefaults&lt;/code&gt; or the keychain is your primary
+way to persist data; &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;NSCoding&lt;/code&gt; has methods to read and
+write to files.  And finally, if you really need to deal with files,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;NSFileManager&lt;/code&gt; has everything you’ll ever need.&lt;/p&gt;
+
+&lt;p&gt;Why would a productive Swift programmer think about POSIX in this environment?
+Why would a tutor teach POSIX over the useful/practical/”native” alternatives?&lt;/p&gt;
+
+&lt;p&gt;We can trace “riding on the Apple platform” mentality back to the pre-iPhone
+days, where a very small Mac developer community labors on on a niche platform
+(compared to iOS today) and they &lt;em&gt;loved&lt;/em&gt; it. However, I’m sure they used more
+POSIX stuff back then than the average iOS developers today.&lt;/p&gt;
+
+&lt;p&gt;Having a great library such as Foundation on the most popular developer
+platform where the language thrives means it’ll take longer for “subcultures”
+to emerge, if they do at all.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-standard-library-and-its-influence-on-new-users&quot;&gt;The Standard Library And Its Influence on New Users&lt;/h2&gt;
+
+&lt;p&gt;File system APIs being in &lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation&lt;/code&gt; as opposed to the standard library is
+probably a temporary condition. Nevertheless, it has at least the following
+implications:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Its quality of implementation is not held on the same standard that those
+APIs in the standard library. This is especially true for the separate,
+open-source &lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation&lt;/code&gt; implementation. Getting consistent and correct
+behaviors across macOS and Linux is hard.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A person learning Swift won’t explore the language with a file system API.
+This I suspect, is &lt;strong&gt;the most important reason many of these great CLI
+utilites are written in other programming languages&lt;/strong&gt;. Programmers seek
+instant gratification when they learn. And they usually stay in a limited
+domain (like iOS) at first. This is where the built-in library is special: no
+matter which domain is chosen, it’s always available. Languages such as Go
+and Rust include things like paths and files in their built-in library.
+Playing with these APIs while learning the lanugage plants a seed for future,
+serious, projects. There are less users of these languages compared to Swift,
+but there are more people thinking about projects that involves file systems
+in thoes communities. (Note I don’t have statistics here, just a guess.)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;The next killer CLI tool is still more likely to be written in Go or Rust,
+than in Swift. Hopefully, somewhere in these speculations is a true cause of
+this phenomena. Maybe someone reading this will be inspired to accelerate change
+that will eventually revert the condition. (I’m &lt;a href=&quot;https://github.com/dduan/Pathos&quot;&gt;trying&lt;/a&gt;).&lt;/p&gt;
+
+</description>
+                <pubDate>Sun, 20 Jan 2019 16:09:38 -0800</pubDate>
+                
+                <link>https://duan.ca/2019/01/20/kick-ass-cli-tools-in-swift/</link>
+                
+                <guid isPermaLink="true">https://duan.ca/2019/01/20/kick-ass-cli-tools-in-swift/</guid>
+            </item>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </channel>
+</rss>

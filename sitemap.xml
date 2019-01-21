@@ -3,6 +3,10 @@
     
     
     <url>
+        <loc>https://duan.ca/2019/01/20/kick-ass-cli-tools-in-swift/</loc>
+    </url>
+    
+    <url>
         <loc>https://duan.ca/2018/09/01/magical-interaction/</loc>
     </url>
     
@@ -474,6 +478,22 @@
     
     <url>
         <loc>https://duan.ca/tag/scheme/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/cli/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/cli/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/posix/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/posix/feed.xml</loc>
     </url>
     
     <url>

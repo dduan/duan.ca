@@ -54,6 +54,127 @@
   
   <div class="content post">
     
+    <h1 class="post-title"><a href="/2019/01/20/kick-ass-cli-tools-in-swift/">Kick-ass CLI Tools In Swift</a></h1>
+    
+    <div class="post-date">
+      
+      <time>20 Jan 2019</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/swift">Swift</a>,
+      
+        <a href="/tag/cli">CLI</a>,
+      
+        <a href="/tag/posix">POSIX</a>
+      
+      </div>
+      
+    </div>
+    <p>As someone who lives in a terminal simulator, I’m pleasantly surprised by the
+new toys we get in recent years such as <a href="https://github.com/junegunn/fzf">fzf</a>, <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a>, <a href="https://github.com/sharkdp/fd">fd</a>, etc.
+A great number of these are written in relatively young programming languages
+such as Go and Rust. But, noticibly, none of them are written in Swift.</p>
+
+<p>In this post, I’ll try to explain why that is.</p>
+
+<h2 id="posix-ergonomics">POSIX Ergonomics</h2>
+
+<p>Unix-like virtual file systems has been around for decades. API that manupulates
+such systems has standardized a long time ago and exists in most computers
+running Linux/BSD/macOS today (and, to a large extend, smart phones). To Swift
+users, Using these APIs is straight-forward (<code class="highlighter-rouge">rmdir("path/to/dir")</code>).</p>
+
+<p>So Swift programmers are all happy campers (re-)inventeing all sorts of file,
+system utilities, right?</p>
+
+<p>Well, not quite.</p>
+
+<p>Okay, I lied about POSIX APIs being “straight-forward” in Swift. Or rather, this
+is very subjective.</p>
+
+<p>Continuing with the <code class="highlighter-rouge">rmdir</code> example, we must first import it from either <code class="highlighter-rouge">Glibc</code>
+or <code class="highlighter-rouge">Darwin</code>, depending on your OS. To know whether the operation is successful,
+we need to see whether it returned integer 0. To learn <em>why</em> 0 was not returned,
+we need to read the “magical” variable <code class="highlighter-rouge">errno</code>. <code class="highlighter-rouge">errno</code> could be written to by
+other APIs so we’d better capture it in time…</p>
+
+<p>And that’s one of the simpler APIs in POSIX calls!</p>
+
+<p>Programmers whine about ergonomics partially because we are previlidged and
+spoiled. But mostly because our attention is a limited resources. Mixing API
+conventions distracts us from solving the problem at hand. Bad ergonomics,
+therefore, drives away a good potion of users who cares about quality of their
+tools.</p>
+
+<h2 id="culture-and-history">Culture and History</h2>
+
+<p>As of this writing, the release of Swift 5 is imminent. The vast majority of
+existing Swift code is written to run on iOS. The concept of a file, or the
+traditional virtal file system, is hidden to iOS users, and sandboxed for
+developers. I bet most Swift users rarely think about the fact that there’s
+a entire set of POSIX API at their disposal.</p>
+
+<p><code class="highlighter-rouge">Foundation</code> alleviates the need to deal with files and directories: <code class="highlighter-rouge">Bundle</code>
+locates the files; <code class="highlighter-rouge">CoreData</code>, <code class="highlighter-rouge">UserDefaults</code> or the keychain is your primary
+way to persist data; <code class="highlighter-rouge">Data</code>, <code class="highlighter-rouge">String</code> or <code class="highlighter-rouge">NSCoding</code> has methods to read and
+write to files.  And finally, if you really need to deal with files,
+<code class="highlighter-rouge">NSFileManager</code> has everything you’ll ever need.</p>
+
+<p>Why would a productive Swift programmer think about POSIX in this environment?
+Why would a tutor teach POSIX over the useful/practical/”native” alternatives?</p>
+
+<p>We can trace “riding on the Apple platform” mentality back to the pre-iPhone
+days, where a very small Mac developer community labors on on a niche platform
+(compared to iOS today) and they <em>loved</em> it. However, I’m sure they used more
+POSIX stuff back then than the average iOS developers today.</p>
+
+<p>Having a great library such as Foundation on the most popular developer
+platform where the language thrives means it’ll take longer for “subcultures”
+to emerge, if they do at all.</p>
+
+<h2 id="the-standard-library-and-its-influence-on-new-users">The Standard Library And Its Influence on New Users</h2>
+
+<p>File system APIs being in <code class="highlighter-rouge">Foundation</code> as opposed to the standard library is
+probably a temporary condition. Nevertheless, it has at least the following
+implications:</p>
+
+<ol>
+  <li>
+    <p>Its quality of implementation is not held on the same standard that those
+APIs in the standard library. This is especially true for the separate,
+open-source <code class="highlighter-rouge">Foundation</code> implementation. Getting consistent and correct
+behaviors across macOS and Linux is hard.</p>
+  </li>
+  <li>
+    <p>A person learning Swift won’t explore the language with a file system API.
+This I suspect, is <strong>the most important reason many of these great CLI
+utilites are written in other programming languages</strong>. Programmers seek
+instant gratification when they learn. And they usually stay in a limited
+domain (like iOS) at first. This is where the built-in library is special: no
+matter which domain is chosen, it’s always available. Languages such as Go
+and Rust include things like paths and files in their built-in library.
+Playing with these APIs while learning the lanugage plants a seed for future,
+serious, projects. There are less users of these languages compared to Swift,
+but there are more people thinking about projects that involves file systems
+in thoes communities. (Note I don’t have statistics here, just a guess.)</p>
+  </li>
+</ol>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>The next killer CLI tool is still more likely to be written in Go or Rust,
+than in Swift. Hopefully, somewhere in these speculations is a true cause of
+this phenomena. Maybe someone reading this will be inspired to accelerate change
+that will eventually revert the condition. (I’m <a href="https://github.com/dduan/Pathos">trying</a>).</p>
+
+
+  </div>
+  <hr />
+  
+  <div class="content post">
+    
     <h1 class="post-title"><a href="/2018/09/01/magical-interaction/">Magical Interactions</a></h1>
     
     <div class="post-date">
@@ -191,113 +312,6 @@ recognize as a rotation.</p>
 <code class="highlighter-rouge">!isEmpty</code>, and adding it would open the door to adding trivial negations of
 essentially every predicate.</p>
 </blockquote>
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2018/08/25/a-tale-of-two-dates/">A Tale of Two Dates</a></h1>
-    
-    <div class="post-date">
-      
-      <time>25 Aug 2018</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/swift">Swift</a>,
-      
-        <a href="/tag/foundation">Foundation</a>
-      
-      </div>
-      
-    </div>
-    <p>Recently, I discovered a curious thing about <code class="highlighter-rouge">Date</code>s in two large projects
-I work on. Simply put, both projects receives, from various HTTP endpoints, the
-same object component: a timestamp, and a duration. Combining these two pieces,
-both projects derives two <code class="highlighter-rouge">Foundation.Date</code>s to represent a time range. So far,
-so good.</p>
-
-<p>However, project <code class="highlighter-rouge">A</code> uses <code class="highlighter-rouge">Fonudation.DateInterval</code> to represent this concept,
-while project <code class="highlighter-rouge">B</code> uses <code class="highlighter-rouge">Range&lt;Date&gt;</code>. But why? Why represent the same component
-differently? What a gigantic waste of brain power for everyone on both projects!</p>
-
-<p>So I set out to unify this thing. Wherever a <code class="highlighter-rouge">Range</code> literal is used, I swap in
-<code class="highlighter-rouge">DateInterval.init(start:end:)</code>; <code class="highlighter-rouge">Range.lowerBound</code> becomes
-<code class="highlighter-rouge">DateInterval.start</code>; <code class="highlighter-rouge">Range.upperBound</code> becomes <code class="highlighter-rouge">DateInterval.end</code>, etc. It
-didn’t take long to complete the conversion to <code class="highlighter-rouge">DateInterval</code> in project <code class="highlighter-rouge">B</code>,
-now it builds and runs!</p>
-
-<p>Oh, wait, why are some tests failing in project <code class="highlighter-rouge">B</code>? Shouldn’t this just be an
-mechanical change?</p>
-
-<p>I spent time investigating. The failing tests are for some very specific
-business logic that I’m not familiar with. So things took a while to become
-clear. What felt like a long time later, I realized my mistake.</p>
-
-<p>(I’m sorry if this has been obvious to you. You are a better Swift programmer!)</p>
-
-<p>Somewhere in project <code class="highlighter-rouge">B</code> is the following:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Item</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Date</span><span class="o">&gt;</span>
-<span class="p">}</span>
-
-<span class="kd">struct</span> <span class="kt">Container</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt">Item</span><span class="p">]</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">containerFactory</span><span class="p">(</span><span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Date</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt">Item</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Container</span> <span class="p">{</span>
-    <span class="c1">/// pretend there's more code here</span>
-
-    <span class="k">return</span> <span class="kt">Conatiner</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="n">items</span><span class="o">.</span><span class="n">filter</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="n">range</span><span class="o">.</span><span class="n">lowerBound</span><span class="p">)</span> <span class="p">})</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>And of course, after my “refactor”, it became</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Item</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">DateInterval</span>
-<span class="p">}</span>
-
-<span class="kd">struct</span> <span class="kt">Container</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt">Item</span><span class="p">]</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">containerFactory</span><span class="p">(</span><span class="nv">range</span><span class="p">:</span> <span class="kt">DateInterval</span><span class="p">,</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt">Item</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Container</span> <span class="p">{</span>
-    <span class="c1">/// pretend there's more code here</span>
-
-    <span class="k">return</span> <span class="kt">Conatiner</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="n">items</span><span class="o">.</span><span class="n">filter</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="n">range</span><span class="o">.</span><span class="n">start</span><span class="p">)</span> <span class="p">})</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Tests for <code class="highlighter-rouge">containerFactory</code> failed. And here’s why: <strong><code class="highlighter-rouge">DateInterval.contains</code>
-is inclusive for its upper bound (<code class="highlighter-rouge">.end</code>), whereas <code class="highlighter-rouge">Range.contains</code> isn’t!</strong> You
-can see it plainly by running the following</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Foundation</span>
-
-<span class="k">let</span> <span class="nv">sooner</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(</span><span class="nv">timeIntervalSince1970</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">later</span> <span class="o">=</span> <span class="n">sooner</span><span class="o">.</span><span class="nf">addingTimeInterval</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-
-<span class="kt">DateInterval</span><span class="p">(</span><span class="nv">start</span><span class="p">:</span> <span class="n">sooner</span><span class="p">,</span> <span class="nv">end</span><span class="p">:</span> <span class="n">later</span><span class="p">)</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="n">later</span><span class="p">)</span> <span class="c1">// true</span>
-<span class="p">(</span><span class="n">sooner</span><span class="o">..&lt;</span><span class="n">later</span><span class="p">)</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="n">later</span><span class="p">)</span>                        <span class="c1">// false</span>
-</code></pre></div></div>
-
-<p>So here’s what stumped me:</p>
-
-<ol>
-  <li>
-    <p>The 2 projects chose to interpret the same component differently, which
-I didn’t not expect.</p>
-  </li>
-  <li>
-    <p>I didn’t know how <code class="highlighter-rouge">Foundation.DateInterval</code> works.</p>
-  </li>
-</ol>
-
-<p>Well, today I learned.</p>
 
   </div>
   <hr />

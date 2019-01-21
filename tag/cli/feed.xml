@@ -23,12 +23,12 @@ such systems has standardized a long time ago and exists in most computers
 running Linux/BSD/macOS today (and, to a large extend, smart phones). To Swift
 users, Using these APIs is straight-forward (&lt;code class=&quot;highlighter-rouge&quot;&gt;rmdir(&quot;path/to/dir&quot;)&lt;/code&gt;).&lt;/p&gt;
 
-&lt;p&gt;So Swift programmers are all happy campers (re-)inventeing all sorts of file,
-system utilities&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2019/01/20/kick-ass-cli-tools-in-swift/&gt;,&lt;/a&gt; right?&lt;/p&gt;
+&lt;p&gt;So Swift programmers are all happy campers (re-)inventeing all sorts of file
+system utilities, right?&lt;/p&gt;
 
 &lt;p&gt;Well, not quite.&lt;/p&gt;
 
-&lt;p&gt;Okay, I lied about POSIX APIs being “straight-forward” in Swift. Or rather, this
+&lt;p&gt;Okay&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2019/01/20/kick-ass-cli-tools-in-swift/&gt;,&lt;/a&gt; I lied about POSIX APIs being “straight-forward” in Swift. Or rather, this
 is very subjective.&lt;/p&gt;
 
 &lt;p&gt;Continuing with the &lt;code class=&quot;highlighter-rouge&quot;&gt;rmdir&lt;/code&gt; example, we must first import it from either &lt;code class=&quot;highlighter-rouge&quot;&gt;Glibc&lt;/code&gt;

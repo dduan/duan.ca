@@ -18,7 +18,7 @@ such systems has standardized a long time ago and exists in most computers
 running Linux/BSD/macOS today (and, to a large extend, smart phones). To Swift
 users, Using these APIs is straight-forward (`rmdir("path/to/dir")`).
 
-So Swift programmers are all happy campers (re-)inventeing all sorts of file,
+So Swift programmers are all happy campers (re-)inventeing all sorts of file
 system utilities, right?
 
 Well, not quite.

@@ -1,10 +1,36 @@
 ---
 layout: page
 ---
+<section>
+<h2 class="list-post-title">
+  <a href="https://github.com/dduan/Pathos">Pathos</a>
+</h2>
+A file management library built from scratch.
+</section>
+
+<br />
 
 <section>
 <h2 class="list-post-title">
-  <a href="http://justhttp.net">Just</a>
+  <a href="https://github.com/dduan/NetTime">NetTime</a>
+</h2>
+RFC 3339 compliant date/time data types.
+</section>
+
+<br />
+
+<section>
+<h2 class="list-post-title">
+  <a href="https://github.com/dduan/tre">tre</a>
+</h2>
+A git-aware replacement for the tree unix command.
+</section>
+
+<br />
+
+<section>
+<h2 class="list-post-title">
+  <a href="https://github.com/JustHTTP/Just">Just</a>
 </h2>
 A Swift HTTP library for humans inspired by
 <a href="http://docs.python-requests.org">Requests.</a>

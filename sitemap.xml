@@ -3,6 +3,10 @@
     
     
     <url>
+        <loc>https://duan.ca/2019/03/10/toml-decoder/</loc>
+    </url>
+    
+    <url>
         <loc>https://duan.ca/2019/01/20/kick-ass-cli-tools-in-swift/</loc>
     </url>
     
@@ -494,6 +498,14 @@
     
     <url>
         <loc>https://duan.ca/tag/posix/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/toml/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/toml/feed.xml</loc>
     </url>
     
     <url>

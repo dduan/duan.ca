@@ -8,6 +8,42 @@
         
             
             <item>
+                <title>TOML Decoder Playlist</title>
+                <description>&lt;p&gt;I enjoyed making &lt;a href=&quot;https://github.com/dduan/TOMLDeserializer&quot;&gt;TOMLDeserializer&lt;/a&gt; and &lt;a href=&quot;https://github.com/dduan/TOMLDecoder&quot;&gt;TOMLDecoder&lt;/a&gt; recently. Let’s hope
+some projects will pick them up and TOML as a configuration format will start to
+spead in Swift communities.&lt;/p&gt;
+
+&lt;p&gt;What’s outstanding about these projects is that I started working on them while
+&lt;a href=&quot;https://twitch.tv/daniel_duan&quot;&gt;streaming&lt;/a&gt;. Personally&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2019/03/10/toml-decoder/&gt;,&lt;/a&gt; I consume a lot of content like this. So now people
+can watch me writing Swift, too.&lt;/p&gt;
+
+&lt;p&gt;I’ve been archiving recordings of these streams as much as I can. Here are the
+links to these videos, each is around 1-1.5 hours long:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://youtu.be/XLLlCEfuFLw&quot;&gt;Turn TOML Test Fixtures Into XCTests With Vim Macros&lt;/a&gt;
+&lt;a href=&quot;https://youtu.be/Ztq3K3cq8f0&quot;&gt;Passing TOML Deserialization Tests&lt;/a&gt;
+&lt;a href=&quot;https://youtu.be/GTCYSIc6n3U&quot;&gt;Finishing TOML Invalidation Tests&lt;/a&gt;
+&lt;a href=&quot;https://youtu.be/HP2Wzh8MVvg&quot;&gt;TOML Decoder: The Beginning&lt;/a&gt;
+&lt;a href=&quot;https://youtu.be/EZ7VpbrLkH0&quot;&gt;TOML Decoder: Filling In Missing Implementation Pieces&lt;/a&gt;
+&lt;a href=&quot;https://youtu.be/bISMVVWOHKg&quot;&gt;TOML Decoder: Adding The First TOML Decoding Strategy!&lt;/a&gt;
+&lt;a href=&quot;https://youtu.be/oOOS4bnhwx4&quot;&gt;TOML Decoder: Project Overview And Data Decoding Support&lt;/a&gt;
+&lt;a href=&quot;https://youtu.be/9yDtXsrMtbU&quot;&gt;TOML Decoder: Key Decoding Strategies&lt;/a&gt;
+&lt;a href=&quot;https://youtu.be/g1V872HL4Dk&quot;&gt;TOML Decoder: Project Updates&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The TOMLDecoder projects would’ve been capture on camera entirely if I weren’t
+such a streaming n00b and messed up a few streams. Hilarious.&lt;/p&gt;
+
+</description>
+                <pubDate>Sun, 10 Mar 2019 20:32:37 -0700</pubDate>
+                
+                <link>https://duan.ca/2019/03/10/toml-decoder/</link>
+                
+                <guid isPermaLink="true">https://duan.ca/2019/03/10/toml-decoder/</guid>
+            </item>
+            
+        
+            
+            <item>
                 <title>Kick-ass CLI Tools In Swift</title>
                 <description>&lt;p&gt;As someone who lives in a terminal simulator, I’m pleasantly surprised by the
 new toys we get in recent years such as &lt;a href=&quot;https://github.com/junegunn/fzf&quot;&gt;fzf&lt;/a&gt;, &lt;a href=&quot;https://github.com/BurntSushi/ripgrep&quot;&gt;ripgrep&lt;/a&gt;, &lt;a href=&quot;https://github.com/sharkdp/fd&quot;&gt;fd&lt;/a&gt;, etc.
@@ -587,8 +623,8 @@ of evolution of lambda expressions, since it’s much nicer to write one-liners 
 &lt;p&gt;Here is what that example would be in Python:&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# [(1, 3), (1, 4), (1, 5), (2, 3), (2, 4) ...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;span class=&quot;c1&quot;&gt;# [(1, 3), (1, 4), (1, 5), (2, 3), (2, 4) ...
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Here’s what it would be in mathematics (except we are dealing with sets, not lists, but I’ll only refer to
 lists from here on.):&lt;/p&gt;

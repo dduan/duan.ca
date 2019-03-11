@@ -7,9 +7,9 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.4.0 -->
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>Daniel Duan | Daniel Duan’s Thoughts And Works.</title>
-<meta name="generator" content="Jekyll v3.6.2" />
+<meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Daniel Duan" />
 <meta name="author" content="Daniel Duan" />
 <meta property="og:locale" content="en_US" />
@@ -51,6 +51,52 @@
   
 
 
+  
+  <div class="content post">
+    
+    <h1 class="post-title"><a href="/2019/03/10/toml-decoder/">TOML Decoder Playlist</a></h1>
+    
+    <div class="post-date">
+      
+      <time>10 Mar 2019</time>
+      
+       |
+      <div class="post-tags">
+      
+        <a href="/tag/toml">TOML</a>,
+      
+        <a href="/tag/swift">Swift</a>
+      
+      </div>
+      
+    </div>
+    <p>I enjoyed making <a href="https://github.com/dduan/TOMLDeserializer">TOMLDeserializer</a> and <a href="https://github.com/dduan/TOMLDecoder">TOMLDecoder</a> recently. Let’s hope
+some projects will pick them up and TOML as a configuration format will start to
+spead in Swift communities.</p>
+
+<p>What’s outstanding about these projects is that I started working on them while
+<a href="https://twitch.tv/daniel_duan">streaming</a>. Personally, I consume a lot of content like this. So now people
+can watch me writing Swift, too.</p>
+
+<p>I’ve been archiving recordings of these streams as much as I can. Here are the
+links to these videos, each is around 1-1.5 hours long:</p>
+
+<p><a href="https://youtu.be/XLLlCEfuFLw">Turn TOML Test Fixtures Into XCTests With Vim Macros</a>
+<a href="https://youtu.be/Ztq3K3cq8f0">Passing TOML Deserialization Tests</a>
+<a href="https://youtu.be/GTCYSIc6n3U">Finishing TOML Invalidation Tests</a>
+<a href="https://youtu.be/HP2Wzh8MVvg">TOML Decoder: The Beginning</a>
+<a href="https://youtu.be/EZ7VpbrLkH0">TOML Decoder: Filling In Missing Implementation Pieces</a>
+<a href="https://youtu.be/bISMVVWOHKg">TOML Decoder: Adding The First TOML Decoding Strategy!</a>
+<a href="https://youtu.be/oOOS4bnhwx4">TOML Decoder: Project Overview And Data Decoding Support</a>
+<a href="https://youtu.be/9yDtXsrMtbU">TOML Decoder: Key Decoding Strategies</a>
+<a href="https://youtu.be/g1V872HL4Dk">TOML Decoder: Project Updates</a></p>
+
+<p>The TOMLDecoder projects would’ve been capture on camera entirely if I weren’t
+such a streaming n00b and messed up a few streams. Hilarious.</p>
+
+
+  </div>
+  <hr />
   
   <div class="content post">
     
@@ -256,62 +302,6 @@ output. But its user deals with <em>zero</em>. It’s as if the two effects “c
 other out! It’s a <em>neat</em> trick, really. Small, low-key, easy to miss. But I’m
 glad I noticed it and come to appreciate its power and simplicity.</p>
 
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="https://forums.swift.org/t/accepted-with-modifications-se-0225-adding-iseven-isodd-ismultiple-to-binaryinteger/15689">🔗 [Accepted with Modifications] SE-0225</a></h1>
-    
-    <div class="post-date">
-      
-      <a href="/linked/2018/08/se0225/">
-      
-      <time>30 Aug 2018</time>
-      
-      </a>
-      
-      
-    </div>
-    <p>This announcement comes with some answers to “what should be in the Swift
-standard library?”</p>
-
-<p>Notably:</p>
-
-<blockquote>
-  <p>Almost all library features can be composed from existing features with enough
-effort. To be considered for addition to the library, a proposed feature must
-satisfy two conditions: it must provide functionality that is useful to
-a substantial population of Swift programmers, and it must provide substantial
-advantages over the alternative ways of accomplishing that functionality.
-Potential advantages include:</p>
-
-  <p>It may be complex, challenging, or error-prone for users to implement
-themselves.  It may have substantial performance advantages over a user
-implementation, either because it has access to library internals or just
-because the library implementation will likely be more carefully tuned.  It may
-be substantially easier to work with because it composes better with other
-language or library features.  It may be substantially more “fluent”: that is,
-more natural to discover, use, and read in code. The implementation may involve
-composing primitives in a subtle or tricky way, or the primitives may be
-unfamiliar to many programmers. This is a more subjective criterion than the
-others, and people may reasonably differ about how to apply it.  For example,
-consider adding an method to rotate the elements of an array. This operation can
-be performed using a relatively simple composition of slicing and concatenation:</p>
-
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array = array[amount...] + array[..&lt;amount]
-</code></pre></div>  </div>
-
-  <p>However, a method to rotate an array in-place would still be welcome: it would
-have substantial performance advantages, it would avoid several potential
-off-by-one errors, and it would be significantly easier for a reader to
-recognize as a rotation.</p>
-
-  <p>In contrast, a property like <code class="highlighter-rouge">isNotEmpty</code> offers no substantial advantages over
-<code class="highlighter-rouge">!isEmpty</code>, and adding it would open the door to adding trivial negations of
-essentially every predicate.</p>
-</blockquote>
 
   </div>
   <hr />

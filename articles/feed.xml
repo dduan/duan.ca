@@ -14,21 +14,23 @@ some projects will pick them up and TOML as a configuration format will start to
 spead in Swift communities.&lt;/p&gt;
 
 &lt;p&gt;What’s outstanding about these projects is that I started working on them while
-&lt;a href=&quot;https://twitch.tv/daniel_duan&quot;&gt;streaming&lt;/a&gt;. Personally&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2019/03/10/toml-decoder/&gt;,&lt;/a&gt; I consume a lot of content like this. So now people
-can watch me writing Swift, too.&lt;/p&gt;
+&lt;a href=&quot;https://twitch.tv/daniel_duan&quot;&gt;streaming&lt;/a&gt;. Personally, I consume a lot of content like this. So now people
+can watch me writing Swift&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2019/03/10/toml-decoder/&gt;,&lt;/a&gt; too.&lt;/p&gt;
 
 &lt;p&gt;I’ve been archiving recordings of these streams as much as I can. Here are the
 links to these videos, each is around 1-1.5 hours long:&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://youtu.be/XLLlCEfuFLw&quot;&gt;Turn TOML Test Fixtures Into XCTests With Vim Macros&lt;/a&gt;
-&lt;a href=&quot;https://youtu.be/Ztq3K3cq8f0&quot;&gt;Passing TOML Deserialization Tests&lt;/a&gt;
-&lt;a href=&quot;https://youtu.be/GTCYSIc6n3U&quot;&gt;Finishing TOML Invalidation Tests&lt;/a&gt;
-&lt;a href=&quot;https://youtu.be/HP2Wzh8MVvg&quot;&gt;TOML Decoder: The Beginning&lt;/a&gt;
-&lt;a href=&quot;https://youtu.be/EZ7VpbrLkH0&quot;&gt;TOML Decoder: Filling In Missing Implementation Pieces&lt;/a&gt;
-&lt;a href=&quot;https://youtu.be/bISMVVWOHKg&quot;&gt;TOML Decoder: Adding The First TOML Decoding Strategy!&lt;/a&gt;
-&lt;a href=&quot;https://youtu.be/oOOS4bnhwx4&quot;&gt;TOML Decoder: Project Overview And Data Decoding Support&lt;/a&gt;
-&lt;a href=&quot;https://youtu.be/9yDtXsrMtbU&quot;&gt;TOML Decoder: Key Decoding Strategies&lt;/a&gt;
-&lt;a href=&quot;https://youtu.be/g1V872HL4Dk&quot;&gt;TOML Decoder: Project Updates&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/XLLlCEfuFLw&quot;&gt;Turn TOML Test Fixtures Into XCTests With Vim Macros&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/Ztq3K3cq8f0&quot;&gt;Passing TOML Deserialization Tests&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/GTCYSIc6n3U&quot;&gt;Finishing TOML Invalidation Tests&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/HP2Wzh8MVvg&quot;&gt;TOML Decoder: The Beginning&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/EZ7VpbrLkH0&quot;&gt;TOML Decoder: Filling In Missing Implementation Pieces&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/bISMVVWOHKg&quot;&gt;TOML Decoder: Adding The First TOML Decoding Strategy!&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/oOOS4bnhwx4&quot;&gt;TOML Decoder: Project Overview And Data Decoding Support&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/9yDtXsrMtbU&quot;&gt;TOML Decoder: Key Decoding Strategies&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/g1V872HL4Dk&quot;&gt;TOML Decoder: Project Updates&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;The TOMLDecoder projects would’ve been capture on camera entirely if I weren’t
 such a streaming n00b and messed up a few streams. Hilarious.&lt;/p&gt;

@@ -3,6 +3,14 @@ layout: page
 ---
 <section>
 <h2 class="list-post-title">
+  <a href="https://github.com/dduan/TOMLDecoder">TOMLDecoder</a>
+</h2>
+Decodes `Decodable` from TOML files for Swift!
+</section>
+
+<br />
+<section>
+<h2 class="list-post-title">
   <a href="https://github.com/dduan/Pathos">Pathos</a>
 </h2>
 A file management library built from scratch on top of POSIX APIs.

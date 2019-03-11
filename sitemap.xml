@@ -509,6 +509,14 @@
     </url>
     
     <url>
+        <loc>https://duan.ca/tag/twitch/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/twitch/feed.xml</loc>
+    </url>
+    
+    <url>
         <loc>https://duan.ca/tweets/</loc>
     </url>
 

@@ -3,74 +3,55 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Daniel Duan</title>
+  <title>On the Subject of Interface Hygiene</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
   <link rel="stylesheet" href="/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Daniel Duan | Daniel Duan’s Thoughts And Works.</title>
+<title>On the Subject of Interface Hygiene | Daniel Duan</title>
 <meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Daniel Duan" />
+<meta property="og:title" content="On the Subject of Interface Hygiene" />
 <meta name="author" content="Daniel Duan" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Daniel Duan’s Thoughts And Works." />
-<meta property="og:description" content="Daniel Duan’s Thoughts And Works." />
-<link rel="canonical" href="https://duan.ca/" />
-<meta property="og:url" content="https://duan.ca/" />
+<meta name="description" content="In a purly reactive world, your entire program should be a single stream. Now, close your eyes, and envision: your project as one, beautiful, stream." />
+<meta property="og:description" content="In a purly reactive world, your entire program should be a single stream. Now, close your eyes, and envision: your project as one, beautiful, stream." />
+<link rel="canonical" href="https://duan.ca/2019/07/01/combine-hygiene/" />
+<meta property="og:url" content="https://duan.ca/2019/07/01/combine-hygiene/" />
 <meta property="og:site_name" content="Daniel Duan" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-01T20:22:48-07:00" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
 <script type="application/ld+json">
-{"@type":"WebSite","url":"https://duan.ca/","name":"Daniel Duan","author":{"@type":"Person","name":"Daniel Duan"},"description":"Daniel Duan’s Thoughts And Works.","headline":"Daniel Duan","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2019/07/01/combine-hygiene/"},"url":"https://duan.ca/2019/07/01/combine-hygiene/","author":{"@type":"Person","name":"Daniel Duan"},"description":"In a purly reactive world, your entire program should be a single stream. Now, close your eyes, and envision: your project as one, beautiful, stream.","headline":"On the Subject of Interface Hygiene","dateModified":"2019-07-01T20:22:48-07:00","datePublished":"2019-07-01T20:22:48-07:00","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
 <body>
   <div class="container">
     <header class="masthead">
-  <h1 class="masthead-title">
-    <a href="/">Daniel Duan<span>&#39;s blog</span></a>
+  <h1 class="masthead-title--small">
+    <a href="/">Daniel Duan</a>
   </h1>
-  <nav class="masthead-nav">
-    
-    <a href="/articles">articles</a>
-    
-    <a href="https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A">videos</a>
-    
-    <a href="/links">Links</a>
-    
-    <a href="/projects">Projects</a>
-    
-    <a href="/about">About</a>
-    
-  </nav>
 </header>
-<div class="content page">
-  <h3 class="page-title"></h3>
-  
+<div class="content post">
+  <h1 class="post-title">On the Subject of Interface Hygiene</h1>
+  <div class="post-date">
+    <time>01 Jul 2019</time>
+     | 
+
+<div class="post-tags">
+
+  <a href="/tag/combine">Combine</a>,
+
+  <a href="/tag/swift">Swift</a>
+
+</div>
 
 
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2019/07/01/combine-hygiene/">On the Subject of Interface Hygiene</a></h1>
-    
-    <div class="post-date">
-      
-      <time>01 Jul 2019</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/combine">Combine</a>,
-      
-        <a href="/tag/swift">Swift</a>
-      
-      </div>
-      
-    </div>
-    <p>In a purly reactive world, your entire program should be a single stream. Now,
+  </div>
+  <p>In a purly reactive world, your entire program should be a single stream. Now,
 close your eyes, and envision: your project as one, beautiful, stream.</p>
 
 <p>Now open your eyes. Yeah, it’s not. Your project is a Mac or iOS app. It’s full
@@ -159,7 +140,7 @@ surprising, but I’ve seen folks transitioning to RX clinging to the old ways:<
 
 <p>First, you’ll notice that <code class="highlighter-rouge">0</code>, the initial value, is duplicated as both the
 subject’s initial value, as well as the value of a stored property. And these
-duplicated sources of truth persist throughout the parent’s life time. Weird,
+duplicated sources of truth persist throughout the parent’s life time. Weird<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2019/07/01/combine-hygiene/>,</a>
 right?</p>
 
 <p>Here’s a slightly better version:</p>
@@ -218,201 +199,6 @@ stuff?</p>
 
 <p>That’s all for now. I’m not an expert with RX myself. Hopefully these
 perspective can help you avoid some nasties.</p>
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2019/03/10/toml-decoder/">TOML Decoder Playlist</a></h1>
-    
-    <div class="post-date">
-      
-      <time>10 Mar 2019</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/toml">TOML</a>,
-      
-        <a href="/tag/swift">Swift</a>,
-      
-        <a href="/tag/youtube">YouTube</a>,
-      
-        <a href="/tag/twitch">Twitch</a>
-      
-      </div>
-      
-    </div>
-    <p>I enjoyed making <a href="https://github.com/dduan/TOMLDeserializer">TOMLDeserializer</a> and <a href="https://github.com/dduan/TOMLDecoder">TOMLDecoder</a> recently. Let’s hope
-some projects will pick them up and TOML as a configuration format will start to
-spead in Swift communities.</p>
-
-<p>What’s outstanding about these projects is that I started working on them while
-<a href="https://twitch.tv/daniel_duan">streaming</a>. Personally, I consume a lot of content like this. So now people
-can watch me writing Swift, too.</p>
-
-<p>I’ve been archiving recordings of these streams as much as I can. Here are the
-links to these videos, each is around 1-1.5 hours long:</p>
-
-<ul>
-  <li><a href="https://youtu.be/XLLlCEfuFLw">Turn TOML Test Fixtures Into XCTests With Vim Macros</a></li>
-  <li><a href="https://youtu.be/Ztq3K3cq8f0">Passing TOML Deserialization Tests</a></li>
-  <li><a href="https://youtu.be/GTCYSIc6n3U">Finishing TOML Invalidation Tests</a></li>
-  <li><a href="https://youtu.be/HP2Wzh8MVvg">TOML Decoder: The Beginning</a></li>
-  <li><a href="https://youtu.be/EZ7VpbrLkH0">TOML Decoder: Filling In Missing Implementation Pieces</a></li>
-  <li><a href="https://youtu.be/bISMVVWOHKg">TOML Decoder: Adding The First TOML Decoding Strategy!</a></li>
-  <li><a href="https://youtu.be/oOOS4bnhwx4">TOML Decoder: Project Overview And Data Decoding Support</a></li>
-  <li><a href="https://youtu.be/9yDtXsrMtbU">TOML Decoder: Key Decoding Strategies</a></li>
-  <li><a href="https://youtu.be/g1V872HL4Dk">TOML Decoder: Project Updates</a></li>
-</ul>
-
-<p>The TOMLDecoder projects would’ve been capture on camera entirely if I weren’t
-such a streaming n00b and messed up a few streams. Hilarious.</p>
-
-
-  </div>
-  <hr />
-  
-  <div class="content post">
-    
-    <h1 class="post-title"><a href="/2019/01/20/kick-ass-cli-tools-in-swift/">Kick-ass CLI Tools In Swift</a></h1>
-    
-    <div class="post-date">
-      
-      <time>20 Jan 2019</time>
-      
-       |
-      <div class="post-tags">
-      
-        <a href="/tag/swift">Swift</a>,
-      
-        <a href="/tag/cli">CLI</a>,
-      
-        <a href="/tag/posix">POSIX</a>
-      
-      </div>
-      
-    </div>
-    <p>As someone who lives in a terminal simulator, I’m pleasantly surprised by the
-new toys we get in recent years such as <a href="https://github.com/junegunn/fzf">fzf</a>, <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a>, <a href="https://github.com/sharkdp/fd">fd</a>, etc.
-A great number of these are written in relatively young programming languages
-such as Go and Rust. But, noticibly, none of them are written in Swift.</p>
-
-<p>In this post, I’ll try to explain why that is.</p>
-
-<h2 id="posix-ergonomics">POSIX Ergonomics</h2>
-
-<p>Unix-like virtual file systems has been around for decades. API that manupulates
-such systems has standardized a long time ago and exists in most computers
-running Linux/BSD/macOS today (and, to a large extend, smart phones). To Swift
-users, Using these APIs is straight-forward (<code class="highlighter-rouge">rmdir("path/to/dir")</code>).</p>
-
-<p>So Swift programmers are all happy campers (re-)inventeing all sorts of file
-system utilities, right?</p>
-
-<p>Well, not quite.</p>
-
-<p>Okay, I lied about POSIX APIs being “straight-forward” in Swift. Or rather, this
-is very subjective.</p>
-
-<p>Continuing with the <code class="highlighter-rouge">rmdir</code> example, we must first import it from either <code class="highlighter-rouge">Glibc</code>
-or <code class="highlighter-rouge">Darwin</code>, depending on your OS. To know whether the operation is successful,
-we need to see whether it returned integer 0. To learn <em>why</em> 0 was not returned,
-we need to read the “magical” variable <code class="highlighter-rouge">errno</code>. <code class="highlighter-rouge">errno</code> could be written to by
-other APIs so we’d better capture it in time…</p>
-
-<p>And that’s one of the simpler APIs in POSIX calls!</p>
-
-<p>Programmers whine about ergonomics partially because we are previlidged and
-spoiled. But mostly because our attention is a limited resources. Mixing API
-conventions distracts us from solving the problem at hand. Bad ergonomics,
-therefore, drives away a good potion of users who cares about quality of their
-tools.</p>
-
-<h2 id="culture-and-history">Culture and History</h2>
-
-<p>As of this writing, the release of Swift 5 is imminent. The vast majority of
-existing Swift code is written to run on iOS. The concept of a file, or the
-traditional virtal file system, is hidden to iOS users, and sandboxed for
-developers. I bet most Swift users rarely think about the fact that there’s
-a entire set of POSIX API at their disposal.</p>
-
-<p><code class="highlighter-rouge">Foundation</code> alleviates the need to deal with files and directories: <code class="highlighter-rouge">Bundle</code>
-locates the files; <code class="highlighter-rouge">CoreData</code>, <code class="highlighter-rouge">UserDefaults</code> or the keychain is your primary
-way to persist data; <code class="highlighter-rouge">Data</code>, <code class="highlighter-rouge">String</code> or <code class="highlighter-rouge">NSCoding</code> has methods to read and
-write to files.  And finally, if you really need to deal with files,
-<code class="highlighter-rouge">NSFileManager</code> has everything you’ll ever need.</p>
-
-<p>Why would a productive Swift programmer think about POSIX in this environment?
-Why would a tutor teach POSIX over the useful/practical/”native” alternatives?</p>
-
-<p>We can trace “riding on the Apple platform” mentality back to the pre-iPhone
-days, where a very small Mac developer community labors on on a niche platform
-(compared to iOS today) and they <em>loved</em> it. However, I’m sure they used more
-POSIX stuff back then than the average iOS developers today.</p>
-
-<p>Having a great library such as Foundation on the most popular developer
-platform where the language thrives means it’ll take longer for “subcultures”
-to emerge, if they do at all.</p>
-
-<h2 id="the-standard-library-and-its-influence-on-new-users">The Standard Library And Its Influence on New Users</h2>
-
-<p>File system APIs being in <code class="highlighter-rouge">Foundation</code> as opposed to the standard library is
-probably a temporary condition. Nevertheless, it has at least the following
-implications:</p>
-
-<ol>
-  <li>
-    <p>Its quality of implementation is not held on the same standard that those
-APIs in the standard library. This is especially true for the separate,
-open-source <code class="highlighter-rouge">Foundation</code> implementation. Getting consistent and correct
-behaviors across macOS and Linux is hard.</p>
-  </li>
-  <li>
-    <p>A person learning Swift won’t explore the language with a file system API.
-This I suspect, is <strong>the most important reason many of these great CLI
-utilites are written in other programming languages</strong>. Programmers seek
-instant gratification when they learn. And they usually stay in a limited
-domain (like iOS) at first. This is where the built-in library is special: no
-matter which domain is chosen, it’s always available. Languages such as Go
-and Rust include things like paths and files in their built-in library.
-Playing with these APIs while learning the lanugage plants a seed for future,
-serious, projects. There are less users of these languages compared to Swift,
-but there are more people thinking about projects that involves file systems
-in thoes communities. (Note I don’t have statistics here, just a guess.)</p>
-  </li>
-</ol>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>The next killer CLI tool is still more likely to be written in Go or Rust,
-than in Swift. Hopefully, somewhere in these speculations is a true cause of
-this phenomena. Maybe someone reading this will be inspired to accelerate change
-that will eventually revert the condition. (I’m <a href="https://github.com/dduan/Pathos">trying</a>).</p>
-
-
-  </div>
-  <hr />
-  
-
-
-<footer class="masthead">
-<h4>Read More:</h4>
-<nav class="masthead-nav">
-  
-  <a href="/articles">articles</a>
-  
-  <a href="https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A">videos</a>
-  
-  <a href="/links">Links</a>
-  
-  <a href="/projects">Projects</a>
-  
-  <a href="/about">About</a>
-  
-</nav>
-</footer>
 
 </div>
 

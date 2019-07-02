@@ -3,6 +3,10 @@
     
     
     <url>
+        <loc>https://duan.ca/2019/07/01/combine-hygiene/</loc>
+    </url>
+    
+    <url>
         <loc>https://duan.ca/2019/03/10/toml-decoder/</loc>
     </url>
     
@@ -514,6 +518,14 @@
     
     <url>
         <loc>https://duan.ca/tag/twitch/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/combine/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/combine/feed.xml</loc>
     </url>
     
     <url>

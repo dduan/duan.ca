@@ -4,7 +4,7 @@ tags: [Combine, Swift]
 date: 2019-07-01 20:22:48-0700
 ---
 
-In a purly reactive world, your entire program should be a single stream. Now,
+In a purly reactive world, your entire program merge into a single stream. Now,
 close your eyes, and envision: your project as one, beautiful, stream.
 
 Now open your eyes. Yeah, it's not. Your project is a Mac or iOS app. It's full

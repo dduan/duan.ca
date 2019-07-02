@@ -13,8 +13,8 @@
 <meta property="og:title" content="On the Subject of Interface Hygiene" />
 <meta name="author" content="Daniel Duan" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="In a purly reactive world, your entire program should be a single stream. Now, close your eyes, and envision: your project as one, beautiful, stream." />
-<meta property="og:description" content="In a purly reactive world, your entire program should be a single stream. Now, close your eyes, and envision: your project as one, beautiful, stream." />
+<meta name="description" content="In a purly reactive world, your entire program merge into a single stream. Now, close your eyes, and envision: your project as one, beautiful, stream." />
+<meta property="og:description" content="In a purly reactive world, your entire program merge into a single stream. Now, close your eyes, and envision: your project as one, beautiful, stream." />
 <link rel="canonical" href="https://duan.ca/2019/07/01/combine-hygiene/" />
 <meta property="og:url" content="https://duan.ca/2019/07/01/combine-hygiene/" />
 <meta property="og:site_name" content="Daniel Duan" />
@@ -24,7 +24,7 @@
 <meta name="twitter:site" content="@daniel_duan" />
 <meta name="twitter:creator" content="@Daniel Duan" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2019/07/01/combine-hygiene/"},"url":"https://duan.ca/2019/07/01/combine-hygiene/","author":{"@type":"Person","name":"Daniel Duan"},"description":"In a purly reactive world, your entire program should be a single stream. Now, close your eyes, and envision: your project as one, beautiful, stream.","headline":"On the Subject of Interface Hygiene","dateModified":"2019-07-01T20:22:48-07:00","datePublished":"2019-07-01T20:22:48-07:00","@context":"http://schema.org"}</script>
+{"@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2019/07/01/combine-hygiene/"},"url":"https://duan.ca/2019/07/01/combine-hygiene/","author":{"@type":"Person","name":"Daniel Duan"},"description":"In a purly reactive world, your entire program merge into a single stream. Now, close your eyes, and envision: your project as one, beautiful, stream.","headline":"On the Subject of Interface Hygiene","dateModified":"2019-07-01T20:22:48-07:00","datePublished":"2019-07-01T20:22:48-07:00","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -51,7 +51,7 @@
 
 
   </div>
-  <p>In a purly reactive world, your entire program should be a single stream. Now,
+  <p>In a purly reactive world, your entire program merge into a single stream. Now,
 close your eyes, and envision: your project as one, beautiful, stream.</p>
 
 <p>Now open your eyes. Yeah, it’s not. Your project is a Mac or iOS app. It’s full
@@ -86,9 +86,9 @@ happens via type-erasure:</p>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Better: all your users care is the stream (publisher)<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2019/07/01/combine-hygiene/>,</a> so give them that!</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Better: all your users care is the stream (publisher), so give them that!</span>
 <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">GreatInts</span> <span class="p">{</span>
-    <span class="c1">// Internally, it's backed by a subject.</span>
+    <span class="c1">// Internally<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2019/07/01/combine-hygiene/>,</a> it's backed by a subject.</span>
     <span class="k">var</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">CurrentValueSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="c1">// Externally, it's just a Publisher. </span>
     <span class="kd">public</span> <span class="k">var</span> <span class="nv">subject</span><span class="p">:</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span> <span class="p">{</span>

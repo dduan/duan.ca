@@ -8,11 +8,11 @@ In a purly reactive world, your entire program merge into a single stream. Now,
 close your eyes, and envision: your project as one, beautiful, stream.
 
 Now open your eyes. Yeah, it's not. Your project is a Mac or iOS app. It's full
-of your memories, sweat, blood. Now you are ready to sweat and bleed some more
-by putting some Combine and SwiftUI into it. You watched the WWDC19 sessions and
-learned that "Subjcets are super powerful". You looked into your code and
-realized you can't really do anything with Combine without `Subject`s at the
-current state of the project.
+of your memories, sweat, and blood. And you are ready to sweat and bleed some
+more by putting some Combine and SwiftUI into it. You watched the WWDC19
+sessions and learned that "Subjcets are super powerful". You looked into your
+code and realized you can't really do anything with Combine without `Subject`s
+at the current state of the project.
 
 Well…
 

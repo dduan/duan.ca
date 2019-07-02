@@ -146,7 +146,7 @@ stuff?
 Lucky for you (and me), a "incompletable" subject is a established concept -- a
 "Relay". I've put together a repo for you to look and/or use:
 
-https://github.com/dduan/relay
+[https://github.com/dduan/relay](https://github.com/dduan/relay)
 
 Yeah, ban all Subjects in your project with a linter. Seriously.
 

@@ -14,11 +14,11 @@
 close your eyes, and envision: your project as one, beautiful, stream.&lt;/p&gt;
 
 &lt;p&gt;Now open your eyes. Yeah, it’s not. Your project is a Mac or iOS app. It’s full
-of your memories, sweat, blood. Now you are ready to sweat and bleed some more
-by putting some Combine and SwiftUI into it. You watched the WWDC19 sessions and
-learned that “Subjcets are super powerful”. You looked into your code and
-realized you can’t really do anything with Combine without &lt;code class=&quot;highlighter-rouge&quot;&gt;Subject&lt;/code&gt;s at the
-current state of the project.&lt;/p&gt;
+of your memories, sweat, and blood. And you are ready to sweat and bleed some
+more by putting some Combine and SwiftUI into it. You watched the WWDC19
+sessions and learned that “Subjcets are super powerful”. You looked into your
+code and realized you can’t really do anything with Combine without &lt;code class=&quot;highlighter-rouge&quot;&gt;Subject&lt;/code&gt;s
+at the current state of the project.&lt;/p&gt;
 
 &lt;p&gt;Well…&lt;/p&gt;
 
@@ -47,9 +47,9 @@ happens via type-erasure:&lt;/p&gt;
 
 &lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Better: all your users care is the stream (publisher), so give them that!&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;GreatInts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Internally&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2019/07/01/combine-hygiene/&gt;,&lt;/a&gt; it's backed by a subject.&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Internally, it's backed by a subject.&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;subject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CurrentValueSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Externally, it's just a Publisher. &lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Externally&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2019/07/01/combine-hygiene/&gt;,&lt;/a&gt; it's just a Publisher. &lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyPublisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;eraseToAnyPublisher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;

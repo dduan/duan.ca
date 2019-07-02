@@ -55,11 +55,11 @@
 close your eyes, and envision: your project as one, beautiful, stream.</p>
 
 <p>Now open your eyes. Yeah, it’s not. Your project is a Mac or iOS app. It’s full
-of your memories, sweat, blood. Now you are ready to sweat and bleed some more
-by putting some Combine and SwiftUI into it. You watched the WWDC19 sessions and
-learned that “Subjcets are super powerful”. You looked into your code and
-realized you can’t really do anything with Combine without <code class="highlighter-rouge">Subject</code>s at the
-current state of the project.</p>
+of your memories, sweat, and blood. And you are ready to sweat and bleed some
+more by putting some Combine and SwiftUI into it. You watched the WWDC19
+sessions and learned that “Subjcets are super powerful”. You looked into your
+code and realized you can’t really do anything with Combine without <code class="highlighter-rouge">Subject</code>s
+at the current state of the project.</p>
 
 <p>Well…</p>
 
@@ -88,9 +88,9 @@ happens via type-erasure:</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Better: all your users care is the stream (publisher), so give them that!</span>
 <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">GreatInts</span> <span class="p">{</span>
-    <span class="c1">// Internally<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2019/07/01/combine-hygiene/>,</a> it's backed by a subject.</span>
+    <span class="c1">// Internally, it's backed by a subject.</span>
     <span class="k">var</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">CurrentValueSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="c1">// Externally, it's just a Publisher. </span>
+    <span class="c1">// Externally<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2019/07/01/combine-hygiene/>,</a> it's just a Publisher. </span>
     <span class="kd">public</span> <span class="k">var</span> <span class="nv">subject</span><span class="p">:</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span> <span class="p">{</span>
         <span class="n">subject</span><span class="o">.</span><span class="nf">eraseToAnyPublisher</span><span class="p">()</span>
     <span class="p">}</span>

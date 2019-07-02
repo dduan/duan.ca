@@ -86,7 +86,7 @@ happens via type-erasure:</p>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Better: all your users care is the stream (publisher), so give them that!</span>
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Better: all your users care is the stream (publisher)<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2019/07/01/combine-hygiene/>,</a> so give them that!</span>
 <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">GreatInts</span> <span class="p">{</span>
     <span class="c1">// Internally, it's backed by a subject.</span>
     <span class="k">var</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">CurrentValueSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -140,7 +140,7 @@ surprising, but I’ve seen folks transitioning to RX clinging to the old ways:<
 
 <p>First, you’ll notice that <code class="highlighter-rouge">0</code>, the initial value, is duplicated as both the
 subject’s initial value, as well as the value of a stored property. And these
-duplicated sources of truth persist throughout the parent’s life time. Weird<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2019/07/01/combine-hygiene/>,</a>
+duplicated sources of truth persist throughout the parent’s life time. Weird,
 right?</p>
 
 <p>Here’s a slightly better version:</p>
@@ -191,7 +191,7 @@ stuff?</p>
 <p>Lucky for you (and me), a “incompletable” subject is a established concept – a
 “Relay”. I’ve put together a repo for you to look and/or use:</p>
 
-<p>https://github.com/dduan/relay</p>
+<p><a href="https://github.com/dduan/relay">https://github.com/dduan/relay</a></p>
 
 <p>Yeah, ban all Subjects in your project with a linter. Seriously.</p>
 

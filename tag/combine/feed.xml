@@ -44,7 +44,7 @@ happens via type-erasure:&lt;/p&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Better: all your users care is the stream (publisher), so give them that!&lt;/span&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Better: all your users care is the stream (publisher)&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2019/07/01/combine-hygiene/&gt;,&lt;/a&gt; so give them that!&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;GreatInts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;// Internally, it's backed by a subject.&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;subject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CurrentValueSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -98,7 +98,7 @@ surprising, but I’ve seen folks transitioning to RX clinging to the old ways:&
 
 &lt;p&gt;First, you’ll notice that &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt;, the initial value, is duplicated as both the
 subject’s initial value, as well as the value of a stored property. And these
-duplicated sources of truth persist throughout the parent’s life time. Weird&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2019/07/01/combine-hygiene/&gt;,&lt;/a&gt;
+duplicated sources of truth persist throughout the parent’s life time. Weird,
 right?&lt;/p&gt;
 
 &lt;p&gt;Here’s a slightly better version:&lt;/p&gt;
@@ -149,7 +149,7 @@ stuff?&lt;/p&gt;
 &lt;p&gt;Lucky for you (and me), a “incompletable” subject is a established concept – a
 “Relay”. I’ve put together a repo for you to look and/or use:&lt;/p&gt;
 
-&lt;p&gt;https://github.com/dduan/relay&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/dduan/relay&quot;&gt;https://github.com/dduan/relay&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Yeah, ban all Subjects in your project with a linter. Seriously.&lt;/p&gt;
 

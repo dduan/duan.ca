@@ -84,26 +84,27 @@ at the current state of the project.</p>
 
 <p>Here are a few habits that help keeping your project that prevasively uses
 <code class="highlighter-rouge">Combine.Subject</code> <em>sane</em>. They should seem obvious to anyone who understands
-murphy’s law and the value of minialism in interfaces. If you already are using
+Murphy’s law and the value of minialism in interfaces. If you already are using
 some reactive stream implementation, substitute the types with their
 counterparts in your framework and these rules should seem down right <strong>basic</strong>.</p>
 
-<h2 id="disguise-subjects-as-publishers">Disguise <code class="highlighter-rouge">Subject</code>s as <code class="highlighter-rouge">Publisher</code>s</h2>
+<h2 id="vend-subjects-as-publishers">Vend <code class="highlighter-rouge">Subject</code>s as <code class="highlighter-rouge">Publisher</code>s</h2>
 
 <p><code class="highlighter-rouge">Subject</code>s help bridge from the imperitive to the reactive world. Somewhat
 paradoxically, sharing them is not very “RX-y”. This is akin to prefering <code class="highlighter-rouge">let</code>s
-over <code class="highlighter-rouge">var</code>: sharing the stream, but not the previlage of mutating it.</p>
+over <code class="highlighter-rouge">var</code>.</p>
 
-<p>Most of the time, what you want to share is the values pumped into the stream.
-Because Subjects conform to <code class="highlighter-rouge">Publisher</code>, it’s easy to hide from the users the
-fact that your stream is backed by them. With Combine this conversion
-happens via type-erasure:</p>
+<p>Most of the time, what you want to share is the values pumped into the stream,
+not the privilage to mutate it. Because Subjects conform to <code class="highlighter-rouge">Publisher</code>, it’s
+easy to hide from the users the fact that your stream is backed by them.</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Bad: now anyone who get a hold of it can mess with your stream!</span>
 <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">GreatInts</span> <span class="p">{</span>
     <span class="kd">public</span> <span class="k">var</span> <span class="nv">updates</span> <span class="o">=</span> <span class="kt">CurrentValueSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div></div>
+
+<p>With Combine this conversion happens via type-erasure:</p>
 
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Better: all your users care is the stream (publisher), so give them that!</span>
 <span class="kd">public</span> <span class="kd">enum</span> <span class="kt">GreatInts</span> <span class="p">{</span>

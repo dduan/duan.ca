@@ -18,20 +18,19 @@ Well…
 
 Here are a few habits that help keeping your project that prevasively uses
 `Combine.Subject` *sane*. They should seem obvious to anyone who understands
-murphy's law and the value of minialism in interfaces. If you already are using
+Murphy's law and the value of minialism in interfaces. If you already are using
 some reactive stream implementation, substitute the types with their
 counterparts in your framework and these rules should seem down right **basic**.
 
-## Disguise `Subject`s as `Publisher`s
+## Vend `Subject`s as `Publisher`s
 
 `Subject`s help bridge from the imperitive to the reactive world. Somewhat
 paradoxically, sharing them is not very "RX-y". This is akin to prefering `let`s
-over `var`: sharing the stream, but not the previlage of mutating it.
+over `var`.
 
-Most of the time, what you want to share is the values pumped into the stream.
-Because Subjects conform to `Publisher`, it's easy to hide from the users the
-fact that your stream is backed by them. With Combine this conversion
-happens via type-erasure:
+Most of the time, what you want to share is the values pumped into the stream,
+not the privilage to mutate it. Because Subjects conform to `Publisher`, it's
+easy to hide from the users the fact that your stream is backed by them.
 
 ```swift
 // Bad: now anyone who get a hold of it can mess with your stream!
@@ -39,6 +38,8 @@ public enum GreatInts {
     public var updates = CurrentValueSubject<Int, Never>(0)
 }
 ```
+
+With Combine this conversion happens via type-erasure:
 
 ```swift
 // Better: all your users care is the stream (publisher), so give them that!

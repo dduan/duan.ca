@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daniel Duan</title>
+    <link rel="stylesheet" href="styles.css"></link>
+</head>
+<body>
+    <header>
+        <h1>Daniel Duan's Website</h1>
+    </header>
+    <main>
+        <p>Hi! I'm a software engineer at <b><a href="https://lyft.com">Lyft</a></b>.</p>
+        <p>I like computers and have been writing code since 12.</p>
+        <p>Frequently, I contribute to OSS on <b><a href="https://github.com/dduan">Github</a></b>.</p>
+        <p>Here are a few <b><a href="/projects">projects</a></b> I started.</p>
+        <p>Sometimes, I make <b><a href="https://youtube.com/dduan">YouTube</a></b> videos…</p>
+        <p>or live stream myself writing code on <b><a href="https://twitch.com/daniel_duan">Twitch</a></b>.</p>
+        <p>Once in a blue moon, I post <b><a href="/articles">articles</a></b> here.</p>
+        <p>I talk about all of the above on <b><a href="https://twitter.com/daniel_duan">Twitter</a></b>, a lot.</p>
+        <p id="greeting">That's it. Have a nice day!</p>
+        <script>
+            let what = "nice day!";
+            const hour = (new Date()).getHours();
+            if (hour > 18 && hour < 22) {
+                greet = "nice evening!";
+            } else if (hour >= 22 || hour >=0 && hour < 5) {
+                greet = "good night.";
+            }
+            document.getElementById("greeting").innerHTML = "That's it. Have a " + what;
+        </script>
+    </main>
+</body>
+</html>

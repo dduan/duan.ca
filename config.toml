@@ -1,0 +1,9 @@
+base_url = "https://duan.ca"
+compile_sass = false
+highlight_code = true
+highlight_theme = "monokai"
+build_search_index = false
+generate_rss = true
+taxonomies = [
+  {name = "tags", rss = true},
+]

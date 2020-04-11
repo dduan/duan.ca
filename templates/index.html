@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Daniel Duan</title>
-    <link rel="stylesheet" href="styles.css"></link>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Daniel Duan{% endblock title %}
+{% block content %}
     <header>
         <h1>Daniel Duan's Website</h1>
     </header>
@@ -31,5 +25,4 @@
             document.getElementById("greeting").innerHTML = "That's it. Have a " + what;
         </script>
     </main>
-</body>
-</html>
+{% endblock content %}

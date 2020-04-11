@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }}{% endblock title %}
+{% block content %}
+<article>
+    <h1>{{ page.title }}</h1>
+    <p class="article-meta">
+        <a href="/">Daniel Duan</a>
+        ·
+        <time>{{ page.date }}</time>
+        {% for tag in page.taxonomies.tags %}
+        ·
+         <a href="/tags/{{tag}}">{{ tag }}</a>
+        {% endfor %}
+    </p>
+    {{ page.content | safe }}
+</article>
+{% endblock content %}

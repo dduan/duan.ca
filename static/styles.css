@@ -5,21 +5,24 @@
     --font-emphasize: Georgia, Cambria, "Times New Roman", Times, serif;
     --article-meta-color: rgba(0, 0, 0, 0.54);
     --article-meta-font-size: 16px;
-    font-size: 21px;
-    background: white;
+    --background-color: white;
+    --content-font-size: 21px;
+    --code-font-size: 18px;
+    font-size: var(--content-font-size);
+    background: var(--background-color);
     color: var(--main-text-color);
 }
 @media (max-width: 551.98px) {
     :root {
-        font-size: 18px;
+        --content-font-size: 18px;
         --content-margin: 24px;
+        --code-font-size: 15px;
         --article-meta-font-size: 14px;
     }
 }
 @media (prefers-color-scheme: dark) {
     :root {
-        background: rgb(20, 20, 17);
-        color: white;
+        --background-color: rgb(20, 20, 17);
         --main-text-color: white;
         --article-meta-color: rgba(255, 255, 255, 0.54);
     }
@@ -43,22 +46,42 @@ header, main, article {
 main, article {
     max-width: 680px;
 }
-
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+pre {
+    overflow: scroll;
+    background: var(--background-color) !important;
+    font-size: var(--code-font-size);
+}
 blockquote {
+    font-family: var(--font-emphasize);
+}
+
+blockquote, pre {
     box-shadow: var(--main-text-color) 3px 0px 0px 0px inset;
     margin: 0;
     padding-left: 23px;
     margin-left: -20px;
-    font-family: var(--font-emphasize);
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-emphasize);
 }
-
+h1 {
+    font-size: 30px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid var(--main-text-color);
+    padding: 10px;
+}
 .article-meta {
     margin-top: -10px;
 }
-
 .article-meta, .article-meta a {
     color: var(--article-meta-color);
     font-size: var(--article-meta-font-size);

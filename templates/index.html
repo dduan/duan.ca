@@ -18,9 +18,9 @@
             let what = "nice day!";
             const hour = (new Date()).getHours();
             if (hour > 18 && hour < 22) {
-                greet = "nice evening!";
+                what = "nice evening!";
             } else if (hour >= 22 || hour >=0 && hour < 5) {
-                greet = "good night.";
+                what = "good night.";
             }
             document.getElementById("greeting").innerHTML = "That's it. Have a " + what;
         </script>

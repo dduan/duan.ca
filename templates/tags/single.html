@@ -1,1 +1,24 @@
 {% extends "base.html" %}
+
+{% block title %}Daniel Duan's Articles About {{ term.name }}{% endblock title %}
+{% block content %}
+<header>
+    <h1><a href="/">Daniel Duan</a>'s <a href="/articles">Articles</a> About '{{ term.name }}' </h1>
+</header>
+<main>
+    <ul>
+        {% for post in term.pages %}
+        <li>
+            <p><a href="{{ post.permalink }}">{{ post.title }}</a></p>
+            <p class="article-meta">
+                {{ post.date }}
+                {% for tag in post.taxonomies.tags %}
+                ·
+                <a href="/tags/{{ tag }}">{{ tag }}</a>
+                {% endfor %}
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
+</main>
+{% endblock content %}

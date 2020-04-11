@@ -12,7 +12,7 @@
         {% set count = term.pages | length %}
         <tr>
             <td>{{ term.name }}</td>
-            <td><a href="/tags/{{ term.slug }}">{{ term.pages | length }} article{{ count | pluralize }} </a></td>
+            <td><a href="/tags/{{ term.slug | slugify }}">{{ term.pages | length }} article{{ count | pluralize }} </a></td>
         </tr>
         {% endfor %}
     </table>

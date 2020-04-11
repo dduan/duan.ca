@@ -11,7 +11,7 @@
         <a href="/articles"><time>{{ page.date }}</time></a>
         {% for tag in page.taxonomies.tags %}
         ·
-         <a href="/tags/{{tag}}">{{ tag }}</a>
+        <a href="/tags/{{ tag | slugify }}">{{ tag }}</a>
         {% endfor %}
     </p>
     {{ page.content | safe }}

@@ -11,10 +11,10 @@
         <li>
             <p><a href="{{ post.permalink }}">{{ post.title }}</a></p>
             <p class="article-meta">
-                {{ post.date }}
+                {{ post.date | date(format="%Y-%m-%d") }}
                 {% for tag in post.taxonomies.tags %}
                 ·
-                <a href="/tags/{{ tag }}">{{ tag }}</a>
+                <a href="/tags/{{ tag | slugify }}">{{ tag }}</a>
                 {% endfor %}
             </p>
         </li>

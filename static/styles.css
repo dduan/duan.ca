@@ -8,29 +8,33 @@
     --background-color: white;
     --content-font-size: 21px;
     --code-background: #eeeeee;
+    --quote-padding-left: 23px;
+    --quote-margin-left: -20px;
+    --quote-left-shadow-size: 3px;
     font-size: var(--content-font-size);
     background: var(--background-color);
     color: var(--main-text-color);
+    font-family: var(--font-normal);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 @media (max-width: 551.98px) {
     :root {
         --content-font-size: 18px;
         --content-margin: 24px;
         --article-meta-font-size: 14px;
+        --quote-padding-left: 14px;
+        --quote-margin-left: -11px;
+        --quote-left-shadow-size: 1px;
     }
 }
 @media (prefers-color-scheme: dark) {
     :root {
         --background-color: rgb(20, 20, 17);
-        --main-text-color: rgb(173, 173, 173);
+        --main-text-color: rgb(200, 200, 200);
         --article-meta-color: rgba(255, 255, 255, 0.54);
         --code-background: #272727;
     }
-}
-html {
-    font-family: var(--font-normal);
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
 }
 a:link, a:hover, a:visited, a:active {
     color: var(--main-text-color);
@@ -45,6 +49,7 @@ header, main, article {
 }
 main, article {
     max-width: 680px;
+    line-height: 1.58;
 }
 main > ul {
     list-style-type: none;
@@ -65,9 +70,9 @@ pre, code {
 
 code {
     background: var(--code-background);
-    font-size: var(--code-font-size);
-    padding-left: 0.3em;
-    padding-right: 0.3em;
+    font-size: 87%;
+    padding-left: 0.1em;
+    padding-right: 0.1em;
 }
 
 blockquote {
@@ -75,10 +80,10 @@ blockquote {
 }
 
 blockquote, pre {
-    box-shadow: var(--main-text-color) 3px 0px 0px 0px inset;
+    box-shadow: var(--main-text-color) var(--quote-left-shadow-size) 0px 0px 0px inset;
     margin: 0;
-    padding-left: 23px;
-    margin-left: -20px;
+    padding-left: var(--quote-padding-left);
+    margin-left: var(--quote-margin-left);
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-emphasize);

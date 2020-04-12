@@ -10,20 +10,25 @@
 {% block title %}{{ page.title }}{% endblock title %}
 
 {% block content %}
+{% set date = page.date | date(format="%Y-%m-%d") %}
 <article>
     <h1>{{ page.title }}</h1>
-    <nav>
-    <p class="article-meta">
-        <a  itemscope itemtype="http://schema.org/Person" itemprop="author" href="/">Daniel Duan</a>
+    <p class="meta article-meta">
+        <time datetime={{ date }} itemProp="datePublished">{{ date }}</time>
+    </p>
+    {{ page.content | safe }}
+</article>
+<footer>
+    <hr />
+    <p class="meta article-meta">
+        <a href="/">Home</a>
         ·
-        {% set date = page.date | date(format="%Y-%m-%d") %}
-        <a href="/articles"><time datetime={{ date }} itemProp="datePublished">{{ date }}</time></a>
+        <a href="/articles">More Articles</a>
         {% for tag in page.taxonomies.tags %}
         ·
         <a href="/tags/{{ tag | slugify }}">{{ tag }}</a>
         {% endfor %}
     </p>
-    </nav>
-    {{ page.content | safe }}
-</article>
+</footer>
+
 {% endblock content %}

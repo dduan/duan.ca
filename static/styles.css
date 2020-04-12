@@ -43,12 +43,11 @@ body {
     margin-block-start: 1em;
     margin-block-end: 1em;
 }
-
-header, main, article {
+header, footer, main, article {
     margin: 0 var(--content-margin);
+    max-width: 680px;
 }
 main, article {
-    max-width: 680px;
     line-height: 1.58;
 }
 main > ul {
@@ -99,14 +98,22 @@ td, th {
     border: 1px solid var(--main-text-color);
     padding: 10px;
 }
+.meta, .meta a {
+    color: var(--article-meta-color);
+    font-size: var(--article-meta-font-size);
+}
+.article-meta, .article-meta a {
+    text-transform: uppercase;
+}
 .article-meta {
     margin-top: -10px;
 }
-.article-meta, .article-meta a {
-    color: var(--article-meta-color);
-    font-size: var(--article-meta-font-size);
-    text-transform: uppercase;
-}
 img {
     max-width: 100%;
+}
+hr {
+    border-color: var(--article-meta-color);
+}
+footer .article-meta {
+    margin-top: 0;
 }

@@ -10,7 +10,7 @@
         {% for post in term.pages %}
         <li>
             <p><a href="{{ post.permalink }}">{{ post.title }}</a></p>
-            <p class="article-meta">
+            <p class="meta article-meta">
                 {{ post.date | date(format="%Y-%m-%d") }}
                 {% for tag in post.taxonomies.tags %}
                 ·

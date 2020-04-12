@@ -12,15 +12,18 @@
 {% block content %}
 <article>
     <h1>{{ page.title }}</h1>
+    <nav>
     <p class="article-meta">
-        <a href="/">Daniel Duan</a>
+        <a  itemscope itemtype="http://schema.org/Person" itemprop="author" href="/">Daniel Duan</a>
         ·
-        <a href="/articles"><time>{{ page.date | date(format="%Y-%m-%d") }}</time></a>
+        {% set date = page.date | date(format="%Y-%m-%d") %}
+        <a href="/articles"><time datetime={{ date }} itemProp="datePublished">{{ date }}</time></a>
         {% for tag in page.taxonomies.tags %}
         ·
         <a href="/tags/{{ tag | slugify }}">{{ tag }}</a>
         {% endfor %}
     </p>
+    </nav>
     {{ page.content | safe }}
 </article>
 {% endblock content %}

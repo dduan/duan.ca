@@ -8,6 +8,7 @@
     --background-color: white;
     --content-font-size: 21px;
     --code-font-size: 18px;
+    --code-background: #eeeeee;
     font-size: var(--content-font-size);
     background: var(--background-color);
     color: var(--main-text-color);
@@ -25,6 +26,7 @@
         --background-color: rgb(20, 20, 17);
         --main-text-color: white;
         --article-meta-color: rgba(255, 255, 255, 0.54);
+        --code-background: #272727;
     }
 }
 html {
@@ -55,6 +57,14 @@ pre {
     background: var(--background-color) !important;
     font-size: var(--code-font-size);
 }
+
+code {
+    background: var(--code-background);
+    font-size: var(--code-font-size);
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+}
+
 blockquote {
     font-family: var(--font-emphasize);
 }

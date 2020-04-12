@@ -97,3 +97,7 @@ td, th {
     font-size: var(--article-meta-font-size);
     text-transform: uppercase;
 }
+
+img {
+    max-width: 100%;
+}

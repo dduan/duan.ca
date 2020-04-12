@@ -7,7 +7,6 @@
     --article-meta-font-size: 16px;
     --background-color: white;
     --content-font-size: 21px;
-    --code-font-size: 18px;
     --code-background: #eeeeee;
     font-size: var(--content-font-size);
     background: var(--background-color);
@@ -17,7 +16,6 @@
     :root {
         --content-font-size: 18px;
         --content-margin: 24px;
-        --code-font-size: 15px;
         --article-meta-font-size: 14px;
     }
 }
@@ -55,7 +53,14 @@ ul {
 pre {
     overflow: scroll;
     background: var(--background-color) !important;
-    font-size: var(--code-font-size);
+}
+code {
+    background: var(--code-background);
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+}
+pre, code {
+    font-size: 90%;
 }
 
 code {
@@ -97,7 +102,6 @@ td, th {
     font-size: var(--article-meta-font-size);
     text-transform: uppercase;
 }
-
 img {
     max-width: 100%;
 }

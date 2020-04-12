@@ -46,7 +46,7 @@ header, main, article {
 main, article {
     max-width: 680px;
 }
-ul {
+main > ul {
     list-style-type: none;
     padding: 0;
 }

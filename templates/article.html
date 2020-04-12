@@ -1,6 +1,12 @@
 
 {% extends "base.html" %}
 
+{% block meta %}
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="article:published_time" content="{{ page.date }}">
+{% endblock meta %}
+
 {% block title %}{{ page.title }}{% endblock title %}
 {% block content %}
 <article>

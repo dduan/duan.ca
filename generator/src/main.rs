@@ -1,41 +1,38 @@
+mod article;
 use std::env;
+use article::Article;
 
 /*
+use comrak::{self, ComrakOptions};
+use std::path::Path;
 use syntect::highlighting::ThemeSet;
 use syntect::html::css_for_theme;
 use syntect::html::ClassedHTMLGenerator;
 use syntect::parsing::SyntaxSet;
-*/
-
-use comrak::{self, ComrakOptions};
-use chrono::{DateTime, FixedOffset};
-use std::fs::{self, File};
-
-/*
 use std::io::{BufWriter, Write};
-use std::path::Path;
 */
 
-struct Article {
-    path: String,
-    title: String,
-    date: DateTime<FixedOffset>,
-    tags: Vec<String>,
-}
-
-impl Article {
-    fn from_path(path: &str) -> Option<Article> {
-        fs::read_to_string(path)
-            .map(|source| {
-            })
-    }
+#[derive(Debug, PartialEq)]
+struct Content {
+    base_url: String,
+    root_path: String,
+    articles: Vec<Article>,
 }
 
 fn main() -> Result<(), std::io::Error> {
     let args: Vec<String> = env::args().collect();
-    let markdown = fs::read_to_string(&args[1]).unwrap();
-    let html = comrak::markdown_to_html(&markdown, &ComrakOptions::default());
-    print!("{}", html);
+    let content_path = args[1].to_string();
+    let content = Content {
+        base_url: "http://localhost:8000".to_string(),
+        root_path: content_path.clone(),
+        articles: article::articles_from_root_path(&content_path)
+    };
+    println!("{}", content.root_path);
+    for a in content.articles {
+        println!("{:?}", a.read_body(&content.root_path));
+    }
+    //let markdown = fs::read_to_string(&args[1]).unwrap();
+    //let html = comrak::markdown_to_html(&markdown, &ComrakOptions::default());
 
     /*
     // ---------------------------------------------------------------------------------------------
@@ -136,3 +133,4 @@ int main() {
 
     Ok(())
 }
+

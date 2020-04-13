@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Git Commit Message, Vim, and Markdown</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Git Commit Message, Vim, and Markdown | Daniel Duan</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Git Commit Message, Vim, and Markdown" />
+<meta name="author" content="Daniel Duan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="It’s been bothering me for years." />
+<meta property="og:description" content="It’s been bothering me for years." />
+<link rel="canonical" href="https://duan.ca/2020/04/13/git-commit-comment/" />
+<meta property="og:url" content="https://duan.ca/2020/04/13/git-commit-comment/" />
+<meta property="og:site_name" content="Daniel Duan" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-13T13:41:02-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@daniel_duan" />
+<meta name="twitter:creator" content="@Daniel Duan" />
+<script type="application/ld+json">
+{"datePublished":"2020-04-13T13:41:02-07:00","headline":"Git Commit Message, Vim, and Markdown","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2020/04/13/git-commit-comment/"},"url":"https://duan.ca/2020/04/13/git-commit-comment/","author":{"@type":"Person","name":"Daniel Duan"},"description":"It’s been bothering me for years.","@type":"BlogPosting","dateModified":"2020-04-13T13:41:02-07:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>
+  <div class="container">
+    <header class="masthead">
+  <h1 class="masthead-title--small">
+    <a href="/">Daniel Duan</a>
+  </h1>
+</header>
+<div class="content post">
+  <h1 class="post-title">Git Commit Message, Vim, and Markdown</h1>
+  <div class="post-date">
+    <time>13 Apr 2020</time>
+     | 
+
+<div class="post-tags">
+
+  <a href="/tag/git">Git</a>,
+
+  <a href="/tag/vim">Vim</a>,
+
+  <a href="/tag/markdown">Markdown</a>,
+
+  <a href="/tag/github">GitHub</a>
+
+</div>
+
+
+  </div>
+  <p>It’s been bothering me for years.</p>
+
+<p>That is, <code class="highlighter-rouge">#</code> is both the start of a comment in a git commit message, but also
+the syntax for headings in Markdown.</p>
+
+<p>Personally, I prefer using commit messages to populate pull request descriptions
+whenever possible. On GitHub, This happens automatically when the pull request
+contains a single commit. But I can’t type, say an H3 as <code class="highlighter-rouge">### Heading</code> in the
+commit message (in Vim, most of the time) because it gets treated as a comment!</p>
+
+<p>But thanks to this twitter interaction with <a href="https://twitter.com/dmartincy">@dmartincy</a>, I finally solved
+this problem:</p>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I haven&#39;t found myself in that situation, but maybe you could do &#39;git config core.commentChar &quot;;&quot;&#39; before creating the commits? That will change the default git commit marker (#) to something that won&#39;t conflict with Markdown titles.</p>&mdash; Daniel Martín (@dmartincy) <a href="https://twitter.com/dmartincy/status/1247271508420026368?ref_src=twsrc%5Etfw">April 6, 2020</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>As mentioned by Daniel, Git has introduced a setting called <code class="highlighter-rouge">core.commentChar</code>,
+documented <a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-corecommentChar">here</a>, which lets us control which character
+becomes the start of a comment line. Let’s say we want to replace the default
+<code class="highlighter-rouge">#</code> with <code class="highlighter-rouge">;</code>, we can edit <code class="highlighter-rouge">~/.gitconfig</code> to include this preference:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[core]
+	commentChar = ";"
+</code></pre></div></div>
+
+<p>… and this will affect every Git repository on this computer.</p>
+
+<p>For me, though, this broke git commit syntax highlighting in Vim: the comments<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2020/04/13/git-commit-comment/>,</a>
+beginning with <code class="highlighter-rouge">;</code>, are no longer recognized as comments. To fix this, I updated
+Vim’s syntax for file type <code class="highlighter-rouge">gitcommit</code>. In your Vim setting directory
+(<code class="highlighter-rouge">~/.config/nvim/</code> for me), create a file <code class="highlighter-rouge">syntax/gitcommit.vim</code> file (unless
+you already have one), add the following line:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>syn match gitcommitComment	"^;.*"
+</code></pre></div></div>
+
+<p>Note <code class="highlighter-rouge">;</code> matches my preferred <code class="highlighter-rouge">core.commentChar</code> for Git.</p>
+
+<p>Et voilà! Git commit message looks tippy-top in Vim again!</p>
+
+<p><img src="/assets/2020/04/gitcommit.png" alt="editing git commit in vim, with alternative character being the beginning of a comment" /></p>
+
+
+</div>
+
+  </div>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)
+    },i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-59501714-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>

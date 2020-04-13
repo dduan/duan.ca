@@ -8,6 +8,58 @@
         
             
             <item>
+                <title>Git Commit Message, Vim, and Markdown</title>
+                <description>&lt;p&gt;It’s been bothering me for years.&lt;/p&gt;
+
+&lt;p&gt;That is, &lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt; is both the start of a comment in a git commit message, but also
+the syntax for headings in Markdown.&lt;/p&gt;
+
+&lt;p&gt;Personally, I prefer using commit messages to populate pull request descriptions
+whenever possible. On GitHub, This happens automatically when the pull request
+contains a single commit. But I can’t type, say an H3 as &lt;code class=&quot;highlighter-rouge&quot;&gt;### Heading&lt;/code&gt; in the
+commit message (in Vim, most of the time) because it gets treated as a comment!&lt;/p&gt;
+
+&lt;p&gt;But thanks to this twitter interaction with &lt;a href=&quot;https://twitter.com/dmartincy&quot;&gt;@dmartincy&lt;/a&gt;, I finally solved
+this problem:&lt;/p&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;I haven&amp;#39;t found myself in that situation, but maybe you could do &amp;#39;git config core.commentChar &amp;quot;;&amp;quot;&amp;#39; before creating the commits? That will change the default git commit marker (#) to something that won&amp;#39;t conflict with Markdown titles.&lt;/p&gt;&amp;mdash; Daniel Martín (@dmartincy) &lt;a href=&quot;https://twitter.com/dmartincy/status/1247271508420026368?ref_src=twsrc%5Etfw&quot;&gt;April 6, 2020&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;As mentioned by Daniel, Git has introduced a setting called &lt;code class=&quot;highlighter-rouge&quot;&gt;core.commentChar&lt;/code&gt;,
+documented &lt;a href=&quot;https://git-scm.com/docs/git-config#Documentation/git-config.txt-corecommentChar&quot;&gt;here&lt;/a&gt;, which lets us control which character
+becomes the start of a comment line. Let’s say we want to replace the default
+&lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt;, we can edit &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.gitconfig&lt;/code&gt; to include this preference:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[core]
+	commentChar = &quot;;&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;… and this will affect every Git repository on this computer.&lt;/p&gt;
+
+&lt;p&gt;For me, though, this broke git commit syntax highlighting in Vim: the comments&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2020/04/13/git-commit-comment/&gt;,&lt;/a&gt;
+beginning with &lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt;, are no longer recognized as comments. To fix this, I updated
+Vim’s syntax for file type &lt;code class=&quot;highlighter-rouge&quot;&gt;gitcommit&lt;/code&gt;. In your Vim setting directory
+(&lt;code class=&quot;highlighter-rouge&quot;&gt;~/.config/nvim/&lt;/code&gt; for me), create a file &lt;code class=&quot;highlighter-rouge&quot;&gt;syntax/gitcommit.vim&lt;/code&gt; file (unless
+you already have one), add the following line:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;syn match gitcommitComment	&quot;^;.*&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note &lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt; matches my preferred &lt;code class=&quot;highlighter-rouge&quot;&gt;core.commentChar&lt;/code&gt; for Git.&lt;/p&gt;
+
+&lt;p&gt;Et voilà! Git commit message looks tippy-top in Vim again!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/2020/04/gitcommit.png&quot; alt=&quot;editing git commit in vim, with alternative character being the beginning of a comment&quot; /&gt;&lt;/p&gt;
+
+</description>
+                <pubDate>Mon, 13 Apr 2020 13:41:02 -0700</pubDate>
+                <link>https://duan.ca/2020/04/13/git-commit-comment/</link>
+                <guid isPermaLink="true">https://duan.ca/2020/04/13/git-commit-comment/</guid>
+            </item>
+            
+        
+            
+            <item>
                 <title>On the Subject of Interface Hygiene</title>
                 <description>&lt;p&gt;In a purly reactive world, your entire program merge into a single stream. Now&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2019/07/01/combine-hygiene/&gt;,&lt;/a&gt;
 close your eyes, and envision: your project as one, beautiful, stream.&lt;/p&gt;

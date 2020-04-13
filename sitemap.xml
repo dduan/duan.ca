@@ -3,6 +3,10 @@
     
     
     <url>
+        <loc>https://duan.ca/2020/04/13/git-commit-comment/</loc>
+    </url>
+    
+    <url>
         <loc>https://duan.ca/2019/07/01/combine-hygiene/</loc>
     </url>
     
@@ -526,6 +530,30 @@
     
     <url>
         <loc>https://duan.ca/tag/combine/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/vim/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/vim/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/markdown/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/markdown/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/github/</loc>
+    </url>
+    
+    <url>
+        <loc>https://duan.ca/tag/github/feed.xml</loc>
     </url>
     
     <url>

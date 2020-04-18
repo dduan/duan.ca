@@ -1,9 +1,10 @@
 mod article;
 mod page;
 mod templates;
+mod site;
+
+use site::Site;
 use std::env;
-use article::Article;
-use page::Page;
 use templates::{ArticleTemplate, RenderedTag, RenderedMetadata};
 use askama::Template;
 
@@ -15,21 +16,12 @@ use syntect::html::css_for_theme;
 use std::io::{BufWriter, Write};
 */
 
-#[derive(Debug, PartialEq)]
-struct Site {
-    base_url: String,
-    articles: Vec<Article>,
-    pages: Vec<Page>,
-}
 
 fn main() -> Result<(), std::io::Error> {
     let args: Vec<String> = env::args().collect();
     let root_path = args[1].to_string();
-    let content = Site {
-        base_url: "http://localhost:8000".to_string(),
-        articles: article::articles_from_root_path(&root_path),
-        pages: page::pages_from_root_path(&root_path),
-    };
+
+    let content = Site::from_root_path("http://localhost:8000", &root_path);
 
     for a in content.articles {
         println!("{:?}", a);

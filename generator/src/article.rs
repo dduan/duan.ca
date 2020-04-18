@@ -2,13 +2,14 @@ use chrono::{DateTime, FixedOffset};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use walkdir::WalkDir;
+use std::clone::Clone;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct Article {
-    relative_link: String,
-    title: String,
-    date: DateTime<FixedOffset>,
-    tags: Vec<String>,
+    pub relative_link: String,
+    pub title: String,
+    pub date: DateTime<FixedOffset>,
+    pub tags: Vec<String>,
 }
 
 impl Article {

@@ -2,11 +2,11 @@ mod article;
 mod page;
 mod templates;
 mod site;
+mod builder;
 
 use site::Site;
 use std::env;
-use templates::{ArticleTemplate, RenderedTag, RenderedMetadata};
-use askama::Template;
+use std::error::Error;
 
 /*
 use comrak::{self, ComrakOptions};
@@ -17,30 +17,13 @@ use std::io::{BufWriter, Write};
 */
 
 
-fn main() -> Result<(), std::io::Error> {
+fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().collect();
     let root_path = args[1].to_string();
+    let output_path = args[2].to_string();
 
-    let content = Site::from_root_path("http://localhost:8000", &root_path);
-
-    for a in content.articles {
-        println!("{:?}", a);
-        println!("{:?}", a.read_body(&root_path));
-    }
-
-    for p in content.pages {
-        println!("{:?}", p);
-        println!("{:?}", p.read_body(&root_path));
-    }
-
-    let hello = ArticleTemplate {
-        meta: RenderedMetadata { permalink: "https://localhost/hello", title: "My Post", },
-        current_url: "/hello",
-        date: "2020-04-17",
-        content: "A good day without quarintine",
-        tags: vec![&RenderedTag { name: "Rust", slug: "rust" }, &RenderedTag { name: "Swift", slug: "swift" }]
-    };
-    println!("{}", hello.render().unwrap()); // then render it.
+    let site = Site::from_root_path("http://localhost:8000", &root_path);
+    builder::build_site(site, &root_path, &output_path)?;
     //let markdown = fs::read_to_string(&args[1]).unwrap();
     //let html = comrak::markdown_to_html(&markdown, &ComrakOptions::default());
 

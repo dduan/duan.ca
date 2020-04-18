@@ -4,8 +4,8 @@ use walkdir::WalkDir;
 
 #[derive(Debug, PartialEq)]
 pub struct Page {
-    relative_link: String,
-    title: String,
+    pub relative_link: String,
+    pub title: String,
 }
 
 impl Page {

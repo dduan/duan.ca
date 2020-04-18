@@ -5,9 +5,9 @@ pub struct RenderedMetadata<'a> {
     pub title: &'a str,
 }
 
-pub struct RenderedTag<'a> {
-    pub name: &'a str,
-    pub slug: &'a str,
+pub struct RenderedTag {
+    pub name: String,
+    pub slug: String,
 }
 
 #[derive(Template)]
@@ -17,7 +17,7 @@ pub struct ArticleTemplate<'a> {
     pub current_url: &'a str,
     pub date: &'a str,
     pub content: &'a str,
-    pub tags: Vec<&'a RenderedTag<'a>>
+    pub tags: Vec<RenderedTag>
 }
 
 #[derive(Template)]

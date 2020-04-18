@@ -55,7 +55,7 @@ impl Article {
     }
 
     pub fn read_body(&self, root_path: &str) -> Option<String> {
-        File::open(format!("{}{}", root_path, self.path))
+        File::open(format!("{}/articles/{}.md", root_path, self.path))
             .ok()
             .map(|file| {
                 BufReader::new(file)

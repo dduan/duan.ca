@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block meta %}
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{meta.title}}">
+    <meta property="article:published_time" content="{{date}}">
+{% endblock meta %}
+
+{% block title %}{{meta.title}}{% endblock title %}
+
+{% block content %}
+<article>
+    <h1>{{meta.title}}</h1>
+    <p class="meta article-meta">
+        <time datetime={{date}} itemProp="datePublished">{{date}}</time>
+    </p>
+    {{ content }}
+</article>
+<footer>
+    <hr />
+    <p class="meta article-meta">
+        <a href="/">Home</a>
+        ·
+        <a href="/articles">More Articles</a>
+        {% for tag in tags %}
+        ·
+        <a href="/tags/{{tag.slug}}">{{tag.name}}</a>
+        {% endfor %}
+    </p>
+</footer>
+{% endblock content %}

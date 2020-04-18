@@ -5,6 +5,7 @@ authors = ["Daniel Duan <daniel@duan.ca>"]
 edition = "2018"
 
 [dependencies]
+askama = "=0.9.0"
 chrono = "=0.4.11"
 comrak = "=0.7.0"
 syntect = "=4.1.0"

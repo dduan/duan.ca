@@ -1,14 +1,15 @@
 mod article;
+mod templates;
 use std::env;
 use article::Article;
+use templates::{ArticleTemplate, RenderedTag, RenderedMetadata};
+use askama::Template;
 
 /*
 use comrak::{self, ComrakOptions};
 use std::path::Path;
 use syntect::highlighting::ThemeSet;
 use syntect::html::css_for_theme;
-use syntect::html::ClassedHTMLGenerator;
-use syntect::parsing::SyntaxSet;
 use std::io::{BufWriter, Write};
 */
 
@@ -31,6 +32,14 @@ fn main() -> Result<(), std::io::Error> {
     for a in content.articles {
         println!("{:?}", a.read_body(&content.root_path));
     }
+
+    let hello = ArticleTemplate {
+        meta: RenderedMetadata { current_url: "/hello", title: "My Post", },
+        date: "2020-04-17",
+        content: "A good day without quarintine",
+        tags: vec![&RenderedTag { name: "Rust", slug: "rust" }, &RenderedTag { name: "Swift", slug: "swift" }]
+    };
+    println!("{}", hello.render().unwrap()); // then render it.
     //let markdown = fs::read_to_string(&args[1]).unwrap();
     //let html = comrak::markdown_to_html(&markdown, &ComrakOptions::default());
 

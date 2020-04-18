@@ -9,7 +9,7 @@
     <ul>
         {% for post in list.items %}
         <li>
-            <p><a href="{{post.meta.current_url}}">{{post.meta.title}}</a></p>
+            <p><a href="{{post.current_url}}">{{post.meta.title}}</a></p>
             <p class="meta article-meta">
                 {{post.date}}
                 {% for tag in post.tags %}

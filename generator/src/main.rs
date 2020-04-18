@@ -28,13 +28,13 @@ fn main() -> Result<(), std::io::Error> {
         root_path: content_path.clone(),
         articles: article::articles_from_root_path(&content_path)
     };
-    println!("{}", content.root_path);
     for a in content.articles {
         println!("{:?}", a.read_body(&content.root_path));
     }
 
     let hello = ArticleTemplate {
-        meta: RenderedMetadata { current_url: "/hello", title: "My Post", },
+        meta: RenderedMetadata { permalink: "https://localhost/hello", title: "My Post", },
+        current_url: "/hello",
         date: "2020-04-17",
         content: "A good day without quarintine",
         tags: vec![&RenderedTag { name: "Rust", slug: "rust" }, &RenderedTag { name: "Swift", slug: "swift" }]

@@ -40,9 +40,10 @@ impl Article {
                 .split(", ")
                 .map(|x| { x.to_string() })
                 .collect();
+            let relative_path = path[root_path.len()..].rsplitn(2, ".").last().unwrap_or("").to_string();
             Some(
                 Article {
-                    path:  path[root_path.len()..].to_string(),
+                    path: relative_path,
                     title: lines[0].to_owned(),
                     date: time.unwrap(),
                     tags: tags,

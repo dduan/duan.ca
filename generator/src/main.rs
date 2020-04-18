@@ -1,7 +1,9 @@
 mod article;
+mod page;
 mod templates;
 use std::env;
 use article::Article;
+use page::Page;
 use templates::{ArticleTemplate, RenderedTag, RenderedMetadata};
 use askama::Template;
 
@@ -18,6 +20,7 @@ struct Content {
     base_url: String,
     root_path: String,
     articles: Vec<Article>,
+    pages: Vec<Page>,
 }
 
 fn main() -> Result<(), std::io::Error> {
@@ -27,10 +30,17 @@ fn main() -> Result<(), std::io::Error> {
         base_url: "http://localhost:8000".to_string(),
         root_path: root_path.clone(),
         articles: article::articles_from_root_path(&root_path),
-        pages: vec![],
+        pages: page::pages_from_root_path(&root_path),
     };
+
     for a in content.articles {
+        println!("{:?}", a);
+        println!("{}", content.root_path);
         println!("{:?}", a.read_body(&content.root_path));
+    }
+
+    for p in content.pages {
+        println!("{:?}", p);
     }
 
     let hello = ArticleTemplate {

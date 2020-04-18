@@ -18,7 +18,6 @@ use std::io::{BufWriter, Write};
 #[derive(Debug, PartialEq)]
 struct Content {
     base_url: String,
-    root_path: String,
     articles: Vec<Article>,
     pages: Vec<Page>,
 }
@@ -28,15 +27,13 @@ fn main() -> Result<(), std::io::Error> {
     let root_path = args[1].to_string();
     let content = Content {
         base_url: "http://localhost:8000".to_string(),
-        root_path: root_path.clone(),
         articles: article::articles_from_root_path(&root_path),
         pages: page::pages_from_root_path(&root_path),
     };
 
     for a in content.articles {
         println!("{:?}", a);
-        println!("{}", content.root_path);
-        println!("{:?}", a.read_body(&content.root_path));
+        println!("{:?}", a.read_body(&root_path));
     }
 
     for p in content.pages {

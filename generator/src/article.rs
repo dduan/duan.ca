@@ -12,7 +12,7 @@ pub struct Article {
 }
 
 impl Article {
-    pub fn from_path(root_path: &str, path: &str) -> Option<Article> {
+    fn from_path(root_path: &str, path: &str) -> Option<Article> {
         File::open(path)
             .ok()
             .and_then(|file| -> Option<Vec<String>> {
@@ -69,7 +69,15 @@ impl Article {
 }
 
 pub fn articles_from_root_path(root_path: &str) -> Vec<Article> {
-    WalkDir::new(root_path)
+    let root_path = format!(
+        "{}/articles",
+        if root_path.ends_with("/") {
+            &root_path[0..root_path.len() - 1]
+        } else {
+            root_path
+        });
+
+    WalkDir::new(&root_path)
         .into_iter()
         .flat_map(|e| e.ok())
         .filter(|e| {
@@ -84,7 +92,7 @@ pub fn articles_from_root_path(root_path: &str) -> Vec<Article> {
         entry
             .path()
             .to_str()
-            .map(|path| Article::from_path(root_path, path))
+            .map(|path| Article::from_path(&root_path, path))
     })
     .flat_map(|a| a)
     .collect()

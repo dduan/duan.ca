@@ -22,11 +22,12 @@ struct Content {
 
 fn main() -> Result<(), std::io::Error> {
     let args: Vec<String> = env::args().collect();
-    let content_path = args[1].to_string();
+    let root_path = args[1].to_string();
     let content = Content {
         base_url: "http://localhost:8000".to_string(),
-        root_path: content_path.clone(),
-        articles: article::articles_from_root_path(&content_path)
+        root_path: root_path.clone(),
+        articles: article::articles_from_root_path(&root_path),
+        pages: vec![],
     };
     for a in content.articles {
         println!("{:?}", a.read_body(&content.root_path));

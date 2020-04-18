@@ -6,21 +6,21 @@ use walkdir::WalkDir;
 pub struct Page {
     relative_link: String,
     title: String,
-    content: String,
 }
 
 impl Page {
+    pub fn read_body(&self, root_path: &str) -> Option<String> {
+        fs::read_to_string(format!("{}/pages{}{}.html", root_path, self.relative_link, self.title)).ok()
+    }
+
     fn from_path(root_path: &str, path: &str) -> Option<Page> {
         let path = Path::new(path);
         if let Some(title) = Page::title_from_path(&path) {
             if let Some(relative_link) = Page::relative_link_from_path(root_path, path) {
-                if let Some(content) = fs::read_to_string(path).ok() {
-                    return Some(Page {
-                        relative_link: relative_link,
-                        title: title,
-                        content: content,
-                    })
-                }
+                return Some(Page {
+                    relative_link: relative_link,
+                    title: title,
+                })
             }
         }
 

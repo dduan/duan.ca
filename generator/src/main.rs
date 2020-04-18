@@ -16,7 +16,7 @@ use std::io::{BufWriter, Write};
 */
 
 #[derive(Debug, PartialEq)]
-struct Content {
+struct Site {
     base_url: String,
     articles: Vec<Article>,
     pages: Vec<Page>,
@@ -25,7 +25,7 @@ struct Content {
 fn main() -> Result<(), std::io::Error> {
     let args: Vec<String> = env::args().collect();
     let root_path = args[1].to_string();
-    let content = Content {
+    let content = Site {
         base_url: "http://localhost:8000".to_string(),
         articles: article::articles_from_root_path(&root_path),
         pages: page::pages_from_root_path(&root_path),
@@ -38,6 +38,7 @@ fn main() -> Result<(), std::io::Error> {
 
     for p in content.pages {
         println!("{:?}", p);
+        println!("{:?}", p.read_body(&root_path));
     }
 
     let hello = ArticleTemplate {

@@ -5,7 +5,7 @@ use walkdir::WalkDir;
 
 #[derive(Debug, PartialEq)]
 pub struct Article {
-    path: String,
+    relative_link: String,
     title: String,
     date: DateTime<FixedOffset>,
     tags: Vec<String>,
@@ -40,10 +40,10 @@ impl Article {
                 .split(", ")
                 .map(|x| { x.to_string() })
                 .collect();
-            let relative_path = path[root_path.len()..].rsplitn(2, ".").last().unwrap_or("").to_string();
+            let relative_link = path[root_path.len()..].rsplitn(2, ".").last().unwrap_or("").to_string();
             Some(
                 Article {
-                    path: relative_path,
+                    relative_link: relative_link,
                     title: lines[0].to_owned(),
                     date: time.unwrap(),
                     tags: tags,
@@ -55,7 +55,7 @@ impl Article {
     }
 
     pub fn read_body(&self, root_path: &str) -> Option<String> {
-        File::open(format!("{}/articles/{}.md", root_path, self.path))
+        File::open(format!("{}/articles/{}.md", root_path, self.relative_link))
             .ok()
             .map(|file| {
                 BufReader::new(file)
@@ -119,7 +119,7 @@ mod tests {
             ),
             Some(
                 Article {
-                    path: path,
+                    relative_link: path,
                     title: title,
                     date: DateTime::parse_from_rfc3339(&date_string).unwrap(),
                     tags: vec!["a".to_owned(), "b".to_owned()]

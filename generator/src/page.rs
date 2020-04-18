@@ -4,7 +4,7 @@ use walkdir::WalkDir;
 
 #[derive(Debug, PartialEq)]
 pub struct Page {
-    relative_path: String,
+    relative_link: String,
     title: String,
     content: String,
 }
@@ -13,10 +13,10 @@ impl Page {
     fn from_path(root_path: &str, path: &str) -> Option<Page> {
         let path = Path::new(path);
         if let Some(title) = Page::title_from_path(&path) {
-            if let Some(relative_path) = Page::relative_path_from_path(root_path, path) {
+            if let Some(relative_link) = Page::relative_link_from_path(root_path, path) {
                 if let Some(content) = fs::read_to_string(path).ok() {
                     return Some(Page {
-                        relative_path: relative_path,
+                        relative_link: relative_link,
                         title: title,
                         content: content,
                     })
@@ -34,7 +34,7 @@ impl Page {
             .map (|s| s.to_string())
     }
 
-    fn relative_path_from_path(root_path: &str, path: &Path) -> Option<String> {
+    fn relative_link_from_path(root_path: &str, path: &Path) -> Option<String> {
         path
             .parent()
             .and_then(|p| p.strip_prefix(root_path).ok())
@@ -87,11 +87,11 @@ mod tests {
     }
 
     #[test]
-    fn relative_path_from_path() {
-        let relative_path = "/about";
+    fn relative_link_from_path() {
+        let relative_link = "/about";
         let root = "/root/pages";
-        let path_str = format!("{}{}/test.html", root, relative_path);
+        let path_str = format!("{}{}/test.html", root, relative_link);
         let path = Path::new(&path_str);
-        assert_eq!(Page::relative_path_from_path(root, &path), Some(relative_path.to_string()));
+        assert_eq!(Page::relative_link_from_path(root, &path), Some(relative_link.to_string()));
     }
 }

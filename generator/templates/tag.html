@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}Daniel Duan's Articles About {{tag_name}}{% endblock title %}
+{% block title %}Daniel Duan's Articles About {{tag.name}}{% endblock title %}
 {% block content %}<header>
-    <h1><a href="/">Daniel Duan</a>'s <a href="/articles">Articles</a> About '{{tag_name}}' </h1>
+    <h1><a href="/">Daniel Duan</a>'s <a href="/articles">Articles</a> About '{{tag.name}}' </h1>
 </header>
 <main>
     <ul>{% for post in items %}

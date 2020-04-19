@@ -29,10 +29,27 @@ pub struct ArticleListTemplate<'a> {
 }
 
 #[derive(Template)]
+#[template(path = "global-feed.xml")]
+pub struct GlobalFeedTemplate<'a> {
+    pub base_url: &'a str,
+    pub items: &'a Vec<ArticleTemplate<'a>>
+}
+
+#[derive(Template)]
 #[template(path = "tag.html")]
 pub struct TagArticleListTemplate<'a> {
     pub meta: RenderedMetadata,
-    pub tag_name: &'a str,
+    pub base_url: &'a str,
+    pub tag: RenderedTag,
+    pub items: &'a Vec<ArticleTemplate<'a>>
+}
+
+#[derive(Template)]
+#[template(path = "tag-feed.xml")]
+pub struct TagFeedTemplate<'a> {
+    pub meta: RenderedMetadata,
+    pub base_url: &'a str,
+    pub tag: RenderedTag,
     pub items: &'a Vec<ArticleTemplate<'a>>
 }
 

@@ -90,6 +90,19 @@ fn build_article_list(article_templates: &Vec<ArticleTemplate>, base_url: &str, 
     Ok(())
 }
 
+fn build_global_feed(article_templates: &Vec<ArticleTemplate>, base_url: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
+    let template = GlobalFeedTemplate {
+        base_url: base_url,
+        items: article_templates,
+    };
+
+    let rendered = template.render()?;
+    let page_output = format!("{}/feed.xml", output_path);
+    std::fs::write(page_output, rendered)?;
+
+    Ok(())
+}
+
 fn build_tag_list(tag: &str, article_templates: &Vec<ArticleTemplate>, base_url: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
     let slug = slug::slugify(tag);
     let template = TagArticleListTemplate {
@@ -97,13 +110,41 @@ fn build_tag_list(tag: &str, article_templates: &Vec<ArticleTemplate>, base_url:
             permalink: format!("{}/tag/{}", base_url, slug),
             title: format!("Daniel Duan's Articles About {}", tag),
         },
-        tag_name: tag,
+        base_url: base_url,
+        tag: RenderedTag {
+            name: tag.to_string(),
+            slug: slug::slugify(tag),
+        },
         items: article_templates,
     };
 
     let rendered = template.render()?;
     let page_output_path = format!("{}/tag/{}", output_path, slug);
     let page_output = format!("{}/index.html", page_output_path);
+    std::fs::create_dir_all(&page_output_path)?;
+    std::fs::write(page_output, rendered)?;
+
+    Ok(())
+}
+
+fn build_tag_feed(tag: &str, article_templates: &Vec<ArticleTemplate>, base_url: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
+    let slug = slug::slugify(tag);
+    let template = TagFeedTemplate {
+        meta: RenderedMetadata {
+            permalink: format!("{}/tag/{}/feed.xml", base_url, slug),
+            title: format!("Daniel Duan's Articles About {}", tag),
+        },
+        base_url: base_url,
+        tag: RenderedTag {
+            name: tag.to_string(),
+            slug: slug::slugify(tag),
+        },
+        items: article_templates,
+    };
+
+    let rendered = template.render()?;
+    let page_output_path = format!("{}/tag/{}", output_path, slug);
+    let page_output = format!("{}/feed.xml", page_output_path);
     std::fs::create_dir_all(&page_output_path)?;
     std::fs::write(page_output, rendered)?;
 
@@ -123,6 +164,7 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
         .collect::<Vec<ArticleTemplate>>();
 
     build_article_list(&article_templates, &site.base_url, output_path)?;
+    build_global_feed(&article_templates, &site.base_url, output_path)?;
 
     for article_template in article_templates {
         build_article(&article_template, output_path)?;
@@ -135,9 +177,10 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
     for (tag, tagged) in &site.tags {
         let articles = tagged
             .iter()
-            .filter_map(|article| instantiate_article_template_with_body("".to_string(), article, &site.base_url))
+            .filter_map(|article| instantiate_article_template(article, &site.base_url, root_path))
             .collect::<Vec<ArticleTemplate>>();
         build_tag_list(&tag, &articles, &site.base_url, output_path)?;
+        build_tag_feed(&tag, &articles, &site.base_url, output_path)?;
     }
 
     Ok(())

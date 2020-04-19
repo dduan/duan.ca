@@ -51,14 +51,8 @@ fn instantiate_article_template_with_body<'a>(body: String, article: &'a Article
         date: date_string.to_string(),
         rfc2822_date: rfc2822date_string.to_string(),
         content: body.to_owned(),
-        tags: article.tags.iter().map(|tag| {
-            let slug = slug::slugify(&tag);
-            RenderedTag {
-                name: tag.clone(),
-                slug: slug,
-            }
-        })
-        .collect()
+        tags: article.tags.iter().map(|tag| RenderedTag.from_name(tag))
+            .collect()
     })
 }
 
@@ -113,10 +107,7 @@ fn build_tag_list(tag: &str, article_templates: &Vec<ArticleTemplate>, base_url:
             title: format!("Daniel Duan's Articles About {}", tag),
         },
         base_url: base_url,
-        tag: RenderedTag {
-            name: tag.to_string(),
-            slug: slug::slugify(tag),
-        },
+        tag: RenderedTag::from_name(tag),
         items: article_templates,
     };
 
@@ -137,10 +128,7 @@ fn build_tag_feed(tag: &str, article_templates: &Vec<ArticleTemplate>, base_url:
             title: format!("Daniel Duan's Articles About {}", tag),
         },
         base_url: base_url,
-        tag: RenderedTag {
-            name: tag.to_string(),
-            slug: slug::slugify(tag),
-        },
+        tag: RenderedTag::from_name(tag),
         items: article_templates,
     };
 

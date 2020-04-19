@@ -1,4 +1,5 @@
 use askama::Template;
+use slug;
 
 pub struct RenderedMetadata {
     pub permalink: String,
@@ -8,6 +9,15 @@ pub struct RenderedMetadata {
 pub struct RenderedTag {
     pub name: String,
     pub slug: String,
+}
+
+impl RenderedTag {
+    pub fn from_name(name: &str) -> RenderedTag {
+        RenderedTag {
+            name: name.to_string(),
+            slug: slug::slugify(name),
+        }
+    }
 }
 
 #[derive(Template)]

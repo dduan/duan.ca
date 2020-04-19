@@ -16,6 +16,7 @@ pub struct ArticleTemplate<'a> {
     pub meta: RenderedMetadata,
     pub current_url: &'a str,
     pub date: String,
+    pub rfc2822_date: String,
     pub content: String,
     pub tags: Vec<RenderedTag>
 }

@@ -41,6 +41,7 @@ fn instantiate_article_template<'a>(article: &'a Article, base_url: &str, root_p
 fn instantiate_article_template_with_body<'a>(body: String, article: &'a Article, base_url: &str) -> Option<ArticleTemplate<'a>> {
     let permalink = format!("{}{}", base_url, article.relative_link);
     let date_string = format!("{}", article.date.format("%Y-%m-%d"));
+    let rfc2822date_string = format!("{}", article.date.to_rfc2822());
     Some(ArticleTemplate {
         meta: RenderedMetadata {
             permalink: permalink.to_string(),
@@ -48,6 +49,7 @@ fn instantiate_article_template_with_body<'a>(body: String, article: &'a Article
         },
         current_url: &article.relative_link,
         date: date_string.to_string(),
+        rfc2822_date: rfc2822date_string.to_string(),
         content: body.to_owned(),
         tags: article.tags.iter().map(|tag| {
             let slug = slug::slugify(&tag);

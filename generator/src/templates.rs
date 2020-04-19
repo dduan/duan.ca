@@ -33,7 +33,7 @@ pub struct ArticleListTemplate<'a> {
 pub struct TagArticleListTemplate<'a> {
     pub meta: RenderedMetadata,
     pub tag_name: &'a str,
-    pub list: &'a ArticleListTemplate<'a>,
+    pub items: &'a Vec<ArticleTemplate<'a>>
 }
 
 #[derive(Template)]

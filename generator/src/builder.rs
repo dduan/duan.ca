@@ -6,7 +6,7 @@ use crate::templates::*;
 use std::error::Error;
 use slug;
 
-fn build_page(page: Page, base_url: &str, root_path: &str, output_path: &str) -> Result<(),Box<dyn Error>> {
+fn build_page(page: &Page, base_url: &str, root_path: &str, output_path: &str) -> Result<(),Box<dyn Error>> {
     let permalink = format!("{}{}", base_url, page.relative_link);
     if let Some(body) = page.read_body(root_path) {
         let template = PageTemplate {
@@ -33,27 +33,31 @@ fn instantiate_article_template<'a>(article: &'a Article, base_url: &str, root_p
     match article.read_body(root_path) {
         None => None,
         Some(body) => {
-            let permalink = format!("{}{}", base_url, article.relative_link);
-            let date_string = format!("{}", article.date.format("%Y-%m-%d"));
-            Some(ArticleTemplate {
-                meta: RenderedMetadata {
-                    permalink: permalink.to_string(),
-                    title: article.title.to_string(),
-                },
-                current_url: &article.relative_link,
-                date: date_string.to_string(),
-                content: body.to_owned(),
-                tags: article.tags.iter().map(|tag| {
-                    let slug = slug::slugify(&tag);
-                    RenderedTag {
-                        name: tag.clone(),
-                        slug: slug,
-                    }
-                })
-                .collect()
-            })
+            instantiate_article_template_with_body(body.to_owned(), article, base_url)
         }
     }
+}
+
+fn instantiate_article_template_with_body<'a>(body: String, article: &'a Article, base_url: &str) -> Option<ArticleTemplate<'a>> {
+    let permalink = format!("{}{}", base_url, article.relative_link);
+    let date_string = format!("{}", article.date.format("%Y-%m-%d"));
+    Some(ArticleTemplate {
+        meta: RenderedMetadata {
+            permalink: permalink.to_string(),
+            title: article.title.to_string(),
+        },
+        current_url: &article.relative_link,
+        date: date_string.to_string(),
+        content: body.to_owned(),
+        tags: article.tags.iter().map(|tag| {
+            let slug = slug::slugify(&tag);
+            RenderedTag {
+                name: tag.clone(),
+                slug: slug,
+            }
+        })
+        .collect()
+    })
 }
 
 fn build_article(article_template: &ArticleTemplate, output_path: &str) -> Result<(), Box<dyn Error>> {
@@ -86,6 +90,26 @@ fn build_article_list(article_templates: &Vec<ArticleTemplate>, base_url: &str, 
     Ok(())
 }
 
+fn build_tag_list(tag: &str, article_templates: &Vec<ArticleTemplate>, base_url: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
+    let slug = slug::slugify(tag);
+    let template = TagArticleListTemplate {
+        meta: RenderedMetadata {
+            permalink: format!("{}/tag/{}", base_url, slug),
+            title: format!("Daniel Duan's Articles About {}", tag),
+        },
+        tag_name: tag,
+        items: article_templates,
+    };
+
+    let rendered = template.render()?;
+    let page_output_path = format!("{}/tag/{}", output_path, slug);
+    let page_output = format!("{}/index.html", page_output_path);
+    std::fs::create_dir_all(&page_output_path)?;
+    std::fs::write(page_output, rendered)?;
+
+    Ok(())
+}
+
 pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
     if std::fs::metadata(output_path).is_ok() {
         std::fs::remove_dir_all(output_path)?;
@@ -104,8 +128,16 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
         build_article(&article_template, output_path)?;
     }
 
-    for page in site.pages {
+    for page in &site.pages {
         build_page(page, &site.base_url, root_path, output_path)?;
+    }
+
+    for (tag, tagged) in &site.tags {
+        let articles = tagged
+            .iter()
+            .filter_map(|article| instantiate_article_template_with_body("".to_string(), article, &site.base_url))
+            .collect::<Vec<ArticleTemplate>>();
+        build_tag_list(&tag, &articles, &site.base_url, output_path)?;
     }
 
     Ok(())

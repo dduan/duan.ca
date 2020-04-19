@@ -11,8 +11,8 @@ fn build_page(page: Page, base_url: &str, root_path: &str, output_path: &str) ->
     if let Some(body) = page.read_body(root_path) {
         let template = PageTemplate {
             meta: RenderedMetadata {
-                permalink: &permalink,
-                title: &page.title,
+                permalink: permalink.to_string(),
+                title: page.title.to_string(),
             },
             content: &body,
         };
@@ -29,37 +29,59 @@ fn build_page(page: Page, base_url: &str, root_path: &str, output_path: &str) ->
     Ok(())
 }
 
-fn build_article(article: Article, base_url: &str, root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
-
-    let permalink = format!("{}{}", base_url, article.relative_link);
-    if let Some(body) = article.read_body(root_path) {
-        let date_string = format!("{}", article.date.format("%Y-%m-%d"));
-        let template = ArticleTemplate {
-            meta: RenderedMetadata {
-                permalink: &permalink,
-                title: &article.title,
-            },
-            current_url: &article.relative_link,
-            date: &date_string,
-            content: &body,
-            tags: article.tags.into_iter().map(|tag| {
-                let slug = slug::slugify(&tag);
-                RenderedTag {
-                    name: tag,
-                    slug: slug,
-                }
+fn instantiate_article_template<'a>(article: &'a Article, base_url: &str, root_path: &str) -> Option<ArticleTemplate<'a>> {
+    match article.read_body(root_path) {
+        None => None,
+        Some(body) => {
+            let permalink = format!("{}{}", base_url, article.relative_link);
+            let date_string = format!("{}", article.date.format("%Y-%m-%d"));
+            Some(ArticleTemplate {
+                meta: RenderedMetadata {
+                    permalink: permalink.to_string(),
+                    title: article.title.to_string(),
+                },
+                current_url: &article.relative_link,
+                date: date_string.to_string(),
+                content: body.to_owned(),
+                tags: article.tags.iter().map(|tag| {
+                    let slug = slug::slugify(&tag);
+                    RenderedTag {
+                        name: tag.clone(),
+                        slug: slug,
+                    }
+                })
+                .collect()
             })
-            .collect()
-        };
-
-        let rendered = template.render()?;
-        let page_output_path = format!("{}{}", output_path, article.relative_link);
-        let page_output = format!("{}/index.html", page_output_path);
-        std::fs::create_dir_all(&page_output_path)?;
-        std::fs::write(page_output, rendered)?;
-    } else {
-        return Err(Box::new(std::io::Error::new(std::io::ErrorKind::InvalidInput, format!("Could not read page {}", article.relative_link))))
+        }
     }
+}
+
+fn build_article(article_template: &ArticleTemplate, output_path: &str) -> Result<(), Box<dyn Error>> {
+    let rendered = article_template.render()?;
+    let page_output_path = format!("{}{}", output_path, article_template.current_url);
+    let page_output = format!("{}/index.html", page_output_path);
+    std::fs::create_dir_all(&page_output_path)?;
+    std::fs::write(page_output, rendered)?;
+
+    Ok(())
+}
+
+
+fn build_article_list(article_templates: &Vec<ArticleTemplate>, base_url: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
+    let template = ArticleListTemplate {
+        meta: RenderedMetadata {
+            permalink: "/articles".to_string(),
+            title: "Daniel Duan's Articles".to_string()
+        },
+        base_url: base_url,
+        items: article_templates,
+    };
+
+    let rendered = template.render()?;
+    let page_output_path = format!("{}{}", output_path, "/articles");
+    let page_output = format!("{}/index.html", page_output_path);
+    std::fs::create_dir_all(&page_output_path)?;
+    std::fs::write(page_output, rendered)?;
 
     Ok(())
 }
@@ -69,12 +91,21 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
         std::fs::remove_dir_all(output_path)?;
         std::fs::create_dir_all(output_path)?;
     }
-    for page in site.pages {
-        build_page(page, &site.base_url, root_path, output_path)?;
+
+    let article_templates = site
+        .articles
+        .iter()
+        .filter_map(|article| instantiate_article_template(article, &site.base_url, root_path))
+        .collect::<Vec<ArticleTemplate>>();
+
+    build_article_list(&article_templates, &site.base_url, output_path)?;
+
+    for article_template in article_templates {
+        build_article(&article_template, output_path)?;
     }
 
-    for article in site.articles {
-        build_article(article, &site.base_url, root_path, output_path)?;
+    for page in site.pages {
+        build_page(page, &site.base_url, root_path, output_path)?;
     }
 
     Ok(())

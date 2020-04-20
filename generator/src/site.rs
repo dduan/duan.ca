@@ -7,7 +7,7 @@ pub struct Site {
     pub base_url: String,
     pub articles: Vec<Article>,
     pub pages: Vec<Page>,
-    pub tags: Vec<(String, Vec<Article>)>
+    pub tags: Vec<(String, Vec<Article>)>,
 }
 
 impl Site {

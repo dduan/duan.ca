@@ -1,6 +1,6 @@
 use askama::Template;
-use comrak::{self, ComrakOptions};
-use crate::article::Article;
+use syntect::parsing::{SyntaxSet, SyntaxSetBuilder};
+use crate::article::{self, Article};
 use crate::page::Page;
 use crate::site::Site;
 use crate::templates::*;
@@ -31,13 +31,11 @@ fn build_page(page: &Page, base_url: &str, root_path: &str, output_path: &str) -
     Ok(())
 }
 
-fn instantiate_article_template<'a>(article: &'a Article, base_url: &str, root_path: &str) -> Option<ArticleTemplate<'a>> {
+fn instantiate_article_template<'a>(syntax_set: &SyntaxSet, article: &'a Article, base_url: &str, root_path: &str) -> Option<ArticleTemplate<'a>> {
     match article.read_body(root_path) {
         None => None,
         Some(markdown) => {
-            let mut options = ComrakOptions::default();
-            options.github_pre_lang = true;
-            let body = comrak::markdown_to_html(&markdown, &options);
+            let body = article::markdown_to_html(syntax_set, markdown);
             let permalink = format!("{}{}", base_url, article.relative_link);
             let date_string = format!("{}", article.date.format("%Y-%m-%d"));
             let rfc2822date_string = format!("{}", article.date.to_rfc2822());
@@ -114,6 +112,9 @@ fn build_tag_feed(tag: &str, article_templates: &Vec<ArticleTemplate>, base_url:
 }
 
 pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
+    let mut syntax_builder = SyntaxSetBuilder::new();
+    let _ = syntax_builder.add_from_folder(format!("{}/syntaxes", root_path), true);
+    let syntax_set = syntax_builder.build();
     if std::fs::metadata(output_path).is_ok() {
         std::fs::remove_dir_all(output_path)?;
         std::fs::create_dir_all(output_path)?;
@@ -122,7 +123,7 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
     let article_templates = site
         .articles
         .iter()
-        .filter_map(|article| instantiate_article_template(article, &site.base_url, root_path))
+        .filter_map(|article| instantiate_article_template(&syntax_set, article, &site.base_url, root_path))
         .collect::<Vec<ArticleTemplate>>();
 
     build_article_list(&article_templates, &site.base_url, output_path)?;
@@ -143,7 +144,7 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
     for (tag, tagged) in &site.tags {
         let articles = tagged
             .iter()
-            .filter_map(|article| instantiate_article_template(article, &site.base_url, root_path))
+            .filter_map(|article| instantiate_article_template(&syntax_set, article, &site.base_url, root_path))
             .collect::<Vec<ArticleTemplate>>();
         build_tag_list(&tag, &articles, &site.base_url, output_path)?;
         build_tag_feed(&tag, &articles, &site.base_url, output_path)?;

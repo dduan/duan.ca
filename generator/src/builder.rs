@@ -136,7 +136,7 @@ fn copy_static_assets(root_path: &str, output_path: &str) -> Result<(), Box<dyn 
 }
 
 pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
-    let syntax_set: SyntaxSet = dumps::from_binary(include_bytes!("syntax.packdump"));
+    let syntax_set: SyntaxSet = dumps::from_binary(include_bytes!("syntax.dump"));
     if std::fs::metadata(output_path).is_ok() {
         std::fs::remove_dir_all(output_path)?;
         std::fs::create_dir_all(output_path)?;

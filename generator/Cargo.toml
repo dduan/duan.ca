@@ -13,3 +13,6 @@ slug = "=0.1.4"
 syntect = "=4"
 walkdir = "=2.3.1"
 htmlescape = "=0.3.1"
+
+[[example]]
+name = "sublime-syntax-dumper"

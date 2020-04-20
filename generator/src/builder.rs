@@ -1,11 +1,12 @@
 use askama::Template;
-use syntect::parsing::{SyntaxSet, SyntaxSetBuilder};
 use crate::article::{self, Article};
 use crate::page::Page;
 use crate::site::Site;
 use crate::templates::*;
-use std::error::Error;
 use slug;
+use std::error::Error;
+use syntect::parsing::{SyntaxSet, SyntaxSetBuilder};
+use walkdir::WalkDir;
 
 fn write(text: &str, path: &str, file: &str) -> Result<(), Box<dyn Error>> {
     std::fs::create_dir_all(&path)?;
@@ -111,14 +112,39 @@ fn build_tag_feed(tag: &str, article_templates: &Vec<ArticleTemplate>, base_url:
     Ok(())
 }
 
+fn copy_static_assets(root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
+    let asset_path = format!("{}/static", root_path);
+    if !std::fs::metadata(&asset_path).is_ok() {
+        return Ok(())
+    }
+
+    for entry in WalkDir::new(&asset_path).into_iter().filter_map(|e| e.ok()) {
+        match entry.path().to_str() {
+            None => {},
+            Some(path) => {
+                let target = format!("{}{}", output_path, &path[asset_path.len()..]);
+                if entry.file_type().is_dir() {
+                    std::fs::create_dir_all(target)?;
+                } else if entry.file_type().is_file() {
+                    std::fs::copy(path, target)?;
+                }
+            },
+        }
+    }
+    Ok(())
+}
+
 pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
     let mut syntax_builder = SyntaxSetBuilder::new();
     let _ = syntax_builder.add_from_folder(format!("{}/syntaxes", root_path), true);
     let syntax_set = syntax_builder.build();
+
     if std::fs::metadata(output_path).is_ok() {
         std::fs::remove_dir_all(output_path)?;
         std::fs::create_dir_all(output_path)?;
     }
+
+    copy_static_assets(root_path, output_path)?;
 
     let article_templates = site
         .articles

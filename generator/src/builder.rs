@@ -5,7 +5,8 @@ use crate::site::Site;
 use crate::templates::*;
 use slug;
 use std::error::Error;
-use syntect::parsing::{SyntaxSet, SyntaxSetBuilder};
+use syntect::parsing::SyntaxSet;
+use syntect::dumps;
 use walkdir::WalkDir;
 
 fn write(text: &str, path: &str, file: &str) -> Result<(), Box<dyn Error>> {
@@ -135,10 +136,7 @@ fn copy_static_assets(root_path: &str, output_path: &str) -> Result<(), Box<dyn 
 }
 
 pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
-    let mut syntax_builder = SyntaxSetBuilder::new();
-    let _ = syntax_builder.add_from_folder(format!("{}/syntaxes", root_path), true);
-    let syntax_set = syntax_builder.build();
-
+    let syntax_set: SyntaxSet = dumps::from_binary(include_bytes!("syntax.packdump"));
     if std::fs::metadata(output_path).is_ok() {
         std::fs::remove_dir_all(output_path)?;
         std::fs::create_dir_all(output_path)?;

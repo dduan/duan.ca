@@ -6,7 +6,7 @@
     <h1><a href="/">Daniel Duan</a>'s Articles</h1>
 </header>
 <main>
-    <section class="meta">
+    <section class="metainfo">
     <i>
     <p>Below are a complete list of articles I posted on this site. Each article is tagged with related topics. You can subscribe to this list at <a href="/feed.xml">{{base_url|safe}}/feed.xml</a> or subscribe to a topic such as "Swift" at <a href="/tags/swift/feed.xml">{{base_url|safe}}/tags/swift/feed.xml</a></p>
     </i>
@@ -14,10 +14,10 @@
     <ul>
         {% for post in items %}<li>
             <p><a href="{{post.current_url|safe}}">{{post.meta.title}}</a></p>
-            <p class="meta article-meta">
+            <p class="metainfo article-meta">
                 {{ post.date }}{% for tag in post.tags %}
                 ·
-                <a href="/tags/{{tag.slug}}">{{tag.name}}</a>{% endfor %}
+                <a href="/tag/{{tag.slug}}">{{tag.name}}</a>{% endfor %}
             </p>
         </li>{% endfor %}
     </ul>

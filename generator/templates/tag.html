@@ -8,10 +8,10 @@
     <ul>{% for post in items %}
         <li>
             <p><a href="{{post.current_url|safe}}">{{post.meta.title}}</a></p>
-            <p class="meta article-meta">
+            <p class="metainfo article-meta">
                 {{post.date}}{% for tag in post.tags %}
                 ·
-                <a href="/tags/{{tag.slug}}">{{tag.name}}</a>{% endfor %}
+                <a href="/tag/{{tag.slug}}">{{tag.name}}</a>{% endfor %}
             </p>
         </li>{% endfor %}
     </ul>

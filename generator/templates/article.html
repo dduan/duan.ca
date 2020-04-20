@@ -8,17 +8,17 @@
 
 {% block content %}<article>
     <h1>{{meta.title}}</h1>
-    <p class="meta article-meta">
+    <p class="metainfo article-meta">
         <time datetime="{{date}}" itemProp="datePublished">{{date}}</time>
     </p>{{content|safe}}
 </article>
 <footer>
     <hr />
-    <p class="meta article-meta">
+    <p class="metainfo article-meta">
         <a href="/">Home</a>
         ·
         <a href="/articles">More Articles</a>{% for tag in tags %}
         ·
-        <a href="/tags/{{tag.slug}}">{{tag.name}}</a>{% endfor %}
+        <a href="/tag/{{tag.slug}}">{{tag.name}}</a>{% endfor %}
     </p>
 </footer>{% endblock content %}

@@ -7,6 +7,7 @@ use std::io::{BufRead, BufReader};
 use syntect::html::ClassedHTMLGenerator;
 use syntect::parsing::SyntaxSet;
 use walkdir::WalkDir;
+use htmlescape;
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct Article {
@@ -75,14 +76,15 @@ impl Article {
 }
 pub fn markdown_to_html(syntax_set: &SyntaxSet, markdown: String) -> String {
     let mut options = ComrakOptions::default();
+    options.unsafe_ = true;
     options.github_pre_lang = true;
     let html = comrak::markdown_to_html(&markdown, &options);
-    let re = Regex::new(r#"(?s)<pre lang="(\w+)"><code>(.+)</code></pre>"#).unwrap();
+    let re = Regex::new(r#"(?s)<pre lang="(\w+)"><code>(.+?)</code></pre>"#).unwrap();
     let mut start: usize = 0;
     let mut highlighted = String::new();
     for cap in re.captures_iter(&html) {
         let lang = &cap[1];
-        let code = &cap[2];
+        let code = htmlescape::decode_html(&cap[2]).unwrap();
         let highlighted_code = match syntax_set.find_syntax_by_extension(lang) {
             None => {
                 code.to_owned()
@@ -97,9 +99,9 @@ pub fn markdown_to_html(syntax_set: &SyntaxSet, markdown: String) -> String {
         };
 
         highlighted.push_str(&html[start..cap.get(0).unwrap().start()]);
-        highlighted.push_str("<pre><code>\n");
+        highlighted.push_str("<pre>");
         highlighted.push_str(&highlighted_code);
-        highlighted.push_str("\n</code></pre>");
+        highlighted.push_str("</pre>");
         start = cap.get(0).unwrap().end();
     }
 

@@ -1,4 +1,5 @@
 use askama::Template;
+use comrak::{self, ComrakOptions};
 use crate::article::Article;
 use crate::page::Page;
 use crate::site::Site;
@@ -33,7 +34,10 @@ fn build_page(page: &Page, base_url: &str, root_path: &str, output_path: &str) -
 fn instantiate_article_template<'a>(article: &'a Article, base_url: &str, root_path: &str) -> Option<ArticleTemplate<'a>> {
     match article.read_body(root_path) {
         None => None,
-        Some(body) => {
+        Some(markdown) => {
+            let mut options = ComrakOptions::default();
+            options.github_pre_lang = true;
+            let body = comrak::markdown_to_html(&markdown, &options);
             let permalink = format!("{}{}", base_url, article.relative_link);
             let date_string = format!("{}", article.date.format("%Y-%m-%d"));
             let rfc2822date_string = format!("{}", article.date.to_rfc2822());

@@ -10,7 +10,6 @@ use std::error::Error;
 
 /*
 use comrak::{self, ComrakOptions};
-use std::path::Path;
 use syntect::highlighting::ThemeSet;
 use syntect::html::css_for_theme;
 use std::io::{BufWriter, Write};

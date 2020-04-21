@@ -57,14 +57,14 @@ main > ul {
     list-style-type: none;
     padding: 0;
 }
-pre {
-    overflow: scroll;
-    background: var(--background-color) !important;
-}
 code {
     background: var(--code-background);
     padding-left: 0.3em;
     padding-right: 0.3em;
+}
+pre, pre code {
+    overflow: scroll;
+    background: var(--background-color) !important;
 }
 pre, code {
     font-size: 90%;

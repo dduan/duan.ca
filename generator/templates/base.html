@@ -11,10 +11,12 @@
     {% block meta %}{% endblock %}<meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@daniel_duan">
     <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
     <title>{% block title %}{% endblock %}</title>
     <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
     <link rel="canonical" href="{{meta.permalink|safe}}/">
     <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
 <body>{% block content %}{% endblock %}</body>
 </html>

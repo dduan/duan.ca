@@ -35,7 +35,7 @@ impl Site {
         }
 
         for articles in map.values_mut() {
-            articles.sort_by_key(|a| a.date);
+            articles.sort_by(|a, b| b.date.cmp(&a.date));
         }
 
         let mut result = map.into_iter().collect::<Vec<(String, Vec<Article>)>>();

@@ -50,7 +50,7 @@ impl Article {
             Some(
                 Article {
                     relative_link: relative_link,
-                    title: lines[0].to_owned(),
+                    title: lines[0][2..].to_owned(),
                     date: time.unwrap(),
                     tags: tags,
                 }
@@ -118,7 +118,7 @@ pub fn articles_from_root_path(root_path: &str) -> Vec<Article> {
             root_path
         });
 
-    WalkDir::new(&root_path)
+    let mut articles: Vec<Article> = WalkDir::new(&root_path)
         .into_iter()
         .flat_map(|e| e.ok())
         .filter(|e| {
@@ -136,7 +136,9 @@ pub fn articles_from_root_path(root_path: &str) -> Vec<Article> {
             .map(|path| Article::from_path(&root_path, path))
     })
     .flat_map(|a| a)
-    .collect()
+    .collect();
+    articles.sort_by(|a, b| b.date.cmp(&a.date));
+    articles
 }
 
 #[cfg(test)]

@@ -148,6 +148,25 @@ fn build_sitemap(site: &Site, output_path: &str) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+fn build_404_page(base_url: &str, root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
+    let permalink = format!("{}/404.html", base_url);
+    match std::fs::read_to_string(format!("{}/404.html", root_path)) {
+        Err(_) => {},
+        Ok(body) => {
+            let template = PageTemplate {
+                meta: RenderedMetadata {
+                    permalink: permalink,
+                    title: "It's a 404.".to_string(),
+                },
+                content: &body,
+            };
+            write(&template.render()?, output_path, "404.html")?;
+        },
+    };
+
+    Ok(())
+}
+
 pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
     let syntax_set: SyntaxSet = dumps::from_binary(include_bytes!("syntax.dump"));
     if std::fs::metadata(output_path).is_ok() {
@@ -188,5 +207,6 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
     }
 
     build_sitemap(&site, output_path)?;
+    build_404_page(&site.base_url, root_path, output_path)?;
     Ok(())
 }

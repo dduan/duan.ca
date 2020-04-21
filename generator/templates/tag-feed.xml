@@ -8,8 +8,8 @@
                 <title>{{post.meta.title}}</title>
                 <description>{{post.content}}</description>
                 <pubDate>{{post.rfc2822_date}}</pubDate>
-                <link>{{post.meta.permalink|safe}}</link>
-                <guid isPermaLink="true">{{post.meta.permalink|safe}}</guid>
+                <link>{{post.meta.permalink|safe}}/</link>
+                <guid isPermaLink="true">{{post.meta.permalink|safe}}/</guid>
             </item>{% endfor %}
     </channel>
 </rss>

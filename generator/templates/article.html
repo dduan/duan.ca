@@ -17,8 +17,8 @@
 <footer>
     <hr />
     <p class="metainfo article-meta">
-        <a href="/articles">More Articles</a>{% for tag in tags %}
+        <a href="/articles/">More Articles</a>{% for tag in tags %}
         ·
-        <a href="/tag/{{tag.slug}}">{{tag.name}}</a>{% endfor %}
+        <a href="/tag/{{tag.slug}}/">{{tag.name}}</a>{% endfor %}
     </p>
 </footer>{% endblock content %}

@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Daniel Duan's Articles</title>
-        <link>{{base_url|safe}}</link>
+        <link>{{base_url|safe}}/</link>
         <atom:link href="{{base_url|safe}}/feed.xml" rel="self" type="application/rss+xml" />{% for post in items %}
             <item>
                 <title>{{post.meta.title}}</title>
                 <description>{{post.content}}</description>
                 <pubDate>{{post.rfc2822_date}}</pubDate>
-                <link>{{post.meta.permalink|safe}}</link>
-                <guid isPermaLink="true">{{post.meta.permalink|safe}}</guid>
+                <link>{{post.meta.permalink|safe}}/</link>
+                <guid isPermaLink="true">{{post.meta.permalink|safe}}/</guid>
             </item>{% endfor %}
     </channel>
 </rss>

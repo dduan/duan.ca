@@ -135,6 +135,19 @@ fn copy_static_assets(root_path: &str, output_path: &str) -> Result<(), Box<dyn 
     Ok(())
 }
 
+fn build_sitemap(site: &Site, output_path: &str) -> Result<(), Box<dyn Error>> {
+    let tag_slugs: Vec<String> = site.tags.iter().map(|t| slug::slugify(&t.0)).collect();
+    let template = SitemapTemplate {
+        base_url: &site.base_url,
+        articles: &site.articles.iter().map(|a| a.relative_link.as_str()).collect(),
+        pages: &site.pages.iter().map(|p| p.relative_link.as_str()).collect(),
+        tags: &tag_slugs.iter().map(|t| t.as_str()).collect(),
+    };
+
+    write(&template.render()?, output_path, "sitemap.xml")?;
+    Ok(())
+}
+
 pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
     let syntax_set: SyntaxSet = dumps::from_binary(include_bytes!("syntax.dump"));
     if std::fs::metadata(output_path).is_ok() {
@@ -173,5 +186,7 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
         build_tag_list(&tag, &articles, &site.base_url, output_path)?;
         build_tag_feed(&tag, &articles, &site.base_url, output_path)?;
     }
+
+    build_sitemap(&site, output_path)?;
     Ok(())
 }

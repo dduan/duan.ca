@@ -70,3 +70,12 @@ pub struct PageTemplate<'a> {
     pub meta: RenderedMetadata,
     pub content: &'a str,
 }
+
+#[derive(Template)]
+#[template(path = "sitemap.xml")]
+pub struct SitemapTemplate<'a> {
+    pub base_url: &'a str,
+    pub articles: &'a Vec<&'a str>,
+    pub pages: &'a Vec<&'a str>,
+    pub tags: &'a Vec<&'a str>,
+}

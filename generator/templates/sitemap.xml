@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>{{base_url|safe}}/feed.xml</loc>
+    </url>{% for article in articles %}
+    <url>
+        <loc>{{base_url|safe}}{{article|safe}}/</loc>
+    </url>{% endfor %}
+    {% for page in pages %}<url>
+        <loc>{{base_url|safe}}{{page|safe}}/</loc>
+    </url>{% endfor %}{% for tag in tags %}
+    <url>
+        <loc>{{base_url|safe}}/tag/{{tag|safe}}/</loc>
+    </url>
+    <url>
+        <loc>{{base_url|safe}}/tag/{{tag|safe}}/feed.xml</loc>
+    </url>{% endfor %}
+</urlset>

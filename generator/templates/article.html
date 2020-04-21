@@ -8,11 +8,13 @@
 
 {% block content %}<article>
     <h1>{{meta.title}}</h1>
-    <p class="metainfo article-meta">
-        <a href="/">Daniel Duan</a>
-        ·
-        <time datetime="{{date}}" itemProp="datePublished">{{date}}</time>
-    </p>{{content|safe}}
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="{{date}}" itemProp="datePublished">{{date}}</time>
+        </p>
+    </nav>{{content|safe}}
 </article>
 <footer>
     <hr />

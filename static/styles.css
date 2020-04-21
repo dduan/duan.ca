@@ -101,7 +101,7 @@ td, th {
     border: 1px solid var(--main-text-color);
     padding: 10px;
 }
-.meta, .meta a {
+.metainfo, .metainfo a {
     color: var(--article-meta-color);
     font-size: var(--article-meta-font-size);
 }

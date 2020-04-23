@@ -1,0 +1,29 @@
+name: Continuous Integration
+
+on: [push, pull_request]
+
+jobs:
+  macOS:
+    name: Darwin Tests
+    runs-on: macOS-latest
+    strategy:
+      matrix:
+        action:
+          - cd generator; make test
+          - make build
+    steps:
+    - uses: actions/checkout@v1
+    - name: Action
+      run: ${{ matrix.action }}
+  ubuntu:
+    name: Linux Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        action:
+          - cd generator; make test
+          - make build
+    steps:
+    - uses: actions/checkout@v1
+    - name: Action
+      run: ${{ matrix.action }}

@@ -1,147 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Keep Git Social</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Keep Git Social | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Keep Git Social" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="A project I’m working on uses GitlabHQ, I think it is a cool open source project and the developers are doing an excellent job of making a sweet web interface for Git projects. However, as I found out today, my one issue with it was closed without fixing. And that’s what finally propelled me to writing this airticle." />
-<meta property="og:description" content="A project I’m working on uses GitlabHQ, I think it is a cool open source project and the developers are doing an excellent job of making a sweet web interface for Git projects. However, as I found out today, my one issue with it was closed without fixing. And that’s what finally propelled me to writing this airticle." />
-<link rel="canonical" href="https://duan.ca/2012/10/31/keep-git-social/" />
-<meta property="og:url" content="https://duan.ca/2012/10/31/keep-git-social/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2012-10-31T09:02:30-07:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2012-10-31T09:02:30-07:00","headline":"Keep Git Social","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2012/10/31/keep-git-social/"},"url":"https://duan.ca/2012/10/31/keep-git-social/","author":{"@type":"Person","name":"Daniel Duan"},"description":"A project I’m working on uses GitlabHQ, I think it is a cool open source project and the developers are doing an excellent job of making a sweet web interface for Git projects. However, as I found out today, my one issue with it was closed without fixing. And that’s what finally propelled me to writing this airticle.","@type":"BlogPosting","dateModified":"2012-10-31T09:02:30-07:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2012/10/31/keep-git-social/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Keep Git Social">
+    <meta property="article:published_time" content="2012-10-31"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Keep Git Social</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2012/10/31/keep-git-social/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">Keep Git Social</h1>
-  <div class="post-date">
-    <time>31 Oct 2012</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/git">Git</a>
-
-</div>
-
-
-  </div>
-  <p><em>A project I’m working on uses <a href="http://gitlabhq.com">GitlabHQ</a>, I think it is a cool open source
+<body><article>
+    <h1>Keep Git Social</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2012-10-31" itemProp="datePublished">2012-10-31</time>
+        </p>
+    </nav><p><em>A project I'm working on uses <a href="http://gitlabhq.com">GitlabHQ</a>, I think it is a cool open source
 project and the developers are doing an excellent job of making a sweet web
 interface for Git projects. However, as I found out today, <a href="https://github.com/gitlabhq/gitlabhq/issues/1298" title="Gitlab Issue: Closed">my one issue</a>
-with it was closed without fixing. And that’s what finally propelled me to
+with it was closed without fixing. And that's what finally propelled me to
 writing this airticle.</em></p>
-
 <p>Do you know, the Linux kernel is broken by hundreds of commited patches
 everyday?</p>
-
 <p>That, of course, is a trick question. Yes, <em>technically</em>, hundreds (if not
 thousands) of patches were commited to <em>a</em> git repository of the Linux kernel
-that isn’t different in anyway from <em>the</em> repository. What makes the
-repository “conanical” is the fact that Linus Torvalds owns it. If the world
+that isn't different in anyway from <em>the</em> repository. What makes the
+repository &quot;conanical&quot; is the fact that Linus Torvalds owns it. If the world
 lost access to his hard drive because Linus was hit by a bus (I would never
 wish this to happen) today, all the Linux community need to do is figure out
 who is next BDFL. Then his/hers would become <em>the</em> Linux repository.</p>
-
 <p>In other words, what makes the difference is purely social.</p>
-
 <p><strong>Not trying to fit the social structure of a software project into a
 repository is the biggest strength of git.</strong> This is why I frown everytime
 I see a discussion about locking down branches of a Git repository.</p>
-
-<p>Making developers “own” branches on a shared repository is a pratice
-inheritated from the days of centralized version control. Git doesn’t provide
+<p>Making developers &quot;own&quot; branches on a shared repository is a pratice
+inheritated from the days of centralized version control. Git doesn't provide
 built-in support for this, for good reasons.</p>
-
 <p>With Subversion, the ultimate goal of branch-wise access control is to keep
 out
 bad changes made by developers while give them the benefits of version
 control, namely:</p>
-
 <ol>
-  <li>provide a backup of the change history</li>
-  <li>let others to follow his/her progress so that they can contribute via
+<li>provide a backup of the change history</li>
+<li>let others to follow his/her progress so that they can contribute via
 patches or collaborate if they have write access.</li>
 </ol>
-
 <p>With Git, these are easily achieved by a personal repository read-accessible
 for the team.</p>
-
 <p>Meanwhile, write access is granted at the repository level, but only to very
 few or, more preferably, one person. This is possible because each team member
 can have and only push to his/her own repositories. No change made by others
-will make their way to the “conanical” repository unless its owner(s) activaly
+will make their way to the &quot;conanical&quot; repository unless its owner(s) activaly
 pulls them in. Bad changes therefore is kept out.</p>
-
 <p>Additionally, Git has <a href="http://git-scm.com/book/en/Git-Branching">features</a> flexible enough to support all kinds of
-<a href="http://nvie.com/posts/a-successful-git-branching-model">development process</a>es, partially because its branches<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2012/10/31/keep-git-social/>,</a> by design, are not
+<a href="http://nvie.com/posts/a-successful-git-branching-model">development process</a>es, partially because its branches, by design, are not
 responsible for enforcing access permissions.</p>
-
 <p>Consider developer John working on a shared git repository with locked
 branches: where would he push his temporary branch to for backup, if he can
-only write to <code class="highlighter-rouge">feature42</code> and <code class="highlighter-rouge">johns_branch</code>? How does he get
-<code class="highlighter-rouge">emergency_bugfix_14159</code> pair reviewed at 4am? If he uses his own repo for
+only write to <code>feature42</code> and <code>johns_branch</code>? How does he get
+<code>emergency_bugfix_14159</code> pair reviewed at 4am? If he uses his own repo for
 those, does it mean he has to force the whole team to know about it?  How does
-it affect work when a <code class="highlighter-rouge">git branch --all</code> produces a phone book?</p>
-
-<p>Break Git’s design gets you no where nice.</p>
-
-<p>And no, Git’s social model doesn’t add work to the owner of the “official”
+it affect work when a <code>git branch --all</code> produces a phone book?</p>
+<p>Break Git's design gets you no where nice.</p>
+<p>And no, Git's social model doesn't add work to the owner of the &quot;official&quot;
 repository. Afterall, Git was designed with he linux kernel in mind!  Linus
 himself explains it the best (summary provided below):</p>
-
 <div class="video-container">
-    <iframe src="http://www.youtube.com/embed/4XpnKHJAok8" frameborder="0" allowfullscreen=""></iframe>
+    <iframe src="http://www.youtube.com/embed/4XpnKHJAok8" frameborder="0" allowfullscreen></iframe>
 </div>
-
-<p>In short, Linus only review pull requests from a few “lieutenants” he trusts,
+<p>In short, Linus only review pull requests from a few &quot;lieutenants&quot; he trusts,
 and they each follow the same process with their trusted few.  And the pyramid
 trickles all the way down. Here agian, Git solves a problem by getting out of
-the way of the project’s social stucture, instead of trying to encapsulate it.</p>
-
-<p>Git was the first version control system I’ve ever used starting in 2008.
-I’ve since gradually realized that not everyone is lucky like me, in the sense
+the way of the project's social stucture, instead of trying to encapsulate it.</p>
+<p>Git was the first version control system I've ever used starting in 2008.
+I've since gradually realized that not everyone is lucky like me, in the sense
 that svn has been working just fine for a lot of people. When their project
 switches to Git, emulating the svn/old workflow with functionality provided by
-projects like <code class="highlighter-rouge">gitolite</code> is only natural. But if you are one of them, and want
+projects like <code>gitolite</code> is only natural. But if you are one of them, and want
 more creativity from your team, perhaps embracing the social aspect of Git by
 breaking the shackles on their hand is a good thing to try.</p>
 
-
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/git/">Git</a>
+    </p>
+</footer></body>
 </html>

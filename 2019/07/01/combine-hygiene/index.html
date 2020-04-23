@@ -1,217 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>On the Subject of Interface Hygiene</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>On the Subject of Interface Hygiene | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="On the Subject of Interface Hygiene" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="In a purly reactive world, your entire program merge into a single stream. Now, close your eyes, and envision: your project as one, beautiful, stream." />
-<meta property="og:description" content="In a purly reactive world, your entire program merge into a single stream. Now, close your eyes, and envision: your project as one, beautiful, stream." />
-<link rel="canonical" href="https://duan.ca/2019/07/01/combine-hygiene/" />
-<meta property="og:url" content="https://duan.ca/2019/07/01/combine-hygiene/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-07-01T20:22:48-07:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2019-07-01T20:22:48-07:00","headline":"On the Subject of Interface Hygiene","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2019/07/01/combine-hygiene/"},"url":"https://duan.ca/2019/07/01/combine-hygiene/","author":{"@type":"Person","name":"Daniel Duan"},"description":"In a purly reactive world, your entire program merge into a single stream. Now, close your eyes, and envision: your project as one, beautiful, stream.","@type":"BlogPosting","dateModified":"2019-07-01T20:22:48-07:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2019/07/01/combine-hygiene/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="On the Subject of Interface Hygiene">
+    <meta property="article:published_time" content="2019-07-01"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>On the Subject of Interface Hygiene</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2019/07/01/combine-hygiene/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">On the Subject of Interface Hygiene</h1>
-  <div class="post-date">
-    <time>01 Jul 2019</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/combine">Combine</a>,
-
-  <a href="/tag/swift">Swift</a>
-
-</div>
-
-
-  </div>
-  <p>In a purly reactive world, your entire program merge into a single stream. Now<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2019/07/01/combine-hygiene/>,</a>
+<body><article>
+    <h1>On the Subject of Interface Hygiene</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2019-07-01" itemProp="datePublished">2019-07-01</time>
+        </p>
+    </nav><p>In a purly reactive world, your entire program merge into a single stream. Now,
 close your eyes, and envision: your project as one, beautiful, stream.</p>
-
-<p>Now open your eyes. Yeah, it’s not. Your project is a Mac or iOS app. It’s full
+<p>Now open your eyes. Yeah, it's not. Your project is a Mac or iOS app. It's full
 of your memories, sweat, and blood. And you are ready to sweat and bleed some
 more by putting some Combine and SwiftUI into it. You watched the WWDC19
-sessions and learned that “Subjcets are super powerful”. You looked into your
-code and realized you can’t really do anything with Combine without <code class="highlighter-rouge">Subject</code>s
+sessions and learned that &quot;Subjcets are super powerful&quot;. You looked into your
+code and realized you can't really do anything with Combine without <code>Subject</code>s
 at the current state of the project.</p>
-
 <p>Well…</p>
-
 <p>Here are a few habits that help keeping your project that prevasively uses
-<code class="highlighter-rouge">Combine.Subject</code> <em>sane</em>. They should seem obvious to anyone who understands
-Murphy’s law and the value of minialism in interfaces. If you already are using
+<code>Combine.Subject</code> <em>sane</em>. They should seem obvious to anyone who understands
+Murphy's law and the value of minialism in interfaces. If you already are using
 some reactive stream implementation, substitute the types with their
 counterparts in your framework and these rules should seem down right <strong>basic</strong>.</p>
-
-<h2 id="vend-subjects-as-publishers">Vend <code class="highlighter-rouge">Subject</code>s as <code class="highlighter-rouge">Publisher</code>s</h2>
-
-<p><code class="highlighter-rouge">Subject</code>s help bridge from the imperitive to the reactive world. Somewhat
-paradoxically, sharing them is not very “RX-y”. This is akin to prefering <code class="highlighter-rouge">let</code>s
-over <code class="highlighter-rouge">var</code>.</p>
-
+<h2>Vend <code>Subject</code>s as <code>Publisher</code>s</h2>
+<p><code>Subject</code>s help bridge from the imperitive to the reactive world. Somewhat
+paradoxically, sharing them is not very &quot;RX-y&quot;. This is akin to prefering <code>let</code>s
+over <code>var</code>.</p>
 <p>Most of the time, what you want to share is the values pumped into the stream,
-not the privilage to mutate it. Because Subjects conform to <code class="highlighter-rouge">Publisher</code>, it’s
+not the privilage to mutate it. Because Subjects conform to <code>Publisher</code>, it's
 easy to hide from the users the fact that your stream is backed by them.</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Bad: now anyone who get a hold of it can mess with your stream!</span>
-<span class="kd">public</span> <span class="kd">enum</span> <span class="kt">GreatInts</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">updates</span> <span class="o">=</span> <span class="kt">CurrentValueSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> Bad: now anyone who get a hold of it can mess with your stream!</span>
+<span class="storage modifier">public</span> <span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">GreatInts</span></span></span> {
+    <span class="storage modifier">public</span> <span class="keyword variable">var</span> updates = <span class="support class">CurrentValueSubject</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span>(<span class="constant numeric decimal">0</span>)
+}
+</span></pre>
 <p>With Combine this conversion happens via type-erasure:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Better: all your users care is the stream (publisher), so give them that!</span>
-<span class="kd">public</span> <span class="kd">enum</span> <span class="kt">GreatInts</span> <span class="p">{</span>
-    <span class="c1">// Internally, it's backed by a subject.</span>
-    <span class="k">var</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">CurrentValueSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="c1">// Externally, it's just a Publisher. </span>
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">subject</span><span class="p">:</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span> <span class="p">{</span>
-        <span class="n">subject</span><span class="o">.</span><span class="nf">eraseToAnyPublisher</span><span class="p">()</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h2 id="currentvaluesubject-natually-caches-the-latest-value">CurrentValueSubject natually caches the latest value</h2>
-
-<p>RX theorists will hate this: sometimes it’s just practical to expose
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> Better: all your users care is the stream (publisher), so give them that!</span>
+<span class="storage modifier">public</span> <span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">GreatInts</span></span></span> {
+    <span class="comment line"><span class="punctuation definition comment">//</span> Internally, it&#39;s backed by a subject.</span>
+    <span class="keyword variable">var</span> subject = <span class="support class">CurrentValueSubject</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span>(<span class="constant numeric decimal">0</span>)
+    <span class="comment line"><span class="punctuation definition comment">//</span> Externally, it&#39;s just a Publisher. </span>
+    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">subject</span>: <span class="support class">AnyPublisher</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span> {
+        subject<span class="keyword operator">.</span>eraseToAnyPublisher()
+    }
+}
+</span></pre>
+<h2>CurrentValueSubject natually caches the latest value</h2>
+<p>RX theorists will hate this: sometimes it's just practical to expose
 a synchronous interface to the latest vaule in the stream!</p>
-
 <p>Two things.</p>
-
 <ol>
-  <li>It might be tempting to expose the subject and let your user use its
-<code class="highlighter-rouge">.value</code>. Well, you shouldn’t (as explained in the previous section).
+<li>It might be tempting to expose the subject and let your user use its
+<code>.value</code>. Well, you shouldn't (as explained in the previous section).
 A separate interface dedicated to the latest value prevents people from
 polluting your stream.</li>
 </ol>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// (Still) bad</span>
-<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">GreatInts</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">updates</span> <span class="o">=</span> <span class="kt">CurrentValueSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<ol>
-  <li>Remember <code class="highlighter-rouge">CurrentValueSubject</code> has that <code class="highlighter-rouge">.value</code> property! It may seem
-surprising, but I’ve seen folks transitioning to RX clinging to the old ways:</li>
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> (Still) bad</span>
+<span class="storage modifier">public</span> <span class="storage modifier">final</span> <span class="entity name type"><span class="keyword entity">class</span> <span class="entity name type"><span class="support class">GreatInts</span></span></span> {
+    <span class="storage modifier">public</span> <span class="keyword variable">var</span> updates = <span class="support class">CurrentValueSubject</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span>(<span class="constant numeric decimal">0</span>)
+}
+</span></pre>
+<ol start="2">
+<li>Remember <code>CurrentValueSubject</code> has that <code>.value</code> property! It may seem
+surprising, but I've seen folks transitioning to RX clinging to the old ways:</li>
 </ol>
+<pre><span class="source swift"><span class="storage modifier">public</span> <span class="storage modifier">final</span> <span class="entity name type"><span class="keyword entity">class</span> <span class="entity name type"><span class="support class">GreatInts</span></span></span> {
+    <span class="comment line"><span class="punctuation definition comment">//</span> well, at least it&#39;s not a public subject...</span>
+    <span class="keyword variable">var</span> subject = <span class="support class">CurrentValueSubject</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span>(<span class="constant numeric decimal">0</span>) <span class="comment line"><span class="punctuation definition comment">//</span> &lt;- initial value 0</span>
+    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">updates</span>: <span class="support class">AnyPublisher</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span> {
+        subject<span class="keyword operator">.</span>eraseToAnyPublisher()
+    }
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">GreatInts</span> <span class="p">{</span>
-    <span class="c1">// well, at least it's not a public subject...</span>
-    <span class="k">var</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">CurrentValueSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">// &lt;- initial value 0</span>
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">updates</span><span class="p">:</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span> <span class="p">{</span>
-        <span class="n">subject</span><span class="o">.</span><span class="nf">eraseToAnyPublisher</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Wait, there's that 0 again</span>
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">latest</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">{</span>
-        <span class="k">didSet</span> <span class="p">{</span>
-            <span class="n">subject</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">latest</span><span class="p">)</span> <span class="c1">// ?</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>First, you’ll notice that <code class="highlighter-rouge">0</code>, the initial value, is duplicated as both the
-subject’s initial value, as well as the value of a stored property. And these
-duplicated sources of truth persist throughout the parent’s life time. Weird,
+    <span class="comment line"><span class="punctuation definition comment">//</span> Wait, there&#39;s that 0 again</span>
+    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">latest</span>: <span class="support class">Int</span> = <span class="constant numeric decimal">0</span> {
+        <span class="keyword control">didSet</span> {
+            subject<span class="keyword operator">.</span>send(latest) <span class="comment line"><span class="punctuation definition comment">//</span> ?</span>
+        }
+    }
+}
+</span></pre>
+<p>First, you'll notice that <code>0</code>, the initial value, is duplicated as both the
+subject's initial value, as well as the value of a stored property. And these
+duplicated sources of truth persist throughout the parent's life time. Weird,
 right?</p>
+<p>Here's a slightly better version:</p>
+<pre><span class="source swift"><span class="storage modifier">public</span> <span class="storage modifier">final</span> <span class="entity name type"><span class="keyword entity">class</span> <span class="entity name type"><span class="support class">GreatInts</span></span></span> {
+    <span class="keyword variable">var</span> subject = <span class="support class">PassthroughSubject</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span>()
+    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">updates</span>: <span class="support class">AnyPublisher</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span> {
+        subject<span class="keyword operator">.</span>eraseToAnyPublisher()
+    }
 
-<p>Here’s a slightly better version:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">GreatInts</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">PassthroughSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span><span class="p">()</span>
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">updates</span><span class="p">:</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span> <span class="p">{</span>
-        <span class="n">subject</span><span class="o">.</span><span class="nf">eraseToAnyPublisher</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">latest</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">{</span>
-        <span class="k">didSet</span> <span class="p">{</span>
-            <span class="n">subject</span><span class="o">.</span><span class="nf">send</span><span class="p">(</span><span class="n">latest</span><span class="p">)</span> <span class="c1">// ?</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Now there’s no two copy of the latest value in memory anymore. But in my opinion
-it does not embrace the full power of Combine. Here’s the most natual way to do
+    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">latest</span>: <span class="support class">Int</span> = <span class="constant numeric decimal">0</span> {
+        <span class="keyword control">didSet</span> {
+            subject<span class="keyword operator">.</span>send(latest) <span class="comment line"><span class="punctuation definition comment">//</span> ?</span>
+        }
+    }
+}
+</span></pre>
+<p>Now there's no two copy of the latest value in memory anymore. But in my opinion
+it does not embrace the full power of Combine. Here's the most natual way to do
 this:</p>
+<pre><span class="source swift"><span class="storage modifier">public</span> <span class="storage modifier">final</span> <span class="entity name type"><span class="keyword entity">class</span> <span class="entity name type"><span class="support class">GreatInts</span></span></span> {
+    <span class="comment line"><span class="punctuation definition comment">///</span> This is a CurrentValueSubject again.</span>
+    <span class="keyword variable">var</span> subject = <span class="support class">CurrentValueSubject</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span>(<span class="constant numeric decimal">0</span>)
+    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">updates</span>: <span class="support class">AnyPublisher</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span> {
+        subject<span class="keyword operator">.</span>eraseToAnyPublisher()
+    }
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">GreatInts</span> <span class="p">{</span>
-    <span class="c1">/// This is a CurrentValueSubject again.</span>
-    <span class="k">var</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">CurrentValueSubject</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">updates</span><span class="p">:</span> <span class="kt">AnyPublisher</span><span class="o">&lt;</span><span class="kt">Int</span><span class="p">,</span> <span class="kt">Never</span><span class="o">&gt;</span> <span class="p">{</span>
-        <span class="n">subject</span><span class="o">.</span><span class="nf">eraseToAnyPublisher</span><span class="p">()</span>
-    <span class="p">}</span>
-
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">latest</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span>
-        <span class="n">subject</span><span class="o">.</span><span class="n">value</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
+    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">latest</span>: <span class="support class">Int</span> {
+        subject<span class="keyword operator">.</span>value
+    }
+}
+</span></pre>
 <p>Essentially, you create separate public interface, each vends a little piece of
-<code class="highlighter-rouge">CurrentValueSubject</code>’s power.</p>
-
-<h2 id="no-really-dont-use-subjects">No really, don’t use <code class="highlighter-rouge">Subject</code>s</h2>
-
-<p>Even a well-scoped <code class="highlighter-rouge">Subject</code> (properly being private or internal, depending on
+<code>CurrentValueSubject</code>'s power.</p>
+<h2>No really, don't use <code>Subject</code>s</h2>
+<p>Even a well-scoped <code>Subject</code> (properly being private or internal, depending on
 your tool of choice for access control) still has a mutable state that you
-probably don’t want: its stream can go from “alive” to “complete”. And, again,
+probably don't want: its stream can go from &quot;alive&quot; to &quot;complete&quot;. And, again,
 anyone with access can make this state transition happen, leaving you in the
 undefensible position of … hoping everyone on your team to not misuse your
 stuff?</p>
-
-<p>Lucky for you (and me), a “incompletable” subject is a established concept – a
-“Relay”. I’ve put together a repo for you to look and/or use:</p>
-
+<p>Lucky for you (and me), a &quot;incompletable&quot; subject is a established concept -- a
+&quot;Relay&quot;. I've put together a repo for you to look and/or use:</p>
 <p><a href="https://github.com/dduan/relay">https://github.com/dduan/relay</a></p>
-
 <p>Yeah, ban all Subjects in your project with a linter. Seriously.</p>
-
-<h2 id="fin">Fin</h2>
-
-<p>That’s all for now. I’m not an expert with RX myself. Hopefully these
+<h2>Fin</h2>
+<p>That's all for now. I'm not an expert with RX myself. Hopefully these
 perspective can help you avoid some nasties.</p>
 
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/combine/">Combine</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+    </p>
+</footer></body>
 </html>

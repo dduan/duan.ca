@@ -1,114 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Daniel Duan - Minute Swift</title>
-        <link>https://duan.ca/tag/Minute Swift/</link>
-        <atom:link href="https://duan.ca/tag/Minute Swift/index.xml" rel="self" type="application/rss+xml" />
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
+        <title>Daniel Duan's Articles About Minute Swift</title>
+        <link>https://duan.ca/tag/minute-swift/</link>
+        <atom:link href="https://duan.ca/tag/minute-swift/feed.xml" rel="self" type="application/rss+xml" />
             <item>
-                <title>Building 'pwd' Under 1 Minute In Swift</title>
-                <description>&lt;p&gt;I guess I’m starting a series of minute-long videos. In this first video, I built &lt;code class=&quot;highlighter-rouge&quot;&gt;pwd&lt;/code&gt; out of &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;. The
-code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift’s great C-interop
-capability.&lt;/p&gt;
-
+                <title>Building &#x27;pwd&#x27; Under 1 Minute In Swift</title>
+                <description>&lt;p&gt;I guess I&#x27;m starting a series of minute-long videos. In this first video, I built &lt;code&gt;pwd&lt;&#x2f;code&gt; out of &lt;code&gt;getcwd&lt;&#x2f;code&gt;. The
+code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift&#x27;s great C-interop
+capability.&lt;&#x2f;p&gt;
 &lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Some details are lost in this video, however. For example&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/&gt;,&lt;/a&gt; the POSIX standard actually says &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;’s 2nd
-argument being &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
-memory as needed). Swift’s handling of &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt; aka &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;/code&gt; in context of a &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; array
-is also very cool.&lt;/p&gt;
+    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
+&lt;p&gt;Some details are lost in this video, however. For example, the POSIX standard actually says &lt;code&gt;getcwd&lt;&#x2f;code&gt;&#x27;s 2nd
+argument being &lt;code&gt;0&lt;&#x2f;code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
+memory as needed). Swift&#x27;s handling of &lt;code&gt;char *&lt;&#x2f;code&gt; aka &lt;code&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;&#x2f;code&gt; in context of a &lt;code&gt;var&lt;&#x2f;code&gt; array
+is also very cool.&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Wed, 27 Dec 2017 01:13:07 -0800</pubDate>
-                
                 <link>https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</link>
-                
                 <guid isPermaLink="true">https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</guid>
             </item>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
     </channel>
 </rss>

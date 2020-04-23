@@ -1,148 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Building Swift Projects In Source Compatibility Mode</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Building Swift Projects In Source Compatibility Mode | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Building Swift Projects In Source Compatibility Mode" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="It’s a few weeks before WWDC, so naturally¹ it’s time to try build your Swift projects in the compiler’s compatibility mode!" />
-<meta property="og:description" content="It’s a few weeks before WWDC, so naturally¹ it’s time to try build your Swift projects in the compiler’s compatibility mode!" />
-<link rel="canonical" href="https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/" />
-<meta property="og:url" content="https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2017-05-22T09:04:01-07:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2017-05-22T09:04:01-07:00","headline":"Building Swift Projects In Source Compatibility Mode","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/"},"url":"https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/","author":{"@type":"Person","name":"Daniel Duan"},"description":"It’s a few weeks before WWDC, so naturally¹ it’s time to try build your Swift projects in the compiler’s compatibility mode!","@type":"BlogPosting","dateModified":"2017-05-22T09:04:01-07:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Building Swift Projects In Source Compatibility Mode">
+    <meta property="article:published_time" content="2017-05-22"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Building Swift Projects In Source Compatibility Mode</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">Building Swift Projects In Source Compatibility Mode</h1>
-  <div class="post-date">
-    <time>22 May 2017</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/swift">Swift</a>,
-
-  <a href="/tag/xcode">Xcode</a>
-
-</div>
-
-
-  </div>
-  <p>It’s a few weeks before WWDC<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/>,</a> so naturally¹ it’s time to try build your Swift
-projects in the compiler’s compatibility mode!</p>
-
+<body><article>
+    <h1>Building Swift Projects In Source Compatibility Mode</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2017-05-22" itemProp="datePublished">2017-05-22</time>
+        </p>
+    </nav><p>It's a few weeks before WWDC, so naturally¹ it's time to try build your Swift
+projects in the compiler's compatibility mode!</p>
 <ol>
-  <li>
-    <p>Download and install a snapshot for the next major version <a href="https://swift.org/download/">on
+<li>
+<p>Download and install a snapshot for the next major version <a href="https://swift.org/download/">on
 Swift.org</a>.</p>
-
-    <p><img src="/assets/2017/05/download-swift-snapshot.png" alt="download swift toolchain" />
- <img src="/assets/2017/05/install-swift-snapshot.png" alt="install swift toolchain" /></p>
-  </li>
-  <li>
-    <p>Choose the newly installed toolchain in Xcode.</p>
-
-    <p><img src="/assets/2017/05/choose-toolchain.png" alt="choose swift toolchain in Xcode" /></p>
-  </li>
-  <li>
-    <p>Ask the compiler to use compatibility mode. This means using the complier
-flag <code class="highlighter-rouge">-swift-version X</code>, where “X” is the <em>current</em> major Swift version.</p>
-
-    <p>In project’s “Build Settings”, value for “Other Swift Flags” should
- contain <code class="highlighter-rouge">-swift-version X</code>. This could mean setting it in Xcode, in
- <code class="highlighter-rouge">.xcconfig</code> files you are using and/or in your dependency managers such
- as Cocoapods.</p>
-
-    <p><img src="/assets/2017/05/compat-mode-flag.png" alt="compatibility flag in xcode" /></p>
-
-    <p>For example, with Cocoapods, you’ll need to add the following in your
- <code class="highlighter-rouge">Podfile</code> to compile 3rd party libraries in compatibility mode:</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> post_install do |installer|
+<p><img src="/assets/2017/05/download-swift-snapshot.png" alt="download swift toolchain" />
+<img src="/assets/2017/05/install-swift-snapshot.png" alt="install swift toolchain" /></p>
+</li>
+<li>
+<p>Choose the newly installed toolchain in Xcode.</p>
+<p><img src="/assets/2017/05/choose-toolchain.png" alt="choose swift toolchain in Xcode" /></p>
+</li>
+<li>
+<p>Ask the compiler to use compatibility mode. This means using the complier
+flag <code>-swift-version X</code>, where &quot;X&quot; is the <em>current</em> major Swift version.</p>
+<p>In project's &quot;Build Settings&quot;, value for &quot;Other Swift Flags&quot; should
+contain <code>-swift-version X</code>. This could mean setting it in Xcode, in
+<code>.xcconfig</code> files you are using and/or in your dependency managers such
+as Cocoapods.</p>
+<p><img src="/assets/2017/05/compat-mode-flag.png" alt="compatibility flag in xcode" /></p>
+<p>For example, with Cocoapods, you'll need to add the following in your
+<code>Podfile</code> to compile 3rd party libraries in compatibility mode:</p>
+<pre><code> post_install do |installer|
      installer.pods_projects.targets.each do |target|
          target.build_configurations.each do |config|
-             config.build_settings["OTHER_SWIFT_FLAGS"] = "$(inherited) -swift-version 3"
+             config.build_settings[&quot;OTHER_SWIFT_FLAGS&quot;] = &quot;$(inherited) -swift-version 3&quot;
          end
      end
  end
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Build your project! This is where things start to get exciting.</p>
-
-    <p>You should expect some warnings. Hopefully they are self-explanatory
+</code></pre>
+</li>
+<li>
+<p>Build your project! This is where things start to get exciting.</p>
+<p>You should expect some warnings. Hopefully they are self-explanatory
 enough. Most of them should correspond to <a href="https://apple.github.io/swift-evolution/">a swift-evolution
 proposal</a>.</p>
-
-    <p>Improvement to the language or compiler usually means some of these
+<p>Improvement to the language or compiler usually means some of these
 warnings tell you problems in your code that has been ignored by the
 compiler previously. Fix them today!</p>
-
-    <p>The project should compile successfully in compatibility mode (despite
+<p>The project should compile successfully in compatibility mode (despite
 warnings). This where you can stop reading. Go celebrate with your
 coworkers, friends, and family!</p>
-
-    <p>Things could go wrong for compiler snapshots, of course. Read on if see
+<p>Things could go wrong for compiler snapshots, of course. Read on if see
 errors or crashes (whaaaaat 😸).</p>
-  </li>
-  <li>
-    <p>It’s time to tell the compiler team about the error or crash you encountered.</p>
-
-    <p>Reduce the error or crash to a state that your are comfortable reporting in
+</li>
+<li>
+<p>It's time to tell the compiler team about the error or crash you encountered.</p>
+<p>Reduce the error or crash to a state that your are comfortable reporting in
 public. Then go to <a href="https://bugs.swift.org">bugs.swift.org</a> and file a JIRA
 ticket describing the error or compiler crash.</p>
-
-    <p>During the process of code reduction you may find ways to work around the
+<p>During the process of code reduction you may find ways to work around the
 compile error or crash. Make the changes for the workaround and repeat
 steps 4-5. Maybe your project will compile this time.</p>
-  </li>
-  <li>
-    <p>The issue you discovered will be fixed in the official Swift release come
-fall. You’ve ensured a smooth Swift upgrade for your project and contributed
+</li>
+<li>
+<p>The issue you discovered will be fixed in the official Swift release come
+fall. You've ensured a smooth Swift upgrade for your project and contributed
 to the Swift community 🎉!</p>
-  </li>
+</li>
 </ol>
-
 <hr />
-
 <p>¹ source compatibility mode is a thing starting with Swift 4. As new
 major version of Swift is released, code written in the previous version should
 compile without change in compatibility mode.</p>
 
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/xcode/">Xcode</a>
+    </p>
+</footer></body>
 </html>

@@ -1,103 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Supporting Foundation.Data Without Depending On It</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Supporting Foundation.Data Without Depending On It | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Supporting Foundation.Data Without Depending On It" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="While implementing some file I/O APIs in Pathos, I decided reading/writing file content as Foundation.Data is kind of important (can you blame me?). But Pathos, by accident, does not depend on Swift Foundation. Now what?" />
-<meta property="og:description" content="While implementing some file I/O APIs in Pathos, I decided reading/writing file content as Foundation.Data is kind of important (can you blame me?). But Pathos, by accident, does not depend on Swift Foundation. Now what?" />
-<link rel="canonical" href="https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/" />
-<meta property="og:url" content="https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2018-08-18T11:00:41-07:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2018-08-18T11:00:41-07:00","headline":"Supporting Foundation.Data Without Depending On It","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/"},"url":"https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/","author":{"@type":"Person","name":"Daniel Duan"},"description":"While implementing some file I/O APIs in Pathos, I decided reading/writing file content as Foundation.Data is kind of important (can you blame me?). But Pathos, by accident, does not depend on Swift Foundation. Now what?","@type":"BlogPosting","dateModified":"2018-08-18T11:00:41-07:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Supporting Foundation.Data Without Depending On It">
+    <meta property="article:published_time" content="2018-08-18"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Supporting Foundation.Data Without Depending On It</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">Supporting Foundation.Data Without Depending On It</h1>
-  <div class="post-date">
-    <time>18 Aug 2018</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/swift">Swift</a>,
-
-  <a href="/tag/foundation">Foundation</a>
-
-</div>
-
-
-  </div>
-  <p>While implementing some file I/O APIs in <a href="https://github.com/dduan/Pathos">Pathos</a>, I decided reading/writing
-file content as <code class="highlighter-rouge">Foundation.Data</code> is kind of important (can you blame me?). But
-Pathos, by accident, does not depend on Swift <code class="highlighter-rouge">Foundation</code>. Now what?</p>
-
-<p>After browsing the <a href="https://developer.apple.com/documentation/foundation/data">documentation</a>, a pretty good solution emerged: <code class="highlighter-rouge">Data</code> is
+<body><article>
+    <h1>Supporting Foundation.Data Without Depending On It</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2018-08-18" itemProp="datePublished">2018-08-18</time>
+        </p>
+    </nav><p>While implementing some file I/O APIs in <a href="https://github.com/dduan/Pathos">Pathos</a>, I decided reading/writing
+file content as <code>Foundation.Data</code> is kind of important (can you blame me?). But
+Pathos, by accident, does not depend on Swift <code>Foundation</code>. Now what?</p>
+<p>After browsing the <a href="https://developer.apple.com/documentation/foundation/data">documentation</a>, a pretty good solution emerged: <code>Data</code> is
 a sequence of bytes! Lets say we hand our users some bytes, they can easily
-construct a <code class="highlighter-rouge">Data</code> from it:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">content</span><span class="p">:</span> <span class="p">[</span><span class="kt">UInt8</span><span class="p">]</span> <span class="o">=</span> <span class="k">try</span> <span class="nf">readBytes</span><span class="p">(</span><span class="n">fromPath</span> <span class="s">"/tmp/test"</span><span class="p">)</span>
-<span class="kt">Data</span><span class="p">(</span><span class="nv">bytes</span><span class="p">:</span> <span class="n">content</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>Okay<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/>,</a> so this built-in initializer makes <code class="highlighter-rouge">[UInt8]</code> an acceptable substitute for
-returning <code class="highlighter-rouge">Data</code>. What can we do about about <code class="highlighter-rouge">Data</code> as input? Well, turns out,
-<code class="highlighter-rouge">Data</code> is a <code class="highlighter-rouge">Collection</code> of <code class="highlighter-rouge">UInt8</code>s! So we can accept <code class="highlighter-rouge">Data</code> indirectly like
+construct a <code>Data</code> from it:</p>
+<pre><span class="source swift"><span class="keyword variable">let</span> <span class="variable parameter">content</span>: [<span class="support class">UInt8</span>] = <span class="keyword control">try</span> readBytes(fromPath <span class="string quoted double">&quot;/tmp/test&quot;</span>)
+<span class="support class">Data</span>(<span class="variable parameter">bytes</span>: content)
+</span></pre>
+<p>Okay, so this built-in initializer makes <code>[UInt8]</code> an acceptable substitute for
+returning <code>Data</code>. What can we do about about <code>Data</code> as input? Well, turns out,
+<code>Data</code> is a <code>Collection</code> of <code>UInt8</code>s! So we can accept <code>Data</code> indirectly like
 so:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="n">write</span><span class="o">&lt;</span><span class="kt">Bytes</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">bytes</span><span class="p">:</span> <span class="kt">Bytes</span><span class="p">)</span>
-    <span class="k">where</span> <span class="kt">Bytes</span><span class="p">:</span> <span class="kt">Collection</span><span class="p">,</span> <span class="kt">Bytes</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">UInt8</span>
-<span class="p">{</span>
-    <span class="c1">// blah</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>User can pass in a <code class="highlighter-rouge">Data</code> as argument and it just works™.</p>
-
-<p>The only disadvantage of supporting <code class="highlighter-rouge">Data</code> in these ways is that it requires
+<pre><span class="source swift"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">write</span></span><span class="keyword operator">&lt;</span><span class="support class">Bytes</span><span class="keyword operator">&gt;</span>(<span class="constant language other">_</span> <span class="variable parameter">bytes</span>: <span class="support class">Bytes</span>)
+    <span class="keyword control">where</span> <span class="support class">Bytes</span>: <span class="support class">Collection</span>, <span class="support class">Bytes</span><span class="keyword operator">.</span><span class="support class">Element</span> == <span class="support class">UInt8</span>
+{
+    <span class="comment line"><span class="punctuation definition comment">//</span> blah</span>
+}
+</span></pre>
+<p>User can pass in a <code>Data</code> as argument and it just works™.</p>
+<p>The only disadvantage of supporting <code>Data</code> in these ways is that it requires
 your user to discover it either via your excellent documentation, or through
-their super good knowledge of <code class="highlighter-rouge">Foundation</code>.</p>
-
+their super good knowledge of <code>Foundation</code>.</p>
 <p><em>Update: this could also <a href="https://mastodon.social/@helge/100573358160444340">be</a> <a href="https://twitter.com/daniel_dunbar/status/1030938273047179264">slower</a> than using Data directly. Luckily
-I’m only doing file I/O here.</em></p>
-
+I'm only doing file I/O here.</em></p>
 <p>But this is pretty nice, regardless.</p>
 
-
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/foundation/">Foundation</a>
+    </p>
+</footer></body>
 </html>

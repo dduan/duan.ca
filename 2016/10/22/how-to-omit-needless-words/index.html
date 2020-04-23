@@ -1,222 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>How To Omit Needless Words</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>How To Omit Needless Words | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="How To Omit Needless Words" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="A typical experience in adopting Swift 3 may look like this:" />
-<meta property="og:description" content="A typical experience in adopting Swift 3 may look like this:" />
-<link rel="canonical" href="https://duan.ca/2016/10/22/how-to-omit-needless-words/" />
-<meta property="og:url" content="https://duan.ca/2016/10/22/how-to-omit-needless-words/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-10-22T17:08:41-07:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2016-10-22T17:08:41-07:00","headline":"How To Omit Needless Words","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2016/10/22/how-to-omit-needless-words/"},"url":"https://duan.ca/2016/10/22/how-to-omit-needless-words/","author":{"@type":"Person","name":"Daniel Duan"},"description":"A typical experience in adopting Swift 3 may look like this:","@type":"BlogPosting","dateModified":"2016-10-22T17:08:41-07:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2016/10/22/how-to-omit-needless-words/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="How To Omit Needless Words">
+    <meta property="article:published_time" content="2016-10-22"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>How To Omit Needless Words</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2016/10/22/how-to-omit-needless-words/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">How To Omit Needless Words</h1>
-  <div class="post-date">
-    <time>22 Oct 2016</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/swift">Swift</a>,
-
-  <a href="/tag/api-design-guidelines">API Design Guidelines</a>,
-
-  <a href="/tag/naming">Naming</a>
-
-</div>
-
-
-  </div>
-  <p>A typical experience in adopting Swift 3 may look like this:</p>
-
+<body><article>
+    <h1>How To Omit Needless Words</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2016-10-22" itemProp="datePublished">2016-10-22</time>
+        </p>
+    </nav><p>A typical experience in adopting Swift 3 may look like this:</p>
 <ul>
-  <li>Run the migrator.</li>
-  <li>Fix up what the migrator left undone so your project complies.</li>
-  <li>Remove artifacts that migrator added to ensure successful compilation (you
+<li>Run the migrator.</li>
+<li>Fix up what the migrator left undone so your project complies.</li>
+<li>Remove artifacts that migrator added to ensure successful compilation (you
 know what this means if you finished previous step in a mildly sized code
 base).</li>
-  <li>Fix bugs caused by mechanical changes.</li>
-  <li>Try to adapt your code base to the new style: lowercased static members, etc.</li>
+<li>Fix bugs caused by mechanical changes.</li>
+<li>Try to adapt your code base to the new style: lowercased static members, etc.</li>
 </ul>
-
 <p>The last step is particularly challenging in a team environment because it
-involves naming things. Luckily we have (IMHO) the best “features” in Swift
+involves naming things. Luckily we have (IMHO) the best &quot;features&quot; in Swift
 3 for help: the <a href="https://swift.org/documentation/api-design-guidelines/">API Design Guidelines</a>.</p>
-
 <hr />
-
 <p><a href="https://swift.org/documentation/api-design-guidelines/#omit-needless-words">Omit needless words</a> is one of the most differentiating
 guideline for function names between Swift 2 and 3. In Swift 2 we used to name
 things like so…</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func doStuffWithThing(thing: Thing) { … }
-</code></pre></div></div>
-
+<pre><code>func doStuffWithThing(thing: Thing) { … }
+</code></pre>
 <p>… and use it like …</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>doStuffWithThing(someThing)
-</code></pre></div></div>
-
-<p>That’s a lot of “thing”s, have you noticed?</p>
-
-<p>Since the word “Thing” is <em>merely repeating</em> the type information, we can omit
+<pre><code>doStuffWithThing(someThing)
+</code></pre>
+<p>That's a lot of &quot;thing&quot;s, have you noticed?</p>
+<p>Since the word &quot;Thing&quot; is <em>merely repeating</em> the type information, we can omit
 it in Swift 3:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// declare
+<pre><code>// declare
 func doStuff(with thing: Thing) { … }
 
 // use
 doStuff(with: someThing)
-</code></pre></div></div>
-
-<p>It’s clear at both declaration and use site what we are doing stuff to.</p>
-
+</code></pre>
+<p>It's clear at both declaration and use site what we are doing stuff to.</p>
 <p>So … you should go through you code base and make this change! In the next
-section, we’ll discuss one way to make it happen.</p>
-
+section, we'll discuss one way to make it happen.</p>
 <hr />
-
-<h2 id="step-1-automate">Step 1: Automate</h2>
-
-<p>A good indicator of “merely repeating type information” is repetition of words.
-If you have been disciplined about naming your functions in Swift 2<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2016/10/22/how-to-omit-needless-words/>,</a> finding
+<h2>Step 1: Automate</h2>
+<p>A good indicator of &quot;merely repeating type information&quot; is repetition of words.
+If you have been disciplined about naming your functions in Swift 2, finding
 such repetition should take no more than one or two good regular expressions.
 After the migrator, your code may contain a mixture of these:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">doStuffWithX</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">X</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
-<span class="kd">func</span> <span class="nf">doStuff</span><span class="p">(</span><span class="n">forY</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">Y</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
-</code></pre></div></div>
-
-<p>In other words, the repeating word (<code class="highlighter-rouge">X</code> or <code class="highlighter-rouge">Y</code>) is preceded by a
+<pre><span class="source swift"><span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">doStuffWithX</span></span>(<span class="constant language other">_</span>: <span class="support class">X</span>)</span></span> { … }
+<span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">doStuff</span></span>(forY <span class="variable parameter">y</span>: <span class="support class">Y</span>)</span></span> { … }
+</span></pre>
+<p>In other words, the repeating word (<code>X</code> or <code>Y</code>) is preceded by a
 <a href="https://www.englishclub.com/grammar/prepositions-list.htm">preposition</a>.</p>
-
-<p>Finding these in a large code base is quite fun. If you don’t feel like writing
-the scripts yourself, I’ve made a little tool for it <a href="https://github.com/dduan/needless">here</a>.</p>
-
-<p>(Sometimes the repeating words aren’t a exact match because of prefixes such as
-“CG” in <code class="highlighter-rouge">CGSize</code>. That’s covered by the tool as well.)</p>
-
-<h2 id="step-2-update">Step 2: Update</h2>
-
+<p>Finding these in a large code base is quite fun. If you don't feel like writing
+the scripts yourself, I've made a little tool for it <a href="https://github.com/dduan/needless">here</a>.</p>
+<p>(Sometimes the repeating words aren't a exact match because of prefixes such as
+&quot;CG&quot; in <code>CGSize</code>. That's covered by the tool as well.)</p>
+<h2>Step 2: Update</h2>
 <p>You can further rearrange the pieces in function name mechanically to:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">doStuff</span><span class="p">(</span><span class="n">preposition</span> <span class="nv">originalArgName</span><span class="p">:</span> <span class="k">Type</span><span class="p">)</span> <span class="p">{</span> <span class="err">…</span> <span class="p">}</span>
-</code></pre></div></div>
-
+<pre><span class="source swift"><span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">doStuff</span></span>(preposition <span class="variable parameter">originalArgName</span>: <span class="support class">Type</span>)</span></span> { … }
+</span></pre>
 <p>The <a href="https://github.com/dduan/needless">tool</a> I wrote can suggest alternatives like this. Applying them
 is technically automatable. But I find manually doing tasks such as fixing up
 indentation for multi-line functions or updating their use site to be easier.
 Your conclusion may depend the size of your code base and your patience.</p>
-
-<h2 id="step-3-audit">Step 3: Audit</h2>
-
-<p>The main goal for the API Design Guidelines is “clarity at the point of use”.
-Our automated process will yield some undesirable results. I’ll list a few
+<h2>Step 3: Audit</h2>
+<p>The main goal for the API Design Guidelines is &quot;clarity at the point of use&quot;.
+Our automated process will yield some undesirable results. I'll list a few
 scenarios here.</p>
-
 <p><strong>Poorly named function name becomes poorer</strong>. Example:
-<code class="highlighter-rouge">alertForScreenSize(_ size CGRize)</code> becomes <code class="highlighter-rouge">alert(forScreen size: CGSize)</code>.
-Obviously, “for screen” is misleading since a <code class="highlighter-rouge">CGSize</code> is not a screen. The
-problem here is the “alert” is not for a “size” to begin with. We as human
-intuitively pick up that it’s for a “screen with a certain size”. So the correct
-renaming here should be <code class="highlighter-rouge">alertForScreen(with size: CGSize)</code>.</p>
-
+<code>alertForScreenSize(_ size CGRize)</code> becomes <code>alert(forScreen size: CGSize)</code>.
+Obviously, &quot;for screen&quot; is misleading since a <code>CGSize</code> is not a screen. The
+problem here is the &quot;alert&quot; is not for a &quot;size&quot; to begin with. We as human
+intuitively pick up that it's for a &quot;screen with a certain size&quot;. So the correct
+renaming here should be <code>alertForScreen(with size: CGSize)</code>.</p>
 <p><strong>Awkward literal values results in ungrammatical phrases</strong>. Imagine our
 argument is a enum:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Mode</span> <span class="p">{</span>
-  <span class="k">case</span> <span class="n">add</span>
-  <span class="k">case</span> <span class="n">edit</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>… and we renamed a function <code class="highlighter-rouge">updateUIForMode(mode: Mode)</code> to
-<code class="highlighter-rouge">update(for mode: Mode)</code>. The call site, therefore, becomes
-<code class="highlighter-rouge">update(for: .add)</code>.</p>
-
-<p>What makes it feels wrong? Well, a preposition followed by a verb (“for add”)
-is not very grammatical. Normally we would say “update UI for <em>adding</em>”. So here
-we need to update the literals in that enum to “adding” and “editing”.</p>
-
+<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Mode</span></span></span> {
+  <span class="keyword control">case</span> add
+  <span class="keyword control">case</span> edit
+}
+</span></pre>
+<p>… and we renamed a function <code>updateUIForMode(mode: Mode)</code> to
+<code>update(for mode: Mode)</code>. The call site, therefore, becomes
+<code>update(for: .add)</code>.</p>
+<p>What makes it feels wrong? Well, a preposition followed by a verb (&quot;for add&quot;)
+is not very grammatical. Normally we would say &quot;update UI for <em>adding</em>&quot;. So here
+we need to update the literals in that enum to &quot;adding&quot; and &quot;editing&quot;.</p>
 <p><strong>Type information becomes too weak</strong>. This can happen very often with enum
 literals. We often name enum values with an adjective to qualify its name:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">UIControlState</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="n">automatic</span> <span class="c1">// which state? the *automatic* state!</span>
-    <span class="err">…</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>After renaming, we’ll have functions that simply becomes too generic and
+<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">UIControlState</span></span></span> {
+    <span class="keyword control">case</span> automatic <span class="comment line"><span class="punctuation definition comment">//</span> which state? the *automatic* state!</span>
+    …
+}
+</span></pre>
+<p>After renaming, we'll have functions that simply becomes too generic and
 mysterious at call site:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">update</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">automatic</span><span class="p">)</span> <span class="c1">// automatic what? 😂</span>
-</code></pre></div></div>
-
+<pre><span class="source swift">update(<span class="keyword control">for</span>: .<span class="constant language enum">automatic</span>) <span class="comment line"><span class="punctuation definition comment">//</span> automatic what? 😂</span>
+</span></pre>
 <p>This is where we need to be flexible and use our own good judgement. Perhaps
-it’s simply better to keep the qualifying postfix:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">update</span><span class="p">(</span><span class="nv">forControlState</span><span class="p">:</span> <span class="o">.</span><span class="n">automatic</span><span class="p">)</span> <span class="c1">// better</span>
-</code></pre></div></div>
-
-<p>In the guideline’s parlance, this is <a href="https://swift.org/documentation/api-design-guidelines/#weak-type-information">compensate for weak type
+it's simply better to keep the qualifying postfix:</p>
+<pre><span class="source swift">update(<span class="variable parameter">forControlState</span>: .<span class="constant language enum">automatic</span>) <span class="comment line"><span class="punctuation definition comment">//</span> better</span>
+</span></pre>
+<p>In the guideline's parlance, this is <a href="https://swift.org/documentation/api-design-guidelines/#weak-type-information">compensate for weak type
 information</a>.</p>
-
 <p><strong>Other argument labels needs updates too</strong>. A function at call site should read
 like a sentence as much as possible. We removed words at beginning of the
-“sentence”, it’s important to take a look at labels for the rest of the sentence
+&quot;sentence&quot;, it's important to take a look at labels for the rest of the sentence
 and ensure the whole thing fits together.</p>
-
 <hr />
-
 <p>There are <em>many</em>, <em>many</em> other fallouts from mechanically omitting needless
-words that I didn’t cover in this post. There are many many other things in the
+words that I didn't cover in this post. There are many many other things in the
 API Design Guidelines that are worth conforming to. There will be much much bike
 shedding among your team members.</p>
-
-<p>Just remember, the API guidelines don’t provide an answer to every naming
+<p>Just remember, the API guidelines don't provide an answer to every naming
 decision. Following it means your code base will fit in with the rest of the
 community and APIs from Foundation/Swift standard library. But find what feels
 right for your team is the most important thing. In the end, you should be glad
-that everyone cares so much about your code base’s “Swiftness” and it’ll be all
+that everyone cares so much about your code base's &quot;Swiftness&quot; and it'll be all
 worth it!</p>
 
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/api-design-guidelines/">API Design Guidelines</a>
+        ·
+        <a href="/tag/naming/">Naming</a>
+    </p>
+</footer></body>
 </html>

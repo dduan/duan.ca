@@ -1,144 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Daniel Duan - Vim</title>
-        <link>https://duan.ca/tag/Vim/</link>
-        <atom:link href="https://duan.ca/tag/Vim/index.xml" rel="self" type="application/rss+xml" />
-        
-        
-            
+        <title>Daniel Duan's Articles About Vim</title>
+        <link>https://duan.ca/tag/vim/</link>
+        <atom:link href="https://duan.ca/tag/vim/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Git Commit Message, Vim, and Markdown</title>
-                <description>&lt;p&gt;It’s been bothering me for years.&lt;/p&gt;
-
-&lt;p&gt;That is, &lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt; is both the start of a comment in a git commit message, but also
-the syntax for headings in Markdown.&lt;/p&gt;
-
+                <description>&lt;p&gt;It&#x27;s been bothering me for years.&lt;&#x2f;p&gt;
+&lt;p&gt;That is, &lt;code&gt;#&lt;&#x2f;code&gt; is both the start of a comment in a git commit message, but also
+the syntax for headings in Markdown.&lt;&#x2f;p&gt;
 &lt;p&gt;Personally, I prefer using commit messages to populate pull request descriptions
 whenever possible. On GitHub, This happens automatically when the pull request
-contains a single commit. But I can’t type, say an H3 as &lt;code class=&quot;highlighter-rouge&quot;&gt;### Heading&lt;/code&gt; in the
-commit message (in Vim, most of the time) because it gets treated as a comment!&lt;/p&gt;
-
-&lt;p&gt;But thanks to this twitter interaction with &lt;a href=&quot;https://twitter.com/dmartincy&quot;&gt;@dmartincy&lt;/a&gt;, I finally solved
-this problem:&lt;/p&gt;
-
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;I haven&amp;#39;t found myself in that situation, but maybe you could do &amp;#39;git config core.commentChar &amp;quot;;&amp;quot;&amp;#39; before creating the commits? That will change the default git commit marker (#) to something that won&amp;#39;t conflict with Markdown titles.&lt;/p&gt;&amp;mdash; Daniel Martín (@dmartincy) &lt;a href=&quot;https://twitter.com/dmartincy/status/1247271508420026368?ref_src=twsrc%5Etfw&quot;&gt;April 6, 2020&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;As mentioned by Daniel, Git has introduced a setting called &lt;code class=&quot;highlighter-rouge&quot;&gt;core.commentChar&lt;/code&gt;,
-documented &lt;a href=&quot;https://git-scm.com/docs/git-config#Documentation/git-config.txt-corecommentChar&quot;&gt;here&lt;/a&gt;, which lets us control which character
-becomes the start of a comment line. Let’s say we want to replace the default
-&lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt;, we can edit &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.gitconfig&lt;/code&gt; to include this preference:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[core]
-	commentChar = &quot;;&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;… and this will affect every Git repository on this computer.&lt;/p&gt;
-
-&lt;p&gt;For me, though, this broke git commit syntax highlighting in Vim: the comments&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2020/04/13/git-commit-comment/&gt;,&lt;/a&gt;
-beginning with &lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt;, are no longer recognized as comments. To fix this, I updated
-Vim’s syntax for file type &lt;code class=&quot;highlighter-rouge&quot;&gt;gitcommit&lt;/code&gt;. In your Vim setting directory
-(&lt;code class=&quot;highlighter-rouge&quot;&gt;~/.config/nvim/&lt;/code&gt; for me), create a file &lt;code class=&quot;highlighter-rouge&quot;&gt;syntax/gitcommit.vim&lt;/code&gt; file (unless
-you already have one), add the following line:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;syn match gitcommitComment	&quot;^;.*&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Note &lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt; matches my preferred &lt;code class=&quot;highlighter-rouge&quot;&gt;core.commentChar&lt;/code&gt; for Git.&lt;/p&gt;
-
-&lt;p&gt;Et voilà! Git commit message looks tippy-top in Vim again!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/2020/04/gitcommit.png&quot; alt=&quot;editing git commit in vim, with alternative character being the beginning of a comment&quot; /&gt;&lt;/p&gt;
-
+contains a single commit. But I can&#x27;t type, say an H3 as &lt;code&gt;### Heading&lt;&#x2f;code&gt; in the
+commit message (in Vim, most of the time) because it gets treated as a comment!&lt;&#x2f;p&gt;
+&lt;p&gt;But thanks to this twitter interaction with &lt;a href=&quot;https:&#x2f;&#x2f;twitter.com&#x2f;dmartincy&quot;&gt;@dmartincy&lt;&#x2f;a&gt;, I finally solved
+this problem:&lt;&#x2f;p&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;I haven&amp;#39;t found myself in that situation, but maybe you could do &amp;#39;git config core.commentChar &amp;quot;;&amp;quot;&amp;#39; before creating the commits? That will change the default git commit marker (#) to something that won&amp;#39;t conflict with Markdown titles.&lt;&#x2f;p&gt;&amp;mdash; Daniel Martín (@dmartincy) &lt;a href=&quot;https:&#x2f;&#x2f;twitter.com&#x2f;dmartincy&#x2f;status&#x2f;1247271508420026368?ref_src=twsrc%5Etfw&quot;&gt;April 6, 2020&lt;&#x2f;a&gt;&lt;&#x2f;blockquote&gt; &lt;script async src=&quot;https:&#x2f;&#x2f;platform.twitter.com&#x2f;widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;&#x2f;script&gt;
+&lt;p&gt;As mentioned by Daniel, Git has introduced a setting called &lt;code&gt;core.commentChar&lt;&#x2f;code&gt;,
+documented &lt;a href=&quot;https:&#x2f;&#x2f;git-scm.com&#x2f;docs&#x2f;git-config#Documentation&#x2f;git-config.txt-corecommentChar&quot;&gt;here&lt;&#x2f;a&gt;, which lets us control which character
+becomes the start of a comment line. Let&#x27;s say we want to replace the default
+&lt;code&gt;#&lt;&#x2f;code&gt; with &lt;code&gt;;&lt;&#x2f;code&gt;, we can edit &lt;code&gt;~&#x2f;.gitconfig&lt;&#x2f;code&gt; to include this preference:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;[core]
+	commentChar = &amp;quot;;&amp;quot;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;… and this will affect every Git repository on this computer.&lt;&#x2f;p&gt;
+&lt;p&gt;For me, though, this broke git commit syntax highlighting in Vim: the comments,
+beginning with &lt;code&gt;;&lt;&#x2f;code&gt;, are no longer recognized as comments. To fix this, I updated
+Vim&#x27;s syntax for file type &lt;code&gt;gitcommit&lt;&#x2f;code&gt;. In your Vim setting directory
+(&lt;code&gt;~&#x2f;.config&#x2f;nvim&#x2f;&lt;&#x2f;code&gt; for me), create a file &lt;code&gt;syntax&#x2f;gitcommit.vim&lt;&#x2f;code&gt; file (unless
+you already have one), add the following line:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;syn match gitcommitComment	&amp;quot;^;.*&amp;quot;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Note &lt;code&gt;;&lt;&#x2f;code&gt; matches my preferred &lt;code&gt;core.commentChar&lt;&#x2f;code&gt; for Git.&lt;&#x2f;p&gt;
+&lt;p&gt;Et voilà! Git commit message looks tippy-top in Vim again!&lt;&#x2f;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2020&#x2f;04&#x2f;gitcommit.png&quot; alt=&quot;editing git commit in vim, with alternative character being the beginning of a comment&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Mon, 13 Apr 2020 13:41:02 -0700</pubDate>
-                
                 <link>https://duan.ca/2020/04/13/git-commit-comment/</link>
-                
                 <guid isPermaLink="true">https://duan.ca/2020/04/13/git-commit-comment/</guid>
             </item>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
     </channel>
 </rss>

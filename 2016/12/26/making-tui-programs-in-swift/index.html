@@ -1,225 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Making TUI Applications In Swift</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Making TUI Applications In Swift | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Making TUI Applications In Swift" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="One of my fondest memory in programming is writing the game Snake on one of these:" />
-<meta property="og:description" content="One of my fondest memory in programming is writing the game Snake on one of these:" />
-<link rel="canonical" href="https://duan.ca/2016/12/26/making-tui-programs-in-swift/" />
-<meta property="og:url" content="https://duan.ca/2016/12/26/making-tui-programs-in-swift/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-12-26T21:39:05-08:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2016-12-26T21:39:05-08:00","headline":"Making TUI Applications In Swift","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2016/12/26/making-tui-programs-in-swift/"},"url":"https://duan.ca/2016/12/26/making-tui-programs-in-swift/","author":{"@type":"Person","name":"Daniel Duan"},"description":"One of my fondest memory in programming is writing the game Snake on one of these:","@type":"BlogPosting","dateModified":"2016-12-26T21:39:05-08:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2016/12/26/making-tui-programs-in-swift/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Making TUI Applications In Swift">
+    <meta property="article:published_time" content="2016-12-26"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Making TUI Applications In Swift</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2016/12/26/making-tui-programs-in-swift/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">Making TUI Applications In Swift</h1>
-  <div class="post-date">
-    <time>26 Dec 2016</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/swift">Swift</a>,
-
-  <a href="/tag/tui">TUI</a>
-
-</div>
-
-
-  </div>
-  <p>One of my fondest memory in programming is writing the game Snake on one of
+<body><article>
+    <h1>Making TUI Applications In Swift</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2016-12-26" itemProp="datePublished">2016-12-26</time>
+        </p>
+    </nav><p>One of my fondest memory in programming is writing the game Snake on one of
 these:</p>
-
-<p><img src="https://duan.ca/assets/2016/12/e-dictionary.jpg" alt="An Electronic/Digital Dictionary" /></p>
-
-<p>At the time, I was in a very restrictive school where a real computer wasn’t
-permited in class. The actual thing (that’s an “electronic dictionary” by the
+<p><img src="/assets/2016/12/e-dictionary.jpg" alt="An Electronic/Digital Dictionary" /></p>
+<p>At the time, I was in a very restrictive school where a real computer wasn't
+permited in class. The actual thing (that's an &quot;electronic dictionary&quot; by the
 way) was probably older, slower and of a different brand than the one in the
-photo. In fact, I didn’t know how to make a copy of the code, and the device
-wasn’t even mine. So the game just stayed there when the device was returned to
+photo. In fact, I didn't know how to make a copy of the code, and the device
+wasn't even mine. So the game just stayed there when the device was returned to
 the owener and its fate unknown.</p>
-
 <p>But I love it nontheless. Design the game, write it, playing it, showing it off</p>
 <ul>
-  <li>everything.</li>
+<li>everything.</li>
 </ul>
-
-<p><br /></p>
-
+<br />
 <p>Fastforward to today. I use and write software applications for a living.
 Programs I use directly range from terminal commands to GUI apps and web apps in
 a browser.</p>
-
-<p>Some programs, however, don’t belong to those categories: vim, tig, irssi, etc.
-They run in a terminal like CLI commands. But unlike commands like <code class="highlighter-rouge">ls</code>, they
+<p>Some programs, however, don't belong to those categories: vim, tig, irssi, etc.
+They run in a terminal like CLI commands. But unlike commands like <code>ls</code>, they
 take over the entire buffer to offer different modes of interaction. You can
 use hotkeys to navigate menus, trigger functions and so on.  Sometimes you can
 use mouse, too. Their layout often resemble that of a GUI application running in
-it’s own “window”:</p>
-
-<p><img src="https://duan.ca/assets/2016/12/tig.png" alt="tig" /></p>
-
-<p>Just to make things painfully clear, these apps’s interface is composed
-exclusively of text. We can vaguely categorize them as “Text-based User
-Interface(TUI)” application.</p>
-
+it's own &quot;window&quot;:</p>
+<p><img src="/assets/2016/12/tig.png" alt="tig" /></p>
+<p>Just to make things painfully clear, these apps's interface is composed
+exclusively of text. We can vaguely categorize them as &quot;Text-based User
+Interface(TUI)&quot; application.</p>
 <p>There are many reasons to like TUI applications. Compared to a CLI program,
 they can display information in 2-dimentional, more organized layout (aka more
 like a GUI app). Unlike a GUI application, they almost only require a terminal
-to run. If you ssh onto a Linux server on your iPad, they’d work the same as
-running locally on a Mac. For people who live in terminal simulators, it’s nice
-to run apps that don’t open a new Window. Oh, they often tend to look the same
+to run. If you ssh onto a Linux server on your iPad, they'd work the same as
+running locally on a Mac. For people who live in terminal simulators, it's nice
+to run apps that don't open a new Window. Oh, they often tend to look the same
 no matter how your OS changes.</p>
-
 <p>Most importantly, they remind me of the programs I built on that electronic
 dictionary. I want to make them today, with my favorite programming language
 Swift!</p>
-
-<p><br /></p>
-
+<br />
 <p>The go-to library for writing TUI apps is <a href="https://www.gnu.org/software/ncurses/">ncurses</a>. Classics such as vim,
 emacs and mutt were written with it to some degree. But I find it hard to dive
 into: it has a large number of strange legacy function names and offers
 pre-built UI elements like panels, menus, forms etc. The terminal in my mind is
 a spread of characters that can be updated by me. That sounds fun. Ncurses seems
 more like UIKit :P.</p>
-
-<p>Luckily<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2016/12/26/making-tui-programs-in-swift/>,</a> I found the fun library: <a href="https://github.com/nsf/termbox">termbox</a> by <a href="https://github.com/nsf">nsf</a>. Termbox offers around
+<p>Luckily, I found the fun library: <a href="https://github.com/nsf/termbox">termbox</a> by <a href="https://github.com/nsf">nsf</a>. Termbox offers around
 a dozen functions that gives us size of the terminal, a way to update text at
 a row/column coordinates, and user inputs in forms of key-presses and
-mouse-clicks. And that’s it!</p>
-
+mouse-clicks. And that's it!</p>
 <p>After making <a href="https://github.com/dduan/Termbox">a Swift wrapper</a>, I was able to build a painter app in
 <a href="https://github.com/dduan/TerminalPaint">a handleful of lines</a>:</p>
-
-<p><img src="https://duan.ca/assets/2016/12/terminal-paint.png" alt="terminal paint" /></p>
-
-<p>So that’s an TUI app drawing according to mouse clicks built with only a few
-primitives from termbox. Awww yeah! Here’s the code with the comment stripped,
+<p><img src="/assets/2016/12/terminal-paint.png" alt="terminal paint" /></p>
+<p>So that's an TUI app drawing according to mouse clicks built with only a few
+primitives from termbox. Awww yeah! Here's the code with the comment stripped,
 to give you a taste:</p>
+<pre><span class="source swift"><span class="keyword other import">import</span> <span class="support class">Termbox</span>
+<span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">printAt</span></span>(<span class="variable parameter">x</span>: <span class="support class">Int32</span>, <span class="variable parameter">y</span>: <span class="support class">Int32</span>, <span class="variable parameter">text</span>: <span class="support class">String</span>,
+    <span class="variable parameter">foreground</span>: <span class="support class">Attributes</span> = .<span class="constant language enum">default</span>,
+    <span class="variable parameter">background</span>: <span class="support class">Attributes</span> = .<span class="constant language enum">default</span>)</span></span>
+{
+    <span class="keyword variable">let</span> border = <span class="support class">Termbox</span><span class="keyword operator">.</span>width
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Termbox</span>
-<span class="kd">func</span> <span class="nf">printAt</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="kt">Int32</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="kt">Int32</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">foreground</span><span class="p">:</span> <span class="kt">Attributes</span> <span class="o">=</span> <span class="o">.</span><span class="k">default</span><span class="p">,</span>
-    <span class="nv">background</span><span class="p">:</span> <span class="kt">Attributes</span> <span class="o">=</span> <span class="o">.</span><span class="k">default</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">let</span> <span class="nv">border</span> <span class="o">=</span> <span class="kt">Termbox</span><span class="o">.</span><span class="n">width</span>
+    <span class="keyword control">for</span> (c, xi) <span class="keyword control">in</span> zip(text<span class="keyword operator">.</span>unicodeScalars, x ..&lt; border) {
+        <span class="support class">Termbox</span><span class="keyword operator">.</span>put(<span class="variable parameter">x</span>: xi, <span class="variable parameter">y</span>: y, <span class="variable parameter">character</span>: c,
+            <span class="variable parameter">foreground</span>: foreground, <span class="variable parameter">background</span>: background)
+    }
+}
 
-    <span class="k">for</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span> <span class="k">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">unicodeScalars</span><span class="p">,</span> <span class="n">x</span> <span class="o">..&lt;</span> <span class="n">border</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">Termbox</span><span class="o">.</span><span class="nf">put</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="n">xi</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="nv">character</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span>
-            <span class="nv">foreground</span><span class="p">:</span> <span class="n">foreground</span><span class="p">,</span> <span class="nv">background</span><span class="p">:</span> <span class="n">background</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">updateHelp</span></span>(<span class="variable parameter">drawing</span>: <span class="support class">UnicodeScalar</span>)</span></span> {
+    <span class="keyword variable">let</span> lastY = <span class="support class">Termbox</span><span class="keyword operator">.</span>height - <span class="constant numeric decimal">1</span>
+    <span class="keyword variable">let</span> content = [
+        <span class="string quoted double">&quot;Drawing [<span class="punctuation section embedded">\(</span></span>drawing<span class="string quoted double"><span class="punctuation section embedded">)</span>]&quot;</span>,
+        <span class="string quoted double">&quot;Press other character to change&quot;</span>,
+        <span class="string quoted double">&quot;Use mouse to draw&quot;</span>,
+        <span class="string quoted double">&quot;Press &#39;q&#39; to quit&quot;</span>
+    ].<span class="constant language enum">joined</span>(<span class="variable parameter">separator</span>: <span class="string quoted double">&quot; | &quot;</span>)
 
-<span class="kd">func</span> <span class="nf">updateHelp</span><span class="p">(</span><span class="nv">drawing</span><span class="p">:</span> <span class="kt">UnicodeScalar</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">lastY</span> <span class="o">=</span> <span class="kt">Termbox</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="k">let</span> <span class="nv">content</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s">"Drawing [</span><span class="se">\(</span><span class="n">drawing</span><span class="se">)</span><span class="s">]"</span><span class="p">,</span>
-        <span class="s">"Press other character to change"</span><span class="p">,</span>
-        <span class="s">"Use mouse to draw"</span><span class="p">,</span>
-        <span class="s">"Press 'q' to quit"</span>
-    <span class="p">]</span><span class="o">.</span><span class="nf">joined</span><span class="p">(</span><span class="nv">separator</span><span class="p">:</span> <span class="s">" | "</span><span class="p">)</span>
+    <span class="keyword variable">let</span> filler = <span class="support class">String</span>(<span class="variable parameter">repeating</span>: <span class="string quoted double">&quot; &quot;</span>,
+        <span class="variable parameter">count</span>: <span class="support class">Int</span>(<span class="support class">Termbox</span><span class="keyword operator">.</span>width) - content<span class="keyword operator">.</span>unicodeScalars<span class="keyword operator">.</span>count)
 
-    <span class="k">let</span> <span class="nv">filler</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">repeating</span><span class="p">:</span> <span class="s">" "</span><span class="p">,</span>
-        <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">(</span><span class="kt">Termbox</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="o">-</span> <span class="n">content</span><span class="o">.</span><span class="n">unicodeScalars</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
+    printAt(<span class="variable parameter">x</span>: <span class="constant numeric decimal">0</span>, <span class="variable parameter">y</span>: lastY, <span class="variable parameter">text</span>: content + filler,
+        <span class="variable parameter">foreground</span>: .<span class="constant language enum">white</span>, <span class="variable parameter">background</span>: .<span class="constant language enum">blue</span>)
+}
 
-    <span class="nf">printAt</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="n">lastY</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="n">content</span> <span class="o">+</span> <span class="n">filler</span><span class="p">,</span>
-        <span class="nv">foreground</span><span class="p">:</span> <span class="o">.</span><span class="n">white</span><span class="p">,</span> <span class="nv">background</span><span class="p">:</span> <span class="o">.</span><span class="n">blue</span><span class="p">)</span>
-<span class="p">}</span>
+<span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">paint</span></span>()</span></span> {
+    <span class="keyword control">do</span> {
+        <span class="keyword control">try</span> <span class="support class">Termbox</span><span class="keyword operator">.</span>initialize()
+    } <span class="keyword control">catch</span> <span class="keyword variable">let</span> error {
+        print(error)
+        <span class="keyword control">return</span>
+    }
+    <span class="support class">Termbox</span><span class="keyword operator">.</span>inputModes = [.<span class="constant language enum">esc</span>, .<span class="constant language enum">mouse</span>]
 
-<span class="kd">func</span> <span class="nf">paint</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">do</span> <span class="p">{</span>
-        <span class="k">try</span> <span class="kt">Termbox</span><span class="o">.</span><span class="nf">initialize</span><span class="p">()</span>
-    <span class="p">}</span> <span class="k">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-        <span class="k">return</span>
-    <span class="p">}</span>
-    <span class="kt">Termbox</span><span class="o">.</span><span class="n">inputModes</span> <span class="o">=</span> <span class="p">[</span><span class="o">.</span><span class="n">esc</span><span class="p">,</span> <span class="o">.</span><span class="n">mouse</span><span class="p">]</span>
+    <span class="keyword variable">var</span> <span class="variable parameter">drawingCharacter</span>: <span class="support class">UnicodeScalar</span> = <span class="string quoted double">&quot;.&quot;</span> {
+        <span class="keyword control">didSet</span> {
+            updateHelp(<span class="variable parameter">drawing</span>: drawingCharacter)
+        }
+    }
 
-    <span class="k">var</span> <span class="nv">drawingCharacter</span><span class="p">:</span> <span class="kt">UnicodeScalar</span> <span class="o">=</span> <span class="s">"."</span> <span class="p">{</span>
-        <span class="k">didSet</span> <span class="p">{</span>
-            <span class="nf">updateHelp</span><span class="p">(</span><span class="nv">drawing</span><span class="p">:</span> <span class="n">drawingCharacter</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+    updateHelp(<span class="variable parameter">drawing</span>: drawingCharacter)
 
-    <span class="nf">updateHelp</span><span class="p">(</span><span class="nv">drawing</span><span class="p">:</span> <span class="n">drawingCharacter</span><span class="p">)</span>
+    <span class="support class">Termbox</span><span class="keyword operator">.</span>present()
 
-    <span class="kt">Termbox</span><span class="o">.</span><span class="nf">present</span><span class="p">()</span>
+    <span class="variable parameter">outer</span>: <span class="keyword control">while</span> <span class="constant language true">true</span> {
+        <span class="keyword control">guard</span> <span class="keyword variable">let</span> event = <span class="support class">Termbox</span><span class="keyword operator">.</span>pollEvent() <span class="keyword control">else</span> {
+            <span class="keyword control">continue</span>
+        }
 
-    <span class="nv">outer</span><span class="p">:</span> <span class="k">while</span> <span class="kc">true</span> <span class="p">{</span>
-        <span class="k">guard</span> <span class="k">let</span> <span class="nv">event</span> <span class="o">=</span> <span class="kt">Termbox</span><span class="o">.</span><span class="nf">pollEvent</span><span class="p">()</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">continue</span>
-        <span class="p">}</span>
+        <span class="keyword control">switch</span> event {
+        <span class="keyword control">case</span> <span class="keyword variable">let</span> .<span class="constant language enum">character</span>(<span class="constant language other">_</span>, value):
+            <span class="keyword control">if</span> value == <span class="string quoted double">&quot;q&quot;</span> {
+                <span class="keyword control">break</span> outer
+            }
 
-        <span class="k">switch</span> <span class="n">event</span> <span class="p">{</span>
-        <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">character</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s">"q"</span> <span class="p">{</span>
-                <span class="k">break</span> <span class="n">outer</span>
-            <span class="p">}</span>
+            drawingCharacter = value
 
-            <span class="n">drawingCharacter</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="keyword control">case</span> <span class="keyword variable">let</span> .<span class="constant language enum">key</span>(<span class="constant language other">_</span>, value):
+            <span class="keyword control">if</span> value == .<span class="constant language enum">space</span> {
+                drawingCharacter = <span class="string quoted double">&quot; &quot;</span>
+            }
 
-        <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">key</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="o">.</span><span class="n">space</span> <span class="p">{</span>
-                <span class="n">drawingCharacter</span> <span class="o">=</span> <span class="s">" "</span>
-            <span class="p">}</span>
+        <span class="keyword control">case</span> <span class="keyword variable">let</span> .<span class="constant language enum">mouse</span>(x, y):
+            <span class="support class">Termbox</span><span class="keyword operator">.</span>put(<span class="variable parameter">x</span>: x, <span class="variable parameter">y</span>: y,
+                <span class="variable parameter">character</span>: drawingCharacter,
+                <span class="variable parameter">foreground</span>: .<span class="constant language enum">red</span>)
+        <span class="keyword control">default</span>:
+            <span class="keyword control">continue</span>
+        }
 
-        <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">mouse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-            <span class="kt">Termbox</span><span class="o">.</span><span class="nf">put</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span>
-                <span class="nv">character</span><span class="p">:</span> <span class="n">drawingCharacter</span><span class="p">,</span>
-                <span class="nv">foreground</span><span class="p">:</span> <span class="o">.</span><span class="n">red</span><span class="p">)</span>
-        <span class="k">default</span><span class="p">:</span>
-            <span class="k">continue</span>
-        <span class="p">}</span>
+        <span class="support class">Termbox</span><span class="keyword operator">.</span>present()
+    }
 
-        <span class="kt">Termbox</span><span class="o">.</span><span class="nf">present</span><span class="p">()</span>
-    <span class="p">}</span>
+    <span class="support class">Termbox</span><span class="keyword operator">.</span>shutdown()
+}
 
-    <span class="kt">Termbox</span><span class="o">.</span><span class="nf">shutdown</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="nf">paint</span><span class="p">()</span>
-</code></pre></div></div>
-
+paint()
+</span></pre>
 <p><a href="https://github.com/dduan/Termbox">Library</a> and this <a href="https://github.com/dduan/TerminalPaint">app</a> are both on Github. Go and
 have fun :)</p>
 
-
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/tui/">TUI</a>
+    </p>
+</footer></body>
 </html>

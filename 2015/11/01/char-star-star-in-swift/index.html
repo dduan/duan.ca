@@ -1,152 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>char ** in Swift</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>char ** in Swift | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="char ** in Swift" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="A “string” in C is just a continuous chunk of char values in memory with \0 at the end. To reference it, a variable of type char * is used to store the address of the first char (commonly known as a pointer 😉). It’s common to have string manipulating functions take this form:" />
-<meta property="og:description" content="A “string” in C is just a continuous chunk of char values in memory with \0 at the end. To reference it, a variable of type char * is used to store the address of the first char (commonly known as a pointer 😉). It’s common to have string manipulating functions take this form:" />
-<link rel="canonical" href="https://duan.ca/2015/11/01/char-star-star-in-swift/" />
-<meta property="og:url" content="https://duan.ca/2015/11/01/char-star-star-in-swift/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2015-11-01T11:18:40-08:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2015-11-01T11:18:40-08:00","headline":"char ** in Swift","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2015/11/01/char-star-star-in-swift/"},"url":"https://duan.ca/2015/11/01/char-star-star-in-swift/","author":{"@type":"Person","name":"Daniel Duan"},"description":"A “string” in C is just a continuous chunk of char values in memory with \\0 at the end. To reference it, a variable of type char * is used to store the address of the first char (commonly known as a pointer 😉). It’s common to have string manipulating functions take this form:","@type":"BlogPosting","dateModified":"2015-11-01T11:18:40-08:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2015/11/01/char-star-star-in-swift/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="char ** in Swift">
+    <meta property="article:published_time" content="2015-11-01"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>char ** in Swift</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2015/11/01/char-star-star-in-swift/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">char ** in Swift</h1>
-  <div class="post-date">
-    <time>01 Nov 2015</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/swift">Swift</a>,
-
-  <a href="/tag/c">C</a>
-
-</div>
-
-
-  </div>
-  <p>A “string” in C is just a continuous chunk of <code class="highlighter-rouge">char</code> values in memory with
-<code class="highlighter-rouge">\0</code> at the end. To reference it, a variable of type <code class="highlighter-rouge">char *</code> is used to store
-the address of the first <code class="highlighter-rouge">char</code> (commonly known as a pointer 😉).  It’s common
+<body><article>
+    <h1>char ** in Swift</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2015-11-01" itemProp="datePublished">2015-11-01</time>
+        </p>
+    </nav><p>A &quot;string&quot; in C is just a continuous chunk of <code>char</code> values in memory with
+<code>\0</code> at the end. To reference it, a variable of type <code>char *</code> is used to store
+the address of the first <code>char</code> (commonly known as a pointer 😉).  It's common
 to have string manipulating functions take this form:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">void</span> <span class="nf">foo</span><span class="p">(</span><span class="n">char</span> <span class="o">**</span><span class="n">errorMessage</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>To mutate the arugment <code class="highlighter-rouge">errorMessage</code> of type <code class="highlighter-rouge">char *</code>, <code class="highlighter-rouge">foo</code> takes a pointer
-to it, <code class="highlighter-rouge">(char *)*</code>.</p>
-
+<pre><span class="source swift">void foo(char **errorMessage) {
+    <span class="comment line"><span class="punctuation definition comment">//</span> ...</span>
+}
+</span></pre>
+<p>To mutate the arugment <code>errorMessage</code> of type <code>char *</code>, <code>foo</code> takes a pointer
+to it, <code>(char *)*</code>.</p>
 <hr />
-
-<p>How do we call <code class="highlighter-rouge">foo</code> in Swift?</p>
-
-<p>Here’s the tl;dr. We can wrap it in a Swift function that have the same
+<p>How do we call <code>foo</code> in Swift?</p>
+<p>Here's the tl;dr. We can wrap it in a Swift function that have the same
 interface:</p>
+<pre><span class="source swift"><span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">fooSwift</span></span>(inout <span class="variable parameter">errorMessage</span>: <span class="support class">String</span><span class="keyword operator">?</span>)</span></span> {
+    <span class="keyword variable">var</span> <span class="variable parameter">message</span>: <span class="support class">UnsafeMutablePointer</span><span class="keyword operator">&lt;</span><span class="support class">CChar</span><span class="keyword operator">&gt;</span> = <span class="constant language nil">nil</span>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">fooSwift</span><span class="p">(</span><span class="k">inout</span> <span class="nv">errorMessage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kc">nil</span>
-
-    <span class="nf">foo</span><span class="p">(</span><span class="o">&amp;</span><span class="n">message</span><span class="p">)</span>
-    <span class="n">errorMessage</span> <span class="o">=</span> <span class="kt">String</span><span class="o">.</span><span class="nf">fromCString</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><code class="highlighter-rouge">errorMessage</code> will contain whatever our C function <code class="highlighter-rouge">foo</code> assigns to it.</p>
-
+    foo(<span class="keyword operator">&amp;</span>message)
+    errorMessage = <span class="support class">String</span><span class="keyword operator">.</span>fromCString(message)
+}
+</span></pre>
+<p><code>errorMessage</code> will contain whatever our C function <code>foo</code> assigns to it.</p>
 <hr />
-
-<p>So, what’s really going on here?</p>
-
-<p>Inspecting <code class="highlighter-rouge">foo</code>’s signature in Swift, we see</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">errorMessage</span><span class="p">:</span> <span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">UnsafeMutablePointer</span><span class="o">&lt;</span><span class="kt">CChar</span><span class="o">&gt;&gt;</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>… okey, <code class="highlighter-rouge">errorMessage</code>’s type is little intimidating to someone who doesn’t
+<p>So, what's really going on here?</p>
+<p>Inspecting <code>foo</code>'s signature in Swift, we see</p>
+<pre><span class="source swift"><span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">foo</span></span>(<span class="variable parameter">errorMessage</span>: <span class="support class">UnsafeMutablePointer</span><span class="keyword operator">&lt;</span><span class="support class">UnsafeMutablePointer</span><span class="keyword operator">&lt;</span><span class="support class">CChar</span><span class="keyword operator">&gt;&gt;</span>)</span></span>
+</span></pre>
+<p>… okey, <code>errorMessage</code>'s type is little intimidating to someone who doesn't
 use C functions in Swift everyday (like me)!</p>
-
-<p>Let’s break it down. Swift does a ton of work for us to interoperate with C:</p>
-
+<p>Let's break it down. Swift does a ton of work for us to interoperate with C:</p>
 <ol>
-  <li>
-    <p><code class="highlighter-rouge">CChar</code> is Swift’s name for <em><code class="highlighter-rouge">char</code> in C</em> (shocking, amiright?)</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">UnsafeMutablePointer&lt;Type&gt;</code> roughly translates to <code class="highlighter-rouge">Type *</code><a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2015/11/01/char-star-star-in-swift/>,</a> so
+<li>
+<p><code>CChar</code> is Swift's name for <em><code>char</code> in C</em> (shocking, amiright?)</p>
+</li>
+<li>
+<p><code>UnsafeMutablePointer&lt;Type&gt;</code> roughly translates to <code>Type *</code>, so
 syntactically, we can see why
-<code class="highlighter-rouge">UnsafeMutablePointer&lt;UnsafeMutablePointer&lt;CChar&gt;&gt;</code> is used to bridge the
-C type <code class="highlighter-rouge">(char *)*</code>.</p>
-  </li>
-  <li>
-    <p>A function that takes <code class="highlighter-rouge">UnsafeMutablePointer&lt;Type&gt;</code> argument accepts
-<code class="highlighter-rouge">inout Type</code> values. Therefore, we can look at <code class="highlighter-rouge">foo</code> as</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>foo(inout errorMessage: UnsafeMutablePointer&lt;CChar&gt;)
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Swift acknowledge C’s string representation and provides convenient
-methods for converting <code class="highlighter-rouge">char *</code> / <code class="highlighter-rouge">UnsafeMutablePointer&lt;CChar&gt;</code> to its own
-<code class="highlighter-rouge">String</code> type (<code class="highlighter-rouge">String.fromCString()</code>).</p>
-  </li>
+<code>UnsafeMutablePointer&lt;UnsafeMutablePointer&lt;CChar&gt;&gt;</code> is used to bridge the
+C type <code>(char *)*</code>.</p>
+</li>
+<li>
+<p>A function that takes <code>UnsafeMutablePointer&lt;Type&gt;</code> argument accepts
+<code>inout Type</code> values. Therefore, we can look at <code>foo</code> as</p>
+<pre><code>foo(inout errorMessage: UnsafeMutablePointer&lt;CChar&gt;)
+</code></pre>
+</li>
+<li>
+<p>Swift acknowledge C's string representation and provides convenient
+methods for converting <code>char *</code> / <code>UnsafeMutablePointer&lt;CChar&gt;</code> to its own
+<code>String</code> type (<code>String.fromCString()</code>).</p>
+</li>
 </ol>
-
-<p>Hopefully you can see how <code class="highlighter-rouge">fooSwift</code> works now.</p>
-
+<p>Hopefully you can see how <code>fooSwift</code> works now.</p>
 <hr />
-
-<p>Taking a step back, to deal with <code class="highlighter-rouge">char **</code> in Swift, we overcame 2 obstacles:</p>
-
+<p>Taking a step back, to deal with <code>char **</code> in Swift, we overcame 2 obstacles:</p>
 <ol>
-  <li>
-    <p>The difference in string representation between C and Swift.</p>
-  </li>
-  <li>
-    <p>Compared to C pointers, Swift’s <code class="highlighter-rouge">inout</code> expresses mutability of function
-arguments in a more restricted way. We can’t nest <code class="highlighter-rouge">inout</code>s to represent
+<li>
+<p>The difference in string representation between C and Swift.</p>
+</li>
+<li>
+<p>Compared to C pointers, Swift's <code>inout</code> expresses mutability of function
+arguments in a more restricted way. We can't nest <code>inout</code>s to represent
 the infinite layers of indirections that pointers achieve.</p>
-  </li>
+</li>
 </ol>
 
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/c/">C</a>
+    </p>
+</footer></body>
 </html>

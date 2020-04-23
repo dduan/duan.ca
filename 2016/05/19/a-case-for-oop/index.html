@@ -1,99 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>A Case For OOP?</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>A Case For OOP? | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="A Case For OOP?" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Python’s standard library includes a very handy defaultdict. It behaves almost exactly like the standard dictionary except it’ll supply a pre-defined value for any non-existence keys. It is, unsurpringly, a subclass of dict." />
-<meta property="og:description" content="Python’s standard library includes a very handy defaultdict. It behaves almost exactly like the standard dictionary except it’ll supply a pre-defined value for any non-existence keys. It is, unsurpringly, a subclass of dict." />
-<link rel="canonical" href="https://duan.ca/2016/05/19/a-case-for-oop/" />
-<meta property="og:url" content="https://duan.ca/2016/05/19/a-case-for-oop/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-05-19T12:03:02-07:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2016-05-19T12:03:02-07:00","headline":"A Case For OOP?","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2016/05/19/a-case-for-oop/"},"url":"https://duan.ca/2016/05/19/a-case-for-oop/","author":{"@type":"Person","name":"Daniel Duan"},"description":"Python’s standard library includes a very handy defaultdict. It behaves almost exactly like the standard dictionary except it’ll supply a pre-defined value for any non-existence keys. It is, unsurpringly, a subclass of dict.","@type":"BlogPosting","dateModified":"2016-05-19T12:03:02-07:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2016/05/19/a-case-for-oop/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="A Case For OOP?">
+    <meta property="article:published_time" content="2016-05-19"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>A Case For OOP?</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2016/05/19/a-case-for-oop/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">A Case For OOP?</h1>
-  <div class="post-date">
-    <time>19 May 2016</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/python">Python</a>,
-
-  <a href="/tag/oop">OOP</a>,
-
-  <a href="/tag/swift">Swift</a>
-
-</div>
-
-
-  </div>
-  <p>Python’s standard library includes a very handy <code class="highlighter-rouge">defaultdict</code>. It behaves
-almost exactly like the standard dictionary except it’ll supply a pre-defined
-value for any non-existence keys. It is, unsurpringly, a subclass of <code class="highlighter-rouge">dict</code>.</p>
-
+<body><article>
+    <h1>A Case For OOP?</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2016-05-19" itemProp="datePublished">2016-05-19</time>
+        </p>
+    </nav><p>Python's standard library includes a very handy <code>defaultdict</code>. It behaves
+almost exactly like the standard dictionary except it'll supply a pre-defined
+value for any non-existence keys. It is, unsurpringly, a subclass of <code>dict</code>.</p>
 <p>I find my self missing this handy container in Swift. Especially when I use
-a normal <code class="highlighter-rouge">Dictionary</code> to accumulate/coalesce values under distinct keys. So I
+a normal <code>Dictionary</code> to accumulate/coalesce values under distinct keys. So I
 wrote my own:</p>
-
 <script src="https://gist.github.com/dduan/31ed39c4c98ecb88290f0743cb394c20.js"></script>
-
 <p>There are a few noticable things about this implementation:</p>
-
 <ul>
-  <li>It does not conform to the <code class="highlighter-rouge">DictionaryLiteralConvertible</code> protocol, for no
+<li>It does not conform to the <code>DictionaryLiteralConvertible</code> protocol, for no
 good reasons, really. The initializer in this protocol takes a varadic
-argument. There’s no conevient way to forward this array to a normal
-dictionary’s initializer (incidentally, this is a Swift feature I really
-want). Plus, I don’t need <code class="highlighter-rouge">DefaultDictionary</code> to be a literal convertible.</li>
-  <li>Most of the code, including the imaginary <code class="highlighter-rouge">init</code> mentioned in previous
-point<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2016/05/19/a-case-for-oop/>,</a> simply reuses stuff from <code class="highlighter-rouge">Dictionary</code>: asscociated type, indexes,
+argument. There's no conevient way to forward this array to a normal
+dictionary's initializer (incidentally, this is a Swift feature I really
+want). Plus, I don't need <code>DefaultDictionary</code> to be a literal convertible.</li>
+<li>Most of the code, including the imaginary <code>init</code> mentioned in previous
+point, simply reuses stuff from <code>Dictionary</code>: asscociated type, indexes,
 generator, subscript, etc.</li>
 </ul>
-
-<p>In comparison, Python implements <code class="highlighter-rouge">defaultdict</code> in a more intuitive way – via
+<p>In comparison, Python implements <code>defaultdict</code> in a more intuitive way -- via
 inheritance.</p>
-
-<p>But do we want inheritance for <code class="highlighter-rouge">struct</code>s and <code class="highlighter-rouge">enum</code>s in Swift? What does that
+<p>But do we want inheritance for <code>struct</code>s and <code>enum</code>s in Swift? What does that
 even mean? Is it simply a case that will go away when protocols become more
 powerful?</p>
 
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/python/">Python</a>
+        ·
+        <a href="/tag/oop/">OOP</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+    </p>
+</footer></body>
 </html>

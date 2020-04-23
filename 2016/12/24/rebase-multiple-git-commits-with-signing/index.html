@@ -1,100 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rebase And Sign Multiple Git Commits</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Rebase And Sign Multiple Git Commits | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Rebase And Sign Multiple Git Commits" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="I never bothered signing my git commits until Github started putting those shiny badges on them. Since then I’ve encountered a problem: rebased commits lose their hash and their signed-ness." />
-<meta property="og:description" content="I never bothered signing my git commits until Github started putting those shiny badges on them. Since then I’ve encountered a problem: rebased commits lose their hash and their signed-ness." />
-<link rel="canonical" href="https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/" />
-<meta property="og:url" content="https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-12-24T01:31:14-08:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2016-12-24T01:31:14-08:00","headline":"Rebase And Sign Multiple Git Commits","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/"},"url":"https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/","author":{"@type":"Person","name":"Daniel Duan"},"description":"I never bothered signing my git commits until Github started putting those shiny badges on them. Since then I’ve encountered a problem: rebased commits lose their hash and their signed-ness.","@type":"BlogPosting","dateModified":"2016-12-24T01:31:14-08:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Rebase And Sign Multiple Git Commits">
+    <meta property="article:published_time" content="2016-12-24"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Rebase And Sign Multiple Git Commits</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">Rebase And Sign Multiple Git Commits</h1>
-  <div class="post-date">
-    <time>24 Dec 2016</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/git">Git</a>
-
-</div>
-
-
-  </div>
-  <p>I never bothered <a href="https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work">signing</a> my git commits until Github started putting
-those shiny badges on them. Since then I’ve encountered a problem: rebased
+<body><article>
+    <h1>Rebase And Sign Multiple Git Commits</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2016-12-24" itemProp="datePublished">2016-12-24</time>
+        </p>
+    </nav><p>I never bothered <a href="https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work">signing</a> my git commits until Github started putting
+those shiny badges on them. Since then I've encountered a problem: rebased
 commits lose their hash and their signed-ness.</p>
-
-<p>That’s not a big deal for a single commit. Just run <code class="highlighter-rouge">git commit -S --amend
---no-edit</code> after rebase. And that commit, which is at <code class="highlighter-rouge">HEAD</code> will have a new
+<p>That's not a big deal for a single commit. Just run <code>git commit -S --amend --no-edit</code> after rebase. And that commit, which is at <code>HEAD</code> will have a new
 hash and be signed.</p>
-
 <p>What if we have more than one commit to rebase? My instinctive answer was sign
-the one on <code class="highlighter-rouge">HEAD</code>, then use interactive rebase to rotate the next one on top and
-sign it, repeat until each one is signed and reorder them. But that doesn’t work
-at all because a commit’s position in history is part of its content. That means
+the one on <code>HEAD</code>, then use interactive rebase to rotate the next one on top and
+sign it, repeat until each one is signed and reorder them. But that doesn't work
+at all because a commit's position in history is part of its content. That means
 after a commit is rebased, it and every commits following it will have a new
-hash and git doesn’t give us an oppurtunity to say “include my signature,
-please”. You cannot rebase and keep the commits signed!</p>
-
-<p>Well, that kind of sucks. But you are reading about it here, so I’d better give
+hash and git doesn't give us an oppurtunity to say &quot;include my signature,
+please&quot;. You cannot rebase and keep the commits signed!</p>
+<p>Well, that kind of sucks. But you are reading about it here, so I'd better give
 you something to help, right?</p>
-
-<p>There is<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/>,</a> at least, one way to achieve <em>rebase and sign multiple commits</em>:</p>
-
+<p>There is, at least, one way to achieve <em>rebase and sign multiple commits</em>:</p>
 <ol>
-  <li>Run interactive rebase: <code class="highlighter-rouge">git rebase -i branch</code>.</li>
-  <li>Mark all commits and “edit” or “e”.</li>
-  <li>Git now stops at every commit for you to make changes. This is an oppurtunity
-to sign it! <code class="highlighter-rouge">git commit -S --amend --no-edit</code>, just like how you would sign
-<code class="highlighter-rouge">HEAD</code>.</li>
-  <li><code class="highlighter-rouge">git rebase --continue</code>, move on the next commit until all every one is
+<li>Run interactive rebase: <code>git rebase -i branch</code>.</li>
+<li>Mark all commits and &quot;edit&quot; or &quot;e&quot;.</li>
+<li>Git now stops at every commit for you to make changes. This is an oppurtunity
+to sign it! <code>git commit -S --amend --no-edit</code>, just like how you would sign
+<code>HEAD</code>.</li>
+<li><code>git rebase --continue</code>, move on the next commit until all every one is
 edited.</li>
 </ol>
-
-<p>There’s virtually nothing you cannot do with git. Hence the reputation for it’s
+<p>There's virtually nothing you cannot do with git. Hence the reputation for it's
 glorious UI, ya know?</p>
 
-
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/git/">Git</a>
+    </p>
+</footer></body>
 </html>

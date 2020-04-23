@@ -1,208 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Daniel Duan - C</title>
-        <link>https://duan.ca/tag/C/</link>
-        <atom:link href="https://duan.ca/tag/C/index.xml" rel="self" type="application/rss+xml" />
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
+        <title>Daniel Duan's Articles About C</title>
+        <link>https://duan.ca/tag/c/</link>
+        <atom:link href="https://duan.ca/tag/c/feed.xml" rel="self" type="application/rss+xml" />
             <item>
-                <title>Building 'pwd' Under 1 Minute In Swift</title>
-                <description>&lt;p&gt;I guess I’m starting a series of minute-long videos. In this first video, I built &lt;code class=&quot;highlighter-rouge&quot;&gt;pwd&lt;/code&gt; out of &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;. The
-code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift’s great C-interop
-capability.&lt;/p&gt;
-
+                <title>Building &#x27;pwd&#x27; Under 1 Minute In Swift</title>
+                <description>&lt;p&gt;I guess I&#x27;m starting a series of minute-long videos. In this first video, I built &lt;code&gt;pwd&lt;&#x2f;code&gt; out of &lt;code&gt;getcwd&lt;&#x2f;code&gt;. The
+code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift&#x27;s great C-interop
+capability.&lt;&#x2f;p&gt;
 &lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Some details are lost in this video, however. For example&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/&gt;,&lt;/a&gt; the POSIX standard actually says &lt;code class=&quot;highlighter-rouge&quot;&gt;getcwd&lt;/code&gt;’s 2nd
-argument being &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
-memory as needed). Swift’s handling of &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt; aka &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;/code&gt; in context of a &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt; array
-is also very cool.&lt;/p&gt;
+    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
+&lt;p&gt;Some details are lost in this video, however. For example, the POSIX standard actually says &lt;code&gt;getcwd&lt;&#x2f;code&gt;&#x27;s 2nd
+argument being &lt;code&gt;0&lt;&#x2f;code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
+memory as needed). Swift&#x27;s handling of &lt;code&gt;char *&lt;&#x2f;code&gt; aka &lt;code&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;&#x2f;code&gt; in context of a &lt;code&gt;var&lt;&#x2f;code&gt; array
+is also very cool.&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Wed, 27 Dec 2017 01:13:07 -0800</pubDate>
-                
                 <link>https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</link>
-                
                 <guid isPermaLink="true">https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</guid>
             </item>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <item>
                 <title>char ** in Swift</title>
-                <description>&lt;p&gt;A “string” in C is just a continuous chunk of &lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt; values in memory with
-&lt;code class=&quot;highlighter-rouge&quot;&gt;\0&lt;/code&gt; at the end. To reference it, a variable of type &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt; is used to store
-the address of the first &lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt; (commonly known as a pointer 😉).  It’s common
-to have string manipulating functions take this form:&lt;/p&gt;
+                <description>&lt;p&gt;A &amp;quot;string&amp;quot; in C is just a continuous chunk of &lt;code&gt;char&lt;&#x2f;code&gt; values in memory with
+&lt;code&gt;\0&lt;&#x2f;code&gt; at the end. To reference it, a variable of type &lt;code&gt;char *&lt;&#x2f;code&gt; is used to store
+the address of the first &lt;code&gt;char&lt;&#x2f;code&gt; (commonly known as a pointer 😉).  It&#x27;s common
+to have string manipulating functions take this form:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;void foo(char **errorMessage) {
+    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; ...&lt;&#x2f;span&gt;
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;To mutate the arugment &lt;code&gt;errorMessage&lt;&#x2f;code&gt; of type &lt;code&gt;char *&lt;&#x2f;code&gt;, &lt;code&gt;foo&lt;&#x2f;code&gt; takes a pointer
+to it, &lt;code&gt;(char *)*&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
+&lt;hr &#x2f;&gt;
+&lt;p&gt;How do we call &lt;code&gt;foo&lt;&#x2f;code&gt; in Swift?&lt;&#x2f;p&gt;
+&lt;p&gt;Here&#x27;s the tl;dr. We can wrap it in a Swift function that have the same
+interface:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;fooSwift&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;(inout &lt;span class=&quot;variable parameter&quot;&gt;errorMessage&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;?&lt;&#x2f;span&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;message&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;UnsafeMutablePointer&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;CChar&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt; = &lt;span class=&quot;constant language nil&quot;&gt;nil&lt;&#x2f;span&gt;
 
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;errorMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;To mutate the arugment &lt;code class=&quot;highlighter-rouge&quot;&gt;errorMessage&lt;/code&gt; of type &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt; takes a pointer
-to it, &lt;code class=&quot;highlighter-rouge&quot;&gt;(char *)*&lt;/code&gt;.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;How do we call &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt; in Swift?&lt;/p&gt;
-
-&lt;p&gt;Here’s the tl;dr. We can wrap it in a Swift function that have the same
-interface:&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fooSwift&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;inout&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;errorMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UnsafeMutablePointer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;CChar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
-
-    &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;errorMessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fromCString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;errorMessage&lt;/code&gt; will contain whatever our C function &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt; assigns to it.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;So, what’s really going on here?&lt;/p&gt;
-
-&lt;p&gt;Inspecting &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt;’s signature in Swift, we see&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;errorMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UnsafeMutablePointer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;UnsafeMutablePointer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;CChar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;… okey, &lt;code class=&quot;highlighter-rouge&quot;&gt;errorMessage&lt;/code&gt;’s type is little intimidating to someone who doesn’t
-use C functions in Swift everyday (like me)!&lt;/p&gt;
-
-&lt;p&gt;Let’s break it down. Swift does a ton of work for us to interoperate with C:&lt;/p&gt;
-
+    foo(&lt;span class=&quot;keyword operator&quot;&gt;&amp;amp;&lt;&#x2f;span&gt;message)
+    errorMessage = &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;fromCString(message)
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;&lt;code&gt;errorMessage&lt;&#x2f;code&gt; will contain whatever our C function &lt;code&gt;foo&lt;&#x2f;code&gt; assigns to it.&lt;&#x2f;p&gt;
+&lt;hr &#x2f;&gt;
+&lt;p&gt;So, what&#x27;s really going on here?&lt;&#x2f;p&gt;
+&lt;p&gt;Inspecting &lt;code&gt;foo&lt;&#x2f;code&gt;&#x27;s signature in Swift, we see&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;foo&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;errorMessage&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;UnsafeMutablePointer&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;UnsafeMutablePointer&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;CChar&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&amp;gt;&lt;&#x2f;span&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;… okey, &lt;code&gt;errorMessage&lt;&#x2f;code&gt;&#x27;s type is little intimidating to someone who doesn&#x27;t
+use C functions in Swift everyday (like me)!&lt;&#x2f;p&gt;
+&lt;p&gt;Let&#x27;s break it down. Swift does a ton of work for us to interoperate with C:&lt;&#x2f;p&gt;
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CChar&lt;/code&gt; is Swift’s name for &lt;em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;char&lt;/code&gt; in C&lt;/em&gt; (shocking, amiright?)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;/code&gt; roughly translates to &lt;code class=&quot;highlighter-rouge&quot;&gt;Type *&lt;/code&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2015/11/01/char-star-star-in-swift/&gt;,&lt;/a&gt; so
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;CChar&lt;&#x2f;code&gt; is Swift&#x27;s name for &lt;em&gt;&lt;code&gt;char&lt;&#x2f;code&gt; in C&lt;&#x2f;em&gt; (shocking, amiright?)&lt;&#x2f;p&gt;
+&lt;&#x2f;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;&#x2f;code&gt; roughly translates to &lt;code&gt;Type *&lt;&#x2f;code&gt;, so
 syntactically, we can see why
-&lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&amp;gt;&lt;/code&gt; is used to bridge the
-C type &lt;code class=&quot;highlighter-rouge&quot;&gt;(char *)*&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;A function that takes &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;/code&gt; argument accepts
-&lt;code class=&quot;highlighter-rouge&quot;&gt;inout Type&lt;/code&gt; values. Therefore, we can look at &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt; as&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;foo(inout errorMessage: UnsafeMutablePointer&amp;lt;CChar&amp;gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Swift acknowledge C’s string representation and provides convenient
-methods for converting &lt;code class=&quot;highlighter-rouge&quot;&gt;char *&lt;/code&gt; / &lt;code class=&quot;highlighter-rouge&quot;&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;/code&gt; to its own
-&lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt; type (&lt;code class=&quot;highlighter-rouge&quot;&gt;String.fromCString()&lt;/code&gt;).&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Hopefully you can see how &lt;code class=&quot;highlighter-rouge&quot;&gt;fooSwift&lt;/code&gt; works now.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Taking a step back, to deal with &lt;code class=&quot;highlighter-rouge&quot;&gt;char **&lt;/code&gt; in Swift, we overcame 2 obstacles:&lt;/p&gt;
-
+&lt;code&gt;UnsafeMutablePointer&amp;lt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&amp;gt;&lt;&#x2f;code&gt; is used to bridge the
+C type &lt;code&gt;(char *)*&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
+&lt;&#x2f;li&gt;
+&lt;li&gt;
+&lt;p&gt;A function that takes &lt;code&gt;UnsafeMutablePointer&amp;lt;Type&amp;gt;&lt;&#x2f;code&gt; argument accepts
+&lt;code&gt;inout Type&lt;&#x2f;code&gt; values. Therefore, we can look at &lt;code&gt;foo&lt;&#x2f;code&gt; as&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;foo(inout errorMessage: UnsafeMutablePointer&amp;lt;CChar&amp;gt;)
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;li&gt;
+&lt;li&gt;
+&lt;p&gt;Swift acknowledge C&#x27;s string representation and provides convenient
+methods for converting &lt;code&gt;char *&lt;&#x2f;code&gt; &#x2f; &lt;code&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;&#x2f;code&gt; to its own
+&lt;code&gt;String&lt;&#x2f;code&gt; type (&lt;code&gt;String.fromCString()&lt;&#x2f;code&gt;).&lt;&#x2f;p&gt;
+&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;p&gt;Hopefully you can see how &lt;code&gt;fooSwift&lt;&#x2f;code&gt; works now.&lt;&#x2f;p&gt;
+&lt;hr &#x2f;&gt;
+&lt;p&gt;Taking a step back, to deal with &lt;code&gt;char **&lt;&#x2f;code&gt; in Swift, we overcame 2 obstacles:&lt;&#x2f;p&gt;
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;The difference in string representation between C and Swift.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Compared to C pointers, Swift’s &lt;code class=&quot;highlighter-rouge&quot;&gt;inout&lt;/code&gt; expresses mutability of function
-arguments in a more restricted way. We can’t nest &lt;code class=&quot;highlighter-rouge&quot;&gt;inout&lt;/code&gt;s to represent
-the infinite layers of indirections that pointers achieve.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+&lt;li&gt;
+&lt;p&gt;The difference in string representation between C and Swift.&lt;&#x2f;p&gt;
+&lt;&#x2f;li&gt;
+&lt;li&gt;
+&lt;p&gt;Compared to C pointers, Swift&#x27;s &lt;code&gt;inout&lt;&#x2f;code&gt; expresses mutability of function
+arguments in a more restricted way. We can&#x27;t nest &lt;code&gt;inout&lt;&#x2f;code&gt;s to represent
+the infinite layers of indirections that pointers achieve.&lt;&#x2f;p&gt;
+&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
 </description>
                 <pubDate>Sun, 01 Nov 2015 11:18:40 -0800</pubDate>
-                
                 <link>https://duan.ca/2015/11/01/char-star-star-in-swift/</link>
-                
                 <guid isPermaLink="true">https://duan.ca/2015/11/01/char-star-star-in-swift/</guid>
             </item>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
     </channel>
 </rss>

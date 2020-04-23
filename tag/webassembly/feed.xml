@@ -1,282 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Daniel Duan - WebAssembly</title>
-        <link>https://duan.ca/tag/WebAssembly/</link>
-        <atom:link href="https://duan.ca/tag/WebAssembly/index.xml" rel="self" type="application/rss+xml" />
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
+        <title>Daniel Duan's Articles About WebAssembly</title>
+        <link>https://duan.ca/tag/webassembly/</link>
+        <atom:link href="https://duan.ca/tag/webassembly/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Hello World In WebAssembly</title>
                 <description>&lt;p&gt;Every now and then, I check on the progress of Web Assembly. I did it again
 around the time of this post and finally found enough tutorials, examples, and
 working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (&lt;em&gt;this article includes all the same information and
-more, so just read on if you don’t have 15 minutes for YouTube&lt;/em&gt;).&lt;/p&gt;
-
+more, so just read on if you don&#x27;t have 15 minutes for YouTube&lt;&#x2f;em&gt;).&lt;&#x2f;p&gt;
 &lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/yEYtwmI7bDg&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;our-goal&quot;&gt;Our goal:&lt;/h2&gt;
-
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;yEYtwmI7bDg&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
+&lt;br&gt;
+&lt;h2&gt;Our goal:&lt;&#x2f;h2&gt;
 &lt;ol&gt;
-  &lt;li&gt;Use as much built-in tools on a Mac as possible. The web development
-toolchain scares me.&lt;/li&gt;
-  &lt;li&gt;Target the browser. That’s where the value of WebAssembly is. (Node supports
-it as well. BUT, WHY THO?)&lt;/li&gt;
-  &lt;li&gt;Build from scratch. In the video I started from &lt;code class=&quot;highlighter-rouge&quot;&gt;mkdir&lt;/code&gt; a folder. We should
+&lt;li&gt;Use as much built-in tools on a Mac as possible. The web development
+toolchain scares me.&lt;&#x2f;li&gt;
+&lt;li&gt;Target the browser. That&#x27;s where the value of WebAssembly is. (Node supports
+it as well. BUT, WHY THO?)&lt;&#x2f;li&gt;
+&lt;li&gt;Build from scratch. In the video I started from &lt;code&gt;mkdir&lt;&#x2f;code&gt; a folder. We should
 strive to understand details on every level whenever possible. Boilerplates
-and dependencies should come later.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;things-youll-need&quot;&gt;Things you’ll need:&lt;/h2&gt;
-
+and dependencies should come later.&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;h2&gt;Things you&#x27;ll need:&lt;&#x2f;h2&gt;
 &lt;ol&gt;
-  &lt;li&gt;Safari 11+&lt;/li&gt;
-  &lt;li&gt;Xcode. More specifically, you should be able to run &lt;code class=&quot;highlighter-rouge&quot;&gt;clang&lt;/code&gt; in a shell.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;the-workflow&quot;&gt;The Workflow&lt;/h2&gt;
-
-&lt;p&gt;Having these things installed, get a copy of &lt;a href=&quot;https://github.com/WebAssembly/wabt&quot;&gt;The WebAssembly Binary
-Toolkit&lt;/a&gt; (wabt). Build it. The README has detailed instructions. I just went
-into the folder and ran&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;make clang-release
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This will generate a bunch of binary files in &lt;code class=&quot;highlighter-rouge&quot;&gt;out/clang/Release&lt;/code&gt; and you need
+&lt;li&gt;Safari 11+&lt;&#x2f;li&gt;
+&lt;li&gt;Xcode. More specifically, you should be able to run &lt;code&gt;clang&lt;&#x2f;code&gt; in a shell.&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;h2&gt;The Workflow&lt;&#x2f;h2&gt;
+&lt;p&gt;Having these things installed, get a copy of &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;WebAssembly&#x2f;wabt&quot;&gt;The WebAssembly Binary
+Toolkit&lt;&#x2f;a&gt; (wabt). Build it. The README has detailed instructions. I just went
+into the folder and ran&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;make clang-release
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;This will generate a bunch of binary files in &lt;code&gt;out&#x2f;clang&#x2f;Release&lt;&#x2f;code&gt; and you need
 to make sure you can run them from wherever you want to work on WebAssembly
-project (so either copy them into a folder included in your &lt;code class=&quot;highlighter-rouge&quot;&gt;PATH&lt;/code&gt; environment
-variable or add the absolute path to &lt;code class=&quot;highlighter-rouge&quot;&gt;out/clang/Release&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;PATH&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;Among the binaries “wabt” builds, &lt;code class=&quot;highlighter-rouge&quot;&gt;wat2wasm&lt;/code&gt; takes a &lt;code class=&quot;highlighter-rouge&quot;&gt;.wat&lt;/code&gt; file and compiles it
-to a WebAssembly binary. A &lt;code class=&quot;highlighter-rouge&quot;&gt;.wat&lt;/code&gt; is a source file in the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format&quot;&gt;text format&lt;/a&gt; for
-WebAssembly, which is in the form of S-expressions. So&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wat2wasm main.wat -o main.wasm
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;…will compile your WebAssembly module in &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wat&lt;/code&gt; to generate &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wasm&lt;/code&gt;, the
-binary file. For now, &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wat&lt;/code&gt; can be the simplest WebAssembly program:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(module)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Running the binary in a browser demands the bulk of the work. First&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/30/hello-world-in-webassembly/&gt;,&lt;/a&gt; we’ll need
-a web page. It doesn’t need any content other than invoking some JavaScript
-code.&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- The only thing that matters is the following line,
-    although having a valid HTML5 page is nice. --&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;play.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
+project (so either copy them into a folder included in your &lt;code&gt;PATH&lt;&#x2f;code&gt; environment
+variable or add the absolute path to &lt;code&gt;out&#x2f;clang&#x2f;Release&lt;&#x2f;code&gt; to &lt;code&gt;PATH&lt;&#x2f;code&gt;).&lt;&#x2f;p&gt;
+&lt;p&gt;Among the binaries &amp;quot;wabt&amp;quot; builds, &lt;code&gt;wat2wasm&lt;&#x2f;code&gt; takes a &lt;code&gt;.wat&lt;&#x2f;code&gt; file and compiles it
+to a WebAssembly binary. A &lt;code&gt;.wat&lt;&#x2f;code&gt; is a source file in the &lt;a href=&quot;https:&#x2f;&#x2f;developer.mozilla.org&#x2f;en-US&#x2f;docs&#x2f;WebAssembly&#x2f;Understanding_the_text_format&quot;&gt;text format&lt;&#x2f;a&gt; for
+WebAssembly, which is in the form of S-expressions. So&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;wat2wasm main.wat -o main.wasm
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;…will compile your WebAssembly module in &lt;code&gt;main.wat&lt;&#x2f;code&gt; to generate &lt;code&gt;main.wasm&lt;&#x2f;code&gt;, the
+binary file. For now, &lt;code&gt;main.wat&lt;&#x2f;code&gt; can be the simplest WebAssembly program:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source lisp&quot;&gt;&lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;module&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Running the binary in a browser demands the bulk of the work. First, we&#x27;ll need
+a web page. It doesn&#x27;t need any content other than invoking some JavaScript
+code.&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;text html basic&quot;&gt;&lt;span class=&quot;meta tag sgml html&quot;&gt;&lt;span class=&quot;punctuation definition tag html&quot;&gt;&amp;lt;!&lt;&#x2f;span&gt;&lt;span class=&quot;meta tag sgml doctype html&quot;&gt;&lt;span class=&quot;entity name tag doctype html&quot;&gt;DOCTYPE&lt;&#x2f;span&gt; html&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;span class=&quot;meta tag structure any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag structure any html&quot;&gt;html&lt;&#x2f;span&gt; &lt;span class=&quot;meta attribute-with-value html&quot;&gt;&lt;span class=&quot;entity other attribute-name html&quot;&gt;lang&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator key-value html&quot;&gt;=&lt;&#x2f;span&gt;&lt;span class=&quot;string quoted double html&quot;&gt;&lt;span class=&quot;punctuation definition string begin html&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;en&lt;span class=&quot;punctuation definition string end html&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;span class=&quot;meta tag structure any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag structure any html&quot;&gt;head&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;meta tag inline any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag inline any html&quot;&gt;meta&lt;&#x2f;span&gt; &lt;span class=&quot;meta attribute-with-value html&quot;&gt;&lt;span class=&quot;entity other attribute-name html&quot;&gt;charset&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator key-value html&quot;&gt;=&lt;&#x2f;span&gt;&lt;span class=&quot;string quoted double html&quot;&gt;&lt;span class=&quot;punctuation definition string begin html&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;UTF-8&lt;span class=&quot;punctuation definition string end html&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;meta tag inline any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag inline any html&quot;&gt;title&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta tag inline any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag inline any html&quot;&gt;title&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;span class=&quot;meta tag structure any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag structure any html&quot;&gt;head&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;span class=&quot;meta tag structure any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag structure any html&quot;&gt;body&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;comment block html&quot;&gt;&lt;span class=&quot;punctuation definition comment begin html&quot;&gt;&amp;lt;!--&lt;&#x2f;span&gt; The only thing that matters is the following line,
+    although having a valid HTML5 page is nice. &lt;span class=&quot;punctuation definition comment end html&quot;&gt;--&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;meta tag script begin html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag script html&quot;&gt;script&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta tag script begin html&quot;&gt; &lt;span class=&quot;meta attribute-with-value html&quot;&gt;&lt;span class=&quot;entity other attribute-name html&quot;&gt;src&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator key-value html&quot;&gt;=&lt;&#x2f;span&gt;&lt;span class=&quot;string quoted double html&quot;&gt;&lt;span class=&quot;punctuation definition string begin html&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;play.js&lt;span class=&quot;punctuation definition string end html&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta tag script end html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag script html&quot;&gt;script&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;span class=&quot;meta tag structure any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag structure any html&quot;&gt;body&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;span class=&quot;meta tag structure any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag structure any html&quot;&gt;html&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;First, the Javascript logic needs to &lt;em&gt;fetch and instantiate the compiled
-WebAssembly module&lt;/em&gt;. Since this is not a JS or WebAssembly tutorial, I’ll point
-you to the docmuntation for &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API&quot;&gt;Fetch API&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise&quot;&gt;Promises&lt;/a&gt;, and &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly&quot;&gt;the WebAssembly
-object&lt;/a&gt; for details:&lt;/p&gt;
+WebAssembly module&lt;&#x2f;em&gt;. Since this is not a JS or WebAssembly tutorial, I&#x27;ll point
+you to the docmuntation for &lt;a href=&quot;https:&#x2f;&#x2f;developer.mozilla.org&#x2f;en-US&#x2f;docs&#x2f;Web&#x2f;API&#x2f;Fetch_API&quot;&gt;Fetch API&lt;&#x2f;a&gt;, &lt;a href=&quot;https:&#x2f;&#x2f;developer.mozilla.org&#x2f;en-US&#x2f;docs&#x2f;Web&#x2f;JavaScript&#x2f;Reference&#x2f;Global_Objects&#x2f;Promise&quot;&gt;Promises&lt;&#x2f;a&gt;, and &lt;a href=&quot;https:&#x2f;&#x2f;developer.mozilla.org&#x2f;en-US&#x2f;docs&#x2f;Web&#x2f;JavaScript&#x2f;Reference&#x2f;Global_Objects&#x2f;WebAssembly&quot;&gt;the WebAssembly
+object&lt;&#x2f;a&gt; for details:&lt;&#x2f;p&gt;
+&lt;pre&gt;fetch(&quot;main.wasm&quot;).then(reponse =&gt;
+    reponse.arrayBuffer()
+).then(bytes =&gt;
+    WebAssembly.instantiate(bytes, {})
+).then(result =&gt;
+    result.instance
+).then(main);
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;main.wasm&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reponse&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;reponse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arrayBuffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bytes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;WebAssembly&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;instantiate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;instance&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This snippet fetches &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wasm&lt;/code&gt; (adjust this URL according to your choosing),
-instantiate it, then pass it into a function named &lt;code class=&quot;highlighter-rouge&quot;&gt;main&lt;/code&gt;, we can put
-a placeholder logic for it for now:&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wasm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wasm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Before we move on, you’ll find that simply opending your HTML file in browser
-and looking at developer console won’t work. Safari would complain about
-cross-domain request error for &lt;code class=&quot;highlighter-rouge&quot;&gt;fetch&lt;/code&gt;. So we need to serve these resources
+&lt;&#x2f;pre&gt;
+&lt;p&gt;This snippet fetches &lt;code&gt;main.wasm&lt;&#x2f;code&gt; (adjust this URL according to your choosing),
+instantiate it, then pass it into a function named &lt;code&gt;main&lt;&#x2f;code&gt;, we can put
+a placeholder logic for it for now:&lt;&#x2f;p&gt;
+&lt;pre&gt;function main(wasm) {
+    console.log(wasm);
+}
+&lt;&#x2f;pre&gt;
+&lt;p&gt;Before we move on, you&#x27;ll find that simply opending your HTML file in browser
+and looking at developer console won&#x27;t work. Safari would complain about
+cross-domain request error for &lt;code&gt;fetch&lt;&#x2f;code&gt;. So we need to serve these resources
 locally. I usually use the built in server module from Python standard library
-for this kind of things:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# In your source folder, run
+for this kind of things:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;# In your source folder, run
 python -m SimpleHTTPServer
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now go to &lt;a href=&quot;http://localhost:8000&quot;&gt;http://localhost:8000&lt;/a&gt; and click on your HTML file. If everything
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Now go to &lt;a href=&quot;http:&#x2f;&#x2f;localhost:8000&quot;&gt;http:&#x2f;&#x2f;localhost:8000&lt;&#x2f;a&gt; and click on your HTML file. If everything
 went well, you should see a WebAssembly instance logged in the developer
-console.&lt;/p&gt;
-
+console.&lt;&#x2f;p&gt;
 &lt;p&gt;Congratulations! You can start writing WebAssembly locally. Just remember to
-re-compile &lt;code class=&quot;highlighter-rouge&quot;&gt;main.wat&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;wat2wasm&lt;/code&gt; whenever you want to test things out in
-browser.&lt;/p&gt;
+re-compile &lt;code&gt;main.wat&lt;&#x2f;code&gt; with &lt;code&gt;wat2wasm&lt;&#x2f;code&gt; whenever you want to test things out in
+browser.&lt;&#x2f;p&gt;
+&lt;h2&gt;An Actual &amp;quot;Hello, World!&amp;quot; Implementation&lt;&#x2f;h2&gt;
+&lt;p&gt;This is my implementation:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source lisp&quot;&gt;&lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;module
+  &lt;span class=&quot;comment line semicolon lisp&quot;&gt;&lt;span class=&quot;punctuation definition comment lisp&quot;&gt;;&lt;&#x2f;span&gt;; Allocate a page of linear memory (64kb). Export it as &amp;quot;memory&amp;quot;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;memory &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;&lt;span class=&quot;support function lisp&quot;&gt;export&lt;&#x2f;span&gt; &lt;span class=&quot;string quoted double lisp&quot;&gt;&lt;span class=&quot;punctuation definition string begin lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;memory&lt;span class=&quot;punctuation definition string end lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;constant numeric lisp&quot;&gt;1&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
 
-&lt;h2 id=&quot;an-actual-hello-world-implementation&quot;&gt;An Actual “Hello, World!” Implementation&lt;/h2&gt;
+  &lt;span class=&quot;comment line semicolon lisp&quot;&gt;&lt;span class=&quot;punctuation definition comment lisp&quot;&gt;;&lt;&#x2f;span&gt;; Write the string at the start of the linear memory.&lt;&#x2f;span&gt;
+  &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;data &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;i32.const &lt;span class=&quot;constant numeric lisp&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;string quoted double lisp&quot;&gt;&lt;span class=&quot;punctuation definition string begin lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;Hello, world!&lt;span class=&quot;punctuation definition string end lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;comment line semicolon lisp&quot;&gt;&lt;span class=&quot;punctuation definition comment lisp&quot;&gt;;&lt;&#x2f;span&gt;; write string at location 0&lt;&#x2f;span&gt;
 
-&lt;p&gt;This is my implementation:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(module
-  ;; Allocate a page of linear memory (64kb). Export it as &quot;memory&quot;
-  (memory (export &quot;memory&quot;) 1)
-
-  ;; Write the string at the start of the linear memory.
-  (data (i32.const 0) &quot;Hello, world!&quot;) ;; write string at location 0
-
-  ;; Export the position and length of the string.
-  (global (export &quot;length&quot;) i32 (i32.const 12))
-  (global (export &quot;position&quot;) i32 (i32.const 0)))
-&lt;/code&gt;&lt;/pre&gt;
-
+  &lt;span class=&quot;comment line semicolon lisp&quot;&gt;&lt;span class=&quot;punctuation definition comment lisp&quot;&gt;;&lt;&#x2f;span&gt;; Export the position and length of the string.&lt;&#x2f;span&gt;
+  &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;global &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;&lt;span class=&quot;support function lisp&quot;&gt;export&lt;&#x2f;span&gt; &lt;span class=&quot;string quoted double lisp&quot;&gt;&lt;span class=&quot;punctuation definition string begin lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;length&lt;span class=&quot;punctuation definition string end lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; i32 &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;i32.const &lt;span class=&quot;constant numeric lisp&quot;&gt;12&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;global &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;&lt;span class=&quot;support function lisp&quot;&gt;export&lt;&#x2f;span&gt; &lt;span class=&quot;string quoted double lisp&quot;&gt;&lt;span class=&quot;punctuation definition string begin lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;position&lt;span class=&quot;punctuation definition string end lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; i32 &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;i32.const &lt;span class=&quot;constant numeric lisp&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;In other words, we expose information of the linear memory we manipulated to the
-JavaScript environment. Things that has been &lt;code class=&quot;highlighter-rouge&quot;&gt;export&lt;/code&gt;ed will show up as
-properties of &lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt; of the &lt;code class=&quot;highlighter-rouge&quot;&gt;WebAssembly&lt;/code&gt; instance. We can access them in the
-&lt;code class=&quot;highlighter-rouge&quot;&gt;main&lt;/code&gt; JavaScript functions:&lt;/p&gt;
+JavaScript environment. Things that has been &lt;code&gt;export&lt;&#x2f;code&gt;ed will show up as
+properties of &lt;code&gt;exports&lt;&#x2f;code&gt; of the &lt;code&gt;WebAssembly&lt;&#x2f;code&gt; instance. We can access them in the
+&lt;code&gt;main&lt;&#x2f;code&gt; JavaScript functions:&lt;&#x2f;p&gt;
+&lt;pre&gt;function main(wasm) {
+    const memory   = wasm.exports.memory;
+    const length   = wasm.exports.length;
+    const position = wasm.exports.position;
+    ...
+}
+&lt;&#x2f;pre&gt;
+&lt;p&gt;Then it&#x27;s just plain-old Javascript (tho I had to steal it from tutorials).
+&lt;code&gt;memory.buffer&lt;&#x2f;code&gt; is of type &lt;a href=&quot;https:&#x2f;&#x2f;developer.mozilla.org&#x2f;en-US&#x2f;docs&#x2f;Web&#x2f;JavaScript&#x2f;Reference&#x2f;Global_Objects&#x2f;ArrayBuffer&quot;&gt;ArrayBuffer&lt;&#x2f;a&gt;. We need to convert it into a string
+and log it to the console:&lt;&#x2f;p&gt;
+&lt;pre&gt;function main(wasm) {
+    const memory   = wasm.exports.memory;
+    const length   = wasm.exports.length;
+    const position = wasm.exports.position;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wasm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;memory&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;wasm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;wasm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;wasm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+    const bytes = new Uint8Array(memory.buffer, position, length);
+    const s = new TextDecoder(&#x27;utf8&#x27;).decode(bytes);
 
-&lt;p&gt;Then it’s just plain-old Javascript (tho I had to steal it from tutorials).
-&lt;code class=&quot;highlighter-rouge&quot;&gt;memory.buffer&lt;/code&gt; is of type &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer&quot;&gt;ArrayBuffer&lt;/a&gt;. We need to convert it into a string
-and log it to the console:&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;wasm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;memory&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;wasm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;wasm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;wasm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bytes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Uint8Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;TextDecoder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'utf8'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Et, voilà! &lt;code class=&quot;highlighter-rouge&quot;&gt;Hello, World!&lt;/code&gt; hot off a Web Assembly module in your developer
-console. To conclude, I personally like to use a &lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt; to streamline some
-of the typing. Here’s what I used for this demo:&lt;/p&gt;
-
-&lt;div class=&quot;language-makefile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-	wat2wasm main.wat &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; main.wasm
-
-&lt;span class=&quot;nl&quot;&gt;serve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
-	python &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; SimpleHTTPServer
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
+    console.log(s);
+}
+&lt;&#x2f;pre&gt;
+&lt;p&gt;Et, voilà! &lt;code&gt;Hello, World!&lt;&#x2f;code&gt; hot off a Web Assembly module in your developer
+console. To conclude, I personally like to use a &lt;code&gt;Makefile&lt;&#x2f;code&gt; to streamline some
+of the typing. Here&#x27;s what I used for this demo:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source makefile&quot;&gt;&lt;span class=&quot;meta function makefile&quot;&gt;&lt;span class=&quot;entity name function makefile&quot;&gt;compile&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator assignment makefile&quot;&gt;:&lt;&#x2f;span&gt;&lt;span class=&quot;meta function arguments makefile&quot;&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta function body makefile&quot;&gt;
+&lt;&#x2f;span&gt;&lt;span class=&quot;meta function body makefile&quot;&gt;	&lt;span class=&quot;source shell&quot;&gt;&lt;span class=&quot;meta function-call shell&quot;&gt;&lt;span class=&quot;variable function shell&quot;&gt;wat2wasm&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta function-call arguments shell&quot;&gt; main.wat&lt;span class=&quot;variable parameter option shell&quot;&gt;&lt;span class=&quot;punctuation definition parameter shell&quot;&gt; -&lt;&#x2f;span&gt;o&lt;&#x2f;span&gt; main.wasm&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;
+&lt;span class=&quot;meta function makefile&quot;&gt;&lt;span class=&quot;entity name function makefile&quot;&gt;serve&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator assignment makefile&quot;&gt;:&lt;&#x2f;span&gt;&lt;span class=&quot;meta function arguments makefile&quot;&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta function body makefile&quot;&gt;
+&lt;&#x2f;span&gt;&lt;span class=&quot;meta function body makefile&quot;&gt;	&lt;span class=&quot;source shell&quot;&gt;&lt;span class=&quot;meta function-call shell&quot;&gt;&lt;span class=&quot;variable function shell&quot;&gt;python&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta function-call arguments shell&quot;&gt;&lt;span class=&quot;variable parameter option shell&quot;&gt;&lt;span class=&quot;punctuation definition parameter shell&quot;&gt; -&lt;&#x2f;span&gt;m&lt;&#x2f;span&gt; SimpleHTTPServer&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;h2&gt;Conclusion&lt;&#x2f;h2&gt;
 &lt;p&gt;No fancy schmancy Javascript build stack, no 3rd-party code dependency. Write
 code, compile, run on your (virtual, in browser) machine, repeat. That sounds like
-“assembly” to me!&lt;/p&gt;
-
+&amp;quot;assembly&amp;quot; to me!&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Sat, 30 Dec 2017 18:43:49 -0800</pubDate>
-                
                 <link>https://duan.ca/2017/12/30/hello-world-in-webassembly/</link>
-                
                 <guid isPermaLink="true">https://duan.ca/2017/12/30/hello-world-in-webassembly/</guid>
             </item>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
     </channel>
 </rss>

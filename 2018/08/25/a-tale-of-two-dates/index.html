@@ -1,153 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>A Tale of Two Dates</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>A Tale of Two Dates | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="A Tale of Two Dates" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Recently, I discovered a curious thing about Dates in two large projects I work on. Simply put, both projects receives, from various HTTP endpoints, the same object component: a timestamp, and a duration. Combining these two pieces, both projects derives two Foundation.Dates to represent a time range. So far, so good." />
-<meta property="og:description" content="Recently, I discovered a curious thing about Dates in two large projects I work on. Simply put, both projects receives, from various HTTP endpoints, the same object component: a timestamp, and a duration. Combining these two pieces, both projects derives two Foundation.Dates to represent a time range. So far, so good." />
-<link rel="canonical" href="https://duan.ca/2018/08/25/a-tale-of-two-dates/" />
-<meta property="og:url" content="https://duan.ca/2018/08/25/a-tale-of-two-dates/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2018-08-25T17:11:43-07:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2018-08-25T17:11:43-07:00","headline":"A Tale of Two Dates","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2018/08/25/a-tale-of-two-dates/"},"url":"https://duan.ca/2018/08/25/a-tale-of-two-dates/","author":{"@type":"Person","name":"Daniel Duan"},"description":"Recently, I discovered a curious thing about Dates in two large projects I work on. Simply put, both projects receives, from various HTTP endpoints, the same object component: a timestamp, and a duration. Combining these two pieces, both projects derives two Foundation.Dates to represent a time range. So far, so good.","@type":"BlogPosting","dateModified":"2018-08-25T17:11:43-07:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2018/08/25/a-tale-of-two-dates/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="A Tale of Two Dates">
+    <meta property="article:published_time" content="2018-08-25"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>A Tale of Two Dates</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2018/08/25/a-tale-of-two-dates/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">A Tale of Two Dates</h1>
-  <div class="post-date">
-    <time>25 Aug 2018</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/swift">Swift</a>,
-
-  <a href="/tag/foundation">Foundation</a>
-
-</div>
-
-
-  </div>
-  <p>Recently, I discovered a curious thing about <code class="highlighter-rouge">Date</code>s in two large projects
+<body><article>
+    <h1>A Tale of Two Dates</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2018-08-25" itemProp="datePublished">2018-08-25</time>
+        </p>
+    </nav><p>Recently, I discovered a curious thing about <code>Date</code>s in two large projects
 I work on. Simply put, both projects receives, from various HTTP endpoints, the
 same object component: a timestamp, and a duration. Combining these two pieces,
-both projects derives two <code class="highlighter-rouge">Foundation.Date</code>s to represent a time range. So far<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2018/08/25/a-tale-of-two-dates/>,</a>
+both projects derives two <code>Foundation.Date</code>s to represent a time range. So far,
 so good.</p>
-
-<p>However, project <code class="highlighter-rouge">A</code> uses <code class="highlighter-rouge">Fonudation.DateInterval</code> to represent this concept,
-while project <code class="highlighter-rouge">B</code> uses <code class="highlighter-rouge">Range&lt;Date&gt;</code>. But why? Why represent the same component
+<p>However, project <code>A</code> uses <code>Fonudation.DateInterval</code> to represent this concept,
+while project <code>B</code> uses <code>Range&lt;Date&gt;</code>. But why? Why represent the same component
 differently? What a gigantic waste of brain power for everyone on both projects!</p>
-
-<p>So I set out to unify this thing. Wherever a <code class="highlighter-rouge">Range</code> literal is used, I swap in
-<code class="highlighter-rouge">DateInterval.init(start:end:)</code>; <code class="highlighter-rouge">Range.lowerBound</code> becomes
-<code class="highlighter-rouge">DateInterval.start</code>; <code class="highlighter-rouge">Range.upperBound</code> becomes <code class="highlighter-rouge">DateInterval.end</code>, etc. It
-didn’t take long to complete the conversion to <code class="highlighter-rouge">DateInterval</code> in project <code class="highlighter-rouge">B</code>,
+<p>So I set out to unify this thing. Wherever a <code>Range</code> literal is used, I swap in
+<code>DateInterval.init(start:end:)</code>; <code>Range.lowerBound</code> becomes
+<code>DateInterval.start</code>; <code>Range.upperBound</code> becomes <code>DateInterval.end</code>, etc. It
+didn't take long to complete the conversion to <code>DateInterval</code> in project <code>B</code>,
 now it builds and runs!</p>
-
-<p>Oh, wait, why are some tests failing in project <code class="highlighter-rouge">B</code>? Shouldn’t this just be an
+<p>Oh, wait, why are some tests failing in project <code>B</code>? Shouldn't this just be an
 mechanical change?</p>
-
 <p>I spent time investigating. The failing tests are for some very specific
-business logic that I’m not familiar with. So things took a while to become
+business logic that I'm not familiar with. So things took a while to become
 clear. What felt like a long time later, I realized my mistake.</p>
+<p>(I'm sorry if this has been obvious to you. You are a better Swift programmer!)</p>
+<p>Somewhere in project <code>B</code> is the following:</p>
+<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">Item</span></span></span> {
+    <span class="keyword variable">let</span> <span class="variable parameter">range</span>: <span class="support class">Range</span><span class="keyword operator">&lt;</span><span class="support class">Date</span><span class="keyword operator">&gt;</span>
+}
 
-<p>(I’m sorry if this has been obvious to you. You are a better Swift programmer!)</p>
+<span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">Container</span></span></span> {
+    <span class="keyword variable">let</span> <span class="variable parameter">items</span>: [<span class="support class">Item</span>]
+}
 
-<p>Somewhere in project <code class="highlighter-rouge">B</code> is the following:</p>
+<span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">containerFactory</span></span>(<span class="variable parameter">range</span>: <span class="support class">Range</span><span class="keyword operator">&lt;</span><span class="support class">Date</span><span class="keyword operator">&gt;</span>, <span class="variable parameter">items</span>: [<span class="support class">Item</span>])</span></span> -&gt; <span class="support class">Container</span> {
+    <span class="comment line"><span class="punctuation definition comment">///</span> pretend there&#39;s more code here</span>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Item</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Date</span><span class="o">&gt;</span>
-<span class="p">}</span>
+    <span class="keyword control">return</span> <span class="support class">Conatiner</span>(<span class="variable parameter">items</span>: items<span class="keyword operator">.</span>filter { $<span class="constant numeric decimal">0</span><span class="keyword operator">.</span>range<span class="keyword operator">.</span>contains(range<span class="keyword operator">.</span>lowerBound) })
+}
+</span></pre>
+<p>And of course, after my &quot;refactor&quot;, it became</p>
+<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">Item</span></span></span> {
+    <span class="keyword variable">let</span> <span class="variable parameter">range</span>: <span class="support class">DateInterval</span>
+}
 
-<span class="kd">struct</span> <span class="kt">Container</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt">Item</span><span class="p">]</span>
-<span class="p">}</span>
+<span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">Container</span></span></span> {
+    <span class="keyword variable">let</span> <span class="variable parameter">items</span>: [<span class="support class">Item</span>]
+}
 
-<span class="kd">func</span> <span class="nf">containerFactory</span><span class="p">(</span><span class="nv">range</span><span class="p">:</span> <span class="kt">Range</span><span class="o">&lt;</span><span class="kt">Date</span><span class="o">&gt;</span><span class="p">,</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt">Item</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Container</span> <span class="p">{</span>
-    <span class="c1">/// pretend there's more code here</span>
+<span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">containerFactory</span></span>(<span class="variable parameter">range</span>: <span class="support class">DateInterval</span>, <span class="variable parameter">items</span>: [<span class="support class">Item</span>])</span></span> -&gt; <span class="support class">Container</span> {
+    <span class="comment line"><span class="punctuation definition comment">///</span> pretend there&#39;s more code here</span>
 
-    <span class="k">return</span> <span class="kt">Conatiner</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="n">items</span><span class="o">.</span><span class="n">filter</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="n">range</span><span class="o">.</span><span class="n">lowerBound</span><span class="p">)</span> <span class="p">})</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>And of course, after my “refactor”, it became</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Item</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">DateInterval</span>
-<span class="p">}</span>
-
-<span class="kd">struct</span> <span class="kt">Container</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt">Item</span><span class="p">]</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">containerFactory</span><span class="p">(</span><span class="nv">range</span><span class="p">:</span> <span class="kt">DateInterval</span><span class="p">,</span> <span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt">Item</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Container</span> <span class="p">{</span>
-    <span class="c1">/// pretend there's more code here</span>
-
-    <span class="k">return</span> <span class="kt">Conatiner</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="n">items</span><span class="o">.</span><span class="n">filter</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">range</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="n">range</span><span class="o">.</span><span class="n">start</span><span class="p">)</span> <span class="p">})</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Tests for <code class="highlighter-rouge">containerFactory</code> failed. And here’s why: <strong><code class="highlighter-rouge">DateInterval.contains</code>
-is inclusive for its upper bound (<code class="highlighter-rouge">.end</code>), whereas <code class="highlighter-rouge">Range.contains</code> isn’t!</strong> You
+    <span class="keyword control">return</span> <span class="support class">Conatiner</span>(<span class="variable parameter">items</span>: items<span class="keyword operator">.</span>filter { $<span class="constant numeric decimal">0</span><span class="keyword operator">.</span>range<span class="keyword operator">.</span>contains(range<span class="keyword operator">.</span>start) })
+}
+</span></pre>
+<p>Tests for <code>containerFactory</code> failed. And here's why: <strong><code>DateInterval.contains</code>
+is inclusive for its upper bound (<code>.end</code>), whereas <code>Range.contains</code> isn't!</strong> You
 can see it plainly by running the following</p>
+<pre><span class="source swift"><span class="keyword other import">import</span> <span class="support class">Foundation</span>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Foundation</span>
+<span class="keyword variable">let</span> sooner = <span class="support class">Date</span>(<span class="variable parameter">timeIntervalSince1970</span>: <span class="constant numeric decimal">0</span>)
+<span class="keyword variable">let</span> later = sooner<span class="keyword operator">.</span>addingTimeInterval(<span class="constant numeric decimal">1000</span>)
 
-<span class="k">let</span> <span class="nv">sooner</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">(</span><span class="nv">timeIntervalSince1970</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">later</span> <span class="o">=</span> <span class="n">sooner</span><span class="o">.</span><span class="nf">addingTimeInterval</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-
-<span class="kt">DateInterval</span><span class="p">(</span><span class="nv">start</span><span class="p">:</span> <span class="n">sooner</span><span class="p">,</span> <span class="nv">end</span><span class="p">:</span> <span class="n">later</span><span class="p">)</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="n">later</span><span class="p">)</span> <span class="c1">// true</span>
-<span class="p">(</span><span class="n">sooner</span><span class="o">..&lt;</span><span class="n">later</span><span class="p">)</span><span class="o">.</span><span class="nf">contains</span><span class="p">(</span><span class="n">later</span><span class="p">)</span>                        <span class="c1">// false</span>
-</code></pre></div></div>
-
-<p>So here’s what stumped me:</p>
-
+<span class="support class">DateInterval</span>(<span class="variable parameter">start</span>: sooner, <span class="variable parameter">end</span>: later)<span class="keyword operator">.</span>contains(later) <span class="comment line"><span class="punctuation definition comment">//</span> true</span>
+(sooner<span class="keyword operator">..&lt;</span>later)<span class="keyword operator">.</span>contains(later)                        <span class="comment line"><span class="punctuation definition comment">//</span> false</span>
+</span></pre>
+<p>So here's what stumped me:</p>
 <ol>
-  <li>
-    <p>The 2 projects chose to interpret the same component differently, which
-I didn’t not expect.</p>
-  </li>
-  <li>
-    <p>I didn’t know how <code class="highlighter-rouge">Foundation.DateInterval</code> works.</p>
-  </li>
+<li>
+<p>The 2 projects chose to interpret the same component differently, which
+I didn't not expect.</p>
+</li>
+<li>
+<p>I didn't know how <code>Foundation.DateInterval</code> works.</p>
+</li>
 </ol>
-
 <p>Well, today I learned.</p>
 
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/foundation/">Foundation</a>
+    </p>
+</footer></body>
 </html>

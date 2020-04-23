@@ -1,191 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Swift Algebraic Data Types</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Swift Algebraic Data Types | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Swift Algebraic Data Types" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="The Basics" />
-<meta property="og:description" content="The Basics" />
-<link rel="canonical" href="https://duan.ca/2015/07/12/swift-algebraic-data-types/" />
-<meta property="og:url" content="https://duan.ca/2015/07/12/swift-algebraic-data-types/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2015-07-12T15:51:27-07:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2015-07-12T15:51:27-07:00","headline":"Swift Algebraic Data Types","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2015/07/12/swift-algebraic-data-types/"},"url":"https://duan.ca/2015/07/12/swift-algebraic-data-types/","author":{"@type":"Person","name":"Daniel Duan"},"description":"The Basics","@type":"BlogPosting","dateModified":"2015-07-12T15:51:27-07:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2015/07/12/swift-algebraic-data-types/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Swift Algebraic Data Types">
+    <meta property="article:published_time" content="2015-07-12"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Swift Algebraic Data Types</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2015/07/12/swift-algebraic-data-types/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">Swift Algebraic Data Types</h1>
-  <div class="post-date">
-    <time>12 Jul 2015</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/swift">Swift</a>
-
-</div>
-
-
-  </div>
-  <h2 id="the-basics">The Basics</h2>
-
-<p><a href="https://en.wikipedia.org/wiki/Algebraic_data_type">Algebraic Data Type</a> is a fancy name for “a type creaded by combining other
-types” in programming languages. One aspect of the “algebraic-ness” is how
+<body><article>
+    <h1>Swift Algebraic Data Types</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2015-07-12" itemProp="datePublished">2015-07-12</time>
+        </p>
+    </nav><h2>The Basics</h2>
+<p><a href="https://en.wikipedia.org/wiki/Algebraic_data_type">Algebraic Data Type</a> is a fancy name for &quot;a type creaded by combining other
+types&quot; in programming languages. One aspect of the &quot;algebraic-ness&quot; is how
 many potential new values there are for the new type, given a set of type as
 its building block.</p>
-
 <p>To better illustrate this, consider the following example in Swift.</p>
+<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">StarkChild</span></span></span> { <span class="keyword control">case</span> <span class="support class">Rickon</span>, <span class="support class">Bran</span>, <span class="support class">Arya</span>, <span class="support class">Sansa</span>, <span class="support class">Robb</span>, <span class="support class">Jon</span> }
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">StarkChild</span> <span class="p">{</span> <span class="k">case</span> <span class="kt">Rickon</span><span class="p">,</span> <span class="kt">Bran</span><span class="p">,</span> <span class="kt">Arya</span><span class="p">,</span> <span class="kt">Sansa</span><span class="p">,</span> <span class="kt">Robb</span><span class="p">,</span> <span class="kt">Jon</span> <span class="p">}</span>
+<span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Direwolf</span></span></span> { <span class="keyword control">case</span> <span class="support class">Shaggydog</span>, <span class="support class">Summer</span>, <span class="support class">Nymeria</span>, <span class="support class">Lady</span>, <span class="support class">Greywind</span>, <span class="support class">Ghost</span> }
 
-<span class="kd">enum</span> <span class="kt">Direwolf</span> <span class="p">{</span> <span class="k">case</span> <span class="kt">Shaggydog</span><span class="p">,</span> <span class="kt">Summer</span><span class="p">,</span> <span class="kt">Nymeria</span><span class="p">,</span> <span class="kt">Lady</span><span class="p">,</span> <span class="kt">Greywind</span><span class="p">,</span> <span class="kt">Ghost</span> <span class="p">}</span>
+<span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Actor</span></span></span> {
+    <span class="keyword control">case</span> <span class="support class">Wolf</span>(<span class="support class">Direwolf</span>)
+    <span class="keyword control">case</span> <span class="support class">Person</span>(<span class="support class">StarkChild</span>)
+}
 
-<span class="kd">enum</span> <span class="kt">Actor</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="kt">Wolf</span><span class="p">(</span><span class="kt">Direwolf</span><span class="p">)</span>
-    <span class="k">case</span> <span class="kt">Person</span><span class="p">(</span><span class="kt">StarkChild</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="kd">struct</span> <span class="kt">Parters</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="nv">wolf</span><span class="p">:</span> <span class="kt">Direwolf</span>
-    <span class="k">var</span> <span class="nv">person</span><span class="p">:</span> <span class="kt">StarkChild</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><code class="highlighter-rouge">StarkChild</code> and <code class="highlighter-rouge">Direwolf</code> each has 6 potential values. Combining them, we
+<span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">Parters</span></span></span> {
+    <span class="keyword variable">var</span> <span class="variable parameter">wolf</span>: <span class="support class">Direwolf</span>
+    <span class="keyword variable">var</span> <span class="variable parameter">person</span>: <span class="support class">StarkChild</span>
+}
+</span></pre>
+<p><code>StarkChild</code> and <code>Direwolf</code> each has 6 potential values. Combining them, we
 get two new types.</p>
-
-<p>Question: how many potentiol values are there for <code class="highlighter-rouge">Actor</code>? How many for
-<code class="highlighter-rouge">Parters</code>?</p>
-
-<hr />
-
-<p>An <code class="highlighter-rouge">Actor</code> can be either a <code class="highlighter-rouge">StarkChild</code> or a <code class="highlighter-rouge">DireWolf</code>, therefore it has `6</p>
+<p>Question: how many potentiol values are there for <code>Actor</code>? How many for
+<code>Parters</code>?</p>
+<hr>
+<p>An <code>Actor</code> can be either a <code>StarkChild</code> or a <code>DireWolf</code>, therefore it has `6</p>
 <ul>
-  <li>6 = 12<code class="highlighter-rouge"> potential values – the *sum* of </code>Child<code class="highlighter-rouge">'s and </code>DireWolf`’s values.</li>
+<li>6 = 12<code>potential values – the *sum* of</code>Child<code>'s and </code>DireWolf`'s values.</li>
 </ul>
-
-<p>A <code class="highlighter-rouge">Partners</code> requires us to select one value from <code class="highlighter-rouge">Child</code> and one from
-<code class="highlighter-rouge">DireWolf</code>, resulting in <code class="highlighter-rouge">6 * 6 = 36</code> potential values – the <em>product</em> of
-<code class="highlighter-rouge">Child</code>’s and <code class="highlighter-rouge">DireWolf</code>’s values.</p>
-
-<p><code class="highlighter-rouge">Actor</code><a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2015/07/12/swift-algebraic-data-types/>,</a> an <code class="highlighter-rouge">enum</code>, is a <em>sum</em> type. <code class="highlighter-rouge">Parters</code>, a <code class="highlighter-rouge">struct</code>, is a <em>product</em>
-type. Here, <code class="highlighter-rouge">Parters</code> could easily be defined as a <code class="highlighter-rouge">class</code> or a <code class="highlighter-rouge">tuple</code> and
+<p>A <code>Partners</code> requires us to select one value from <code>Child</code> and one from
+<code>DireWolf</code>, resulting in <code>6 * 6 = 36</code> potential values – the <em>product</em> of
+<code>Child</code>'s and <code>DireWolf</code>'s values.</p>
+<p><code>Actor</code>, an <code>enum</code>, is a <em>sum</em> type. <code>Parters</code>, a <code>struct</code>, is a <em>product</em>
+type. Here, <code>Parters</code> could easily be defined as a <code>class</code> or a <code>tuple</code> and
 remain a <em>product</em> type. Because we can create product or sum types in these
 direct ways, we can say Swift has first class support for Algebraic Data
 Types.</p>
-
-<h2 id="the-crossovers">The Crossovers</h2>
-
-<p>However, the story doesn’t stop here. In Swift, an <code class="highlighter-rouge">enum</code>’s option can have
+<h2>The Crossovers</h2>
+<p>However, the story doesn't stop here. In Swift, an <code>enum</code>'s option can have
 multiple values. If it happens to be the only option, then this
-<code class="highlighter-rouge">enum</code>effectively becomes a <em>product</em> type:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// there are 6 * 6 = 36 potential values for Parters</span>
-<span class="kd">enum</span> <span class="kt">Parters</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="kt">Value</span><span class="p">(</span><span class="nv">wolf</span><span class="p">:</span> <span class="kt">DireWolf</span><span class="p">,</span> <span class="nv">person</span><span class="p">:</span> <span class="kt">StarkChild</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Incidentally, this makes <code class="highlighter-rouge">enum</code> similar to <code class="highlighter-rouge">data</code> in Haskell, where <em>product</em>
-and <em>sum</em> types can be created with a unified construct – <code class="highlighter-rouge">data</code>.</p>
-
-<p>In C and C++, <code class="highlighter-rouge">union</code>s are the closest thing to <em>sum</em> types. However, <code class="highlighter-rouge">union</code>
+<code>enum</code>effectively becomes a <em>product</em> type:</p>
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> there are 6 * 6 = 36 potential values for Parters</span>
+<span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Parters</span></span></span> {
+    <span class="keyword control">case</span> <span class="support class">Value</span>(<span class="variable parameter">wolf</span>: <span class="support class">DireWolf</span>, <span class="variable parameter">person</span>: <span class="support class">StarkChild</span>)
+}
+</span></pre>
+<p>Incidentally, this makes <code>enum</code> similar to <code>data</code> in Haskell, where <em>product</em>
+and <em>sum</em> types can be created with a unified construct – <code>data</code>.</p>
+<p>In C and C++, <code>union</code>s are the closest thing to <em>sum</em> types. However, <code>union</code>
 is hardly used to combine arbitrary types due to its lack of associated
 values. What do people do in need of <em>sum</em> types? They make do with product
-types. Here’s one way to achive that in Swift:</p>
+types. Here's one way to achive that in Swift:</p>
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> Actor.value can have only 6 + 6 = 12 potential values thanks to</span>
+<span class="comment line"><span class="punctuation definition comment">//</span> manual enforcement</span>
+<span class="entity name type"><span class="keyword entity">class</span> <span class="entity name type"><span class="support class">Actor</span></span></span> {
+    <span class="keyword variable">var</span> <span class="variable parameter">child</span>: <span class="support class">StarkChild</span><span class="keyword operator">?</span>
+    <span class="keyword variable">var</span> <span class="variable parameter">wolf</span>: <span class="support class">Direwolf</span><span class="keyword operator">?</span>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Actor.value can have only 6 + 6 = 12 potential values thanks to</span>
-<span class="c1">// manual enforcement</span>
-<span class="kd">class</span> <span class="kt">Actor</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="nv">child</span><span class="p">:</span> <span class="kt">StarkChild</span><span class="p">?</span>
-    <span class="k">var</span> <span class="nv">wolf</span><span class="p">:</span> <span class="kt">Direwolf</span><span class="p">?</span>
+    <span class="keyword variable">var</span> <span class="variable parameter">value</span>: <span class="support class">Any</span> {
+        <span class="keyword control">get</span> {
+            <span class="keyword control">return</span> child == <span class="constant language nil">nil</span> ? wolf<span class="keyword operator">!</span> : child<span class="keyword operator">!</span>
+        }
+        <span class="keyword control">set</span>(newValue) {
+            <span class="keyword control">if</span> newValue <span class="keyword control">is</span> <span class="support class">StarkChild</span> {
+                child = (newValue <span class="keyword control">as</span><span class="keyword operator">!</span> <span class="support class">StarkChild</span>)
+                wolf = <span class="constant language nil">nil</span>
+            }
+            <span class="keyword control">if</span> newValue <span class="keyword control">is</span> <span class="support class">Direwolf</span> {
+                wolf = (newValue <span class="keyword control">as</span><span class="keyword operator">!</span> <span class="support class">Direwolf</span>)
+                child = <span class="constant language nil">nil</span>
+            }
+        }
+    }
 
-    <span class="k">var</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Any</span> <span class="p">{</span>
-        <span class="k">get</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">child</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">?</span> <span class="n">wolf</span><span class="o">!</span> <span class="p">:</span> <span class="n">child</span><span class="o">!</span>
-        <span class="p">}</span>
-        <span class="nf">set</span><span class="p">(</span><span class="n">newValue</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="n">newValue</span> <span class="k">is</span> <span class="kt">StarkChild</span> <span class="p">{</span>
-                <span class="n">child</span> <span class="o">=</span> <span class="p">(</span><span class="n">newValue</span> <span class="k">as!</span> <span class="kt">StarkChild</span><span class="p">)</span>
-                <span class="n">wolf</span> <span class="o">=</span> <span class="kc">nil</span>
-            <span class="p">}</span>
-            <span class="k">if</span> <span class="n">newValue</span> <span class="k">is</span> <span class="kt">Direwolf</span> <span class="p">{</span>
-                <span class="n">wolf</span> <span class="o">=</span> <span class="p">(</span><span class="n">newValue</span> <span class="k">as!</span> <span class="kt">Direwolf</span><span class="p">)</span>
-                <span class="n">child</span> <span class="o">=</span> <span class="kc">nil</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="nf">init</span><span class="p">(</span><span class="nv">wolf</span><span class="p">:</span> <span class="kt">Direwolf</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">self</span><span class="o">.</span><span class="n">wolf</span> <span class="o">=</span> <span class="n">wolf</span>
-    <span class="p">}</span>
-    <span class="nf">init</span><span class="p">(</span><span class="nv">child</span><span class="p">:</span> <span class="kt">StarkChild</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">self</span><span class="o">.</span><span class="n">child</span> <span class="o">=</span> <span class="n">child</span>
-    <span class="p">}</span>
-    <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nf">fatalError</span><span class="p">(</span><span class="s">"must initialize with a child or a wolf"</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>It’s… ugly.</p>
-
-<h2 id="recursion-types">Recursion Types</h2>
-
+    <span class="meta function"><span class="meta toc-list"><span class="storage type function">init</span>(<span class="variable parameter">wolf</span>: <span class="support class">Direwolf</span>)</span></span> {
+        <span class="keyword variable">self</span><span class="keyword operator">.</span>wolf = wolf
+    }
+    <span class="meta function"><span class="meta toc-list"><span class="storage type function">init</span>(<span class="variable parameter">child</span>: <span class="support class">StarkChild</span>)</span></span> {
+        <span class="keyword variable">self</span><span class="keyword operator">.</span>child = child
+    }
+    <span class="meta function"><span class="meta toc-list"><span class="storage type function">init</span>()</span></span> {
+        fatalError(<span class="string quoted double">&quot;must initialize with a child or a wolf&quot;</span>)
+    }
+}
+</span></pre>
+<p>It's… ugly.</p>
+<h2>Recursion Types</h2>
 <p>Besides <em>sum</em> and <em>product</em>, another common class of algebraic type is
 recursion types. The interesting bit here is that Swift struggles to support
-it. In WWDC 2015, it was announced that <code class="highlighter-rouge">enum</code>s can be defined recursively in
+it. In WWDC 2015, it was announced that <code>enum</code>s can be defined recursively in
 Swift 2:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Tree</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="kt">Empty</span>
-    <span class="kd">indirect</span> <span class="k">case</span> <span class="kt">Node</span><span class="p">(</span><span class="kt">Tree</span><span class="p">,</span> <span class="kt">Tree</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
+<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Tree</span></span></span> {
+    <span class="keyword control">case</span> <span class="support class">Empty</span>
+    indirect <span class="keyword control">case</span> <span class="support class">Node</span>(<span class="support class">Tree</span>, <span class="support class">Tree</span>)
+}
+</span></pre>
 <p>As of this writing, Xcode 7 beta 3 has not delivered this feature yet.
-Also, it’s a good bet that <code class="highlighter-rouge">indirect</code> is not going to be available in tuple
+Also, it's a good bet that <code>indirect</code> is not going to be available in tuple
 aliases, such as:</p>
+<pre><span class="source swift"><span class="keyword variable">typealias</span> <span class="support class">Node</span> = (indirect <span class="support class">Node</span>, indirect <span class="support class">Node</span>)
+</span></pre>
+<p>I hope this is on the Swift team's (understandably) gigantic todo list 😉.</p>
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">Node</span> <span class="o">=</span> <span class="p">(</span><span class="kd">indirect</span> <span class="kt">Node</span><span class="p">,</span> <span class="kd">indirect</span> <span class="kt">Node</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>I hope this is on the Swift team’s (understandably) gigantic todo list 😉.</p>
-
-
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+    </p>
+</footer></body>
 </html>

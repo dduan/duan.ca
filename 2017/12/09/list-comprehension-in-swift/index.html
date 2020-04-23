@@ -1,206 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>List Comprehension In Swift</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>List Comprehension In Swift | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="List Comprehension In Swift" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Let’s explore ways to add list comprehension to Swift." />
-<meta property="og:description" content="Let’s explore ways to add list comprehension to Swift." />
-<link rel="canonical" href="https://duan.ca/2017/12/09/list-comprehension-in-swift/" />
-<meta property="og:url" content="https://duan.ca/2017/12/09/list-comprehension-in-swift/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2017-12-09T12:26:30-08:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2017-12-09T12:26:30-08:00","headline":"List Comprehension In Swift","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2017/12/09/list-comprehension-in-swift/"},"url":"https://duan.ca/2017/12/09/list-comprehension-in-swift/","author":{"@type":"Person","name":"Daniel Duan"},"description":"Let’s explore ways to add list comprehension to Swift.","@type":"BlogPosting","dateModified":"2017-12-09T12:26:30-08:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2017/12/09/list-comprehension-in-swift/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="List Comprehension In Swift">
+    <meta property="article:published_time" content="2017-12-09"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>List Comprehension In Swift</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2017/12/09/list-comprehension-in-swift/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">List Comprehension In Swift</h1>
-  <div class="post-date">
-    <time>09 Dec 2017</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/swift">Swift</a>,
-
-  <a href="/tag/python">Python</a>,
-
-  <a href="/tag/haskell">Haskell</a>
-
-</div>
-
-
-  </div>
-  <p>Let’s explore ways to add list comprehension to Swift.</p>
-
-<h2 id="motivation">Motivation</h2>
-
-<p><a href="https://en.wikipedia.org/wiki/List_comprehension">List comprehension</a> should be no stranger to a Python or (and?) Haskell user. It’s a really compact syntax
-that deals with <a href="https://en.wikipedia.org/wiki/Cartesian_product">Cartesian product</a> of lists. In the case of Python, it’s probably responsible for the lack
-of evolution of lambda expressions, since it’s much nicer to write one-liners with it in place of <code class="highlighter-rouge">map</code>s and
-<code class="highlighter-rouge">filter</code>s.</p>
-
-<p>Here’s an example of an list comprehension in Haskell from Wikipedia:</p>
-
-<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">3</span><span class="o">..</span><span class="mi">5</span><span class="p">]]</span>
-<span class="c1">-- [(1,3),(1,4),(1,5),(2,3),(2,4) ...</span>
-</code></pre></div></div>
-
+<body><article>
+    <h1>List Comprehension In Swift</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2017-12-09" itemProp="datePublished">2017-12-09</time>
+        </p>
+    </nav><p>Let's explore ways to add list comprehension to Swift.</p>
+<h2>Motivation</h2>
+<p><a href="https://en.wikipedia.org/wiki/List_comprehension">List comprehension</a> should be no stranger to a Python or (and?) Haskell user. It's a really compact syntax
+that deals with <a href="https://en.wikipedia.org/wiki/Cartesian_product">Cartesian product</a> of lists. In the case of Python, it's probably responsible for the lack
+of evolution of lambda expressions, since it's much nicer to write one-liners with it in place of <code>map</code>s and
+<code>filter</code>s.</p>
+<p>Here's an example of an list comprehension in Haskell from Wikipedia:</p>
+<pre>a = [(x,y) | x <- [1..5], y <- [3..5]]
+-- [(1,3),(1,4),(1,5),(2,3),(2,4) ...
+</pre>
 <p>In this example, a list of pair of integers is constructed from 2 lists of integers.</p>
-
 <p>Here is what that example would be in Python:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
-<span class="c1"># [(1, 3), (1, 4), (1, 5), (2, 3), (2, 4) ...
-</span></code></pre></div></div>
-
-<p>Here’s what it would be in mathematics (except we are dealing with sets, not lists, but I’ll only refer to
+<pre>a = [(x, y) for x in range(1,6) for y in range(3, 6)]
+# [(1, 3), (1, 4), (1, 5), (2, 3), (2, 4) ...
+</pre>
+<p>Here's what it would be in mathematics (except we are dealing with sets, not lists, but I'll only refer to
 lists from here on.):</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Let (a, b) be an ordered list of elements
+<pre><code>Let (a, b) be an ordered list of elements
 
 {(x, y)|x ∈ {1,2,3,4,5}, y ∈ {3,4,5}}
-</code></pre></div></div>
-
+</code></pre>
 <p>One can filter out unwanted elements with predicates, and apply arbitrary functions to elements of the
-result. Let’s say we only want even numbers from the first list, and we want the sum of x and y, continuing on
+result. Let's say we only want even numbers from the first list, and we want the sum of x and y, continuing on
 our examples:</p>
-
-<div class="language-haskell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="n">y</span> <span class="o">|</span> <span class="n">x</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">y</span> <span class="o">&lt;-</span> <span class="p">[</span><span class="mi">3</span><span class="o">..</span><span class="mi">5</span><span class="p">],</span> <span class="n">x</span> <span class="p">`</span><span class="n">mod</span><span class="p">`</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-</code></pre></div></div>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{x+y|x ∈ {1,2,3,4,5}, y ∈ {3,4,5}, x is even}
-</code></pre></div></div>
-
+<pre>a = [x+y | x <- [1..5], y <- [3..5], x `mod` 2 == 0]
+</pre>
+<pre>a = [x + y for x in range(1,6) for y in range(3, 6) if x % 2 == 0]
+</pre>
+<pre><code>{x+y|x ∈ {1,2,3,4,5}, y ∈ {3,4,5}, x is even}
+</code></pre>
 <p>In theory, this syntax can be applied to an arbitrary number of lists. Putting aside how often this need comes
-up in day-to-day programming in your domain, it should be obvious that it’s alternative, be it nested loops or
-<code class="highlighter-rouge">map</code>s and <code class="highlighter-rouge">filter</code>s, is pretty clumsy in comparison.</p>
-
-<h2 id="adding-list-comprehension-in-swift">Adding List Comprehension in Swift</h2>
-
+up in day-to-day programming in your domain, it should be obvious that it's alternative, be it nested loops or
+<code>map</code>s and <code>filter</code>s, is pretty clumsy in comparison.</p>
+<h2>Adding List Comprehension in Swift</h2>
 <p>A comprehension can be considered in 3 parts:</p>
-
 <ol>
-  <li>some lists, each may contain a different type of elements.</li>
-  <li>a predicate (or a series of them joined logically) to filter out elements.</li>
-  <li>a function to process the combination of elements into results.</li>
+<li>some lists, each may contain a different type of elements.</li>
+<li>a predicate (or a series of them joined logically) to filter out elements.</li>
+<li>a function to process the combination of elements into results.</li>
 </ol>
-
-<p>In Swift, if our input is only one list, there’s a pretty sweet way to achieve that:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list</span><span class="o">.</span><span class="nf">filter</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span><span class="o">.</span><span class="nf">map</span><span class="p">(</span><span class="n">processor</span><span class="p">)</span>
-</code></pre></div></div>
-
+<p>In Swift, if our input is only one list, there's a pretty sweet way to achieve that:</p>
+<pre><span class="source swift">list<span class="keyword operator">.</span>filter(predicate)<span class="keyword operator">.</span>map(processor)
+</span></pre>
 <p>To make comprehension work with more lists, we have some syntax options.</p>
+<h3>Option One</h3>
+<p>The &quot;brute force&quot; option would be a function that parameterize all 3 parts of the comprehension. Such as</p>
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> going with order of appearance in Python/Haskell syntax</span>
+<span class="storage type function">func</span> <span class="entity name function"><span class="variable function">comprehension</span></span><span class="keyword operator">&lt;</span><span class="support class">Element</span>, <span class="support class">List</span>, <span class="support class">Result</span><span class="keyword operator">&gt;</span>(
+    <span class="variable parameter">predicate</span>: (<span class="support class">Element</span>) -&gt; <span class="support class">Bool</span>,
+    <span class="variable parameter">list</span>: <span class="support class">List</span>,
+    <span class="variable parameter">processor</span>: (<span class="support class">Element</span>) -&gt; <span class="support class">Result</span>
+) <span class="keyword control">where</span>
+    <span class="support class">List</span>: <span class="support class">Sequence</span>, <span class="support class">List</span><span class="keyword operator">.</span><span class="support class">Element</span> == <span class="support class">Element</span>
 
-<h3 id="option-one">Option One</h3>
-
-<p>The “brute force” option would be a function that parameterize all 3 parts of the comprehension. Such as</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// going with order of appearance in Python/Haskell syntax</span>
-<span class="kd">func</span> <span class="n">comprehension</span><span class="o">&lt;</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">List</span><span class="p">,</span> <span class="kt">Result</span><span class="o">&gt;</span><span class="p">(</span>
-    <span class="nv">predicate</span><span class="p">:</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">,</span>
-    <span class="nv">list</span><span class="p">:</span> <span class="kt">List</span><span class="p"><a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/12/09/list-comprehension-in-swift/>,</a></span>
-    <span class="nv">processor</span><span class="p">:</span> <span class="p">(</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Result</span>
-<span class="p">)</span> <span class="k">where</span>
-    <span class="kt">List</span><span class="p">:</span> <span class="kt">Sequence</span><span class="p">,</span> <span class="kt">List</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">Element</span>
-
-<span class="p">{</span>
-    <span class="c1">// implementation</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
+{
+    <span class="comment line"><span class="punctuation definition comment">//</span> implementation</span>
+}
+</span></pre>
 <p>To supporting more than one list, just add more parameters to both types and the function itself.</p>
-
-<p>(Can’t wait until we can have <a href="https://github.com/apple/swift/blob/master/docs/GenericsManifesto.md#variadic-generics">variadic generic parameters</a>!)</p>
-
-<h3 id="option-two">Option Two</h3>
-
+<p>(Can't wait until we can have <a href="https://github.com/apple/swift/blob/master/docs/GenericsManifesto.md#variadic-generics">variadic generic parameters</a>!)</p>
+<h3>Option Two</h3>
 <p>Deploy more syntax tricks. Somehow make it visually similar to the math/Haskell/Python notation. If we can
-accept some temporary data structure and introduce/implement some operators, there’d be many possibilities.</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">/// Just an example of the infinite possibilities.</span>
-<span class="n">processor</span> <span class="o">|</span> <span class="n">list0</span> <span class="o">&amp;&amp;&amp;</span> <span class="n">list1</span> <span class="o">|</span> <span class="n">predicate</span>
-</code></pre></div></div>
-
-<p>I’ll leave the implementation of this example as an exercise to the reader.</p>
-
-<h3 id="option-that-i-like">Option That I Like</h3>
-
-<p>I spent quite some time exploring the realm of possibilities in “option two”. However, introducing data
-structures and custom operators just to do what “option one” offers seems really unappealing. It’s not
-entirely clear that doing so would be “Swift-y” anyways! Eventually, I did find an arrangement that fits in
+accept some temporary data structure and introduce/implement some operators, there'd be many possibilities.</p>
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">///</span> Just an example of the infinite possibilities.</span>
+processor | list0 &amp;&amp;&amp; list1 | predicate
+</span></pre>
+<p>I'll leave the implementation of this example as an exercise to the reader.</p>
+<h3>Option That I Like</h3>
+<p>I spent quite some time exploring the realm of possibilities in &quot;option two&quot;. However, introducing data
+structures and custom operators just to do what &quot;option one&quot; offers seems really unappealing. It's not
+entirely clear that doing so would be &quot;Swift-y&quot; anyways! Eventually, I did find an arrangement that fits in
 Swift, and requires no fancy syntax trickery.</p>
-
 <p>The result of list comprehension is a list. The goal of this operation is to <em>construct</em> a list. Yep, thinking
-along this line, it became obvious that using a “list”’s initializer is just natural:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="mi">1</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span>
-<span class="c1">// [(2,3),(2,4),(2,5) ...</span>
-</code></pre></div></div>
-
-<p>The processing function is at the end to take advantage of the trailing closure syntax. It’s nicer when
-there’s not predicate:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="kt">Array</span><span class="p">(</span><span class="mi">1</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">..&lt;</span><span class="mi">5</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span>
-<span class="c1">// [(1,3),(1,4),(1,5),(2,3),(2,4) ...</span>
-</code></pre></div></div>
-
+along this line, it became obvious that using a &quot;list&quot;'s initializer is just natural:</p>
+<pre><span class="source swift"><span class="keyword variable">let</span> a = <span class="support class">Array</span>(<span class="constant numeric decimal">1</span><span class="keyword operator">..&lt;</span><span class="constant numeric decimal">5</span>, <span class="constant numeric decimal">3</span><span class="keyword operator">..&lt;</span><span class="constant numeric decimal">5</span>, <span class="keyword control">where</span>: { n, <span class="constant language other">_</span> <span class="keyword control">in</span> n % <span class="constant numeric decimal">2</span> == <span class="constant numeric decimal">0</span> }) { (<span class="keyword operator">$</span><span class="constant numeric decimal">0</span>, $<span class="constant numeric decimal">1</span>) }
+<span class="comment line"><span class="punctuation definition comment">//</span> [(2,3),(2,4),(2,5) ...</span>
+</span></pre>
+<p>The processing function is at the end to take advantage of the trailing closure syntax. It's nicer when
+there's not predicate:</p>
+<pre><span class="source swift"><span class="keyword variable">let</span> a = <span class="support class">Array</span>(<span class="constant numeric decimal">1</span><span class="keyword operator">..&lt;</span><span class="constant numeric decimal">5</span>, <span class="constant numeric decimal">3</span><span class="keyword operator">..&lt;</span><span class="constant numeric decimal">5</span>) { (<span class="keyword operator">$</span><span class="constant numeric decimal">0</span>, $<span class="constant numeric decimal">1</span>) }
+<span class="comment line"><span class="punctuation definition comment">//</span> [(1,3),(1,4),(1,5),(2,3),(2,4) ...</span>
+</span></pre>
 <p>This syntax seems both succinct and Swift-y.</p>
-
 <p>I put an implementation on <a href="https://github.com/dduan/Comprehension">github</a>, in case you find it useful.</p>
-
-<h2 id="parting-thoughts">Parting Thoughts</h2>
-
-<p>There’s no doubt that the conclusion in this post is imperfect. Though it feels more Swift-y, it deviates from
+<h2>Parting Thoughts</h2>
+<p>There's no doubt that the conclusion in this post is imperfect. Though it feels more Swift-y, it deviates from
 the mathematical syntax by a lot. We can only implement it for finite number of lists. When many lists are
 involved, using a embedded closure as the predicate would make the compiler complain that the expression is
-too complex. We suffer from the normal woes with Swift closures where anonymous arguments (<code class="highlighter-rouge">$0</code>, <code class="highlighter-rouge">$1</code>, etc)
-won’t work unless the last one is mentioned in the closure’s body. Overloading <code class="highlighter-rouge">Array</code> initializer may
+too complex. We suffer from the normal woes with Swift closures where anonymous arguments (<code>$0</code>, <code>$1</code>, etc)
+won't work unless the last one is mentioned in the closure's body. Overloading <code>Array</code> initializer may
 negatively affect compilation speed in large projects.</p>
-
 <p>Not all of these issues are temporary.</p>
-
 <p>Does list comprehension warrant a language change in Swift? Can you think of better ways to implement it
 with the current compiler?</p>
 
-
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/python/">Python</a>
+        ·
+        <a href="/tag/haskell/">Haskell</a>
+    </p>
+</footer></body>
 </html>

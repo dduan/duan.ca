@@ -1,277 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Daniel Duan - Python</title>
-        <link>https://duan.ca/tag/Python/</link>
-        <atom:link href="https://duan.ca/tag/Python/index.xml" rel="self" type="application/rss+xml" />
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
+        <title>Daniel Duan's Articles About Python</title>
+        <link>https://duan.ca/tag/python/</link>
+        <atom:link href="https://duan.ca/tag/python/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>List Comprehension In Swift</title>
-                <description>&lt;p&gt;Let’s explore ways to add list comprehension to Swift.&lt;/p&gt;
-
-&lt;h2 id=&quot;motivation&quot;&gt;Motivation&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/List_comprehension&quot;&gt;List comprehension&lt;/a&gt; should be no stranger to a Python or (and?) Haskell user. It’s a really compact syntax
-that deals with &lt;a href=&quot;https://en.wikipedia.org/wiki/Cartesian_product&quot;&gt;Cartesian product&lt;/a&gt; of lists. In the case of Python, it’s probably responsible for the lack
-of evolution of lambda expressions, since it’s much nicer to write one-liners with it in place of &lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;s and
-&lt;code class=&quot;highlighter-rouge&quot;&gt;filter&lt;/code&gt;s.&lt;/p&gt;
-
-&lt;p&gt;Here’s an example of an list comprehension in Haskell from Wikipedia:&lt;/p&gt;
-
-&lt;div class=&quot;language-haskell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;-- [(1,3),(1,4),(1,5),(2,3),(2,4) ...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In this example, a list of pair of integers is constructed from 2 lists of integers.&lt;/p&gt;
-
-&lt;p&gt;Here is what that example would be in Python:&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# [(1, 3), (1, 4), (1, 5), (2, 3), (2, 4) ...
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Here’s what it would be in mathematics (except we are dealing with sets, not lists, but I’ll only refer to
-lists from here on.):&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Let (a, b) be an ordered list of elements
+                <description>&lt;p&gt;Let&#x27;s explore ways to add list comprehension to Swift.&lt;&#x2f;p&gt;
+&lt;h2&gt;Motivation&lt;&#x2f;h2&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2f;&#x2f;en.wikipedia.org&#x2f;wiki&#x2f;List_comprehension&quot;&gt;List comprehension&lt;&#x2f;a&gt; should be no stranger to a Python or (and?) Haskell user. It&#x27;s a really compact syntax
+that deals with &lt;a href=&quot;https:&#x2f;&#x2f;en.wikipedia.org&#x2f;wiki&#x2f;Cartesian_product&quot;&gt;Cartesian product&lt;&#x2f;a&gt; of lists. In the case of Python, it&#x27;s probably responsible for the lack
+of evolution of lambda expressions, since it&#x27;s much nicer to write one-liners with it in place of &lt;code&gt;map&lt;&#x2f;code&gt;s and
+&lt;code&gt;filter&lt;&#x2f;code&gt;s.&lt;&#x2f;p&gt;
+&lt;p&gt;Here&#x27;s an example of an list comprehension in Haskell from Wikipedia:&lt;&#x2f;p&gt;
+&lt;pre&gt;a = [(x,y) | x &lt;- [1..5], y &lt;- [3..5]]
+-- [(1,3),(1,4),(1,5),(2,3),(2,4) ...
+&lt;&#x2f;pre&gt;
+&lt;p&gt;In this example, a list of pair of integers is constructed from 2 lists of integers.&lt;&#x2f;p&gt;
+&lt;p&gt;Here is what that example would be in Python:&lt;&#x2f;p&gt;
+&lt;pre&gt;a = [(x, y) for x in range(1,6) for y in range(3, 6)]
+# [(1, 3), (1, 4), (1, 5), (2, 3), (2, 4) ...
+&lt;&#x2f;pre&gt;
+&lt;p&gt;Here&#x27;s what it would be in mathematics (except we are dealing with sets, not lists, but I&#x27;ll only refer to
+lists from here on.):&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;Let (a, b) be an ordered list of elements
 
 {(x, y)|x ∈ {1,2,3,4,5}, y ∈ {3,4,5}}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;One can filter out unwanted elements with predicates, and apply arbitrary functions to elements of the
-result. Let’s say we only want even numbers from the first list, and we want the sum of x and y, continuing on
-our examples:&lt;/p&gt;
-
-&lt;div class=&quot;language-haskell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{x+y|x ∈ {1,2,3,4,5}, y ∈ {3,4,5}, x is even}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
+result. Let&#x27;s say we only want even numbers from the first list, and we want the sum of x and y, continuing on
+our examples:&lt;&#x2f;p&gt;
+&lt;pre&gt;a = [x+y | x &lt;- [1..5], y &lt;- [3..5], x `mod` 2 == 0]
+&lt;&#x2f;pre&gt;
+&lt;pre&gt;a = [x + y for x in range(1,6) for y in range(3, 6) if x % 2 == 0]
+&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code&gt;{x+y|x ∈ {1,2,3,4,5}, y ∈ {3,4,5}, x is even}
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;In theory, this syntax can be applied to an arbitrary number of lists. Putting aside how often this need comes
-up in day-to-day programming in your domain, it should be obvious that it’s alternative, be it nested loops or
-&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;s and &lt;code class=&quot;highlighter-rouge&quot;&gt;filter&lt;/code&gt;s, is pretty clumsy in comparison.&lt;/p&gt;
-
-&lt;h2 id=&quot;adding-list-comprehension-in-swift&quot;&gt;Adding List Comprehension in Swift&lt;/h2&gt;
-
-&lt;p&gt;A comprehension can be considered in 3 parts:&lt;/p&gt;
-
+up in day-to-day programming in your domain, it should be obvious that it&#x27;s alternative, be it nested loops or
+&lt;code&gt;map&lt;&#x2f;code&gt;s and &lt;code&gt;filter&lt;&#x2f;code&gt;s, is pretty clumsy in comparison.&lt;&#x2f;p&gt;
+&lt;h2&gt;Adding List Comprehension in Swift&lt;&#x2f;h2&gt;
+&lt;p&gt;A comprehension can be considered in 3 parts:&lt;&#x2f;p&gt;
 &lt;ol&gt;
-  &lt;li&gt;some lists, each may contain a different type of elements.&lt;/li&gt;
-  &lt;li&gt;a predicate (or a series of them joined logically) to filter out elements.&lt;/li&gt;
-  &lt;li&gt;a function to process the combination of elements into results.&lt;/li&gt;
-&lt;/ol&gt;
+&lt;li&gt;some lists, each may contain a different type of elements.&lt;&#x2f;li&gt;
+&lt;li&gt;a predicate (or a series of them joined logically) to filter out elements.&lt;&#x2f;li&gt;
+&lt;li&gt;a function to process the combination of elements into results.&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;p&gt;In Swift, if our input is only one list, there&#x27;s a pretty sweet way to achieve that:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;list&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;filter(predicate)&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;map(processor)
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;To make comprehension work with more lists, we have some syntax options.&lt;&#x2f;p&gt;
+&lt;h3&gt;Option One&lt;&#x2f;h3&gt;
+&lt;p&gt;The &amp;quot;brute force&amp;quot; option would be a function that parameterize all 3 parts of the comprehension. Such as&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; going with order of appearance in Python&#x2f;Haskell syntax&lt;&#x2f;span&gt;
+&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;comprehension&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;List&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Result&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(
+    &lt;span class=&quot;variable parameter&quot;&gt;predicate&lt;&#x2f;span&gt;: (&lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt;) -&amp;gt; &lt;span class=&quot;support class&quot;&gt;Bool&lt;&#x2f;span&gt;,
+    &lt;span class=&quot;variable parameter&quot;&gt;list&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;List&lt;&#x2f;span&gt;,
+    &lt;span class=&quot;variable parameter&quot;&gt;processor&lt;&#x2f;span&gt;: (&lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt;) -&amp;gt; &lt;span class=&quot;support class&quot;&gt;Result&lt;&#x2f;span&gt;
+) &lt;span class=&quot;keyword control&quot;&gt;where&lt;&#x2f;span&gt;
+    &lt;span class=&quot;support class&quot;&gt;List&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Sequence&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;List&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt; == &lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt;
 
-&lt;p&gt;In Swift, if our input is only one list, there’s a pretty sweet way to achieve that:&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predicate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;processor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;To make comprehension work with more lists, we have some syntax options.&lt;/p&gt;
-
-&lt;h3 id=&quot;option-one&quot;&gt;Option One&lt;/h3&gt;
-
-&lt;p&gt;The “brute force” option would be a function that parameterize all 3 parts of the comprehension. Such as&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// going with order of appearance in Python/Haskell syntax&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;comprehension&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;predicate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/09/list-comprehension-in-swift/&gt;,&lt;/a&gt;&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;processor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Result&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Sequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// implementation&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;To supporting more than one list, just add more parameters to both types and the function itself.&lt;/p&gt;
-
-&lt;p&gt;(Can’t wait until we can have &lt;a href=&quot;https://github.com/apple/swift/blob/master/docs/GenericsManifesto.md#variadic-generics&quot;&gt;variadic generic parameters&lt;/a&gt;!)&lt;/p&gt;
-
-&lt;h3 id=&quot;option-two&quot;&gt;Option Two&lt;/h3&gt;
-
-&lt;p&gt;Deploy more syntax tricks. Somehow make it visually similar to the math/Haskell/Python notation. If we can
-accept some temporary data structure and introduce/implement some operators, there’d be many possibilities.&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;/// Just an example of the infinite possibilities.&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;processor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predicate&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I’ll leave the implementation of this example as an exercise to the reader.&lt;/p&gt;
-
-&lt;h3 id=&quot;option-that-i-like&quot;&gt;Option That I Like&lt;/h3&gt;
-
-&lt;p&gt;I spent quite some time exploring the realm of possibilities in “option two”. However, introducing data
-structures and custom operators just to do what “option one” offers seems really unappealing. It’s not
-entirely clear that doing so would be “Swift-y” anyways! Eventually, I did find an arrangement that fits in
-Swift, and requires no fancy syntax trickery.&lt;/p&gt;
-
-&lt;p&gt;The result of list comprehension is a list. The goal of this operation is to &lt;em&gt;construct&lt;/em&gt; a list. Yep, thinking
-along this line, it became obvious that using a “list”’s initializer is just natural:&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// [(2,3),(2,4),(2,5) ...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The processing function is at the end to take advantage of the trailing closure syntax. It’s nicer when
-there’s not predicate:&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// [(1,3),(1,4),(1,5),(2,3),(2,4) ...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This syntax seems both succinct and Swift-y.&lt;/p&gt;
-
-&lt;p&gt;I put an implementation on &lt;a href=&quot;https://github.com/dduan/Comprehension&quot;&gt;github&lt;/a&gt;, in case you find it useful.&lt;/p&gt;
-
-&lt;h2 id=&quot;parting-thoughts&quot;&gt;Parting Thoughts&lt;/h2&gt;
-
-&lt;p&gt;There’s no doubt that the conclusion in this post is imperfect. Though it feels more Swift-y, it deviates from
+{
+    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; implementation&lt;&#x2f;span&gt;
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;To supporting more than one list, just add more parameters to both types and the function itself.&lt;&#x2f;p&gt;
+&lt;p&gt;(Can&#x27;t wait until we can have &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;swift&#x2f;blob&#x2f;master&#x2f;docs&#x2f;GenericsManifesto.md#variadic-generics&quot;&gt;variadic generic parameters&lt;&#x2f;a&gt;!)&lt;&#x2f;p&gt;
+&lt;h3&gt;Option Two&lt;&#x2f;h3&gt;
+&lt;p&gt;Deploy more syntax tricks. Somehow make it visually similar to the math&#x2f;Haskell&#x2f;Python notation. If we can
+accept some temporary data structure and introduce&#x2f;implement some operators, there&#x27;d be many possibilities.&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&#x2f;&lt;&#x2f;span&gt; Just an example of the infinite possibilities.&lt;&#x2f;span&gt;
+processor | list0 &amp;amp;&amp;amp;&amp;amp; list1 | predicate
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;I&#x27;ll leave the implementation of this example as an exercise to the reader.&lt;&#x2f;p&gt;
+&lt;h3&gt;Option That I Like&lt;&#x2f;h3&gt;
+&lt;p&gt;I spent quite some time exploring the realm of possibilities in &amp;quot;option two&amp;quot;. However, introducing data
+structures and custom operators just to do what &amp;quot;option one&amp;quot; offers seems really unappealing. It&#x27;s not
+entirely clear that doing so would be &amp;quot;Swift-y&amp;quot; anyways! Eventually, I did find an arrangement that fits in
+Swift, and requires no fancy syntax trickery.&lt;&#x2f;p&gt;
+&lt;p&gt;The result of list comprehension is a list. The goal of this operation is to &lt;em&gt;construct&lt;&#x2f;em&gt; a list. Yep, thinking
+along this line, it became obvious that using a &amp;quot;list&amp;quot;&#x27;s initializer is just natural:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; a = &lt;span class=&quot;support class&quot;&gt;Array&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;..&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;5&lt;&#x2f;span&gt;, &lt;span class=&quot;constant numeric decimal&quot;&gt;3&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;..&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;5&lt;&#x2f;span&gt;, &lt;span class=&quot;keyword control&quot;&gt;where&lt;&#x2f;span&gt;: { n, &lt;span class=&quot;constant language other&quot;&gt;_&lt;&#x2f;span&gt; &lt;span class=&quot;keyword control&quot;&gt;in&lt;&#x2f;span&gt; n % &lt;span class=&quot;constant numeric decimal&quot;&gt;2&lt;&#x2f;span&gt; == &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt; }) { (&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;, $&lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;) }
+&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; [(2,3),(2,4),(2,5) ...&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;The processing function is at the end to take advantage of the trailing closure syntax. It&#x27;s nicer when
+there&#x27;s not predicate:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; a = &lt;span class=&quot;support class&quot;&gt;Array&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;..&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;5&lt;&#x2f;span&gt;, &lt;span class=&quot;constant numeric decimal&quot;&gt;3&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;..&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;5&lt;&#x2f;span&gt;) { (&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;, $&lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;) }
+&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; [(1,3),(1,4),(1,5),(2,3),(2,4) ...&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;This syntax seems both succinct and Swift-y.&lt;&#x2f;p&gt;
+&lt;p&gt;I put an implementation on &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Comprehension&quot;&gt;github&lt;&#x2f;a&gt;, in case you find it useful.&lt;&#x2f;p&gt;
+&lt;h2&gt;Parting Thoughts&lt;&#x2f;h2&gt;
+&lt;p&gt;There&#x27;s no doubt that the conclusion in this post is imperfect. Though it feels more Swift-y, it deviates from
 the mathematical syntax by a lot. We can only implement it for finite number of lists. When many lists are
 involved, using a embedded closure as the predicate would make the compiler complain that the expression is
-too complex. We suffer from the normal woes with Swift closures where anonymous arguments (&lt;code class=&quot;highlighter-rouge&quot;&gt;$0&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;$1&lt;/code&gt;, etc)
-won’t work unless the last one is mentioned in the closure’s body. Overloading &lt;code class=&quot;highlighter-rouge&quot;&gt;Array&lt;/code&gt; initializer may
-negatively affect compilation speed in large projects.&lt;/p&gt;
-
-&lt;p&gt;Not all of these issues are temporary.&lt;/p&gt;
-
+too complex. We suffer from the normal woes with Swift closures where anonymous arguments (&lt;code&gt;$0&lt;&#x2f;code&gt;, &lt;code&gt;$1&lt;&#x2f;code&gt;, etc)
+won&#x27;t work unless the last one is mentioned in the closure&#x27;s body. Overloading &lt;code&gt;Array&lt;&#x2f;code&gt; initializer may
+negatively affect compilation speed in large projects.&lt;&#x2f;p&gt;
+&lt;p&gt;Not all of these issues are temporary.&lt;&#x2f;p&gt;
 &lt;p&gt;Does list comprehension warrant a language change in Swift? Can you think of better ways to implement it
-with the current compiler?&lt;/p&gt;
-
+with the current compiler?&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Sat, 09 Dec 2017 12:26:30 -0800</pubDate>
-                
                 <link>https://duan.ca/2017/12/09/list-comprehension-in-swift/</link>
-                
                 <guid isPermaLink="true">https://duan.ca/2017/12/09/list-comprehension-in-swift/</guid>
             </item>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <item>
                 <title>A Case For OOP?</title>
-                <description>&lt;p&gt;Python’s standard library includes a very handy &lt;code class=&quot;highlighter-rouge&quot;&gt;defaultdict&lt;/code&gt;. It behaves
-almost exactly like the standard dictionary except it’ll supply a pre-defined
-value for any non-existence keys. It is, unsurpringly, a subclass of &lt;code class=&quot;highlighter-rouge&quot;&gt;dict&lt;/code&gt;.&lt;/p&gt;
-
+                <description>&lt;p&gt;Python&#x27;s standard library includes a very handy &lt;code&gt;defaultdict&lt;&#x2f;code&gt;. It behaves
+almost exactly like the standard dictionary except it&#x27;ll supply a pre-defined
+value for any non-existence keys. It is, unsurpringly, a subclass of &lt;code&gt;dict&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
 &lt;p&gt;I find my self missing this handy container in Swift. Especially when I use
-a normal &lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt; to accumulate/coalesce values under distinct keys. So I
-wrote my own:&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/dduan/31ed39c4c98ecb88290f0743cb394c20.js&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;There are a few noticable things about this implementation:&lt;/p&gt;
-
+a normal &lt;code&gt;Dictionary&lt;&#x2f;code&gt; to accumulate&#x2f;coalesce values under distinct keys. So I
+wrote my own:&lt;&#x2f;p&gt;
+&lt;script src=&quot;https:&#x2f;&#x2f;gist.github.com&#x2f;dduan&#x2f;31ed39c4c98ecb88290f0743cb394c20.js&quot;&gt;&lt;&#x2f;script&gt;
+&lt;p&gt;There are a few noticable things about this implementation:&lt;&#x2f;p&gt;
 &lt;ul&gt;
-  &lt;li&gt;It does not conform to the &lt;code class=&quot;highlighter-rouge&quot;&gt;DictionaryLiteralConvertible&lt;/code&gt; protocol, for no
+&lt;li&gt;It does not conform to the &lt;code&gt;DictionaryLiteralConvertible&lt;&#x2f;code&gt; protocol, for no
 good reasons, really. The initializer in this protocol takes a varadic
-argument. There’s no conevient way to forward this array to a normal
-dictionary’s initializer (incidentally, this is a Swift feature I really
-want). Plus, I don’t need &lt;code class=&quot;highlighter-rouge&quot;&gt;DefaultDictionary&lt;/code&gt; to be a literal convertible.&lt;/li&gt;
-  &lt;li&gt;Most of the code, including the imaginary &lt;code class=&quot;highlighter-rouge&quot;&gt;init&lt;/code&gt; mentioned in previous
-point&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2016/05/19/a-case-for-oop/&gt;,&lt;/a&gt; simply reuses stuff from &lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt;: asscociated type, indexes,
-generator, subscript, etc.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In comparison, Python implements &lt;code class=&quot;highlighter-rouge&quot;&gt;defaultdict&lt;/code&gt; in a more intuitive way – via
-inheritance.&lt;/p&gt;
-
-&lt;p&gt;But do we want inheritance for &lt;code class=&quot;highlighter-rouge&quot;&gt;struct&lt;/code&gt;s and &lt;code class=&quot;highlighter-rouge&quot;&gt;enum&lt;/code&gt;s in Swift? What does that
+argument. There&#x27;s no conevient way to forward this array to a normal
+dictionary&#x27;s initializer (incidentally, this is a Swift feature I really
+want). Plus, I don&#x27;t need &lt;code&gt;DefaultDictionary&lt;&#x2f;code&gt; to be a literal convertible.&lt;&#x2f;li&gt;
+&lt;li&gt;Most of the code, including the imaginary &lt;code&gt;init&lt;&#x2f;code&gt; mentioned in previous
+point, simply reuses stuff from &lt;code&gt;Dictionary&lt;&#x2f;code&gt;: asscociated type, indexes,
+generator, subscript, etc.&lt;&#x2f;li&gt;
+&lt;&#x2f;ul&gt;
+&lt;p&gt;In comparison, Python implements &lt;code&gt;defaultdict&lt;&#x2f;code&gt; in a more intuitive way -- via
+inheritance.&lt;&#x2f;p&gt;
+&lt;p&gt;But do we want inheritance for &lt;code&gt;struct&lt;&#x2f;code&gt;s and &lt;code&gt;enum&lt;&#x2f;code&gt;s in Swift? What does that
 even mean? Is it simply a case that will go away when protocols become more
-powerful?&lt;/p&gt;
+powerful?&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Thu, 19 May 2016 12:03:02 -0700</pubDate>
-                
                 <link>https://duan.ca/2016/05/19/a-case-for-oop/</link>
-                
                 <guid isPermaLink="true">https://duan.ca/2016/05/19/a-case-for-oop/</guid>
             </item>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
     </channel>
 </rss>

@@ -1,153 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Replying To Old Mailing List Threads</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Replying To Old Mailing List Threads | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Replying To Old Mailing List Threads" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="One common complains on the Swift Evolution mailing list is about its inscrutable interface. If you see an inactive thread on the web archive but haven’t subscribed, there seems to be no way to participate or “revive” it since you never received any of its emails." />
-<meta property="og:description" content="One common complains on the Swift Evolution mailing list is about its inscrutable interface. If you see an inactive thread on the web archive but haven’t subscribed, there seems to be no way to participate or “revive” it since you never received any of its emails." />
-<link rel="canonical" href="https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/" />
-<meta property="og:url" content="https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2017-02-07T10:21:19-08:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2017-02-07T10:21:19-08:00","headline":"Replying To Old Mailing List Threads","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/"},"url":"https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/","author":{"@type":"Person","name":"Daniel Duan"},"description":"One common complains on the Swift Evolution mailing list is about its inscrutable interface. If you see an inactive thread on the web archive but haven’t subscribed, there seems to be no way to participate or “revive” it since you never received any of its emails.","@type":"BlogPosting","dateModified":"2017-02-07T10:21:19-08:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Replying To Old Mailing List Threads">
+    <meta property="article:published_time" content="2017-02-07"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Replying To Old Mailing List Threads</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">Replying To Old Mailing List Threads</h1>
-  <div class="post-date">
-    <time>07 Feb 2017</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/swift-evolution">Swift Evolution</a>,
-
-  <a href="/tag/email">Email</a>
-
-</div>
-
-
-  </div>
-  <p><em>One common complains on the Swift Evolution mailing list is about its
+<body><article>
+    <h1>Replying To Old Mailing List Threads</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2017-02-07" itemProp="datePublished">2017-02-07</time>
+        </p>
+    </nav><p><em>One common complains on the Swift Evolution mailing list is about its
 inscrutable interface. If you see an inactive thread on the web archive but
-haven’t subscribed, there seems to be no way to participate or “revive” it
+haven't subscribed, there seems to be no way to participate or &quot;revive&quot; it
 since you never received any of its emails.</em></p>
-
-<p><em>With a <a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20170206/031537.html">hint</a> and some experiments, I’ve discovered that there is
+<p><em>With a <a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20170206/031537.html">hint</a> and some experiments, I've discovered that there is
 a way. This post reveals the magic step by step (without commenting on the
 merits of email or this solution).</em></p>
-
 <p>Like HTTP, Email is a text-based <a href="https://tools.ietf.org/html/rfc2822">protocol</a>. Unlike HTTP, we directly
-consume payloads of this protocol and, as a consequence, don’t think much about
+consume payloads of this protocol and, as a consequence, don't think much about
 that very fact.</p>
-
 <p>Like HTTP, each email includes headers hidden by normal email clients. Each
-header is essentially two strings, a key and a value<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/>,</a> separated by a colon.
-Among these headers are <code class="highlighter-rouge">Message-Id</code> and <code class="highlighter-rouge">In-Reply-To</code>. When we tell our email
-client applications to start a reply, they take the value from <code class="highlighter-rouge">Message-Id</code>
-and use it as value for <code class="highlighter-rouge">In-Reply-To</code> automatically.</p>
-
+header is essentially two strings, a key and a value, separated by a colon.
+Among these headers are <code>Message-Id</code> and <code>In-Reply-To</code>. When we tell our email
+client applications to start a reply, they take the value from <code>Message-Id</code>
+and use it as value for <code>In-Reply-To</code> automatically.</p>
 <p>To observe all this in action, we can open some emails with our favorite text
 editors and look for these headers. Of course, this require us to know where the
 emails exist as files. On macOS, an easy thing to do is to drag from Mail.app to
 Finder/Desktop and open the resulting .eml file:</p>
-
-<p><img src="https://duan.ca/assets/2017/02/open-email.gif" alt="Open an email in text editors" /></p>
-
-<p>Among the (perhaps overwhelming amount of) headers, we’ll find the two fields we
+<p><img src="/assets/2017/02/open-email.gif" alt="Open an email in text editors" /></p>
+<p>Among the (perhaps overwhelming amount of) headers, we'll find the two fields we
 are looking for:</p>
-
-<p><img src="https://duan.ca/assets/2017/02/email-headers.png" alt="Email Headers Message-Id and
-In-Reply-To" /></p>
-
-<p>… I’ll leave the clients’ reply behavior regarding these fields for the reader
+<p><img src="/assets/2017/02/email-headers.png" alt="Email Headers Message-Id and In-Reply-To" /></p>
+<p>… I'll leave the clients' reply behavior regarding these fields for the reader
 to verify.</p>
-
 <p>Mailing list software such as GNU Mailman, which <a href="https://swift.org">swift.org</a> and <a href="http://llvm.org">llvm.org</a>
 use to host various mailing lists, associate emails in threads by chaining them
 with the headers explained above, among other things. As long as we have
-a message’s <code class="highlighter-rouge">Message-Id</code>, we can reply to it “officially” by adding its value to
-the <code class="highlighter-rouge">In-Reply-To</code> header in our email, regardless of whether we have received
+a message's <code>Message-Id</code>, we can reply to it &quot;officially&quot; by adding its value to
+the <code>In-Reply-To</code> header in our email, regardless of whether we have received
 that email ourselves previously.</p>
-
 <p>So here are the steps to reply retroactively to a mailing list thread.</p>
-
 <ol>
-  <li>
-    <p><strong>find <code class="highlighter-rouge">Message-Id</code> of the mailing list message we want to reply to.</strong></p>
-
-    <p>This value is contained in the mailing list web archive’s <code class="highlighter-rouge">mailto</code> link.
-Unfortunately Mail.app doesn’t recognize it. It’s easy enough to find it
+<li>
+<p><strong>find <code>Message-Id</code> of the mailing list message we want to reply to.</strong></p>
+<p>This value is contained in the mailing list web archive's <code>mailto</code> link.
+Unfortunately Mail.app doesn't recognize it. It's easy enough to find it
 ourselves though:</p>
-
-    <p><img src="https://duan.ca/assets/2017/02/find-message-id.gif" alt="Finding Message-Id on mailman
-archive" /></p>
-
-    <p>Note the <code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">@</code> characters are percent-quoted. We have to recover the
+<p><img src="/assets/2017/02/find-message-id.gif" alt="Finding Message-Id on mailman archive" /></p>
+<p>Note the <code>&lt;</code>, <code>&gt;</code>, <code>@</code> characters are percent-quoted. We have to recover the
 id values to the format
-<code class="highlighter-rouge">&lt;alphanumerics-potentially-separated-by-dash@address.com&gt;</code>.</p>
-
-    <p>Another way to acquire this value is from the gzip’d archive. There they
+<code>&lt;alphanumerics-potentially-separated-by-dash@address.com&gt;</code>.</p>
+<p>Another way to acquire this value is from the gzip'd archive. There they
 just exist as plain text. The downside is you have to dig out the message
 itself first.</p>
-  </li>
-  <li>
-    <p><strong>Add <code class="highlighter-rouge">In-Reply-To</code> header to our email.</strong></p>
-
-    <p>Draft a new email, make its title the same as our email chain’s title (this
+</li>
+<li>
+<p><strong>Add <code>In-Reply-To</code> header to our email.</strong></p>
+<p>Draft a new email, make its title the same as our email chain's title (this
 is a good idea because lots of email <em>clients</em> do use the title to thread
 messages). Set the appropriate recipients, and CCs, including the mailing
-list’s address. Now save this email as draft and open it in a text editor as
+list's address. Now save this email as draft and open it in a text editor as
 we did in our investigations.  Add in the line
-<code class="highlighter-rouge">In-Reply-To: &lt;id-we-found-in-step-one.address.com&gt;</code>, save it. Then send this
+<code>In-Reply-To: &lt;id-we-found-in-step-one.address.com&gt;</code>, save it. Then send this
 email (for example, open it with Mail.app and use Message-&gt;Send Again in the
 menu).</p>
-
-    <p>Of course, some email client <a href="http://www.pixelbeat.org/docs/thunderbird-threading.html">supports</a> adding it
+<p>Of course, some email client <a href="http://www.pixelbeat.org/docs/thunderbird-threading.html">supports</a> adding it
 from their GUI.</p>
-  </li>
+</li>
 </ol>
-
-<p>You’ll find the in addition to functioning as an normal message to the
+<p>You'll find the in addition to functioning as an normal message to the
 recipients, the mailing list will properly put your message to the original
 thread (in the case of swift-evolution, only if your reply is within the same
 week).</p>
 
-
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift-evolution/">Swift Evolution</a>
+        ·
+        <a href="/tag/email/">Email</a>
+    </p>
+</footer></body>
 </html>

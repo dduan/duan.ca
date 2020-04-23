@@ -1,248 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello World In WebAssembly</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Hello World In WebAssembly | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Hello World In WebAssembly" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Every now and then, I check on the progress of Web Assembly. I did it again around the time of this post and finally found enough tutorials, examples, and working software to get myself started in this area. In doing so, I made a video to demo some progress. (this article includes all the same information and more, so just read on if you don’t have 15 minutes for YouTube)." />
-<meta property="og:description" content="Every now and then, I check on the progress of Web Assembly. I did it again around the time of this post and finally found enough tutorials, examples, and working software to get myself started in this area. In doing so, I made a video to demo some progress. (this article includes all the same information and more, so just read on if you don’t have 15 minutes for YouTube)." />
-<link rel="canonical" href="https://duan.ca/2017/12/30/hello-world-in-webassembly/" />
-<meta property="og:url" content="https://duan.ca/2017/12/30/hello-world-in-webassembly/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2017-12-30T18:43:49-08:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2017-12-30T18:43:49-08:00","headline":"Hello World In WebAssembly","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2017/12/30/hello-world-in-webassembly/"},"url":"https://duan.ca/2017/12/30/hello-world-in-webassembly/","author":{"@type":"Person","name":"Daniel Duan"},"description":"Every now and then, I check on the progress of Web Assembly. I did it again around the time of this post and finally found enough tutorials, examples, and working software to get myself started in this area. In doing so, I made a video to demo some progress. (this article includes all the same information and more, so just read on if you don’t have 15 minutes for YouTube).","@type":"BlogPosting","dateModified":"2017-12-30T18:43:49-08:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2017/12/30/hello-world-in-webassembly/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Hello World In WebAssembly">
+    <meta property="article:published_time" content="2017-12-30"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Hello World In WebAssembly</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2017/12/30/hello-world-in-webassembly/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">Hello World In WebAssembly</h1>
-  <div class="post-date">
-    <time>30 Dec 2017</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/webassembly">WebAssembly</a>,
-
-  <a href="/tag/youtube">YouTube</a>
-
-</div>
-
-
-  </div>
-  <p>Every now and then, I check on the progress of Web Assembly. I did it again
+<body><article>
+    <h1>Hello World In WebAssembly</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2017-12-30" itemProp="datePublished">2017-12-30</time>
+        </p>
+    </nav><p>Every now and then, I check on the progress of Web Assembly. I did it again
 around the time of this post and finally found enough tutorials, examples, and
 working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (<em>this article includes all the same information and
-more, so just read on if you don’t have 15 minutes for YouTube</em>).</p>
-
+more, so just read on if you don't have 15 minutes for YouTube</em>).</p>
 <div class="video-container">
-    <iframe src="https://www.youtube.com/embed/yEYtwmI7bDg" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen=""></iframe>
+    <iframe src="https://www.youtube.com/embed/yEYtwmI7bDg" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 </div>
-
-<p><br /></p>
-
-<h2 id="our-goal">Our goal:</h2>
-
+<br>
+<h2>Our goal:</h2>
 <ol>
-  <li>Use as much built-in tools on a Mac as possible. The web development
+<li>Use as much built-in tools on a Mac as possible. The web development
 toolchain scares me.</li>
-  <li>Target the browser. That’s where the value of WebAssembly is. (Node supports
+<li>Target the browser. That's where the value of WebAssembly is. (Node supports
 it as well. BUT, WHY THO?)</li>
-  <li>Build from scratch. In the video I started from <code class="highlighter-rouge">mkdir</code> a folder. We should
+<li>Build from scratch. In the video I started from <code>mkdir</code> a folder. We should
 strive to understand details on every level whenever possible. Boilerplates
 and dependencies should come later.</li>
 </ol>
-
-<h2 id="things-youll-need">Things you’ll need:</h2>
-
+<h2>Things you'll need:</h2>
 <ol>
-  <li>Safari 11+</li>
-  <li>Xcode. More specifically, you should be able to run <code class="highlighter-rouge">clang</code> in a shell.</li>
+<li>Safari 11+</li>
+<li>Xcode. More specifically, you should be able to run <code>clang</code> in a shell.</li>
 </ol>
-
-<h2 id="the-workflow">The Workflow</h2>
-
+<h2>The Workflow</h2>
 <p>Having these things installed, get a copy of <a href="https://github.com/WebAssembly/wabt">The WebAssembly Binary
 Toolkit</a> (wabt). Build it. The README has detailed instructions. I just went
 into the folder and ran</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make clang-release
-</code></pre></div></div>
-
-<p>This will generate a bunch of binary files in <code class="highlighter-rouge">out/clang/Release</code> and you need
-to make sure you can run them from wherever you want to work on WebAssembly
-project (so either copy them into a folder included in your <code class="highlighter-rouge">PATH</code> environment
-variable or add the absolute path to <code class="highlighter-rouge">out/clang/Release</code> to <code class="highlighter-rouge">PATH</code>).</p>
-
-<p>Among the binaries “wabt” builds, <code class="highlighter-rouge">wat2wasm</code> takes a <code class="highlighter-rouge">.wat</code> file and compiles it
-to a WebAssembly binary. A <code class="highlighter-rouge">.wat</code> is a source file in the <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format">text format</a> for
-WebAssembly, which is in the form of S-expressions. So</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wat2wasm main.wat -o main.wasm
-</code></pre></div></div>
-
-<p>…will compile your WebAssembly module in <code class="highlighter-rouge">main.wat</code> to generate <code class="highlighter-rouge">main.wasm</code>, the
-binary file. For now, <code class="highlighter-rouge">main.wat</code> can be the simplest WebAssembly program:</p>
-
-<pre><code class="language-lisp">(module)
+<pre><code>make clang-release
 </code></pre>
-
-<p>Running the binary in a browser demands the bulk of the work. First<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2017/12/30/hello-world-in-webassembly/>,</a> we’ll need
-a web page. It doesn’t need any content other than invoking some JavaScript
+<p>This will generate a bunch of binary files in <code>out/clang/Release</code> and you need
+to make sure you can run them from wherever you want to work on WebAssembly
+project (so either copy them into a folder included in your <code>PATH</code> environment
+variable or add the absolute path to <code>out/clang/Release</code> to <code>PATH</code>).</p>
+<p>Among the binaries &quot;wabt&quot; builds, <code>wat2wasm</code> takes a <code>.wat</code> file and compiles it
+to a WebAssembly binary. A <code>.wat</code> is a source file in the <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format">text format</a> for
+WebAssembly, which is in the form of S-expressions. So</p>
+<pre><code>wat2wasm main.wat -o main.wasm
+</code></pre>
+<p>…will compile your WebAssembly module in <code>main.wat</code> to generate <code>main.wasm</code>, the
+binary file. For now, <code>main.wat</code> can be the simplest WebAssembly program:</p>
+<pre><span class="source lisp"><span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>module<span class="punctuation definition group end lisp">)</span></span>
+</span></pre>
+<p>Running the binary in a browser demands the bulk of the work. First, we'll need
+a web page. It doesn't need any content other than invoking some JavaScript
 code.</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    <span class="c">&lt;!-- The only thing that matters is the following line,
-    although having a valid HTML5 page is nice. --&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"play.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div></div>
-
+<pre><span class="text html basic"><span class="meta tag sgml html"><span class="punctuation definition tag html">&lt;!</span><span class="meta tag sgml doctype html"><span class="entity name tag doctype html">DOCTYPE</span> html</span><span class="punctuation definition tag html">&gt;</span></span>
+<span class="meta tag structure any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag structure any html">html</span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">lang</span><span class="punctuation separator key-value html">=</span><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>en<span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html">&gt;</span></span>
+<span class="meta tag structure any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag structure any html">head</span><span class="punctuation definition tag end html">&gt;</span></span>
+    <span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline any html">meta</span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">charset</span><span class="punctuation separator key-value html">=</span><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>UTF-8<span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html">&gt;</span></span>
+    <span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline any html">title</span><span class="punctuation definition tag end html">&gt;</span></span><span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag inline any html">title</span><span class="punctuation definition tag end html">&gt;</span></span>
+<span class="meta tag structure any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag structure any html">head</span><span class="punctuation definition tag end html">&gt;</span></span>
+<span class="meta tag structure any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag structure any html">body</span><span class="punctuation definition tag end html">&gt;</span></span>
+    <span class="comment block html"><span class="punctuation definition comment begin html">&lt;!--</span> The only thing that matters is the following line,
+    although having a valid HTML5 page is nice. <span class="punctuation definition comment end html">--&gt;</span></span>
+    <span class="meta tag script begin html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag script html">script</span></span><span class="meta tag script begin html"> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">src</span><span class="punctuation separator key-value html">=</span><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>play.js<span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html">&gt;</span></span><span class="meta tag script end html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag script html">script</span><span class="punctuation definition tag end html">&gt;</span></span>
+<span class="meta tag structure any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag structure any html">body</span><span class="punctuation definition tag end html">&gt;</span></span>
+<span class="meta tag structure any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag structure any html">html</span><span class="punctuation definition tag end html">&gt;</span></span>
+</span></pre>
 <p>First, the Javascript logic needs to <em>fetch and instantiate the compiled
-WebAssembly module</em>. Since this is not a JS or WebAssembly tutorial, I’ll point
+WebAssembly module</em>. Since this is not a JS or WebAssembly tutorial, I'll point
 you to the docmuntation for <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a>, and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly">the WebAssembly
 object</a> for details:</p>
+<pre>fetch("main.wasm").then(reponse =>
+    reponse.arrayBuffer()
+).then(bytes =>
+    WebAssembly.instantiate(bytes, {})
+).then(result =>
+    result.instance
+).then(main);
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fetch</span><span class="p">(</span><span class="s2">"main.wasm"</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">reponse</span> <span class="o">=&gt;</span>
-    <span class="nx">reponse</span><span class="p">.</span><span class="nx">arrayBuffer</span><span class="p">()</span>
-<span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">bytes</span> <span class="o">=&gt;</span>
-    <span class="nx">WebAssembly</span><span class="p">.</span><span class="nx">instantiate</span><span class="p">(</span><span class="nx">bytes</span><span class="p">,</span> <span class="p">{})</span>
-<span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span>
-    <span class="nx">result</span><span class="p">.</span><span class="nx">instance</span>
-<span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">main</span><span class="p">);</span>
-
-</code></pre></div></div>
-
-<p>This snippet fetches <code class="highlighter-rouge">main.wasm</code> (adjust this URL according to your choosing),
-instantiate it, then pass it into a function named <code class="highlighter-rouge">main</code>, we can put
+</pre>
+<p>This snippet fetches <code>main.wasm</code> (adjust this URL according to your choosing),
+instantiate it, then pass it into a function named <code>main</code>, we can put
 a placeholder logic for it for now:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">wasm</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">wasm</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Before we move on, you’ll find that simply opending your HTML file in browser
-and looking at developer console won’t work. Safari would complain about
-cross-domain request error for <code class="highlighter-rouge">fetch</code>. So we need to serve these resources
+<pre>function main(wasm) {
+    console.log(wasm);
+}
+</pre>
+<p>Before we move on, you'll find that simply opending your HTML file in browser
+and looking at developer console won't work. Safari would complain about
+cross-domain request error for <code>fetch</code>. So we need to serve these resources
 locally. I usually use the built in server module from Python standard library
 for this kind of things:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># In your source folder, run
+<pre><code># In your source folder, run
 python -m SimpleHTTPServer
-</code></pre></div></div>
-
+</code></pre>
 <p>Now go to <a href="http://localhost:8000">http://localhost:8000</a> and click on your HTML file. If everything
 went well, you should see a WebAssembly instance logged in the developer
 console.</p>
-
 <p>Congratulations! You can start writing WebAssembly locally. Just remember to
-re-compile <code class="highlighter-rouge">main.wat</code> with <code class="highlighter-rouge">wat2wasm</code> whenever you want to test things out in
+re-compile <code>main.wat</code> with <code>wat2wasm</code> whenever you want to test things out in
 browser.</p>
-
-<h2 id="an-actual-hello-world-implementation">An Actual “Hello, World!” Implementation</h2>
-
+<h2>An Actual &quot;Hello, World!&quot; Implementation</h2>
 <p>This is my implementation:</p>
+<pre><span class="source lisp"><span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>module
+  <span class="comment line semicolon lisp"><span class="punctuation definition comment lisp">;</span>; Allocate a page of linear memory (64kb). Export it as &quot;memory&quot;</span>
+  <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>memory <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span><span class="support function lisp">export</span> <span class="string quoted double lisp"><span class="punctuation definition string begin lisp">&quot;</span>memory<span class="punctuation definition string end lisp">&quot;</span></span><span class="punctuation definition group end lisp">)</span></span> <span class="constant numeric lisp">1</span><span class="punctuation definition group end lisp">)</span></span>
 
-<pre><code class="language-lisp">(module
-  ;; Allocate a page of linear memory (64kb). Export it as "memory"
-  (memory (export "memory") 1)
+  <span class="comment line semicolon lisp"><span class="punctuation definition comment lisp">;</span>; Write the string at the start of the linear memory.</span>
+  <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>data <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>i32.const <span class="constant numeric lisp">0</span><span class="punctuation definition group end lisp">)</span></span> <span class="string quoted double lisp"><span class="punctuation definition string begin lisp">&quot;</span>Hello, world!<span class="punctuation definition string end lisp">&quot;</span></span><span class="punctuation definition group end lisp">)</span></span> <span class="comment line semicolon lisp"><span class="punctuation definition comment lisp">;</span>; write string at location 0</span>
 
-  ;; Write the string at the start of the linear memory.
-  (data (i32.const 0) "Hello, world!") ;; write string at location 0
-
-  ;; Export the position and length of the string.
-  (global (export "length") i32 (i32.const 12))
-  (global (export "position") i32 (i32.const 0)))
-</code></pre>
-
+  <span class="comment line semicolon lisp"><span class="punctuation definition comment lisp">;</span>; Export the position and length of the string.</span>
+  <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>global <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span><span class="support function lisp">export</span> <span class="string quoted double lisp"><span class="punctuation definition string begin lisp">&quot;</span>length<span class="punctuation definition string end lisp">&quot;</span></span><span class="punctuation definition group end lisp">)</span></span> i32 <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>i32.const <span class="constant numeric lisp">12</span><span class="punctuation definition group end lisp">)</span></span><span class="punctuation definition group end lisp">)</span></span>
+  <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>global <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span><span class="support function lisp">export</span> <span class="string quoted double lisp"><span class="punctuation definition string begin lisp">&quot;</span>position<span class="punctuation definition string end lisp">&quot;</span></span><span class="punctuation definition group end lisp">)</span></span> i32 <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>i32.const <span class="constant numeric lisp">0</span><span class="punctuation definition group end lisp">)</span></span><span class="punctuation definition group end lisp">)</span></span><span class="punctuation definition group end lisp">)</span></span>
+</span></pre>
 <p>In other words, we expose information of the linear memory we manipulated to the
-JavaScript environment. Things that has been <code class="highlighter-rouge">export</code>ed will show up as
-properties of <code class="highlighter-rouge">exports</code> of the <code class="highlighter-rouge">WebAssembly</code> instance. We can access them in the
-<code class="highlighter-rouge">main</code> JavaScript functions:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">wasm</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">memory</span>   <span class="o">=</span> <span class="nx">wasm</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">memory</span><span class="p">;</span>
-    <span class="kd">const</span> <span class="nx">length</span>   <span class="o">=</span> <span class="nx">wasm</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-    <span class="kd">const</span> <span class="nx">position</span> <span class="o">=</span> <span class="nx">wasm</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">position</span><span class="p">;</span>
-    <span class="p">...</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Then it’s just plain-old Javascript (tho I had to steal it from tutorials).
-<code class="highlighter-rouge">memory.buffer</code> is of type <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a>. We need to convert it into a string
+JavaScript environment. Things that has been <code>export</code>ed will show up as
+properties of <code>exports</code> of the <code>WebAssembly</code> instance. We can access them in the
+<code>main</code> JavaScript functions:</p>
+<pre>function main(wasm) {
+    const memory   = wasm.exports.memory;
+    const length   = wasm.exports.length;
+    const position = wasm.exports.position;
+    ...
+}
+</pre>
+<p>Then it's just plain-old Javascript (tho I had to steal it from tutorials).
+<code>memory.buffer</code> is of type <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a>. We need to convert it into a string
 and log it to the console:</p>
+<pre>function main(wasm) {
+    const memory   = wasm.exports.memory;
+    const length   = wasm.exports.length;
+    const position = wasm.exports.position;
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">wasm</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">memory</span>   <span class="o">=</span> <span class="nx">wasm</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">memory</span><span class="p">;</span>
-    <span class="kd">const</span> <span class="nx">length</span>   <span class="o">=</span> <span class="nx">wasm</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-    <span class="kd">const</span> <span class="nx">position</span> <span class="o">=</span> <span class="nx">wasm</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">position</span><span class="p">;</span>
+    const bytes = new Uint8Array(memory.buffer, position, length);
+    const s = new TextDecoder('utf8').decode(bytes);
 
-    <span class="kd">const</span> <span class="nx">bytes</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="nx">memory</span><span class="p">.</span><span class="nx">buffer</span><span class="p">,</span> <span class="nx">position</span><span class="p">,</span> <span class="nx">length</span><span class="p">);</span>
-    <span class="kd">const</span> <span class="nx">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextDecoder</span><span class="p">(</span><span class="s1">'utf8'</span><span class="p">).</span><span class="nx">decode</span><span class="p">(</span><span class="nx">bytes</span><span class="p">);</span>
-
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Et, voilà! <code class="highlighter-rouge">Hello, World!</code> hot off a Web Assembly module in your developer
-console. To conclude, I personally like to use a <code class="highlighter-rouge">Makefile</code> to streamline some
-of the typing. Here’s what I used for this demo:</p>
-
-<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">compile</span><span class="o">:</span>
-	wat2wasm main.wat <span class="nt">-o</span> main.wasm
-
-<span class="nl">serve</span><span class="o">:</span>
-	python <span class="nt">-m</span> SimpleHTTPServer
-</code></pre></div></div>
-
-<h2 id="conclusion">Conclusion</h2>
-
+    console.log(s);
+}
+</pre>
+<p>Et, voilà! <code>Hello, World!</code> hot off a Web Assembly module in your developer
+console. To conclude, I personally like to use a <code>Makefile</code> to streamline some
+of the typing. Here's what I used for this demo:</p>
+<pre><span class="source makefile"><span class="meta function makefile"><span class="entity name function makefile">compile</span></span><span class="keyword operator assignment makefile">:</span><span class="meta function arguments makefile"></span><span class="meta function body makefile">
+</span><span class="meta function body makefile">	<span class="source shell"><span class="meta function-call shell"><span class="variable function shell">wat2wasm</span></span><span class="meta function-call arguments shell"> main.wat<span class="variable parameter option shell"><span class="punctuation definition parameter shell"> -</span>o</span> main.wasm</span></span>
+</span>
+<span class="meta function makefile"><span class="entity name function makefile">serve</span></span><span class="keyword operator assignment makefile">:</span><span class="meta function arguments makefile"></span><span class="meta function body makefile">
+</span><span class="meta function body makefile">	<span class="source shell"><span class="meta function-call shell"><span class="variable function shell">python</span></span><span class="meta function-call arguments shell"><span class="variable parameter option shell"><span class="punctuation definition parameter shell"> -</span>m</span> SimpleHTTPServer</span></span>
+</span></span></pre>
+<h2>Conclusion</h2>
 <p>No fancy schmancy Javascript build stack, no 3rd-party code dependency. Write
 code, compile, run on your (virtual, in browser) machine, repeat. That sounds like
-“assembly” to me!</p>
+&quot;assembly&quot; to me!</p>
 
-
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/webassembly/">WebAssembly</a>
+        ·
+        <a href="/tag/youtube/">YouTube</a>
+    </p>
+</footer></body>
 </html>

@@ -1,191 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cheap Orders</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Cheap Orders | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Cheap Orders" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="How to create order? If the second law of thermal dynamics tells us anything, we’d better get to work, right?" />
-<meta property="og:description" content="How to create order? If the second law of thermal dynamics tells us anything, we’d better get to work, right?" />
-<link rel="canonical" href="https://duan.ca/2016/05/15/cheap-orders/" />
-<meta property="og:url" content="https://duan.ca/2016/05/15/cheap-orders/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-05-15T17:42:27-07:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2016-05-15T17:42:27-07:00","headline":"Cheap Orders","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2016/05/15/cheap-orders/"},"url":"https://duan.ca/2016/05/15/cheap-orders/","author":{"@type":"Person","name":"Daniel Duan"},"description":"How to create order? If the second law of thermal dynamics tells us anything, we’d better get to work, right?","@type":"BlogPosting","dateModified":"2016-05-15T17:42:27-07:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2016/05/15/cheap-orders/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Cheap Orders">
+    <meta property="article:published_time" content="2016-05-15"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Cheap Orders</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2016/05/15/cheap-orders/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">Cheap Orders</h1>
-  <div class="post-date">
-    <time>15 May 2016</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/swift">Swift</a>
-
-</div>
-
-
-  </div>
-  <p class="lead">How to create order? If the second law of thermal dynamics tells us anything,
-we’d better get to work, right?</p>
-
-<p>Before going full existential, let’s limit “order” to Swift’s set and
-dictionaries – there is none. Of course, you can take values/keys out and
+<body><article>
+    <h1>Cheap Orders</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2016-05-15" itemProp="datePublished">2016-05-15</time>
+        </p>
+    </nav><p>How to create order? If the second law of thermal dynamics tells us anything,
+we'd better get to work, right?
+{: .lead}</p>
+<p>Before going full existential, let's limit &quot;order&quot; to Swift's set and
+dictionaries -- there is none. Of course, you can take values/keys out and
 sort them. But what if all you care about is <em>some</em> order?</p>
-
 <hr />
-
 <p>Recently, I wrote</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Token</span> <span class="p">{</span>
-  <span class="kd">static</span> <span class="k">let</span> <span class="nv">all</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s">"="</span><span class="p">:</span> <span class="o">.</span><span class="kt">Equal</span><span class="p">,</span>
-    <span class="s">"-"</span><span class="p">:</span> <span class="o">.</span><span class="kt">Minus</span><span class="p">,</span>
-    <span class="c1">// more token mappings …</span>
-  <span class="p">]</span>
-  <span class="k">case</span> <span class="kt">Equal</span>
-  <span class="k">case</span> <span class="kt">Minus</span>
-  <span class="c1">// more tokens …</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>… in the hope that I can take each value from <code class="highlighter-rouge">Token.all.keys</code> and see if
+<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Token</span></span></span> {
+  <span class="storage modifier">static</span> <span class="keyword variable">let</span> all = [
+    <span class="string quoted double">&quot;=&quot;</span>: .<span class="constant language enum">Equal</span>,
+    <span class="string quoted double">&quot;-&quot;</span>: .<span class="constant language enum">Minus</span>,
+    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
+  ]
+  <span class="keyword control">case</span> <span class="support class">Equal</span>
+  <span class="keyword control">case</span> <span class="support class">Minus</span>
+  <span class="comment line"><span class="punctuation definition comment">//</span> more tokens …</span>
+}
+</span></pre>
+<p>… in the hope that I can take each value from <code>Token.all.keys</code> and see if
 a prefix of a string is a matching token. It started to fail as the tokens
 expands to multiple characters:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Token</span> <span class="p">{</span>
-  <span class="kd">static</span> <span class="k">let</span> <span class="nv">all</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s">"="</span><span class="p">:</span> <span class="o">.</span><span class="kt">Equal</span><span class="p">,</span>
-    <span class="s">"-"</span><span class="p">:</span> <span class="o">.</span><span class="kt">Minus</span><span class="p">,</span>
-    <span class="c1">// more token mappings …</span>
-    <span class="s">"=="</span><span class="p">:</span> <span class="o">.</span><span class="kt">Equality</span><span class="p">,</span>
-    <span class="s">"-&gt;"</span><span class="p">:</span> <span class="o">.</span><span class="kt">Arrow</span><span class="p">,</span>
-    <span class="c1">// more token mappings …</span>
-    <span class="s">"==="</span><span class="p">:</span> <span class="o">.</span><span class="kt">Identity</span><span class="p"><a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2016/05/15/cheap-orders/>,</a></span>
-    <span class="c1">// more token mappings …</span>
-  <span class="p">]</span>
-  <span class="k">case</span> <span class="kt">Equal</span>
-  <span class="k">case</span> <span class="kt">Minus</span>
-  <span class="k">case</span> <span class="kt">Equality</span>
-  <span class="k">case</span> <span class="kt">Arrow</span>
-  <span class="k">case</span> <span class="kt">Identity</span>
-  <span class="c1">// … more tokens …</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><code class="highlighter-rouge">-&gt;</code> could get a match with <code class="highlighter-rouge">-</code> and <code class="highlighter-rouge">===</code> would match to either <code class="highlighter-rouge">==</code> or <code class="highlighter-rouge">=</code>,
+<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Token</span></span></span> {
+  <span class="storage modifier">static</span> <span class="keyword variable">let</span> all = [
+    <span class="string quoted double">&quot;=&quot;</span>: .<span class="constant language enum">Equal</span>,
+    <span class="string quoted double">&quot;-&quot;</span>: .<span class="constant language enum">Minus</span>,
+    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
+    <span class="string quoted double">&quot;==&quot;</span>: .<span class="constant language enum">Equality</span>,
+    <span class="string quoted double">&quot;-&gt;&quot;</span>: .<span class="constant language enum">Arrow</span>,
+    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
+    <span class="string quoted double">&quot;===&quot;</span>: .<span class="constant language enum">Identity</span>,
+    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
+  ]
+  <span class="keyword control">case</span> <span class="support class">Equal</span>
+  <span class="keyword control">case</span> <span class="support class">Minus</span>
+  <span class="keyword control">case</span> <span class="support class">Equality</span>
+  <span class="keyword control">case</span> <span class="support class">Arrow</span>
+  <span class="keyword control">case</span> <span class="support class">Identity</span>
+  <span class="comment line"><span class="punctuation definition comment">//</span> … more tokens …</span>
+}
+</span></pre>
+<p><code>-&gt;</code> could get a match with <code>-</code> and <code>===</code> would match to either <code>==</code> or <code>=</code>,
 etc.</p>
-
 <p>Since the tokens in this exercise have at most 3 characters, I decided to
 group them by length and match from the longer group first. The groups became:</p>
+<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Token</span></span></span> {
+  <span class="storage modifier">static</span> <span class="storage modifier">private</span> <span class="keyword variable">let</span> group1 = [
+    <span class="string quoted double">&quot;=&quot;</span>: .<span class="constant language enum">Equal</span>,
+    <span class="string quoted double">&quot;-&quot;</span>: .<span class="constant language enum">Minus</span>,
+    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
+  ]
 
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Token</span> <span class="p">{</span>
-  <span class="kd">static</span> <span class="kd">private</span> <span class="k">let</span> <span class="nv">group1</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s">"="</span><span class="p">:</span> <span class="o">.</span><span class="kt">Equal</span><span class="p">,</span>
-    <span class="s">"-"</span><span class="p">:</span> <span class="o">.</span><span class="kt">Minus</span><span class="p">,</span>
-    <span class="c1">// more token mappings …</span>
-  <span class="p">]</span>
+  <span class="storage modifier">static</span> <span class="storage modifier">private</span> <span class="keyword variable">let</span> group2 = [
+    <span class="string quoted double">&quot;==&quot;</span>: .<span class="constant language enum">Equality</span>,
+    <span class="string quoted double">&quot;-&gt;&quot;</span>: .<span class="constant language enum">Arrow</span>,
+    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
+  ]
 
-  <span class="kd">static</span> <span class="kd">private</span> <span class="k">let</span> <span class="nv">group2</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s">"=="</span><span class="p">:</span> <span class="o">.</span><span class="kt">Equality</span><span class="p">,</span>
-    <span class="s">"-&gt;"</span><span class="p">:</span> <span class="o">.</span><span class="kt">Arrow</span><span class="p">,</span>
-    <span class="c1">// more token mappings …</span>
-  <span class="p">]</span>
-
-  <span class="kd">static</span> <span class="kd">private</span> <span class="k">let</span> <span class="nv">group3</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s">"==="</span><span class="p">:</span> <span class="o">.</span><span class="kt">Identity</span><span class="p">,</span>
-    <span class="c1">// more token mappings …</span>
-  <span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Now I can choose which group to take values first. There’s a way to do it
+  <span class="storage modifier">static</span> <span class="storage modifier">private</span> <span class="keyword variable">let</span> group3 = [
+    <span class="string quoted double">&quot;===&quot;</span>: .<span class="constant language enum">Identity</span>,
+    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
+  ]
+}
+</span></pre>
+<p>Now I can choose which group to take values first. There's a way to do it
 without adding some control flow logic:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">group3</span><span class="o">.</span><span class="n">keys</span><span class="p">,</span> <span class="n">group2</span><span class="o">.</span><span class="n">keys</span><span class="p">,</span> <span class="n">group3</span><span class="o">.</span><span class="n">keys</span><span class="p">]</span><span class="o">.</span><span class="nf">flatten</span><span class="p">()</span>
-</code></pre></div></div>
-
-<p>Even better, I’ll make it a lazy property…</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Token</span> <span class="p">{</span>
-  <span class="kd">static</span> <span class="k">var</span> <span class="nv">all</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">[</span><span class="n">group3</span><span class="o">.</span><span class="n">keys</span><span class="p">,</span> <span class="n">group2</span><span class="o">.</span><span class="n">keys</span><span class="p">,</span> <span class="n">group3</span><span class="o">.</span><span class="n">keys</span><span class="p">]</span><span class="o">.</span><span class="nf">flatten</span><span class="p">()</span>
-  <span class="p">}()</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>…except an important piece of information is missing from the property: what’s
-<code class="highlighter-rouge">all</code>’s type? Turns out, it’s become</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">FlattenCollection</span><span class="o">&lt;</span><span class="kt">Array</span><span class="o">&lt;</span><span class="kt">LazyMapCollection</span><span class="o">&lt;</span><span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Token</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;&gt;&gt;</span>
-</code></pre></div></div>
-
+<pre><span class="source swift">[group3<span class="keyword operator">.</span>keys, group2<span class="keyword operator">.</span>keys, group3<span class="keyword operator">.</span>keys].<span class="constant language enum">flatten</span>()
+</span></pre>
+<p>Even better, I'll make it a lazy property…</p>
+<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Token</span></span></span> {
+  <span class="storage modifier">static</span> <span class="keyword variable">var</span> all = {
+    [group3<span class="keyword operator">.</span>keys, group2<span class="keyword operator">.</span>keys, group3<span class="keyword operator">.</span>keys].<span class="constant language enum">flatten</span>()
+  }()
+}
+</span></pre>
+<p>…except an important piece of information is missing from the property: what's
+<code>all</code>'s type? Turns out, it's become</p>
+<pre><span class="source swift"><span class="support class">FlattenCollection</span><span class="keyword operator">&lt;</span><span class="support class">Array</span><span class="keyword operator">&lt;</span><span class="support class">LazyMapCollection</span><span class="keyword operator">&lt;</span><span class="support class">Dictionary</span><span class="keyword operator">&lt;</span><span class="support class">String</span>, <span class="support class">Token</span><span class="keyword operator">&gt;</span>, <span class="support class">String</span><span class="keyword operator">&gt;&gt;&gt;</span>
+</span></pre>
 <p>Ahh, it seems that in the pursue of cheap, lazy creation of these structures,
 we are forced to deal with a bunch of type wrappers, each having a good reason
 to be here!</p>
-
-<p>But I really just need something like <code class="highlighter-rouge">Array&lt;String&gt;</code> for the consumer. If
-only there’s a way to make all this stuff go away from my type signature, as
+<p>But I really just need something like <code>Array&lt;String&gt;</code> for the consumer. If
+only there's a way to make all this stuff go away from my type signature, as
 if they are <a href="http://robnapier.net/erasure">erased</a> :).</p>
-
-<p>Okay, I’m talking about <code class="highlighter-rouge">AnySequence</code> now. Rob Napier has an excellent post on
+<p>Okay, I'm talking about <code>AnySequence</code> now. Rob Napier has an excellent post on
 this topic <a href="http://robnapier.net/erasure">here</a> if you need to catch up. Our
 code eventually end up like this:</p>
-
-<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">Token</span> <span class="p">{</span>
-  <span class="kd">static</span> <span class="k">var</span> <span class="nv">all</span><span class="p">:</span> <span class="kt">AnySequence</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="kt">AnySequence</span><span class="p">(</span>
-      <span class="p">[</span><span class="n">group3</span><span class="o">.</span><span class="n">keys</span><span class="p">,</span> <span class="n">group2</span><span class="o">.</span><span class="n">keys</span><span class="p">,</span> <span class="n">group3</span><span class="o">.</span><span class="n">keys</span><span class="p">]</span>
-        <span class="o">.</span><span class="nf">flatten</span><span class="p">())</span>
-  <span class="p">}()</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Instead of <code class="highlighter-rouge">Array&lt;String&gt;</code>, we have an <code class="highlighter-rouge">AnySequence&lt;String&gt;</code>. Our tokens now
-gets checked with the correct order. We didn’t need to sort the entire set of
+<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Token</span></span></span> {
+  <span class="storage modifier">static</span> <span class="keyword variable">var</span> <span class="variable parameter">all</span>: <span class="support class">AnySequence</span><span class="keyword operator">&lt;</span><span class="support class">String</span><span class="keyword operator">&gt;</span> = {
+    <span class="support class">AnySequence</span>(
+      [group3<span class="keyword operator">.</span>keys, group2<span class="keyword operator">.</span>keys, group3<span class="keyword operator">.</span>keys]
+        .<span class="constant language enum">flatten</span>())
+  }()
+}
+</span></pre>
+<p>Instead of <code>Array&lt;String&gt;</code>, we have an <code>AnySequence&lt;String&gt;</code>. Our tokens now
+gets checked with the correct order. We didn't need to sort the entire set of
 tokens, nor did we do any heavy data massage upfront, making a bunch of copies
 along the way.</p>
-
 <hr />
-
 <p>Looking back, this post really failed to capture the eureka moment as I came
 up with the erasure method. I discovered a series of small challenges and got
-help from Swift’s designers in each step. Everything fell together in the end.</p>
+help from Swift's designers in each step. Everything fell together in the end.</p>
 
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+    </p>
+</footer></body>
 </html>

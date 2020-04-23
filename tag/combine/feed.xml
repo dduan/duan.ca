@@ -1,251 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Daniel Duan - Combine</title>
-        <link>https://duan.ca/tag/Combine/</link>
-        <atom:link href="https://duan.ca/tag/Combine/index.xml" rel="self" type="application/rss+xml" />
-        
-        
-            
-        
-            
+        <title>Daniel Duan's Articles About Combine</title>
+        <link>https://duan.ca/tag/combine/</link>
+        <atom:link href="https://duan.ca/tag/combine/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>On the Subject of Interface Hygiene</title>
-                <description>&lt;p&gt;In a purly reactive world, your entire program merge into a single stream. Now&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2019/07/01/combine-hygiene/&gt;,&lt;/a&gt;
-close your eyes, and envision: your project as one, beautiful, stream.&lt;/p&gt;
-
-&lt;p&gt;Now open your eyes. Yeah, it’s not. Your project is a Mac or iOS app. It’s full
+                <description>&lt;p&gt;In a purly reactive world, your entire program merge into a single stream. Now,
+close your eyes, and envision: your project as one, beautiful, stream.&lt;&#x2f;p&gt;
+&lt;p&gt;Now open your eyes. Yeah, it&#x27;s not. Your project is a Mac or iOS app. It&#x27;s full
 of your memories, sweat, and blood. And you are ready to sweat and bleed some
 more by putting some Combine and SwiftUI into it. You watched the WWDC19
-sessions and learned that “Subjcets are super powerful”. You looked into your
-code and realized you can’t really do anything with Combine without &lt;code class=&quot;highlighter-rouge&quot;&gt;Subject&lt;/code&gt;s
-at the current state of the project.&lt;/p&gt;
-
-&lt;p&gt;Well…&lt;/p&gt;
-
+sessions and learned that &amp;quot;Subjcets are super powerful&amp;quot;. You looked into your
+code and realized you can&#x27;t really do anything with Combine without &lt;code&gt;Subject&lt;&#x2f;code&gt;s
+at the current state of the project.&lt;&#x2f;p&gt;
+&lt;p&gt;Well…&lt;&#x2f;p&gt;
 &lt;p&gt;Here are a few habits that help keeping your project that prevasively uses
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Combine.Subject&lt;/code&gt; &lt;em&gt;sane&lt;/em&gt;. They should seem obvious to anyone who understands
-Murphy’s law and the value of minialism in interfaces. If you already are using
+&lt;code&gt;Combine.Subject&lt;&#x2f;code&gt; &lt;em&gt;sane&lt;&#x2f;em&gt;. They should seem obvious to anyone who understands
+Murphy&#x27;s law and the value of minialism in interfaces. If you already are using
 some reactive stream implementation, substitute the types with their
-counterparts in your framework and these rules should seem down right &lt;strong&gt;basic&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;vend-subjects-as-publishers&quot;&gt;Vend &lt;code class=&quot;highlighter-rouge&quot;&gt;Subject&lt;/code&gt;s as &lt;code class=&quot;highlighter-rouge&quot;&gt;Publisher&lt;/code&gt;s&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Subject&lt;/code&gt;s help bridge from the imperitive to the reactive world. Somewhat
-paradoxically, sharing them is not very “RX-y”. This is akin to prefering &lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;s
-over &lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;.&lt;/p&gt;
-
+counterparts in your framework and these rules should seem down right &lt;strong&gt;basic&lt;&#x2f;strong&gt;.&lt;&#x2f;p&gt;
+&lt;h2&gt;Vend &lt;code&gt;Subject&lt;&#x2f;code&gt;s as &lt;code&gt;Publisher&lt;&#x2f;code&gt;s&lt;&#x2f;h2&gt;
+&lt;p&gt;&lt;code&gt;Subject&lt;&#x2f;code&gt;s help bridge from the imperitive to the reactive world. Somewhat
+paradoxically, sharing them is not very &amp;quot;RX-y&amp;quot;. This is akin to prefering &lt;code&gt;let&lt;&#x2f;code&gt;s
+over &lt;code&gt;var&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
 &lt;p&gt;Most of the time, what you want to share is the values pumped into the stream,
-not the privilage to mutate it. Because Subjects conform to &lt;code class=&quot;highlighter-rouge&quot;&gt;Publisher&lt;/code&gt;, it’s
-easy to hide from the users the fact that your stream is backed by them.&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Bad: now anyone who get a hold of it can mess with your stream!&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;GreatInts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;updates&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CurrentValueSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;With Combine this conversion happens via type-erasure:&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Better: all your users care is the stream (publisher), so give them that!&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;GreatInts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Internally, it's backed by a subject.&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;subject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CurrentValueSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// Externally, it's just a Publisher. &lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyPublisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;eraseToAnyPublisher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;currentvaluesubject-natually-caches-the-latest-value&quot;&gt;CurrentValueSubject natually caches the latest value&lt;/h2&gt;
-
-&lt;p&gt;RX theorists will hate this: sometimes it’s just practical to expose
-a synchronous interface to the latest vaule in the stream!&lt;/p&gt;
-
-&lt;p&gt;Two things.&lt;/p&gt;
-
+not the privilage to mutate it. Because Subjects conform to &lt;code&gt;Publisher&lt;&#x2f;code&gt;, it&#x27;s
+easy to hide from the users the fact that your stream is backed by them.&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Bad: now anyone who get a hold of it can mess with your stream!&lt;&#x2f;span&gt;
+&lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;enum&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;GreatInts&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; updates = &lt;span class=&quot;support class&quot;&gt;CurrentValueSubject&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;)
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;With Combine this conversion happens via type-erasure:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Better: all your users care is the stream (publisher), so give them that!&lt;&#x2f;span&gt;
+&lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;enum&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;GreatInts&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Internally, it&amp;#39;s backed by a subject.&lt;&#x2f;span&gt;
+    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; subject = &lt;span class=&quot;support class&quot;&gt;CurrentValueSubject&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;)
+    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Externally, it&amp;#39;s just a Publisher. &lt;&#x2f;span&gt;
+    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;subject&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;AnyPublisher&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt; {
+        subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;eraseToAnyPublisher()
+    }
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;h2&gt;CurrentValueSubject natually caches the latest value&lt;&#x2f;h2&gt;
+&lt;p&gt;RX theorists will hate this: sometimes it&#x27;s just practical to expose
+a synchronous interface to the latest vaule in the stream!&lt;&#x2f;p&gt;
+&lt;p&gt;Two things.&lt;&#x2f;p&gt;
 &lt;ol&gt;
-  &lt;li&gt;It might be tempting to expose the subject and let your user use its
-&lt;code class=&quot;highlighter-rouge&quot;&gt;.value&lt;/code&gt;. Well, you shouldn’t (as explained in the previous section).
+&lt;li&gt;It might be tempting to expose the subject and let your user use its
+&lt;code&gt;.value&lt;&#x2f;code&gt;. Well, you shouldn&#x27;t (as explained in the previous section).
 A separate interface dedicated to the latest value prevents people from
-polluting your stream.&lt;/li&gt;
-&lt;/ol&gt;
+polluting your stream.&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; (Still) bad&lt;&#x2f;span&gt;
+&lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;storage modifier&quot;&gt;final&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;class&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;GreatInts&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; updates = &lt;span class=&quot;support class&quot;&gt;CurrentValueSubject&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;)
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;Remember &lt;code&gt;CurrentValueSubject&lt;&#x2f;code&gt; has that &lt;code&gt;.value&lt;&#x2f;code&gt; property! It may seem
+surprising, but I&#x27;ve seen folks transitioning to RX clinging to the old ways:&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;storage modifier&quot;&gt;final&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;class&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;GreatInts&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; well, at least it&amp;#39;s not a public subject...&lt;&#x2f;span&gt;
+    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; subject = &lt;span class=&quot;support class&quot;&gt;CurrentValueSubject&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;) &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; &amp;lt;- initial value 0&lt;&#x2f;span&gt;
+    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;updates&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;AnyPublisher&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt; {
+        subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;eraseToAnyPublisher()
+    }
 
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// (Still) bad&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;GreatInts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;updates&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CurrentValueSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Wait, there&amp;#39;s that 0 again&lt;&#x2f;span&gt;
+    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;latest&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt; = &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt; {
+        &lt;span class=&quot;keyword control&quot;&gt;didSet&lt;&#x2f;span&gt; {
+            subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;send(latest) &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; ?&lt;&#x2f;span&gt;
+        }
+    }
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;First, you&#x27;ll notice that &lt;code&gt;0&lt;&#x2f;code&gt;, the initial value, is duplicated as both the
+subject&#x27;s initial value, as well as the value of a stored property. And these
+duplicated sources of truth persist throughout the parent&#x27;s life time. Weird,
+right?&lt;&#x2f;p&gt;
+&lt;p&gt;Here&#x27;s a slightly better version:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;storage modifier&quot;&gt;final&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;class&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;GreatInts&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; subject = &lt;span class=&quot;support class&quot;&gt;PassthroughSubject&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;()
+    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;updates&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;AnyPublisher&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt; {
+        subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;eraseToAnyPublisher()
+    }
 
-&lt;ol&gt;
-  &lt;li&gt;Remember &lt;code class=&quot;highlighter-rouge&quot;&gt;CurrentValueSubject&lt;/code&gt; has that &lt;code class=&quot;highlighter-rouge&quot;&gt;.value&lt;/code&gt; property! It may seem
-surprising, but I’ve seen folks transitioning to RX clinging to the old ways:&lt;/li&gt;
-&lt;/ol&gt;
+    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;latest&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt; = &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt; {
+        &lt;span class=&quot;keyword control&quot;&gt;didSet&lt;&#x2f;span&gt; {
+            subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;send(latest) &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; ?&lt;&#x2f;span&gt;
+        }
+    }
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Now there&#x27;s no two copy of the latest value in memory anymore. But in my opinion
+it does not embrace the full power of Combine. Here&#x27;s the most natual way to do
+this:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;storage modifier&quot;&gt;final&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;class&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;GreatInts&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&#x2f;&lt;&#x2f;span&gt; This is a CurrentValueSubject again.&lt;&#x2f;span&gt;
+    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; subject = &lt;span class=&quot;support class&quot;&gt;CurrentValueSubject&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;)
+    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;updates&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;AnyPublisher&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt; {
+        subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;eraseToAnyPublisher()
+    }
 
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;GreatInts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// well, at least it's not a public subject...&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;subject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CurrentValueSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// &amp;lt;- initial value 0&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;updates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyPublisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;eraseToAnyPublisher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// Wait, there's that 0 again&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;latest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;didSet&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;latest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// ?&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;First, you’ll notice that &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt;, the initial value, is duplicated as both the
-subject’s initial value, as well as the value of a stored property. And these
-duplicated sources of truth persist throughout the parent’s life time. Weird,
-right?&lt;/p&gt;
-
-&lt;p&gt;Here’s a slightly better version:&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;GreatInts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;subject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;PassthroughSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;updates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyPublisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;eraseToAnyPublisher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;latest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;didSet&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;latest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// ?&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now there’s no two copy of the latest value in memory anymore. But in my opinion
-it does not embrace the full power of Combine. Here’s the most natual way to do
-this:&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;GreatInts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;/// This is a CurrentValueSubject again.&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;subject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CurrentValueSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;updates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AnyPublisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Never&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;eraseToAnyPublisher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;latest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
+    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;latest&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt; {
+        subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;value
+    }
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Essentially, you create separate public interface, each vends a little piece of
-&lt;code class=&quot;highlighter-rouge&quot;&gt;CurrentValueSubject&lt;/code&gt;’s power.&lt;/p&gt;
-
-&lt;h2 id=&quot;no-really-dont-use-subjects&quot;&gt;No really, don’t use &lt;code class=&quot;highlighter-rouge&quot;&gt;Subject&lt;/code&gt;s&lt;/h2&gt;
-
-&lt;p&gt;Even a well-scoped &lt;code class=&quot;highlighter-rouge&quot;&gt;Subject&lt;/code&gt; (properly being private or internal, depending on
+&lt;code&gt;CurrentValueSubject&lt;&#x2f;code&gt;&#x27;s power.&lt;&#x2f;p&gt;
+&lt;h2&gt;No really, don&#x27;t use &lt;code&gt;Subject&lt;&#x2f;code&gt;s&lt;&#x2f;h2&gt;
+&lt;p&gt;Even a well-scoped &lt;code&gt;Subject&lt;&#x2f;code&gt; (properly being private or internal, depending on
 your tool of choice for access control) still has a mutable state that you
-probably don’t want: its stream can go from “alive” to “complete”. And, again,
+probably don&#x27;t want: its stream can go from &amp;quot;alive&amp;quot; to &amp;quot;complete&amp;quot;. And, again,
 anyone with access can make this state transition happen, leaving you in the
 undefensible position of … hoping everyone on your team to not misuse your
-stuff?&lt;/p&gt;
-
-&lt;p&gt;Lucky for you (and me), a “incompletable” subject is a established concept – a
-“Relay”. I’ve put together a repo for you to look and/or use:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/dduan/relay&quot;&gt;https://github.com/dduan/relay&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Yeah, ban all Subjects in your project with a linter. Seriously.&lt;/p&gt;
-
-&lt;h2 id=&quot;fin&quot;&gt;Fin&lt;/h2&gt;
-
-&lt;p&gt;That’s all for now. I’m not an expert with RX myself. Hopefully these
-perspective can help you avoid some nasties.&lt;/p&gt;
+stuff?&lt;&#x2f;p&gt;
+&lt;p&gt;Lucky for you (and me), a &amp;quot;incompletable&amp;quot; subject is a established concept -- a
+&amp;quot;Relay&amp;quot;. I&#x27;ve put together a repo for you to look and&#x2f;or use:&lt;&#x2f;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;relay&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;relay&lt;&#x2f;a&gt;&lt;&#x2f;p&gt;
+&lt;p&gt;Yeah, ban all Subjects in your project with a linter. Seriously.&lt;&#x2f;p&gt;
+&lt;h2&gt;Fin&lt;&#x2f;h2&gt;
+&lt;p&gt;That&#x27;s all for now. I&#x27;m not an expert with RX myself. Hopefully these
+perspective can help you avoid some nasties.&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Mon, 01 Jul 2019 20:22:48 -0700</pubDate>
-                
                 <link>https://duan.ca/2019/07/01/combine-hygiene/</link>
-                
                 <guid isPermaLink="true">https://duan.ca/2019/07/01/combine-hygiene/</guid>
             </item>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
     </channel>
 </rss>

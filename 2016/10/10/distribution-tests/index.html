@@ -1,126 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Distribution Tests</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS Feed for Daniel Duan" href="/feed.xml" />
-  <!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>Distribution Tests | Daniel Duan</title>
-<meta name="generator" content="Jekyll v3.8.5" />
-<meta property="og:title" content="Distribution Tests" />
-<meta name="author" content="Daniel Duan" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="There are several ways to build dependencies for a Swift 3 project: Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which is the best choice for their projects. As a library author who want to help as many people as possible, however, they can’t ignore any of them." />
-<meta property="og:description" content="There are several ways to build dependencies for a Swift 3 project: Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which is the best choice for their projects. As a library author who want to help as many people as possible, however, they can’t ignore any of them." />
-<link rel="canonical" href="https://duan.ca/2016/10/10/distribution-tests/" />
-<meta property="og:url" content="https://duan.ca/2016/10/10/distribution-tests/" />
-<meta property="og:site_name" content="Daniel Duan" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2016-10-10T10:34:49-07:00" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@daniel_duan" />
-<meta name="twitter:creator" content="@Daniel Duan" />
-<script type="application/ld+json">
-{"datePublished":"2016-10-10T10:34:49-07:00","headline":"Distribution Tests","mainEntityOfPage":{"@type":"WebPage","@id":"https://duan.ca/2016/10/10/distribution-tests/"},"url":"https://duan.ca/2016/10/10/distribution-tests/","author":{"@type":"Person","name":"Daniel Duan"},"description":"There are several ways to build dependencies for a Swift 3 project: Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which is the best choice for their projects. As a library author who want to help as many people as possible, however, they can’t ignore any of them.","@type":"BlogPosting","dateModified":"2016-10-10T10:34:49-07:00","@context":"http://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2016/10/10/distribution-tests/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Distribution Tests">
+    <meta property="article:published_time" content="2016-10-10"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Distribution Tests</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2016/10/10/distribution-tests/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-  <div class="container">
-    <header class="masthead">
-  <h1 class="masthead-title--small">
-    <a href="/">Daniel Duan</a>
-  </h1>
-</header>
-<div class="content post">
-  <h1 class="post-title">Distribution Tests</h1>
-  <div class="post-date">
-    <time>10 Oct 2016</time>
-     | 
-
-<div class="post-tags">
-
-  <a href="/tag/swift">Swift</a>,
-
-  <a href="/tag/cocoapods">Cocoapods</a>,
-
-  <a href="/tag/carthage">Carthage</a>,
-
-  <a href="/tag/swift-package-manager">Swift Package Manager</a>,
-
-  <a href="/tag/make">Make</a>
-
-</div>
-
-
-  </div>
-  <p>There are several ways to build dependencies for a Swift 3 project:
+<body><article>
+    <h1>Distribution Tests</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2016-10-10" itemProp="datePublished">2016-10-10</time>
+        </p>
+    </nav><p>There are several ways to build dependencies for a Swift 3 project:
 Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which
 is the best choice for their projects. As a library author who want to help as
-many people as possible, however, they can’t ignore any of them.</p>
-
+many people as possible, however, they can't ignore any of them.</p>
 <p>I sometimes question the sanity of that conclusion: instead of becoming an
 export in each package manager, I find myself a novice of all. Did I break
 support for any of them with this project change? Is it still working on
 a particular platform, say, tvOS? Can I <em>really</em> know?</p>
-
 <p>The only way to <em>really</em> know is to verify yourself: both Cocoapods and
-Carthage support four platforms – iOS, macOS, watchOS, tvOS; Swift Package
-Manager only works on Mac or Linux. So that’s 2*4+1=9 targets. All these
+Carthage support four platforms -- iOS, macOS, watchOS, tvOS; Swift Package
+Manager only works on Mac or Linux. So that's 2*4+1=9 targets. All these
 targets need is have the library in question fetched and imported. Every Swift
 library author should have such verification before publishing updates of
 their project.</p>
-
 <p>The steps to verify can be triggered with commands: fetch and build
 dependencies, build Xcode/Swift project. To automate the process, put these
-commands in a script or a Makefile. But wait, there’s more! One shouldn’t have
+commands in a script or a Makefile. But wait, there's more! One shouldn't have
 to create these dummy projects every time they create a new library. If all
 these projects do is importing a library and attempt to build, they should
-work for <em>any</em> library. The config in <code class="highlighter-rouge">Package.swift</code>/<code class="highlighter-rouge">Cocoapods</code>/<code class="highlighter-rouge">Cartfile</code>
-and the <code class="highlighter-rouge">import</code> statements just needs some strings replaced: name of the next
-library, URL for its git repository, etc. And that’s a scriptable process as
+work for <em>any</em> library. The config in <code>Package.swift</code>/<code>Cocoapods</code>/<code>Cartfile</code>
+and the <code>import</code> statements just needs some strings replaced: name of the next
+library, URL for its git repository, etc. And that's a scriptable process as
 well!</p>
-
 <p>To recap, one could, in theory, copy in some dummy projects, run a command to
 inject information about a new library, run another command to build all these
 project, verifying that support for those package managers remain functional.</p>
-
 <p>In reality, I have created <a href="https://github.com/dduan/DistributionTests">DistributionTests</a> and put it
 on <a href="https://github.com/dduan/DistributionTests">Github</a> 😉.</p>
-
-<p>The script <code class="highlighter-rouge">customize</code> requires 3 pieces of information of the library: its
-import name<a class="backlink" rel="canonical" title="From duan.ca" href=https://duan.ca/2016/10/10/distribution-tests/>,</a> its git repository URL and a major version number. The assumption
+<p>The script <code>customize</code> requires 3 pieces of information of the library: its
+import name, its git repository URL and a major version number. The assumption
 here is the library generates uniformly named artifacts: the file name for
-<code class="highlighter-rouge">.framework</code> and the name users use to import it are the same. Testing
+<code>.framework</code> and the name users use to import it are the same. Testing
 distribution of a library is as simple as:</p>
-
 <ol>
-  <li>clone the project.</li>
-  <li>customize the project with <code class="highlighter-rouge">customize</code>.</li>
-  <li>run <code class="highlighter-rouge">make</code>.</li>
+<li>clone the project.</li>
+<li>customize the project with <code>customize</code>.</li>
+<li>run <code>make</code>.</li>
 </ol>
-
-<p>If you do step 1 and 2, include the projects in library’s repository, then
+<p>If you do step 1 and 2, include the projects in library's repository, then
 only step 3 is necessary! This makes testing distribution methods trivial on
 a continuous integration server.</p>
-
 <p>Go forth and create fearlessly!</p>
 
-
-</div>
-
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)
-    },i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-59501714-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-</body>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/cocoapods/">Cocoapods</a>
+        ·
+        <a href="/tag/carthage/">Carthage</a>
+        ·
+        <a href="/tag/swift-package-manager/">Swift Package Manager</a>
+        ·
+        <a href="/tag/make/">Make</a>
+    </p>
+</footer></body>
 </html>

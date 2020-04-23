@@ -1,252 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Daniel Duan - Foundation</title>
-        <link>https://duan.ca/tag/Foundation/</link>
-        <atom:link href="https://duan.ca/tag/Foundation/index.xml" rel="self" type="application/rss+xml" />
-        
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
+        <title>Daniel Duan's Articles About Foundation</title>
+        <link>https://duan.ca/tag/foundation/</link>
+        <atom:link href="https://duan.ca/tag/foundation/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>A Tale of Two Dates</title>
-                <description>&lt;p&gt;Recently, I discovered a curious thing about &lt;code class=&quot;highlighter-rouge&quot;&gt;Date&lt;/code&gt;s in two large projects
+                <description>&lt;p&gt;Recently, I discovered a curious thing about &lt;code&gt;Date&lt;&#x2f;code&gt;s in two large projects
 I work on. Simply put, both projects receives, from various HTTP endpoints, the
 same object component: a timestamp, and a duration. Combining these two pieces,
-both projects derives two &lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation.Date&lt;/code&gt;s to represent a time range. So far&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2018/08/25/a-tale-of-two-dates/&gt;,&lt;/a&gt;
-so good.&lt;/p&gt;
-
-&lt;p&gt;However, project &lt;code class=&quot;highlighter-rouge&quot;&gt;A&lt;/code&gt; uses &lt;code class=&quot;highlighter-rouge&quot;&gt;Fonudation.DateInterval&lt;/code&gt; to represent this concept,
-while project &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt; uses &lt;code class=&quot;highlighter-rouge&quot;&gt;Range&amp;lt;Date&amp;gt;&lt;/code&gt;. But why? Why represent the same component
-differently? What a gigantic waste of brain power for everyone on both projects!&lt;/p&gt;
-
-&lt;p&gt;So I set out to unify this thing. Wherever a &lt;code class=&quot;highlighter-rouge&quot;&gt;Range&lt;/code&gt; literal is used, I swap in
-&lt;code class=&quot;highlighter-rouge&quot;&gt;DateInterval.init(start:end:)&lt;/code&gt;; &lt;code class=&quot;highlighter-rouge&quot;&gt;Range.lowerBound&lt;/code&gt; becomes
-&lt;code class=&quot;highlighter-rouge&quot;&gt;DateInterval.start&lt;/code&gt;; &lt;code class=&quot;highlighter-rouge&quot;&gt;Range.upperBound&lt;/code&gt; becomes &lt;code class=&quot;highlighter-rouge&quot;&gt;DateInterval.end&lt;/code&gt;, etc. It
-didn’t take long to complete the conversion to &lt;code class=&quot;highlighter-rouge&quot;&gt;DateInterval&lt;/code&gt; in project &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt;,
-now it builds and runs!&lt;/p&gt;
-
-&lt;p&gt;Oh, wait, why are some tests failing in project &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt;? Shouldn’t this just be an
-mechanical change?&lt;/p&gt;
-
+both projects derives two &lt;code&gt;Foundation.Date&lt;&#x2f;code&gt;s to represent a time range. So far,
+so good.&lt;&#x2f;p&gt;
+&lt;p&gt;However, project &lt;code&gt;A&lt;&#x2f;code&gt; uses &lt;code&gt;Fonudation.DateInterval&lt;&#x2f;code&gt; to represent this concept,
+while project &lt;code&gt;B&lt;&#x2f;code&gt; uses &lt;code&gt;Range&amp;lt;Date&amp;gt;&lt;&#x2f;code&gt;. But why? Why represent the same component
+differently? What a gigantic waste of brain power for everyone on both projects!&lt;&#x2f;p&gt;
+&lt;p&gt;So I set out to unify this thing. Wherever a &lt;code&gt;Range&lt;&#x2f;code&gt; literal is used, I swap in
+&lt;code&gt;DateInterval.init(start:end:)&lt;&#x2f;code&gt;; &lt;code&gt;Range.lowerBound&lt;&#x2f;code&gt; becomes
+&lt;code&gt;DateInterval.start&lt;&#x2f;code&gt;; &lt;code&gt;Range.upperBound&lt;&#x2f;code&gt; becomes &lt;code&gt;DateInterval.end&lt;&#x2f;code&gt;, etc. It
+didn&#x27;t take long to complete the conversion to &lt;code&gt;DateInterval&lt;&#x2f;code&gt; in project &lt;code&gt;B&lt;&#x2f;code&gt;,
+now it builds and runs!&lt;&#x2f;p&gt;
+&lt;p&gt;Oh, wait, why are some tests failing in project &lt;code&gt;B&lt;&#x2f;code&gt;? Shouldn&#x27;t this just be an
+mechanical change?&lt;&#x2f;p&gt;
 &lt;p&gt;I spent time investigating. The failing tests are for some very specific
-business logic that I’m not familiar with. So things took a while to become
-clear. What felt like a long time later, I realized my mistake.&lt;/p&gt;
+business logic that I&#x27;m not familiar with. So things took a while to become
+clear. What felt like a long time later, I realized my mistake.&lt;&#x2f;p&gt;
+&lt;p&gt;(I&#x27;m sorry if this has been obvious to you. You are a better Swift programmer!)&lt;&#x2f;p&gt;
+&lt;p&gt;Somewhere in project &lt;code&gt;B&lt;&#x2f;code&gt; is the following:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;Item&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;range&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Range&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Date&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;
+}
 
-&lt;p&gt;(I’m sorry if this has been obvious to you. You are a better Swift programmer!)&lt;/p&gt;
+&lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;Container&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;items&lt;&#x2f;span&gt;: [&lt;span class=&quot;support class&quot;&gt;Item&lt;&#x2f;span&gt;]
+}
 
-&lt;p&gt;Somewhere in project &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt; is the following:&lt;/p&gt;
+&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;containerFactory&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;range&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Range&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Date&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;, &lt;span class=&quot;variable parameter&quot;&gt;items&lt;&#x2f;span&gt;: [&lt;span class=&quot;support class&quot;&gt;Item&lt;&#x2f;span&gt;])&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; -&amp;gt; &lt;span class=&quot;support class&quot;&gt;Container&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&#x2f;&lt;&#x2f;span&gt; pretend there&amp;#39;s more code here&lt;&#x2f;span&gt;
 
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Item&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;keyword control&quot;&gt;return&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;Conatiner&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;items&lt;&#x2f;span&gt;: items&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;filter { $&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;range&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;contains(range&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;lowerBound) })
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;And of course, after my &amp;quot;refactor&amp;quot;, it became&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;Item&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;range&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;DateInterval&lt;&#x2f;span&gt;
+}
 
-&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Container&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;Container&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;items&lt;&#x2f;span&gt;: [&lt;span class=&quot;support class&quot;&gt;Item&lt;&#x2f;span&gt;]
+}
 
-&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;containerFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Container&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;/// pretend there's more code here&lt;/span&gt;
+&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;containerFactory&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;range&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;DateInterval&lt;&#x2f;span&gt;, &lt;span class=&quot;variable parameter&quot;&gt;items&lt;&#x2f;span&gt;: [&lt;span class=&quot;support class&quot;&gt;Item&lt;&#x2f;span&gt;])&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; -&amp;gt; &lt;span class=&quot;support class&quot;&gt;Container&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&#x2f;&lt;&#x2f;span&gt; pretend there&amp;#39;s more code here&lt;&#x2f;span&gt;
 
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Conatiner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lowerBound&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;span class=&quot;keyword control&quot;&gt;return&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;Conatiner&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;items&lt;&#x2f;span&gt;: items&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;filter { $&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;range&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;contains(range&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;start) })
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Tests for &lt;code&gt;containerFactory&lt;&#x2f;code&gt; failed. And here&#x27;s why: &lt;strong&gt;&lt;code&gt;DateInterval.contains&lt;&#x2f;code&gt;
+is inclusive for its upper bound (&lt;code&gt;.end&lt;&#x2f;code&gt;), whereas &lt;code&gt;Range.contains&lt;&#x2f;code&gt; isn&#x27;t!&lt;&#x2f;strong&gt; You
+can see it plainly by running the following&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword other import&quot;&gt;import&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;Foundation&lt;&#x2f;span&gt;
 
-&lt;p&gt;And of course, after my “refactor”, it became&lt;/p&gt;
+&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; sooner = &lt;span class=&quot;support class&quot;&gt;Date&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;timeIntervalSince1970&lt;&#x2f;span&gt;: &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;)
+&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; later = sooner&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;addingTimeInterval(&lt;span class=&quot;constant numeric decimal&quot;&gt;1000&lt;&#x2f;span&gt;)
 
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Item&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DateInterval&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Container&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;containerFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DateInterval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Container&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;/// pretend there's more code here&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Conatiner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Tests for &lt;code class=&quot;highlighter-rouge&quot;&gt;containerFactory&lt;/code&gt; failed. And here’s why: &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DateInterval.contains&lt;/code&gt;
-is inclusive for its upper bound (&lt;code class=&quot;highlighter-rouge&quot;&gt;.end&lt;/code&gt;), whereas &lt;code class=&quot;highlighter-rouge&quot;&gt;Range.contains&lt;/code&gt; isn’t!&lt;/strong&gt; You
-can see it plainly by running the following&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Foundation&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;sooner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;timeIntervalSince1970&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;later&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sooner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addingTimeInterval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;kt&quot;&gt;DateInterval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sooner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sooner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;later&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                        &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;So here’s what stumped me:&lt;/p&gt;
-
+&lt;span class=&quot;support class&quot;&gt;DateInterval&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;start&lt;&#x2f;span&gt;: sooner, &lt;span class=&quot;variable parameter&quot;&gt;end&lt;&#x2f;span&gt;: later)&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;contains(later) &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; true&lt;&#x2f;span&gt;
+(sooner&lt;span class=&quot;keyword operator&quot;&gt;..&amp;lt;&lt;&#x2f;span&gt;later)&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;contains(later)                        &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; false&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;So here&#x27;s what stumped me:&lt;&#x2f;p&gt;
 &lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;The 2 projects chose to interpret the same component differently, which
-I didn’t not expect.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;I didn’t know how &lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation.DateInterval&lt;/code&gt; works.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Well, today I learned.&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;The 2 projects chose to interpret the same component differently, which
+I didn&#x27;t not expect.&lt;&#x2f;p&gt;
+&lt;&#x2f;li&gt;
+&lt;li&gt;
+&lt;p&gt;I didn&#x27;t know how &lt;code&gt;Foundation.DateInterval&lt;&#x2f;code&gt; works.&lt;&#x2f;p&gt;
+&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;p&gt;Well, today I learned.&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Sat, 25 Aug 2018 17:11:43 -0700</pubDate>
-                
                 <link>https://duan.ca/2018/08/25/a-tale-of-two-dates/</link>
-                
                 <guid isPermaLink="true">https://duan.ca/2018/08/25/a-tale-of-two-dates/</guid>
             </item>
-            
-        
-            
             <item>
                 <title>Supporting Foundation.Data Without Depending On It</title>
-                <description>&lt;p&gt;While implementing some file I/O APIs in &lt;a href=&quot;https://github.com/dduan/Pathos&quot;&gt;Pathos&lt;/a&gt;, I decided reading/writing
-file content as &lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation.Data&lt;/code&gt; is kind of important (can you blame me?). But
-Pathos, by accident, does not depend on Swift &lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation&lt;/code&gt;. Now what?&lt;/p&gt;
-
-&lt;p&gt;After browsing the &lt;a href=&quot;https://developer.apple.com/documentation/foundation/data&quot;&gt;documentation&lt;/a&gt;, a pretty good solution emerged: &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; is
+                <description>&lt;p&gt;While implementing some file I&#x2f;O APIs in &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Pathos&quot;&gt;Pathos&lt;&#x2f;a&gt;, I decided reading&#x2f;writing
+file content as &lt;code&gt;Foundation.Data&lt;&#x2f;code&gt; is kind of important (can you blame me?). But
+Pathos, by accident, does not depend on Swift &lt;code&gt;Foundation&lt;&#x2f;code&gt;. Now what?&lt;&#x2f;p&gt;
+&lt;p&gt;After browsing the &lt;a href=&quot;https:&#x2f;&#x2f;developer.apple.com&#x2f;documentation&#x2f;foundation&#x2f;data&quot;&gt;documentation&lt;&#x2f;a&gt;, a pretty good solution emerged: &lt;code&gt;Data&lt;&#x2f;code&gt; is
 a sequence of bytes! Lets say we hand our users some bytes, they can easily
-construct a &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; from it:&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;UInt8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;readBytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fromPath&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/tmp/test&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;Data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Okay&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/&gt;,&lt;/a&gt; so this built-in initializer makes &lt;code class=&quot;highlighter-rouge&quot;&gt;[UInt8]&lt;/code&gt; an acceptable substitute for
-returning &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt;. What can we do about about &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; as input? Well, turns out,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; is a &lt;code class=&quot;highlighter-rouge&quot;&gt;Collection&lt;/code&gt; of &lt;code class=&quot;highlighter-rouge&quot;&gt;UInt8&lt;/code&gt;s! So we can accept &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; indirectly like
-so:&lt;/p&gt;
-
-&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Bytes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Collection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bytes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UInt8&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// blah&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;User can pass in a &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; as argument and it just works™.&lt;/p&gt;
-
-&lt;p&gt;The only disadvantage of supporting &lt;code class=&quot;highlighter-rouge&quot;&gt;Data&lt;/code&gt; in these ways is that it requires
+construct a &lt;code&gt;Data&lt;&#x2f;code&gt; from it:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;content&lt;&#x2f;span&gt;: [&lt;span class=&quot;support class&quot;&gt;UInt8&lt;&#x2f;span&gt;] = &lt;span class=&quot;keyword control&quot;&gt;try&lt;&#x2f;span&gt; readBytes(fromPath &lt;span class=&quot;string quoted double&quot;&gt;&amp;quot;&#x2f;tmp&#x2f;test&amp;quot;&lt;&#x2f;span&gt;)
+&lt;span class=&quot;support class&quot;&gt;Data&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;bytes&lt;&#x2f;span&gt;: content)
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Okay, so this built-in initializer makes &lt;code&gt;[UInt8]&lt;&#x2f;code&gt; an acceptable substitute for
+returning &lt;code&gt;Data&lt;&#x2f;code&gt;. What can we do about about &lt;code&gt;Data&lt;&#x2f;code&gt; as input? Well, turns out,
+&lt;code&gt;Data&lt;&#x2f;code&gt; is a &lt;code&gt;Collection&lt;&#x2f;code&gt; of &lt;code&gt;UInt8&lt;&#x2f;code&gt;s! So we can accept &lt;code&gt;Data&lt;&#x2f;code&gt; indirectly like
+so:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;write&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Bytes&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant language other&quot;&gt;_&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;bytes&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Bytes&lt;&#x2f;span&gt;)
+    &lt;span class=&quot;keyword control&quot;&gt;where&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;Bytes&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Collection&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Bytes&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt; == &lt;span class=&quot;support class&quot;&gt;UInt8&lt;&#x2f;span&gt;
+{
+    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; blah&lt;&#x2f;span&gt;
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;User can pass in a &lt;code&gt;Data&lt;&#x2f;code&gt; as argument and it just works™.&lt;&#x2f;p&gt;
+&lt;p&gt;The only disadvantage of supporting &lt;code&gt;Data&lt;&#x2f;code&gt; in these ways is that it requires
 your user to discover it either via your excellent documentation, or through
-their super good knowledge of &lt;code class=&quot;highlighter-rouge&quot;&gt;Foundation&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Update: this could also &lt;a href=&quot;https://mastodon.social/@helge/100573358160444340&quot;&gt;be&lt;/a&gt; &lt;a href=&quot;https://twitter.com/daniel_dunbar/status/1030938273047179264&quot;&gt;slower&lt;/a&gt; than using Data directly. Luckily
-I’m only doing file I/O here.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;But this is pretty nice, regardless.&lt;/p&gt;
-
+their super good knowledge of &lt;code&gt;Foundation&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
+&lt;p&gt;&lt;em&gt;Update: this could also &lt;a href=&quot;https:&#x2f;&#x2f;mastodon.social&#x2f;@helge&#x2f;100573358160444340&quot;&gt;be&lt;&#x2f;a&gt; &lt;a href=&quot;https:&#x2f;&#x2f;twitter.com&#x2f;daniel_dunbar&#x2f;status&#x2f;1030938273047179264&quot;&gt;slower&lt;&#x2f;a&gt; than using Data directly. Luckily
+I&#x27;m only doing file I&#x2f;O here.&lt;&#x2f;em&gt;&lt;&#x2f;p&gt;
+&lt;p&gt;But this is pretty nice, regardless.&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Sat, 18 Aug 2018 11:00:41 -0700</pubDate>
-                
                 <link>https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/</link>
-                
                 <guid isPermaLink="true">https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/</guid>
             </item>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
             <item>
                 <title>Contributing To Open-Source Swift</title>
-                <description>&lt;p&gt;I discover, report&lt;a class=&quot;backlink&quot; rel=&quot;canonical&quot; title=&quot;From duan.ca&quot; href=https://duan.ca/2017/12/23/contributing-to-open-source-foundation/&gt;,&lt;/a&gt; fix and merge a bug in the open-source Foundation project. And why, yes, on YouTube.&lt;/p&gt;
-
+                <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes, on YouTube.&lt;&#x2f;p&gt;
 &lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;ul&gt;
-  &lt;li&gt;Pull request: &lt;a href=&quot;https://github.com/apple/swift-corelibs-foundation/pull/1376&quot;&gt;https://github.com/apple/swift-corelibs-foundation/pull/1376&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;SR-6647: &lt;a href=&quot;https://bugs.swift.org/browse/SR-6647&quot;&gt;https://bugs.swift.org/browse/SR-6647&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;Pull request: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;swift-corelibs-foundation&#x2f;pull&#x2f;1376&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;swift-corelibs-foundation&#x2f;pull&#x2f;1376&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
+&lt;li&gt;SR-6647: &lt;a href=&quot;https:&#x2f;&#x2f;bugs.swift.org&#x2f;browse&#x2f;SR-6647&quot;&gt;https:&#x2f;&#x2f;bugs.swift.org&#x2f;browse&#x2f;SR-6647&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
+&lt;&#x2f;ul&gt;
 </description>
                 <pubDate>Sat, 23 Dec 2017 13:21:10 -0800</pubDate>
-                
                 <link>https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</link>
-                
                 <guid isPermaLink="true">https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</guid>
             </item>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
     </channel>
 </rss>

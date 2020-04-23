@@ -1,0 +1,29 @@
+name: Deploy Website
+
+on:
+  push:
+    paths:
+    - 'bin/**'
+    - 'articles/**'
+    - 'pages/**'
+    - 'static/**'
+
+jobs:
+  deploy:
+    name: Deploy Website
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+        git fetch origin
+        git config user.email "$(git show -s --format='%ae' HEAD)"
+        git config user.name "$(git show -s --format='%an' HEAD)"
+        make build
+        rm -rf /tmp/public
+        cp -r public /tmp/public
+        git checkout gh-pages
+        rm -rf ./*
+        cp -r /tmp/public/* ./
+        git add .
+        git commit -m "Deploy $GITHUB_SHA"
+        git push origin gh-pages

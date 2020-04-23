@@ -32,11 +32,11 @@ process, however repetitive, never got old for me.
 In the last decade, my professional work is focused on native, mobile
 applications. This experience biased me in a few ways. "Native" made me
 appreciate the closeness to "the metal": you have an OS; you get the executable;
-, you launch strace, and boom, everything the OS thinks what your code should do
-is revealed to you. "Mobile" forced me to see the reality: desktop experience
-has become a niche. It's nowhere near as important as it was prior to the
-iPhone. Not making your software run well on mobile devices is a particular kind
-of choice that come with some severe trade-offs.
+you launch strace, and boom, everything the OS thinks what your code does is
+revealed to you. "Mobile" forced me to reckon with the reality: desktop
+experience has become a niche. It's nowhere near as important as it was prior to
+the iPhone. Not making your software run well on mobile devices is a particular
+kind of choice that come with some severe trade-offs.
 
 And, finally, I subscribe to the idea that *plain text is supreme*. Yes, even
 more supreme than the web. This website is a derivative of the articles I write
@@ -62,7 +62,7 @@ This site gained the concept of "links" the [last time][]. It has since become
 clear that I don't use this feature (blame Twitter). It's gone, for now. The old
 "about" page is replaced by the home page.
 
-When I decide the site needed a rewrite, I fantasized a place with only HTML.
+When I decided the site needed a rewrite, I fantasized a place with only HTML.
 Perhaps users who want a better reading experience can simply put it in Reader
 mode. Alas, if browsers (with the exception of Safari) implemented automatic
 dark mode with a [color-scheme meta][] tag, it'd almost be a working idea.
@@ -71,7 +71,7 @@ So, that's my starting point.
 
 The site is a list of articles organized by tags and dates, and a few web pages.
 _I want you to read the site, not navigate it_. So text is the point. It's the
-only design element. There are has 2 fonts and 2 text-color (not counting
+only design element. The site uses 2 fonts and 2 text-color (not counting
 highlighted code). Links are always underscored (because you can't hover in
 mobile browsers to find something clickable).
 
@@ -84,7 +84,7 @@ static CSS files. Other than that, all CSS and HTML are hand-written. There's no
 build step for them, farm to table, Vim to your browser.
 
 It turned out standardized CSS variable is game-changing. Combined with media
-query, I barely needed any class to support dark mode/mobile layout. More
+queries, I barely needed any class to support dark mode/mobile layout. More
 importantly, it makes my programmer brain happy. Oh, yes I'm talking about them
 here because this is the first time I truly attempted to catch up since they
 were introduced to the world. It's freeing to let go of constrains of an

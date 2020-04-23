@@ -155,7 +155,7 @@ mod tests {
                 "",
                 "path",
                 vec![
-                    title.clone(),
+                    format!("# {}", title),
                     date_string.clone(),
                     tags_string
                 ]

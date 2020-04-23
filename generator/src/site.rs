@@ -78,11 +78,11 @@ mod tests {
         let expected = vec![
             (
                 "Rust".to_string(),
-                vec![a2.clone(), a1.clone()],
+                vec![a1.clone(), a2.clone(),],
             ),
             (
                 "Swift".to_string(),
-                vec![a1.clone(), a3.clone()],
+                vec![a3.clone(), a1.clone(),],
             ),
         ];
 

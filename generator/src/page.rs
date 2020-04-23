@@ -10,7 +10,7 @@ pub struct Page {
 
 impl Page {
     pub fn read_body(&self, root_path: &str) -> Option<String> {
-        fs::read_to_string(format!("{}/pages{}{}.html", root_path, self.relative_link, self.title)).ok()
+        fs::read_to_string(format!("{}/pages{}/{}.html", root_path, self.relative_link, self.title)).ok()
     }
 
     fn from_path(root_path: &str, path: &str) -> Option<Page> {

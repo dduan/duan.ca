@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Generator
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   macOS:
-    name: Darwin Tests
+    name: Darwin Generator Tests
     runs-on: macOS-latest
     strategy:
       matrix:
@@ -21,7 +21,7 @@ jobs:
     - name: Action
       run: ${{ matrix.action }}
   ubuntu:
-    name: Linux Tests
+    name: Linux Generator Tests
     runs-on: ubuntu-latest
     strategy:
       matrix:

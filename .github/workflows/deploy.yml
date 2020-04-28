@@ -3,10 +3,10 @@ name: Deploy Website
 on:
   push:
     paths:
-    - 'bin/**'
-    - 'articles/**'
-    - 'pages/**'
-    - 'static/**'
+    - 'bin/**/*'
+    - 'articles/**/*.md'
+    - 'pages/**/*.html'
+    - 'static/**/*'
 
 jobs:
   deploy:
@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: |
+    - name: Push to gh-pages
+      run: |
         git fetch origin
         git config user.email "$(git show -s --format='%ae' HEAD)"
         git config user.name "$(git show -s --format='%an' HEAD)"
@@ -23,7 +24,13 @@ jobs:
         cp -r public /tmp/public
         git checkout gh-pages
         rm -rf ./*
-        cp -r /tmp/public/* ./
+        cp -r /tmp/public/. ./
         git add .
         git commit -m "Deploy $GITHUB_SHA"
         git push origin gh-pages
+    - name: Beg Archive.org
+      run: |
+        git checkout gh-pages
+        git fetch origin
+        git reset --hard origin/gh-pages
+        git log -n 1 --pretty=oneline --name-status --no-decorate --diff-filter=MA | tail -n +2 | awk '{printf "https://web.archive.org/save/https://duan.ca/%s\n", $2}'  | xargs -I\{\} curl --silent --output /dev/null {}

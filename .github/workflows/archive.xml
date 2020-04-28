@@ -1,0 +1,14 @@
+name: Beg archive.org
+
+on:
+  push:
+    branches:
+    - gh-pages
+
+jobs:
+  deploy:
+    name: Beg archive.org
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: git log -n 1 --pretty=oneline --name-status --no-decorate --diff-filter=MA | tail -n +2 | awk '{printf "https://web.archive.org/save/https://duan.ca/%s\n", $2}'  | xargs -I\{\} curl --silent --output /dev/null {}

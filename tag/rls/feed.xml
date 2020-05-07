@@ -88,7 +88,7 @@ internet, or local cache), load the expression it includes, mix in my
 customization, and execute it.&lt;&#x2f;p&gt;
 &lt;p&gt;That marks the end of my search. I like the final solution because it&#x27;s mostly
 &amp;quot;vanilla&amp;quot; Nix and doesn&#x27;t require me to mess with a bunch of other tools. For
-solutions that do, read [this][].&lt;&#x2f;p&gt;
+solutions that do, read &lt;a href=&quot;https:&#x2f;&#x2f;christine.website&#x2f;blog&#x2f;how-i-start-nix-2020-03-08&quot;&gt;this&lt;&#x2f;a&gt;.&lt;&#x2f;p&gt;
 &lt;hr &#x2f;&gt;
 &lt;p&gt;At end of the day, my needs are pretty basic: consistency from rustup and
 convenience from nix-shell. I didn&#x27;t need to pin the compiler to a specific Rust

@@ -65,6 +65,12 @@ code {
 pre, pre code {
     overflow: scroll;
     background: var(--background-color) !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+pre::-webkit-scrollbar, pre code::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 pre, code {
     font-size: 90%;

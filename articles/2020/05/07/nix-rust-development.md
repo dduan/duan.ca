@@ -102,7 +102,7 @@ customization, and execute it.
 
 That marks the end of my search. I like the final solution because it's mostly
 "vanilla" Nix and doesn't require me to mess with a bunch of other tools. For
-solutions that do, read [this][].
+solutions that do, read [this][How I Start: Nix].
 
 
 ***

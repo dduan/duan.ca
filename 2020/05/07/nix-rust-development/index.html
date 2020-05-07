@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2020/05/07/nix-rust-development/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Naive NixOS Rust Development">
+    <meta property="article:published_time" content="2020-05-07"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Naive NixOS Rust Development</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2020/05/07/nix-rust-development/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>Naive NixOS Rust Development</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2020-05-07" itemProp="datePublished">2020-05-07</time>
+        </p>
+    </nav><p>tl;dr: To work on Rust project with nix-shell, with stable toolchain, rls and
+extensions such as <code>rust-analysis</code>, <code>rust-src</code>, without caring too much about
+specific Rust toolchain version (except for it being <code>stable</code>), use the
+following <code>shell.nix</code>:</p>
+<pre><span class="source nix"><span class="keyword other nix">let</span>
+  <span class="entity other attribute-name multipart nix">moz_overlay</span> <span class="keyword operator bind nix">=</span> <span class="support function nix">import</span> <span class="punctuation definition expression nix">(</span><span class="constant language nix">builtins</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">fetchTarball</span> <span class="string unquoted url nix">https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz</span><span class="punctuation definition expression nix">)</span><span class="punctuation terminator bind nix">;</span>
+  <span class="entity other attribute-name multipart nix">nixpkgs</span> <span class="keyword operator bind nix">=</span> <span class="support function nix">import</span> <span class="string unquoted spath nix">&lt;nixpkgs&gt;</span> <span class="punctuation definition attrset-or-function nix">{</span>
+    <span class="entity other attribute-name multipart nix">overlays</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition list nix">[</span> <span class="variable parameter name nix">moz_overlay</span> <span class="punctuation definition list nix">]</span><span class="punctuation terminator bind nix">;</span>
+  <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
+  <span class="entity other attribute-name multipart nix">ruststable</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition expression nix">(</span><span class="variable parameter name nix">nixpkgs</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">latest</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">rustChannels</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">stable</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">rust</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">override</span> <span class="punctuation definition attrset-or-function nix">{</span>
+    <span class="entity other attribute-name multipart nix">extensions</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition list nix">[</span> <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>rust-src<span class="punctuation definition string double end nix">&quot;</span></span> <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>rust-analysis<span class="punctuation definition string double end nix">&quot;</span></span> <span class="punctuation definition list nix">]</span><span class="punctuation terminator bind nix">;</span><span class="punctuation definition attrset nix">}</span>
+  <span class="punctuation definition expression nix">)</span><span class="punctuation terminator bind nix">;</span>
+<span class="keyword other nix">in</span>
+  <span class="keyword other nix">with</span> <span class="variable parameter name nix">nixpkgs</span>;
+  <span class="variable parameter name nix">stdenv</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">mkDerivation</span> <span class="punctuation definition attrset-or-function nix">{</span>
+    <span class="entity other attribute-name multipart nix">name</span> <span class="keyword operator bind nix">=</span> <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>rust<span class="punctuation definition string double end nix">&quot;</span></span><span class="punctuation terminator bind nix">;</span>
+    <span class="entity other attribute-name multipart nix">buildInputs</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition list nix">[</span> <span class="variable parameter name nix">rustup</span> <span class="variable parameter name nix">ruststable</span> <span class="punctuation definition list nix">]</span><span class="punctuation terminator bind nix">;</span>
+  <span class="punctuation definition attrset nix">}</span>
+</span></pre>
+<hr />
+<p>When you have a Nix hammer, everything looks like a Nix expression.</p>
+<p>Having used NixOS on a real PC for a number of days, this is the impression
+I get from the world of Nix. Unfortunately, so far, it's been a negative for me.</p>
+<p>One of the most exciting thing I want to use Nix for is to bootstrap development
+environment with <code>nix-shell</code>. I imagined it to be similar to using <a href="https://pipenv-fork.readthedocs.io/en/latest/">pipenv</a>
+with Python, except for everything. Well, I've since learned that it's not true
+(yet?) for many reasons.</p>
+<p>Modern programming languages come with their own attempt at <em>reproducibility</em>.
+Some does it better than others. To make it concrete, I'm talking about things
+like <a href="https://haskellstack.org">Stack</a> for Haskell or <a href="https://rustup.rs/">rustup</a> for Rust: given the source code, how do
+I make it build in the way the project intended? What's the correct version of
+the compiler, runtime, and tools that works best with this revision of the
+source code? The common solution usually follows this pattern: as author of
+a project, specify as much as you can, the environment best suited for the
+current state of the project. As a &quot;builder&quot;, use a <em>single program</em> that's
+capable of updating itself, as well as ensuring that the project builds exactly
+as specified, including managing the compiler/runtime/tooling versions, etc.</p>
+<p>This <em>single program</em>'s role is very much the same as the Nix system, except the
+latter is independent of programming languages: <code>rustup</code> installs Rust, so does
+Nix. That's a bad thing. As a package manager, Nix either have to tightly
+integrate with each of these other package managers, leveraging their evolving
+behaviors to give its user the build environment; or, it must replace them.
+The former is impractical; the latter, well, sucks.</p>
+<p>Back to reality. This is the experience I want to have with NixOS: Some programs
+I use daily such as Alacritty, NeoVim, Firfox, etc, are installed globally and
+readily available. They are part of my <code>/etc/nixos/configuration.nix</code>. So far so
+good. Now, I regularly program in a few languages. For each of the project, I'd
+like to have a <code>shell.nix</code> that brings in its compilers, libraries, LSP servers,
+etc. This is what <code>nix-shell</code> is supposed to give me! This is known as the &quot;per
+project&quot; setup.</p>
+<p>Let's see: with Rust, that means <code>rustc</code> (compiler), <code>cargo</code> (package manager),
+<code>rls</code>, <code>rust-src</code> and <code>rust-analysis</code> (LSP). In macOS, I'd install all of these
+globally with <code>rustup</code>. In NixOS...well, I can ask for <code>rustup</code> for my project:</p>
+<pre><span class="source nix"><span class="keyword other nix">with</span> <span class="support function nix">import</span> <span class="string unquoted spath nix">&lt;nixpkgs&gt;</span> <span class="punctuation definition attrset nix">{</span><span class="punctuation definition attrset nix">}</span>;
+
+<span class="variable parameter name nix">stdenv</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">mkDerivation</span> <span class="punctuation definition attrset-or-function nix">{</span>
+  <span class="entity other attribute-name multipart nix">name</span> <span class="keyword operator bind nix">=</span> <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>rust<span class="punctuation definition string double end nix">&quot;</span></span><span class="punctuation terminator bind nix">;</span>
+  <span class="entity other attribute-name multipart nix">nativeBuildInputs</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition list nix">[</span> <span class="variable parameter name nix">rustup</span> <span class="punctuation definition list nix">]</span><span class="punctuation terminator bind nix">;</span>
+<span class="punctuation definition attrset nix">}</span>
+</span></pre>
+<p>...which gives me <code>rustup</code> and nothing else. That's right, you don't even get
+a <code>rustc</code> after running <code>nix-shell</code>. But <code>rustup</code> can get you everything else,
+all I need to do is ask. Hmm, do I need to run a series of set-up commands with
+<code>rustup</code> every time I enter the environment? No? I just need to run it the first
+time? Until the cached tools get deleted by some garbage collection mechanism?
+That seems unsatisfying, doesn't it?</p>
+<p>Instead of <code>rustup</code>, I could also ask Nix to use the <code>rustc</code>/<code>cargo</code>/<code>rls</code> it
+knows about directly. This is marginally better. Except I still need <code>rust-src</code>
+and <code>rust-analysis</code> for my needs. As far as I can tell, these <a href="https://github.com/rust-lang/rls">RLS</a> components
+are out of Nix's control (as of today).</p>
+<p>Everywhere on the internet I looked, for every problem that
+Nix-the-package-manager doesn't work out-of-the-box, there's someone responding
+along the line of &quot;you can write some Nix expression yourself&quot;. In other words,
+Nix-the-language is powerful enough to solve it, probably. In the case of Rust,
+luckily, Mozilla wrote enough Nix expressions for us and provides them via an
+<a href="https://github.com/mozilla/nixpkgs-mozilla">overlay</a>. These expressions are rich enough to meet my needs.
+As you can see in the tl;dr at the top, when entering the development
+environment, nix-shell would: download the overlay's source code (from the
+internet, or local cache), load the expression it includes, mix in my
+customization, and execute it.</p>
+<p>That marks the end of my search. I like the final solution because it's mostly
+&quot;vanilla&quot; Nix and doesn't require me to mess with a bunch of other tools. For
+solutions that do, read [this][].</p>
+<hr />
+<p>At end of the day, my needs are pretty basic: consistency from rustup and
+convenience from nix-shell. I didn't need to pin the compiler to a specific Rust
+release, or checksum the final build output.</p>
+<p>I'm very new to both technologies so there may be a follow-up post sometime in
+the future.</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/nix/">Nix</a>
+        ·
+        <a href="/tag/nixos/">NixOS</a>
+        ·
+        <a href="/tag/rust/">Rust</a>
+        ·
+        <a href="/tag/rls/">RLS</a>
+    </p>
+</footer></body>
+</html>

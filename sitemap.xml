@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2020/05/07/nix-rust-development/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2020/04/22/site-improvements-2020/</loc>
     </url>
     <url>
@@ -261,6 +264,18 @@
         <loc>https://duan.ca/tag/naming/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/nix/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/nix/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/nixos/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/nixos/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/oop/</loc>
     </url>
     <url>
@@ -277,6 +292,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/python/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/rls/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/rls/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/ruby/</loc>

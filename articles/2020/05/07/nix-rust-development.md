@@ -2,10 +2,9 @@
 2020-05-07T11:04:58-07:00
 tags: Nix, NixOS, Rust, RLS
 
-tl;dr: To work on Rust project with nix-shell, with stable toolchain, rls and
-extensions such as `rust-analysis`, `rust-src`, without caring too much about
-specific Rust toolchain version (except for it being `stable`), use the
-following `shell.nix`:
+tl;dr: To work on Rust project with nix-shell, rls and extensions such as
+`rust-analysis`, `rust-src`, without caring too much about specific Rust
+toolchain version (except for it being `stable`), use the following `shell.nix`:
 
 ```nix
 let
@@ -23,8 +22,6 @@ in
     buildInputs = [ rustup ruststable ];
   }
 ```
-
-***
 
 When you have a Nix hammer, everything looks like a Nix expression.
 

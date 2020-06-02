@@ -5,6 +5,55 @@
         <link>https://duan.ca/tag/swift/</link>
         <atom:link href="https://duan.ca/tag/swift/feed.xml" rel="self" type="application/rss+xml" />
             <item>
+                <title>Introducing Dye</title>
+                <description>&lt;p&gt;&lt;em&gt;Recently, I got a PC. And I started writing some code on Windows for the
+giggles. Naturally, I gravitate towards stuff I use on macOS and Linux when it
+comes to tooling. To my delight, NeoVim, ripgrep and fzf all work out of the box
+in terminal simulators, which brings us to todays main topic...&lt;&#x2f;em&gt;&lt;&#x2f;p&gt;
+&lt;p&gt;I made a terminal coloring library for Swift that works on Windows,
+&lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Dye&#x2f;releases&#x2f;tag&#x2f;0.0.1&quot;&gt;Dye 0.0.1 is available now&lt;&#x2f;a&gt;!&lt;&#x2f;p&gt;
+&lt;h2&gt;So, why?&lt;&#x2f;h2&gt;
+&lt;p&gt;When I started working on &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;tre&quot;&gt;tre&lt;&#x2f;a&gt;, I search in the
+Rust ecosystem for a CLI interface library that supports as many platforms as
+possible. Eventually I found &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;BurntSushi&#x2f;termcolor&quot;&gt;termcolor&lt;&#x2f;a&gt; among an ocean of options. As
+a result, tre, like a lot of other CLI tools (like rg) written in Rust, has
+a consistent UI on Windows and Unix. This experience has brought lots of joy, as
+a user of both the library, and the app. I want to pay it forward to my fellow
+Swift CLI makers, and their users.&lt;&#x2f;p&gt;
+&lt;p&gt;Zooming out slightly, success of Swift on Windows makes Swift as a skill more
+valuable. And &lt;a href=&quot;https:&#x2f;&#x2f;duan.ca&#x2f;2019&#x2f;01&#x2f;20&#x2f;kick-ass-cli-tools-in-swift&#x2f;&quot;&gt;I want more CLI tools written in Swift&lt;&#x2f;a&gt;. So it&#x27;s
+a double-win, really.&lt;&#x2f;p&gt;
+&lt;p&gt;Lastly, it&#x27;s a small library, all things considered. Being able to get it to
+a shippable state on a weekend is a key reason I decided to work on it.&lt;&#x2f;p&gt;
+&lt;h2&gt;Technical tidbits&lt;&#x2f;h2&gt;
+&lt;p&gt;I love Max Howell&#x27;s &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;mxcl&#x2f;Chalk&quot;&gt;Chalk&lt;&#x2f;a&gt; library. It&#x27;s a 100-line Swift file that
+implements &lt;a href=&quot;https:&#x2f;&#x2f;en.wikipedia.org&#x2f;wiki&#x2f;ANSI_escape_code&quot;&gt;ANSI escape code&lt;&#x2f;a&gt; with Swift&#x27;s custom string interpolation
+API. It demonstrates well how simple it is to customize your terminal output.&lt;&#x2f;p&gt;
+&lt;p&gt;Enter Windows, where ANSI sequences are ignored by built-in terminal simulators
+from the past. The console is customized via a entirely separate, stateful,
+imperative APIs (Newer simulators such as the freshly released &lt;a href=&quot;&quot;&gt;Terminal&lt;&#x2f;a&gt;
+actually supports ANSI codes pretty well). This is our lowest common API
+denominator, which ultimately dictated the design of Dye.&lt;&#x2f;p&gt;
+&lt;p&gt;Dye&#x27;s API is centered around Swift&#x27;s built-in protocol &lt;code&gt;TextOutputStream&lt;&#x2f;code&gt;. You
+create a stream object and mutate the style need for upcoming output:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; output = &lt;span class=&quot;support class&quot;&gt;OutputStream&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;standardOutput()
+output&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;color&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;foreground = .&lt;span class=&quot;constant language enum&quot;&gt;blue&lt;&#x2f;span&gt;
+print(&lt;span class=&quot;string quoted double&quot;&gt;&amp;quot;blue text&amp;quot;&lt;&#x2f;span&gt;, to &amp;amp;stream) &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; blue text is blue&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;If the stream is redirected to something other than the terminal, styling gets
+automatically disabled. There are various options to customize this behavior.&lt;&#x2f;p&gt;
+&lt;p&gt;Take a look at this &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Dye&#x2f;blob&#x2f;master&#x2f;Examples&#x2f;main.swift&quot;&gt;sample app&lt;&#x2f;a&gt; to get a more concrete picture of
+how things work.&lt;&#x2f;p&gt;
+&lt;hr &#x2f;&gt;
+&lt;p&gt;I&#x27;ll end with a screenshot of the sample app running in Command Prompt:&lt;&#x2f;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2020&#x2f;06&#x2f;01&#x2f;windows-example-screenshot.jpg&quot; alt=&quot;Dye sample app running in Windows Command Prompt&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
+&lt;p&gt;Let&#x27;s build more.&lt;&#x2f;p&gt;
+</description>
+                <pubDate>Mon, 01 Jun 2020 15:08:01 -0700</pubDate>
+                <link>https://duan.ca/2020/06/01/dye/</link>
+                <guid isPermaLink="true">https://duan.ca/2020/06/01/dye/</guid>
+            </item>
+            <item>
                 <title>On the Subject of Interface Hygiene</title>
                 <description>&lt;p&gt;In a purly reactive world, your entire program merge into a single stream. Now,
 close your eyes, and envision: your project as one, beautiful, stream.&lt;&#x2f;p&gt;

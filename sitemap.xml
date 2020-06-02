@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2020/06/01/dye/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2020/05/07/nix-rust-development/</loc>
     </url>
     <url>
@@ -382,6 +385,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/webassembly/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/windows/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/windows/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/xcode/</loc>

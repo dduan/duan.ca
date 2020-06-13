@@ -4,7 +4,7 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
-        <loc>https://duan.ca/2020/06/13/stream-loger/</loc>
+        <loc>https://duan.ca/2020/06/13/stream-logger/</loc>
     </url>
     <url>
         <loc>https://duan.ca/2020/06/01/dye/</loc>
@@ -328,12 +328,6 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/scheme/feed.xml</loc>
-    </url>
-    <url>
-        <loc>https://duan.ca/tag/streaming/</loc>
-    </url>
-    <url>
-        <loc>https://duan.ca/tag/streaming/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/swift/</loc>

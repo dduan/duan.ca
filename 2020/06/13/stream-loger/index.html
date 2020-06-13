@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2020/06/13/stream-loger/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="StreamLogger">
+    <meta property="article:published_time" content="2020-06-13"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>StreamLogger</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2020/06/13/stream-loger/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>StreamLogger</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2020-06-13" itemProp="datePublished">2020-06-13</time>
+        </p>
+    </nav><p>After turning off stream on <a href="https://twitch.tv/daniel_duan">Twitch</a>, the first thing I normally do is
+exporting the stream video to YouTube, so that the stream has an archive that
+survives Twitch's short-ish retain policy.</p>
+<p>These videos, perhaps surprisingly, get a few views! It's not a lot by any
+measures, but I'm conscientious of the fact that a typical stream archive is
+a multi-hour long video with no content curation, no clear schedule, and
+it sometimes contains breaks. Needless to say, watching them after-the-fact
+requires some (or a lot of) fast-forwarding.</p>
+<p>So, last week <a href="https://twitch.tv/daniel_duan">on stream</a>, I set out to improve the fast-forwarding
+experience. YouTube has this feature that lets you jump to specific timestamp
+in the video through a URL parameter in the video' link. Further, they generate
+this parameter for text in video's description, if the text is in the right
+format. This is handy for generating a &quot;table of content&quot; for the video so that
+viewers can click the timestamp in the description to jump to the section they
+are most interested in.</p>
+<p><a href="https://github.com/dduan/StreamLogger">StreamLogger</a> is a little utility that lets me note down what happened while
+I'm streaming. It's kind of like writing a commit message, except the message
+describes what happened since the last &quot;commit&quot;. These messages, along with
+their associated timestamps, will be used by StreamLogger to generate the &quot;table
+of content&quot;. Using it in command line looks like this:</p>
+<pre><span class="source shell bash"><span class="comment line number-sign shell"><span class="punctuation definition comment begin shell">#</span></span><span class="comment line number-sign shell"> Turn on stream, maybe check signs of being live, etc. Then
+slog start # start a new log
+
+# Do stuff, when it comes to a natural conclusion point...
+slog -- &#39;I did stuff&#39;
+
+# Do more stuff...
+slog -- &#39;some other stuff&#39;
+
+# Some time later... end stream
+# No action is required to end the stream as far as StreamLogger is concerned.
+
+# Now, to generate the table-of-content
+slog stamp -s 1:32
+</span></span></pre>
+<p>That last command outputs</p>
+<pre><code>0:01:32 I did stuff
+1:41:59 some other stuff
+</code></pre>
+<p>... which goes to the video's description.</p>
+<p>There's a few subtleties in this overall simple tool.</p>
+<p>Whenever a message is added, it gets associated with the time at which the
+<em>previous</em> message was add. So the act of logging marks both the end of
+a chapter and the beginning of the next.</p>
+<p>In reality, there's always going to be a gap between the start of the stream and
+the time the log is initialized. That's what the <code>-s 1:32</code> in the last command
+is trying to correct. It tells StreamLogger the length of the gap. Now the
+absolute time associated with each event has a relationship with the archive
+video.</p>
+<hr />
+<p>I chose to write this in Rust because I'm going to need the final product on
+Linux, macOS, and Windows since I stream on all 3 platforms. (fun fact: I never
+built it directly on my PC running Linux. Instead, I simply downloaded the
+musl-based build from the GitHub release, which was built by GitHub Actions. It
+works beautifully.) Maybe one day I'll add a GUI for it that works across these
+platforms, too, so that it's more friendly to wider group of users.</p>
+<hr />
+<p>The more I use and think about StreamLogger, the more I like it. You can see
+me working its entirety in the following archives ;)</p>
+<p>Part 1: https://youtu.be/xWRcdaEjir4
+Part 2: https://youtu.be/RS-ZMBzu9Dg</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/rust/">Rust</a>
+        ·
+        <a href="/tag/streaming/">Streaming</a>
+    </p>
+</footer></body>
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Streaming</title>
+        <link>https://duan.ca/tag/streaming/</link>
+        <atom:link href="https://duan.ca/tag/streaming/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>StreamLogger</title>
+                <description>&lt;p&gt;After turning off stream on &lt;a href=&quot;https:&#x2f;&#x2f;twitch.tv&#x2f;daniel_duan&quot;&gt;Twitch&lt;&#x2f;a&gt;, the first thing I normally do is
+exporting the stream video to YouTube, so that the stream has an archive that
+survives Twitch&#x27;s short-ish retain policy.&lt;&#x2f;p&gt;
+&lt;p&gt;These videos, perhaps surprisingly, get a few views! It&#x27;s not a lot by any
+measures, but I&#x27;m conscientious of the fact that a typical stream archive is
+a multi-hour long video with no content curation, no clear schedule, and
+it sometimes contains breaks. Needless to say, watching them after-the-fact
+requires some (or a lot of) fast-forwarding.&lt;&#x2f;p&gt;
+&lt;p&gt;So, last week &lt;a href=&quot;https:&#x2f;&#x2f;twitch.tv&#x2f;daniel_duan&quot;&gt;on stream&lt;&#x2f;a&gt;, I set out to improve the fast-forwarding
+experience. YouTube has this feature that lets you jump to specific timestamp
+in the video through a URL parameter in the video&#x27; link. Further, they generate
+this parameter for text in video&#x27;s description, if the text is in the right
+format. This is handy for generating a &amp;quot;table of content&amp;quot; for the video so that
+viewers can click the timestamp in the description to jump to the section they
+are most interested in.&lt;&#x2f;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;StreamLogger&quot;&gt;StreamLogger&lt;&#x2f;a&gt; is a little utility that lets me note down what happened while
+I&#x27;m streaming. It&#x27;s kind of like writing a commit message, except the message
+describes what happened since the last &amp;quot;commit&amp;quot;. These messages, along with
+their associated timestamps, will be used by StreamLogger to generate the &amp;quot;table
+of content&amp;quot;. Using it in command line looks like this:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source shell bash&quot;&gt;&lt;span class=&quot;comment line number-sign shell&quot;&gt;&lt;span class=&quot;punctuation definition comment begin shell&quot;&gt;#&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;comment line number-sign shell&quot;&gt; Turn on stream, maybe check signs of being live, etc. Then
+slog start # start a new log
+
+# Do stuff, when it comes to a natural conclusion point...
+slog -- &amp;#39;I did stuff&amp;#39;
+
+# Do more stuff...
+slog -- &amp;#39;some other stuff&amp;#39;
+
+# Some time later... end stream
+# No action is required to end the stream as far as StreamLogger is concerned.
+
+# Now, to generate the table-of-content
+slog stamp -s 1:32
+&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;That last command outputs&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;0:01:32 I did stuff
+1:41:59 some other stuff
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;... which goes to the video&#x27;s description.&lt;&#x2f;p&gt;
+&lt;p&gt;There&#x27;s a few subtleties in this overall simple tool.&lt;&#x2f;p&gt;
+&lt;p&gt;Whenever a message is added, it gets associated with the time at which the
+&lt;em&gt;previous&lt;&#x2f;em&gt; message was add. So the act of logging marks both the end of
+a chapter and the beginning of the next.&lt;&#x2f;p&gt;
+&lt;p&gt;In reality, there&#x27;s always going to be a gap between the start of the stream and
+the time the log is initialized. That&#x27;s what the &lt;code&gt;-s 1:32&lt;&#x2f;code&gt; in the last command
+is trying to correct. It tells StreamLogger the length of the gap. Now the
+absolute time associated with each event has a relationship with the archive
+video.&lt;&#x2f;p&gt;
+&lt;hr &#x2f;&gt;
+&lt;p&gt;I chose to write this in Rust because I&#x27;m going to need the final product on
+Linux, macOS, and Windows since I stream on all 3 platforms. (fun fact: I never
+built it directly on my PC running Linux. Instead, I simply downloaded the
+musl-based build from the GitHub release, which was built by GitHub Actions. It
+works beautifully.) Maybe one day I&#x27;ll add a GUI for it that works across these
+platforms, too, so that it&#x27;s more friendly to wider group of users.&lt;&#x2f;p&gt;
+&lt;hr &#x2f;&gt;
+&lt;p&gt;The more I use and think about StreamLogger, the more I like it. You can see
+me working its entirety in the following archives ;)&lt;&#x2f;p&gt;
+&lt;p&gt;Part 1: https:&#x2f;&#x2f;youtu.be&#x2f;xWRcdaEjir4
+Part 2: https:&#x2f;&#x2f;youtu.be&#x2f;RS-ZMBzu9Dg&lt;&#x2f;p&gt;
+</description>
+                <pubDate>Sat, 13 Jun 2020 12:36:55 -0700</pubDate>
+                <link>https://duan.ca/2020/06/13/stream-loger/</link>
+                <guid isPermaLink="true">https://duan.ca/2020/06/13/stream-loger/</guid>
+            </item>
+    </channel>
+</rss>

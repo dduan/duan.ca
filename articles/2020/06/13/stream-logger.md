@@ -1,6 +1,6 @@
 # StreamLogger
 2020-06-13T12:36:55-07:00
-tags: Rust, Streaming
+tags: Rust, Twitch
 
 After turning off stream on [Twitch][], the first thing I normally do is
 exporting the stream video to YouTube, so that the stream has an archive that

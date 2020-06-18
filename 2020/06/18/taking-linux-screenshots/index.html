@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2020/06/18/taking-linux-screenshots/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Taking Screenshots On Linux">
+    <meta property="article:published_time" content="2020-06-18"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Taking Screenshots On Linux</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2020/06/18/taking-linux-screenshots/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>Taking Screenshots On Linux</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2020-06-18" itemProp="datePublished">2020-06-18</time>
+        </p>
+    </nav><p>Having used macOS for a number of years, I've formed some habit that I'm never
+going to shake. Among them is taking screenshots with <code>Alt-Shift-3</code> and
+<code>Alt-Shift-4</code>, follow up with area or window selection. So, when I bought a PC
+and put Linux on it, it's time to mess with it for these habits!</p>
+<p>And, it didn't take too long to solve. I've found <a href="https://github.com/naelstrof/maim">maim</a>. Writing this down
+for mine and maybe, yours, future reference.</p>
+<p>To capture the entire screen:</p>
+<pre><code>bash -c &quot;maim ~/Screenshots/fullscreen_$(date +%s).png&quot;
+</code></pre>
+<p>To active area/windows selection for the capture:</p>
+<pre><code>bash -c &quot;maim -s ~/Screenshots/area_$(date +%s).png&quot;
+</code></pre>
+<p>Here's how the latter in action (with keybinds via Ubuntu 20.20 desktop's
+Settings app).</p>
+<p><img src="/assets/2020/06/18/area-screenshot-on-ubuntu.gif" alt="How selecting an area with maim works on Ubuntu" /></p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/linux/">Linux</a>
+        ·
+        <a href="/tag/macos/">macOS</a>
+    </p>
+</footer></body>
+</html>

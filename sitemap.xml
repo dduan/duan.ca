@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2020/06/18/taking-linux-screenshots/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2020/06/13/stream-logger/</loc>
     </url>
     <url>
@@ -121,9 +124,9 @@
         <loc>https://duan.ca/2012/10/31/keep-git-social/</loc>
     </url>
     <url>
-        <loc>https://duan.ca/projects/</loc>
-    </url><url>
         <loc>https://duan.ca//</loc>
+    </url><url>
+        <loc>https://duan.ca/projects/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/api-design-guidelines/</loc>
@@ -244,6 +247,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/let-s-build/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/linux/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/linux/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/make/</loc>

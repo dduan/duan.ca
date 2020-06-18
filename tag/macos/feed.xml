@@ -5,6 +5,28 @@
         <link>https://duan.ca/tag/macos/</link>
         <atom:link href="https://duan.ca/tag/macos/feed.xml" rel="self" type="application/rss+xml" />
             <item>
+                <title>Taking Screenshots On Linux</title>
+                <description>&lt;p&gt;Having used macOS for a number of years, I&#x27;ve formed some habit that I&#x27;m never
+going to shake. Among them is taking screenshots with &lt;code&gt;Alt-Shift-3&lt;&#x2f;code&gt; and
+&lt;code&gt;Alt-Shift-4&lt;&#x2f;code&gt;, follow up with area or window selection. So, when I bought a PC
+and put Linux on it, it&#x27;s time to mess with it for these habits!&lt;&#x2f;p&gt;
+&lt;p&gt;And, it didn&#x27;t take too long to solve. I&#x27;ve found &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;naelstrof&#x2f;maim&quot;&gt;maim&lt;&#x2f;a&gt;. Writing this down
+for mine and maybe, yours, future reference.&lt;&#x2f;p&gt;
+&lt;p&gt;To capture the entire screen:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;bash -c &amp;quot;maim ~&#x2f;Screenshots&#x2f;fullscreen_$(date +%s).png&amp;quot;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;To active area&#x2f;windows selection for the capture:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;bash -c &amp;quot;maim -s ~&#x2f;Screenshots&#x2f;area_$(date +%s).png&amp;quot;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Here&#x27;s how the latter in action (with keybinds via Ubuntu 20.20 desktop&#x27;s
+Settings app).&lt;&#x2f;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2020&#x2f;06&#x2f;18&#x2f;area-screenshot-on-ubuntu.gif&quot; alt=&quot;How selecting an area with maim works on Ubuntu&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
+</description>
+                <pubDate>Thu, 18 Jun 2020 13:22:01 -0700</pubDate>
+                <link>https://duan.ca/2020/06/18/taking-linux-screenshots/</link>
+                <guid isPermaLink="true">https://duan.ca/2020/06/18/taking-linux-screenshots/</guid>
+            </item>
+            <item>
                 <title>Making An Open-Source Swift Project</title>
                 <description>&lt;p&gt;This video shows what it takes to open source a Swift project. Starting from some code in a playground,
 I created a framework that supports distribution via Swift Package Manager, CocoaPods, Xcode project and

@@ -67,7 +67,7 @@ pre, pre code {
     background: var(--background-color) !important;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    font-family: ui-monospace, monospace;
+    font-family: "SF Mono", ui-monospace, monospace;
 }
 pre::-webkit-scrollbar, pre code::-webkit-scrollbar {
     width: 0;

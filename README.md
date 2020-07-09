@@ -43,7 +43,7 @@ becomes its URL. For example, `/pages/you/Have a nice day.html` will become
 
 ### Adding an asset
 
-Put it in `/static`. It's relative path to `/static` becomes its URL.
+Put it in `/static`. Its relative path to `/static` becomes its URL.
 
 ### Adding a new type of page
 

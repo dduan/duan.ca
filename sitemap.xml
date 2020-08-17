@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2020/08/16/fall-guys-and-among-us/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2020/06/18/taking-linux-screenshots/</loc>
     </url>
     <url>
@@ -128,9 +131,9 @@
     </url><url>
         <loc>https://duan.ca/projects/</loc>
     </url><url>
-        <loc>https://duan.ca/DrString/privacy/</loc>
-    </url><url>
         <loc>https://duan.ca/DrString/release-notes/</loc>
+    </url><url>
+        <loc>https://duan.ca/DrString/privacy/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/</loc>
     </url>
@@ -205,6 +208,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/foundation/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/gaming/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/gaming/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/git/</loc>

@@ -13,7 +13,23 @@ for a while, and I'm getting increasingly anxious because those who frequently p
 aren't making similar remarks *at all*. So, in this Sunday evening, I just had to get it out of my
 head:
 
-<video controls="controls" width="100%" name="Fall Guys are Among Us" src="/assets/2020/08/FallGuysAmongUs.mov" autoplay loop muted playsinline></video>
+<video id="video-tag" width="100%" autoplay muted loop playsinline> 
+    <source src="/assets/2020/08/FallGuysAmongUs.mov" type="video/quicktime" />  
+</video>
+<img id="img-tag" width="100%" src="/assets/2020/08/FallGuysAmongUs.mov">
 
+<script type="text/javascript">
+    function BrowserDetection() {
+        //Check if browser is Safari, if it is, hide the <video> tag, otherwise hide the <img> tag
+        if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
+            document.getElementById('video-tag').style.display= "none";
+        } else {
+            document.getElementById('img-tag').style.display= "none";
+        }
+    }
+
+    //And run the script. Note that the script tag needs to be run after HTML so where you place it is important. 
+    BrowserDetection();
+</script>
 This animation is made from Pixelmator and Keynote. Those two along with Sketch and Final Cut Pro
 make me feel invincible these days.

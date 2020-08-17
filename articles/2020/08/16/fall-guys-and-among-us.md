@@ -14,3 +14,6 @@ aren't making similar remarks *at all*. So, in this Sunday evening, I just had t
 head:
 
 <video controls="controls" width="100%" name="Fall Guys are Among Us" src="/assets/2020/08/FallGuysAmongUs.mov" autoplay loop muted playsinline></video>
+
+This animation is made from Pixelmator and Keynote. Those two along with Sketch and Final Cut Pro
+make me feel invincible these days.

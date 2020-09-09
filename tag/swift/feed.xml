@@ -22,7 +22,10 @@ char *getcwd(char *buf, size_t size);
 
 &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Windows&lt;&#x2f;span&gt;
 &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; LPTSTR (with right environment) is `wchar_t *`&lt;&#x2f;span&gt;
-&lt;span class=&quot;support class&quot;&gt;DWORD&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;GetCurrentDirectory&lt;&#x2f;span&gt;(&lt;span class=&quot;support class&quot;&gt;DWORD&lt;&#x2f;span&gt; nBufferLength, &lt;span class=&quot;support class&quot;&gt;LPTSTR&lt;&#x2f;span&gt; lpBuffer);
+&lt;span class=&quot;support class&quot;&gt;DWORD&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;GetCurrentDirectory&lt;&#x2f;span&gt;(
+    &lt;span class=&quot;support class&quot;&gt;DWORD&lt;&#x2f;span&gt; nBufferLength,
+    &lt;span class=&quot;support class&quot;&gt;LPTSTR&lt;&#x2f;span&gt; lpBuffer
+);
 &lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;The expected steps for using APIs like this are the following:&lt;&#x2f;p&gt;
 &lt;ol&gt;
@@ -162,7 +165,7 @@ element. Here&#x27;s the actual definition in &lt;a href=&quot;https:&#x2f;&#x2f
            buffer[length] = &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;
            count = length + &lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;
        }
-    }   
+    }
 
     &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; ... more stuff&lt;&#x2f;span&gt;
 }

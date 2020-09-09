@@ -44,7 +44,10 @@ char *getcwd(char *buf, size_t size);
 
 <span class="comment line"><span class="punctuation definition comment">//</span> Windows</span>
 <span class="comment line"><span class="punctuation definition comment">//</span> LPTSTR (with right environment) is `wchar_t *`</span>
-<span class="support class">DWORD</span> <span class="support class">GetCurrentDirectory</span>(<span class="support class">DWORD</span> nBufferLength, <span class="support class">LPTSTR</span> lpBuffer);
+<span class="support class">DWORD</span> <span class="support class">GetCurrentDirectory</span>(
+    <span class="support class">DWORD</span> nBufferLength,
+    <span class="support class">LPTSTR</span> lpBuffer
+);
 </span></pre>
 <p>The expected steps for using APIs like this are the following:</p>
 <ol>
@@ -184,7 +187,7 @@ element. Here's the actual definition in <a href="https://github.com/dduan/Patho
            buffer[length] = <span class="constant numeric decimal">0</span>
            count = length + <span class="constant numeric decimal">1</span>
        }
-    }   
+    }
 
     <span class="comment line"><span class="punctuation definition comment">//</span> ... more stuff</span>
 }

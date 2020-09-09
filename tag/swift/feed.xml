@@ -17,7 +17,7 @@ doesn&#x27;t officially support yet), paths are bought and sold in the so called
 values on Windows with &lt;code&gt;UNICODE&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
 &lt;p&gt;Let&#x27;s walk over a couple of examples. Here&#x27;s how to get the current working
 directory:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source c&quot;&gt;&lt;span class=&quot;comment line double-slash c&quot;&gt;&lt;span class=&quot;punctuation definition comment c&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; POSIX
+&lt;pre&gt;&lt;span class=&quot;source c++&quot;&gt;&lt;span class=&quot;comment line double-slash c&quot;&gt;&lt;span class=&quot;punctuation definition comment c&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; POSIX
 char *getcwd(char *buf, size_t size);
 
 &#x2f;&#x2f; Windows
@@ -37,7 +37,7 @@ result, not counting the &lt;code&gt;NUL&lt;&#x2f;code&gt;.&lt;&#x2f;li&gt;
 the point of using &lt;code&gt;NUL&lt;&#x2f;code&gt; to terminate &amp;quot;strings&amp;quot; is to avoid having to use
 a separate size. Let&#x27;s use &lt;em&gt;setting the current working directory&lt;&#x2f;em&gt; as the next
 example:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source c&quot;&gt;&lt;span class=&quot;comment line double-slash c&quot;&gt;&lt;span class=&quot;punctuation definition comment c&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; POSIX
+&lt;pre&gt;&lt;span class=&quot;source c++&quot;&gt;&lt;span class=&quot;comment line double-slash c&quot;&gt;&lt;span class=&quot;punctuation definition comment c&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; POSIX
 int chdir(const char *path);
 
 &#x2f;&#x2f; Windows
@@ -136,37 +136,37 @@ everything will be fine.&lt;&#x2f;p&gt;
 &lt;p&gt;Alright, that&#x27;s easier said than done. To alleviate this off-by-1 painfulness,
 I ended up exposing a &amp;quot;view&amp;quot; into the array storage that excludes the last
 element. Here&#x27;s the actual definition in &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Pathos&quot;&gt;Pathos&lt;&#x2f;a&gt;:&lt;&#x2f;p&gt;
-&lt;pre&gt;struct CString&lt;Unit: BinaryInteger&gt;: Equatable, Hashable {
-    private var storage: ContiguousArray&lt;Unit&gt;
-    var content: ContiguousArray&lt;Unit&gt;.SubSequence {
-        storage[0 ..&lt; storage.count - 1]
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;CString&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Unit&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;BinaryInteger&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Equatable&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Hashable&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;storage modifier&quot;&gt;private&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;storage&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;ContiguousArray&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Unit&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;content&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;ContiguousArray&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Unit&lt;&#x2f;span&gt;&amp;gt;.&lt;span class=&quot;constant language enum&quot;&gt;SubSequence&lt;&#x2f;span&gt; {
+        storage[&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt; ..&amp;lt; storage&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;count - &lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;]
     }
 
-    public func c&lt;T&gt;(action: (UnsafePointer&lt;Unit&gt;) throws -&gt; T) throws -&gt; T {
-        try content.withUnsafeBufferPointer {
-            try action($0.baseAddress!)
+    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;c&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;T&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;action&lt;&#x2f;span&gt;: (&lt;span class=&quot;support class&quot;&gt;UnsafePointer&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Unit&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;) &lt;span class=&quot;keyword control&quot;&gt;throws&lt;&#x2f;span&gt; -&amp;gt; &lt;span class=&quot;support class&quot;&gt;T&lt;&#x2f;span&gt;) &lt;span class=&quot;keyword control&quot;&gt;throws&lt;&#x2f;span&gt; -&amp;gt; &lt;span class=&quot;support class&quot;&gt;T&lt;&#x2f;span&gt; {
+        &lt;span class=&quot;keyword control&quot;&gt;try&lt;&#x2f;span&gt; content&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;withUnsafeBufferPointer {
+            &lt;span class=&quot;keyword control&quot;&gt;try&lt;&#x2f;span&gt; action(&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;baseAddress&lt;span class=&quot;keyword operator&quot;&gt;!&lt;&#x2f;span&gt;)
         }
     }
 
-    init(cString: UnsafePointer&lt;Unit&gt;) {
-       var length = 0
-       while cString.advanced(by: length).pointee != 0 {
-           length += 1
+    &lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;init&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;cString&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;UnsafePointer&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Unit&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+       &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; length = &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;
+       &lt;span class=&quot;keyword control&quot;&gt;while&lt;&#x2f;span&gt; cString&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;advanced(&lt;span class=&quot;variable parameter&quot;&gt;by&lt;&#x2f;span&gt;: length)&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;pointee != &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt; {
+           length += &lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;
        }
 
-       storage = ContiguousArray(unsafeUninitializedCapacity: length + 1) { buffer, count in
-           for offset in 0 ..&lt; length {
-               buffer[offset] = cString.advanced(by: offset).pointee
+       storage = &lt;span class=&quot;support class&quot;&gt;ContiguousArray&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;unsafeUninitializedCapacity&lt;&#x2f;span&gt;: length + &lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;) { buffer, count &lt;span class=&quot;keyword control&quot;&gt;in&lt;&#x2f;span&gt;
+           &lt;span class=&quot;keyword control&quot;&gt;for&lt;&#x2f;span&gt; offset &lt;span class=&quot;keyword control&quot;&gt;in&lt;&#x2f;span&gt; &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt; ..&amp;lt; length {
+               buffer[offset] = cString&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;advanced(&lt;span class=&quot;variable parameter&quot;&gt;by&lt;&#x2f;span&gt;: offset)&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;pointee
            }
 
-           buffer[length] = 0
-           count = length + 1
+           buffer[length] = &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;
+           count = length + &lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;
        }
     }   
 
-    &#x2f;&#x2f; ... more stuff
+    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; ... more stuff&lt;&#x2f;span&gt;
 }
-&lt;&#x2f;pre&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;&lt;code&gt;storege&lt;&#x2f;code&gt; in this solution is an private implementation detail. &lt;code&gt;content&lt;&#x2f;code&gt; is
 the primary access to the content of the string. And finally, this type
 interops with C APIs correctly and efficiently because of the extra &lt;code&gt;NUL&lt;&#x2f;code&gt; we put

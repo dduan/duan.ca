@@ -39,7 +39,7 @@ doesn't officially support yet), paths are bought and sold in the so called
 values on Windows with <code>UNICODE</code>.</p>
 <p>Let's walk over a couple of examples. Here's how to get the current working
 directory:</p>
-<pre><span class="source c"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
+<pre><span class="source c++"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
 char *getcwd(char *buf, size_t size);
 
 // Windows
@@ -59,7 +59,7 @@ result, not counting the <code>NUL</code>.</li>
 the point of using <code>NUL</code> to terminate &quot;strings&quot; is to avoid having to use
 a separate size. Let's use <em>setting the current working directory</em> as the next
 example:</p>
-<pre><span class="source c"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
+<pre><span class="source c++"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
 int chdir(const char *path);
 
 // Windows
@@ -158,37 +158,37 @@ everything will be fine.</p>
 <p>Alright, that's easier said than done. To alleviate this off-by-1 painfulness,
 I ended up exposing a &quot;view&quot; into the array storage that excludes the last
 element. Here's the actual definition in <a href="https://github.com/dduan/Pathos">Pathos</a>:</p>
-<pre>struct CString<Unit: BinaryInteger>: Equatable, Hashable {
-    private var storage: ContiguousArray<Unit>
-    var content: ContiguousArray<Unit>.SubSequence {
-        storage[0 ..< storage.count - 1]
+<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">CString</span></span></span><span class="keyword operator">&lt;</span><span class="support class">Unit</span>: <span class="support class">BinaryInteger</span><span class="keyword operator">&gt;</span>: <span class="support class">Equatable</span>, <span class="support class">Hashable</span> {
+    <span class="storage modifier">private</span> <span class="keyword variable">var</span> <span class="variable parameter">storage</span>: <span class="support class">ContiguousArray</span><span class="keyword operator">&lt;</span><span class="support class">Unit</span><span class="keyword operator">&gt;</span>
+    <span class="keyword variable">var</span> <span class="variable parameter">content</span>: <span class="support class">ContiguousArray</span><span class="keyword operator">&lt;</span><span class="support class">Unit</span>&gt;.<span class="constant language enum">SubSequence</span> {
+        storage[<span class="constant numeric decimal">0</span> ..&lt; storage<span class="keyword operator">.</span>count - <span class="constant numeric decimal">1</span>]
     }
 
-    public func c<T>(action: (UnsafePointer<Unit>) throws -> T) throws -> T {
-        try content.withUnsafeBufferPointer {
-            try action($0.baseAddress!)
+    <span class="storage modifier">public</span> <span class="storage type function">func</span> <span class="entity name function"><span class="variable function">c</span></span><span class="keyword operator">&lt;</span><span class="support class">T</span><span class="keyword operator">&gt;</span>(<span class="variable parameter">action</span>: (<span class="support class">UnsafePointer</span><span class="keyword operator">&lt;</span><span class="support class">Unit</span><span class="keyword operator">&gt;</span>) <span class="keyword control">throws</span> -&gt; <span class="support class">T</span>) <span class="keyword control">throws</span> -&gt; <span class="support class">T</span> {
+        <span class="keyword control">try</span> content<span class="keyword operator">.</span>withUnsafeBufferPointer {
+            <span class="keyword control">try</span> action(<span class="keyword operator">$</span><span class="constant numeric decimal">0</span><span class="keyword operator">.</span>baseAddress<span class="keyword operator">!</span>)
         }
     }
 
-    init(cString: UnsafePointer<Unit>) {
-       var length = 0
-       while cString.advanced(by: length).pointee != 0 {
-           length += 1
+    <span class="meta function"><span class="meta toc-list"><span class="storage type function">init</span>(<span class="variable parameter">cString</span>: <span class="support class">UnsafePointer</span><span class="keyword operator">&lt;</span><span class="support class">Unit</span><span class="keyword operator">&gt;</span>)</span></span> {
+       <span class="keyword variable">var</span> length = <span class="constant numeric decimal">0</span>
+       <span class="keyword control">while</span> cString<span class="keyword operator">.</span>advanced(<span class="variable parameter">by</span>: length)<span class="keyword operator">.</span>pointee != <span class="constant numeric decimal">0</span> {
+           length += <span class="constant numeric decimal">1</span>
        }
 
-       storage = ContiguousArray(unsafeUninitializedCapacity: length + 1) { buffer, count in
-           for offset in 0 ..< length {
-               buffer[offset] = cString.advanced(by: offset).pointee
+       storage = <span class="support class">ContiguousArray</span>(<span class="variable parameter">unsafeUninitializedCapacity</span>: length + <span class="constant numeric decimal">1</span>) { buffer, count <span class="keyword control">in</span>
+           <span class="keyword control">for</span> offset <span class="keyword control">in</span> <span class="constant numeric decimal">0</span> ..&lt; length {
+               buffer[offset] = cString<span class="keyword operator">.</span>advanced(<span class="variable parameter">by</span>: offset)<span class="keyword operator">.</span>pointee
            }
 
-           buffer[length] = 0
-           count = length + 1
+           buffer[length] = <span class="constant numeric decimal">0</span>
+           count = length + <span class="constant numeric decimal">1</span>
        }
     }   
 
-    // ... more stuff
+    <span class="comment line"><span class="punctuation definition comment">//</span> ... more stuff</span>
 }
-</pre>
+</span></pre>
 <p><code>storege</code> in this solution is an private implementation detail. <code>content</code> is
 the primary access to the content of the string. And finally, this type
 interops with C APIs correctly and efficiently because of the extra <code>NUL</code> we put

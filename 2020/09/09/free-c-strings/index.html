@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2020/09/09/free-c-strings/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Faster C Strings in Swift">
+    <meta property="article:published_time" content="2020-09-09"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Faster C Strings in Swift</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2020/09/09/free-c-strings/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>Faster C Strings in Swift</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2020-09-09" itemProp="datePublished">2020-09-09</time>
+        </p>
+    </nav><p>One of the goals in the re-write of my VFS library <a href="https://github.com/dduan/Pathos">Pathos</a> is to make it go
+fast. What does that mean when most of the time users are hitting the hard
+drive when running your code? Well, let's not dwell on that for now.</p>
+<p>A library like this passes <em>file paths</em> back and forth with C APIs from the OS
+a lot. So one way to go fast is to keep the original representation of the paths
+as they are provided to us. On macOS and Linux (and other OSes that Swift
+doesn't officially support yet), paths are bought and sold in the so called
+&quot;C strings&quot;: <code>NUL</code>-terminated bytes (8-bit integers) with POSIX APIs and 16-bit
+values on Windows with <code>UNICODE</code>.</p>
+<p>Let's walk over a couple of examples. Here's how to get the current working
+directory:</p>
+<pre><span class="source c"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
+char *getcwd(char *buf, size_t size);
+
+// Windows
+// LPTSTR (with right environment) is `wchar_t *`
+DWORD GetCurrentDirectory(DWORD nBufferLength, LPTSTR lpBuffer);
+</span></span></pre>
+<p>The expected steps for using APIs like this are the following:</p>
+<ol>
+<li>you allocate a buffer large enough to store any result you expect.</li>
+<li>you give the buffer to the C function.</li>
+<li>the C function fills the buffer with some characters, and a <code>NUL</code> (or <code>0</code>)
+right after the last character in the result.</li>
+<li>the function use a separate variable to tell you the size of the actual
+result, not counting the <code>NUL</code>.</li>
+</ol>
+<p>It's very generous of these functions to give us the size of the result. Because
+the point of using <code>NUL</code> to terminate &quot;strings&quot; is to avoid having to use
+a separate size. Let's use <em>setting the current working directory</em> as the next
+example:</p>
+<pre><span class="source c"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
+int chdir(const char *path);
+
+// Windows
+BOOL SetCurrentDirectory(LPCTSTR lpPathName);
+</span></span></pre>
+<p>Yup, these APIs don't need you to tell them the content size of your buffer. But
+if your content doesn't end with a <code>NUL</code>, they'll happily read beyond your
+intended stopping point until it finds a random <code>0</code> in memory.</p>
+<p>Anyways, this is pretty classic C stuff. Now let's talk about Swift!</p>
+<p>The default option to store a file path for most should be a <code>Swift.String</code>,
+which is a encoding-agnostic, Unicode glyph based list of characters. But as
+I mentioned earlier, I want to avoid the cost of decoding and encoding in the
+case where the path is only passing through the Swift code from C to C, without
+being analyzed or modified. (If you need a refresher, <a href="https://youtu.be/Vy2r21kli0Q">I recently made a video
+on Unicode and encoding</a>.) So I chose to use an
+<a href="https://developer.apple.com/documentation/swift/contiguousarray">ContiguousArray</a> to store these C values:</p>
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> Simplified for POSIX</span>
+<span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">Path</span></span></span> {
+    <span class="keyword variable">let</span> <span class="variable parameter">storage</span>: <span class="support class">ContiguousArray</span><span class="keyword operator">&lt;</span><span class="support class">CChar</span><span class="keyword operator">&gt;</span>
+    <span class="comment line"><span class="punctuation definition comment">//</span> ...</span>
+}
+</span></pre>
+<p><code>ContiguousArray</code> (and <code>Array</code>) provides an excellent way to interact with C
+APIs we encountered earlier:</p>
+<pre><span class="source swift"><span class="meta function"><span class="meta toc-list"><span class="storage type function">init</span>(
+    <span class="variable parameter">unsafeUninitializedCapacity</span>: <span class="support class">Int</span>,
+    initializingWith <span class="variable parameter">initializer</span>: (
+        inout <span class="support class">UnsafeMutableBufferPointer</span><span class="keyword operator">&lt;</span><span class="support class">Element</span><span class="keyword operator">&gt;</span>, inout <span class="support class">Int</span>
+    ) <span class="keyword control">throws</span> -&gt; <span class="support class">Void</span>
+)</span></span> <span class="keyword control">rethrows</span>
+</span></pre>
+<p>Don't let the complex-looking signature intimidate you. Essentially, it gives
+you write access to the array's memory right after its allocation, but before
+Swift does standard initialization to it. It works really well with the C APIs
+we looked at earlier:</p>
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> Store the current directory in a ContiguousArray</span>
+<span class="comment line"><span class="punctuation definition comment">//</span> Using the Windows API</span>
+<span class="keyword variable">let</span> storage = <span class="support class">ContiguousArray</span>(
+    <span class="variable parameter">unsafeUninitializedCapacity</span>: <span class="support class">Int</span>(<span class="support class">MAX_PATH</span>)
+) { buffer, count
+    <span class="keyword variable">let</span> length = <span class="support class">GetCurrentWorkingDirectoryW</span>(
+        <span class="support class">DWORD</span>(<span class="support class">MAX_PATH</span>),
+        buffer<span class="keyword operator">.</span>baseAddress <span class="comment line"><span class="punctuation definition comment">//</span> C API writes in the allocated memory</span>
+    )
+
+    count = length <span class="comment line"><span class="punctuation definition comment">//</span> you are responsible for setting size of the array</span>
+}
+</span></pre>
+<p>Read the steps 1-4 again from earlier, it's easy to see how this initializer is
+designed to fit that pattern. The resulting array will have all the characters
+as its content, and carries the correct size.</p>
+<p>When it's time to pass the array back to C, we can provide a pointer easily:</p>
+<pre><span class="source swift">storage<span class="keyword operator">.</span>withUnsafeBufferPointer {
+    <span class="support class">SetCurrentDirectory</span>(<span class="keyword operator">$</span><span class="constant numeric decimal">0</span><span class="keyword operator">.</span>baseAddress<span class="keyword operator">!</span>)
+}
+</span></pre>
+<p>This is not great, because we don't have a <code>NUL</code> at the end of our array.  The
+C function that read our array will sometimes read over the contents memory
+until it finds a 0! Yikes.</p>
+<p>So here's an easy fix:</p>
+<pre><span class="source swift">(storage + [<span class="constant numeric decimal">0</span>])<span class="keyword operator">.</span>withUnsafeBufferPointer {
+    <span class="support class">SetCurrentDirectory</span>(<span class="keyword operator">$</span><span class="constant numeric decimal">0</span><span class="keyword operator">.</span>baseAddress<span class="keyword operator">!</span>)
+}
+</span></pre>
+<p>Instead of using the memory of <code>storage</code>, we construct a new array with an 0 as
+its last value. This lets C APIs pick the right place to stop reading.
+(Incidentally, Swift includes a built-in version of this <a href="https://developer.apple.com/documentation/swift/string/2430818-utf8cstring">for converting String
+ot UTF-8 (8-bit) C strings</a>,
+and it's possible to further encode with different encodings.)</p>
+<p>Although we've fixed the correctness bug, doing this defeats the purpose of
+storing the C string directly somewhat: constructing a new array each time we
+want to call a C API is kind of expensive. It involves allocating new memories
+and copying over the content, etc.</p>
+<p>Alright. How about we carry around the <code>NUL</code> in our array? Let's update the
+construction code:</p>
+<pre><span class="source swift"><span class="keyword variable">let</span> storage = <span class="support class">ContiguousArray</span>(
+    <span class="variable parameter">unsafeUninitializedCapacity</span>: <span class="support class">Int</span>(<span class="support class">MAX_PATH</span>) + <span class="constant numeric decimal">1</span>
+) { buffer, count
+    <span class="keyword variable">let</span> length = <span class="support class">GetCurrentWorkingDirectoryW</span>(
+        <span class="support class">DWORD</span>(<span class="support class">MAX_PATH</span>),
+        buffer<span class="keyword operator">.</span>baseAddress
+    )
+
+    buffer[length] = <span class="constant numeric decimal">0</span>
+    count = length + <span class="constant numeric decimal">1</span>
+}
+</span></pre>
+<p>We add 1 every time we have a say in size. Then we manually set a 0 at the end
+of the stuff from C. Having done this, we've solved both the correctness problem
+and performance concern from earlier!</p>
+<p>The last bit of of this journey is ergonomics. Carrying an extra <code>NUL</code> is fine
+if you never look at the array's content. But when you do, it's important to
+remember that the content we care about is <em>almost</em> all of the array, except for
+the <code>NUL</code> at the end. In other words, simply don't make off-by-1 mistakes and
+everything will be fine.</p>
+<p>Alright, that's easier said than done. To alleviate this off-by-1 painfulness,
+I ended up exposing a &quot;view&quot; into the array storage that excludes the last
+element. Here's the actual definition in <a href="https://github.com/dduan/Pathos">Pathos</a>:</p>
+<pre>struct CString<Unit: BinaryInteger>: Equatable, Hashable {
+    private var storage: ContiguousArray<Unit>
+    var content: ContiguousArray<Unit>.SubSequence {
+        storage[0 ..< storage.count - 1]
+    }
+
+    public func c<T>(action: (UnsafePointer<Unit>) throws -> T) throws -> T {
+        try content.withUnsafeBufferPointer {
+            try action($0.baseAddress!)
+        }
+    }
+
+    init(cString: UnsafePointer<Unit>) {
+       var length = 0
+       while cString.advanced(by: length).pointee != 0 {
+           length += 1
+       }
+
+       storage = ContiguousArray(unsafeUninitializedCapacity: length + 1) { buffer, count in
+           for offset in 0 ..< length {
+               buffer[offset] = cString.advanced(by: offset).pointee
+           }
+
+           buffer[length] = 0
+           count = length + 1
+       }
+    }   
+
+    // ... more stuff
+}
+</pre>
+<p><code>storege</code> in this solution is an private implementation detail. <code>content</code> is
+the primary access to the content of the string. And finally, this type
+interops with C APIs correctly and efficiently because of the extra <code>NUL</code> we put
+at the end of <code>storage</code>.</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/c/">C</a>
+    </p>
+</footer></body>
+</html>

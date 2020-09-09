@@ -5,6 +5,178 @@
         <link>https://duan.ca/tag/c/</link>
         <atom:link href="https://duan.ca/tag/c/feed.xml" rel="self" type="application/rss+xml" />
             <item>
+                <title>Faster C Strings in Swift</title>
+                <description>&lt;p&gt;One of the goals in the re-write of my VFS library &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Pathos&quot;&gt;Pathos&lt;&#x2f;a&gt; is to make it go
+fast. What does that mean when most of the time users are hitting the hard
+drive when running your code? Well, let&#x27;s not dwell on that for now.&lt;&#x2f;p&gt;
+&lt;p&gt;A library like this passes &lt;em&gt;file paths&lt;&#x2f;em&gt; back and forth with C APIs from the OS
+a lot. So one way to go fast is to keep the original representation of the paths
+as they are provided to us. On macOS and Linux (and other OSes that Swift
+doesn&#x27;t officially support yet), paths are bought and sold in the so called
+&amp;quot;C strings&amp;quot;: &lt;code&gt;NUL&lt;&#x2f;code&gt;-terminated bytes (8-bit integers) with POSIX APIs and 16-bit
+values on Windows with &lt;code&gt;UNICODE&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
+&lt;p&gt;Let&#x27;s walk over a couple of examples. Here&#x27;s how to get the current working
+directory:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source c&quot;&gt;&lt;span class=&quot;comment line double-slash c&quot;&gt;&lt;span class=&quot;punctuation definition comment c&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; POSIX
+char *getcwd(char *buf, size_t size);
+
+&#x2f;&#x2f; Windows
+&#x2f;&#x2f; LPTSTR (with right environment) is `wchar_t *`
+DWORD GetCurrentDirectory(DWORD nBufferLength, LPTSTR lpBuffer);
+&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;The expected steps for using APIs like this are the following:&lt;&#x2f;p&gt;
+&lt;ol&gt;
+&lt;li&gt;you allocate a buffer large enough to store any result you expect.&lt;&#x2f;li&gt;
+&lt;li&gt;you give the buffer to the C function.&lt;&#x2f;li&gt;
+&lt;li&gt;the C function fills the buffer with some characters, and a &lt;code&gt;NUL&lt;&#x2f;code&gt; (or &lt;code&gt;0&lt;&#x2f;code&gt;)
+right after the last character in the result.&lt;&#x2f;li&gt;
+&lt;li&gt;the function use a separate variable to tell you the size of the actual
+result, not counting the &lt;code&gt;NUL&lt;&#x2f;code&gt;.&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;p&gt;It&#x27;s very generous of these functions to give us the size of the result. Because
+the point of using &lt;code&gt;NUL&lt;&#x2f;code&gt; to terminate &amp;quot;strings&amp;quot; is to avoid having to use
+a separate size. Let&#x27;s use &lt;em&gt;setting the current working directory&lt;&#x2f;em&gt; as the next
+example:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source c&quot;&gt;&lt;span class=&quot;comment line double-slash c&quot;&gt;&lt;span class=&quot;punctuation definition comment c&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; POSIX
+int chdir(const char *path);
+
+&#x2f;&#x2f; Windows
+BOOL SetCurrentDirectory(LPCTSTR lpPathName);
+&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Yup, these APIs don&#x27;t need you to tell them the content size of your buffer. But
+if your content doesn&#x27;t end with a &lt;code&gt;NUL&lt;&#x2f;code&gt;, they&#x27;ll happily read beyond your
+intended stopping point until it finds a random &lt;code&gt;0&lt;&#x2f;code&gt; in memory.&lt;&#x2f;p&gt;
+&lt;p&gt;Anyways, this is pretty classic C stuff. Now let&#x27;s talk about Swift!&lt;&#x2f;p&gt;
+&lt;p&gt;The default option to store a file path for most should be a &lt;code&gt;Swift.String&lt;&#x2f;code&gt;,
+which is a encoding-agnostic, Unicode glyph based list of characters. But as
+I mentioned earlier, I want to avoid the cost of decoding and encoding in the
+case where the path is only passing through the Swift code from C to C, without
+being analyzed or modified. (If you need a refresher, &lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;Vy2r21kli0Q&quot;&gt;I recently made a video
+on Unicode and encoding&lt;&#x2f;a&gt;.) So I chose to use an
+&lt;a href=&quot;https:&#x2f;&#x2f;developer.apple.com&#x2f;documentation&#x2f;swift&#x2f;contiguousarray&quot;&gt;ContiguousArray&lt;&#x2f;a&gt; to store these C values:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Simplified for POSIX&lt;&#x2f;span&gt;
+&lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;Path&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;storage&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;ContiguousArray&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;CChar&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; ...&lt;&#x2f;span&gt;
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;&lt;code&gt;ContiguousArray&lt;&#x2f;code&gt; (and &lt;code&gt;Array&lt;&#x2f;code&gt;) provides an excellent way to interact with C
+APIs we encountered earlier:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;init&lt;&#x2f;span&gt;(
+    &lt;span class=&quot;variable parameter&quot;&gt;unsafeUninitializedCapacity&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;,
+    initializingWith &lt;span class=&quot;variable parameter&quot;&gt;initializer&lt;&#x2f;span&gt;: (
+        inout &lt;span class=&quot;support class&quot;&gt;UnsafeMutableBufferPointer&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;, inout &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;
+    ) &lt;span class=&quot;keyword control&quot;&gt;throws&lt;&#x2f;span&gt; -&amp;gt; &lt;span class=&quot;support class&quot;&gt;Void&lt;&#x2f;span&gt;
+)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;keyword control&quot;&gt;rethrows&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Don&#x27;t let the complex-looking signature intimidate you. Essentially, it gives
+you write access to the array&#x27;s memory right after its allocation, but before
+Swift does standard initialization to it. It works really well with the C APIs
+we looked at earlier:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Store the current directory in a ContiguousArray&lt;&#x2f;span&gt;
+&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Using the Windows API&lt;&#x2f;span&gt;
+&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; storage = &lt;span class=&quot;support class&quot;&gt;ContiguousArray&lt;&#x2f;span&gt;(
+    &lt;span class=&quot;variable parameter&quot;&gt;unsafeUninitializedCapacity&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;(&lt;span class=&quot;support class&quot;&gt;MAX_PATH&lt;&#x2f;span&gt;)
+) { buffer, count
+    &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; length = &lt;span class=&quot;support class&quot;&gt;GetCurrentWorkingDirectoryW&lt;&#x2f;span&gt;(
+        &lt;span class=&quot;support class&quot;&gt;DWORD&lt;&#x2f;span&gt;(&lt;span class=&quot;support class&quot;&gt;MAX_PATH&lt;&#x2f;span&gt;),
+        buffer&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;baseAddress &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; C API writes in the allocated memory&lt;&#x2f;span&gt;
+    )
+
+    count = length &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; you are responsible for setting size of the array&lt;&#x2f;span&gt;
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Read the steps 1-4 again from earlier, it&#x27;s easy to see how this initializer is
+designed to fit that pattern. The resulting array will have all the characters
+as its content, and carries the correct size.&lt;&#x2f;p&gt;
+&lt;p&gt;When it&#x27;s time to pass the array back to C, we can provide a pointer easily:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;storage&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;withUnsafeBufferPointer {
+    &lt;span class=&quot;support class&quot;&gt;SetCurrentDirectory&lt;&#x2f;span&gt;(&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;baseAddress&lt;span class=&quot;keyword operator&quot;&gt;!&lt;&#x2f;span&gt;)
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;This is not great, because we don&#x27;t have a &lt;code&gt;NUL&lt;&#x2f;code&gt; at the end of our array.  The
+C function that read our array will sometimes read over the contents memory
+until it finds a 0! Yikes.&lt;&#x2f;p&gt;
+&lt;p&gt;So here&#x27;s an easy fix:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;(storage + [&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;])&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;withUnsafeBufferPointer {
+    &lt;span class=&quot;support class&quot;&gt;SetCurrentDirectory&lt;&#x2f;span&gt;(&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;baseAddress&lt;span class=&quot;keyword operator&quot;&gt;!&lt;&#x2f;span&gt;)
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Instead of using the memory of &lt;code&gt;storage&lt;&#x2f;code&gt;, we construct a new array with an 0 as
+its last value. This lets C APIs pick the right place to stop reading.
+(Incidentally, Swift includes a built-in version of this &lt;a href=&quot;https:&#x2f;&#x2f;developer.apple.com&#x2f;documentation&#x2f;swift&#x2f;string&#x2f;2430818-utf8cstring&quot;&gt;for converting String
+ot UTF-8 (8-bit) C strings&lt;&#x2f;a&gt;,
+and it&#x27;s possible to further encode with different encodings.)&lt;&#x2f;p&gt;
+&lt;p&gt;Although we&#x27;ve fixed the correctness bug, doing this defeats the purpose of
+storing the C string directly somewhat: constructing a new array each time we
+want to call a C API is kind of expensive. It involves allocating new memories
+and copying over the content, etc.&lt;&#x2f;p&gt;
+&lt;p&gt;Alright. How about we carry around the &lt;code&gt;NUL&lt;&#x2f;code&gt; in our array? Let&#x27;s update the
+construction code:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; storage = &lt;span class=&quot;support class&quot;&gt;ContiguousArray&lt;&#x2f;span&gt;(
+    &lt;span class=&quot;variable parameter&quot;&gt;unsafeUninitializedCapacity&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;(&lt;span class=&quot;support class&quot;&gt;MAX_PATH&lt;&#x2f;span&gt;) + &lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;
+) { buffer, count
+    &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; length = &lt;span class=&quot;support class&quot;&gt;GetCurrentWorkingDirectoryW&lt;&#x2f;span&gt;(
+        &lt;span class=&quot;support class&quot;&gt;DWORD&lt;&#x2f;span&gt;(&lt;span class=&quot;support class&quot;&gt;MAX_PATH&lt;&#x2f;span&gt;),
+        buffer&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;baseAddress
+    )
+
+    buffer[length] = &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;
+    count = length + &lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;We add 1 every time we have a say in size. Then we manually set a 0 at the end
+of the stuff from C. Having done this, we&#x27;ve solved both the correctness problem
+and performance concern from earlier!&lt;&#x2f;p&gt;
+&lt;p&gt;The last bit of of this journey is ergonomics. Carrying an extra &lt;code&gt;NUL&lt;&#x2f;code&gt; is fine
+if you never look at the array&#x27;s content. But when you do, it&#x27;s important to
+remember that the content we care about is &lt;em&gt;almost&lt;&#x2f;em&gt; all of the array, except for
+the &lt;code&gt;NUL&lt;&#x2f;code&gt; at the end. In other words, simply don&#x27;t make off-by-1 mistakes and
+everything will be fine.&lt;&#x2f;p&gt;
+&lt;p&gt;Alright, that&#x27;s easier said than done. To alleviate this off-by-1 painfulness,
+I ended up exposing a &amp;quot;view&amp;quot; into the array storage that excludes the last
+element. Here&#x27;s the actual definition in &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Pathos&quot;&gt;Pathos&lt;&#x2f;a&gt;:&lt;&#x2f;p&gt;
+&lt;pre&gt;struct CString&lt;Unit: BinaryInteger&gt;: Equatable, Hashable {
+    private var storage: ContiguousArray&lt;Unit&gt;
+    var content: ContiguousArray&lt;Unit&gt;.SubSequence {
+        storage[0 ..&lt; storage.count - 1]
+    }
+
+    public func c&lt;T&gt;(action: (UnsafePointer&lt;Unit&gt;) throws -&gt; T) throws -&gt; T {
+        try content.withUnsafeBufferPointer {
+            try action($0.baseAddress!)
+        }
+    }
+
+    init(cString: UnsafePointer&lt;Unit&gt;) {
+       var length = 0
+       while cString.advanced(by: length).pointee != 0 {
+           length += 1
+       }
+
+       storage = ContiguousArray(unsafeUninitializedCapacity: length + 1) { buffer, count in
+           for offset in 0 ..&lt; length {
+               buffer[offset] = cString.advanced(by: offset).pointee
+           }
+
+           buffer[length] = 0
+           count = length + 1
+       }
+    }   
+
+    &#x2f;&#x2f; ... more stuff
+}
+&lt;&#x2f;pre&gt;
+&lt;p&gt;&lt;code&gt;storege&lt;&#x2f;code&gt; in this solution is an private implementation detail. &lt;code&gt;content&lt;&#x2f;code&gt; is
+the primary access to the content of the string. And finally, this type
+interops with C APIs correctly and efficiently because of the extra &lt;code&gt;NUL&lt;&#x2f;code&gt; we put
+at the end of &lt;code&gt;storage&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
+</description>
+                <pubDate>Wed, 09 Sep 2020 01:21:26 -0700</pubDate>
+                <link>https://duan.ca/2020/09/09/free-c-strings/</link>
+                <guid isPermaLink="true">https://duan.ca/2020/09/09/free-c-strings/</guid>
+            </item>
+            <item>
                 <title>Building &#x27;pwd&#x27; Under 1 Minute In Swift</title>
                 <description>&lt;p&gt;I guess I&#x27;m starting a series of minute-long videos. In this first video, I built &lt;code&gt;pwd&lt;&#x2f;code&gt; out of &lt;code&gt;getcwd&lt;&#x2f;code&gt;. The
 code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift&#x27;s great C-interop

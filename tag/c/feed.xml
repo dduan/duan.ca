@@ -68,7 +68,8 @@ APIs we encountered earlier:&lt;&#x2f;p&gt;
 &lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;init&lt;&#x2f;span&gt;(
     &lt;span class=&quot;variable parameter&quot;&gt;unsafeUninitializedCapacity&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;,
     initializingWith &lt;span class=&quot;variable parameter&quot;&gt;initializer&lt;&#x2f;span&gt;: (
-        inout &lt;span class=&quot;support class&quot;&gt;UnsafeMutableBufferPointer&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;, inout &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;
+        inout &lt;span class=&quot;support class&quot;&gt;UnsafeMutableBufferPointer&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;,
+        inout &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;
     ) &lt;span class=&quot;keyword control&quot;&gt;throws&lt;&#x2f;span&gt; -&amp;gt; &lt;span class=&quot;support class&quot;&gt;Void&lt;&#x2f;span&gt;
 )&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;keyword control&quot;&gt;rethrows&lt;&#x2f;span&gt;
 &lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;

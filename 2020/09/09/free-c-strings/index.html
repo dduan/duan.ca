@@ -39,13 +39,13 @@ doesn't officially support yet), paths are bought and sold in the so called
 values on Windows with <code>UNICODE</code>.</p>
 <p>Let's walk over a couple of examples. Here's how to get the current working
 directory:</p>
-<pre><span class="source c"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> POSIX</span>
 char *getcwd(char *buf, size_t size);
 
-// Windows
-// LPTSTR (with right environment) is `wchar_t *`
-DWORD GetCurrentDirectory(DWORD nBufferLength, LPTSTR lpBuffer);
-</span></span></pre>
+<span class="comment line"><span class="punctuation definition comment">//</span> Windows</span>
+<span class="comment line"><span class="punctuation definition comment">//</span> LPTSTR (with right environment) is `wchar_t *`</span>
+<span class="support class">DWORD</span> <span class="support class">GetCurrentDirectory</span>(<span class="support class">DWORD</span> nBufferLength, <span class="support class">LPTSTR</span> lpBuffer);
+</span></pre>
 <p>The expected steps for using APIs like this are the following:</p>
 <ol>
 <li>you allocate a buffer large enough to store any result you expect.</li>
@@ -59,12 +59,12 @@ result, not counting the <code>NUL</code>.</li>
 the point of using <code>NUL</code> to terminate &quot;strings&quot; is to avoid having to use
 a separate size. Let's use <em>setting the current working directory</em> as the next
 example:</p>
-<pre><span class="source c"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> POSIX</span>
 int chdir(const char *path);
 
-// Windows
-BOOL SetCurrentDirectory(LPCTSTR lpPathName);
-</span></span></pre>
+<span class="comment line"><span class="punctuation definition comment">//</span> Windows</span>
+<span class="support class">BOOL</span> <span class="support class">SetCurrentDirectory</span>(<span class="support class">LPCTSTR</span> lpPathName);
+</span></pre>
 <p>Yup, these APIs don't need you to tell them the content size of your buffer. But
 if your content doesn't end with a <code>NUL</code>, they'll happily read beyond your
 intended stopping point until it finds a random <code>0</code> in memory.</p>

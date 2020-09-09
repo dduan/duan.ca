@@ -39,7 +39,7 @@ doesn't officially support yet), paths are bought and sold in the so called
 values on Windows with <code>UNICODE</code>.</p>
 <p>Let's walk over a couple of examples. Here's how to get the current working
 directory:</p>
-<pre><span class="source c++"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
+<pre><span class="source c"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
 char *getcwd(char *buf, size_t size);
 
 // Windows
@@ -59,7 +59,7 @@ result, not counting the <code>NUL</code>.</li>
 the point of using <code>NUL</code> to terminate &quot;strings&quot; is to avoid having to use
 a separate size. Let's use <em>setting the current working directory</em> as the next
 example:</p>
-<pre><span class="source c++"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
+<pre><span class="source c"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
 int chdir(const char *path);
 
 // Windows

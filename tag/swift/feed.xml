@@ -17,7 +17,7 @@ doesn&#x27;t officially support yet), paths are bought and sold in the so called
 values on Windows with &lt;code&gt;UNICODE&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
 &lt;p&gt;Let&#x27;s walk over a couple of examples. Here&#x27;s how to get the current working
 directory:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source c++&quot;&gt;&lt;span class=&quot;comment line double-slash c&quot;&gt;&lt;span class=&quot;punctuation definition comment c&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; POSIX
+&lt;pre&gt;&lt;span class=&quot;source c&quot;&gt;&lt;span class=&quot;comment line double-slash c&quot;&gt;&lt;span class=&quot;punctuation definition comment c&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; POSIX
 char *getcwd(char *buf, size_t size);
 
 &#x2f;&#x2f; Windows
@@ -37,7 +37,7 @@ result, not counting the &lt;code&gt;NUL&lt;&#x2f;code&gt;.&lt;&#x2f;li&gt;
 the point of using &lt;code&gt;NUL&lt;&#x2f;code&gt; to terminate &amp;quot;strings&amp;quot; is to avoid having to use
 a separate size. Let&#x27;s use &lt;em&gt;setting the current working directory&lt;&#x2f;em&gt; as the next
 example:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source c++&quot;&gt;&lt;span class=&quot;comment line double-slash c&quot;&gt;&lt;span class=&quot;punctuation definition comment c&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; POSIX
+&lt;pre&gt;&lt;span class=&quot;source c&quot;&gt;&lt;span class=&quot;comment line double-slash c&quot;&gt;&lt;span class=&quot;punctuation definition comment c&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; POSIX
 int chdir(const char *path);
 
 &#x2f;&#x2f; Windows

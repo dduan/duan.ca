@@ -109,8 +109,9 @@ until it finds a 0! Yikes.&lt;&#x2f;p&gt;
 &lt;p&gt;Instead of using the memory of &lt;code&gt;storage&lt;&#x2f;code&gt;, we construct a new array with an 0 as
 its last value. This lets C APIs pick the right place to stop reading.
 (Incidentally, Swift includes a built-in version of this &lt;a href=&quot;https:&#x2f;&#x2f;developer.apple.com&#x2f;documentation&#x2f;swift&#x2f;string&#x2f;2430818-utf8cstring&quot;&gt;for converting String
-ot UTF-8 (8-bit) C strings&lt;&#x2f;a&gt;,
-and it&#x27;s possible to further encode with different encodings.)&lt;&#x2f;p&gt;
+to UTF-8 (8-bit) C strings&lt;&#x2f;a&gt;,
+which includes the &lt;code&gt;NUL&lt;&#x2f;code&gt; and it&#x27;s possible to further encode with different
+encodings.)&lt;&#x2f;p&gt;
 &lt;p&gt;Although we&#x27;ve fixed the correctness bug, doing this defeats the purpose of
 storing the C string directly somewhat: constructing a new array each time we
 want to call a C API is kind of expensive. It involves allocating new memories

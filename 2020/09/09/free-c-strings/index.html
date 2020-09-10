@@ -169,7 +169,9 @@ element. Here's the actual definition in <a href="https://github.com/dduan/Patho
         storage[<span class="constant numeric decimal">0</span> ..&lt; storage<span class="keyword operator">.</span>count - <span class="constant numeric decimal">1</span>]
     }
 
-    <span class="storage modifier">public</span> <span class="storage type function">func</span> <span class="entity name function"><span class="variable function">c</span></span><span class="keyword operator">&lt;</span><span class="support class">T</span><span class="keyword operator">&gt;</span>(<span class="variable parameter">action</span>: (<span class="support class">UnsafePointer</span><span class="keyword operator">&lt;</span><span class="support class">Unit</span><span class="keyword operator">&gt;</span>) <span class="keyword control">throws</span> -&gt; <span class="support class">T</span>) <span class="keyword control">throws</span> -&gt; <span class="support class">T</span> {
+    <span class="storage modifier">public</span> <span class="storage type function">func</span> <span class="entity name function"><span class="variable function">c</span></span><span class="keyword operator">&lt;</span><span class="support class">T</span><span class="keyword operator">&gt;</span>(
+        <span class="variable parameter">action</span>: (<span class="support class">UnsafePointer</span><span class="keyword operator">&lt;</span><span class="support class">Unit</span><span class="keyword operator">&gt;</span>) <span class="keyword control">throws</span> -&gt; <span class="support class">T</span>) <span class="keyword control">throws</span> -&gt; <span class="support class">T</span>
+    {
         <span class="keyword control">try</span> content<span class="keyword operator">.</span>withUnsafeBufferPointer {
             <span class="keyword control">try</span> action(<span class="keyword operator">$</span><span class="constant numeric decimal">0</span><span class="keyword operator">.</span>baseAddress<span class="keyword operator">!</span>)
         }
@@ -181,7 +183,9 @@ element. Here's the actual definition in <a href="https://github.com/dduan/Patho
            length += <span class="constant numeric decimal">1</span>
        }
 
-       storage = <span class="support class">ContiguousArray</span>(<span class="variable parameter">unsafeUninitializedCapacity</span>: length + <span class="constant numeric decimal">1</span>) { buffer, count <span class="keyword control">in</span>
+       storage = <span class="support class">ContiguousArray</span>(
+           <span class="variable parameter">unsafeUninitializedCapacity</span>: length + <span class="constant numeric decimal">1</span>
+       ) { buffer, count <span class="keyword control">in</span>
            <span class="keyword control">for</span> offset <span class="keyword control">in</span> <span class="constant numeric decimal">0</span> ..&lt; length {
                buffer[offset] = cString<span class="keyword operator">.</span>advanced(<span class="variable parameter">by</span>: offset)<span class="keyword operator">.</span>pointee
            }

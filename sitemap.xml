@@ -321,6 +321,12 @@
         <loc>https://duan.ca/tag/posix/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/pathos/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/pathos/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/python/</loc>
     </url>
     <url>

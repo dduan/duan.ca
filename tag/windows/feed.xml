@@ -5,6 +5,205 @@
         <link>https://duan.ca/tag/windows/</link>
         <atom:link href="https://duan.ca/tag/windows/feed.xml" rel="self" type="application/rss+xml" />
             <item>
+                <title>Fantastic Beasts in C and Where To Find Them in Swift</title>
+                <description>&lt;p&gt;Swift has a pretty decent C-interoperability story. But C has many features! Today, I&#x27;ll tell you
+a story involving a few not-so-well supported C features and Swift.&lt;&#x2f;p&gt;
+&lt;p&gt;It all started when I decided to re-write &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Pathos&quot;&gt;Pathos&lt;&#x2f;a&gt; with Windows support. One of the library&#x27;s
+offering is reading the literal target of a symbolic link: if &lt;code&gt;b&lt;&#x2f;code&gt; is a link to &lt;code&gt;a&lt;&#x2f;code&gt;, then
+&lt;code&gt;Path(&amp;quot;b&amp;quot;).readSymlink()&lt;&#x2f;code&gt; should return a another path that&#x27;s equivalent to &lt;code&gt;Path(&amp;quot;a&amp;quot;)&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
+&lt;p&gt;The Windows API that returns this information is &lt;a href=&quot;https:&#x2f;&#x2f;docs.microsoft.com&#x2f;en-us&#x2f;windows&#x2f;win32&#x2f;api&#x2f;ioapiset&#x2f;nf-ioapiset-deviceiocontrol&quot;&gt;DeviceIoControl&lt;&#x2f;a&gt;:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source c&quot;&gt;&lt;span class=&quot;support type windows c&quot;&gt;BOOL&lt;&#x2f;span&gt; &lt;span class=&quot;meta function c&quot;&gt;&lt;span class=&quot;entity name function c&quot;&gt;DeviceIoControl&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta function parameters c&quot;&gt;&lt;span class=&quot;meta group c&quot;&gt;&lt;span class=&quot;punctuation section group begin c&quot;&gt;(&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta function parameters c&quot;&gt;&lt;span class=&quot;meta group c&quot;&gt;
+  &lt;span class=&quot;support type windows c&quot;&gt;HANDLE&lt;&#x2f;span&gt;       &lt;span class=&quot;variable parameter c&quot;&gt;hDevice&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator c&quot;&gt;,&lt;&#x2f;span&gt;
+  &lt;span class=&quot;support type windows c&quot;&gt;DWORD&lt;&#x2f;span&gt;        &lt;span class=&quot;variable parameter c&quot;&gt;dwIoControlCode&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator c&quot;&gt;,&lt;&#x2f;span&gt;
+  &lt;span class=&quot;support type windows c&quot;&gt;LPVOID&lt;&#x2f;span&gt;       &lt;span class=&quot;variable parameter c&quot;&gt;lpInBuffer&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator c&quot;&gt;,&lt;&#x2f;span&gt;
+  &lt;span class=&quot;support type windows c&quot;&gt;DWORD&lt;&#x2f;span&gt;        &lt;span class=&quot;variable parameter c&quot;&gt;nInBufferSize&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator c&quot;&gt;,&lt;&#x2f;span&gt;
+  &lt;span class=&quot;support type windows c&quot;&gt;LPVOID&lt;&#x2f;span&gt;       &lt;span class=&quot;variable parameter c&quot;&gt;lpOutBuffer&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator c&quot;&gt;,&lt;&#x2f;span&gt;
+  &lt;span class=&quot;support type windows c&quot;&gt;DWORD&lt;&#x2f;span&gt;        &lt;span class=&quot;variable parameter c&quot;&gt;nOutBufferSize&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator c&quot;&gt;,&lt;&#x2f;span&gt;
+  &lt;span class=&quot;support type windows c&quot;&gt;LPDWORD&lt;&#x2f;span&gt;      &lt;span class=&quot;variable parameter c&quot;&gt;lpBytesReturned&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator c&quot;&gt;,&lt;&#x2f;span&gt;
+  LPOVERLAPPED lpOverlapped
+&lt;span class=&quot;punctuation section group end c&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Notice anything weird? Hint: &lt;code&gt;LPVOID&lt;&#x2f;code&gt; is &lt;code&gt;void *&lt;&#x2f;code&gt; in standard C.&lt;&#x2f;p&gt;
+&lt;p&gt;This function is, for the lack of better words, polymorphic: depending on your input, it can intake
+and output different types. As a caller, it is your responsibility to look up what type is needed
+and cast them to and from those &lt;code&gt;void *&lt;&#x2f;code&gt;s. The size of the data structure is returned as well. We&#x27;ll
+have a lot to talk about that later.&lt;&#x2f;p&gt;
+&lt;p&gt;Perhaps, surprisingly, this is not too hard to deal with in Swift. In my &lt;a href=&quot;&#x2f;2020&#x2f;09&#x2f;09&#x2f;free-c-strings&quot;&gt;last article&lt;&#x2f;a&gt;,
+I detailed how we can use an Swift API to work with C buffers:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&#x2f;&lt;&#x2f;span&gt; get the file `handle`...&lt;&#x2f;span&gt;
+&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&#x2f;&lt;&#x2f;span&gt; now call `DeviceIoControl`&lt;&#x2f;span&gt;
+&lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; data = &lt;span class=&quot;support class&quot;&gt;ContiguousArray&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;CChar&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(
+    &lt;span class=&quot;variable parameter&quot;&gt;unsafeUninitializedCapacity&lt;&#x2f;span&gt;: kMax
+) { buffer, count &lt;span class=&quot;keyword control&quot;&gt;in&lt;&#x2f;span&gt;
+    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;size&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;DWORD&lt;&#x2f;span&gt; = &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;
+    &lt;span class=&quot;support class&quot;&gt;DeviceIoControl&lt;&#x2f;span&gt;(
+        handle,
+        &lt;span class=&quot;support class&quot;&gt;FSCTL_GET_REPARSE_POINT&lt;&#x2f;span&gt;,
+        &lt;span class=&quot;constant language nil&quot;&gt;nil&lt;&#x2f;span&gt;,
+        &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;,
+        buffer&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;baseAddress,
+        &lt;span class=&quot;support class&quot;&gt;DWORD&lt;&#x2f;span&gt;(buffer&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;count),
+        &amp;amp;size,
+        &lt;span class=&quot;constant language nil&quot;&gt;nil&lt;&#x2f;span&gt;
+    )
+    count = &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;(size)
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;So this fills the array of &lt;code&gt;CChar&lt;&#x2f;code&gt;s with the necessary bytes for out result. I named the variable
+&lt;code&gt;data&lt;&#x2f;code&gt; because it is exactly the same concept as &lt;code&gt;Foundation&lt;&#x2f;code&gt;&#x27;s Data, as most Swift programmers
+know.&lt;&#x2f;p&gt;
+&lt;p&gt;As promised, we&#x27;ll cast this data to the actual type so that we can retrieve information from its
+bytes. Side note: casting in this context is a documented usage, So it really is more awkward rather
+than bad. And there&#x27;s a safe way to do it:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;withUnsafePointer(&lt;span class=&quot;variable parameter&quot;&gt;to&lt;&#x2f;span&gt;: data) {
+    $&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;withMemoryRebound(
+        &lt;span class=&quot;variable parameter&quot;&gt;to&lt;&#x2f;span&gt;: [&lt;span class=&quot;support class&quot;&gt;ReparseDataBuffer&lt;&#x2f;span&gt;].&lt;span class=&quot;constant language enum&quot;&gt;self&lt;&#x2f;span&gt;,
+        &lt;span class=&quot;variable parameter&quot;&gt;capacity&lt;&#x2f;span&gt;: &lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;
+    ) { buffer &lt;span class=&quot;keyword control&quot;&gt;in&lt;&#x2f;span&gt;
+        &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; first element in `buffer` is &lt;&#x2f;span&gt;
+        &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&#x2f;&lt;&#x2f;span&gt; a `ReparseDataBuffer`! Yay&lt;&#x2f;span&gt;
+    }
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;It&#x27;s very important to note that &lt;code&gt;ReparseDataBuffer&lt;&#x2f;code&gt; is a struct with fixed, predictable layout,
+that the API &lt;code&gt;DeviceIoControl&lt;&#x2f;code&gt; promises to return. In practice, this means it is defined in C. Swift
+does not currently guarantee struct layout. So unless you really know what you are doing and don&#x27;t
+care about forward compatibility, you should not do this with Swift structs!&lt;&#x2f;p&gt;
+&lt;p&gt;So far this story has been boring for avid Swift programmers. Fear not, things will get spicy now!&lt;&#x2f;p&gt;
+&lt;p&gt;Let&#x27;s talk about this &lt;code&gt;ReparseDataBuffer&lt;&#x2f;code&gt;. It&#x27;s an imported C type with a few notable features.&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source c&quot;&gt;&lt;span class=&quot;storage type c&quot;&gt;typedef&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;meta block c&quot;&gt;&lt;span class=&quot;punctuation section block begin c&quot;&gt;{&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;long&lt;&#x2f;span&gt;  ReparseTag&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; ReparseDataLength&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; Reserved&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;union&lt;&#x2f;span&gt; &lt;span class=&quot;meta block c&quot;&gt;&lt;span class=&quot;punctuation section block begin c&quot;&gt;{&lt;&#x2f;span&gt;
+    &lt;span class=&quot;storage type c&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;meta block c&quot;&gt;&lt;span class=&quot;punctuation section block begin c&quot;&gt;{&lt;&#x2f;span&gt;
+      &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; SubstituteNameOffset&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+      &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; SubstituteNameLength&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+      &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; PrintNameOffset&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+      &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; PrintNameLength&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+      &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;long&lt;&#x2f;span&gt;  Flags&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+      wchar_t  PathBuffer&lt;span class=&quot;meta brackets c&quot;&gt;&lt;span class=&quot;punctuation section brackets begin c&quot;&gt;[&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric c&quot;&gt;1&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation section brackets end c&quot;&gt;]&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;punctuation section block end c&quot;&gt;}&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; SymbolicLinkReparseBuffer&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;storage type c&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;meta block c&quot;&gt;&lt;span class=&quot;punctuation section block begin c&quot;&gt;{&lt;&#x2f;span&gt;
+      &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; SubstituteNameOffset&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+      &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; SubstituteNameLength&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+      &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; PrintNameOffset&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+      &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; PrintNameLength&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+      wchar_t  PathBuffer&lt;span class=&quot;meta brackets c&quot;&gt;&lt;span class=&quot;punctuation section brackets begin c&quot;&gt;[&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric c&quot;&gt;1&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation section brackets end c&quot;&gt;]&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;punctuation section block end c&quot;&gt;}&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; MountPointReparseBuffer&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;storage type c&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;meta block c&quot;&gt;&lt;span class=&quot;punctuation section block begin c&quot;&gt;{&lt;&#x2f;span&gt;
+      &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;char&lt;&#x2f;span&gt; DataBuffer&lt;span class=&quot;meta brackets c&quot;&gt;&lt;span class=&quot;punctuation section brackets begin c&quot;&gt;[&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric c&quot;&gt;1&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation section brackets end c&quot;&gt;]&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;punctuation section block end c&quot;&gt;}&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; GenericReparseBuffer&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;punctuation section block end c&quot;&gt;}&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+&lt;span class=&quot;punctuation section block end c&quot;&gt;}&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type typedef c&quot;&gt;ReparseDataBuffer&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Feature #1: it has a &lt;em&gt;union member&lt;&#x2f;em&gt;.&lt;&#x2f;p&gt;
+&lt;p&gt;A &lt;code&gt;union&lt;&#x2f;code&gt; in C is an area in memory that could be any of the types specified in the union:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source c&quot;&gt;&lt;span class=&quot;comment line double-slash c&quot;&gt;&lt;span class=&quot;punctuation definition comment c&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; X.a is a `char` and X.b is a `uint64_t`. 
+&#x2f;&#x2f; And they occupy the same memory because
+&#x2f;&#x2f; only 1 of them exists at a time.
+typedef union {
+    char a;
+    uint64_t b;
+} X;
+&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Swift does not own a direct analog for this. So if we import this &lt;code&gt;ReparseDataBuffer&lt;&#x2f;code&gt; definition,
+there wouldn&#x27;t be a good way to access the data inside the union.&lt;&#x2f;p&gt;
+&lt;p&gt;As I pointed out in the comment, members of a union occupy the same space in memory. The largest
+member defines the size of that space, so everyone can fit inside of it. Each union member
+interprets the same bytes according to their own definition. Given this knowledge, we can derive
+a solution that works around Swift&#x27;s limitations: break up the union (sorry, this whole paragraph
+reads super suggestive of the real world union. It&#x27;s probably why this word is picked for this data
+structure in the first place. But I do not intend to say anything about the real world here)!&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source c&quot;&gt;&lt;span class=&quot;storage type c&quot;&gt;typedef&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;meta block c&quot;&gt;&lt;span class=&quot;punctuation section block begin c&quot;&gt;{&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;long&lt;&#x2f;span&gt; reparseTag&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; reparseDataLength&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; reserved&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; substituteNameOffset&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; substituteNameLength&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; printNameOffset&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; printNameLength&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;long&lt;&#x2f;span&gt; flags&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  wchar_t pathBuffer&lt;span class=&quot;meta brackets c&quot;&gt;&lt;span class=&quot;punctuation section brackets begin c&quot;&gt;[&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric c&quot;&gt;1&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation section brackets end c&quot;&gt;]&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+&lt;span class=&quot;punctuation section block end c&quot;&gt;}&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type typedef c&quot;&gt;SymbolicLinkReparseBuffer&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+
+&lt;span class=&quot;storage type c&quot;&gt;typedef&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;meta block c&quot;&gt;&lt;span class=&quot;punctuation section block begin c&quot;&gt;{&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;long&lt;&#x2f;span&gt; reparseTag&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; reparseDataLength&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; reserved&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; substituteNameOffset&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; substituteNameLength&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; printNameOffset&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;short&lt;&#x2f;span&gt; printNameLength&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+  wchar_t pathBuffer&lt;span class=&quot;meta brackets c&quot;&gt;&lt;span class=&quot;punctuation section brackets begin c&quot;&gt;[&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric c&quot;&gt;1&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation section brackets end c&quot;&gt;]&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+&lt;span class=&quot;punctuation section block end c&quot;&gt;}&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type typedef c&quot;&gt;MountPointReparseBuffer&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;
+
+&lt;span class=&quot;comment line double-slash c&quot;&gt;&lt;span class=&quot;punctuation definition comment c&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; we don&amp;#39;t care about the 3rd union
+&#x2f;&#x2f; member in this use case
+&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Conveniently for us, the union member in &lt;code&gt;ReparseDataBuffer&lt;&#x2f;code&gt; is at the end. So we don&#x27;t need to
+worry about padding the unused space for smaller alternatives. Back in Swift, instead of dealing
+with &lt;code&gt;ReparseDataBuffer&lt;&#x2f;code&gt; directly, we can work with &lt;code&gt;SymbolicLinkReparseBuffer&lt;&#x2f;code&gt; or
+&lt;code&gt;MountPointReparseBuffer&lt;&#x2f;code&gt;, depending on our expectation of which union member to read.&lt;&#x2f;p&gt;
+&lt;p&gt;Yeah, this is a good time to mention that, &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Pathos&quot;&gt;Pathos&lt;&#x2f;a&gt; has to include copies of these definition in a
+separate C module. Not only because we need to &amp;quot;break up the union&amp;quot;, the original definition is also
+only accessible after importing some headers in the NT kernel. So the standard &lt;code&gt;import WinSDK&lt;&#x2f;code&gt; won&#x27;t
+suffice.&lt;&#x2f;p&gt;
+&lt;p&gt;Moving on to notable feature #2. The last member of both &lt;code&gt;SymbolicLinkReparseBuffer&lt;&#x2f;code&gt; and
+&lt;code&gt;MountPointReparseBuffer&lt;&#x2f;code&gt; &lt;code&gt;pathBuffer&lt;&#x2f;code&gt; is a 1-character long array...why?&lt;&#x2f;p&gt;
+&lt;p&gt;In C, this is a &lt;em&gt;flexible array member&lt;&#x2f;em&gt;. Such member must always appear at the end of a struct.
+The word &amp;quot;flexible&amp;quot; in this context refers to the amount of memory allocated for this type of
+structs : it can vary according to the length of the array as needed. The member such as
+&lt;code&gt;pathBuffer&lt;&#x2f;code&gt; is here to provide access to the beginning of the buffer.&lt;&#x2f;p&gt;
+&lt;p&gt;To Swift, &lt;code&gt;pathBuffer&lt;&#x2f;code&gt; looks like a single &lt;code&gt;UInt16&lt;&#x2f;code&gt;. The language obviously don&#x27;t have a good idea
+of this C feature. So how to we get the rest of the data from this array?&lt;&#x2f;p&gt;
+&lt;p&gt;Once again, we have to lean on our understanding of memory layout in C structs.&lt;&#x2f;p&gt;
+&lt;p&gt;As is common in APIs for flexible array members, the length of the array trailing the struct is
+provide to us. Let&#x27;s call it &lt;code&gt;flexibleLength&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2020&#x2f;09&#x2f;flexible_array_member.png&quot; alt=&quot;Illustration of memory layout for a C struct with flexible array member&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
+&lt;p&gt;We already have the memory for these structs in bytes (remember &lt;code&gt;data&lt;&#x2f;code&gt;?). And we can get the size
+for the fixed potion of the structs with&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; fixedStructSize = &lt;span class=&quot;support class&quot;&gt;MemoryLayout&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;support class&quot;&gt;SymbolicLinkReparseBuffer&lt;&#x2f;span&gt;
+&amp;gt;.&lt;span class=&quot;constant language enum&quot;&gt;stride&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Putting it all together, we can get the full content of the array by&lt;&#x2f;p&gt;
+&lt;ol&gt;
+&lt;li&gt;chopping off the content for struct itself,&lt;&#x2f;li&gt;
+&lt;li&gt;casting the rest of the raw buffer to the expected element type, and&lt;&#x2f;li&gt;
+&lt;li&gt;include the last member in this struct as the first element in the array&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Include the first element, which is at&lt;&#x2f;span&gt;
+&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; the end of the fixed struct potion.&lt;&#x2f;span&gt;
+&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; arrayStart = fixedStructSize - &lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;
+&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Cast the data buffer so it&amp;#39;s composed &lt;&#x2f;span&gt;
+&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; of `wchar_t` aka `UInt16`s.&lt;&#x2f;span&gt;
+&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; array = withUnsafePointer(&lt;span class=&quot;variable parameter&quot;&gt;to&lt;&#x2f;span&gt;: data) {
+    $&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;withMemoryRebound(
+        &lt;span class=&quot;variable parameter&quot;&gt;to&lt;&#x2f;span&gt;: [&lt;span class=&quot;support class&quot;&gt;UInt16&lt;&#x2f;span&gt;].&lt;span class=&quot;constant language enum&quot;&gt;self&lt;&#x2f;span&gt;,
+        &lt;span class=&quot;variable parameter&quot;&gt;capacity&lt;&#x2f;span&gt;: data&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;count &#x2f; &lt;span class=&quot;constant numeric decimal&quot;&gt;2&lt;&#x2f;span&gt;
+    ) { sixteenBitData &lt;span class=&quot;keyword control&quot;&gt;in&lt;&#x2f;span&gt;
+        &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; chop off the non-array potion&lt;&#x2f;span&gt;
+        sixteenBitData&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;pointee[
+            arrayStart ..&amp;lt; (arrayStart + flexibleLength)
+        ]
+    }
+}
+
+&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; now, go nuts on the array! You earned it!&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Considerations such as error handling are intentionally left out in this article. You can checkout
+the source code of &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Pathos&quot;&gt;Pathos&lt;&#x2f;a&gt; (on the &lt;code&gt;next&lt;&#x2f;code&gt; branch) for the full glory.&lt;&#x2f;p&gt;
+&lt;p&gt;Anyways, the flexible array member turns out to be the literal target of the symbolic link. So here
+is the end of our story. I&#x27;m interested to hear about alternative approaches for dealing with union
+members and flexible array members in Swift. Let me know on &lt;a href=&quot;https:&#x2f;&#x2f;twitter.com&#x2f;daniel_duan&quot;&gt;Twitter&lt;&#x2f;a&gt;, or &lt;a href=&quot;&quot;&gt;Twitch&lt;&#x2f;a&gt; when I&#x27;m
+streaming!&lt;&#x2f;p&gt;
+</description>
+                <pubDate>Sat, 12 Sep 2020 23:11:48 -0700</pubDate>
+                <link>https://duan.ca/2020/09/12/fantastic-c-beasts-and-where-to-find-them-in-swift/</link>
+                <guid isPermaLink="true">https://duan.ca/2020/09/12/fantastic-c-beasts-and-where-to-find-them-in-swift/</guid>
+            </item>
+            <item>
                 <title>Introducing Dye</title>
                 <description>&lt;p&gt;&lt;em&gt;Recently, I got a PC. And I started writing some code on Windows for the
 giggles. Naturally, I gravitate towards stuff I use on macOS and Linux when it

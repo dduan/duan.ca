@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2020/09/12/fantastic-c-beasts-and-where-to-find-them-in-swift/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Fantastic Beasts in C and Where To Find Them in Swift">
+    <meta property="article:published_time" content="2020-09-12"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Fantastic Beasts in C and Where To Find Them in Swift</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2020/09/12/fantastic-c-beasts-and-where-to-find-them-in-swift/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>Fantastic Beasts in C and Where To Find Them in Swift</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2020-09-12" itemProp="datePublished">2020-09-12</time>
+        </p>
+    </nav><p>Swift has a pretty decent C-interoperability story. But C has many features! Today, I'll tell you
+a story involving a few not-so-well supported C features and Swift.</p>
+<p>It all started when I decided to re-write <a href="https://github.com/dduan/Pathos">Pathos</a> with Windows support. One of the library's
+offering is reading the literal target of a symbolic link: if <code>b</code> is a link to <code>a</code>, then
+<code>Path(&quot;b&quot;).readSymlink()</code> should return a another path that's equivalent to <code>Path(&quot;a&quot;)</code>.</p>
+<p>The Windows API that returns this information is <a href="https://docs.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-deviceiocontrol">DeviceIoControl</a>:</p>
+<pre><span class="source c"><span class="support type windows c">BOOL</span> <span class="meta function c"><span class="entity name function c">DeviceIoControl</span></span><span class="meta function parameters c"><span class="meta group c"><span class="punctuation section group begin c">(</span></span></span><span class="meta function parameters c"><span class="meta group c">
+  <span class="support type windows c">HANDLE</span>       <span class="variable parameter c">hDevice</span><span class="punctuation separator c">,</span>
+  <span class="support type windows c">DWORD</span>        <span class="variable parameter c">dwIoControlCode</span><span class="punctuation separator c">,</span>
+  <span class="support type windows c">LPVOID</span>       <span class="variable parameter c">lpInBuffer</span><span class="punctuation separator c">,</span>
+  <span class="support type windows c">DWORD</span>        <span class="variable parameter c">nInBufferSize</span><span class="punctuation separator c">,</span>
+  <span class="support type windows c">LPVOID</span>       <span class="variable parameter c">lpOutBuffer</span><span class="punctuation separator c">,</span>
+  <span class="support type windows c">DWORD</span>        <span class="variable parameter c">nOutBufferSize</span><span class="punctuation separator c">,</span>
+  <span class="support type windows c">LPDWORD</span>      <span class="variable parameter c">lpBytesReturned</span><span class="punctuation separator c">,</span>
+  LPOVERLAPPED lpOverlapped
+<span class="punctuation section group end c">)</span></span></span><span class="punctuation terminator c">;</span>
+</span></pre>
+<p>Notice anything weird? Hint: <code>LPVOID</code> is <code>void *</code> in standard C.</p>
+<p>This function is, for the lack of better words, polymorphic: depending on your input, it can intake
+and output different types. As a caller, it is your responsibility to look up what type is needed
+and cast them to and from those <code>void *</code>s. The size of the data structure is returned as well. We'll
+have a lot to talk about that later.</p>
+<p>Perhaps, surprisingly, this is not too hard to deal with in Swift. In my <a href="/2020/09/09/free-c-strings">last article</a>,
+I detailed how we can use an Swift API to work with C buffers:</p>
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">///</span> get the file `handle`...</span>
+<span class="comment line"><span class="punctuation definition comment">///</span> now call `DeviceIoControl`</span>
+<span class="keyword variable">var</span> data = <span class="support class">ContiguousArray</span><span class="keyword operator">&lt;</span><span class="support class">CChar</span><span class="keyword operator">&gt;</span>(
+    <span class="variable parameter">unsafeUninitializedCapacity</span>: kMax
+) { buffer, count <span class="keyword control">in</span>
+    <span class="keyword variable">var</span> <span class="variable parameter">size</span>: <span class="support class">DWORD</span> = <span class="constant numeric decimal">0</span>
+    <span class="support class">DeviceIoControl</span>(
+        handle,
+        <span class="support class">FSCTL_GET_REPARSE_POINT</span>,
+        <span class="constant language nil">nil</span>,
+        <span class="constant numeric decimal">0</span>,
+        buffer<span class="keyword operator">.</span>baseAddress,
+        <span class="support class">DWORD</span>(buffer<span class="keyword operator">.</span>count),
+        &amp;size,
+        <span class="constant language nil">nil</span>
+    )
+    count = <span class="support class">Int</span>(size)
+}
+</span></pre>
+<p>So this fills the array of <code>CChar</code>s with the necessary bytes for out result. I named the variable
+<code>data</code> because it is exactly the same concept as <code>Foundation</code>'s Data, as most Swift programmers
+know.</p>
+<p>As promised, we'll cast this data to the actual type so that we can retrieve information from its
+bytes. Side note: casting in this context is a documented usage, So it really is more awkward rather
+than bad. And there's a safe way to do it:</p>
+<pre><span class="source swift">withUnsafePointer(<span class="variable parameter">to</span>: data) {
+    $<span class="constant numeric decimal">0</span><span class="keyword operator">.</span>withMemoryRebound(
+        <span class="variable parameter">to</span>: [<span class="support class">ReparseDataBuffer</span>].<span class="constant language enum">self</span>,
+        <span class="variable parameter">capacity</span>: <span class="constant numeric decimal">1</span>
+    ) { buffer <span class="keyword control">in</span>
+        <span class="comment line"><span class="punctuation definition comment">//</span> first element in `buffer` is </span>
+        <span class="comment line"><span class="punctuation definition comment">///</span> a `ReparseDataBuffer`! Yay</span>
+    }
+}
+</span></pre>
+<p>It's very important to note that <code>ReparseDataBuffer</code> is a struct with fixed, predictable layout,
+that the API <code>DeviceIoControl</code> promises to return. In practice, this means it is defined in C. Swift
+does not currently guarantee struct layout. So unless you really know what you are doing and don't
+care about forward compatibility, you should not do this with Swift structs!</p>
+<p>So far this story has been boring for avid Swift programmers. Fear not, things will get spicy now!</p>
+<p>Let's talk about this <code>ReparseDataBuffer</code>. It's an imported C type with a few notable features.</p>
+<pre><span class="source c"><span class="storage type c">typedef</span> <span class="storage type c">struct</span> <span class="meta block c"><span class="punctuation section block begin c">{</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">long</span>  ReparseTag<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> ReparseDataLength<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> Reserved<span class="punctuation terminator c">;</span>
+  <span class="storage type c">union</span> <span class="meta block c"><span class="punctuation section block begin c">{</span>
+    <span class="storage type c">struct</span> <span class="meta block c"><span class="punctuation section block begin c">{</span>
+      <span class="storage type c">unsigned</span> <span class="storage type c">short</span> SubstituteNameOffset<span class="punctuation terminator c">;</span>
+      <span class="storage type c">unsigned</span> <span class="storage type c">short</span> SubstituteNameLength<span class="punctuation terminator c">;</span>
+      <span class="storage type c">unsigned</span> <span class="storage type c">short</span> PrintNameOffset<span class="punctuation terminator c">;</span>
+      <span class="storage type c">unsigned</span> <span class="storage type c">short</span> PrintNameLength<span class="punctuation terminator c">;</span>
+      <span class="storage type c">unsigned</span> <span class="storage type c">long</span>  Flags<span class="punctuation terminator c">;</span>
+      wchar_t  PathBuffer<span class="meta brackets c"><span class="punctuation section brackets begin c">[</span><span class="constant numeric c">1</span><span class="punctuation section brackets end c">]</span></span><span class="punctuation terminator c">;</span>
+    <span class="punctuation section block end c">}</span></span> SymbolicLinkReparseBuffer<span class="punctuation terminator c">;</span>
+    <span class="storage type c">struct</span> <span class="meta block c"><span class="punctuation section block begin c">{</span>
+      <span class="storage type c">unsigned</span> <span class="storage type c">short</span> SubstituteNameOffset<span class="punctuation terminator c">;</span>
+      <span class="storage type c">unsigned</span> <span class="storage type c">short</span> SubstituteNameLength<span class="punctuation terminator c">;</span>
+      <span class="storage type c">unsigned</span> <span class="storage type c">short</span> PrintNameOffset<span class="punctuation terminator c">;</span>
+      <span class="storage type c">unsigned</span> <span class="storage type c">short</span> PrintNameLength<span class="punctuation terminator c">;</span>
+      wchar_t  PathBuffer<span class="meta brackets c"><span class="punctuation section brackets begin c">[</span><span class="constant numeric c">1</span><span class="punctuation section brackets end c">]</span></span><span class="punctuation terminator c">;</span>
+    <span class="punctuation section block end c">}</span></span> MountPointReparseBuffer<span class="punctuation terminator c">;</span>
+    <span class="storage type c">struct</span> <span class="meta block c"><span class="punctuation section block begin c">{</span>
+      <span class="storage type c">unsigned</span> <span class="storage type c">char</span> DataBuffer<span class="meta brackets c"><span class="punctuation section brackets begin c">[</span><span class="constant numeric c">1</span><span class="punctuation section brackets end c">]</span></span><span class="punctuation terminator c">;</span>
+    <span class="punctuation section block end c">}</span></span> GenericReparseBuffer<span class="punctuation terminator c">;</span>
+  <span class="punctuation section block end c">}</span></span><span class="punctuation terminator c">;</span>
+<span class="punctuation section block end c">}</span></span> <span class="entity name type typedef c">ReparseDataBuffer</span><span class="punctuation terminator c">;</span>
+</span></pre>
+<p>Feature #1: it has a <em>union member</em>.</p>
+<p>A <code>union</code> in C is an area in memory that could be any of the types specified in the union:</p>
+<pre><span class="source c"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> X.a is a `char` and X.b is a `uint64_t`. 
+// And they occupy the same memory because
+// only 1 of them exists at a time.
+typedef union {
+    char a;
+    uint64_t b;
+} X;
+</span></span></pre>
+<p>Swift does not own a direct analog for this. So if we import this <code>ReparseDataBuffer</code> definition,
+there wouldn't be a good way to access the data inside the union.</p>
+<p>As I pointed out in the comment, members of a union occupy the same space in memory. The largest
+member defines the size of that space, so everyone can fit inside of it. Each union member
+interprets the same bytes according to their own definition. Given this knowledge, we can derive
+a solution that works around Swift's limitations: break up the union (sorry, this whole paragraph
+reads super suggestive of the real world union. It's probably why this word is picked for this data
+structure in the first place. But I do not intend to say anything about the real world here)!</p>
+<pre><span class="source c"><span class="storage type c">typedef</span> <span class="storage type c">struct</span> <span class="meta block c"><span class="punctuation section block begin c">{</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">long</span> reparseTag<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> reparseDataLength<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> reserved<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> substituteNameOffset<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> substituteNameLength<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> printNameOffset<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> printNameLength<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">long</span> flags<span class="punctuation terminator c">;</span>
+  wchar_t pathBuffer<span class="meta brackets c"><span class="punctuation section brackets begin c">[</span><span class="constant numeric c">1</span><span class="punctuation section brackets end c">]</span></span><span class="punctuation terminator c">;</span>
+<span class="punctuation section block end c">}</span></span> <span class="entity name type typedef c">SymbolicLinkReparseBuffer</span><span class="punctuation terminator c">;</span>
+
+<span class="storage type c">typedef</span> <span class="storage type c">struct</span> <span class="meta block c"><span class="punctuation section block begin c">{</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">long</span> reparseTag<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> reparseDataLength<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> reserved<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> substituteNameOffset<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> substituteNameLength<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> printNameOffset<span class="punctuation terminator c">;</span>
+  <span class="storage type c">unsigned</span> <span class="storage type c">short</span> printNameLength<span class="punctuation terminator c">;</span>
+  wchar_t pathBuffer<span class="meta brackets c"><span class="punctuation section brackets begin c">[</span><span class="constant numeric c">1</span><span class="punctuation section brackets end c">]</span></span><span class="punctuation terminator c">;</span>
+<span class="punctuation section block end c">}</span></span> <span class="entity name type typedef c">MountPointReparseBuffer</span><span class="punctuation terminator c">;</span>
+
+<span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> we don&#39;t care about the 3rd union
+// member in this use case
+</span></span></pre>
+<p>Conveniently for us, the union member in <code>ReparseDataBuffer</code> is at the end. So we don't need to
+worry about padding the unused space for smaller alternatives. Back in Swift, instead of dealing
+with <code>ReparseDataBuffer</code> directly, we can work with <code>SymbolicLinkReparseBuffer</code> or
+<code>MountPointReparseBuffer</code>, depending on our expectation of which union member to read.</p>
+<p>Yeah, this is a good time to mention that, <a href="https://github.com/dduan/Pathos">Pathos</a> has to include copies of these definition in a
+separate C module. Not only because we need to &quot;break up the union&quot;, the original definition is also
+only accessible after importing some headers in the NT kernel. So the standard <code>import WinSDK</code> won't
+suffice.</p>
+<p>Moving on to notable feature #2. The last member of both <code>SymbolicLinkReparseBuffer</code> and
+<code>MountPointReparseBuffer</code> <code>pathBuffer</code> is a 1-character long array...why?</p>
+<p>In C, this is a <em>flexible array member</em>. Such member must always appear at the end of a struct.
+The word &quot;flexible&quot; in this context refers to the amount of memory allocated for this type of
+structs : it can vary according to the length of the array as needed. The member such as
+<code>pathBuffer</code> is here to provide access to the beginning of the buffer.</p>
+<p>To Swift, <code>pathBuffer</code> looks like a single <code>UInt16</code>. The language obviously don't have a good idea
+of this C feature. So how to we get the rest of the data from this array?</p>
+<p>Once again, we have to lean on our understanding of memory layout in C structs.</p>
+<p>As is common in APIs for flexible array members, the length of the array trailing the struct is
+provide to us. Let's call it <code>flexibleLength</code>.</p>
+<p><img src="/assets/2020/09/flexible_array_member.png" alt="Illustration of memory layout for a C struct with flexible array member" /></p>
+<p>We already have the memory for these structs in bytes (remember <code>data</code>?). And we can get the size
+for the fixed potion of the structs with</p>
+<pre><span class="source swift"><span class="keyword variable">let</span> fixedStructSize = <span class="support class">MemoryLayout</span><span class="keyword operator">&lt;</span>
+    <span class="support class">SymbolicLinkReparseBuffer</span>
+&gt;.<span class="constant language enum">stride</span>
+</span></pre>
+<p>Putting it all together, we can get the full content of the array by</p>
+<ol>
+<li>chopping off the content for struct itself,</li>
+<li>casting the rest of the raw buffer to the expected element type, and</li>
+<li>include the last member in this struct as the first element in the array</li>
+</ol>
+<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> Include the first element, which is at</span>
+<span class="comment line"><span class="punctuation definition comment">//</span> the end of the fixed struct potion.</span>
+<span class="keyword variable">let</span> arrayStart = fixedStructSize - <span class="constant numeric decimal">1</span>
+<span class="comment line"><span class="punctuation definition comment">//</span> Cast the data buffer so it&#39;s composed </span>
+<span class="comment line"><span class="punctuation definition comment">//</span> of `wchar_t` aka `UInt16`s.</span>
+<span class="keyword variable">let</span> array = withUnsafePointer(<span class="variable parameter">to</span>: data) {
+    $<span class="constant numeric decimal">0</span><span class="keyword operator">.</span>withMemoryRebound(
+        <span class="variable parameter">to</span>: [<span class="support class">UInt16</span>].<span class="constant language enum">self</span>,
+        <span class="variable parameter">capacity</span>: data<span class="keyword operator">.</span>count / <span class="constant numeric decimal">2</span>
+    ) { sixteenBitData <span class="keyword control">in</span>
+        <span class="comment line"><span class="punctuation definition comment">//</span> chop off the non-array potion</span>
+        sixteenBitData<span class="keyword operator">.</span>pointee[
+            arrayStart ..&lt; (arrayStart + flexibleLength)
+        ]
+    }
+}
+
+<span class="comment line"><span class="punctuation definition comment">//</span> now, go nuts on the array! You earned it!</span>
+</span></pre>
+<p>Considerations such as error handling are intentionally left out in this article. You can checkout
+the source code of <a href="https://github.com/dduan/Pathos">Pathos</a> (on the <code>next</code> branch) for the full glory.</p>
+<p>Anyways, the flexible array member turns out to be the literal target of the symbolic link. So here
+is the end of our story. I'm interested to hear about alternative approaches for dealing with union
+members and flexible array members in Swift. Let me know on <a href="https://twitter.com/daniel_duan">Twitter</a>, or <a href="">Twitch</a> when I'm
+streaming!</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/c/">C</a>
+        ·
+        <a href="/tag/windows/">Windows</a>
+        ·
+        <a href="/tag/pathos/">Pathos</a>
+    </p>
+</footer></body>
+</html>

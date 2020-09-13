@@ -87,11 +87,11 @@ than bad. And there's a safe way to do it:</p>
     }
 }
 </span></pre>
-<p>It's very important to note that <code>ReparseDataBuffer</code> is a struct with fixed, predictable layout,
+<p><em>It's very important to note that <code>ReparseDataBuffer</code> is a struct with fixed, predictable layout,
 that the API <code>DeviceIoControl</code> promises to return. In practice, this means it is defined in C. Swift
 does not currently guarantee struct layout. So unless you really know what you are doing and don't
-care about forward compatibility, you should not do this with Swift structs!</p>
-<p>So far this story has been boring for avid Swift programmers. Fear not, things will get spicy now!</p>
+care about forward compatibility, you should not do this with Swift structs.</em></p>
+<p>So far this story has been boring for avid Swift programmers. Fear not, things will get spicy now.</p>
 <p>Let's talk about this <code>ReparseDataBuffer</code>. It's an imported C type with a few notable features.</p>
 <pre><span class="source c"><span class="storage type c">typedef</span> <span class="storage type c">struct</span> <span class="meta block c"><span class="punctuation section block begin c">{</span>
   <span class="storage type c">unsigned</span> <span class="storage type c">long</span>  ReparseTag<span class="punctuation terminator c">;</span>

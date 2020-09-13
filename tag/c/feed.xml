@@ -65,11 +65,11 @@ than bad. And there&#x27;s a safe way to do it:&lt;&#x2f;p&gt;
     }
 }
 &lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;It&#x27;s very important to note that &lt;code&gt;ReparseDataBuffer&lt;&#x2f;code&gt; is a struct with fixed, predictable layout,
+&lt;p&gt;&lt;em&gt;It&#x27;s very important to note that &lt;code&gt;ReparseDataBuffer&lt;&#x2f;code&gt; is a struct with fixed, predictable layout,
 that the API &lt;code&gt;DeviceIoControl&lt;&#x2f;code&gt; promises to return. In practice, this means it is defined in C. Swift
 does not currently guarantee struct layout. So unless you really know what you are doing and don&#x27;t
-care about forward compatibility, you should not do this with Swift structs!&lt;&#x2f;p&gt;
-&lt;p&gt;So far this story has been boring for avid Swift programmers. Fear not, things will get spicy now!&lt;&#x2f;p&gt;
+care about forward compatibility, you should not do this with Swift structs.&lt;&#x2f;em&gt;&lt;&#x2f;p&gt;
+&lt;p&gt;So far this story has been boring for avid Swift programmers. Fear not, things will get spicy now.&lt;&#x2f;p&gt;
 &lt;p&gt;Let&#x27;s talk about this &lt;code&gt;ReparseDataBuffer&lt;&#x2f;code&gt;. It&#x27;s an imported C type with a few notable features.&lt;&#x2f;p&gt;
 &lt;pre&gt;&lt;span class=&quot;source c&quot;&gt;&lt;span class=&quot;storage type c&quot;&gt;typedef&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;struct&lt;&#x2f;span&gt; &lt;span class=&quot;meta block c&quot;&gt;&lt;span class=&quot;punctuation section block begin c&quot;&gt;{&lt;&#x2f;span&gt;
   &lt;span class=&quot;storage type c&quot;&gt;unsigned&lt;&#x2f;span&gt; &lt;span class=&quot;storage type c&quot;&gt;long&lt;&#x2f;span&gt;  ReparseTag&lt;span class=&quot;punctuation terminator c&quot;&gt;;&lt;&#x2f;span&gt;

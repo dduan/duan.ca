@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2020/11/22/marka/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2020/09/12/fantastic-c-beasts-and-where-to-find-them-in-swift/</loc>
     </url>
     <url>
@@ -133,17 +136,17 @@
         <loc>https://duan.ca/2012/10/31/keep-git-social/</loc>
     </url>
     <url>
-        <loc>https://duan.ca/DrString/privacy/</loc>
+        <loc>https://duan.ca/DrString/release-notes/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/</loc>
     </url><url>
-        <loc>https://duan.ca/DrString/release-notes/</loc>
+        <loc>https://duan.ca/DrString/privacy/</loc>
     </url><url>
-        <loc>https://duan.ca/projects/</loc>
+        <loc>https://duan.ca/Markra/</loc>
     </url><url>
         <loc>https://duan.ca//</loc>
     </url><url>
-        <loc>https://duan.ca/Markra/</loc>
+        <loc>https://duan.ca/projects/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/api-design-guidelines/</loc>
@@ -206,6 +209,12 @@
         <loc>https://duan.ca/tag/combine/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/composable-architecture/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/composable-architecture/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/email/</loc>
     </url>
     <url>
@@ -258,6 +267,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/interface-builder/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/jira/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/jira/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/jekyll/</loc>
@@ -318,6 +333,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/oop/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/oss/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/oss/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/posix/</loc>

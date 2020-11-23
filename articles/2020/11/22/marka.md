@@ -10,7 +10,7 @@ I distribute via the Mac App Store. Ultimately, the first option prevailed. So,
 without further adiue, here's the repo for [Markra][] with [version 1.0 macOS
 app download in the release page][Release 1.0].
 
-![A Marka macOS app screenshot](/assets/2020/11/markra-srceenshot.png)
+![A Marka macOS app screenshot](/assets/2020/11/markra-screenshot.png)
 
 As far as I'm concerned, the app is pretty much done. And its feature set is
 small and self-explanatory. So I don't expect more releases other than minor

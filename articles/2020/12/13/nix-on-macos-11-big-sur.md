@@ -1,6 +1,6 @@
 # Installing Nix on macOS 11 Big Sur
 2020-12-13T12:00:52-08:00
-tag: Nix,macOS
+tag: Nix, macOS
 
 Here are the steps for installing nix on macOS 11 Big Sur.
 

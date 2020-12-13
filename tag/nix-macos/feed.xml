@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Nix,macOS</title>
+        <link>https://duan.ca/tag/nix-macos/</link>
+        <atom:link href="https://duan.ca/tag/nix-macos/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>Installing Nix on macOS 11 Big Sur</title>
+                <description>&lt;p&gt;Here are the steps for installing nix on macOS 11 Big Sur.&lt;&#x2f;p&gt;
+&lt;h3&gt;Preparation&lt;&#x2f;h3&gt;
+&lt;p&gt;Decide on which disk the nix store is to be installed. By end of this process, you&#x27;ll have a disk
+name like &lt;code&gt;disk4&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
+&lt;p&gt;Personally, I like looking it up in the Disk Utility app:&lt;&#x2f;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2020&#x2f;12&#x2f;disk-utility.png&quot; alt=&quot;Disk Utility&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
+&lt;p&gt;You can also use other methods, such us the &lt;code&gt;diskutil list&lt;&#x2f;code&gt; command.&lt;&#x2f;p&gt;
+&lt;p&gt;Have this disk name ready.&lt;&#x2f;p&gt;
+&lt;h3&gt;Installation&lt;&#x2f;h3&gt;
+&lt;h4&gt;1. Create the path &lt;code&gt;&#x2f;nix&lt;&#x2f;code&gt; the macOS way.&lt;&#x2f;h4&gt;
+&lt;p&gt;Edit or create the file &lt;code&gt;&#x2f;etc&#x2f;synthetic.conf&lt;&#x2f;code&gt;, adding this line:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;nix
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Reboot the Mac.&lt;&#x2f;p&gt;
+&lt;h4&gt;2. Create a APFS volume for the nix store.&lt;&#x2f;h4&gt;
+&lt;pre&gt;&lt;code&gt;sudo diskutil apfs addVolume diskX APFS &#x27;Nix Store&#x27; -mountpoint &#x2f;nix
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Make sure to replace &lt;code&gt;diskX&lt;&#x2f;code&gt; with the disk you identified in the preparation step.&lt;&#x2f;p&gt;
+&lt;h4&gt;3. Mount the volume.&lt;&#x2f;h4&gt;
+&lt;p&gt;Edit or create the file &lt;code&gt;&#x2f;etc&#x2f;fstab&lt;&#x2f;code&gt;, adding this line:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;LABEL=Nix\040Store &#x2f;nix apfs rw,nobrowse
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Reboot the Mac.&lt;&#x2f;p&gt;
+&lt;h4&gt;4. Install Nix the &amp;quot;normal&amp;quot; way&lt;&#x2f;h4&gt;
+&lt;pre&gt;&lt;code&gt;sh &amp;lt;(curl -L https:&#x2f;&#x2f;nixos.org&#x2f;nix&#x2f;install)
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;h4&gt;5. You are done! Try it out. I ran this little &lt;a href=&quot;https:&#x2f;&#x2f;nix.dev&#x2f;tutorials&#x2f;dev-environment.html&quot;&gt;example&lt;&#x2f;a&gt; as a test and things appears to work as expected.&lt;&#x2f;h4&gt;
+&lt;h3&gt;Bonus: using Nix in Fish shell&lt;&#x2f;h3&gt;
+&lt;p&gt;As a fish user, I&#x27;m used to fixing things up myself since software from non-fish users usually
+pretends fish doesn&#x27;t exist. Anyways, in the final steps of its installation, Nix sets up a few
+environment variables in a bash script. I&#x27;ve adapted these specifically for fish on macOS. Add these
+to your config.fish:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;set -x NIX_PROFILES &amp;quot;&#x2f;nix&#x2f;var&#x2f;nix&#x2f;profiles&#x2f;default $HOME&#x2f;.nix-profile&amp;quot;
+set -x NIX_SSL_CERT_FILE &amp;quot;$HOME&#x2f;.nix-profile&#x2f;etc&#x2f;ssl&#x2f;certs&#x2f;ca-bundle.crt&amp;quot;
+set -x NIX_PATH &#x2f;nix $HOME&#x2f;.nix-defexpr&#x2f;channels
+set -x PATH $HOME&#x2f;.nix-profile&#x2f;bin $PATH
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;It shouldn&#x27;t be to hard to do this on other OSes. The relevant information is in
+&lt;code&gt;~&#x2f;.nix-profile&#x2f;etc&#x2f;profile.d&#x2f;nix.sh&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
+</description>
+                <pubDate>Sun, 13 Dec 2020 12:00:52 -0800</pubDate>
+                <link>https://duan.ca/2020/12/13/nix-on-macos-11-big-sur/</link>
+                <guid isPermaLink="true">https://duan.ca/2020/12/13/nix-on-macos-11-big-sur/</guid>
+            </item>
+    </channel>
+</rss>

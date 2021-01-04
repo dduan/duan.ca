@@ -51,12 +51,12 @@ runtime speed improvements. Perhaps I'll write a follow-up post detailing my jou
 parser go fast later; the C library is part of the benchmark for a reason!
 
 I was also inspired by Joe Groff's blog post [Constructing human-grade parsers][]. Instead of
-stopping at the first syntax error, a parser (any parser!) should take treat the error as part of
-its successful output, deal with the erroneous part of the input, and recover from it. This approach
+stopping at the first syntax error, a parser (any parser!) should treat the error as part of its
+successful output, deal with the erroneous part of the input, and recover from it. This approach
 means the portion of the input after the first error gets parsed, and any error it may contain can
-be fonud and reported, too! Joe's post explains this well.
+be found and reported, too! Joe's post explains this well.
 
-To talk about this further, we need to dive into some details.
+To talk about this further, let's dive into some details.
 
 As mentioned earlier, to validate a TOML document, there are rules for both syntax and semantics to
 consider. TOML has a few top-level constructs: table header, array-table header, and key-value
@@ -64,11 +64,11 @@ pairs. Each of these alone can be validated purely based on syntax. On a high le
 can do the following:
 
 1. parse a list of top-level constructs
-2. iterate over this list, gradually assembly the complete TOML object.
+2. iterate over this list, gradually assembly the complete TOML object
 
-Each of these 2 steps can contain errors. To make the parser *human-grade*, the errors must not
-propagate by disrupting the parsing logic's control flow. In Swift, this means the code don't throw
-the conceptual errors, instead, the top-level constructs include error as a possible value:
+Errors could exist from each of these two steps To make the parser *human-grade*, the errors must
+not propagate by disrupting the parsing logic. In Swift, this means the code don't throw the
+(conceptual) errors, instead, the top-level constructs include error as a possible value:
 
 ```swift
 enum TopLevel: Equatable {
@@ -79,7 +79,7 @@ enum TopLevel: Equatable {
 }
 ```
 
-Upon consuming a `TopLevel` value, the parser must not stop if it generates a conflict according to
+Upon evaluating a `TopLevel` value, the parser must not stop if it generates a conflict according to
 TOML's requirement. We take note of this error, and move on to consume the next `TopLevel`. Errors
 from this step will join the error from `TopLevel.error` at the end for users to see. Therefore, the
 second step's code roughly does this:
@@ -93,13 +93,12 @@ for value in topLevelValues {
         errors.append(reason)
     default:
         do {
-            consume(value)
+            evaluate(value)
         } catch {
             errors.append(error)
         }
     }
 }
-
 
 if !errors.isEmpty {
     throw UserFacingError(details: errors)
@@ -131,8 +130,8 @@ as long as we can figure out what the intent is, we can pretend it's a good valu
 semantic issues related to `a` can be discovered. Improvements like this can be added to the parser
 in many places still.
 
-Anyways, that's the story of my new TOML parser. There's a lot of exciting things left to do. So
-this article might be a "part 1". No promises, though.
+Anyways, here's where I abruptly stop the story of my new TOML parser. There are a lot of exciting
+space for improvment. So this article might be a "part 1". No promises, though.
 
 [TOMLDecoder]: https://github.com/dduan/TOMDecoder
 [Pointfree]: https://pointfree.co

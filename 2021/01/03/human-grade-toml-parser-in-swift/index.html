@@ -60,7 +60,7 @@ example-toml.c            5901.000 ns ±  24.72 %     216140
 by the old parser. <code>example-toml.c</code> is the performance of a C library.</p>
 <p>So, the new parser is much much slower! However, I know from debugging through 200+ unit tests that,
 the new parser fixed a few serious bugs compared to the old. It also conforms to diffs between
-version 0.5 and 1.0 of the TOML spec. Speed along is not good enough of a reason to throw this work
+version 0.5 and 1.0 of the TOML spec. Speed alone is not good enough of a reason to throw this work
 away! There's another reason the new parser is superior, but I'll talk about it later.</p>
 <p>To be fair to parser combinators, I made several decisions that preferred development speed over
 runtime speed during development. These were conscious decisions. There were no benchmarks at

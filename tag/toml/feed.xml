@@ -5,6 +5,120 @@
         <link>https://duan.ca/tag/toml/</link>
         <atom:link href="https://duan.ca/tag/toml/feed.xml" rel="self" type="application/rss+xml" />
             <item>
+                <title>Making of a TOML parser</title>
+                <description>&lt;p&gt;During the holidays, I spent some time on the parser that underlies &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;TOMDecoder&quot;&gt;TOMLDecoder&lt;&#x2f;a&gt;. The original
+implementation targeted TOML&#x27;s spec version 0.5. A few release-candidates for version 1.0 has come
+out since then. So it&#x27;s a good time to give this project attention.&lt;&#x2f;p&gt;
+&lt;p&gt;Back in the 0.5 days, the TOML spec was (well) written in English with a few examples for each
+element in the language. The spec document both:&lt;&#x2f;p&gt;
+&lt;ol&gt;
+&lt;li&gt;how a TOML document should be spelled out (table header should have a &lt;code&gt;[&lt;&#x2f;code&gt;, followed by 0 or more
+whitespace, then, a key, 0 or more whitespace, then &#x27;]&#x27;).&lt;&#x2f;li&gt;
+&lt;li&gt;rules for detecting conflicts in a syntactically correct document (if &lt;code&gt;a.b&lt;&#x2f;code&gt; is a table, then it&#x27;s
+invalid to set its value to be a date in the same document).&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;p&gt;My memory of hand-rolling a recursive-descent scanner that conforms to both of the above
+requirements was unpleasant. My lesser understanding of the markup language, the vagueness for the
+validation rules in the spec, as well as (I think?) poorer skill for writing parsers all contributed
+to the unpleasantness. TOML has gained an ABNF for its syntax since then, making it less necessary
+to reply on the English descriptions. It&#x27;s the holidays, maintaining existing code is hard.&lt;&#x2f;p&gt;
+&lt;p&gt;So, I decided to have some fun, and re-write the parser from scratch. The rest of this post contains
+notable things from the rewrite.&lt;&#x2f;p&gt;
+&lt;p&gt;I translated the ABNF with parser combinators. The recent &lt;a href=&quot;https:&#x2f;&#x2f;pointfree.co&quot;&gt;Pointfree&lt;&#x2f;a&gt; video series made me curious
+about the performance of this parsing style in Swift. At the end of the rewrite, I added benchmarks
+to find out. Here&#x27;s benchmark for parsing an example TOML document&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;name                    time          std        iterations
+-----------------------------------------------------------
+example-toml.decoder    454840.000 ns ±   3.63 %       3045
+example-toml.combinator 422721.500 ns ±   4.28 %       3266
+example-toml.scanner     82232.000 ns ±   9.39 %      16793
+example-toml.c            5901.000 ns ±  24.72 %     216140
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;&lt;code&gt;example-toml.decoder&lt;&#x2f;code&gt; is time spent on parsing + decoding. &lt;code&gt;example-toml.scanner&lt;&#x2f;code&gt; is the time spent
+by the old parser. &lt;code&gt;example-toml.c&lt;&#x2f;code&gt; is the performance of a C library.&lt;&#x2f;p&gt;
+&lt;p&gt;So, the new parser is much much slower! However, I know from debugging through 200+ unit tests that,
+the new parser fixed a few serious bugs compared to the old. It also conforms to diffs between
+version 0.5 and 1.0 of the TOML spec. Speed along is not good enough of a reason to throw this work
+away! There&#x27;s another reason the new parser is superior, but I&#x27;ll talk about it later.&lt;&#x2f;p&gt;
+&lt;p&gt;To be fair to parser combinators, I made several decisions that preferred development speed over
+runtime speed during development. These were conscious decisions. There were no benchmarks at
+time so I didn&#x27;t want to worry about it pre-maturely. Point is, there are rooms for significant
+runtime speed improvements. Perhaps I&#x27;ll write a follow-up post detailing my journey to make the
+parser go fast later; the C library is part of the benchmark for a reason!&lt;&#x2f;p&gt;
+&lt;p&gt;I was also inspired by Joe Groff&#x27;s blog post &lt;a href=&quot;http:&#x2f;&#x2f;duriansoftware.com&#x2f;joe&#x2f;Constructing-human-grade-parsers.html&quot;&gt;Constructing human-grade parsers&lt;&#x2f;a&gt;. Instead of
+stopping at the first syntax error, a parser (any parser!) should take treat the error as part of
+its successful output, deal with the erroneous part of the input, and recover from it. This approach
+means the portion of the input after the first error gets parsed, and any error it may contain can
+be fonud and reported, too! Joe&#x27;s post explains this well.&lt;&#x2f;p&gt;
+&lt;p&gt;To talk about this further, we need to dive into some details.&lt;&#x2f;p&gt;
+&lt;p&gt;As mentioned earlier, to validate a TOML document, there are rules for both syntax and semantics to
+consider. TOML has a few top-level constructs: table header, array-table header, and key-value
+pairs. Each of these alone can be validated purely based on syntax. On a high level, a TOML parser
+can do the following:&lt;&#x2f;p&gt;
+&lt;ol&gt;
+&lt;li&gt;parse a list of top-level constructs&lt;&#x2f;li&gt;
+&lt;li&gt;iterate over this list, gradually assembly the complete TOML object.&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;p&gt;Each of these 2 steps can contain errors. To make the parser &lt;em&gt;human-grade&lt;&#x2f;em&gt;, the errors must not
+propagate by disrupting the parsing logic&#x27;s control flow. In Swift, this means the code don&#x27;t throw
+the conceptual errors, instead, the top-level constructs include error as a possible value:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;enum&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;TopLevel&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;:&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;Equatable&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
+    &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; table(&lt;span class=&quot;support class&quot;&gt;Key&lt;&#x2f;span&gt;)
+    &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; arrayTable(&lt;span class=&quot;support class&quot;&gt;Key&lt;&#x2f;span&gt;)
+    &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; keyValue(&lt;span class=&quot;support class&quot;&gt;KeyValuePair&lt;&#x2f;span&gt;)
+    &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; error(&lt;span class=&quot;support class&quot;&gt;Reason&lt;&#x2f;span&gt;)
+}
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Upon consuming a &lt;code&gt;TopLevel&lt;&#x2f;code&gt; value, the parser must not stop if it generates a conflict according to
+TOML&#x27;s requirement. We take note of this error, and move on to consume the next &lt;code&gt;TopLevel&lt;&#x2f;code&gt;. Errors
+from this step will join the error from &lt;code&gt;TopLevel.error&lt;&#x2f;code&gt; at the end for users to see. Therefore, the
+second step&#x27;s code roughly does this:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; errors = [&lt;span class=&quot;support class&quot;&gt;Error&lt;&#x2f;span&gt;]()
+
+&lt;span class=&quot;keyword control&quot;&gt;for&lt;&#x2f;span&gt; value &lt;span class=&quot;keyword control&quot;&gt;in&lt;&#x2f;span&gt; topLevelValues {
+    &lt;span class=&quot;keyword control&quot;&gt;switch&lt;&#x2f;span&gt; value {
+    &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; .&lt;span class=&quot;constant language enum&quot;&gt;error&lt;&#x2f;span&gt;(&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; reason):
+        errors&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;append(reason)
+    &lt;span class=&quot;keyword control&quot;&gt;default&lt;&#x2f;span&gt;:
+        &lt;span class=&quot;keyword control&quot;&gt;do&lt;&#x2f;span&gt; {
+            consume(value)
+        } &lt;span class=&quot;keyword control&quot;&gt;catch&lt;&#x2f;span&gt; {
+            errors&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;append(error)
+        }
+    }
+}
+
+
+&lt;span class=&quot;keyword control&quot;&gt;if&lt;&#x2f;span&gt; !errors&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;isEmpty {
+    &lt;span class=&quot;keyword control&quot;&gt;throw&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;UserFacingError&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;details&lt;&#x2f;span&gt;: errors)
+}
+
+&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; no error! parsing succeeded&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;This code &amp;quot;synchronizes&amp;quot; the errors from both the syntactical, and semantical level. With some
+additional effort to make the errors &lt;code&gt;CustomStringConvertible&lt;&#x2f;code&gt;, a erroneous TOML document such as&lt;&#x2f;p&gt;
+&lt;pre&gt;a = &quot;Hello
+b = 43
+[b]
+&lt;&#x2f;pre&gt;
+&lt;p&gt;makes the parser generate the following error message:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;Deserialization failure:
+    * Value |1, 5| Missing closing character `&amp;quot;` in string
+    * Conflict |3, 2| Conflicting value at [b] Existing value is 43
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;The explanation I presented above is simplified by a lot. In reality, the &amp;quot;human-grade&amp;quot; upgrade can
+go a lot further. For example, if the definition of &lt;code&gt;a&lt;&#x2f;code&gt; has a syntax error, instead of rejecting it,
+as long as we can figure out what the intent is, we can pretend it&#x27;s a good value. That way, any
+semantic issues related to &lt;code&gt;a&lt;&#x2f;code&gt; can be discovered. Improvements like this can be added to the parser
+in many places still.&lt;&#x2f;p&gt;
+&lt;p&gt;Anyways, that&#x27;s the story of my new TOML parser. There&#x27;s a lot of exciting things left to do. So
+this article might be a &amp;quot;part 1&amp;quot;. No promises, though.&lt;&#x2f;p&gt;
+</description>
+                <pubDate>Sun, 03 Jan 2021 14:56:10 -0800</pubDate>
+                <link>https://duan.ca/2021/01/03/human-grade-toml-parser-in-swift/</link>
+                <guid isPermaLink="true">https://duan.ca/2021/01/03/human-grade-toml-parser-in-swift/</guid>
+            </item>
+            <item>
                 <title>TOML Decoder Playlist</title>
                 <description>&lt;p&gt;I enjoyed making &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;TOMLDeserializer&quot;&gt;TOMLDeserializer&lt;&#x2f;a&gt; and &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;TOMLDecoder&quot;&gt;TOMLDecoder&lt;&#x2f;a&gt; recently. Let&#x27;s hope
 some projects will pick them up and TOML as a configuration format will start to

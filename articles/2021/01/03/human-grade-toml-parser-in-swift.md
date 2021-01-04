@@ -10,7 +10,7 @@ Back in the 0.5 days, the TOML spec was (well) written in English with a few exa
 element in the language. The spec document both:
 
 1. how a TOML document should be spelled out (table header should have a `[`, followed by 0 or more
-   whitespace, then, a key, 0 or more whitespace, then ']').
+   whitespace, then, a key, 0 or more whitespace, then `]`).
 2. rules for detecting conflicts in a syntactically correct document (if `a.b` is a table, then it's
    invalid to set its value to be a date in the same document).
 

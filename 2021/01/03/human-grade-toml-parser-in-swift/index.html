@@ -68,22 +68,22 @@ time so I didn't want to worry about it pre-maturely. Point is, there are rooms 
 runtime speed improvements. Perhaps I'll write a follow-up post detailing my journey to make the
 parser go fast later; the C library is part of the benchmark for a reason!</p>
 <p>I was also inspired by Joe Groff's blog post <a href="http://duriansoftware.com/joe/Constructing-human-grade-parsers.html">Constructing human-grade parsers</a>. Instead of
-stopping at the first syntax error, a parser (any parser!) should take treat the error as part of
-its successful output, deal with the erroneous part of the input, and recover from it. This approach
+stopping at the first syntax error, a parser (any parser!) should treat the error as part of its
+successful output, deal with the erroneous part of the input, and recover from it. This approach
 means the portion of the input after the first error gets parsed, and any error it may contain can
-be fonud and reported, too! Joe's post explains this well.</p>
-<p>To talk about this further, we need to dive into some details.</p>
+be found and reported, too! Joe's post explains this well.</p>
+<p>To talk about this further, let's dive into some details.</p>
 <p>As mentioned earlier, to validate a TOML document, there are rules for both syntax and semantics to
 consider. TOML has a few top-level constructs: table header, array-table header, and key-value
 pairs. Each of these alone can be validated purely based on syntax. On a high level, a TOML parser
 can do the following:</p>
 <ol>
 <li>parse a list of top-level constructs</li>
-<li>iterate over this list, gradually assembly the complete TOML object.</li>
+<li>iterate over this list, gradually assembly the complete TOML object</li>
 </ol>
-<p>Each of these 2 steps can contain errors. To make the parser <em>human-grade</em>, the errors must not
-propagate by disrupting the parsing logic's control flow. In Swift, this means the code don't throw
-the conceptual errors, instead, the top-level constructs include error as a possible value:</p>
+<p>Errors could exist from each of these two steps To make the parser <em>human-grade</em>, the errors must
+not propagate by disrupting the parsing logic. In Swift, this means the code don't throw the
+(conceptual) errors, instead, the top-level constructs include error as a possible value:</p>
 <pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">TopLevel</span><span class="keyword operator">:</span> <span class="support class">Equatable</span></span></span> {
     <span class="keyword control">case</span> table(<span class="support class">Key</span>)
     <span class="keyword control">case</span> arrayTable(<span class="support class">Key</span>)
@@ -91,7 +91,7 @@ the conceptual errors, instead, the top-level constructs include error as a poss
     <span class="keyword control">case</span> error(<span class="support class">Reason</span>)
 }
 </span></pre>
-<p>Upon consuming a <code>TopLevel</code> value, the parser must not stop if it generates a conflict according to
+<p>Upon evaluating a <code>TopLevel</code> value, the parser must not stop if it generates a conflict according to
 TOML's requirement. We take note of this error, and move on to consume the next <code>TopLevel</code>. Errors
 from this step will join the error from <code>TopLevel.error</code> at the end for users to see. Therefore, the
 second step's code roughly does this:</p>
@@ -103,13 +103,12 @@ second step's code roughly does this:</p>
         errors<span class="keyword operator">.</span>append(reason)
     <span class="keyword control">default</span>:
         <span class="keyword control">do</span> {
-            consume(value)
+            evaluate(value)
         } <span class="keyword control">catch</span> {
             errors<span class="keyword operator">.</span>append(error)
         }
     }
 }
-
 
 <span class="keyword control">if</span> !errors<span class="keyword operator">.</span>isEmpty {
     <span class="keyword control">throw</span> <span class="support class">UserFacingError</span>(<span class="variable parameter">details</span>: errors)
@@ -133,8 +132,8 @@ go a lot further. For example, if the definition of <code>a</code> has a syntax 
 as long as we can figure out what the intent is, we can pretend it's a good value. That way, any
 semantic issues related to <code>a</code> can be discovered. Improvements like this can be added to the parser
 in many places still.</p>
-<p>Anyways, that's the story of my new TOML parser. There's a lot of exciting things left to do. So
-this article might be a &quot;part 1&quot;. No promises, though.</p>
+<p>Anyways, here's where I abruptly stop the story of my new TOML parser. There are a lot of exciting
+space for improvment. So this article might be a &quot;part 1&quot;. No promises, though.</p>
 
 </article>
 <footer>

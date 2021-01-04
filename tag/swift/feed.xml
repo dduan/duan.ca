@@ -13,7 +13,7 @@ out since then. So it&#x27;s a good time to give this project attention.&lt;&#x2
 element in the language. The spec document both:&lt;&#x2f;p&gt;
 &lt;ol&gt;
 &lt;li&gt;how a TOML document should be spelled out (table header should have a &lt;code&gt;[&lt;&#x2f;code&gt;, followed by 0 or more
-whitespace, then, a key, 0 or more whitespace, then &#x27;]&#x27;).&lt;&#x2f;li&gt;
+whitespace, then, a key, 0 or more whitespace, then &lt;code&gt;]&lt;&#x2f;code&gt;).&lt;&#x2f;li&gt;
 &lt;li&gt;rules for detecting conflicts in a syntactically correct document (if &lt;code&gt;a.b&lt;&#x2f;code&gt; is a table, then it&#x27;s
 invalid to set its value to be a date in the same document).&lt;&#x2f;li&gt;
 &lt;&#x2f;ol&gt;

@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: duan.ca
+Token: e125b439946c11aac9ba8bd66a72458f5c3794d69fa962ed3d4a9683bc062cc2

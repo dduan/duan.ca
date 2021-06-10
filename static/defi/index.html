@@ -235,7 +235,7 @@
                     return
                 }
 
-                const balance = new BN(depositAmount)
+                const balance = new BN(depositAmount.toString())
                 const reserves = await tokenPair.methods.getReserves().call()
                 const half = balance.div(new BN(2))
                 const sushi = await getSushi(web3)

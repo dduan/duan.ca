@@ -34,12 +34,12 @@
                 <td><span id="spendingApprovedLabel"></span></td>
             </tr>
             <tr>
-                <td>Input Percentage</td>
+                <td>Deposit Percentage</td>
                 <td><input type="range" id="inputTokenAmountInput" style="width: 100%" min="0" max="100" value="100"></td>
             </tr>
             <tr>
-                <td>Balance</td>
-                <td><span id="balanceAmountLabel">0</span></td>
+                <td>Total deposit amount</td>
+                <td><span id="depositAmountLabel">0</span></td>
             </tr>
             <tr>
                 <td>Swap Amount</td>
@@ -141,10 +141,12 @@
                 return account
             }
 
+            // Global variables
             var tokenPair = undefined
             var tokens = []
             var selectedTokenIndex = 0
             var account = undefined
+            var inputAmount = undefined
 
             const poolAddressInput = document.getElementById("poolAddressInput")
             const poolAddressStatusLabel = document.getElementById("poolAddressStatusLabel")
@@ -154,7 +156,7 @@
             const token0Option = document.getElementById("token0Option")
             const token1Option = document.getElementById("token1Option")
             const spendingApprovedLabel = document.getElementById("spendingApprovedLabel")
-            const balanceAmountLabel = document.getElementById("balanceAmountLabel")
+            const depositAmountLabel = document.getElementById("depositAmountLabel")
             const swapAmountLabel = document.getElementById("swapAmountLabel")
             const swapAndLPButton = document.getElementById("swapAndLPButton")
             const errorLabel = document.getElementById("errorLabel")
@@ -175,7 +177,6 @@
                 const token = tokenInfo.contract
                 const allowance = await token.methods.allowance(web3.eth.defaultAccount, sushiAddress).call()
                 spendingApprovedLabel.innerHTML = allowance != 0 ? "✅" : "❌"
-                balanceAmountLabel.innerHTML = `${tokenInfo.balanceDisplay}`
                 setInputAmount(web3)
             }
 
@@ -223,13 +224,18 @@
             }
 
             const setInputAmount = async (web3) => {
+                const percent = parseInt(inputTokenAmountInput.value) / 100
+                const info = tokens[selectedTokenIndex]
+                const depositAmount = info.balance * percent
+                depositAmountLabel.innerHTML = `${depositAmount / (10 ** info.decimals)} ${info.symbol} (${percent * 100}%)`
+
                 const BN = web3.utils.BN
                 if (tokens[selectedTokenIndex].balance == 0) {
                     reportError("Balance is zero, won't check swap amount")
                     return
                 }
 
-                const balance = new BN(tokens[selectedTokenIndex].balance)
+                const balance = new BN(`${depositAmount}`)
                 const reserves = await tokenPair.methods.getReserves().call()
                 const half = balance.div(new BN(2))
                 const sushi = await getSushi(web3)
@@ -366,12 +372,19 @@
                     selectedTokenIndex = parseInt(e.target.value)
                     handleTokenSelection(web3)
                 })
+
                 swapAndLPButton.addEventListener('click', (e) => {
                     swapAndLP()
                 })
+
+                inputTokenAmountInput.addEventListener('change', (e) => {
+                    setInputAmount(web3)
+                })
+
                 depositIronUSDCButton.addEventListener('click', (e) => {
                     depositIronUSDC(web3)
                 })
+
                 updateIronUSDCBalance(web3)
             }
 

@@ -115,16 +115,16 @@
                 const matic = await getERC20Token(maticTokenAddress)
                 const titan = await getERC20Token(titanTokenAddress)
                 const claim0Result = await iron.methods.deposit("1", "0").send({ from: account })
-                say(`claimed ${parseInt(claim0Result.events[0].raw.data) / (10 * 18)} TITAN from IRON/USDC farm`)
+                say(`claimed ${parseInt(claim0Result.events[0].raw.data) / (10 ** 18)} TITAN from IRON/USDC farm`)
                 const claim1Result = await iron.methods.deposit("0", "0").send({ from: account })
-                say(`claimed ${parseInt(claim1Result.events[0].raw.data) / (10 * 18)} TITAN from TITAN/MATIC farm`)
+                say(`claimed ${parseInt(claim1Result.events[0].raw.data) / (10 ** 18)} TITAN from TITAN/MATIC farm`)
                 var titanBalance = await titan.methods.balanceOf(account).call()
                 while (titanBalance == 0) {
                     await new Promise(r => setTimeout(r, 500))
                     titanBalance = await titan.methods.balanceOf(account).call()
                 }
 
-                say(`Now we have ${titanBalance / (10 * 18)} TITAN.`)
+                say(`Now we have ${titanBalance / (10 ** 18)} TITAN.`)
 
                 // Swap on sushi
                 // token 0 is matic, token 1 is titan
@@ -155,7 +155,7 @@
                     (half.sqr().mul(nominator).div(denominator)).sqrt()
                 )
 
-                say(`Swapping ${swapAmount / (10 ** 18)} TITAN for MATIC`)
+                say(`Swapping ${swapAmount / (10 ** 18)} TITAN for MATIC...`)
                 const path = [titanTokenAddress, maticTokenAddress]
                 const swapResult = await sushi.methods.swapExactTokensForTokens(swapAmount, "0", path, account, Date.now() + 3600).send({from: account})
                 const swapedAmount = new web3.utils.BN(BigInt(parseInt(swapResult.events[0].raw.data)).toString())

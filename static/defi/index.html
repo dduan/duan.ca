@@ -3,10 +3,9 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-        <title>ERC20 Token to Sushi LP</title>
+        <title>Iron Compounder</title>
     </head>
     <body>
-        <h1>ERC20 Token to Sushi LP</h1>
         <table>
             <tr>
                 <td>Metamask</td>
@@ -17,110 +16,39 @@
                 <td id="ethAccountLabel"></td>
             </tr>
             <tr>
-                <td>Pool Address</td>
-                <td><input type="text" id="poolAddressInput" style="width: 100%"><div id="poolAddressStatusLabel"></div></td>
-            </tr>
-            <tr>
-                <td>Trade In</td>
-                <td>
-                    <select id="inputTokenSelect" name="inputTokenSelect" style="width: 100%">
-                        <option value="0" id="token0Option"></option>
-                        <option value="1" id="token1Option"></option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Spending Approved</td>
-                <td><span id="spendingApprovedLabel"></span></td>
-            </tr>
-            <tr>
-                <td>Deposit Percentage</td>
-                <td><input type="range" id="inputTokenAmountInput" style="width: 100%" min="0" max="100" value="100"></td>
-            </tr>
-            <tr>
-                <td>Total deposit amount</td>
-                <td><span id="depositAmountLabel">0</span></td>
-            </tr>
-            <tr>
-                <td>Swap Amount</td>
-                <td><span id="swapAmountLabel">0</span></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="button" id="swapAndLPButton" value="Swap and Provide Liquidity" style="width: 100%"></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><span id="errorLabel" style="color: red"></span></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><span id="successLabel" style="color: green"></span></td>
+                <td>Compound?</td>
+                <td><input type="button" value="Compound!" style="width: 100%" id="compoundTitanMaticButton"></td>
             </tr>
         </table>
-
         <hr>
-
-        <p>This is a pure Web3 app that converts an ERC20 asset in your web3 wallet to a liquidity pool token which is composed of that asset and another.</p>
-        <p>Simply put in address for the LP token such as <a href="https://analytics-polygon.sushi.com/pairs/0x85de135ff062df790a5f20b79120f17d3da63b2d">this one</a>, pick one asset out of the pair, pick the percent of asset to spend, and press the big button. You'll have to approve two transations, one for swapping part of the asset to the other one in the liquidity pool, then another for providing liquidity. You'll receive the Sushi LP token in your wallet at the end.</p>
-        <p>As close to 100% as possible of the input asset will become the LP.</p>
-        <p>Network and Sushi exchange fees apply. This app does not incur any additional fees.</p>
-        <p>You can stop the transactions, or view them on scanners via Metamask.</p>
-        <p>This app is only tested on Firefox 89 and Metamask. All code except web3.js is embbeded within this HTML file.</p>
-
-        <hr>
-
-        <table>
-            <tr>
-                <td>USDC-IRON</td>
-                <td><span id="ironUSDCLabel"></span></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="button" id="depositIronUSDCButton" value="Deposit to Polycat">
-                </td>
-            </tr>
-        </table>
-
-        <hr>
-
-        <table>
-            <tr>
-                <td>USDC-IRON</td>
-                <td>0x85de135ff062df790a5f20b79120f17d3da63b2d</td>
-            </tr>
-            <tr>
-                <td>WMATIC-TITAN</td>
-                <td>0xa79983daf2a92c2c902cd74217efe3d8af9fba2a</td>
-            </tr>
-        </table>
-
+        <div id="logs">
+        </div>
         <script>
             "use strict"
-            const getERC20Token = async (web3, address) => {
+            const getERC20Token = async (address) => {
                 const abi = [ { "constant": true, "inputs": [], "name": "name", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_spender", "type": "address" }, { "name": "_value", "type": "uint256" } ], "name": "approve", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_from", "type": "address" }, { "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" } ], "name": "transferFrom", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [ { "name": "", "type": "uint8" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_owner", "type": "address" } ], "name": "balanceOf", "outputs": [ { "name": "balance", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" } ], "name": "transfer", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_owner", "type": "address" }, { "name": "_spender", "type": "address" } ], "name": "allowance", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "payable": true, "stateMutability": "payable", "type": "fallback" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "owner", "type": "address" }, { "indexed": true, "name": "spender", "type": "address" }, { "indexed": false, "name": "value", "type": "uint256" } ], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "from", "type": "address" }, { "indexed": true, "name": "to", "type": "address" }, { "indexed": false, "name": "value", "type": "uint256" } ], "name": "Transfer", "type": "event" } ]
                 return new web3.eth.Contract(abi, address)
             }
 
-            const getPair = async (web3, address) => {
+            const getPair = async (address) => {
                 const abi = [{ "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "spender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "amount0", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "amount1", "type": "uint256" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" } ], "name": "Burn", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "amount0", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "amount1", "type": "uint256" } ], "name": "Mint", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "sender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "amount0In", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "amount1In", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "amount0Out", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "amount1Out", "type": "uint256" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" } ], "name": "Swap", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": false, "internalType": "uint112", "name": "reserve0", "type": "uint112" }, { "indexed": false, "internalType": "uint112", "name": "reserve1", "type": "uint112" } ], "name": "Sync", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "Transfer", "type": "event" }, { "constant": true, "inputs": [], "name": "DOMAIN_SEPARATOR", "outputs": [ { "internalType": "bytes32", "name": "", "type": "bytes32" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "MINIMUM_LIQUIDITY", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "pure", "type": "function" }, { "constant": true, "inputs": [], "name": "PERMIT_TYPEHASH", "outputs": [ { "internalType": "bytes32", "name": "", "type": "bytes32" } ], "payable": false, "stateMutability": "pure", "type": "function" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "spender", "type": "address" } ], "name": "allowance", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "approve", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "owner", "type": "address" } ], "name": "balanceOf", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "to", "type": "address" } ], "name": "burn", "outputs": [ { "internalType": "uint256", "name": "amount0", "type": "uint256" }, { "internalType": "uint256", "name": "amount1", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [ { "internalType": "uint8", "name": "", "type": "uint8" } ], "payable": false, "stateMutability": "pure", "type": "function" }, { "constant": true, "inputs": [], "name": "factory", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getReserves", "outputs": [ { "internalType": "uint112", "name": "reserve0", "type": "uint112" }, { "internalType": "uint112", "name": "reserve1", "type": "uint112" }, { "internalType": "uint32", "name": "blockTimestampLast", "type": "uint32" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "", "type": "address" }, { "internalType": "address", "name": "", "type": "address" } ], "name": "initialize", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "kLast", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "to", "type": "address" } ], "name": "mint", "outputs": [ { "internalType": "uint256", "name": "liquidity", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "payable": false, "stateMutability": "pure", "type": "function" }, { "constant": true, "inputs": [ { "internalType": "address", "name": "owner", "type": "address" } ], "name": "nonces", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "value", "type": "uint256" }, { "internalType": "uint256", "name": "deadline", "type": "uint256" }, { "internalType": "uint8", "name": "v", "type": "uint8" }, { "internalType": "bytes32", "name": "r", "type": "bytes32" }, { "internalType": "bytes32", "name": "s", "type": "bytes32" } ], "name": "permit", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "price0CumulativeLast", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "price1CumulativeLast", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "to", "type": "address" } ], "name": "skim", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "uint256", "name": "amount0Out", "type": "uint256" }, { "internalType": "uint256", "name": "amount1Out", "type": "uint256" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "bytes", "name": "data", "type": "bytes" } ], "name": "swap", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "payable": false, "stateMutability": "pure", "type": "function" }, { "constant": false, "inputs": [], "name": "sync", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "token0", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "token1", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "transfer", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "internalType": "address", "name": "from", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "value", "type": "uint256" } ], "name": "transferFrom", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" } ] 
                 return new web3.eth.Contract(abi, address)
             }
 
+            const titanTokenAddress = "0xaaa5b9e6c589642f98a1cda99b9d024b8407285a"
+            const maticTokenAddress = "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270"
+            const maticTitanPairAddress = "0xa79983daf2a92c2c902cd74217efe3d8af9fba2a"
             const sushiAddress = "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506"
-            const getSushi = async (web3) => {
+
+            const getIron = async () => {
+                const address = "0x65430393358e55A658BcdE6FF69AB28cF1CbB77a"
+                const abi = [{"inputs":[{"internalType":"contract IERC20","name":"_rewardToken","type":"address"},{"internalType":"address","name":"_masterChefFund","type":"address"},{"internalType":"uint256","name":"_rewardPerBlock","type":"uint256"},{"internalType":"uint256","name":"_startBlock","type":"uint256"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":true,"internalType":"uint256","name":"pid","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":true,"internalType":"uint256","name":"pid","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"EmergencyWithdraw","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":true,"internalType":"uint256","name":"pid","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Withdraw","type":"event"},{"inputs":[],"name":"BONUS_MULTIPLIER","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_allocPoint","type":"uint256"},{"internalType":"contract IERC20","name":"_lpToken","type":"address"},{"internalType":"bool","name":"_withUpdate","type":"bool"}],"name":"add","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"}],"name":"emergencyWithdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_from","type":"uint256"},{"internalType":"uint256","name":"_to","type":"uint256"}],"name":"getMultiplier","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"massUpdatePools","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"masterChefFund","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"address","name":"_user","type":"address"}],"name":"pendingReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"poolInfo","outputs":[{"internalType":"contract IERC20","name":"lpToken","type":"address"},{"internalType":"uint256","name":"allocPoint","type":"uint256"},{"internalType":"uint256","name":"lastRewardBlock","type":"uint256"},{"internalType":"uint256","name":"accRewardPerShare","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"poolLength","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"rewardPerBlock","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"rewardToken","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"uint256","name":"_allocPoint","type":"uint256"},{"internalType":"bool","name":"_withUpdate","type":"bool"}],"name":"set","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_masterChefFund","type":"address"}],"name":"setMasterChefFund","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_rewardPerBlock","type":"uint256"}],"name":"setRewardPerBlock","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"startBlock","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalAllocPoint","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"}],"name":"updatePool","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"}],"name":"userInfo","outputs":[{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"rewardDebt","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+                return new web3.eth.Contract(abi, address)
+            }
+
+            const getSushi = async () => {
                 const abi = [{"type":"constructor","stateMutability":"nonpayable","inputs":[{"type":"address","name":"_factory","internalType":"address"},{"type":"address","name":"_WETH","internalType":"address"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"address"}],"name":"WETH","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256","name":"amountA","internalType":"uint256"},{"type":"uint256","name":"amountB","internalType":"uint256"},{"type":"uint256","name":"liquidity","internalType":"uint256"}],"name":"addLiquidity","inputs":[{"type":"address","name":"tokenA","internalType":"address"},{"type":"address","name":"tokenB","internalType":"address"},{"type":"uint256","name":"amountADesired","internalType":"uint256"},{"type":"uint256","name":"amountBDesired","internalType":"uint256"},{"type":"uint256","name":"amountAMin","internalType":"uint256"},{"type":"uint256","name":"amountBMin","internalType":"uint256"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"payable","outputs":[{"type":"uint256","name":"amountToken","internalType":"uint256"},{"type":"uint256","name":"amountETH","internalType":"uint256"},{"type":"uint256","name":"liquidity","internalType":"uint256"}],"name":"addLiquidityETH","inputs":[{"type":"address","name":"token","internalType":"address"},{"type":"uint256","name":"amountTokenDesired","internalType":"uint256"},{"type":"uint256","name":"amountTokenMin","internalType":"uint256"},{"type":"uint256","name":"amountETHMin","internalType":"uint256"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"address"}],"name":"factory","inputs":[]},{"type":"function","stateMutability":"pure","outputs":[{"type":"uint256","name":"amountIn","internalType":"uint256"}],"name":"getAmountIn","inputs":[{"type":"uint256","name":"amountOut","internalType":"uint256"},{"type":"uint256","name":"reserveIn","internalType":"uint256"},{"type":"uint256","name":"reserveOut","internalType":"uint256"}]},{"type":"function","stateMutability":"pure","outputs":[{"type":"uint256","name":"amountOut","internalType":"uint256"}],"name":"getAmountOut","inputs":[{"type":"uint256","name":"amountIn","internalType":"uint256"},{"type":"uint256","name":"reserveIn","internalType":"uint256"},{"type":"uint256","name":"reserveOut","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"amounts","internalType":"uint256[]"}],"name":"getAmountsIn","inputs":[{"type":"uint256","name":"amountOut","internalType":"uint256"},{"type":"address[]","name":"path","internalType":"address[]"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"amounts","internalType":"uint256[]"}],"name":"getAmountsOut","inputs":[{"type":"uint256","name":"amountIn","internalType":"uint256"},{"type":"address[]","name":"path","internalType":"address[]"}]},{"type":"function","stateMutability":"pure","outputs":[{"type":"uint256","name":"amountB","internalType":"uint256"}],"name":"quote","inputs":[{"type":"uint256","name":"amountA","internalType":"uint256"},{"type":"uint256","name":"reserveA","internalType":"uint256"},{"type":"uint256","name":"reserveB","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256","name":"amountA","internalType":"uint256"},{"type":"uint256","name":"amountB","internalType":"uint256"}],"name":"removeLiquidity","inputs":[{"type":"address","name":"tokenA","internalType":"address"},{"type":"address","name":"tokenB","internalType":"address"},{"type":"uint256","name":"liquidity","internalType":"uint256"},{"type":"uint256","name":"amountAMin","internalType":"uint256"},{"type":"uint256","name":"amountBMin","internalType":"uint256"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256","name":"amountToken","internalType":"uint256"},{"type":"uint256","name":"amountETH","internalType":"uint256"}],"name":"removeLiquidityETH","inputs":[{"type":"address","name":"token","internalType":"address"},{"type":"uint256","name":"liquidity","internalType":"uint256"},{"type":"uint256","name":"amountTokenMin","internalType":"uint256"},{"type":"uint256","name":"amountETHMin","internalType":"uint256"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256","name":"amountETH","internalType":"uint256"}],"name":"removeLiquidityETHSupportingFeeOnTransferTokens","inputs":[{"type":"address","name":"token","internalType":"address"},{"type":"uint256","name":"liquidity","internalType":"uint256"},{"type":"uint256","name":"amountTokenMin","internalType":"uint256"},{"type":"uint256","name":"amountETHMin","internalType":"uint256"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256","name":"amountToken","internalType":"uint256"},{"type":"uint256","name":"amountETH","internalType":"uint256"}],"name":"removeLiquidityETHWithPermit","inputs":[{"type":"address","name":"token","internalType":"address"},{"type":"uint256","name":"liquidity","internalType":"uint256"},{"type":"uint256","name":"amountTokenMin","internalType":"uint256"},{"type":"uint256","name":"amountETHMin","internalType":"uint256"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"},{"type":"bool","name":"approveMax","internalType":"bool"},{"type":"uint8","name":"v","internalType":"uint8"},{"type":"bytes32","name":"r","internalType":"bytes32"},{"type":"bytes32","name":"s","internalType":"bytes32"}]},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256","name":"amountETH","internalType":"uint256"}],"name":"removeLiquidityETHWithPermitSupportingFeeOnTransferTokens","inputs":[{"type":"address","name":"token","internalType":"address"},{"type":"uint256","name":"liquidity","internalType":"uint256"},{"type":"uint256","name":"amountTokenMin","internalType":"uint256"},{"type":"uint256","name":"amountETHMin","internalType":"uint256"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"},{"type":"bool","name":"approveMax","internalType":"bool"},{"type":"uint8","name":"v","internalType":"uint8"},{"type":"bytes32","name":"r","internalType":"bytes32"},{"type":"bytes32","name":"s","internalType":"bytes32"}]},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256","name":"amountA","internalType":"uint256"},{"type":"uint256","name":"amountB","internalType":"uint256"}],"name":"removeLiquidityWithPermit","inputs":[{"type":"address","name":"tokenA","internalType":"address"},{"type":"address","name":"tokenB","internalType":"address"},{"type":"uint256","name":"liquidity","internalType":"uint256"},{"type":"uint256","name":"amountAMin","internalType":"uint256"},{"type":"uint256","name":"amountBMin","internalType":"uint256"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"},{"type":"bool","name":"approveMax","internalType":"bool"},{"type":"uint8","name":"v","internalType":"uint8"},{"type":"bytes32","name":"r","internalType":"bytes32"},{"type":"bytes32","name":"s","internalType":"bytes32"}]},{"type":"function","stateMutability":"payable","outputs":[{"type":"uint256[]","name":"amounts","internalType":"uint256[]"}],"name":"swapETHForExactTokens","inputs":[{"type":"uint256","name":"amountOut","internalType":"uint256"},{"type":"address[]","name":"path","internalType":"address[]"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"payable","outputs":[{"type":"uint256[]","name":"amounts","internalType":"uint256[]"}],"name":"swapExactETHForTokens","inputs":[{"type":"uint256","name":"amountOutMin","internalType":"uint256"},{"type":"address[]","name":"path","internalType":"address[]"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"payable","outputs":[],"name":"swapExactETHForTokensSupportingFeeOnTransferTokens","inputs":[{"type":"uint256","name":"amountOutMin","internalType":"uint256"},{"type":"address[]","name":"path","internalType":"address[]"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256[]","name":"amounts","internalType":"uint256[]"}],"name":"swapExactTokensForETH","inputs":[{"type":"uint256","name":"amountIn","internalType":"uint256"},{"type":"uint256","name":"amountOutMin","internalType":"uint256"},{"type":"address[]","name":"path","internalType":"address[]"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"swapExactTokensForETHSupportingFeeOnTransferTokens","inputs":[{"type":"uint256","name":"amountIn","internalType":"uint256"},{"type":"uint256","name":"amountOutMin","internalType":"uint256"},{"type":"address[]","name":"path","internalType":"address[]"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256[]","name":"amounts","internalType":"uint256[]"}],"name":"swapExactTokensForTokens","inputs":[{"type":"uint256","name":"amountIn","internalType":"uint256"},{"type":"uint256","name":"amountOutMin","internalType":"uint256"},{"type":"address[]","name":"path","internalType":"address[]"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"swapExactTokensForTokensSupportingFeeOnTransferTokens","inputs":[{"type":"uint256","name":"amountIn","internalType":"uint256"},{"type":"uint256","name":"amountOutMin","internalType":"uint256"},{"type":"address[]","name":"path","internalType":"address[]"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256[]","name":"amounts","internalType":"uint256[]"}],"name":"swapTokensForExactETH","inputs":[{"type":"uint256","name":"amountOut","internalType":"uint256"},{"type":"uint256","name":"amountInMax","internalType":"uint256"},{"type":"address[]","name":"path","internalType":"address[]"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256[]","name":"amounts","internalType":"uint256[]"}],"name":"swapTokensForExactTokens","inputs":[{"type":"uint256","name":"amountOut","internalType":"uint256"},{"type":"uint256","name":"amountInMax","internalType":"uint256"},{"type":"address[]","name":"path","internalType":"address[]"},{"type":"address","name":"to","internalType":"address"},{"type":"uint256","name":"deadline","internalType":"uint256"}]},{"type":"receive","stateMutability":"payable"}]
                 return new web3.eth.Contract(abi, sushiAddress)
-            }
-
-            const getPolycat = (web3) => {
-                const abi = [{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"strat","type":"address"}],"name":"AddPool","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":true,"internalType":"uint256","name":"pid","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":true,"internalType":"uint256","name":"pid","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"EmergencyWithdraw","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":true,"internalType":"bool","name":"status","type":"bool"}],"name":"OperatorUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":true,"internalType":"uint256","name":"pid","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Withdraw","type":"event"},{"inputs":[{"internalType":"address","name":"_strat","type":"address"}],"name":"addPool","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"uint256","name":"_wantAmt","type":"uint256"},{"internalType":"address","name":"_to","type":"address"}],"name":"deposit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"uint256","name":"_wantAmt","type":"uint256"}],"name":"deposit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"operators","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"poolInfo","outputs":[{"internalType":"contract IERC20","name":"want","type":"address"},{"internalType":"address","name":"strat","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"poolLength","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"resetAllowances","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"}],"name":"resetSingleAllowance","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"address","name":"_user","type":"address"}],"name":"stakedWantTokens","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_operator","type":"address"},{"internalType":"bool","name":"_status","type":"bool"}],"name":"updateOperator","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"}],"name":"userInfo","outputs":[{"internalType":"uint256","name":"shares","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"uint256","name":"_wantAmt","type":"uint256"},{"internalType":"address","name":"_to","type":"address"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"uint256","name":"_wantAmt","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"}],"name":"withdrawAll","outputs":[],"stateMutability":"nonpayable","type":"function"}]
-                return new web3.eth.Contract(abi, "0xBdA1f897E851c7EF22CD490D2Cf2DAce4645A904")
-            }
-
-            const getMaticTitanBalance = async (vaults, account) => {
-                return await vaults.methods.userInfo(57, account).call()
             }
 
             const detectMetaMask = () => {
@@ -142,187 +70,11 @@
             }
 
             // Global variables
-            var tokenPair = undefined
-            var tokens = []
-            var selectedTokenIndex = 0
             var account = undefined
-            var inputAmount = undefined
+            var web3 = undefined
 
-            const poolAddressInput = document.getElementById("poolAddressInput")
-            const poolAddressStatusLabel = document.getElementById("poolAddressStatusLabel")
-            const inputTokenAddressLabel = document.getElementById("inputTokenAddressLabel")
-            const inputTokenAmountInput = document.getElementById("inputTokenAmountInput")
-            const inputTokenSelect = document.getElementById("inputTokenSelect")
-            const token0Option = document.getElementById("token0Option")
-            const token1Option = document.getElementById("token1Option")
-            const spendingApprovedLabel = document.getElementById("spendingApprovedLabel")
-            const depositAmountLabel = document.getElementById("depositAmountLabel")
-            const swapAmountLabel = document.getElementById("swapAmountLabel")
-            const swapAndLPButton = document.getElementById("swapAndLPButton")
-            const errorLabel = document.getElementById("errorLabel")
-            const successLabel = document.getElementById("successLabel")
-            const depositIronUSDCButton = document.getElementById("depositIronUSDCButton")
-            const ironUSDCLabel = document.getElementById("ironUSDCLabel")
-            const updateForAddressValidity = async (isValid) => {
-                poolAddressStatusLabel.innerHTML = isValid ? "✅" : "❌"
-                inputTokenAmountInput.disabled = !isValid
-                inputTokenSelect.disabled = !isValid
-            }
-
-            const handleTokenSelection = async (web3) => {
-                clearError()
-                swapAndLPButton.disabled = true
-                spendingApprovedLabel.innerHTML = "⏳"
-                const tokenInfo = tokens[selectedTokenIndex]
-                const token = tokenInfo.contract
-                const allowance = await token.methods.allowance(web3.eth.defaultAccount, sushiAddress).call()
-                spendingApprovedLabel.innerHTML = allowance != 0 ? "✅" : "❌"
-                setInputAmount(web3)
-            }
-
-            const reportError = (errorMessage) => {
-                errorLabel.innerText = errorMessage
-            }
-
-            const reportSuccess = (successMessage) => {
-                successLabel.innerText = successMessage
-            }
-
-            const clearError = () => {
-                errorLabel.innerText = ""
-            }
-
-            var swapAndLP = undefined
-            const prepareSwapAndLP = async (web3, total, swapAmount) => {
-                const sushi = await getSushi(web3)
-                const outputIndex = selectedTokenIndex == 0 ? 1 : 0
-                const path = [tokens[selectedTokenIndex].address, tokens[outputIndex].address]
-                const inputSymbol = tokens[selectedTokenIndex].symbol
-                const otherSymbol = tokens[outputIndex].symbol
-                swapAndLP = async () => {
-                    swapAndLPButton.disabled = true
-                    reportSuccess(`Swapping ${parseInt(swapAmount.toString()) / (10 ** tokens[selectedTokenIndex].decimals)} ${inputSymbol} for ${otherSymbol}...`)
-                    const swapResult = await sushi.methods.swapExactTokensForTokens(swapAmount, "0", path, account, Date.now() + 3600).send({from: account})
-                    const swapedAmount = new web3.utils.BN(BigInt(parseInt(swapResult.events[0].raw.data)).toString())
-                    const remainingAmount = total.sub(swapedAmount)
-                    const receivedAmount = new web3.utils.BN(BigInt(parseInt(swapResult.events[2].raw.data)).toString())
-                    reportSuccess(`Received ${parseInt(receivedAmount.toString()) / (10 ** tokens[outputIndex].decimals)} ${otherSymbol}. Adding liquidity...`)
-                    const lpResult = await sushi.methods.addLiquidity(
-                        path[0],
-                        path[1],
-                        remainingAmount,
-                        receivedAmount,
-                        "1",
-                        "1",
-                        account,
-                        Date.now() + 3600
-                    )
-                    .send({from: account})
-                    reportSuccess(`Received ${parseInt(lpResult.events[5].raw.data)} LP token!`)
-                    handlePoolAddressUpdate(web3)
-                }
-            }
-
-            const setInputAmount = async (web3) => {
-                const percent = parseInt(inputTokenAmountInput.value) / 100
-                const info = tokens[selectedTokenIndex]
-                const depositAmount = info.balance * percent
-                depositAmountLabel.innerHTML = `${depositAmount / (10 ** info.decimals)} ${info.symbol} (${percent * 100}%)`
-
-                const BN = web3.utils.BN
-                if (tokens[selectedTokenIndex].balance == 0) {
-                    reportError("Balance is zero, won't check swap amount")
-                    return
-                }
-
-                const balance = new BN(BigInt(Math.floor(depositAmount)).toString())
-                const reserves = await tokenPair.methods.getReserves().call()
-                const half = balance.div(new BN(2))
-                const sushi = await getSushi(web3)
-                const outputIndex = selectedTokenIndex == 0 ? 1 : 0
-                const inputReserve = new BN(reserves[selectedTokenIndex])
-                const outputReserve = new BN(reserves[outputIndex])
-                const nominator = new BN(
-                    await sushi.methods.getAmountOut(
-                        half,
-                        inputReserve,
-                        outputReserve,
-                    ).call()
-                )
-                const denominator = new BN(
-                    await sushi.methods.quote(
-                        half,
-                        inputReserve.add(half),
-                        outputReserve.sub(nominator)
-                    ).call()
-                )
-
-                const swapAmount = balance.sub(
-                    (half.sqr().mul(nominator).div(denominator)).sqrt()
-                )
-
-                swapAmountLabel.innerHTML = `${parseInt(swapAmount.toString()) / 10 ** tokens[selectedTokenIndex].decimals}`
-                await prepareSwapAndLP(web3, balance, swapAmount)
-                swapAndLPButton.disabled = false
-            }
-
-            const updateUIBeforePairChange = () => {
-                clearError()
-                swapAndLPButton.disabled = true
-            }
-
-            const updateUIForPairChange = () => {
-                inputTokenSelect.value = `${selectedTokenIndex}`
-                token0Option.innerHTML = `${tokens[0].symbol} (${tokens[0].balanceDisplay})`
-                token1Option.innerHTML = `${tokens[1].symbol} (${tokens[1].balanceDisplay})`
-            }
-
-            const handlePoolAddressUpdate = async (web3) => {
-                updateUIBeforePairChange()
-                const address = poolAddressInput.value
-                if (!(address.indexOf('0x') == 0)) {
-                    updateForAddressValidity(false)
-                    return
-                }
-
-                poolAddressStatusLabel.innerHTML = "⏳"
-                tokenPair = await getPair(web3, address)
-                const token0Address = await tokenPair.methods.token0().call()
-                const token1Address = await tokenPair.methods.token1().call()
-                updateForAddressValidity(true)
-                const token0 = await getERC20Token(web3, token0Address)
-                const token1 = await getERC20Token(web3, token1Address)
-                const token0Symbol = await token0.methods.symbol().call()
-                const token1Symbol = await token1.methods.symbol().call()
-                const token0Balance = await token0.methods.balanceOf(account).call()
-                const token1Balance = await token1.methods.balanceOf(account).call()
-                const token0Decimals = await token0.methods.decimals().call()
-                const token1Decimals = await token1.methods.decimals().call()
-                const token0BalanceDisplay = token0Balance / (10 ** token0Decimals) 
-                const token1BalanceDisplay = token1Balance / (10 ** token1Decimals) 
-
-                tokens = [
-                    {
-                        contract: token0,
-                        address: token0Address,
-                        symbol: token0Symbol,
-                        balance: token0Balance,
-                        balanceDisplay: token0BalanceDisplay,
-                        decimals: token0Decimals
-                    },
-                    {
-                        contract: token1,
-                        address: token1Address,
-                        symbol: token1Symbol,
-                        balance: token1Balance,
-                        balanceDisplay: token1BalanceDisplay,
-                        decimals: token1Decimals
-                    }
-                ]
-
-                updateUIForPairChange()
-                handleTokenSelection(web3)
-            }
+            // Elements
+            const compoundTitanMaticButton = document.getElementById('compoundTitanMaticButton')
 
             const patchBN = (web3) => {
                 var BN = web3.utils.BN
@@ -343,49 +95,103 @@
                 }
             }
 
-            const ironUSDCLPAddress = "0x85de135ff062df790a5f20b79120f17d3da63b2d"
-            const updateIronUSDCBalance = async (web3) => {
-                const token = await getERC20Token(web3, ironUSDCLPAddress)
-                const balance = await token.methods.balanceOf(account).call()
-                ironUSDCLabel.innerHTML = parseInt(balance) / (10 ** await token.methods.decimals().call())
-                return balance
+            const getLocalERC20Balance = async (tokenAddress) => {
+                const token0 = await getERC20Token(web3, tokenAddress)
+                return await token0.methods.balanceOf(account).call()
             }
 
-            const depositIronUSDC = async (web3) => {
-                const balance = await updateIronUSDCBalance(web3)
-                const polycat = getPolycat(web3)
-                await polycat.methods.deposit("29", balance).send({from: account})
-                await updateIronUSDCBalance(web3)
+            const logs = document.getElementById("logs")
+            const say = (message) => {
+                const newP = document.createElement("p")
+                newP.innerText = message
+                logs.appendChild(newP)
+            }
+
+            const compoundTitanMatic = async () => {
+                say("Claiming rewards...")
+                const BN = web3.utils.BN
+                const sushi = await getSushi()
+                const iron = await getIron()
+                const matic = await getERC20Token(maticTokenAddress)
+                const titan = await getERC20Token(titanTokenAddress)
+                const claim0Result = await iron.methods.deposit("1", "0").send({ from: account })
+                say(`claimed ${parseInt(claim0Result.events[0].raw.data) / (10 * 18)} TITAN from IRON/USDC farm`)
+                const claim1Result = await iron.methods.deposit("0", "0").send({ from: account })
+                say(`claimed ${parseInt(claim1Result.events[0].raw.data) / (10 * 18)} TITAN from TITAN/MATIC farm`)
+                var titanBalance = await titan.methods.balanceOf(account).call()
+                while (titanBalance == 0) {
+                    await new Promise(r => setTimeout(r, 500))
+                    titanBalance = await titan.methods.balanceOf(account).call()
+                }
+
+                say(`Now we have ${titanBalance / (10 * 18)} TITAN.`)
+
+                // Swap on sushi
+                // token 0 is matic, token 1 is titan
+                const pair = await getPair(maticTitanPairAddress)
+                const reserves = await pair.methods.getReserves().call()
+                const maticReserve = new BN(reserves[0])
+                const titanReserve = new BN(reserves[1])
+
+                const balance = new BN(BigInt(Math.floor(titanBalance)).toString())
+                const half = balance.div(new BN(2))
+                
+                const nominator = new BN(
+                    await sushi.methods.getAmountOut(
+                        half,
+                        titanReserve,
+                        maticReserve,
+                    ).call()
+                )
+                const denominator = new BN(
+                    await sushi.methods.quote(
+                        half,
+                        titanReserve.add(half),
+                        maticReserve.sub(nominator)
+                    ).call()
+                )
+
+                const swapAmount = balance.sub(
+                    (half.sqr().mul(nominator).div(denominator)).sqrt()
+                )
+
+                say(`Swapping ${swapAmount / (10 ** 18)} TITAN for MATIC`)
+                const path = [titanTokenAddress, maticTokenAddress]
+                const swapResult = await sushi.methods.swapExactTokensForTokens(swapAmount, "0", path, account, Date.now() + 3600).send({from: account})
+                const swapedAmount = new web3.utils.BN(BigInt(parseInt(swapResult.events[0].raw.data)).toString())
+                const remainingAmount = balance.sub(swapedAmount)
+                const receivedAmount = new web3.utils.BN(BigInt(parseInt(swapResult.events[2].raw.data)).toString())
+                say(`Received ${receivedAmount / (10 ** 18)} MATIC.`)
+                say("Adding liquidity...")
+                const lpResult = await sushi.methods.addLiquidity(
+                    path[0],
+                    path[1],
+                    remainingAmount,
+                    receivedAmount,
+                    "1",
+                    "1",
+                    account,
+                    Date.now() + 3600
+                )
+                .send({from: account})                    
+                var slpBalance = 0
+                const slp = await getERC20Token(maticTitanPairAddress)
+                while (slpBalance == 0) {
+                    await new Promise(r => setTimeout(r, 500))
+                    slpBalance = await slp.methods.balanceOf(account).call()
+                }
+
+                say(`Depositing ${slpBalance / (10 ** 18)} SLP`)
+                await iron.methods.deposit("0", new BN(slpBalance)).send({ from: account })
+                say("Done!")
             }
 
             const main = async () => {
                 account = await checkLocalAccount()
-                const web3 = new Web3(ethereum)
+                web3 = new Web3(ethereum)
                 patchBN(web3)
                 web3.eth.defaultAccount = account
-                updateForAddressValidity(false)
-                poolAddressInput.addEventListener('change', (e) => {
-                    handlePoolAddressUpdate(web3)
-                })
-                handlePoolAddressUpdate(web3)
-                inputTokenSelect.addEventListener('change', (e) => {
-                    selectedTokenIndex = parseInt(e.target.value)
-                    handleTokenSelection(web3)
-                })
-
-                swapAndLPButton.addEventListener('click', (e) => {
-                    swapAndLP()
-                })
-
-                inputTokenAmountInput.addEventListener('change', (e) => {
-                    setInputAmount(web3)
-                })
-
-                depositIronUSDCButton.addEventListener('click', (e) => {
-                    depositIronUSDC(web3)
-                })
-
-                updateIronUSDCBalance(web3)
+                compoundTitanMaticButton.addEventListener('click', compoundTitanMatic)
             }
 
             main()

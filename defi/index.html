@@ -114,6 +114,8 @@
                 const iron = await getIron()
                 const matic = await getERC20Token(maticTokenAddress)
                 const titan = await getERC20Token(titanTokenAddress)
+                const claim0Result = await iron.methods.deposit("1", "0").send({ from: account })
+                say(`claimed ${parseInt(claim0Result.events[0].raw.data) / (10 ** 18)} TITAN from IRON/USDC farm`)
                 const claim1Result = await iron.methods.deposit("0", "0").send({ from: account })
                 say(`claimed ${parseInt(claim1Result.events[0].raw.data) / (10 ** 18)} TITAN from TITAN/MATIC farm`)
                 var titanBalance = await titan.methods.balanceOf(account).call()

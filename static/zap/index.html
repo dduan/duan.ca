@@ -95,10 +95,10 @@
                 <td><input type="button" id="harvestOmenButton1" value="Harvest Omen 1" style="width: 100%"></td>
             </tr>
             <tr>
-                <td><input type="button" id="fillOmenUSDCButton" value="OMEN-USDC LP Address" style="width: 100%"></td>
+                <td><input type="button" id="fillOmenETHButton" value="OMEN-ETH LP Address" style="width: 100%"></td>
             </tr>
             <tr>
-                <td><input type="button" id="depositOmenButton" value="Deposit OMEN-USDC" style="width: 100%"></td>
+                <td><input type="button" id="depositOmenButton" value="Deposit OMEN-ETH" style="width: 100%"></td>
             </tr>
         </table>
         <hr>
@@ -405,6 +405,7 @@
 
                 document.getElementById("fillQiMaiButton").addEventListener('click', () => {
                     poolAddressInput.value = "0x7afcf11f3e2f01e71b7cc6b8b5e707e42e6ea397"
+                    quickRadioButton.checked = true
                     handlePoolAddressUpdate(web3)
                 })
                 document.getElementById("depositQiButton").addEventListener('click', async () => {
@@ -423,7 +424,7 @@
 
                 const updateOmen0Amount = async () => {
                     harvestOmenButton0.disabled = true
-                    const balance0 = await augury.methods.pendingOmen(1, account).call()
+                    const balance0 = await augury.methods.pendingOmen(17, account).call()
                     harvestOmenButton0.value = `Harvest ${balance0 / omenDecimal} OMEN`
                     harvestOmenButton0.disabled = false
                 }
@@ -439,7 +440,7 @@
                 updateOmen1Amount()
 
                 harvestOmenButton0.addEventListener('click', async (e) => {
-                    await augury.methods.deposit(1, 0, account).send({from:account})
+                    await augury.methods.deposit(17, 0, account).send({from:account})
                     updateOmen0Amount()
                 })
 
@@ -448,18 +449,15 @@
                     updateOmen1Amount()
                 })
 
-                document.getElementById("fillOmenUSDCButton").addEventListener('click', () => {
-                    poolAddressInput.value = "0x50409de292f5f821888702e9538bf15fa273dfe6"
-                    handlePoolAddressUpdate(web3)
-                })
                 document.getElementById("depositOmenButton").addEventListener('click', async () => {
-                    const lp = await getERC20Token(web3, "0x50409De292f5F821888702e9538Bf15Fa273dFE6")
+                    const lp = await getERC20Token(web3, "0xd7217619279F31DA063D738Cf1Bf7435764a07D9")
                     const balance = await lp.methods.balanceOf(account).call();
-                    augury.methods.deposit(1, balance, account).send({ from: account, gas: 238099 })
+                    augury.methods.deposit(17, balance, account).send({ from: account, gas: 238099 })
                 })
 
-                document.getElementById("fillOmenUSDCButton").addEventListener('click', () => {
-                    poolAddressInput.value = "0x50409de292f5f821888702e9538bf15fa273dfe6"
+                document.getElementById("fillOmenETHButton").addEventListener('click', () => {
+                    poolAddressInput.value = "0xd7217619279F31DA063D738Cf1Bf7435764a07D9"
+                    sushiRadioButton.checked = true
                     handlePoolAddressUpdate(web3)
                 })
             }

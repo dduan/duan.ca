@@ -369,6 +369,101 @@
                 }
             }
 
+            const setUpQiStuff = async (web3) => {
+                const harvestQiButton0 = document.getElementById("harvestQiButton0")
+                const harvestQiButton1 = document.getElementById("harvestQiButton1")
+                const mai = await getMai(web3)
+                const qiToken = await getERC20Token(web3, '0x580A84C73811E1839F75d86d75d88cCa0c241fF4')
+                const qiDecimal = 10 ** (await qiToken.methods.decimals().call())
+
+                const updateOi0Amount = async () => {
+                    harvestQiButton0.disabled = true
+                    const balance0 = await mai.methods.pending(1, account).call()
+                    harvestQiButton0.value = `Harvest ${balance0 / qiDecimal} QI`
+                    harvestQiButton0.disabled = false
+                }
+
+                const updateOi1Amount = async () => {
+                    harvestQiButton1.disabled = true
+                    const balance1 = await mai.methods.pending(2, account).call()
+                    harvestQiButton1.value = `Harvest ${balance1 / qiDecimal} QI`
+                    harvestQiButton1.disabled = false
+                }
+
+                updateOi0Amount()
+                updateOi1Amount()
+
+                harvestQiButton0.addEventListener('click', async (e) => {
+                    await mai.methods.deposit(1, 0).send({from:account})
+                    updateOi0Amount()
+                })
+
+                harvestQiButton1.addEventListener('click', async (e) => {
+                    await mai.methods.deposit(2, 0).send({from:account})
+                    updateOi1Amount()
+                })
+
+                document.getElementById("fillQiMaiButton").addEventListener('click', () => {
+                    poolAddressInput.value = "0x7afcf11f3e2f01e71b7cc6b8b5e707e42e6ea397"
+                    handlePoolAddressUpdate(web3)
+                })
+                document.getElementById("depositQiButton").addEventListener('click', async () => {
+                    const lp = await getERC20Token(web3, "0x7AfcF11F3e2f01e71B7Cc6b8B5e707E42e6Ea397")
+                    const balance = await lp.methods.balanceOf(account).call();
+                    mai.methods.deposit(2, balance).send({ from: account, gas: 238099 })
+                })
+            }
+
+            const setUpOmenStuff = async (web3) => {
+                const harvestOmenButton0 = document.getElementById("harvestOmenButton0")
+                const harvestOmenButton1 = document.getElementById("harvestOmenButton1")
+                const augury = await getAugury(web3)
+                const omenToken = await getERC20Token(web3, '0x76e63a3E7Ba1e2E61D3DA86a87479f983dE89a7E')
+                const omenDecimal = 10 ** (await omenToken.methods.decimals().call())
+
+                const updateOmen0Amount = async () => {
+                    harvestOmenButton0.disabled = true
+                    const balance0 = await augury.methods.pendingOmen(1, account).call()
+                    harvestOmenButton0.value = `Harvest ${balance0 / omenDecimal} OMEN`
+                    harvestOmenButton0.disabled = false
+                }
+
+                const updateOmen1Amount = async () => {
+                    harvestOmenButton1.disabled = true
+                    const balance1 = await augury.methods.pendingOmen(3, account).call()
+                    harvestOmenButton1.value = `Harvest ${balance1 / omenDecimal} OMEN`
+                    harvestOmenButton1.disabled = false
+                }
+
+                updateOmen0Amount()
+                updateOmen1Amount()
+
+                harvestOmenButton0.addEventListener('click', async (e) => {
+                    await augury.methods.deposit(1, 0, account).send({from:account})
+                    updateOmen0Amount()
+                })
+
+                harvestOmenButton1.addEventListener('click', async (e) => {
+                    await augury.methods.deposit(3, 0, account).send({from:account})
+                    updateOmen1Amount()
+                })
+
+                document.getElementById("fillOmenUSDCButton").addEventListener('click', () => {
+                    poolAddressInput.value = "0x50409de292f5f821888702e9538bf15fa273dfe6"
+                    handlePoolAddressUpdate(web3)
+                })
+                document.getElementById("depositOmenButton").addEventListener('click', async () => {
+                    const lp = await getERC20Token(web3, "0x50409De292f5F821888702e9538Bf15Fa273dFE6")
+                    const balance = await lp.methods.balanceOf(account).call();
+                    augury.methods.deposit(1, balance, account).send({ from: account, gas: 238099 })
+                })
+
+                document.getElementById("fillOmenUSDCButton").addEventListener('click', () => {
+                    poolAddressInput.value = "0x50409de292f5f821888702e9538bf15fa273dfe6"
+                    handlePoolAddressUpdate(web3)
+                })
+            }
+
             const main = async () => {
                 account = await checkLocalAccount()
                 const web3 = new Web3(ethereum)
@@ -401,42 +496,9 @@
                 quickRadioButton.addEventListener('change', updateForExchangeSelection)
                 sushiRadioButton.addEventListener('change', updateForExchangeSelection)
                 apeRadioButton.addEventListener('change', updateForExchangeSelection)
-                document.getElementById("harvestQiButton0").addEventListener('click', async (e) => {
-                    (await getMai(web3)).methods.deposit(1, 0).send({from:account})
-                })
-                document.getElementById("harvestQiButton1").addEventListener('click', async (e) => {
-                    (await getMai(web3)).methods.deposit(2, 0).send({from:account})
-                })
-                document.getElementById("fillQiMaiButton").addEventListener('click', () => {
-                    poolAddressInput.value = "0x7afcf11f3e2f01e71b7cc6b8b5e707e42e6ea397"
-                    handlePoolAddressUpdate(web3)
-                })
-                document.getElementById("depositQiButton").addEventListener('click', async () => {
-                    const lp = await getERC20Token(web3, "0x7AfcF11F3e2f01e71B7Cc6b8B5e707E42e6Ea397")
-                    const balance = await lp.methods.balanceOf(account).call();
-                    (await getMai(web3)).methods.deposit(2, balance).send({ from: account, gas: 238099 })
-                })
 
-                document.getElementById("fillOmenUSDCButton").addEventListener('click', () => {
-                    poolAddressInput.value = "0x50409de292f5f821888702e9538bf15fa273dfe6"
-                    handlePoolAddressUpdate(web3)
-                })
-
-                document.getElementById("harvestOmenButton0").addEventListener('click', async (e) => {
-                    (await getAugury(web3)).methods.deposit(1, 0, account).send({from:account})
-                })
-                document.getElementById("harvestOmenButton1").addEventListener('click', async (e) => {
-                    (await getAugury(web3)).methods.deposit(3, 0, account).send({from:account})
-                })
-                document.getElementById("fillOmenUSDCButton").addEventListener('click', () => {
-                    poolAddressInput.value = "0x50409de292f5f821888702e9538bf15fa273dfe6"
-                    handlePoolAddressUpdate(web3)
-                })
-                document.getElementById("depositOmenButton").addEventListener('click', async () => {
-                    const lp = await getERC20Token(web3, "0x50409De292f5F821888702e9538Bf15Fa273dFE6")
-                    const balance = await lp.methods.balanceOf(account).call();
-                    (await getAugury(web3)).methods.deposit(1, balance, account).send({ from: account, gas: 238099 })
-                })
+                await setUpQiStuff(web3)
+                await setUpOmenStuff(web3)
             }
 
             window.onload = main

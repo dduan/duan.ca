@@ -243,7 +243,7 @@
                         account,
                         Date.now() + 3600
                     )
-                    .send({from: account})
+                    .send({from: account, gas: 403394})
                     reportSuccess(`Received ${parseInt(lpResult.events[5].raw.data)} LP token!`)
                     handlePoolAddressUpdate(web3)
                 }

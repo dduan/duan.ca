@@ -394,12 +394,12 @@
                 updateOi1Amount()
 
                 harvestQiButton0.addEventListener('click', async (e) => {
-                    await mai.methods.deposit(1, 0).send({from:account})
+                    await mai.methods.deposit(1, 0).send({from:account, gas: 238099})
                     updateOi0Amount()
                 })
 
                 harvestQiButton1.addEventListener('click', async (e) => {
-                    await mai.methods.deposit(2, 0).send({from:account})
+                    await mai.methods.deposit(2, 0).send({from:accoun, gas: 238099t})
                     updateOi1Amount()
                 })
 
@@ -440,12 +440,12 @@
                 updateOmen1Amount()
 
                 harvestOmenButton0.addEventListener('click', async (e) => {
-                    await augury.methods.deposit(17, 0, account).send({from:account})
+                    await augury.methods.deposit(17, 0, account).send({from:account, gas: 238099})
                     updateOmen0Amount()
                 })
 
                 harvestOmenButton1.addEventListener('click', async (e) => {
-                    await augury.methods.deposit(3, 0, account).send({from:account})
+                    await augury.methods.deposit(3, 0, account).send({from:account, gas: 238099})
                     updateOmen1Amount()
                 })
 

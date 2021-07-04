@@ -74,9 +74,6 @@
         <hr>
         <table style="width: 100%">
             <tr>
-                <td><input type="button" id="harvestQiButton0" value="Harvest QI 0" style="width: 100%"></td>
-            </tr>
-            <tr>
                 <td><input type="button" id="harvestQiButton1" value="Harvest QI 1" style="width: 100%"></td>
             </tr>
             <tr>
@@ -92,16 +89,12 @@
                 <td><input type="button" id="harvestOmenButton0" value="Harvest Omen 0" style="width: 100%"></td>
             </tr>
             <tr>
-                <td><input type="button" id="harvestOmenButton1" value="Harvest Omen 1" style="width: 100%"></td>
-            </tr>
-            <tr>
                 <td><input type="button" id="fillOmenETHButton" value="OMEN-ETH LP Address" style="width: 100%"></td>
             </tr>
             <tr>
                 <td><input type="button" id="depositOmenButton" value="Deposit OMEN-ETH" style="width: 100%"></td>
             </tr>
         </table>
-        <hr>
 
         <script>
             "use strict"
@@ -370,18 +363,10 @@
             }
 
             const setUpQiStuff = async (web3) => {
-                const harvestQiButton0 = document.getElementById("harvestQiButton0")
                 const harvestQiButton1 = document.getElementById("harvestQiButton1")
                 const mai = await getMai(web3)
                 const qiToken = await getERC20Token(web3, '0x580A84C73811E1839F75d86d75d88cCa0c241fF4')
                 const qiDecimal = 10 ** (await qiToken.methods.decimals().call())
-
-                const updateOi0Amount = async () => {
-                    harvestQiButton0.disabled = true
-                    const balance0 = await mai.methods.pending(1, account).call()
-                    harvestQiButton0.value = `Harvest ${balance0 / qiDecimal} QI`
-                    harvestQiButton0.disabled = false
-                }
 
                 const updateOi1Amount = async () => {
                     harvestQiButton1.disabled = true
@@ -390,13 +375,7 @@
                     harvestQiButton1.disabled = false
                 }
 
-                updateOi0Amount()
                 updateOi1Amount()
-
-                harvestQiButton0.addEventListener('click', async (e) => {
-                    await mai.methods.deposit(1, 0).send({from:account, gas: 238099})
-                    updateOi0Amount()
-                })
 
                 harvestQiButton1.addEventListener('click', async (e) => {
                     await mai.methods.deposit(2, 0).send({from:account, gas: 238099})
@@ -417,7 +396,6 @@
 
             const setUpOmenStuff = async (web3) => {
                 const harvestOmenButton0 = document.getElementById("harvestOmenButton0")
-                const harvestOmenButton1 = document.getElementById("harvestOmenButton1")
                 const augury = await getAugury(web3)
                 const omenToken = await getERC20Token(web3, '0x76e63a3E7Ba1e2E61D3DA86a87479f983dE89a7E')
                 const omenDecimal = 10 ** (await omenToken.methods.decimals().call())
@@ -429,24 +407,11 @@
                     harvestOmenButton0.disabled = false
                 }
 
-                const updateOmen1Amount = async () => {
-                    harvestOmenButton1.disabled = true
-                    const balance1 = await augury.methods.pendingOmen(3, account).call()
-                    harvestOmenButton1.value = `Harvest ${balance1 / omenDecimal} OMEN`
-                    harvestOmenButton1.disabled = false
-                }
-
                 updateOmen0Amount()
-                updateOmen1Amount()
 
                 harvestOmenButton0.addEventListener('click', async (e) => {
                     await augury.methods.deposit(17, 0, account).send({from:account, gas: 238099})
                     updateOmen0Amount()
-                })
-
-                harvestOmenButton1.addEventListener('click', async (e) => {
-                    await augury.methods.deposit(3, 0, account).send({from:account, gas: 238099})
-                    updateOmen1Amount()
                 })
 
                 document.getElementById("depositOmenButton").addEventListener('click', async () => {

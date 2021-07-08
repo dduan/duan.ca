@@ -221,7 +221,7 @@
                 swapAndLP = async () => {
                     swapAndLPButton.disabled = true
                     reportSuccess(`Swapping ${parseInt(swapAmount.toString()) / (10 ** tokens[selectedTokenIndex].decimals)} ${inputSymbol} for ${otherSymbol}...`)
-                    const swapResult = await exchange.methods.swapExactTokensForTokens(swapAmount, "0", path, account, Date.now() + 3600).send({from: account, gas: 266107})
+                    const swapResult = await exchange.methods.swapExactTokensForTokensSupportingFeeOnTransferTokens(swapAmount, "0", path, account, Date.now() + 3600).send({from: account, gas: 266107})
                     const swapedAmount = new web3.utils.BN(BigInt(parseInt(swapResult.events[0].raw.data)).toString())
                     const remainingAmount = total.sub(swapedAmount)
                     const receivedAmount = new web3.utils.BN(BigInt(parseInt(swapResult.events[2].raw.data)).toString())

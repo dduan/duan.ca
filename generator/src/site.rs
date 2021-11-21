@@ -12,19 +12,19 @@ pub struct Site {
 
 impl Site {
     pub fn from_root_path(base_url: &str, root_path: &str) -> Site {
-        let articles = article::articles_from_root_path(&root_path);
+        let articles = article::articles_from_root_path(root_path);
         let map = Site::tag_article_map_from(&articles);
         Site {
             base_url: base_url.to_string(),
-            articles: articles.clone(),
-            pages: page::pages_from_root_path(&root_path),
+            articles,
+            pages: page::pages_from_root_path(root_path),
             tags: map,
         }
     }
 
-    fn tag_article_map_from(articles: &Vec<Article>) -> Vec<(String, Vec<Article>)> {
+    fn tag_article_map_from(articles: &[Article]) -> Vec<(String, Vec<Article>)> {
         let mut map: HashMap<String, Vec<Article>> = HashMap::new();
-        for article in articles.clone() {
+        for article in articles.to_owned() {
             for tag in &article.tags {
                 if let Some(tagged) = map.get_mut(tag) {
                     tagged.push(article.clone());
@@ -68,27 +68,14 @@ mod tests {
             date: DateTime::parse_from_rfc3339("2020-04-18T14:47:03-07:00").unwrap(),
             tags: vec!["Swift".to_string()],
         };
-        let articles = vec![
-            a1.clone(),
-            a2.clone(),
-            a3.clone(),
-        ];
+        let articles = vec![a1.clone(), a2.clone(), a3.clone()];
 
         let map = Site::tag_article_map_from(&articles);
         let expected = vec![
-            (
-                "Rust".to_string(),
-                vec![a1.clone(), a2.clone(),],
-            ),
-            (
-                "Swift".to_string(),
-                vec![a3.clone(), a1.clone(),],
-            ),
+            ("Rust".to_string(), vec![a1.clone(), a2.clone()]),
+            ("Swift".to_string(), vec![a3.clone(), a1.clone()]),
         ];
 
-        assert_eq!(
-            map,
-            expected
-        )
+        assert_eq!(map, expected)
     }
 }

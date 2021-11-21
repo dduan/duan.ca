@@ -7,7 +7,6 @@ use std::io::{BufRead, BufReader};
 use syntect::html::ClassedHTMLGenerator;
 use syntect::parsing::SyntaxSet;
 use walkdir::WalkDir;
-use htmlescape;
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct Article {
@@ -42,19 +41,18 @@ impl Article {
         let parts = lines[2].splitn(2, ": ").collect::<Vec<&str>>();
         if parts.len() == 2 {
             let list = parts[1];
-            let tags = list
-                .split(", ")
-                .map(|x| { x.to_string() })
-                .collect();
-            let relative_link = path[root_path.len()..].rsplitn(2, ".").last().unwrap_or("").to_string();
-            Some(
-                Article {
-                    relative_link: relative_link,
-                    title: lines[0][2..].to_owned(),
-                    date: time.unwrap(),
-                    tags: tags,
-                }
-            )
+            let tags = list.split(", ").map(|x| x.to_string()).collect();
+            let relative_link = path[root_path.len()..]
+                .rsplitn(2, '.')
+                .last()
+                .unwrap_or("")
+                .to_string();
+            Some(Article {
+                relative_link,
+                title: lines[0][2..].to_owned(),
+                date: time.unwrap(),
+                tags,
+            })
         } else {
             None
         }
@@ -72,12 +70,9 @@ impl Article {
                     .join("\n")
             })
     }
-
 }
 pub fn markdown_to_html(syntax_set: &SyntaxSet, markdown: String) -> String {
-    let mut options = ComrakOptions::default();
-    options.unsafe_ = true;
-    options.github_pre_lang = true;
+    let options = ComrakOptions::default();
     let html = comrak::markdown_to_html(&markdown, &options);
     let re = Regex::new(r#"(?s)<pre lang="(\w+)"><code>(.+?)</code></pre>"#).unwrap();
     let mut start: usize = 0;
@@ -86,16 +81,14 @@ pub fn markdown_to_html(syntax_set: &SyntaxSet, markdown: String) -> String {
         let lang = &cap[1];
         let code = htmlescape::decode_html(&cap[2]).unwrap();
         let highlighted_code = match syntax_set.find_syntax_by_extension(lang) {
-            None => {
-                code.to_owned()
-            },
+            None => code.to_owned(),
             Some(syntax) => {
-                let mut code_gen = ClassedHTMLGenerator::new(&syntax, &syntax_set);
+                let mut code_gen = ClassedHTMLGenerator::new(syntax, syntax_set);
                 for line in code.lines() {
-                    code_gen.parse_html_for_line(&line)
+                    code_gen.parse_html_for_line(line)
                 }
                 code_gen.finalize()
-            },
+            }
         };
 
         highlighted.push_str(&html[start..cap.get(0).unwrap().start()]);
@@ -112,31 +105,31 @@ pub fn markdown_to_html(syntax_set: &SyntaxSet, markdown: String) -> String {
 pub fn articles_from_root_path(root_path: &str) -> Vec<Article> {
     let root_path = format!(
         "{}/articles",
-        if root_path.ends_with("/") {
+        if root_path.ends_with('/') {
             &root_path[0..root_path.len() - 1]
         } else {
             root_path
-        });
+        }
+    );
 
     let mut articles: Vec<Article> = WalkDir::new(&root_path)
         .into_iter()
         .flat_map(|e| e.ok())
         .filter(|e| {
-            e.file_type().is_file() &&
-                e.file_name()
-                .to_str()
-                .map(|s| s.ends_with(".md"))
-                .unwrap_or(false)
-
+            e.file_type().is_file()
+                && e.file_name()
+                    .to_str()
+                    .map(|s| s.ends_with(".md"))
+                    .unwrap_or(false)
         })
-    .flat_map(|entry| {
-        entry
-            .path()
-            .to_str()
-            .map(|path| Article::from_path(&root_path, path))
-    })
-    .flat_map(|a| a)
-    .collect();
+        .flat_map(|entry| {
+            entry
+                .path()
+                .to_str()
+                .map(|path| Article::from_path(&root_path, path))
+        })
+        .flatten()
+        .collect();
     articles.sort_by(|a, b| b.date.cmp(&a.date));
     articles
 }
@@ -154,20 +147,14 @@ mod tests {
             Article::from_path_lines(
                 "",
                 "path",
-                vec![
-                    format!("# {}", title),
-                    date_string.clone(),
-                    tags_string
-                ]
+                vec![format!("# {}", title), date_string.clone(), tags_string]
             ),
-            Some(
-                Article {
-                    relative_link: path,
-                    title: title,
-                    date: DateTime::parse_from_rfc3339(&date_string).unwrap(),
-                    tags: vec!["a".to_owned(), "b".to_owned()]
-                }
-            )
+            Some(Article {
+                relative_link: path,
+                title: title,
+                date: DateTime::parse_from_rfc3339(&date_string).unwrap(),
+                tags: vec!["a".to_owned(), "b".to_owned()]
+            })
         )
     }
 }

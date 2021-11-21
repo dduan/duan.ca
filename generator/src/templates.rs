@@ -1,5 +1,4 @@
 use askama::Template;
-use slug;
 
 pub struct RenderedMetadata {
     pub permalink: String,
@@ -28,7 +27,7 @@ pub struct ArticleTemplate<'a> {
     pub date: String,
     pub rfc2822_date: String,
     pub content: String,
-    pub tags: Vec<RenderedTag>
+    pub tags: Vec<RenderedTag>,
 }
 
 #[derive(Template)]
@@ -36,14 +35,14 @@ pub struct ArticleTemplate<'a> {
 pub struct ArticleListTemplate<'a> {
     pub meta: RenderedMetadata,
     pub base_url: &'a str,
-    pub items: &'a Vec<ArticleTemplate<'a>>
+    pub items: &'a [ArticleTemplate<'a>],
 }
 
 #[derive(Template)]
 #[template(path = "global-feed.xml")]
 pub struct GlobalFeedTemplate<'a> {
     pub base_url: &'a str,
-    pub items: &'a Vec<ArticleTemplate<'a>>
+    pub items: &'a [ArticleTemplate<'a>],
 }
 
 #[derive(Template)]
@@ -52,7 +51,7 @@ pub struct TagArticleListTemplate<'a> {
     pub meta: RenderedMetadata,
     pub base_url: &'a str,
     pub tag: RenderedTag,
-    pub items: &'a Vec<ArticleTemplate<'a>>
+    pub items: &'a [ArticleTemplate<'a>],
 }
 
 #[derive(Template)]
@@ -61,7 +60,7 @@ pub struct TagFeedTemplate<'a> {
     pub meta: RenderedMetadata,
     pub base_url: &'a str,
     pub tag: RenderedTag,
-    pub items: &'a Vec<ArticleTemplate<'a>>
+    pub items: &'a [ArticleTemplate<'a>],
 }
 
 #[derive(Template)]

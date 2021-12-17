@@ -29,7 +29,7 @@ interact { String($0.count) }
 Got that? Well, now I'm going to rewrite it in a slightly less Swift-y way:
 
 ```swift
-let count: (String) -> String {
+let count: (String) -> String = {
     return String($0.count)
 }
 

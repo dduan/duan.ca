@@ -209,7 +209,7 @@ struct CString<Unit: BinaryInteger>: Equatable, Hashable {
 }
 ```
 
-`storege` in this solution is an private implementation detail. `content` is
+`storage` in this solution is an private implementation detail. `content` is
 the primary access to the content of the string. And finally, this type
 interops with C APIs correctly and efficiently because of the extra `NUL` we put
 at the end of `storage`.

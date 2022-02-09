@@ -46,7 +46,7 @@ into a closure <code>process</code>, which it takes in as its only argument, and
 interact { <span class="support class">String</span>(<span class="keyword operator">$</span><span class="constant numeric decimal">0</span><span class="keyword operator">.</span>count) }
 </span></pre>
 <p>Got that? Well, now I'm going to rewrite it in a slightly less Swift-y way:</p>
-<pre><span class="source swift"><span class="keyword variable">let</span> <span class="variable parameter">count</span>: (<span class="support class">String</span>) -&gt; <span class="support class">String</span> {
+<pre><span class="source swift"><span class="keyword variable">let</span> <span class="variable parameter">count</span>: (<span class="support class">String</span>) -&gt; <span class="support class">String</span> = {
     <span class="keyword control">return</span> <span class="support class">String</span>(<span class="keyword operator">$</span><span class="constant numeric decimal">0</span><span class="keyword operator">.</span>count)
 }
 

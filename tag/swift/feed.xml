@@ -507,7 +507,7 @@ element. Here&#x27;s the actual definition in &lt;a href=&quot;https:&#x2f;&#x2f
     &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; ... more stuff&lt;&#x2f;span&gt;
 }
 &lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;&lt;code&gt;storege&lt;&#x2f;code&gt; in this solution is an private implementation detail. &lt;code&gt;content&lt;&#x2f;code&gt; is
+&lt;p&gt;&lt;code&gt;storage&lt;&#x2f;code&gt; in this solution is an private implementation detail. &lt;code&gt;content&lt;&#x2f;code&gt; is
 the primary access to the content of the string. And finally, this type
 interops with C APIs correctly and efficiently because of the extra &lt;code&gt;NUL&lt;&#x2f;code&gt; we put
 at the end of &lt;code&gt;storage&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
@@ -823,7 +823,7 @@ into a closure &lt;code&gt;process&lt;&#x2f;code&gt;, which it takes in as its o
 interact { &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;(&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;count) }
 &lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Got that? Well, now I&#x27;m going to rewrite it in a slightly less Swift-y way:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;count&lt;&#x2f;span&gt;: (&lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;) -&amp;gt; &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt; {
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;count&lt;&#x2f;span&gt;: (&lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;) -&amp;gt; &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt; = {
     &lt;span class=&quot;keyword control&quot;&gt;return&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;(&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;count)
 }
 

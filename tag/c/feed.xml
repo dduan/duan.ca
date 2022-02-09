@@ -375,7 +375,7 @@ element. Here&#x27;s the actual definition in &lt;a href=&quot;https:&#x2f;&#x2f
     &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; ... more stuff&lt;&#x2f;span&gt;
 }
 &lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;&lt;code&gt;storege&lt;&#x2f;code&gt; in this solution is an private implementation detail. &lt;code&gt;content&lt;&#x2f;code&gt; is
+&lt;p&gt;&lt;code&gt;storage&lt;&#x2f;code&gt; in this solution is an private implementation detail. &lt;code&gt;content&lt;&#x2f;code&gt; is
 the primary access to the content of the string. And finally, this type
 interops with C APIs correctly and efficiently because of the extra &lt;code&gt;NUL&lt;&#x2f;code&gt; we put
 at the end of &lt;code&gt;storage&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;

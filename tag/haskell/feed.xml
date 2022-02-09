@@ -24,7 +24,7 @@ into a closure &lt;code&gt;process&lt;&#x2f;code&gt;, which it takes in as its o
 interact { &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;(&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;count) }
 &lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Got that? Well, now I&#x27;m going to rewrite it in a slightly less Swift-y way:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;count&lt;&#x2f;span&gt;: (&lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;) -&amp;gt; &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt; {
+&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;count&lt;&#x2f;span&gt;: (&lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;) -&amp;gt; &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt; = {
     &lt;span class=&quot;keyword control&quot;&gt;return&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;(&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;count)
 }
 

@@ -1,6 +1,6 @@
 # Building IndexStoreDB on Linux: The Portable Technique
 2022-02-09T15:58:41-08:00
-tag: Swift,IndexStoreDB
+tag: Swift, IndexStoreDB, SwiftPM
 
 ## The problem
 
@@ -47,7 +47,7 @@ what I did for my command-line tool [Clue][].
 ## The solution
 
 The essence of the problem is about the installation location of the Swift toolchain. Our solution makes the
-following assumption
+following assumptions:
 
 1. A Swift toolchain is installed on the file system on Linux (duh!).
 2. The toolchain is at least similar to the one distributed on Swift.org. So `libdispatch` is distributed

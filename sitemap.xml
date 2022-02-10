@@ -272,6 +272,12 @@
         <loc>https://duan.ca/tag/haskell/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/indexstoredb/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/indexstoredb/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/interface-builder/</loc>
     </url>
     <url>
@@ -416,16 +422,16 @@
         <loc>https://duan.ca/tag/swift-package-manager/feed.xml</loc>
     </url>
     <url>
-        <loc>https://duan.ca/tag/swift-indexstoredb/</loc>
-    </url>
-    <url>
-        <loc>https://duan.ca/tag/swift-indexstoredb/feed.xml</loc>
-    </url>
-    <url>
         <loc>https://duan.ca/tag/swiftlint/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/swiftlint/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/swiftpm/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/swiftpm/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/toml/</loc>

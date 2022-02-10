@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2022/02/09/building-indexstoredb-on-linux/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2021/01/03/human-grade-toml-parser-in-swift/</loc>
     </url>
     <url>
@@ -411,6 +414,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/swift-package-manager/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/swift-indexstoredb/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/swift-indexstoredb/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/swiftlint/</loc>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2022/02/17/invisible-chasm/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="An Invisible Chasm">
+    <meta property="article:published_time" content="2022-02-17"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>An Invisible Chasm</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2022/02/17/invisible-chasm/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>An Invisible Chasm</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2022-02-17" itemProp="datePublished">2022-02-17</time>
+        </p>
+    </nav><p>In the journey of growing software systems, there comes a point where certain engineering decision will create
+a chasm so large that it's practically impossible to go back. The initial crossing of this chasm is so easy
+that it often happens without anyone noticing. Nonetheless, it is a costly mistake.</p>
+<p>On one side of this chasm, any member of the engineering team can answer the question &quot;how, exactly, is my
+code being consumed in our engineering org?&quot;. Here lies clarity. Your team fearlessly delete dead code. Legacy
+logic has their days marked. Lacking documentation? Not ideal, but you can always find how an API gets used
+in all scenarios easily.</p>
+<p>On the other side, no one has the answer. The corpses pile up. Deprecating things comes with uncertainty. You
+warn your team &quot;please carefully consider adding things here, because we'll keep it around forever&quot;. Need to
+respond to an incident? Better hope your monitoring system is good. Trying to trace the code path won't get
+you answers in time. We'll leave that for the post-mortem.</p>
+<p>Tooling, yes, exactly what decision leads to the chasm depends on the state of tooling for your technology
+stack. The programming languages, build system, repository setup, coding style guides, IDEs, linters, search
+engine ... all factor into the final answer. A statically typed language compiler won't help you look up
+users in a different micro-service. State-of-art symbol lookup may exist for a dynamically typed system
+because some companies have thrown enormous amount of money to solve it. Maybe your kick-ass style guides
+enforced by linters across multiple languages makes it possible to locate anything by text. You see, it is
+a quantitative matter: it is always <em>possible</em> to revert to the good old days. But it will be <em>expensive</em> in
+terms of dollars, and/or will power.</p>
+<p>When did you cross the chasm?</p>
+<p>Beware of the chasm.</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/software-scaling/">Software Scaling</a>
+        ·
+        <a href="/tag/programming-language/">Programming Language</a>
+        ·
+        <a href="/tag/tooling/">Tooling</a>
+    </p>
+</footer></body>
+</html>

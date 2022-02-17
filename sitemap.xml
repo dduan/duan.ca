@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2022/02/17/invisible-chasm/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2022/02/09/building-indexstoredb-on-linux/</loc>
     </url>
     <url>
@@ -376,6 +379,12 @@
         <loc>https://duan.ca/tag/pathos/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/programming-language/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/programming-language/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/python/</loc>
     </url>
     <url>
@@ -410,6 +419,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/scheme/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/software-scaling/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/software-scaling/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/swift/</loc>
@@ -452,6 +467,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/tui/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/tooling/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/tooling/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/twitch/</loc>

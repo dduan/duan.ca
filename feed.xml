@@ -5,6 +5,34 @@
         <link>https://duan.ca/</link>
         <atom:link href="https://duan.ca/feed.xml" rel="self" type="application/rss+xml" />
             <item>
+                <title>An Invisible Chasm</title>
+                <description>&lt;p&gt;In the journey of growing software systems, there comes a point where certain engineering decision will create
+a chasm so large that it&#x27;s practically impossible to go back. The initial crossing of this chasm is so easy
+that it often happens without anyone noticing. Nonetheless, it is a costly mistake.&lt;&#x2f;p&gt;
+&lt;p&gt;On one side of this chasm, any member of the engineering team can answer the question &amp;quot;how, exactly, is my
+code being consumed in our engineering org?&amp;quot;. Here lies clarity. Your team fearlessly delete dead code. Legacy
+logic has their days marked. Lacking documentation? Not ideal, but you can always find how an API gets used
+in all scenarios easily.&lt;&#x2f;p&gt;
+&lt;p&gt;On the other side, no one has the answer. The corpses pile up. Deprecating things comes with uncertainty. You
+warn your team &amp;quot;please carefully consider adding things here, because we&#x27;ll keep it around forever&amp;quot;. Need to
+respond to an incident? Better hope your monitoring system is good. Trying to trace the code path won&#x27;t get
+you answers in time. We&#x27;ll leave that for the post-mortem.&lt;&#x2f;p&gt;
+&lt;p&gt;Tooling, yes, exactly what decision leads to the chasm depends on the state of tooling for your technology
+stack. The programming languages, build system, repository setup, coding style guides, IDEs, linters, search
+engine ... all factor into the final answer. A statically typed language compiler won&#x27;t help you look up
+users in a different micro-service. State-of-art symbol lookup may exist for a dynamically typed system
+because some companies have thrown enormous amount of money to solve it. Maybe your kick-ass style guides
+enforced by linters across multiple languages makes it possible to locate anything by text. You see, it is
+a quantitative matter: it is always &lt;em&gt;possible&lt;&#x2f;em&gt; to revert to the good old days. But it will be &lt;em&gt;expensive&lt;&#x2f;em&gt; in
+terms of dollars, and&#x2f;or will power.&lt;&#x2f;p&gt;
+&lt;p&gt;When did you cross the chasm?&lt;&#x2f;p&gt;
+&lt;p&gt;Beware of the chasm.&lt;&#x2f;p&gt;
+</description>
+                <pubDate>Thu, 17 Feb 2022 13:40:27 -0800</pubDate>
+                <link>https://duan.ca/2022/02/17/invisible-chasm/</link>
+                <guid isPermaLink="true">https://duan.ca/2022/02/17/invisible-chasm/</guid>
+            </item>
+            <item>
                 <title>Building IndexStoreDB on Linux: The Portable Technique</title>
                 <description>&lt;h2&gt;The problem&lt;&#x2f;h2&gt;
 &lt;p&gt;As of writing of this article, when you attempt to use Apple&#x27;s Swift library &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;indexstore-db&quot;&gt;IndexStoreDB&lt;&#x2f;a&gt; on Linux as

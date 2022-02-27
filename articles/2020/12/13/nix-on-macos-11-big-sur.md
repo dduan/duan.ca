@@ -2,6 +2,8 @@
 2020-12-13T12:00:52-08:00
 tag: Nix, macOS
 
+*Note: as of Feburary, 2022, the steps written below has been incorporated by the official Nix install script for macOS. This article is, therefore, obsolete.*
+
 Here are the steps for installing nix on macOS 11 Big Sur.
 
 ### Preparation

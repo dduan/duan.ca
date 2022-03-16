@@ -60,8 +60,8 @@ We&#x27;ll leverage it to modify the environment made available to its sibling, 
       &lt;span class=&quot;punctuation definition list nix&quot;&gt;]&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
       &lt;span class=&quot;comment line number-sign nix&quot;&gt;# ...&lt;&#x2f;span&gt;
     &lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
-  &lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;
-&lt;span class=&quot;invalid illegal&quot;&gt;}&lt;&#x2f;span&gt;
+  &lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
+&lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;
 &lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;... now that we added &lt;code&gt;args.nixpkgs-unstable&lt;&#x2f;code&gt;, it becomes available in the configuration:&lt;&#x2f;p&gt;
 &lt;pre&gt;&lt;span class=&quot;source nix&quot;&gt;&lt;span class=&quot;punctuation definition attrset-or-function nix&quot;&gt;{&lt;&#x2f;span&gt;
@@ -76,7 +76,7 @@ We&#x27;ll leverage it to modify the environment made available to its sibling, 
           &lt;span class=&quot;punctuation definition list nix&quot;&gt;]&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
       &lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
     &lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
-  &lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;
+  &lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;&lt;span class=&quot;invalid illegal&quot;&gt;;&lt;&#x2f;span&gt;
 &lt;span class=&quot;invalid illegal&quot;&gt;}&lt;&#x2f;span&gt;
 &lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;There, we made &lt;code&gt;python39Packages.python-lsp-server&lt;&#x2f;code&gt; from nixpkgs&#x27;s master branch appear alongside our

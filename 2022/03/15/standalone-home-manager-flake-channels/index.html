@@ -82,8 +82,8 @@ We'll leverage it to modify the environment made available to its sibling, <code
       <span class="punctuation definition list nix">]</span><span class="punctuation terminator bind nix">;</span>
       <span class="comment line number-sign nix"># ...</span>
     <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
-  <span class="punctuation definition attrset nix">}</span>
-<span class="invalid illegal">}</span>
+  <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
+<span class="punctuation definition attrset nix">}</span>
 </span></pre>
 <p>... now that we added <code>args.nixpkgs-unstable</code>, it becomes available in the configuration:</p>
 <pre><span class="source nix"><span class="punctuation definition attrset-or-function nix">{</span>
@@ -98,7 +98,7 @@ We'll leverage it to modify the environment made available to its sibling, <code
           <span class="punctuation definition list nix">]</span><span class="punctuation terminator bind nix">;</span>
       <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
     <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
-  <span class="punctuation definition attrset nix">}</span>
+  <span class="punctuation definition attrset nix">}</span><span class="invalid illegal">;</span>
 <span class="invalid illegal">}</span>
 </span></pre>
 <p>There, we made <code>python39Packages.python-lsp-server</code> from nixpkgs's master branch appear alongside our

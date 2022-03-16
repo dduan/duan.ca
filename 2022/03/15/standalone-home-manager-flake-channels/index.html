@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2022/03/15/standalone-home-manager-flake-channels/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Flake, Home Manager, and Extra Packages">
+    <meta property="article:published_time" content="2022-03-15"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Flake, Home Manager, and Extra Packages</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2022/03/15/standalone-home-manager-flake-channels/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>Flake, Home Manager, and Extra Packages</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2022-03-15" itemProp="datePublished">2022-03-15</time>
+        </p>
+    </nav><p>So, you use a standalone home-manager, it's set up with flake, tracking a particular nixpkgs channel. How do
+you use a package from another channel? This seemingly simple task took me, a Nix noob, quite a bit of
+research to solve. Here's how I did it.</p>
+<p>A simple flake.nix for home-manager might look like this:</p>
+<pre><span class="source nix"><span class="punctuation definition attrset-or-function nix">{</span>
+  <span class="entity other attribute-name multipart nix">inputs</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition attrset-or-function nix">{</span>
+    <span class="entity other attribute-name multipart nix">nixpkgs</span>.<span class="entity other attribute-name multipart nix">url</span> <span class="keyword operator bind nix">=</span> <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>github:nixos/nixpkgs/nixos-21.11<span class="punctuation definition string double end nix">&quot;</span></span><span class="punctuation terminator bind nix">;</span>
+    <span class="entity other attribute-name multipart nix">home-manager</span>.<span class="entity other attribute-name multipart nix">url</span> <span class="keyword operator bind nix">=</span> <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>github:nix-community/home-manager/release-21.11<span class="punctuation definition string double end nix">&quot;</span></span><span class="punctuation terminator bind nix">;</span>
+    <span class="entity other attribute-name multipart nix">home-manager</span>.<span class="entity other attribute-name multipart nix">inputs</span>.<span class="entity other attribute-name multipart nix">nixpkgs</span>.<span class="entity other attribute-name multipart nix">follows</span> <span class="keyword operator bind nix">=</span> <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>nixpkgs<span class="punctuation definition string double end nix">&quot;</span></span><span class="punctuation terminator bind nix">;</span>
+  <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
+  <span class="entity other attribute-name multipart nix">outputs</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition entity function 2 nix">{</span> <span class="variable parameter function 1 nix">self</span><span class="keyword operator nix">,</span> <span class="variable parameter function 1 nix">nixpkgs</span><span class="keyword operator nix">,</span> <span class="variable parameter function 1 nix">home-manager</span> <span class="punctuation definition entity function nix">}</span><span class="punctuation definition function nix">:</span> <span class="punctuation definition attrset-or-function nix">{</span>
+    <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>dan@some-mac<span class="punctuation definition string double end nix">&quot;</span></span> <span class="keyword operator bind nix">=</span> <span class="variable parameter name nix">home-manager</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">lib</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">homeManagerConfiguration</span> <span class="punctuation definition attrset-or-function nix">{</span>
+      <span class="entity other attribute-name multipart nix">username</span> <span class="keyword operator bind nix">=</span> <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>dan<span class="punctuation definition string double end nix">&quot;</span></span><span class="punctuation terminator bind nix">;</span>
+      <span class="entity other attribute-name multipart nix">system</span> <span class="keyword operator bind nix">=</span> <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>x86_64-darwin<span class="punctuation definition string double end nix">&quot;</span></span><span class="punctuation terminator bind nix">;</span>
+      <span class="entity other attribute-name multipart nix">homeDirectory</span> <span class="keyword operator bind nix">=</span> <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>/home/dan<span class="punctuation definition string double end nix">&quot;</span></span><span class="punctuation terminator bind nix">;</span>
+      <span class="entity other attribute-name multipart nix">configuration</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition entity function 2 nix">{</span> <span class="variable parameter function 1 nix">config</span><span class="keyword operator nix">,</span> <span class="variable parameter function 1 nix">pkgs</span> <span class="invalid illegal">.</span><span class="invalid illegal">.</span><span class="invalid illegal">.</span> <span class="punctuation definition entity function nix">}</span><span class="punctuation definition function nix">:</span> <span class="punctuation definition attrset-or-function nix">{</span>
+          <span class="entity other attribute-name multipart nix">home</span>.<span class="entity other attribute-name multipart nix">packages</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition list nix">[</span>
+            <span class="variable parameter name nix">pkgs</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">hello</span>
+          <span class="punctuation definition list nix">]</span><span class="punctuation terminator bind nix">;</span>
+      <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
+    <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
+  <span class="punctuation definition attrset nix">}</span>
+<span class="invalid illegal">}</span>
+</span></pre>
+<p>A few things of note:</p>
+<ol>
+<li>home manager is set to follow <code>nixpkgs</code>, which tracks <code>nixos-21.11</code>.</li>
+<li><code>pkgs.hello</code> refers to the package in <code>nixos-21.11</code> as well.</li>
+</ol>
+<p>To put things in concrete terms, our goal is to put a package from a channel other than <code>nixos-21.11</code>
+alongside <code>pkgs.hello</code>.</p>
+<p>The key to my solution is the <code>extraModules</code> in <code>home-manager.lib.homeManagerConfiguration</code>'s argument set.
+We'll leverage it to modify the environment made available to its sibling, <code>configuration</code>.</p>
+<p>First, add the new channel as input <code>nixpkgs-unstable</code>:</p>
+<pre><span class="source nix"><span class="punctuation definition attrset-or-function nix">{</span>
+  <span class="entity other attribute-name multipart nix">inputs</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition attrset-or-function nix">{</span>
+    <span class="comment line number-sign nix"># ...</span>
+    <span class="entity other attribute-name multipart nix">nixpkgs-unstable</span>.<span class="entity other attribute-name multipart nix">url</span> <span class="keyword operator bind nix">=</span> <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>github:nixos/nixpkgs<span class="punctuation definition string double end nix">&quot;</span></span><span class="punctuation terminator bind nix">;</span>
+  <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
+  ...
+<span class="punctuation definition attrset nix">}</span>
+</span></pre>
+<p>Then, add a small module to <code>extraModules</code>. In it we make <code>nixpkgs-unstable</code> an argument to <code>_module</code>.</p>
+<pre><span class="source nix"><span class="punctuation definition attrset-or-function nix">{</span>
+  <span class="entity other attribute-name multipart nix">input</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition attrset nix">{</span> ... <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
+  <span class="entity other attribute-name multipart nix">outputs</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition entity function 2 nix">{</span> <span class="variable parameter function 1 nix">self</span><span class="keyword operator nix">,</span> <span class="variable parameter function 1 nix">nixpkgs</span><span class="keyword operator nix">,</span> <span class="variable parameter function 1 nix">nixpkgs-unstable</span><span class="keyword operator nix">,</span> <span class="variable parameter function 1 nix">home-manager</span> <span class="punctuation definition entity function nix">}</span><span class="punctuation definition function nix">:</span> <span class="punctuation definition attrset-or-function nix">{</span> <span class="comment line number-sign nix"># Note we also pass in nixpkgs-unstable here</span>
+    <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>dan@some-mac<span class="punctuation definition string double end nix">&quot;</span></span> <span class="keyword operator bind nix">=</span> <span class="variable parameter name nix">home-manager</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">lib</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">homeManagerConfiguration</span> <span class="punctuation definition attrset-or-function nix">{</span>
+      <span class="entity other attribute-name multipart nix">extraModules</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition list nix">[</span>
+        <span class="punctuation definition expression nix">(</span><span class="punctuation definition entity function 2 nix">{</span> <span class="variable parameter function 1 nix">pkgs</span><span class="keyword operator nix">,</span> <span class="keyword operator nix">... </span><span class="punctuation definition entity function nix">}</span><span class="punctuation definition function nix">:</span> <span class="keyword other nix">rec</span> <span class="punctuation definition attrset nix">{</span>
+          <span class="entity other attribute-name multipart nix">_module</span>.<span class="entity other attribute-name multipart nix">args</span>.<span class="entity other attribute-name multipart nix">nixpkgs-unstable</span> <span class="keyword operator bind nix">=</span> <span class="support function nix">import</span> <span class="variable parameter name nix">nixpkgs-unstable</span> <span class="punctuation definition attrset nix">{</span> <span class="keyword other inherit nix">inherit</span> <span class="entity other attribute-name single nix">system</span><span class="punctuation terminator inherit nix">;</span> <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
+        <span class="punctuation definition attrset nix">}</span><span class="punctuation definition expression nix">)</span>
+      <span class="punctuation definition list nix">]</span><span class="punctuation terminator bind nix">;</span>
+      <span class="comment line number-sign nix"># ...</span>
+    <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
+  <span class="punctuation definition attrset nix">}</span>
+<span class="invalid illegal">}</span>
+</span></pre>
+<p>... now that we added <code>args.nixpkgs-unstable</code>, it becomes available in the configuration:</p>
+<pre><span class="source nix"><span class="punctuation definition attrset-or-function nix">{</span>
+  <span class="entity other attribute-name multipart nix">input</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition attrset nix">{</span> ... <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
+  <span class="entity other attribute-name multipart nix">outputs</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition entity function 2 nix">{</span> <span class="variable parameter function 1 nix">self</span><span class="keyword operator nix">,</span> <span class="variable parameter function 1 nix">nixpkgs</span><span class="keyword operator nix">,</span> <span class="variable parameter function 1 nix">nixpkgs-unstable</span><span class="keyword operator nix">,</span> <span class="variable parameter function 1 nix">home-manager</span> <span class="punctuation definition entity function nix">}</span><span class="punctuation definition function nix">:</span> <span class="punctuation definition attrset-or-function nix">{</span> <span class="comment line number-sign nix"># Note we also pass in nixpkgs-unstable here</span>
+    <span class="string quoted double nix"><span class="punctuation definition string double start nix">&quot;</span>dan@some-mac<span class="punctuation definition string double end nix">&quot;</span></span> <span class="keyword operator bind nix">=</span> <span class="variable parameter name nix">home-manager</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">lib</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">homeManagerConfiguration</span> <span class="punctuation definition attrset-or-function nix">{</span>
+      <span class="comment line number-sign nix"># ...</span>
+      <span class="entity other attribute-name multipart nix">configuration</span> <span class="keyword operator bind nix">=</span> <span class="punctuation definition entity function 2 nix">{</span> <span class="variable parameter function 1 nix">config</span><span class="keyword operator nix">,</span> <span class="variable parameter function 1 nix">pkgs</span><span class="keyword operator nix">,</span> <span class="variable parameter function 1 nix">nixpkgs-unstable</span><span class="keyword operator nix">,</span> <span class="keyword operator nix">... </span><span class="punctuation definition entity function nix">}</span><span class="punctuation definition function nix">:</span>
+          <span class="variable parameter name nix">home</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">packages</span> <span class="invalid illegal">=</span> <span class="punctuation definition list nix">[</span>
+            <span class="variable parameter name nix">pkgs</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">hello</span>
+            <span class="variable parameter name nix">nixpkgs-unstable</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">python39Packages</span><span class="keyword operator nix">.</span><span class="variable parameter name nix">python-lsp-server</span>
+          <span class="punctuation definition list nix">]</span><span class="punctuation terminator bind nix">;</span>
+      <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
+    <span class="punctuation definition attrset nix">}</span><span class="punctuation terminator bind nix">;</span>
+  <span class="punctuation definition attrset nix">}</span>
+<span class="invalid illegal">}</span>
+</span></pre>
+<p>There, we made <code>python39Packages.python-lsp-server</code> from nixpkgs's master branch appear alongside our
+standard, default channel.</p>
+<p>And that's how you add packages from a different channel in a flake setup for standalone home-manager.</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/nix/">Nix</a>
+        ·
+        <a href="/tag/nixpkgs/">Nixpkgs</a>
+        ·
+        <a href="/tag/home-manager/">home-manager</a>
+    </p>
+</footer></body>
+</html>

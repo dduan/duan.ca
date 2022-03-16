@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2022/03/15/standalone-home-manager-flake-channels/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2022/02/17/invisible-chasm/</loc>
     </url>
     <url>
@@ -355,6 +358,12 @@
         <loc>https://duan.ca/tag/nixos/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/nixpkgs/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/nixpkgs/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/oop/</loc>
     </url>
     <url>
@@ -515,6 +524,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/youtube/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/home-manager/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/home-manager/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/ios/</loc>

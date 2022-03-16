@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Daniel Duan's Articles About Nix</title>
-        <link>https://duan.ca/tag/nix/</link>
-        <atom:link href="https://duan.ca/tag/nix/feed.xml" rel="self" type="application/rss+xml" />
+        <title>Daniel Duan's Articles About Nixpkgs</title>
+        <link>https://duan.ca/tag/nixpkgs/</link>
+        <atom:link href="https://duan.ca/tag/nixpkgs/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Flake, Home Manager, and Extra Packages</title>
                 <description>&lt;p&gt;So, you use a standalone home-manager, it&#x27;s set up with flake, tracking a particular nixpkgs channel. How do
@@ -86,147 +86,6 @@ standard, default channel.&lt;&#x2f;p&gt;
                 <pubDate>Tue, 15 Mar 2022 18:53:59 -0700</pubDate>
                 <link>https://duan.ca/2022/03/15/standalone-home-manager-flake-channels/</link>
                 <guid isPermaLink="true">https://duan.ca/2022/03/15/standalone-home-manager-flake-channels/</guid>
-            </item>
-            <item>
-                <title>Installing Nix on macOS 11 Big Sur</title>
-                <description>&lt;p&gt;&lt;em&gt;Note: as of Feburary, 2022, the steps written below has been incorporated by the official Nix install script for macOS. This article is, therefore, obsolete.&lt;&#x2f;em&gt;&lt;&#x2f;p&gt;
-&lt;p&gt;Here are the steps for installing nix on macOS 11 Big Sur.&lt;&#x2f;p&gt;
-&lt;h3&gt;Preparation&lt;&#x2f;h3&gt;
-&lt;p&gt;Decide on which disk the nix store is to be installed. By end of this process, you&#x27;ll have a disk
-name like &lt;code&gt;disk4&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
-&lt;p&gt;Personally, I like looking it up in the Disk Utility app:&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2020&#x2f;12&#x2f;disk-utility.png&quot; alt=&quot;Disk Utility&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
-&lt;p&gt;You can also use other methods, such us the &lt;code&gt;diskutil list&lt;&#x2f;code&gt; command.&lt;&#x2f;p&gt;
-&lt;p&gt;Have this disk name ready.&lt;&#x2f;p&gt;
-&lt;h3&gt;Installation&lt;&#x2f;h3&gt;
-&lt;h4&gt;1. Create the path &lt;code&gt;&#x2f;nix&lt;&#x2f;code&gt; the macOS way.&lt;&#x2f;h4&gt;
-&lt;p&gt;Edit or create the file &lt;code&gt;&#x2f;etc&#x2f;synthetic.conf&lt;&#x2f;code&gt;, adding this line:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;code&gt;nix
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;Reboot the Mac.&lt;&#x2f;p&gt;
-&lt;h4&gt;2. Create a APFS volume for the nix store.&lt;&#x2f;h4&gt;
-&lt;pre&gt;&lt;code&gt;sudo diskutil apfs addVolume diskX APFS &#x27;Nix Store&#x27; -mountpoint &#x2f;nix
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;Make sure to replace &lt;code&gt;diskX&lt;&#x2f;code&gt; with the disk you identified in the preparation step.&lt;&#x2f;p&gt;
-&lt;h4&gt;3. Mount the volume.&lt;&#x2f;h4&gt;
-&lt;p&gt;Edit or create the file &lt;code&gt;&#x2f;etc&#x2f;fstab&lt;&#x2f;code&gt;, adding this line:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;code&gt;LABEL=Nix\040Store &#x2f;nix apfs rw,nobrowse
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;Reboot the Mac.&lt;&#x2f;p&gt;
-&lt;h4&gt;4. Install Nix the &amp;quot;normal&amp;quot; way&lt;&#x2f;h4&gt;
-&lt;pre&gt;&lt;code&gt;sh &amp;lt;(curl -L https:&#x2f;&#x2f;nixos.org&#x2f;nix&#x2f;install)
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;h4&gt;5. You are done! Try it out. I ran this little &lt;a href=&quot;https:&#x2f;&#x2f;nix.dev&#x2f;tutorials&#x2f;dev-environment.html&quot;&gt;example&lt;&#x2f;a&gt; as a test and things appears to work as expected.&lt;&#x2f;h4&gt;
-&lt;h3&gt;Bonus: using Nix in Fish shell&lt;&#x2f;h3&gt;
-&lt;p&gt;As a fish user, I&#x27;m used to fixing things up myself since software from non-fish users usually
-pretends fish doesn&#x27;t exist. Anyways, in the final steps of its installation, Nix sets up a few
-environment variables in a bash script. I&#x27;ve adapted these specifically for fish on macOS. Add these
-to your config.fish:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;code&gt;set -x NIX_PROFILES &amp;quot;&#x2f;nix&#x2f;var&#x2f;nix&#x2f;profiles&#x2f;default $HOME&#x2f;.nix-profile&amp;quot;
-set -x NIX_SSL_CERT_FILE &amp;quot;$HOME&#x2f;.nix-profile&#x2f;etc&#x2f;ssl&#x2f;certs&#x2f;ca-bundle.crt&amp;quot;
-set -x NIX_PATH &#x2f;nix $HOME&#x2f;.nix-defexpr&#x2f;channels
-set -x PATH $HOME&#x2f;.nix-profile&#x2f;bin $PATH
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;It shouldn&#x27;t be to hard to do this on other OSes. The relevant information is in
-&lt;code&gt;~&#x2f;.nix-profile&#x2f;etc&#x2f;profile.d&#x2f;nix.sh&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
-</description>
-                <pubDate>Sun, 13 Dec 2020 12:00:52 -0800</pubDate>
-                <link>https://duan.ca/2020/12/13/nix-on-macos-11-big-sur/</link>
-                <guid isPermaLink="true">https://duan.ca/2020/12/13/nix-on-macos-11-big-sur/</guid>
-            </item>
-            <item>
-                <title>Naive NixOS Rust Development</title>
-                <description>&lt;p&gt;tl;dr: To work on Rust project with nix-shell, rls and extensions such as
-&lt;code&gt;rust-analysis&lt;&#x2f;code&gt;, &lt;code&gt;rust-src&lt;&#x2f;code&gt;, without caring too much about specific Rust
-toolchain version (except for it being &lt;code&gt;stable&lt;&#x2f;code&gt;), use the following &lt;code&gt;shell.nix&lt;&#x2f;code&gt;:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source nix&quot;&gt;&lt;span class=&quot;keyword other nix&quot;&gt;let&lt;&#x2f;span&gt;
-  &lt;span class=&quot;entity other attribute-name multipart nix&quot;&gt;moz_overlay&lt;&#x2f;span&gt; &lt;span class=&quot;keyword operator bind nix&quot;&gt;=&lt;&#x2f;span&gt; &lt;span class=&quot;support function nix&quot;&gt;import&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition expression nix&quot;&gt;(&lt;&#x2f;span&gt;&lt;span class=&quot;constant language nix&quot;&gt;builtins&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator nix&quot;&gt;.&lt;&#x2f;span&gt;&lt;span class=&quot;variable parameter name nix&quot;&gt;fetchTarball&lt;&#x2f;span&gt; &lt;span class=&quot;string unquoted url nix&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;mozilla&#x2f;nixpkgs-mozilla&#x2f;archive&#x2f;master.tar.gz&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition expression nix&quot;&gt;)&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
-  &lt;span class=&quot;entity other attribute-name multipart nix&quot;&gt;nixpkgs&lt;&#x2f;span&gt; &lt;span class=&quot;keyword operator bind nix&quot;&gt;=&lt;&#x2f;span&gt; &lt;span class=&quot;support function nix&quot;&gt;import&lt;&#x2f;span&gt; &lt;span class=&quot;string unquoted spath nix&quot;&gt;&amp;lt;nixpkgs&amp;gt;&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition attrset-or-function nix&quot;&gt;{&lt;&#x2f;span&gt;
-    &lt;span class=&quot;entity other attribute-name multipart nix&quot;&gt;overlays&lt;&#x2f;span&gt; &lt;span class=&quot;keyword operator bind nix&quot;&gt;=&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition list nix&quot;&gt;[&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter name nix&quot;&gt;moz_overlay&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition list nix&quot;&gt;]&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
-  &lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
-  &lt;span class=&quot;entity other attribute-name multipart nix&quot;&gt;ruststable&lt;&#x2f;span&gt; &lt;span class=&quot;keyword operator bind nix&quot;&gt;=&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition expression nix&quot;&gt;(&lt;&#x2f;span&gt;&lt;span class=&quot;variable parameter name nix&quot;&gt;nixpkgs&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator nix&quot;&gt;.&lt;&#x2f;span&gt;&lt;span class=&quot;variable parameter name nix&quot;&gt;latest&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator nix&quot;&gt;.&lt;&#x2f;span&gt;&lt;span class=&quot;variable parameter name nix&quot;&gt;rustChannels&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator nix&quot;&gt;.&lt;&#x2f;span&gt;&lt;span class=&quot;variable parameter name nix&quot;&gt;stable&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator nix&quot;&gt;.&lt;&#x2f;span&gt;&lt;span class=&quot;variable parameter name nix&quot;&gt;rust&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator nix&quot;&gt;.&lt;&#x2f;span&gt;&lt;span class=&quot;variable parameter name nix&quot;&gt;override&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition attrset-or-function nix&quot;&gt;{&lt;&#x2f;span&gt;
-    &lt;span class=&quot;entity other attribute-name multipart nix&quot;&gt;extensions&lt;&#x2f;span&gt; &lt;span class=&quot;keyword operator bind nix&quot;&gt;=&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition list nix&quot;&gt;[&lt;&#x2f;span&gt; &lt;span class=&quot;string quoted double nix&quot;&gt;&lt;span class=&quot;punctuation definition string double start nix&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;rust-src&lt;span class=&quot;punctuation definition string double end nix&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;string quoted double nix&quot;&gt;&lt;span class=&quot;punctuation definition string double start nix&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;rust-analysis&lt;span class=&quot;punctuation definition string double end nix&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition list nix&quot;&gt;]&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;
-  &lt;span class=&quot;punctuation definition expression nix&quot;&gt;)&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
-&lt;span class=&quot;keyword other nix&quot;&gt;in&lt;&#x2f;span&gt;
-  &lt;span class=&quot;keyword other nix&quot;&gt;with&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter name nix&quot;&gt;nixpkgs&lt;&#x2f;span&gt;;
-  &lt;span class=&quot;variable parameter name nix&quot;&gt;stdenv&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator nix&quot;&gt;.&lt;&#x2f;span&gt;&lt;span class=&quot;variable parameter name nix&quot;&gt;mkDerivation&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition attrset-or-function nix&quot;&gt;{&lt;&#x2f;span&gt;
-    &lt;span class=&quot;entity other attribute-name multipart nix&quot;&gt;name&lt;&#x2f;span&gt; &lt;span class=&quot;keyword operator bind nix&quot;&gt;=&lt;&#x2f;span&gt; &lt;span class=&quot;string quoted double nix&quot;&gt;&lt;span class=&quot;punctuation definition string double start nix&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;rust&lt;span class=&quot;punctuation definition string double end nix&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
-    &lt;span class=&quot;entity other attribute-name multipart nix&quot;&gt;buildInputs&lt;&#x2f;span&gt; &lt;span class=&quot;keyword operator bind nix&quot;&gt;=&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition list nix&quot;&gt;[&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter name nix&quot;&gt;rustup&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter name nix&quot;&gt;ruststable&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition list nix&quot;&gt;]&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
-  &lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;When you have a Nix hammer, everything looks like a Nix expression.&lt;&#x2f;p&gt;
-&lt;p&gt;Having used NixOS on a real PC for a number of days, this is the impression
-I get from the world of Nix. Unfortunately, so far, it&#x27;s been a negative for me.&lt;&#x2f;p&gt;
-&lt;p&gt;One of the most exciting thing I want to use Nix for is to bootstrap development
-environment with &lt;code&gt;nix-shell&lt;&#x2f;code&gt;. I imagined it to be similar to using &lt;a href=&quot;https:&#x2f;&#x2f;pipenv-fork.readthedocs.io&#x2f;en&#x2f;latest&#x2f;&quot;&gt;pipenv&lt;&#x2f;a&gt;
-with Python, except for everything. Well, I&#x27;ve since learned that it&#x27;s not true
-(yet?) for many reasons.&lt;&#x2f;p&gt;
-&lt;p&gt;Modern programming languages come with their own attempt at &lt;em&gt;reproducibility&lt;&#x2f;em&gt;.
-Some does it better than others. To make it concrete, I&#x27;m talking about things
-like &lt;a href=&quot;https:&#x2f;&#x2f;haskellstack.org&quot;&gt;Stack&lt;&#x2f;a&gt; for Haskell or &lt;a href=&quot;https:&#x2f;&#x2f;rustup.rs&#x2f;&quot;&gt;rustup&lt;&#x2f;a&gt; for Rust: given the source code, how do
-I make it build in the way the project intended? What&#x27;s the correct version of
-the compiler, runtime, and tools that works best with this revision of the
-source code? The common solution usually follows this pattern: as author of
-a project, specify as much as you can, the environment best suited for the
-current state of the project. As a &amp;quot;builder&amp;quot;, use a &lt;em&gt;single program&lt;&#x2f;em&gt; that&#x27;s
-capable of updating itself, as well as ensuring that the project builds exactly
-as specified, including managing the compiler&#x2f;runtime&#x2f;tooling versions, etc.&lt;&#x2f;p&gt;
-&lt;p&gt;This &lt;em&gt;single program&lt;&#x2f;em&gt;&#x27;s role is very much the same as the Nix system, except the
-latter is independent of programming languages: &lt;code&gt;rustup&lt;&#x2f;code&gt; installs Rust, so does
-Nix. That&#x27;s a bad thing. As a package manager, Nix either have to tightly
-integrate with each of these other package managers, leveraging their evolving
-behaviors to give its user the build environment; or, it must replace them.
-The former is impractical; the latter, well, sucks.&lt;&#x2f;p&gt;
-&lt;p&gt;Back to reality. This is the experience I want to have with NixOS: Some programs
-I use daily such as Alacritty, NeoVim, Firfox, etc, are installed globally and
-readily available. They are part of my &lt;code&gt;&#x2f;etc&#x2f;nixos&#x2f;configuration.nix&lt;&#x2f;code&gt;. So far so
-good. Now, I regularly program in a few languages. For each of the project, I&#x27;d
-like to have a &lt;code&gt;shell.nix&lt;&#x2f;code&gt; that brings in its compilers, libraries, LSP servers,
-etc. This is what &lt;code&gt;nix-shell&lt;&#x2f;code&gt; is supposed to give me! This is known as the &amp;quot;per
-project&amp;quot; setup.&lt;&#x2f;p&gt;
-&lt;p&gt;Let&#x27;s see: with Rust, that means &lt;code&gt;rustc&lt;&#x2f;code&gt; (compiler), &lt;code&gt;cargo&lt;&#x2f;code&gt; (package manager),
-&lt;code&gt;rls&lt;&#x2f;code&gt;, &lt;code&gt;rust-src&lt;&#x2f;code&gt; and &lt;code&gt;rust-analysis&lt;&#x2f;code&gt; (LSP). In macOS, I&#x27;d install all of these
-globally with &lt;code&gt;rustup&lt;&#x2f;code&gt;. In NixOS...well, I can ask for &lt;code&gt;rustup&lt;&#x2f;code&gt; for my project:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source nix&quot;&gt;&lt;span class=&quot;keyword other nix&quot;&gt;with&lt;&#x2f;span&gt; &lt;span class=&quot;support function nix&quot;&gt;import&lt;&#x2f;span&gt; &lt;span class=&quot;string unquoted spath nix&quot;&gt;&amp;lt;nixpkgs&amp;gt;&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition attrset nix&quot;&gt;{&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;;
-
-&lt;span class=&quot;variable parameter name nix&quot;&gt;stdenv&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator nix&quot;&gt;.&lt;&#x2f;span&gt;&lt;span class=&quot;variable parameter name nix&quot;&gt;mkDerivation&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition attrset-or-function nix&quot;&gt;{&lt;&#x2f;span&gt;
-  &lt;span class=&quot;entity other attribute-name multipart nix&quot;&gt;name&lt;&#x2f;span&gt; &lt;span class=&quot;keyword operator bind nix&quot;&gt;=&lt;&#x2f;span&gt; &lt;span class=&quot;string quoted double nix&quot;&gt;&lt;span class=&quot;punctuation definition string double start nix&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;rust&lt;span class=&quot;punctuation definition string double end nix&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
-  &lt;span class=&quot;entity other attribute-name multipart nix&quot;&gt;nativeBuildInputs&lt;&#x2f;span&gt; &lt;span class=&quot;keyword operator bind nix&quot;&gt;=&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition list nix&quot;&gt;[&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter name nix&quot;&gt;rustup&lt;&#x2f;span&gt; &lt;span class=&quot;punctuation definition list nix&quot;&gt;]&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation terminator bind nix&quot;&gt;;&lt;&#x2f;span&gt;
-&lt;span class=&quot;punctuation definition attrset nix&quot;&gt;}&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;...which gives me &lt;code&gt;rustup&lt;&#x2f;code&gt; and nothing else. That&#x27;s right, you don&#x27;t even get
-a &lt;code&gt;rustc&lt;&#x2f;code&gt; after running &lt;code&gt;nix-shell&lt;&#x2f;code&gt;. But &lt;code&gt;rustup&lt;&#x2f;code&gt; can get you everything else,
-all I need to do is ask. Hmm, do I need to run a series of set-up commands with
-&lt;code&gt;rustup&lt;&#x2f;code&gt; every time I enter the environment? No? I just need to run it the first
-time? Until the cached tools get deleted by some garbage collection mechanism?
-That seems unsatisfying, doesn&#x27;t it?&lt;&#x2f;p&gt;
-&lt;p&gt;Instead of &lt;code&gt;rustup&lt;&#x2f;code&gt;, I could also ask Nix to use the &lt;code&gt;rustc&lt;&#x2f;code&gt;&#x2f;&lt;code&gt;cargo&lt;&#x2f;code&gt;&#x2f;&lt;code&gt;rls&lt;&#x2f;code&gt; it
-knows about directly. This is marginally better. Except I still need &lt;code&gt;rust-src&lt;&#x2f;code&gt;
-and &lt;code&gt;rust-analysis&lt;&#x2f;code&gt; for my needs. As far as I can tell, these &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;rust-lang&#x2f;rls&quot;&gt;RLS&lt;&#x2f;a&gt; components
-are out of Nix&#x27;s control (as of today).&lt;&#x2f;p&gt;
-&lt;p&gt;Everywhere on the internet I looked, for every problem that
-Nix-the-package-manager doesn&#x27;t work out-of-the-box, there&#x27;s someone responding
-along the line of &amp;quot;you can write some Nix expression yourself&amp;quot;. In other words,
-Nix-the-language is powerful enough to solve it, probably. In the case of Rust,
-luckily, Mozilla wrote enough Nix expressions for us and provides them via an
-&lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;mozilla&#x2f;nixpkgs-mozilla&quot;&gt;overlay&lt;&#x2f;a&gt;. These expressions are rich enough to meet my needs.
-As you can see in the tl;dr at the top, when entering the development
-environment, nix-shell would: download the overlay&#x27;s source code (from the
-internet, or local cache), load the expression it includes, mix in my
-customization, and execute it.&lt;&#x2f;p&gt;
-&lt;p&gt;That marks the end of my search. I like the final solution because it&#x27;s mostly
-&amp;quot;vanilla&amp;quot; Nix and doesn&#x27;t require me to mess with a bunch of other tools. For
-solutions that do, read &lt;a href=&quot;https:&#x2f;&#x2f;christine.website&#x2f;blog&#x2f;how-i-start-nix-2020-03-08&quot;&gt;this&lt;&#x2f;a&gt;.&lt;&#x2f;p&gt;
-&lt;hr &#x2f;&gt;
-&lt;p&gt;At end of the day, my needs are pretty basic: consistency from rustup and
-convenience from nix-shell. I didn&#x27;t need to pin the compiler to a specific Rust
-release, or checksum the final build output.&lt;&#x2f;p&gt;
-&lt;p&gt;I&#x27;m very new to both technologies so there may be a follow-up post sometime in
-the future.&lt;&#x2f;p&gt;
-</description>
-                <pubDate>Thu, 07 May 2020 11:04:58 -0700</pubDate>
-                <link>https://duan.ca/2020/05/07/nix-rust-development/</link>
-                <guid isPermaLink="true">https://duan.ca/2020/05/07/nix-rust-development/</guid>
             </item>
     </channel>
 </rss>

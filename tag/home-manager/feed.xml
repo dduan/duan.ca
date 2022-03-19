@@ -5,6 +5,72 @@
         <link>https://duan.ca/tag/home-manager/</link>
         <atom:link href="https://duan.ca/tag/home-manager/feed.xml" rel="self" type="application/rss+xml" />
             <item>
+                <title>Use Flake For Non-Nix projects</title>
+                <description>&lt;p&gt;The ideal outcome of using Nix or home-manager is to have as many things as possible under their control.
+Among these things are developer tools for coding. You may need &lt;code&gt;cargo&lt;&#x2f;code&gt;, and &lt;code&gt;rust-analyzer&lt;&#x2f;code&gt; for Rust projects;
+&lt;code&gt;ipython&lt;&#x2f;code&gt;, and &lt;code&gt;python-lsp-server&lt;&#x2f;code&gt; for Python projects, etc.&lt;&#x2f;p&gt;
+&lt;p&gt;Of course, the simplest solution is to have them all installed and configured in home-manager or the OS level.
+But, over time, you&#x27;ll end up with a ton of stuff.&lt;&#x2f;p&gt;
+&lt;p&gt;Maybe that won&#x27;t bother you. Fine, but this approach is at odds with some convention of the Nix community. You
+see, there&#x27;s this command called &lt;code&gt;nix-shell&lt;&#x2f;code&gt;, or &lt;code&gt;nix develop&lt;&#x2f;code&gt;, which sets up a environment with certain
+packages, with the expectation that you only need them sometimes, usually within the context of developing
+a certain software project.&lt;&#x2f;p&gt;
+&lt;p&gt;So, arguably, a better alternative to installing everything you possibly need is to keep only the essential
+tools you always need, regardless of what you are working on. Things like &lt;code&gt;neovim&lt;&#x2f;code&gt;, &lt;code&gt;git&lt;&#x2f;code&gt;, &lt;code&gt;ripgrep&lt;&#x2f;code&gt;, etc.
+When a project demands things such as &lt;code&gt;rust-analyzer&lt;&#x2f;code&gt;, running &lt;code&gt;nix develop&lt;&#x2f;code&gt; should set it up for you.&lt;&#x2f;p&gt;
+&lt;p&gt;How do we implement that? In a imaginary world where every single software project is built with a flake.nix,
+the &lt;code&gt;devShell&lt;&#x2f;code&gt; property should provide everything the software project owner expect you to need. And you just
+&lt;code&gt;cd&lt;&#x2f;code&gt; into the root of the project, run &lt;code&gt;nix develop&lt;&#x2f;code&gt;, and you are off to the races.&lt;&#x2f;p&gt;
+&lt;p&gt;Several problems:&lt;&#x2f;p&gt;
+&lt;ol&gt;
+&lt;li&gt;running &lt;code&gt;nix develop&lt;&#x2f;code&gt; is repetitive, and therefore, annoying.&lt;&#x2f;li&gt;
+&lt;li&gt;the owner of a flake.nix may have drastically different taste for the best dev tools for their project
+(bet!).&lt;&#x2f;li&gt;
+&lt;li&gt;we don&#x27;t live in a world built with Nix flakes.&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;p&gt;Yikes.&lt;&#x2f;p&gt;
+&lt;p&gt;To solve &lt;code&gt;1&lt;&#x2f;code&gt;, enter &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;nix-community&#x2f;nix-direnv&quot;&gt;direnv&lt;&#x2f;a&gt;. It&#x27;s a piece of software that let you create a environment for a directory,
+and automatically switch to it when you enter said directory. The &amp;quot;environment&amp;quot; could contain envvars, and,
+you guessed it: a Nix developer shell. If you have a flake.nix, add &lt;code&gt;use flake&lt;&#x2f;code&gt; in your project directory&#x27;s
+&lt;code&gt;.envrc&lt;&#x2f;code&gt; file, direnv will automatically call &lt;code&gt;nix develop&lt;&#x2f;code&gt; the next time you &lt;code&gt;cd&lt;&#x2f;code&gt; in. Neat!&lt;&#x2f;p&gt;
+&lt;p&gt;To make this work in practice, you&#x27;ll want to add &lt;code&gt;.envrc&lt;&#x2f;code&gt; and &lt;code&gt;.direnv&#x2f;&lt;&#x2f;code&gt; to your global git ignore list, as
+they are personal preferences that probably shouldn&#x27;t end up in git history.&lt;&#x2f;p&gt;
+&lt;p&gt;Ok, we are so close to solve problem &lt;code&gt;2&lt;&#x2f;code&gt;, and &lt;code&gt;3&lt;&#x2f;code&gt; now. In short, &lt;code&gt;nix develop&lt;&#x2f;code&gt; may set up &lt;strong&gt;a&lt;&#x2f;strong&gt; environment,
+but it may not be &lt;strong&gt;the&lt;&#x2f;strong&gt; environment that suits you the best. &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;nix-community&#x2f;nix-direnv&quot;&gt;nix-direnv&lt;&#x2f;a&gt; extends direnv to save us:&lt;&#x2f;p&gt;
+&lt;pre&gt;&lt;code&gt;use flake path&#x2f;to&#x2f;flake#target
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;... with this in &lt;code&gt;.envrc&lt;&#x2f;code&gt;, direnv will set up the Nix environment according to &lt;code&gt;path&#x2f;to&#x2f;flake#target&lt;&#x2f;code&gt;. That
+could point to any location on your hard drive! You can have a flake.nix whose &lt;code&gt;devShell&lt;&#x2f;code&gt; has &lt;code&gt;cargo&lt;&#x2f;code&gt;, and
+&lt;code&gt;rust-analyzer&lt;&#x2f;code&gt;. You can have another with &lt;code&gt;ipython&lt;&#x2f;code&gt;, and &lt;code&gt;python-lsp-server&lt;&#x2f;code&gt;. Mix and match to your liking to
+the infinite degree...&lt;&#x2f;p&gt;
+&lt;p&gt;For now, I&#x27;ve decided to give nix-direnv a try. Alongside my home-manager configuration, I&#x27;ve also included
+extra flakes for generic Python&#x2f;Rust projects, and specific projects that may require a mix of tools. A lot of
+the project I work on don&#x27;t use flake as their package manager. With this approach, I get to customize my
+setup for them each, and stay in the comfort of Nix and home-manager.&lt;&#x2f;p&gt;
+&lt;p&gt;direnv and nix-direnv can be configured together with home-manager. To achieve everything mentioned in this
+article, including direnv&#x27;s shell integration (Fish, for me), it&#x27;s as simple as&lt;&#x2f;p&gt;
+&lt;pre&gt;# In home manager config...
+programs.direnv = {
+  enable = true;
+  nix-direnv = {
+    enable = true;
+    enableFlakes = true;
+  };
+}
+&lt;&#x2f;pre&gt;
+&lt;p&gt;To recap, having the snipped above in my home-manager setup, I now can enter any project&#x27;s root diretory and
+add a &lt;code&gt;.envrc&lt;&#x2f;code&gt; file with the content &lt;code&gt;use flake ~&#x2f;src&#x2f;dotfiles&#x2f;direnvs&#x2f;python&lt;&#x2f;code&gt;.
+&lt;code&gt;~&#x2f;src&#x2f;dotfiles&#x2f;direnvs&#x2f;python&lt;&#x2f;code&gt; contains a &lt;code&gt;flake.nix&lt;&#x2f;code&gt; (and a &lt;code&gt;flake.lock&lt;&#x2f;code&gt;) that has the &lt;code&gt;devShell&lt;&#x2f;code&gt; value
+I like for all Python projects. When I &lt;code&gt;cd&lt;&#x2f;code&gt; into this project, &lt;code&gt;(nix-)direnv&lt;&#x2f;code&gt; will read from that &lt;code&gt;devShell&lt;&#x2f;code&gt;
+and set every tool listed under there. The tools are cached in a &lt;code&gt;.direnv&lt;&#x2f;code&gt; directory so when I return here,
+the setup is basically instantaneous. Since I make &lt;code&gt;git&lt;&#x2f;code&gt; to ignore &lt;code&gt;.envrc&lt;&#x2f;code&gt;, and &lt;code&gt;.direnv&lt;&#x2f;code&gt; no matter where
+they are, this project I&#x27;m working on is unaffected by all this.&lt;&#x2f;p&gt;
+</description>
+                <pubDate>Sat, 19 Mar 2022 00:37:01 -0700</pubDate>
+                <link>https://duan.ca/2022/03/19/nix-dirnev/</link>
+                <guid isPermaLink="true">https://duan.ca/2022/03/19/nix-dirnev/</guid>
+            </item>
+            <item>
                 <title>Flake, Home Manager, and Extra Packages</title>
                 <description>&lt;p&gt;So, you use a standalone home-manager, it&#x27;s set up with flake, tracking a particular nixpkgs channel. How do
 you use a package from another channel? This seemingly simple task took me, a Nix noob, quite a bit of

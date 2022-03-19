@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2022/03/19/nix-dirnev/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2022/03/15/standalone-home-manager-flake-channels/</loc>
     </url>
     <url>
@@ -524,6 +527,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/youtube/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/flake/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/flake/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/home-manager/</loc>

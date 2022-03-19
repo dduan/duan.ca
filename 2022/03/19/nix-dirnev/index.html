@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2022/03/19/nix-dirnev/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Use Flake For Non-Nix projects">
+    <meta property="article:published_time" content="2022-03-19"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Use Flake For Non-Nix projects</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2022/03/19/nix-dirnev/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>Use Flake For Non-Nix projects</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2022-03-19" itemProp="datePublished">2022-03-19</time>
+        </p>
+    </nav><p>The ideal outcome of using Nix or home-manager is to have as many things as possible under their control.
+Among these things are developer tools for coding. You may need <code>cargo</code>, and <code>rust-analyzer</code> for Rust projects;
+<code>ipython</code>, and <code>python-lsp-server</code> for Python projects, etc.</p>
+<p>Of course, the simplest solution is to have them all installed and configured in home-manager or the OS level.
+But, over time, you'll end up with a ton of stuff.</p>
+<p>Maybe that won't bother you. Fine, but this approach is at odds with some convention of the Nix community. You
+see, there's this command called <code>nix-shell</code>, or <code>nix develop</code>, which sets up a environment with certain
+packages, with the expectation that you only need them sometimes, usually within the context of developing
+a certain software project.</p>
+<p>So, arguably, a better alternative to installing everything you possibly need is to keep only the essential
+tools you always need, regardless of what you are working on. Things like <code>neovim</code>, <code>git</code>, <code>ripgrep</code>, etc.
+When a project demands things such as <code>rust-analyzer</code>, running <code>nix develop</code> should set it up for you.</p>
+<p>How do we implement that? In a imaginary world where every single software project is built with a flake.nix,
+the <code>devShell</code> property should provide everything the software project owner expect you to need. And you just
+<code>cd</code> into the root of the project, run <code>nix develop</code>, and you are off to the races.</p>
+<p>Several problems:</p>
+<ol>
+<li>running <code>nix develop</code> is repetitive, and therefore, annoying.</li>
+<li>the owner of a flake.nix may have drastically different taste for the best dev tools for their project
+(bet!).</li>
+<li>we don't live in a world built with Nix flakes.</li>
+</ol>
+<p>Yikes.</p>
+<p>To solve <code>1</code>, enter <a href="https://github.com/nix-community/nix-direnv">direnv</a>. It's a piece of software that let you create a environment for a directory,
+and automatically switch to it when you enter said directory. The &quot;environment&quot; could contain envvars, and,
+you guessed it: a Nix developer shell. If you have a flake.nix, add <code>use flake</code> in your project directory's
+<code>.envrc</code> file, direnv will automatically call <code>nix develop</code> the next time you <code>cd</code> in. Neat!</p>
+<p>To make this work in practice, you'll want to add <code>.envrc</code> and <code>.direnv/</code> to your global git ignore list, as
+they are personal preferences that probably shouldn't end up in git history.</p>
+<p>Ok, we are so close to solve problem <code>2</code>, and <code>3</code> now. In short, <code>nix develop</code> may set up <strong>a</strong> environment,
+but it may not be <strong>the</strong> environment that suits you the best. <a href="https://github.com/nix-community/nix-direnv">nix-direnv</a> extends direnv to save us:</p>
+<pre><code>use flake path/to/flake#target
+</code></pre>
+<p>... with this in <code>.envrc</code>, direnv will set up the Nix environment according to <code>path/to/flake#target</code>. That
+could point to any location on your hard drive! You can have a flake.nix whose <code>devShell</code> has <code>cargo</code>, and
+<code>rust-analyzer</code>. You can have another with <code>ipython</code>, and <code>python-lsp-server</code>. Mix and match to your liking to
+the infinite degree...</p>
+<p>For now, I've decided to give nix-direnv a try. Alongside my home-manager configuration, I've also included
+extra flakes for generic Python/Rust projects, and specific projects that may require a mix of tools. A lot of
+the project I work on don't use flake as their package manager. With this approach, I get to customize my
+setup for them each, and stay in the comfort of Nix and home-manager.</p>
+<p>direnv and nix-direnv can be configured together with home-manager. To achieve everything mentioned in this
+article, including direnv's shell integration (Fish, for me), it's as simple as</p>
+<pre># In home manager config...
+programs.direnv = {
+  enable = true;
+  nix-direnv = {
+    enable = true;
+    enableFlakes = true;
+  };
+}
+</pre>
+<p>To recap, having the snipped above in my home-manager setup, I now can enter any project's root diretory and
+add a <code>.envrc</code> file with the content <code>use flake ~/src/dotfiles/direnvs/python</code>.
+<code>~/src/dotfiles/direnvs/python</code> contains a <code>flake.nix</code> (and a <code>flake.lock</code>) that has the <code>devShell</code> value
+I like for all Python projects. When I <code>cd</code> into this project, <code>(nix-)direnv</code> will read from that <code>devShell</code>
+and set every tool listed under there. The tools are cached in a <code>.direnv</code> directory so when I return here,
+the setup is basically instantaneous. Since I make <code>git</code> to ignore <code>.envrc</code>, and <code>.direnv</code> no matter where
+they are, this project I'm working on is unaffected by all this.</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/nix/">Nix</a>
+        ·
+        <a href="/tag/home-manager/">home-manager</a>
+        ·
+        <a href="/tag/flake/">flake</a>
+    </p>
+</footer></body>
+</html>

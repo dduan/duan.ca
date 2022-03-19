@@ -5,7 +5,7 @@
         <link>https://duan.ca/tag/home-manager/</link>
         <atom:link href="https://duan.ca/tag/home-manager/feed.xml" rel="self" type="application/rss+xml" />
             <item>
-                <title>Use Flake For Non-Nix projects</title>
+                <title>Flake For Non-Nix Projects</title>
                 <description>&lt;p&gt;The ideal outcome of using Nix or home-manager is to have as many things as possible under their control.
 Among these things are developer tools for coding. You may need &lt;code&gt;cargo&lt;&#x2f;code&gt;, and &lt;code&gt;rust-analyzer&lt;&#x2f;code&gt; for Rust projects;
 &lt;code&gt;ipython&lt;&#x2f;code&gt;, and &lt;code&gt;python-lsp-server&lt;&#x2f;code&gt; for Python projects, etc.&lt;&#x2f;p&gt;

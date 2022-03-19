@@ -1,6 +1,6 @@
 # Flake, Home Manager, and Extra Packages
 2022-03-15T18:53:59-07:00
-tag: Nix, Nixpkgs, home-manager
+tag: Nix, Nixpkgs, home-manager, flake
 
 So, you use a standalone home-manager, it's set up with flake, tracking a particular nixpkgs channel. How do
 you use a package from another channel? This seemingly simple task took me, a Nix noob, quite a bit of

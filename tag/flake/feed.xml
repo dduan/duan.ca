@@ -58,7 +58,7 @@ programs.direnv = {
   };
 }
 &lt;&#x2f;pre&gt;
-&lt;p&gt;To recap, having the snipped above in my home-manager setup, I now can enter any project&#x27;s root diretory and
+&lt;p&gt;To recap, having the snippet above in my home-manager setup, I now can enter any project&#x27;s root directory and
 add a &lt;code&gt;.envrc&lt;&#x2f;code&gt; file with the content &lt;code&gt;use flake ~&#x2f;src&#x2f;dotfiles&#x2f;direnvs&#x2f;python&lt;&#x2f;code&gt;.
 &lt;code&gt;~&#x2f;src&#x2f;dotfiles&#x2f;direnvs&#x2f;python&lt;&#x2f;code&gt; contains a &lt;code&gt;flake.nix&lt;&#x2f;code&gt; (and a &lt;code&gt;flake.lock&lt;&#x2f;code&gt;) that has the &lt;code&gt;devShell&lt;&#x2f;code&gt; value
 I like for all Python projects. When I &lt;code&gt;cd&lt;&#x2f;code&gt; into this project, &lt;code&gt;(nix-)direnv&lt;&#x2f;code&gt; will read from that &lt;code&gt;devShell&lt;&#x2f;code&gt;

@@ -80,7 +80,7 @@ programs.direnv = {
   };
 }
 </pre>
-<p>To recap, having the snipped above in my home-manager setup, I now can enter any project's root diretory and
+<p>To recap, having the snippet above in my home-manager setup, I now can enter any project's root directory and
 add a <code>.envrc</code> file with the content <code>use flake ~/src/dotfiles/direnvs/python</code>.
 <code>~/src/dotfiles/direnvs/python</code> contains a <code>flake.nix</code> (and a <code>flake.lock</code>) that has the <code>devShell</code> value
 I like for all Python projects. When I <code>cd</code> into this project, <code>(nix-)direnv</code> will read from that <code>devShell</code>

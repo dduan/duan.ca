@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2022/03/31/instrumenting-commandline-executables/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2022/03/19/nix-dirnev/</loc>
     </url>
     <url>
@@ -293,6 +296,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/indexstoredb/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/instruments/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/instruments/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/interface-builder/</loc>

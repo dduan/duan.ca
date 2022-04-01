@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Instruments</title>
+        <link>https://duan.ca/tag/instruments/</link>
+        <atom:link href="https://duan.ca/tag/instruments/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>Using Instruments on Non-macOS, Non-iOS Executables</title>
+                <description>&lt;p&gt;How do you use use Instruments, the instrumentation tool distributed alongside Xcode? It&#x27;s easy if you are
+profiling a macOS or iOS app. No so with a regular old command-line tool built, say, with SwiftPM. To do so,
+you&#x27;ll need to codesign the target binary. Otherwise Instruments will give you a &lt;code&gt;&amp;quot;Failed to gain authorization&amp;quot;&lt;&#x2f;code&gt; error message.&lt;&#x2f;p&gt;
+&lt;p&gt;Here&#x27;s the steps:&lt;&#x2f;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a entitlement file with &lt;code&gt;com.apple.security.get-task-allow&lt;&#x2f;code&gt; set to true:&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;pre&gt;&lt;span class=&quot;text xml&quot;&gt;&lt;span class=&quot;meta tag preprocessor xml&quot;&gt;&lt;span class=&quot;punctuation definition tag begin xml&quot;&gt;&amp;lt;?&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag xml&quot;&gt;xml&lt;&#x2f;span&gt; &lt;span class=&quot;entity other attribute-name localname xml&quot;&gt;version&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator key-value xml&quot;&gt;=&lt;&#x2f;span&gt;&lt;span class=&quot;string quoted double xml&quot;&gt;&lt;span class=&quot;punctuation definition string begin xml&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;1.0&lt;span class=&quot;punctuation definition string end xml&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;entity other attribute-name localname xml&quot;&gt;encoding&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator key-value xml&quot;&gt;=&lt;&#x2f;span&gt;&lt;span class=&quot;string quoted double xml&quot;&gt;&lt;span class=&quot;punctuation definition string begin xml&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;UTF-8&lt;span class=&quot;punctuation definition string end xml&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end xml&quot;&gt;?&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;span class=&quot;meta tag sgml doctype xml&quot;&gt;&lt;span class=&quot;punctuation definition tag begin xml&quot;&gt;&amp;lt;!&lt;&#x2f;span&gt;&lt;span class=&quot;keyword doctype xml&quot;&gt;DOCTYPE&lt;&#x2f;span&gt; &lt;span class=&quot;variable documentroot xml&quot;&gt;plist&lt;&#x2f;span&gt; PUBLIC &amp;quot;-&#x2f;&#x2f;Apple&#x2f;&#x2f;DTD PLIST 1.0&#x2f;&#x2f;EN&amp;quot; &amp;quot;http:&#x2f;&#x2f;www.apple.com&#x2f;DTDs&#x2f;PropertyList-1.0.dtd&amp;quot;&lt;span class=&quot;punctuation definition tag end xml&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;span class=&quot;meta tag xml&quot;&gt;&lt;span class=&quot;punctuation definition tag begin xml&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag localname xml&quot;&gt;plist&lt;&#x2f;span&gt; &lt;span class=&quot;entity other attribute-name localname xml&quot;&gt;version&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator key-value xml&quot;&gt;=&lt;&#x2f;span&gt;&lt;span class=&quot;string quoted double xml&quot;&gt;&lt;span class=&quot;punctuation definition string begin xml&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;1.0&lt;span class=&quot;punctuation definition string end xml&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end xml&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;meta tag xml&quot;&gt;&lt;span class=&quot;punctuation definition tag begin xml&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag localname xml&quot;&gt;dict&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end xml&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+        &lt;span class=&quot;meta tag xml&quot;&gt;&lt;span class=&quot;punctuation definition tag begin xml&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag localname xml&quot;&gt;key&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end xml&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;com.apple.security.get-task-allow&lt;span class=&quot;meta tag xml&quot;&gt;&lt;span class=&quot;punctuation definition tag begin xml&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag localname xml&quot;&gt;key&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end xml&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+        &lt;span class=&quot;meta tag xml&quot;&gt;&lt;span class=&quot;punctuation definition tag begin xml&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag localname xml&quot;&gt;true&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end xml&quot;&gt;&#x2f;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+    &lt;span class=&quot;meta tag xml&quot;&gt;&lt;span class=&quot;punctuation definition tag begin xml&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag localname xml&quot;&gt;dict&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end xml&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;span class=&quot;meta tag xml&quot;&gt;&lt;span class=&quot;punctuation definition tag begin xml&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag localname xml&quot;&gt;plist&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end xml&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Let&#x27;s call it &lt;code&gt;Entitlements.plist&lt;&#x2f;code&gt;&lt;&#x2f;p&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;Build the executable.&lt;&#x2f;p&gt;
+&lt;&#x2f;li&gt;
+&lt;li&gt;
+&lt;p&gt;Codesign your executable with the entitlement file&lt;&#x2f;p&gt;
+&lt;&#x2f;li&gt;
+&lt;&#x2f;ol&gt;
+&lt;pre&gt;&lt;code&gt;codesign -s - -f --entitlements path&#x2f;to&#x2f;Entitlements.plist path&#x2f;to&#x2f;executable
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;p&gt;Now proceed with your profiling in Instruments.&lt;&#x2f;p&gt;
+&lt;p&gt;Not sure where this is officially documented. So I&#x27;m officially documenting it here.&lt;&#x2f;p&gt;
+</description>
+                <pubDate>Thu, 31 Mar 2022 20:39:05 -0700</pubDate>
+                <link>https://duan.ca/2022/03/31/instrumenting-commandline-executables/</link>
+                <guid isPermaLink="true">https://duan.ca/2022/03/31/instrumenting-commandline-executables/</guid>
+            </item>
+    </channel>
+</rss>

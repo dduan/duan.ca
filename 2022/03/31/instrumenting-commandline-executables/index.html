@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2022/03/31/instrumenting-commandline-executables/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Using Instruments on Non-macOS, Non-iOS Executables">
+    <meta property="article:published_time" content="2022-03-31"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Using Instruments on Non-macOS, Non-iOS Executables</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2022/03/31/instrumenting-commandline-executables/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>Using Instruments on Non-macOS, Non-iOS Executables</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/">Daniel Duan</a>
+            ·
+            <time datetime="2022-03-31" itemProp="datePublished">2022-03-31</time>
+        </p>
+    </nav><p>How do you use use Instruments, the instrumentation tool distributed alongside Xcode? It's easy if you are
+profiling a macOS or iOS app. No so with a regular old command-line tool built, say, with SwiftPM. To do so,
+you'll need to codesign the target binary. Otherwise Instruments will give you a <code>&quot;Failed to gain authorization&quot;</code> error message.</p>
+<p>Here's the steps:</p>
+<ol>
+<li>Create a entitlement file with <code>com.apple.security.get-task-allow</code> set to true:</li>
+</ol>
+<pre><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag begin xml">&lt;?</span><span class="entity name tag xml">xml</span> <span class="entity other attribute-name localname xml">version</span><span class="punctuation separator key-value xml">=</span><span class="string quoted double xml"><span class="punctuation definition string begin xml">&quot;</span>1.0<span class="punctuation definition string end xml">&quot;</span></span> <span class="entity other attribute-name localname xml">encoding</span><span class="punctuation separator key-value xml">=</span><span class="string quoted double xml"><span class="punctuation definition string begin xml">&quot;</span>UTF-8<span class="punctuation definition string end xml">&quot;</span></span><span class="punctuation definition tag end xml">?&gt;</span></span>
+<span class="meta tag sgml doctype xml"><span class="punctuation definition tag begin xml">&lt;!</span><span class="keyword doctype xml">DOCTYPE</span> <span class="variable documentroot xml">plist</span> PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;<span class="punctuation definition tag end xml">&gt;</span></span>
+<span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;</span><span class="entity name tag localname xml">plist</span> <span class="entity other attribute-name localname xml">version</span><span class="punctuation separator key-value xml">=</span><span class="string quoted double xml"><span class="punctuation definition string begin xml">&quot;</span>1.0<span class="punctuation definition string end xml">&quot;</span></span><span class="punctuation definition tag end xml">&gt;</span></span>
+    <span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;</span><span class="entity name tag localname xml">dict</span><span class="punctuation definition tag end xml">&gt;</span></span>
+        <span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;</span><span class="entity name tag localname xml">key</span><span class="punctuation definition tag end xml">&gt;</span></span>com.apple.security.get-task-allow<span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;/</span><span class="entity name tag localname xml">key</span><span class="punctuation definition tag end xml">&gt;</span></span>
+        <span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;</span><span class="entity name tag localname xml">true</span><span class="punctuation definition tag end xml">/&gt;</span></span>
+    <span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;/</span><span class="entity name tag localname xml">dict</span><span class="punctuation definition tag end xml">&gt;</span></span>
+<span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;/</span><span class="entity name tag localname xml">plist</span><span class="punctuation definition tag end xml">&gt;</span></span>
+</span></pre>
+<p>Let's call it <code>Entitlements.plist</code></p>
+<ol start="2">
+<li>
+<p>Build the executable.</p>
+</li>
+<li>
+<p>Codesign your executable with the entitlement file</p>
+</li>
+</ol>
+<pre><code>codesign -s - -f --entitlements path/to/Entitlements.plist path/to/executable
+</code></pre>
+<p>Now proceed with your profiling in Instruments.</p>
+<p>Not sure where this is officially documented. So I'm officially documenting it here.</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/instruments/">Instruments</a>
+        ·
+        <a href="/tag/swiftpm/">SwiftPM</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+    </p>
+</footer></body>
+</html>

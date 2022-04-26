@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2022/04/26/visceral/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2022/03/31/instrumenting-commandline-executables/</loc>
     </url>
     <url>
@@ -157,25 +160,25 @@
         <loc>https://duan.ca/2012/10/31/keep-git-social/</loc>
     </url>
     <url>
+        <loc>https://duan.ca//</loc>
+    </url><url>
         <loc>https://duan.ca/projects/</loc>
-    </url><url>
-        <loc>https://duan.ca/Markra/</loc>
-    </url><url>
-        <loc>https://duan.ca/swift-usr/swift-553-linux/</loc>
     </url><url>
         <loc>https://duan.ca/swift-usr/swift-552-macos/</loc>
     </url><url>
-        <loc>https://duan.ca/swift-usr/</loc>
-    </url><url>
         <loc>https://duan.ca/swift-usr/swift-552-linux/</loc>
     </url><url>
-        <loc>https://duan.ca//</loc>
+        <loc>https://duan.ca/swift-usr/</loc>
+    </url><url>
+        <loc>https://duan.ca/swift-usr/swift-553-linux/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/privacy/</loc>
     </url><url>
+        <loc>https://duan.ca/DrString/</loc>
+    </url><url>
         <loc>https://duan.ca/DrString/release-notes/</loc>
     </url><url>
-        <loc>https://duan.ca/DrString/</loc>
+        <loc>https://duan.ca/Markra/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/api-design-guidelines/</loc>
@@ -538,6 +541,12 @@
         <loc>https://duan.ca/tag/youtube/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/censorship/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/censorship/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/flake/</loc>
     </url>
     <url>
@@ -560,6 +569,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/macos/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/personal/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/personal/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/tvos/</loc>

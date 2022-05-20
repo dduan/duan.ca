@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2022/05/20/pro-science-yet-anti-research/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2022/04/26/visceral/</loc>
     </url>
     <url>
@@ -160,25 +163,25 @@
         <loc>https://duan.ca/2012/10/31/keep-git-social/</loc>
     </url>
     <url>
-        <loc>https://duan.ca/Markra/</loc>
-    </url><url>
-        <loc>https://duan.ca/swift-usr/</loc>
+        <loc>https://duan.ca//</loc>
     </url><url>
         <loc>https://duan.ca/swift-usr/swift-552-macos/</loc>
     </url><url>
-        <loc>https://duan.ca/swift-usr/swift-552-linux/</loc>
+        <loc>https://duan.ca/swift-usr/</loc>
     </url><url>
         <loc>https://duan.ca/swift-usr/swift-553-linux/</loc>
     </url><url>
-        <loc>https://duan.ca/DrString/release-notes/</loc>
+        <loc>https://duan.ca/swift-usr/swift-552-linux/</loc>
     </url><url>
-        <loc>https://duan.ca/DrString/</loc>
+        <loc>https://duan.ca/Markra/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/privacy/</loc>
     </url><url>
-        <loc>https://duan.ca/projects/</loc>
+        <loc>https://duan.ca/DrString/</loc>
     </url><url>
-        <loc>https://duan.ca//</loc>
+        <loc>https://duan.ca/DrString/release-notes/</loc>
+    </url><url>
+        <loc>https://duan.ca/projects/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/api-design-guidelines/</loc>
@@ -575,6 +578,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/personal/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/science/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/science/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/tvos/</loc>

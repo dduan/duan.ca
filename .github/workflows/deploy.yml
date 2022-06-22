@@ -28,9 +28,3 @@ jobs:
         git add .
         git commit -m "Deploy $GITHUB_SHA"
         git push origin gh-pages
-    - name: Beg Archive.org
-      run: |
-        git checkout gh-pages
-        git fetch origin
-        git reset --hard origin/gh-pages
-        git log -n 1 --pretty=oneline --name-status --no-decorate --diff-filter=MA | tail -n +2 | awk '{printf "https://web.archive.org/save/https://duan.ca/%s\n", $2}'  | xargs -I\{\} curl --silent --output /dev/null {}

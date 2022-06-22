@@ -2,7 +2,7 @@
 2022-06-22T13:13:09-07:00
 tag: culture
 
-For whatever reason, a dialogue from the Matrix trilogies stuck with me. I've never heard anyone else talk
+For whatever reason, a dialogue from the Matrix trilogy stuck with me. I've never heard anyone else talk
 about these quotes. Maybe they aren't that deep and I have been over-projecting meanings. Anyways, Neo (**N**)
 and Councillor Hamann (**H**) are in the last human city Zion, looking at a vast array of machines. They had
 this exchange about _control_:

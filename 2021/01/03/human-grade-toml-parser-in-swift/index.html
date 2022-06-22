@@ -84,44 +84,44 @@ can do the following:</p>
 <p>Errors could exist from each of these two steps To make the parser <em>human-grade</em>, the errors must
 not propagate by disrupting the parsing logic. In Swift, this means the code don't throw the
 (conceptual) errors, instead, the top-level constructs include error as a possible value:</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">TopLevel</span><span class="keyword operator">:</span> <span class="support class">Equatable</span></span></span> {
-    <span class="keyword control">case</span> table(<span class="support class">Key</span>)
-    <span class="keyword control">case</span> arrayTable(<span class="support class">Key</span>)
-    <span class="keyword control">case</span> keyValue(<span class="support class">KeyValuePair</span>)
-    <span class="keyword control">case</span> error(<span class="support class">Reason</span>)
+<pre><code class="language-swift">enum TopLevel: Equatable {
+    case table(Key)
+    case arrayTable(Key)
+    case keyValue(KeyValuePair)
+    case error(Reason)
 }
-</span></pre>
+</code></pre>
 <p>Upon evaluating a <code>TopLevel</code> value, the parser must not stop if it generates a conflict according to
 TOML's requirement. We take note of this error, and move on to consume the next <code>TopLevel</code>. Errors
 from this step will join the error from <code>TopLevel.error</code> at the end for users to see. Therefore, the
 second step's code roughly does this:</p>
-<pre><span class="source swift"><span class="keyword variable">var</span> errors = [<span class="support class">Error</span>]()
+<pre><code class="language-swift">var errors = [Error]()
 
-<span class="keyword control">for</span> value <span class="keyword control">in</span> topLevelValues {
-    <span class="keyword control">switch</span> value {
-    <span class="keyword control">case</span> .<span class="constant language enum">error</span>(<span class="keyword variable">let</span> reason):
-        errors<span class="keyword operator">.</span>append(reason)
-    <span class="keyword control">default</span>:
-        <span class="keyword control">do</span> {
+for value in topLevelValues {
+    switch value {
+    case .error(let reason):
+        errors.append(reason)
+    default:
+        do {
             evaluate(value)
-        } <span class="keyword control">catch</span> {
-            errors<span class="keyword operator">.</span>append(error)
+        } catch {
+            errors.append(error)
         }
     }
 }
 
-<span class="keyword control">if</span> !errors<span class="keyword operator">.</span>isEmpty {
-    <span class="keyword control">throw</span> <span class="support class">UserFacingError</span>(<span class="variable parameter">details</span>: errors)
+if !errors.isEmpty {
+    throw UserFacingError(details: errors)
 }
 
-<span class="comment line"><span class="punctuation definition comment">//</span> no error! parsing succeeded</span>
-</span></pre>
+// no error! parsing succeeded
+</code></pre>
 <p>This code &quot;synchronizes&quot; the errors from both the syntactical, and semantical level. With some
 additional effort to make the errors <code>CustomStringConvertible</code>, a erroneous TOML document such as</p>
-<pre>a = "Hello
+<pre><code class="language-TOML">a = &quot;Hello
 b = 43
 [b]
-</pre>
+</code></pre>
 <p>makes the parser generate the following error message:</p>
 <pre><code>Deserialization failure:
     * Value |1, 5| Missing closing character `&quot;` in string

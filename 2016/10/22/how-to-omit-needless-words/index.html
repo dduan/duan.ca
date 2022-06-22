@@ -68,9 +68,9 @@ section, we'll discuss one way to make it happen.</p>
 If you have been disciplined about naming your functions in Swift 2, finding
 such repetition should take no more than one or two good regular expressions.
 After the migrator, your code may contain a mixture of these:</p>
-<pre><span class="source swift"><span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">doStuffWithX</span></span>(<span class="constant language other">_</span>: <span class="support class">X</span>)</span></span> { … }
-<span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">doStuff</span></span>(forY <span class="variable parameter">y</span>: <span class="support class">Y</span>)</span></span> { … }
-</span></pre>
+<pre><code class="language-swift">func doStuffWithX(_: X) { … }
+func doStuff(forY y: Y) { … }
+</code></pre>
 <p>In other words, the repeating word (<code>X</code> or <code>Y</code>) is preceded by a
 <a href="https://www.englishclub.com/grammar/prepositions-list.htm">preposition</a>.</p>
 <p>Finding these in a large code base is quite fun. If you don't feel like writing
@@ -79,8 +79,8 @@ the scripts yourself, I've made a little tool for it <a href="https://github.com
 &quot;CG&quot; in <code>CGSize</code>. That's covered by the tool as well.)</p>
 <h2>Step 2: Update</h2>
 <p>You can further rearrange the pieces in function name mechanically to:</p>
-<pre><span class="source swift"><span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">doStuff</span></span>(preposition <span class="variable parameter">originalArgName</span>: <span class="support class">Type</span>)</span></span> { … }
-</span></pre>
+<pre><code class="language-swift">func doStuff(preposition originalArgName: Type) { … }
+</code></pre>
 <p>The <a href="https://github.com/dduan/needless">tool</a> I wrote can suggest alternatives like this. Applying them
 is technically automatable. But I find manually doing tasks such as fixing up
 indentation for multi-line functions or updating their use site to be easier.
@@ -97,11 +97,11 @@ intuitively pick up that it's for a &quot;screen with a certain size&quot;. So t
 renaming here should be <code>alertForScreen(with size: CGSize)</code>.</p>
 <p><strong>Awkward literal values results in ungrammatical phrases</strong>. Imagine our
 argument is a enum:</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Mode</span></span></span> {
-  <span class="keyword control">case</span> add
-  <span class="keyword control">case</span> edit
+<pre><code class="language-swift">enum Mode {
+  case add
+  case edit
 }
-</span></pre>
+</code></pre>
 <p>… and we renamed a function <code>updateUIForMode(mode: Mode)</code> to
 <code>update(for mode: Mode)</code>. The call site, therefore, becomes
 <code>update(for: .add)</code>.</p>
@@ -110,19 +110,19 @@ is not very grammatical. Normally we would say &quot;update UI for <em>adding</e
 we need to update the literals in that enum to &quot;adding&quot; and &quot;editing&quot;.</p>
 <p><strong>Type information becomes too weak</strong>. This can happen very often with enum
 literals. We often name enum values with an adjective to qualify its name:</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">UIControlState</span></span></span> {
-    <span class="keyword control">case</span> automatic <span class="comment line"><span class="punctuation definition comment">//</span> which state? the *automatic* state!</span>
+<pre><code class="language-swift">enum UIControlState {
+    case automatic // which state? the *automatic* state!
     …
 }
-</span></pre>
+</code></pre>
 <p>After renaming, we'll have functions that simply becomes too generic and
 mysterious at call site:</p>
-<pre><span class="source swift">update(<span class="keyword control">for</span>: .<span class="constant language enum">automatic</span>) <span class="comment line"><span class="punctuation definition comment">//</span> automatic what? 😂</span>
-</span></pre>
+<pre><code class="language-swift">update(for: .automatic) // automatic what? 😂
+</code></pre>
 <p>This is where we need to be flexible and use our own good judgement. Perhaps
 it's simply better to keep the qualifying postfix:</p>
-<pre><span class="source swift">update(<span class="variable parameter">forControlState</span>: .<span class="constant language enum">automatic</span>) <span class="comment line"><span class="punctuation definition comment">//</span> better</span>
-</span></pre>
+<pre><code class="language-swift">update(forControlState: .automatic) // better
+</code></pre>
 <p>In the guideline's parlance, this is <a href="https://swift.org/documentation/api-design-guidelines/#weak-type-information">compensate for weak type
 information</a>.</p>
 <p><strong>Other argument labels needs updates too</strong>. A function at call site should read

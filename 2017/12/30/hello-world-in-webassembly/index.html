@@ -33,10 +33,8 @@ around the time of this post and finally found enough tutorials, examples, and
 working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (<em>this article includes all the same information and
 more, so just read on if you don't have 15 minutes for YouTube</em>).</p>
-<div class="video-container">
-    <iframe src="https://www.youtube.com/embed/yEYtwmI7bDg" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-</div>
-<br>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <h2>Our goal:</h2>
 <ol>
 <li>Use as much built-in tools on a Mac as possible. The web development
@@ -69,44 +67,44 @@ WebAssembly, which is in the form of S-expressions. So</p>
 </code></pre>
 <p>…will compile your WebAssembly module in <code>main.wat</code> to generate <code>main.wasm</code>, the
 binary file. For now, <code>main.wat</code> can be the simplest WebAssembly program:</p>
-<pre><span class="source lisp"><span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>module<span class="punctuation definition group end lisp">)</span></span>
-</span></pre>
+<pre><code class="language-lisp">(module)
+</code></pre>
 <p>Running the binary in a browser demands the bulk of the work. First, we'll need
 a web page. It doesn't need any content other than invoking some JavaScript
 code.</p>
-<pre><span class="text html basic"><span class="meta tag sgml html"><span class="punctuation definition tag html">&lt;!</span><span class="meta tag sgml doctype html"><span class="entity name tag doctype html">DOCTYPE</span> html</span><span class="punctuation definition tag html">&gt;</span></span>
-<span class="meta tag structure any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag structure any html">html</span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">lang</span><span class="punctuation separator key-value html">=</span><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>en<span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html">&gt;</span></span>
-<span class="meta tag structure any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag structure any html">head</span><span class="punctuation definition tag end html">&gt;</span></span>
-    <span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline any html">meta</span> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">charset</span><span class="punctuation separator key-value html">=</span><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>UTF-8<span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html">&gt;</span></span>
-    <span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag inline any html">title</span><span class="punctuation definition tag end html">&gt;</span></span><span class="meta tag inline any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag inline any html">title</span><span class="punctuation definition tag end html">&gt;</span></span>
-<span class="meta tag structure any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag structure any html">head</span><span class="punctuation definition tag end html">&gt;</span></span>
-<span class="meta tag structure any html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag structure any html">body</span><span class="punctuation definition tag end html">&gt;</span></span>
-    <span class="comment block html"><span class="punctuation definition comment begin html">&lt;!--</span> The only thing that matters is the following line,
-    although having a valid HTML5 page is nice. <span class="punctuation definition comment end html">--&gt;</span></span>
-    <span class="meta tag script begin html"><span class="punctuation definition tag begin html">&lt;</span><span class="entity name tag script html">script</span></span><span class="meta tag script begin html"> <span class="meta attribute-with-value html"><span class="entity other attribute-name html">src</span><span class="punctuation separator key-value html">=</span><span class="string quoted double html"><span class="punctuation definition string begin html">&quot;</span>play.js<span class="punctuation definition string end html">&quot;</span></span></span><span class="punctuation definition tag end html">&gt;</span></span><span class="meta tag script end html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag script html">script</span><span class="punctuation definition tag end html">&gt;</span></span>
-<span class="meta tag structure any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag structure any html">body</span><span class="punctuation definition tag end html">&gt;</span></span>
-<span class="meta tag structure any html"><span class="punctuation definition tag begin html">&lt;/</span><span class="entity name tag structure any html">html</span><span class="punctuation definition tag end html">&gt;</span></span>
-</span></pre>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- The only thing that matters is the following line,
+    although having a valid HTML5 page is nice. --&gt;
+    &lt;script src=&quot;play.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 <p>First, the Javascript logic needs to <em>fetch and instantiate the compiled
 WebAssembly module</em>. Since this is not a JS or WebAssembly tutorial, I'll point
 you to the docmuntation for <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promises</a>, and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly">the WebAssembly
 object</a> for details:</p>
-<pre>fetch("main.wasm").then(reponse =>
+<pre><code class="language-javascript">fetch(&quot;main.wasm&quot;).then(reponse =&gt;
     reponse.arrayBuffer()
-).then(bytes =>
+).then(bytes =&gt;
     WebAssembly.instantiate(bytes, {})
-).then(result =>
+).then(result =&gt;
     result.instance
 ).then(main);
 
-</pre>
+</code></pre>
 <p>This snippet fetches <code>main.wasm</code> (adjust this URL according to your choosing),
 instantiate it, then pass it into a function named <code>main</code>, we can put
 a placeholder logic for it for now:</p>
-<pre>function main(wasm) {
+<pre><code class="language-javascript">function main(wasm) {
     console.log(wasm);
 }
-</pre>
+</code></pre>
 <p>Before we move on, you'll find that simply opending your HTML file in browser
 and looking at developer console won't work. Safari would complain about
 cross-domain request error for <code>fetch</code>. So we need to serve these resources
@@ -123,32 +121,32 @@ re-compile <code>main.wat</code> with <code>wat2wasm</code> whenever you want to
 browser.</p>
 <h2>An Actual &quot;Hello, World!&quot; Implementation</h2>
 <p>This is my implementation:</p>
-<pre><span class="source lisp"><span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>module
-  <span class="comment line semicolon lisp"><span class="punctuation definition comment lisp">;</span>; Allocate a page of linear memory (64kb). Export it as &quot;memory&quot;</span>
-  <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>memory <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span><span class="support function lisp">export</span> <span class="string quoted double lisp"><span class="punctuation definition string begin lisp">&quot;</span>memory<span class="punctuation definition string end lisp">&quot;</span></span><span class="punctuation definition group end lisp">)</span></span> <span class="constant numeric lisp">1</span><span class="punctuation definition group end lisp">)</span></span>
+<pre><code class="language-lisp">(module
+  ;; Allocate a page of linear memory (64kb). Export it as &quot;memory&quot;
+  (memory (export &quot;memory&quot;) 1)
 
-  <span class="comment line semicolon lisp"><span class="punctuation definition comment lisp">;</span>; Write the string at the start of the linear memory.</span>
-  <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>data <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>i32.const <span class="constant numeric lisp">0</span><span class="punctuation definition group end lisp">)</span></span> <span class="string quoted double lisp"><span class="punctuation definition string begin lisp">&quot;</span>Hello, world!<span class="punctuation definition string end lisp">&quot;</span></span><span class="punctuation definition group end lisp">)</span></span> <span class="comment line semicolon lisp"><span class="punctuation definition comment lisp">;</span>; write string at location 0</span>
+  ;; Write the string at the start of the linear memory.
+  (data (i32.const 0) &quot;Hello, world!&quot;) ;; write string at location 0
 
-  <span class="comment line semicolon lisp"><span class="punctuation definition comment lisp">;</span>; Export the position and length of the string.</span>
-  <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>global <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span><span class="support function lisp">export</span> <span class="string quoted double lisp"><span class="punctuation definition string begin lisp">&quot;</span>length<span class="punctuation definition string end lisp">&quot;</span></span><span class="punctuation definition group end lisp">)</span></span> i32 <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>i32.const <span class="constant numeric lisp">12</span><span class="punctuation definition group end lisp">)</span></span><span class="punctuation definition group end lisp">)</span></span>
-  <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>global <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span><span class="support function lisp">export</span> <span class="string quoted double lisp"><span class="punctuation definition string begin lisp">&quot;</span>position<span class="punctuation definition string end lisp">&quot;</span></span><span class="punctuation definition group end lisp">)</span></span> i32 <span class="meta group lisp"><span class="punctuation definition group begin lisp">(</span>i32.const <span class="constant numeric lisp">0</span><span class="punctuation definition group end lisp">)</span></span><span class="punctuation definition group end lisp">)</span></span><span class="punctuation definition group end lisp">)</span></span>
-</span></pre>
+  ;; Export the position and length of the string.
+  (global (export &quot;length&quot;) i32 (i32.const 12))
+  (global (export &quot;position&quot;) i32 (i32.const 0)))
+</code></pre>
 <p>In other words, we expose information of the linear memory we manipulated to the
 JavaScript environment. Things that has been <code>export</code>ed will show up as
 properties of <code>exports</code> of the <code>WebAssembly</code> instance. We can access them in the
 <code>main</code> JavaScript functions:</p>
-<pre>function main(wasm) {
+<pre><code class="language-javascript">function main(wasm) {
     const memory   = wasm.exports.memory;
     const length   = wasm.exports.length;
     const position = wasm.exports.position;
     ...
 }
-</pre>
+</code></pre>
 <p>Then it's just plain-old Javascript (tho I had to steal it from tutorials).
 <code>memory.buffer</code> is of type <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">ArrayBuffer</a>. We need to convert it into a string
 and log it to the console:</p>
-<pre>function main(wasm) {
+<pre><code class="language-javascript">function main(wasm) {
     const memory   = wasm.exports.memory;
     const length   = wasm.exports.length;
     const position = wasm.exports.position;
@@ -158,16 +156,16 @@ and log it to the console:</p>
 
     console.log(s);
 }
-</pre>
+</code></pre>
 <p>Et, voilà! <code>Hello, World!</code> hot off a Web Assembly module in your developer
 console. To conclude, I personally like to use a <code>Makefile</code> to streamline some
 of the typing. Here's what I used for this demo:</p>
-<pre><span class="source makefile"><span class="meta function makefile"><span class="entity name function makefile">compile</span></span><span class="keyword operator assignment makefile">:</span><span class="meta function arguments makefile"></span><span class="meta function body makefile">
-</span><span class="meta function body makefile">	<span class="source shell"><span class="meta function-call shell"><span class="variable function shell">wat2wasm</span></span><span class="meta function-call arguments shell"> main.wat<span class="variable parameter option shell"><span class="punctuation definition parameter shell"> -</span>o</span> main.wasm</span></span>
-</span>
-<span class="meta function makefile"><span class="entity name function makefile">serve</span></span><span class="keyword operator assignment makefile">:</span><span class="meta function arguments makefile"></span><span class="meta function body makefile">
-</span><span class="meta function body makefile">	<span class="source shell"><span class="meta function-call shell"><span class="variable function shell">python</span></span><span class="meta function-call arguments shell"><span class="variable parameter option shell"><span class="punctuation definition parameter shell"> -</span>m</span> SimpleHTTPServer</span></span>
-</span></span></pre>
+<pre><code class="language-makefile">compile:
+	wat2wasm main.wat -o main.wasm
+
+serve:
+	python -m SimpleHTTPServer
+</code></pre>
 <h2>Conclusion</h2>
 <p>No fancy schmancy Javascript build stack, no 3rd-party code dependency. Write
 code, compile, run on your (virtual, in browser) machine, repeat. That sounds like

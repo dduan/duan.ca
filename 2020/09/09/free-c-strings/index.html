@@ -39,7 +39,7 @@ doesn't officially support yet), paths are bought and sold in the so called
 values on Windows with <code>UNICODE</code>.</p>
 <p>Let's walk over a couple of examples. Here's how to get the current working
 directory:</p>
-<pre><span class="source c"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
+<pre><code class="language-c">// POSIX
 char *getcwd(char *buf, size_t size);
 
 // Windows
@@ -48,7 +48,7 @@ DWORD GetCurrentDirectory(
     DWORD nBufferLength,
     LPTSTR lpBuffer
 );
-</span></span></pre>
+</code></pre>
 <p>The expected steps for using APIs like this are the following:</p>
 <ol>
 <li>you allocate a buffer large enough to store any result you expect.</li>
@@ -62,12 +62,12 @@ result, not counting the <code>NUL</code>.</li>
 the point of using <code>NUL</code> to terminate &quot;strings&quot; is to avoid having to use
 a separate size. Let's use <em>setting the current working directory</em> as the next
 example:</p>
-<pre><span class="source c"><span class="comment line double-slash c"><span class="punctuation definition comment c">//</span> POSIX
+<pre><code class="language-c">// POSIX
 int chdir(const char *path);
 
 // Windows
 BOOL SetCurrentDirectory(LPCTSTR lpPathName);
-</span></span></pre>
+</code></pre>
 <p>Yup, these APIs don't need you to tell them the content size of your buffer. But
 if your content doesn't end with a <code>NUL</code>, they'll happily read beyond your
 intended stopping point until it finds a random <code>0</code> in memory.</p>
@@ -79,55 +79,55 @@ case where the path is only passing through the Swift code from C to C, without
 being analyzed or modified. (If you need a refresher, <a href="https://youtu.be/Vy2r21kli0Q">I recently made a video
 on Unicode and encoding</a>.) So I chose to use an
 <a href="https://developer.apple.com/documentation/swift/contiguousarray">ContiguousArray</a> to store these C values:</p>
-<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> Simplified for POSIX</span>
-<span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">Path</span></span></span> {
-    <span class="keyword variable">let</span> <span class="variable parameter">storage</span>: <span class="support class">ContiguousArray</span><span class="keyword operator">&lt;</span><span class="support class">CChar</span><span class="keyword operator">&gt;</span>
-    <span class="comment line"><span class="punctuation definition comment">//</span> ...</span>
+<pre><code class="language-swift">// Simplified for POSIX
+struct Path {
+    let storage: ContiguousArray&lt;CChar&gt;
+    // ...
 }
-</span></pre>
+</code></pre>
 <p><code>ContiguousArray</code> (and <code>Array</code>) provides an excellent way to interact with C
 APIs we encountered earlier:</p>
-<pre><span class="source swift"><span class="meta function"><span class="meta toc-list"><span class="storage type function">init</span>(
-    <span class="variable parameter">unsafeUninitializedCapacity</span>: <span class="support class">Int</span>,
-    initializingWith <span class="variable parameter">initializer</span>: (
-        inout <span class="support class">UnsafeMutableBufferPointer</span><span class="keyword operator">&lt;</span><span class="support class">Element</span><span class="keyword operator">&gt;</span>,
-        inout <span class="support class">Int</span>
-    ) <span class="keyword control">throws</span> -&gt; <span class="support class">Void</span>
-)</span></span> <span class="keyword control">rethrows</span>
-</span></pre>
+<pre><code class="language-swift">init(
+    unsafeUninitializedCapacity: Int,
+    initializingWith initializer: (
+        inout UnsafeMutableBufferPointer&lt;Element&gt;,
+        inout Int
+    ) throws -&gt; Void
+) rethrows
+</code></pre>
 <p>Don't let the complex-looking signature intimidate you. Essentially, it gives
 you write access to the array's memory right after its allocation, but before
 Swift does standard initialization to it. It works really well with the C APIs
 we looked at earlier:</p>
-<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> Store the current directory in a ContiguousArray</span>
-<span class="comment line"><span class="punctuation definition comment">//</span> Using the Windows API</span>
-<span class="keyword variable">let</span> storage = <span class="support class">ContiguousArray</span>(
-    <span class="variable parameter">unsafeUninitializedCapacity</span>: <span class="support class">Int</span>(<span class="support class">MAX_PATH</span>)
+<pre><code class="language-swift">// Store the current directory in a ContiguousArray
+// Using the Windows API
+let storage = ContiguousArray(
+    unsafeUninitializedCapacity: Int(MAX_PATH)
 ) { buffer, count
-    <span class="keyword variable">let</span> length = <span class="support class">GetCurrentWorkingDirectoryW</span>(
-        <span class="support class">DWORD</span>(<span class="support class">MAX_PATH</span>),
-        buffer<span class="keyword operator">.</span>baseAddress <span class="comment line"><span class="punctuation definition comment">//</span> C API writes in the allocated memory</span>
+    let length = GetCurrentWorkingDirectoryW(
+        DWORD(MAX_PATH),
+        buffer.baseAddress // C API writes in the allocated memory
     )
 
-    count = length <span class="comment line"><span class="punctuation definition comment">//</span> you are responsible for setting size of the array</span>
+    count = length // you are responsible for setting size of the array
 }
-</span></pre>
+</code></pre>
 <p>Read the steps 1-4 again from earlier, it's easy to see how this initializer is
 designed to fit that pattern. The resulting array will have all the characters
 as its content, and carries the correct size.</p>
 <p>When it's time to pass the array back to C, we can provide a pointer easily:</p>
-<pre><span class="source swift">storage<span class="keyword operator">.</span>withUnsafeBufferPointer {
-    <span class="support class">SetCurrentDirectory</span>(<span class="keyword operator">$</span><span class="constant numeric decimal">0</span><span class="keyword operator">.</span>baseAddress<span class="keyword operator">!</span>)
+<pre><code class="language-swift">storage.withUnsafeBufferPointer {
+    SetCurrentDirectory($0.baseAddress!)
 }
-</span></pre>
+</code></pre>
 <p>This is not great, because we don't have a <code>NUL</code> at the end of our array.  The
 C function that read our array will sometimes read over the contents memory
 until it finds a 0! Yikes.</p>
 <p>So here's an easy fix:</p>
-<pre><span class="source swift">(storage + [<span class="constant numeric decimal">0</span>])<span class="keyword operator">.</span>withUnsafeBufferPointer {
-    <span class="support class">SetCurrentDirectory</span>(<span class="keyword operator">$</span><span class="constant numeric decimal">0</span><span class="keyword operator">.</span>baseAddress<span class="keyword operator">!</span>)
+<pre><code class="language-swift">(storage + [0]).withUnsafeBufferPointer {
+    SetCurrentDirectory($0.baseAddress!)
 }
-</span></pre>
+</code></pre>
 <p>Instead of using the memory of <code>storage</code>, we construct a new array with an 0 as
 its last value. This lets C APIs pick the right place to stop reading.
 (Incidentally, Swift includes a built-in version of this <a href="https://developer.apple.com/documentation/swift/string/2430818-utf8cstring">for converting String
@@ -140,18 +140,18 @@ want to call a C API is kind of expensive. It involves allocating new memories
 and copying over the content, etc.</p>
 <p>Alright. How about we carry around the <code>NUL</code> in our array? Let's update the
 construction code:</p>
-<pre><span class="source swift"><span class="keyword variable">let</span> storage = <span class="support class">ContiguousArray</span>(
-    <span class="variable parameter">unsafeUninitializedCapacity</span>: <span class="support class">Int</span>(<span class="support class">MAX_PATH</span>) + <span class="constant numeric decimal">1</span>
+<pre><code class="language-swift">let storage = ContiguousArray(
+    unsafeUninitializedCapacity: Int(MAX_PATH) + 1
 ) { buffer, count
-    <span class="keyword variable">let</span> length = <span class="support class">GetCurrentWorkingDirectoryW</span>(
-        <span class="support class">DWORD</span>(<span class="support class">MAX_PATH</span>),
-        buffer<span class="keyword operator">.</span>baseAddress
+    let length = GetCurrentWorkingDirectoryW(
+        DWORD(MAX_PATH),
+        buffer.baseAddress
     )
 
-    buffer[length] = <span class="constant numeric decimal">0</span>
-    count = length + <span class="constant numeric decimal">1</span>
+    buffer[length] = 0
+    count = length + 1
 }
-</span></pre>
+</code></pre>
 <p>We add 1 every time we have a say in size. Then we manually set a 0 at the end
 of the stuff from C. Having done this, we've solved both the correctness problem
 and performance concern from earlier!</p>
@@ -163,41 +163,41 @@ everything will be fine.</p>
 <p>Alright, that's easier said than done. To alleviate this off-by-1 painfulness,
 I ended up exposing a &quot;view&quot; into the array storage that excludes the last
 element. Here's the actual definition in <a href="https://github.com/dduan/Pathos">Pathos</a>:</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">CString</span></span></span><span class="keyword operator">&lt;</span><span class="support class">Unit</span>: <span class="support class">BinaryInteger</span><span class="keyword operator">&gt;</span>: <span class="support class">Equatable</span>, <span class="support class">Hashable</span> {
-    <span class="storage modifier">private</span> <span class="keyword variable">var</span> <span class="variable parameter">storage</span>: <span class="support class">ContiguousArray</span><span class="keyword operator">&lt;</span><span class="support class">Unit</span><span class="keyword operator">&gt;</span>
-    <span class="keyword variable">var</span> <span class="variable parameter">content</span>: <span class="support class">ContiguousArray</span><span class="keyword operator">&lt;</span><span class="support class">Unit</span>&gt;.<span class="constant language enum">SubSequence</span> {
-        storage[<span class="constant numeric decimal">0</span> ..&lt; storage<span class="keyword operator">.</span>count - <span class="constant numeric decimal">1</span>]
+<pre><code class="language-swift">struct CString&lt;Unit: BinaryInteger&gt;: Equatable, Hashable {
+    private var storage: ContiguousArray&lt;Unit&gt;
+    var content: ContiguousArray&lt;Unit&gt;.SubSequence {
+        storage[0 ..&lt; storage.count - 1]
     }
 
-    <span class="storage modifier">public</span> <span class="storage type function">func</span> <span class="entity name function"><span class="variable function">c</span></span><span class="keyword operator">&lt;</span><span class="support class">T</span><span class="keyword operator">&gt;</span>(
-        <span class="variable parameter">action</span>: (<span class="support class">UnsafePointer</span><span class="keyword operator">&lt;</span><span class="support class">Unit</span><span class="keyword operator">&gt;</span>) <span class="keyword control">throws</span> -&gt; <span class="support class">T</span>) <span class="keyword control">throws</span> -&gt; <span class="support class">T</span>
+    public func c&lt;T&gt;(
+        action: (UnsafePointer&lt;Unit&gt;) throws -&gt; T) throws -&gt; T
     {
-        <span class="keyword control">try</span> content<span class="keyword operator">.</span>withUnsafeBufferPointer {
-            <span class="keyword control">try</span> action(<span class="keyword operator">$</span><span class="constant numeric decimal">0</span><span class="keyword operator">.</span>baseAddress<span class="keyword operator">!</span>)
+        try content.withUnsafeBufferPointer {
+            try action($0.baseAddress!)
         }
     }
 
-    <span class="meta function"><span class="meta toc-list"><span class="storage type function">init</span>(<span class="variable parameter">cString</span>: <span class="support class">UnsafePointer</span><span class="keyword operator">&lt;</span><span class="support class">Unit</span><span class="keyword operator">&gt;</span>)</span></span> {
-       <span class="keyword variable">var</span> length = <span class="constant numeric decimal">0</span>
-       <span class="keyword control">while</span> cString<span class="keyword operator">.</span>advanced(<span class="variable parameter">by</span>: length)<span class="keyword operator">.</span>pointee != <span class="constant numeric decimal">0</span> {
-           length += <span class="constant numeric decimal">1</span>
+    init(cString: UnsafePointer&lt;Unit&gt;) {
+       var length = 0
+       while cString.advanced(by: length).pointee != 0 {
+           length += 1
        }
 
-       storage = <span class="support class">ContiguousArray</span>(
-           <span class="variable parameter">unsafeUninitializedCapacity</span>: length + <span class="constant numeric decimal">1</span>
-       ) { buffer, count <span class="keyword control">in</span>
-           <span class="keyword control">for</span> offset <span class="keyword control">in</span> <span class="constant numeric decimal">0</span> ..&lt; length {
-               buffer[offset] = cString<span class="keyword operator">.</span>advanced(<span class="variable parameter">by</span>: offset)<span class="keyword operator">.</span>pointee
+       storage = ContiguousArray(
+           unsafeUninitializedCapacity: length + 1
+       ) { buffer, count in
+           for offset in 0 ..&lt; length {
+               buffer[offset] = cString.advanced(by: offset).pointee
            }
 
-           buffer[length] = <span class="constant numeric decimal">0</span>
-           count = length + <span class="constant numeric decimal">1</span>
+           buffer[length] = 0
+           count = length + 1
        }
     }
 
-    <span class="comment line"><span class="punctuation definition comment">//</span> ... more stuff</span>
+    // ... more stuff
 }
-</span></pre>
+</code></pre>
 <p><code>storage</code> in this solution is an private implementation detail. <code>content</code> is
 the primary access to the content of the string. And finally, this type
 interops with C APIs correctly and efficiently because of the extra <code>NUL</code> we put

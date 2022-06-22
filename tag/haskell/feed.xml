@@ -7,29 +7,29 @@
             <item>
                 <title>Magical Interactions</title>
                 <description>&lt;p&gt;I want to talk about this little function:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;interact&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant language other&quot;&gt;_&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;process&lt;&#x2f;span&gt;: (&lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;) -&amp;gt; &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; input = &lt;span class=&quot;string quoted double&quot;&gt;&amp;quot;&amp;quot;&lt;&#x2f;span&gt;
-    &lt;span class=&quot;keyword control&quot;&gt;while&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; line = readLine() {
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;func interact(_ process: (String) -&amp;gt; String) {
+    var input = &amp;quot;&amp;quot;
+    while let line = readLine() {
         input += line
     }
 
     print(process(input))
 }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Brief explanation: it reads all the input from stdin as a &lt;code&gt;String&lt;&#x2f;code&gt;, feeds it
 into a closure &lt;code&gt;process&lt;&#x2f;code&gt;, which it takes in as its only argument, and prints
 &lt;code&gt;process&lt;&#x2f;code&gt;&#x27;s output.&lt;&#x2f;p&gt;
 &lt;p&gt;Here&#x27;s how one might use it:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; counts characters from stdin and prints result to stdout&lt;&#x2f;span&gt;
-interact { &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;(&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;count) }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;&#x2f;&#x2f; counts characters from stdin and prints result to stdout
+interact { String($0.count) }
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Got that? Well, now I&#x27;m going to rewrite it in a slightly less Swift-y way:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;count&lt;&#x2f;span&gt;: (&lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;) -&amp;gt; &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt; = {
-    &lt;span class=&quot;keyword control&quot;&gt;return&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;(&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;count)
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;let count: (String) -&amp;gt; String = {
+    return String($0.count)
 }
 
 interact(count)
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;The argument for &lt;code&gt;interact&lt;&#x2f;code&gt; got defined with a name and an explicit type
 signature.&lt;&#x2f;p&gt;
 &lt;p&gt;So, what&#x27;s so special about this &lt;code&gt;interact&lt;&#x2f;code&gt; function? Two words: &lt;em&gt;side effects&lt;&#x2f;em&gt;.
@@ -72,14 +72,14 @@ that deals with &lt;a href=&quot;https:&#x2f;&#x2f;en.wikipedia.org&#x2f;wiki&#x
 of evolution of lambda expressions, since it&#x27;s much nicer to write one-liners with it in place of &lt;code&gt;map&lt;&#x2f;code&gt;s and
 &lt;code&gt;filter&lt;&#x2f;code&gt;s.&lt;&#x2f;p&gt;
 &lt;p&gt;Here&#x27;s an example of an list comprehension in Haskell from Wikipedia:&lt;&#x2f;p&gt;
-&lt;pre&gt;a = [(x,y) | x &lt;- [1..5], y &lt;- [3..5]]
+&lt;pre&gt;&lt;code class=&quot;language-haskell&quot;&gt;a = [(x,y) | x &amp;lt;- [1..5], y &amp;lt;- [3..5]]
 -- [(1,3),(1,4),(1,5),(2,3),(2,4) ...
-&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;In this example, a list of pair of integers is constructed from 2 lists of integers.&lt;&#x2f;p&gt;
 &lt;p&gt;Here is what that example would be in Python:&lt;&#x2f;p&gt;
-&lt;pre&gt;a = [(x, y) for x in range(1,6) for y in range(3, 6)]
+&lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;a = [(x, y) for x in range(1,6) for y in range(3, 6)]
 # [(1, 3), (1, 4), (1, 5), (2, 3), (2, 4) ...
-&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Here&#x27;s what it would be in mathematics (except we are dealing with sets, not lists, but I&#x27;ll only refer to
 lists from here on.):&lt;&#x2f;p&gt;
 &lt;pre&gt;&lt;code&gt;Let (a, b) be an ordered list of elements
@@ -89,10 +89,10 @@ lists from here on.):&lt;&#x2f;p&gt;
 &lt;p&gt;One can filter out unwanted elements with predicates, and apply arbitrary functions to elements of the
 result. Let&#x27;s say we only want even numbers from the first list, and we want the sum of x and y, continuing on
 our examples:&lt;&#x2f;p&gt;
-&lt;pre&gt;a = [x+y | x &lt;- [1..5], y &lt;- [3..5], x `mod` 2 == 0]
-&lt;&#x2f;pre&gt;
-&lt;pre&gt;a = [x + y for x in range(1,6) for y in range(3, 6) if x % 2 == 0]
-&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-haskell&quot;&gt;a = [x+y | x &amp;lt;- [1..5], y &amp;lt;- [3..5], x `mod` 2 == 0]
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;a = [x + y for x in range(1,6) for y in range(3, 6) if x % 2 == 0]
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;pre&gt;&lt;code&gt;{x+y|x ∈ {1,2,3,4,5}, y ∈ {3,4,5}, x is even}
 &lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;In theory, this syntax can be applied to an arbitrary number of lists. Putting aside how often this need comes
@@ -106,31 +106,31 @@ up in day-to-day programming in your domain, it should be obvious that it&#x27;s
 &lt;li&gt;a function to process the combination of elements into results.&lt;&#x2f;li&gt;
 &lt;&#x2f;ol&gt;
 &lt;p&gt;In Swift, if our input is only one list, there&#x27;s a pretty sweet way to achieve that:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;list&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;filter(predicate)&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;map(processor)
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;list.filter(predicate).map(processor)
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;To make comprehension work with more lists, we have some syntax options.&lt;&#x2f;p&gt;
 &lt;h3&gt;Option One&lt;&#x2f;h3&gt;
 &lt;p&gt;The &amp;quot;brute force&amp;quot; option would be a function that parameterize all 3 parts of the comprehension. Such as&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; going with order of appearance in Python&#x2f;Haskell syntax&lt;&#x2f;span&gt;
-&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;comprehension&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;List&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Result&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(
-    &lt;span class=&quot;variable parameter&quot;&gt;predicate&lt;&#x2f;span&gt;: (&lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt;) -&amp;gt; &lt;span class=&quot;support class&quot;&gt;Bool&lt;&#x2f;span&gt;,
-    &lt;span class=&quot;variable parameter&quot;&gt;list&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;List&lt;&#x2f;span&gt;,
-    &lt;span class=&quot;variable parameter&quot;&gt;processor&lt;&#x2f;span&gt;: (&lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt;) -&amp;gt; &lt;span class=&quot;support class&quot;&gt;Result&lt;&#x2f;span&gt;
-) &lt;span class=&quot;keyword control&quot;&gt;where&lt;&#x2f;span&gt;
-    &lt;span class=&quot;support class&quot;&gt;List&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Sequence&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;List&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt; == &lt;span class=&quot;support class&quot;&gt;Element&lt;&#x2f;span&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;&#x2f;&#x2f; going with order of appearance in Python&#x2f;Haskell syntax
+func comprehension&amp;lt;Element, List, Result&amp;gt;(
+    predicate: (Element) -&amp;gt; Bool,
+    list: List,
+    processor: (Element) -&amp;gt; Result
+) where
+    List: Sequence, List.Element == Element
 
 {
-    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; implementation&lt;&#x2f;span&gt;
+    &#x2f;&#x2f; implementation
 }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;To supporting more than one list, just add more parameters to both types and the function itself.&lt;&#x2f;p&gt;
 &lt;p&gt;(Can&#x27;t wait until we can have &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;swift&#x2f;blob&#x2f;master&#x2f;docs&#x2f;GenericsManifesto.md#variadic-generics&quot;&gt;variadic generic parameters&lt;&#x2f;a&gt;!)&lt;&#x2f;p&gt;
 &lt;h3&gt;Option Two&lt;&#x2f;h3&gt;
 &lt;p&gt;Deploy more syntax tricks. Somehow make it visually similar to the math&#x2f;Haskell&#x2f;Python notation. If we can
 accept some temporary data structure and introduce&#x2f;implement some operators, there&#x27;d be many possibilities.&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&#x2f;&lt;&#x2f;span&gt; Just an example of the infinite possibilities.&lt;&#x2f;span&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;&#x2f;&#x2f;&#x2f; Just an example of the infinite possibilities.
 processor | list0 &amp;amp;&amp;amp;&amp;amp; list1 | predicate
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;I&#x27;ll leave the implementation of this example as an exercise to the reader.&lt;&#x2f;p&gt;
 &lt;h3&gt;Option That I Like&lt;&#x2f;h3&gt;
 &lt;p&gt;I spent quite some time exploring the realm of possibilities in &amp;quot;option two&amp;quot;. However, introducing data
@@ -139,14 +139,14 @@ entirely clear that doing so would be &amp;quot;Swift-y&amp;quot; anyways! Event
 Swift, and requires no fancy syntax trickery.&lt;&#x2f;p&gt;
 &lt;p&gt;The result of list comprehension is a list. The goal of this operation is to &lt;em&gt;construct&lt;&#x2f;em&gt; a list. Yep, thinking
 along this line, it became obvious that using a &amp;quot;list&amp;quot;&#x27;s initializer is just natural:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; a = &lt;span class=&quot;support class&quot;&gt;Array&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;..&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;5&lt;&#x2f;span&gt;, &lt;span class=&quot;constant numeric decimal&quot;&gt;3&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;..&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;5&lt;&#x2f;span&gt;, &lt;span class=&quot;keyword control&quot;&gt;where&lt;&#x2f;span&gt;: { n, &lt;span class=&quot;constant language other&quot;&gt;_&lt;&#x2f;span&gt; &lt;span class=&quot;keyword control&quot;&gt;in&lt;&#x2f;span&gt; n % &lt;span class=&quot;constant numeric decimal&quot;&gt;2&lt;&#x2f;span&gt; == &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt; }) { (&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;, $&lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;) }
-&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; [(2,3),(2,4),(2,5) ...&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;let a = Array(1..&amp;lt;5, 3..&amp;lt;5, where: { n, _ in n % 2 == 0 }) { ($0, $1) }
+&#x2f;&#x2f; [(2,3),(2,4),(2,5) ...
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;The processing function is at the end to take advantage of the trailing closure syntax. It&#x27;s nicer when
 there&#x27;s not predicate:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; a = &lt;span class=&quot;support class&quot;&gt;Array&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;..&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;5&lt;&#x2f;span&gt;, &lt;span class=&quot;constant numeric decimal&quot;&gt;3&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;..&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;5&lt;&#x2f;span&gt;) { (&lt;span class=&quot;keyword operator&quot;&gt;$&lt;&#x2f;span&gt;&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;, $&lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;) }
-&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; [(1,3),(1,4),(1,5),(2,3),(2,4) ...&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;let a = Array(1..&amp;lt;5, 3..&amp;lt;5) { ($0, $1) }
+&#x2f;&#x2f; [(1,3),(1,4),(1,5),(2,3),(2,4) ...
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;This syntax seems both succinct and Swift-y.&lt;&#x2f;p&gt;
 &lt;p&gt;I put an implementation on &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Comprehension&quot;&gt;github&lt;&#x2f;a&gt;, in case you find it useful.&lt;&#x2f;p&gt;
 &lt;h2&gt;Parting Thoughts&lt;&#x2f;h2&gt;

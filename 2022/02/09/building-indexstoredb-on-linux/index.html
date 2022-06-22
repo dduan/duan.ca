@@ -31,29 +31,29 @@
     </nav><h2>The problem</h2>
 <p>As of writing of this article, when you attempt to use Apple's Swift library <a href="https://github.com/apple/indexstore-db">IndexStoreDB</a> on Linux as
 a normal SwiftPM dependency, it won't build successfully:</p>
-<pre><span class="source shell bash"><span class="meta function-call shell"><span class="variable function shell">❯</span></span><span class="meta function-call arguments shell"> cat Package.resolved</span>
-<span class="meta function-call shell"><span class="variable function shell">{</span></span>
-  <span class="meta function-call shell"><span class="variable function shell"><span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>object<span class="punctuation definition string end shell">&quot;</span></span>:</span></span><span class="meta function-call arguments shell"> <span class="meta group expansion brace shell"><span class="punctuation section expansion brace begin shell">{</span>
-    <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>pins<span class="punctuation definition string end shell">&quot;</span></span>: [
-      <span class="meta group expansion brace shell"><span class="punctuation section expansion brace begin shell">{</span>
-        <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>package<span class="punctuation definition string end shell">&quot;</span></span>: <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>IndexStoreDB<span class="punctuation definition string end shell">&quot;</span></span><span class="punctuation separator shell">,</span>
-        <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>repositoryURL<span class="punctuation definition string end shell">&quot;</span></span>: <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>https://github.com/apple/indexstore-db<span class="punctuation definition string end shell">&quot;</span></span><span class="punctuation separator shell">,</span>
-        <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>state<span class="punctuation definition string end shell">&quot;</span></span>: <span class="meta group expansion brace shell"><span class="punctuation section expansion brace begin shell">{</span>
-          <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>branch<span class="punctuation definition string end shell">&quot;</span></span>: <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>swift-5.5.2-RELEASE<span class="punctuation definition string end shell">&quot;</span></span><span class="punctuation separator shell">,</span>
-          <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>revision<span class="punctuation definition string end shell">&quot;</span></span>: <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>e771994778265c2efe8d33a7ca30adf5f3d2065a<span class="punctuation definition string end shell">&quot;</span></span><span class="punctuation separator shell">,</span>
-          <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>version<span class="punctuation definition string end shell">&quot;</span></span>: null
-        <span class="punctuation section expansion brace end shell">}</span></span>
-      <span class="punctuation section expansion brace end shell">}</span></span>
+<pre><code class="language-fish">❯ cat Package.resolved
+{
+  &quot;object&quot;: {
+    &quot;pins&quot;: [
+      {
+        &quot;package&quot;: &quot;IndexStoreDB&quot;,
+        &quot;repositoryURL&quot;: &quot;https://github.com/apple/indexstore-db&quot;,
+        &quot;state&quot;: {
+          &quot;branch&quot;: &quot;swift-5.5.2-RELEASE&quot;,
+          &quot;revision&quot;: &quot;e771994778265c2efe8d33a7ca30adf5f3d2065a&quot;,
+          &quot;version&quot;: null
+        }
+      }
     ]
-  <span class="punctuation section expansion brace end shell">}</span></span>,</span>
-  <span class="meta function-call shell"><span class="variable function shell"><span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>version<span class="punctuation definition string end shell">&quot;</span></span>:</span></span><span class="meta function-call arguments shell"> 1</span>
-<span class="meta function-call shell"></span><span class="meta post-cmd shell">}
-</span>
-<span class="meta function-call shell"><span class="variable function shell">❯</span></span><span class="meta function-call arguments shell"> swift build <span class="keyword operator assignment redirection shell">&gt;</span> /dev/null
+  },
+  &quot;version&quot;: 1
+}
 
-❯ echo <span class="meta group expansion parameter shell"><span class="punctuation definition variable shell">$</span><span class="variable other readwrite shell">status</span></span></span>
-<span class="meta function-call shell"><span class="variable function shell">1</span></span>
-</span></pre>
+❯ swift build &gt; /dev/null
+
+❯ echo $status
+1
+</code></pre>
 <p>The issue is documented in the build instruction for Linux:</p>
 <blockquote>
 <p>The C++ code in the index requires <code>libdispatch</code>, but unlike Swift code, it cannot find it automatically on Linux. You can work around this by adding a search path manually.</p>
@@ -73,28 +73,28 @@ alongside the other binaries, in a stable relative directory.</li>
 </ol>
 <p>Having the <code>swift</code> command available (assumption #1), we can just let it tell us about itself with the
 <code>-print-target-info</code> flag:</p>
-<pre><span class="source shell bash"><span class="meta function-call shell"><span class="variable function shell">❯</span></span><span class="meta function-call arguments shell"> swift<span class="variable parameter option shell"><span class="punctuation definition parameter shell"> -</span>print-target-info</span></span>
-<span class="meta function-call shell"><span class="variable function shell">{</span></span>
-  <span class="meta function-call shell"><span class="variable function shell"><span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>compilerVersion<span class="punctuation definition string end shell">&quot;</span></span>:</span></span><span class="meta function-call arguments shell"> <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>Swift version 5.5.2 (swift-5.5.2-RELEASE)<span class="punctuation definition string end shell">&quot;</span></span>,</span>
-  <span class="meta function-call shell"><span class="variable function shell"><span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>target<span class="punctuation definition string end shell">&quot;</span></span>:</span></span><span class="meta function-call arguments shell"> <span class="meta group expansion brace shell"><span class="punctuation section expansion brace begin shell">{</span>
-    <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>triple<span class="punctuation definition string end shell">&quot;</span></span>: <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>x86_64-unknown-linux-gnu<span class="punctuation definition string end shell">&quot;</span></span><span class="punctuation separator shell">,</span>
-    <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>unversionedTriple<span class="punctuation definition string end shell">&quot;</span></span>: <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>x86_64-unknown-linux-gnu<span class="punctuation definition string end shell">&quot;</span></span><span class="punctuation separator shell">,</span>
-    <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>moduleTriple<span class="punctuation definition string end shell">&quot;</span></span>: <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>x86_64-unknown-linux-gnu<span class="punctuation definition string end shell">&quot;</span></span><span class="punctuation separator shell">,</span>
-    <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>compatibilityLibraries<span class="punctuation definition string end shell">&quot;</span></span>: <span class="keyword control regexp set begin shell">[</span> <span class="keyword control regexp set end shell">]</span><span class="punctuation separator shell">,</span>
-    <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>librariesRequireRPath<span class="punctuation definition string end shell">&quot;</span></span>: false
-  <span class="punctuation section expansion brace end shell">}</span></span>,</span>
-  <span class="meta function-call shell"><span class="variable function shell"><span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>paths<span class="punctuation definition string end shell">&quot;</span></span>:</span></span><span class="meta function-call arguments shell"> <span class="meta group expansion brace shell"><span class="punctuation section expansion brace begin shell">{</span>
-    <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>runtimeLibraryPaths<span class="punctuation definition string end shell">&quot;</span></span>: [
-      <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/linux<span class="punctuation definition string end shell">&quot;</span></span>
-    ]<span class="punctuation separator shell">,</span>
-    <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>runtimeLibraryImportPaths<span class="punctuation definition string end shell">&quot;</span></span>: [
-      <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/linux<span class="punctuation definition string end shell">&quot;</span></span><span class="punctuation separator shell">,</span>
-      <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/linux/x86_64<span class="punctuation definition string end shell">&quot;</span></span>
-    ]<span class="punctuation separator shell">,</span>
-    <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>runtimeResourcePath<span class="punctuation definition string end shell">&quot;</span></span>: <span class="string quoted double shell"><span class="punctuation definition string begin shell">&quot;</span>/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift<span class="punctuation definition string end shell">&quot;</span></span>
-  <span class="punctuation section expansion brace end shell">}</span></span></span>
-<span class="meta function-call shell"></span><span class="meta post-cmd shell">}
-</span></span></pre>
+<pre><code class="language-fish">❯ swift -print-target-info
+{
+  &quot;compilerVersion&quot;: &quot;Swift version 5.5.2 (swift-5.5.2-RELEASE)&quot;,
+  &quot;target&quot;: {
+    &quot;triple&quot;: &quot;x86_64-unknown-linux-gnu&quot;,
+    &quot;unversionedTriple&quot;: &quot;x86_64-unknown-linux-gnu&quot;,
+    &quot;moduleTriple&quot;: &quot;x86_64-unknown-linux-gnu&quot;,
+    &quot;compatibilityLibraries&quot;: [ ],
+    &quot;librariesRequireRPath&quot;: false
+  },
+  &quot;paths&quot;: {
+    &quot;runtimeLibraryPaths&quot;: [
+      &quot;/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/linux&quot;
+    ],
+    &quot;runtimeLibraryImportPaths&quot;: [
+      &quot;/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/linux&quot;,
+      &quot;/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/linux/x86_64&quot;
+    ],
+    &quot;runtimeResourcePath&quot;: &quot;/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift&quot;
+  }
+}
+</code></pre>
 <p>Great! We see where the runtime is installed. Now we can invoke assumption #2, that <code>libdispatch</code> is at
 a relative location to the rest of the runtime. In the output from above, the value for <code>runtimeResourcePath</code>
 happens to be the parent directory for <code>libdispatch</code>'s headers. The <code>&lt;path_to_swift_toolchain&gt;</code> value in
@@ -104,30 +104,30 @@ happens to be the parent directory for <code>libdispatch</code>'s headers. The <
 </code></pre>
 <p>All we need to do is parse this information at build time, and it should work on every Linux setup! Choose
 whatever parsing method you like. Here's (more or less) the <code>Makefile</code> for <a href="https://github.com/dduan/Clue">Clue</a>:</p>
-<pre><span class="source makefile"><span class="variable other makefile">SHELL</span> <span class="keyword operator assignment makefile">=</span> <span class="string unquoted makefile">/bin/bash</span>
-<span class="meta group makefile"><span class="keyword control conditional makefile">ifeq</span> <span class="punctuation section group begin makefile">(</span><span class="keyword other block begin makefile">$(</span><span class="support function builtin makefile">shell</span> <span class="source shell"><span class="meta function-call shell"><span class="variable function shell">uname</span></span></span><span class="keyword other block end makefile">)</span><span class="punctuation separator makefile">,</span>Darwin<span class="punctuation section group end makefile">)</span></span>
-<span class="variable other makefile">EXTRA_SWIFT_FLAGS</span> <span class="keyword operator assignment makefile">=</span> <span class="string unquoted makefile">&quot;--disable-sandbox&quot;</span>
-<span class="keyword control conditional makefile">else</span>
-<span class="variable other makefile">SWIFT_TOOLCHAIN</span> <span class="keyword operator assignment makefile">=</span> <span class="string unquoted makefile">&quot;<span class="keyword other block begin makefile">$(</span><span class="support function builtin makefile">shell</span> <span class="source shell"><span class="meta function-call shell"><span class="variable function shell">swift</span></span><span class="meta function-call arguments shell"><span class="variable parameter option shell"><span class="punctuation definition parameter shell"> -</span>print-target-info</span></span> <span class="keyword operator logical pipe shell">|</span> <span class="meta function-call shell"><span class="variable function shell">grep</span></span><span class="meta function-call arguments shell"> runtimeResourcePath</span> <span class="keyword operator logical pipe shell">|</span> <span class="meta function-call shell"><span class="variable function shell">cut</span></span><span class="meta function-call arguments shell"><span class="variable parameter option shell"><span class="punctuation definition parameter shell"> -</span>f</span> 2<span class="variable parameter option shell"><span class="punctuation definition parameter shell"> -</span>d</span> <span class="string quoted single makefile"><span class="punctuation definition string begin makefile">&#39;</span>:<span class="punctuation definition string end makefile">&#39;</span></span></span> <span class="keyword operator logical pipe shell">|</span> <span class="meta function-call shell"><span class="variable function shell">cut</span></span><span class="meta function-call arguments shell"><span class="variable parameter option shell"><span class="punctuation definition parameter shell"> -</span>f</span> 2<span class="variable parameter option shell"><span class="punctuation definition parameter shell"> -</span>d</span> <span class="string quoted single makefile"><span class="punctuation definition string begin makefile">&#39;</span>&quot;<span class="punctuation definition string end makefile">&#39;</span></span></span></span><span class="keyword other block end makefile">)</span>&quot;</span>
-<span class="variable other makefile">EXTRA_SWIFT_FLAGS</span> <span class="keyword operator assignment makefile">=</span> <span class="string unquoted makefile">-Xcxx -I<span class="variable parameter makefile"><span class="keyword other block begin makefile">${</span>SWIFT_TOOLCHAIN<span class="keyword other block end makefile">}</span></span> -Xcxx -I<span class="variable parameter makefile"><span class="keyword other block begin makefile">${</span>SWIFT_TOOLCHAIN<span class="keyword other block end makefile">}</span></span>/Block</span>
-<span class="keyword control conditional makefile">endif</span>
+<pre><code class="language-make">SHELL = /bin/bash
+ifeq ($(shell uname),Darwin)
+EXTRA_SWIFT_FLAGS = &quot;--disable-sandbox&quot;
+else
+SWIFT_TOOLCHAIN = &quot;$(shell swift -print-target-info | grep runtimeResourcePath | cut -f 2 -d ':' | cut -f 2 -d '&quot;')&quot;
+EXTRA_SWIFT_FLAGS = -Xcxx -I${SWIFT_TOOLCHAIN} -Xcxx -I${SWIFT_TOOLCHAIN}/Block
+endif
 
-<span class="keyword control makefile">define</span><span class="variable other makefile"> build
-	@swift build --configuration <span class="variable parameter makefile"><span class="keyword other block begin makefile">$(</span>1<span class="keyword other block end makefile">)</span></span> -Xswiftc -warnings-as-errors <span class="variable parameter makefile"><span class="keyword other block begin makefile">${</span>EXTRA_SWIFT_FLAGS<span class="keyword other block end makefile">}</span></span>
+define build
+	@swift build --configuration $(1) -Xswiftc -warnings-as-errors ${EXTRA_SWIFT_FLAGS}
 endef
 
 .PHONY: build
 build:
-	<span class="meta function-call makefile"><span class="keyword other block begin makefile">$(</span><span class="constant language call makefile">call</span> </span><span class="meta function-call makefile"><span class="variable function makefile">build</span></span><span class="meta function-call makefile"><span class="punctuation separator makefile">,</span></span><span class="meta function-call arguments makefile">release</span><span class="keyword other block end makefile">)</span>
+	$(call build,release)
 
 .PHONY: test
 test:
-	@swift test <span class="variable parameter makefile"><span class="keyword other block begin makefile">${</span>EXTRA_SWIFT_FLAGS<span class="keyword other block end makefile">}</span></span>
+	@swift test ${EXTRA_SWIFT_FLAGS}
 
 .PHONY: debug
 debug:
-	<span class="meta function-call makefile"><span class="keyword other block begin makefile">$(</span><span class="constant language call makefile">call</span> </span><span class="meta function-call makefile"><span class="variable function makefile">build</span></span><span class="meta function-call makefile"><span class="punctuation separator makefile">,</span></span><span class="meta function-call arguments makefile">debug</span><span class="keyword other block end makefile">)</span>
-</span></span></pre>
+	$(call build,debug)
+</code></pre>
 <ol>
 <li><code>make build</code> / <code>make test</code> / <code>make debug</code> all work as expected, building IndexStoreDB successfully.</li>
 <li>As-is, this snippet is project-agnostic. So you can throw it in your SwiftPM project and it should &quot;just

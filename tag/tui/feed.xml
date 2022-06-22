@@ -19,7 +19,7 @@ the owener and its fate unknown.&lt;&#x2f;p&gt;
 &lt;ul&gt;
 &lt;li&gt;everything.&lt;&#x2f;li&gt;
 &lt;&#x2f;ul&gt;
-&lt;br &#x2f;&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Fastforward to today. I use and write software applications for a living.
 Programs I use directly range from terminal commands to GUI apps and web apps in
 a browser.&lt;&#x2f;p&gt;
@@ -43,7 +43,7 @@ no matter how your OS changes.&lt;&#x2f;p&gt;
 &lt;p&gt;Most importantly, they remind me of the programs I built on that electronic
 dictionary. I want to make them today, with my favorite programming language
 Swift!&lt;&#x2f;p&gt;
-&lt;br &#x2f;&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;The go-to library for writing TUI apps is &lt;a href=&quot;https:&#x2f;&#x2f;www.gnu.org&#x2f;software&#x2f;ncurses&#x2f;&quot;&gt;ncurses&lt;&#x2f;a&gt;. Classics such as vim,
 emacs and mutt were written with it to some degree. But I find it hard to dive
 into: it has a large number of strange legacy function names and offers
@@ -60,88 +60,88 @@ mouse-clicks. And that&#x27;s it!&lt;&#x2f;p&gt;
 &lt;p&gt;So that&#x27;s an TUI app drawing according to mouse clicks built with only a few
 primitives from termbox. Awww yeah! Here&#x27;s the code with the comment stripped,
 to give you a taste:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword other import&quot;&gt;import&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;Termbox&lt;&#x2f;span&gt;
-&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;printAt&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;x&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int32&lt;&#x2f;span&gt;, &lt;span class=&quot;variable parameter&quot;&gt;y&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int32&lt;&#x2f;span&gt;, &lt;span class=&quot;variable parameter&quot;&gt;text&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;,
-    &lt;span class=&quot;variable parameter&quot;&gt;foreground&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Attributes&lt;&#x2f;span&gt; = .&lt;span class=&quot;constant language enum&quot;&gt;default&lt;&#x2f;span&gt;,
-    &lt;span class=&quot;variable parameter&quot;&gt;background&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Attributes&lt;&#x2f;span&gt; = .&lt;span class=&quot;constant language enum&quot;&gt;default&lt;&#x2f;span&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;import Termbox
+func printAt(x: Int32, y: Int32, text: String,
+    foreground: Attributes = .default,
+    background: Attributes = .default)
 {
-    &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; border = &lt;span class=&quot;support class&quot;&gt;Termbox&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;width
+    let border = Termbox.width
 
-    &lt;span class=&quot;keyword control&quot;&gt;for&lt;&#x2f;span&gt; (c, xi) &lt;span class=&quot;keyword control&quot;&gt;in&lt;&#x2f;span&gt; zip(text&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;unicodeScalars, x ..&amp;lt; border) {
-        &lt;span class=&quot;support class&quot;&gt;Termbox&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;put(&lt;span class=&quot;variable parameter&quot;&gt;x&lt;&#x2f;span&gt;: xi, &lt;span class=&quot;variable parameter&quot;&gt;y&lt;&#x2f;span&gt;: y, &lt;span class=&quot;variable parameter&quot;&gt;character&lt;&#x2f;span&gt;: c,
-            &lt;span class=&quot;variable parameter&quot;&gt;foreground&lt;&#x2f;span&gt;: foreground, &lt;span class=&quot;variable parameter&quot;&gt;background&lt;&#x2f;span&gt;: background)
+    for (c, xi) in zip(text.unicodeScalars, x ..&amp;lt; border) {
+        Termbox.put(x: xi, y: y, character: c,
+            foreground: foreground, background: background)
     }
 }
 
-&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;updateHelp&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;drawing&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;UnicodeScalar&lt;&#x2f;span&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-    &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; lastY = &lt;span class=&quot;support class&quot;&gt;Termbox&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;height - &lt;span class=&quot;constant numeric decimal&quot;&gt;1&lt;&#x2f;span&gt;
-    &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; content = [
-        &lt;span class=&quot;string quoted double&quot;&gt;&amp;quot;Drawing [&lt;span class=&quot;punctuation section embedded&quot;&gt;\(&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;drawing&lt;span class=&quot;string quoted double&quot;&gt;&lt;span class=&quot;punctuation section embedded&quot;&gt;)&lt;&#x2f;span&gt;]&amp;quot;&lt;&#x2f;span&gt;,
-        &lt;span class=&quot;string quoted double&quot;&gt;&amp;quot;Press other character to change&amp;quot;&lt;&#x2f;span&gt;,
-        &lt;span class=&quot;string quoted double&quot;&gt;&amp;quot;Use mouse to draw&amp;quot;&lt;&#x2f;span&gt;,
-        &lt;span class=&quot;string quoted double&quot;&gt;&amp;quot;Press &amp;#39;q&amp;#39; to quit&amp;quot;&lt;&#x2f;span&gt;
-    ].&lt;span class=&quot;constant language enum&quot;&gt;joined&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;separator&lt;&#x2f;span&gt;: &lt;span class=&quot;string quoted double&quot;&gt;&amp;quot; | &amp;quot;&lt;&#x2f;span&gt;)
+func updateHelp(drawing: UnicodeScalar) {
+    let lastY = Termbox.height - 1
+    let content = [
+        &amp;quot;Drawing [\(drawing)]&amp;quot;,
+        &amp;quot;Press other character to change&amp;quot;,
+        &amp;quot;Use mouse to draw&amp;quot;,
+        &amp;quot;Press &#x27;q&#x27; to quit&amp;quot;
+    ].joined(separator: &amp;quot; | &amp;quot;)
 
-    &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; filler = &lt;span class=&quot;support class&quot;&gt;String&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;repeating&lt;&#x2f;span&gt;: &lt;span class=&quot;string quoted double&quot;&gt;&amp;quot; &amp;quot;&lt;&#x2f;span&gt;,
-        &lt;span class=&quot;variable parameter&quot;&gt;count&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;(&lt;span class=&quot;support class&quot;&gt;Termbox&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;width) - content&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;unicodeScalars&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;count)
+    let filler = String(repeating: &amp;quot; &amp;quot;,
+        count: Int(Termbox.width) - content.unicodeScalars.count)
 
-    printAt(&lt;span class=&quot;variable parameter&quot;&gt;x&lt;&#x2f;span&gt;: &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;, &lt;span class=&quot;variable parameter&quot;&gt;y&lt;&#x2f;span&gt;: lastY, &lt;span class=&quot;variable parameter&quot;&gt;text&lt;&#x2f;span&gt;: content + filler,
-        &lt;span class=&quot;variable parameter&quot;&gt;foreground&lt;&#x2f;span&gt;: .&lt;span class=&quot;constant language enum&quot;&gt;white&lt;&#x2f;span&gt;, &lt;span class=&quot;variable parameter&quot;&gt;background&lt;&#x2f;span&gt;: .&lt;span class=&quot;constant language enum&quot;&gt;blue&lt;&#x2f;span&gt;)
+    printAt(x: 0, y: lastY, text: content + filler,
+        foreground: .white, background: .blue)
 }
 
-&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;paint&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;()&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-    &lt;span class=&quot;keyword control&quot;&gt;do&lt;&#x2f;span&gt; {
-        &lt;span class=&quot;keyword control&quot;&gt;try&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;Termbox&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;initialize()
-    } &lt;span class=&quot;keyword control&quot;&gt;catch&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; error {
+func paint() {
+    do {
+        try Termbox.initialize()
+    } catch let error {
         print(error)
-        &lt;span class=&quot;keyword control&quot;&gt;return&lt;&#x2f;span&gt;
+        return
     }
-    &lt;span class=&quot;support class&quot;&gt;Termbox&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;inputModes = [.&lt;span class=&quot;constant language enum&quot;&gt;esc&lt;&#x2f;span&gt;, .&lt;span class=&quot;constant language enum&quot;&gt;mouse&lt;&#x2f;span&gt;]
+    Termbox.inputModes = [.esc, .mouse]
 
-    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;drawingCharacter&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;UnicodeScalar&lt;&#x2f;span&gt; = &lt;span class=&quot;string quoted double&quot;&gt;&amp;quot;.&amp;quot;&lt;&#x2f;span&gt; {
-        &lt;span class=&quot;keyword control&quot;&gt;didSet&lt;&#x2f;span&gt; {
-            updateHelp(&lt;span class=&quot;variable parameter&quot;&gt;drawing&lt;&#x2f;span&gt;: drawingCharacter)
+    var drawingCharacter: UnicodeScalar = &amp;quot;.&amp;quot; {
+        didSet {
+            updateHelp(drawing: drawingCharacter)
         }
     }
 
-    updateHelp(&lt;span class=&quot;variable parameter&quot;&gt;drawing&lt;&#x2f;span&gt;: drawingCharacter)
+    updateHelp(drawing: drawingCharacter)
 
-    &lt;span class=&quot;support class&quot;&gt;Termbox&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;present()
+    Termbox.present()
 
-    &lt;span class=&quot;variable parameter&quot;&gt;outer&lt;&#x2f;span&gt;: &lt;span class=&quot;keyword control&quot;&gt;while&lt;&#x2f;span&gt; &lt;span class=&quot;constant language true&quot;&gt;true&lt;&#x2f;span&gt; {
-        &lt;span class=&quot;keyword control&quot;&gt;guard&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; event = &lt;span class=&quot;support class&quot;&gt;Termbox&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;pollEvent() &lt;span class=&quot;keyword control&quot;&gt;else&lt;&#x2f;span&gt; {
-            &lt;span class=&quot;keyword control&quot;&gt;continue&lt;&#x2f;span&gt;
+    outer: while true {
+        guard let event = Termbox.pollEvent() else {
+            continue
         }
 
-        &lt;span class=&quot;keyword control&quot;&gt;switch&lt;&#x2f;span&gt; event {
-        &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; .&lt;span class=&quot;constant language enum&quot;&gt;character&lt;&#x2f;span&gt;(&lt;span class=&quot;constant language other&quot;&gt;_&lt;&#x2f;span&gt;, value):
-            &lt;span class=&quot;keyword control&quot;&gt;if&lt;&#x2f;span&gt; value == &lt;span class=&quot;string quoted double&quot;&gt;&amp;quot;q&amp;quot;&lt;&#x2f;span&gt; {
-                &lt;span class=&quot;keyword control&quot;&gt;break&lt;&#x2f;span&gt; outer
+        switch event {
+        case let .character(_, value):
+            if value == &amp;quot;q&amp;quot; {
+                break outer
             }
 
             drawingCharacter = value
 
-        &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; .&lt;span class=&quot;constant language enum&quot;&gt;key&lt;&#x2f;span&gt;(&lt;span class=&quot;constant language other&quot;&gt;_&lt;&#x2f;span&gt;, value):
-            &lt;span class=&quot;keyword control&quot;&gt;if&lt;&#x2f;span&gt; value == .&lt;span class=&quot;constant language enum&quot;&gt;space&lt;&#x2f;span&gt; {
-                drawingCharacter = &lt;span class=&quot;string quoted double&quot;&gt;&amp;quot; &amp;quot;&lt;&#x2f;span&gt;
+        case let .key(_, value):
+            if value == .space {
+                drawingCharacter = &amp;quot; &amp;quot;
             }
 
-        &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; .&lt;span class=&quot;constant language enum&quot;&gt;mouse&lt;&#x2f;span&gt;(x, y):
-            &lt;span class=&quot;support class&quot;&gt;Termbox&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;put(&lt;span class=&quot;variable parameter&quot;&gt;x&lt;&#x2f;span&gt;: x, &lt;span class=&quot;variable parameter&quot;&gt;y&lt;&#x2f;span&gt;: y,
-                &lt;span class=&quot;variable parameter&quot;&gt;character&lt;&#x2f;span&gt;: drawingCharacter,
-                &lt;span class=&quot;variable parameter&quot;&gt;foreground&lt;&#x2f;span&gt;: .&lt;span class=&quot;constant language enum&quot;&gt;red&lt;&#x2f;span&gt;)
-        &lt;span class=&quot;keyword control&quot;&gt;default&lt;&#x2f;span&gt;:
-            &lt;span class=&quot;keyword control&quot;&gt;continue&lt;&#x2f;span&gt;
+        case let .mouse(x, y):
+            Termbox.put(x: x, y: y,
+                character: drawingCharacter,
+                foreground: .red)
+        default:
+            continue
         }
 
-        &lt;span class=&quot;support class&quot;&gt;Termbox&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;present()
+        Termbox.present()
     }
 
-    &lt;span class=&quot;support class&quot;&gt;Termbox&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;shutdown()
+    Termbox.shutdown()
 }
 
 paint()
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;&lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Termbox&quot;&gt;Library&lt;&#x2f;a&gt; and this &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;TerminalPaint&quot;&gt;app&lt;&#x2f;a&gt; are both on Github. Go and
 have fun :)&lt;&#x2f;p&gt;
 </description>

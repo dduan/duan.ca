@@ -32,29 +32,29 @@
 <code>\0</code> at the end. To reference it, a variable of type <code>char *</code> is used to store
 the address of the first <code>char</code> (commonly known as a pointer 😉).  It's common
 to have string manipulating functions take this form:</p>
-<pre><span class="source swift">void foo(char **errorMessage) {
-    <span class="comment line"><span class="punctuation definition comment">//</span> ...</span>
+<pre><code class="language-swift">void foo(char **errorMessage) {
+    // ...
 }
-</span></pre>
+</code></pre>
 <p>To mutate the arugment <code>errorMessage</code> of type <code>char *</code>, <code>foo</code> takes a pointer
 to it, <code>(char *)*</code>.</p>
-<hr />
+<!-- raw HTML omitted -->
 <p>How do we call <code>foo</code> in Swift?</p>
 <p>Here's the tl;dr. We can wrap it in a Swift function that have the same
 interface:</p>
-<pre><span class="source swift"><span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">fooSwift</span></span>(inout <span class="variable parameter">errorMessage</span>: <span class="support class">String</span><span class="keyword operator">?</span>)</span></span> {
-    <span class="keyword variable">var</span> <span class="variable parameter">message</span>: <span class="support class">UnsafeMutablePointer</span><span class="keyword operator">&lt;</span><span class="support class">CChar</span><span class="keyword operator">&gt;</span> = <span class="constant language nil">nil</span>
+<pre><code class="language-swift">func fooSwift(inout errorMessage: String?) {
+    var message: UnsafeMutablePointer&lt;CChar&gt; = nil
 
-    foo(<span class="keyword operator">&amp;</span>message)
-    errorMessage = <span class="support class">String</span><span class="keyword operator">.</span>fromCString(message)
+    foo(&amp;message)
+    errorMessage = String.fromCString(message)
 }
-</span></pre>
+</code></pre>
 <p><code>errorMessage</code> will contain whatever our C function <code>foo</code> assigns to it.</p>
-<hr />
+<!-- raw HTML omitted -->
 <p>So, what's really going on here?</p>
 <p>Inspecting <code>foo</code>'s signature in Swift, we see</p>
-<pre><span class="source swift"><span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">foo</span></span>(<span class="variable parameter">errorMessage</span>: <span class="support class">UnsafeMutablePointer</span><span class="keyword operator">&lt;</span><span class="support class">UnsafeMutablePointer</span><span class="keyword operator">&lt;</span><span class="support class">CChar</span><span class="keyword operator">&gt;&gt;</span>)</span></span>
-</span></pre>
+<pre><code class="language-swift">func foo(errorMessage: UnsafeMutablePointer&lt;UnsafeMutablePointer&lt;CChar&gt;&gt;)
+</code></pre>
 <p>… okey, <code>errorMessage</code>'s type is little intimidating to someone who doesn't
 use C functions in Swift everyday (like me)!</p>
 <p>Let's break it down. Swift does a ton of work for us to interoperate with C:</p>
@@ -81,7 +81,7 @@ methods for converting <code>char *</code> / <code>UnsafeMutablePointer&lt;CChar
 </li>
 </ol>
 <p>Hopefully you can see how <code>fooSwift</code> works now.</p>
-<hr />
+<!-- raw HTML omitted -->
 <p>Taking a step back, to deal with <code>char **</code> in Swift, we overcame 2 obstacles:</p>
 <ol>
 <li>

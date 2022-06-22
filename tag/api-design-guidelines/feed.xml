@@ -46,9 +46,9 @@ section, we&#x27;ll discuss one way to make it happen.&lt;&#x2f;p&gt;
 If you have been disciplined about naming your functions in Swift 2, finding
 such repetition should take no more than one or two good regular expressions.
 After the migrator, your code may contain a mixture of these:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;doStuffWithX&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant language other&quot;&gt;_&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;X&lt;&#x2f;span&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; { … }
-&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;doStuff&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;(forY &lt;span class=&quot;variable parameter&quot;&gt;y&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Y&lt;&#x2f;span&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; { … }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;func doStuffWithX(_: X) { … }
+func doStuff(forY y: Y) { … }
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;In other words, the repeating word (&lt;code&gt;X&lt;&#x2f;code&gt; or &lt;code&gt;Y&lt;&#x2f;code&gt;) is preceded by a
 &lt;a href=&quot;https:&#x2f;&#x2f;www.englishclub.com&#x2f;grammar&#x2f;prepositions-list.htm&quot;&gt;preposition&lt;&#x2f;a&gt;.&lt;&#x2f;p&gt;
 &lt;p&gt;Finding these in a large code base is quite fun. If you don&#x27;t feel like writing
@@ -57,8 +57,8 @@ the scripts yourself, I&#x27;ve made a little tool for it &lt;a href=&quot;https
 &amp;quot;CG&amp;quot; in &lt;code&gt;CGSize&lt;&#x2f;code&gt;. That&#x27;s covered by the tool as well.)&lt;&#x2f;p&gt;
 &lt;h2&gt;Step 2: Update&lt;&#x2f;h2&gt;
 &lt;p&gt;You can further rearrange the pieces in function name mechanically to:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;meta function&quot;&gt;&lt;span class=&quot;meta toc-list&quot;&gt;&lt;span class=&quot;storage type function&quot;&gt;func&lt;&#x2f;span&gt; &lt;span class=&quot;entity name function&quot;&gt;&lt;span class=&quot;variable function&quot;&gt;doStuff&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;(preposition &lt;span class=&quot;variable parameter&quot;&gt;originalArgName&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Type&lt;&#x2f;span&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; { … }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;func doStuff(preposition originalArgName: Type) { … }
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;The &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;needless&quot;&gt;tool&lt;&#x2f;a&gt; I wrote can suggest alternatives like this. Applying them
 is technically automatable. But I find manually doing tasks such as fixing up
 indentation for multi-line functions or updating their use site to be easier.
@@ -75,11 +75,11 @@ intuitively pick up that it&#x27;s for a &amp;quot;screen with a certain size&am
 renaming here should be &lt;code&gt;alertForScreen(with size: CGSize)&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;strong&gt;Awkward literal values results in ungrammatical phrases&lt;&#x2f;strong&gt;. Imagine our
 argument is a enum:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;enum&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;Mode&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-  &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; add
-  &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; edit
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;enum Mode {
+  case add
+  case edit
 }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;… and we renamed a function &lt;code&gt;updateUIForMode(mode: Mode)&lt;&#x2f;code&gt; to
 &lt;code&gt;update(for mode: Mode)&lt;&#x2f;code&gt;. The call site, therefore, becomes
 &lt;code&gt;update(for: .add)&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
@@ -88,19 +88,19 @@ is not very grammatical. Normally we would say &amp;quot;update UI for &lt;em&gt
 we need to update the literals in that enum to &amp;quot;adding&amp;quot; and &amp;quot;editing&amp;quot;.&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;strong&gt;Type information becomes too weak&lt;&#x2f;strong&gt;. This can happen very often with enum
 literals. We often name enum values with an adjective to qualify its name:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;enum&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;UIControlState&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-    &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; automatic &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; which state? the *automatic* state!&lt;&#x2f;span&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;enum UIControlState {
+    case automatic &#x2f;&#x2f; which state? the *automatic* state!
     …
 }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;After renaming, we&#x27;ll have functions that simply becomes too generic and
 mysterious at call site:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;update(&lt;span class=&quot;keyword control&quot;&gt;for&lt;&#x2f;span&gt;: .&lt;span class=&quot;constant language enum&quot;&gt;automatic&lt;&#x2f;span&gt;) &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; automatic what? 😂&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;update(for: .automatic) &#x2f;&#x2f; automatic what? 😂
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;This is where we need to be flexible and use our own good judgement. Perhaps
 it&#x27;s simply better to keep the qualifying postfix:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;update(&lt;span class=&quot;variable parameter&quot;&gt;forControlState&lt;&#x2f;span&gt;: .&lt;span class=&quot;constant language enum&quot;&gt;automatic&lt;&#x2f;span&gt;) &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; better&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;update(forControlState: .automatic) &#x2f;&#x2f; better
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;In the guideline&#x27;s parlance, this is &lt;a href=&quot;https:&#x2f;&#x2f;swift.org&#x2f;documentation&#x2f;api-design-guidelines&#x2f;#weak-type-information&quot;&gt;compensate for weak type
 information&lt;&#x2f;a&gt;.&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;strong&gt;Other argument labels needs updates too&lt;&#x2f;strong&gt;. A function at call site should read

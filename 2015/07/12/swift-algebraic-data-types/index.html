@@ -34,25 +34,25 @@ types&quot; in programming languages. One aspect of the &quot;algebraic-ness&quo
 many potential new values there are for the new type, given a set of type as
 its building block.</p>
 <p>To better illustrate this, consider the following example in Swift.</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">StarkChild</span></span></span> { <span class="keyword control">case</span> <span class="support class">Rickon</span>, <span class="support class">Bran</span>, <span class="support class">Arya</span>, <span class="support class">Sansa</span>, <span class="support class">Robb</span>, <span class="support class">Jon</span> }
+<pre><code class="language-swift">enum StarkChild { case Rickon, Bran, Arya, Sansa, Robb, Jon }
 
-<span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Direwolf</span></span></span> { <span class="keyword control">case</span> <span class="support class">Shaggydog</span>, <span class="support class">Summer</span>, <span class="support class">Nymeria</span>, <span class="support class">Lady</span>, <span class="support class">Greywind</span>, <span class="support class">Ghost</span> }
+enum Direwolf { case Shaggydog, Summer, Nymeria, Lady, Greywind, Ghost }
 
-<span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Actor</span></span></span> {
-    <span class="keyword control">case</span> <span class="support class">Wolf</span>(<span class="support class">Direwolf</span>)
-    <span class="keyword control">case</span> <span class="support class">Person</span>(<span class="support class">StarkChild</span>)
+enum Actor {
+    case Wolf(Direwolf)
+    case Person(StarkChild)
 }
 
-<span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">Parters</span></span></span> {
-    <span class="keyword variable">var</span> <span class="variable parameter">wolf</span>: <span class="support class">Direwolf</span>
-    <span class="keyword variable">var</span> <span class="variable parameter">person</span>: <span class="support class">StarkChild</span>
+struct Parters {
+    var wolf: Direwolf
+    var person: StarkChild
 }
-</span></pre>
+</code></pre>
 <p><code>StarkChild</code> and <code>Direwolf</code> each has 6 potential values. Combining them, we
 get two new types.</p>
 <p>Question: how many potentiol values are there for <code>Actor</code>? How many for
 <code>Parters</code>?</p>
-<hr>
+<!-- raw HTML omitted -->
 <p>An <code>Actor</code> can be either a <code>StarkChild</code> or a <code>DireWolf</code>, therefore it has `6</p>
 <ul>
 <li>6 = 12<code>potential values – the *sum* of</code>Child<code>'s and </code>DireWolf`'s values.</li>
@@ -69,66 +69,66 @@ Types.</p>
 <p>However, the story doesn't stop here. In Swift, an <code>enum</code>'s option can have
 multiple values. If it happens to be the only option, then this
 <code>enum</code>effectively becomes a <em>product</em> type:</p>
-<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> there are 6 * 6 = 36 potential values for Parters</span>
-<span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Parters</span></span></span> {
-    <span class="keyword control">case</span> <span class="support class">Value</span>(<span class="variable parameter">wolf</span>: <span class="support class">DireWolf</span>, <span class="variable parameter">person</span>: <span class="support class">StarkChild</span>)
+<pre><code class="language-swift">// there are 6 * 6 = 36 potential values for Parters
+enum Parters {
+    case Value(wolf: DireWolf, person: StarkChild)
 }
-</span></pre>
+</code></pre>
 <p>Incidentally, this makes <code>enum</code> similar to <code>data</code> in Haskell, where <em>product</em>
 and <em>sum</em> types can be created with a unified construct – <code>data</code>.</p>
 <p>In C and C++, <code>union</code>s are the closest thing to <em>sum</em> types. However, <code>union</code>
 is hardly used to combine arbitrary types due to its lack of associated
 values. What do people do in need of <em>sum</em> types? They make do with product
 types. Here's one way to achive that in Swift:</p>
-<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> Actor.value can have only 6 + 6 = 12 potential values thanks to</span>
-<span class="comment line"><span class="punctuation definition comment">//</span> manual enforcement</span>
-<span class="entity name type"><span class="keyword entity">class</span> <span class="entity name type"><span class="support class">Actor</span></span></span> {
-    <span class="keyword variable">var</span> <span class="variable parameter">child</span>: <span class="support class">StarkChild</span><span class="keyword operator">?</span>
-    <span class="keyword variable">var</span> <span class="variable parameter">wolf</span>: <span class="support class">Direwolf</span><span class="keyword operator">?</span>
+<pre><code class="language-swift">// Actor.value can have only 6 + 6 = 12 potential values thanks to
+// manual enforcement
+class Actor {
+    var child: StarkChild?
+    var wolf: Direwolf?
 
-    <span class="keyword variable">var</span> <span class="variable parameter">value</span>: <span class="support class">Any</span> {
-        <span class="keyword control">get</span> {
-            <span class="keyword control">return</span> child == <span class="constant language nil">nil</span> ? wolf<span class="keyword operator">!</span> : child<span class="keyword operator">!</span>
+    var value: Any {
+        get {
+            return child == nil ? wolf! : child!
         }
-        <span class="keyword control">set</span>(newValue) {
-            <span class="keyword control">if</span> newValue <span class="keyword control">is</span> <span class="support class">StarkChild</span> {
-                child = (newValue <span class="keyword control">as</span><span class="keyword operator">!</span> <span class="support class">StarkChild</span>)
-                wolf = <span class="constant language nil">nil</span>
+        set(newValue) {
+            if newValue is StarkChild {
+                child = (newValue as! StarkChild)
+                wolf = nil
             }
-            <span class="keyword control">if</span> newValue <span class="keyword control">is</span> <span class="support class">Direwolf</span> {
-                wolf = (newValue <span class="keyword control">as</span><span class="keyword operator">!</span> <span class="support class">Direwolf</span>)
-                child = <span class="constant language nil">nil</span>
+            if newValue is Direwolf {
+                wolf = (newValue as! Direwolf)
+                child = nil
             }
         }
     }
 
-    <span class="meta function"><span class="meta toc-list"><span class="storage type function">init</span>(<span class="variable parameter">wolf</span>: <span class="support class">Direwolf</span>)</span></span> {
-        <span class="keyword variable">self</span><span class="keyword operator">.</span>wolf = wolf
+    init(wolf: Direwolf) {
+        self.wolf = wolf
     }
-    <span class="meta function"><span class="meta toc-list"><span class="storage type function">init</span>(<span class="variable parameter">child</span>: <span class="support class">StarkChild</span>)</span></span> {
-        <span class="keyword variable">self</span><span class="keyword operator">.</span>child = child
+    init(child: StarkChild) {
+        self.child = child
     }
-    <span class="meta function"><span class="meta toc-list"><span class="storage type function">init</span>()</span></span> {
-        fatalError(<span class="string quoted double">&quot;must initialize with a child or a wolf&quot;</span>)
+    init() {
+        fatalError(&quot;must initialize with a child or a wolf&quot;)
     }
 }
-</span></pre>
+</code></pre>
 <p>It's… ugly.</p>
 <h2>Recursion Types</h2>
 <p>Besides <em>sum</em> and <em>product</em>, another common class of algebraic type is
 recursion types. The interesting bit here is that Swift struggles to support
 it. In WWDC 2015, it was announced that <code>enum</code>s can be defined recursively in
 Swift 2:</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Tree</span></span></span> {
-    <span class="keyword control">case</span> <span class="support class">Empty</span>
-    indirect <span class="keyword control">case</span> <span class="support class">Node</span>(<span class="support class">Tree</span>, <span class="support class">Tree</span>)
+<pre><code class="language-swift">enum Tree {
+    case Empty
+    indirect case Node(Tree, Tree)
 }
-</span></pre>
+</code></pre>
 <p>As of this writing, Xcode 7 beta 3 has not delivered this feature yet.
 Also, it's a good bet that <code>indirect</code> is not going to be available in tuple
 aliases, such as:</p>
-<pre><span class="source swift"><span class="keyword variable">typealias</span> <span class="support class">Node</span> = (indirect <span class="support class">Node</span>, indirect <span class="support class">Node</span>)
-</span></pre>
+<pre><code class="language-swift">typealias Node = (indirect Node, indirect Node)
+</code></pre>
 <p>I hope this is on the Swift team's (understandably) gigantic todo list 😉.</p>
 
 </article>

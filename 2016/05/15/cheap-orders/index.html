@@ -34,79 +34,79 @@ we'd better get to work, right?
 <p>Before going full existential, let's limit &quot;order&quot; to Swift's set and
 dictionaries -- there is none. Of course, you can take values/keys out and
 sort them. But what if all you care about is <em>some</em> order?</p>
-<hr />
+<!-- raw HTML omitted -->
 <p>Recently, I wrote</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Token</span></span></span> {
-  <span class="storage modifier">static</span> <span class="keyword variable">let</span> all = [
-    <span class="string quoted double">&quot;=&quot;</span>: .<span class="constant language enum">Equal</span>,
-    <span class="string quoted double">&quot;-&quot;</span>: .<span class="constant language enum">Minus</span>,
-    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
+<pre><code class="language-swift">enum Token {
+  static let all = [
+    &quot;=&quot;: .Equal,
+    &quot;-&quot;: .Minus,
+    // more token mappings …
   ]
-  <span class="keyword control">case</span> <span class="support class">Equal</span>
-  <span class="keyword control">case</span> <span class="support class">Minus</span>
-  <span class="comment line"><span class="punctuation definition comment">//</span> more tokens …</span>
+  case Equal
+  case Minus
+  // more tokens …
 }
-</span></pre>
+</code></pre>
 <p>… in the hope that I can take each value from <code>Token.all.keys</code> and see if
 a prefix of a string is a matching token. It started to fail as the tokens
 expands to multiple characters:</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Token</span></span></span> {
-  <span class="storage modifier">static</span> <span class="keyword variable">let</span> all = [
-    <span class="string quoted double">&quot;=&quot;</span>: .<span class="constant language enum">Equal</span>,
-    <span class="string quoted double">&quot;-&quot;</span>: .<span class="constant language enum">Minus</span>,
-    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
-    <span class="string quoted double">&quot;==&quot;</span>: .<span class="constant language enum">Equality</span>,
-    <span class="string quoted double">&quot;-&gt;&quot;</span>: .<span class="constant language enum">Arrow</span>,
-    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
-    <span class="string quoted double">&quot;===&quot;</span>: .<span class="constant language enum">Identity</span>,
-    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
+<pre><code class="language-swift">enum Token {
+  static let all = [
+    &quot;=&quot;: .Equal,
+    &quot;-&quot;: .Minus,
+    // more token mappings …
+    &quot;==&quot;: .Equality,
+    &quot;-&gt;&quot;: .Arrow,
+    // more token mappings …
+    &quot;===&quot;: .Identity,
+    // more token mappings …
   ]
-  <span class="keyword control">case</span> <span class="support class">Equal</span>
-  <span class="keyword control">case</span> <span class="support class">Minus</span>
-  <span class="keyword control">case</span> <span class="support class">Equality</span>
-  <span class="keyword control">case</span> <span class="support class">Arrow</span>
-  <span class="keyword control">case</span> <span class="support class">Identity</span>
-  <span class="comment line"><span class="punctuation definition comment">//</span> … more tokens …</span>
+  case Equal
+  case Minus
+  case Equality
+  case Arrow
+  case Identity
+  // … more tokens …
 }
-</span></pre>
+</code></pre>
 <p><code>-&gt;</code> could get a match with <code>-</code> and <code>===</code> would match to either <code>==</code> or <code>=</code>,
 etc.</p>
 <p>Since the tokens in this exercise have at most 3 characters, I decided to
 group them by length and match from the longer group first. The groups became:</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Token</span></span></span> {
-  <span class="storage modifier">static</span> <span class="storage modifier">private</span> <span class="keyword variable">let</span> group1 = [
-    <span class="string quoted double">&quot;=&quot;</span>: .<span class="constant language enum">Equal</span>,
-    <span class="string quoted double">&quot;-&quot;</span>: .<span class="constant language enum">Minus</span>,
-    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
+<pre><code class="language-swift">enum Token {
+  static private let group1 = [
+    &quot;=&quot;: .Equal,
+    &quot;-&quot;: .Minus,
+    // more token mappings …
   ]
 
-  <span class="storage modifier">static</span> <span class="storage modifier">private</span> <span class="keyword variable">let</span> group2 = [
-    <span class="string quoted double">&quot;==&quot;</span>: .<span class="constant language enum">Equality</span>,
-    <span class="string quoted double">&quot;-&gt;&quot;</span>: .<span class="constant language enum">Arrow</span>,
-    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
+  static private let group2 = [
+    &quot;==&quot;: .Equality,
+    &quot;-&gt;&quot;: .Arrow,
+    // more token mappings …
   ]
 
-  <span class="storage modifier">static</span> <span class="storage modifier">private</span> <span class="keyword variable">let</span> group3 = [
-    <span class="string quoted double">&quot;===&quot;</span>: .<span class="constant language enum">Identity</span>,
-    <span class="comment line"><span class="punctuation definition comment">//</span> more token mappings …</span>
+  static private let group3 = [
+    &quot;===&quot;: .Identity,
+    // more token mappings …
   ]
 }
-</span></pre>
+</code></pre>
 <p>Now I can choose which group to take values first. There's a way to do it
 without adding some control flow logic:</p>
-<pre><span class="source swift">[group3<span class="keyword operator">.</span>keys, group2<span class="keyword operator">.</span>keys, group3<span class="keyword operator">.</span>keys].<span class="constant language enum">flatten</span>()
-</span></pre>
+<pre><code class="language-swift">[group3.keys, group2.keys, group3.keys].flatten()
+</code></pre>
 <p>Even better, I'll make it a lazy property…</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Token</span></span></span> {
-  <span class="storage modifier">static</span> <span class="keyword variable">var</span> all = {
-    [group3<span class="keyword operator">.</span>keys, group2<span class="keyword operator">.</span>keys, group3<span class="keyword operator">.</span>keys].<span class="constant language enum">flatten</span>()
+<pre><code class="language-swift">enum Token {
+  static var all = {
+    [group3.keys, group2.keys, group3.keys].flatten()
   }()
 }
-</span></pre>
+</code></pre>
 <p>…except an important piece of information is missing from the property: what's
 <code>all</code>'s type? Turns out, it's become</p>
-<pre><span class="source swift"><span class="support class">FlattenCollection</span><span class="keyword operator">&lt;</span><span class="support class">Array</span><span class="keyword operator">&lt;</span><span class="support class">LazyMapCollection</span><span class="keyword operator">&lt;</span><span class="support class">Dictionary</span><span class="keyword operator">&lt;</span><span class="support class">String</span>, <span class="support class">Token</span><span class="keyword operator">&gt;</span>, <span class="support class">String</span><span class="keyword operator">&gt;&gt;&gt;</span>
-</span></pre>
+<pre><code class="language-swift">FlattenCollection&lt;Array&lt;LazyMapCollection&lt;Dictionary&lt;String, Token&gt;, String&gt;&gt;&gt;
+</code></pre>
 <p>Ahh, it seems that in the pursue of cheap, lazy creation of these structures,
 we are forced to deal with a bunch of type wrappers, each having a good reason
 to be here!</p>
@@ -116,19 +116,19 @@ if they are <a href="http://robnapier.net/erasure">erased</a> :).</p>
 <p>Okay, I'm talking about <code>AnySequence</code> now. Rob Napier has an excellent post on
 this topic <a href="http://robnapier.net/erasure">here</a> if you need to catch up. Our
 code eventually end up like this:</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">Token</span></span></span> {
-  <span class="storage modifier">static</span> <span class="keyword variable">var</span> <span class="variable parameter">all</span>: <span class="support class">AnySequence</span><span class="keyword operator">&lt;</span><span class="support class">String</span><span class="keyword operator">&gt;</span> = {
-    <span class="support class">AnySequence</span>(
-      [group3<span class="keyword operator">.</span>keys, group2<span class="keyword operator">.</span>keys, group3<span class="keyword operator">.</span>keys]
-        .<span class="constant language enum">flatten</span>())
+<pre><code class="language-swift">enum Token {
+  static var all: AnySequence&lt;String&gt; = {
+    AnySequence(
+      [group3.keys, group2.keys, group3.keys]
+        .flatten())
   }()
 }
-</span></pre>
+</code></pre>
 <p>Instead of <code>Array&lt;String&gt;</code>, we have an <code>AnySequence&lt;String&gt;</code>. Our tokens now
 gets checked with the correct order. We didn't need to sort the entire set of
 tokens, nor did we do any heavy data massage upfront, making a bunch of copies
 along the way.</p>
-<hr />
+<!-- raw HTML omitted -->
 <p>Looking back, this post really failed to capture the eureka moment as I came
 up with the erasure method. I discovered a series of small challenges and got
 help from Swift's designers in each step. Everything fell together in the end.</p>

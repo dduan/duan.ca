@@ -38,13 +38,13 @@
 <h2>Introduction</h2>
 <p>Apple sneakily shipped a &quot;dark mode&quot; in iOS 11, native apps looks <em>gorgeous</em> in this mode (especially on
 iPhone X with it's OLED display):</p>
-<img src="/assets/2017/12/native-ios-apps-with-smart-invert.png" srcset="/assets/2017/12/native-ios-apps-with-smart-invert.png 2x" alt="iOS 11 apps in smart invert mode"/>
+<!-- raw HTML omitted -->
 <p>To see it for yourself, go to <em>Settings -&gt; General -&gt; Accessibility Display Accommodations -&gt; Invert Colors</em>
 and toggle the switch to on (I personally set triple tap of the power buttton to toggle this on/off):</p>
 <p><img src="/assets/2017/12/invert-color-settings.png" alt="turn on smart invert mode in Settings" /></p>
 <p>Note that in Apple's first-party apps, not every view's color is inverted (hence, &quot;smart&quot;). For apps that we
 built, that would not be the case automatically. Instead, we get the full color inversion under this setting:</p>
-<img src="/assets/2017/12/third-party-app-no-change.png" srcset="/assets/2017/12/third-party-app-no-change.png 2x" alt="default third party app before and after smart color"/>
+<!-- raw HTML omitted -->
 <p>In this article, we'll see how to best adapt our apps so they look just as good as first-party iOS apps under
 the smart invert setting.</p>
 <h2>The Basics</h2>
@@ -61,11 +61,11 @@ colors of the view and all of its subviews.</p>
 our sample app's source code:</p>
 <p><img src="/assets/2017/12/setting-accessibilityIgnoresInvertColors-to-true-in-code.png" alt="setting accessibilityIgnoresInvertColors to true in code" /></p>
 <p>This gives us the desired effect for that view 🎉:</p>
-<img src="/assets/2017/12/smart-invert-in-code-result.png" srcset="/assets/2017/12/smart-invert-in-code-result.png 2x" alt="result of supporting invert color in code"/>
+<!-- raw HTML omitted -->
 <p>The same can be done in Interface Builder. Let's fix the other view by setting a runtime attribute:</p>
 <p><img src="/assets/2017/12/setting-accessibilityIgnoresInvertColors-to-true-in-interface-builder.png" alt="setting accessibilityIgnoresInvertColors to true in Interface Builder" /></p>
 <p>Result:</p>
-<img src="/assets/2017/12/smart-invert-in-interface-builder-result.png" srcset="/assets/2017/12/smart-invert-in-interface-builder-result.png 2x" alt="result of supporting invert color in interface builder"/>
+<!-- raw HTML omitted -->
 <p>Tada!</p>
 <h2>Compatibility with older iOS versions</h2>
 <p>The story gets slightly complicated when your app need to run on older iOS versions. For one, our code won't
@@ -78,27 +78,27 @@ well:</p>
 <p><img src="/assets/2017/12/xcode-complain-about-runtime-attirbute.png" alt="Xcode complains about runtime attribute on older iOS" /></p>
 <p>If that bothers you, I recommend writing your own wrapper for this property as an extension to <code>UIView</code>. To
 put a cherry on top, make it <code>@IBInspectable</code>!</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">extension</span> <span class="entity name type"><span class="support class">UIView</span></span></span> {
-    <span class="comment line"><span class="punctuation definition comment">///</span> Whether or not to set accessibilityIgnoresInvertColors to true for iOS 11.</span>
-    <span class="comment line"><span class="punctuation definition comment">///</span> For older OS, this value is false and setting it has no effect.</span>
-    <span class="storage type decorator">@IBInspectable</span>
-    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">ignoreColorInversion</span>: <span class="support class">Bool</span> {
-        <span class="keyword control">get</span> {
-            <span class="keyword control">if</span> <span class="keyword control">#available</span>(iOS <span class="constant numeric decimal">11</span>, *) {
-                <span class="keyword control">return</span> <span class="keyword variable">self</span><span class="keyword operator">.</span>accessibilityIgnoresInvertColors
+<pre><code class="language-swift">extension UIView {
+    /// Whether or not to set accessibilityIgnoresInvertColors to true for iOS 11.
+    /// For older OS, this value is false and setting it has no effect.
+    @IBInspectable
+    public var ignoreColorInversion: Bool {
+        get {
+            if #available(iOS 11, *) {
+                return self.accessibilityIgnoresInvertColors
             }
 
-            <span class="keyword control">return</span> <span class="constant language false">false</span>
+            return false
         }
 
-        <span class="keyword control">set</span> {
-            <span class="keyword control">if</span> <span class="keyword control">#available</span>(iOS <span class="constant numeric decimal">11</span>, *) {
-                <span class="keyword variable">self</span><span class="keyword operator">.</span>accessibilityIgnoresInvertColors = newValue
+        set {
+            if #available(iOS 11, *) {
+                self.accessibilityIgnoresInvertColors = newValue
             }
         }
     }
 }
-</span></pre>
+</code></pre>
 <p>Having this snippet in the project, we set it in interface builder to any view with a couple of clicks:</p>
 <p><img src="/assets/2017/12/set-custom-invert-property-in-interface-builder.png" alt="set custom invert color properties in Interface Builder" /></p>
 <h2>How to screenshot with inverted color settings</h2>

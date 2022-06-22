@@ -6,9 +6,7 @@
         <atom:link href="https://duan.ca/tag/scheme/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Coding Without A Language</title>
-                <description>&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;OKjQtn_Gvug&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+                <description>&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Sorry for the click-baity title. I actually really like this one.&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Sat, 13 Jan 2018 12:07:19 -0800</pubDate>

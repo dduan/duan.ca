@@ -36,10 +36,10 @@ actually supports ANSI codes pretty well). This is our lowest common API
 denominator, which ultimately dictated the design of Dye.&lt;&#x2f;p&gt;
 &lt;p&gt;Dye&#x27;s API is centered around Swift&#x27;s built-in protocol &lt;code&gt;TextOutputStream&lt;&#x2f;code&gt;. You
 create a stream object and mutate the style need for upcoming output:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; output = &lt;span class=&quot;support class&quot;&gt;OutputStream&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;standardOutput()
-output&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;color&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;foreground = .&lt;span class=&quot;constant language enum&quot;&gt;blue&lt;&#x2f;span&gt;
-print(&lt;span class=&quot;string quoted double&quot;&gt;&amp;quot;blue text&amp;quot;&lt;&#x2f;span&gt;, to &amp;amp;stream) &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; blue text is blue&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;let output = OutputStream.standardOutput()
+output.color.foreground = .blue
+print(&amp;quot;blue text&amp;quot;, to &amp;amp;stream) &#x2f;&#x2f; blue text is blue
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;If the stream is redirected to something other than the terminal, styling gets
 automatically disabled. There are various options to customize this behavior.&lt;&#x2f;p&gt;
 &lt;p&gt;Take a look at this &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;Dye&#x2f;blob&#x2f;master&#x2f;Examples&#x2f;main.swift&quot;&gt;sample app&lt;&#x2f;a&gt; to get a more concrete picture of

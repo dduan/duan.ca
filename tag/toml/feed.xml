@@ -62,44 +62,44 @@ can do the following:&lt;&#x2f;p&gt;
 &lt;p&gt;Errors could exist from each of these two steps To make the parser &lt;em&gt;human-grade&lt;&#x2f;em&gt;, the errors must
 not propagate by disrupting the parsing logic. In Swift, this means the code don&#x27;t throw the
 (conceptual) errors, instead, the top-level constructs include error as a possible value:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;enum&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;TopLevel&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;:&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;Equatable&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-    &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; table(&lt;span class=&quot;support class&quot;&gt;Key&lt;&#x2f;span&gt;)
-    &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; arrayTable(&lt;span class=&quot;support class&quot;&gt;Key&lt;&#x2f;span&gt;)
-    &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; keyValue(&lt;span class=&quot;support class&quot;&gt;KeyValuePair&lt;&#x2f;span&gt;)
-    &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; error(&lt;span class=&quot;support class&quot;&gt;Reason&lt;&#x2f;span&gt;)
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;enum TopLevel: Equatable {
+    case table(Key)
+    case arrayTable(Key)
+    case keyValue(KeyValuePair)
+    case error(Reason)
 }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Upon evaluating a &lt;code&gt;TopLevel&lt;&#x2f;code&gt; value, the parser must not stop if it generates a conflict according to
 TOML&#x27;s requirement. We take note of this error, and move on to consume the next &lt;code&gt;TopLevel&lt;&#x2f;code&gt;. Errors
 from this step will join the error from &lt;code&gt;TopLevel.error&lt;&#x2f;code&gt; at the end for users to see. Therefore, the
 second step&#x27;s code roughly does this:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; errors = [&lt;span class=&quot;support class&quot;&gt;Error&lt;&#x2f;span&gt;]()
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;var errors = [Error]()
 
-&lt;span class=&quot;keyword control&quot;&gt;for&lt;&#x2f;span&gt; value &lt;span class=&quot;keyword control&quot;&gt;in&lt;&#x2f;span&gt; topLevelValues {
-    &lt;span class=&quot;keyword control&quot;&gt;switch&lt;&#x2f;span&gt; value {
-    &lt;span class=&quot;keyword control&quot;&gt;case&lt;&#x2f;span&gt; .&lt;span class=&quot;constant language enum&quot;&gt;error&lt;&#x2f;span&gt;(&lt;span class=&quot;keyword variable&quot;&gt;let&lt;&#x2f;span&gt; reason):
-        errors&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;append(reason)
-    &lt;span class=&quot;keyword control&quot;&gt;default&lt;&#x2f;span&gt;:
-        &lt;span class=&quot;keyword control&quot;&gt;do&lt;&#x2f;span&gt; {
+for value in topLevelValues {
+    switch value {
+    case .error(let reason):
+        errors.append(reason)
+    default:
+        do {
             evaluate(value)
-        } &lt;span class=&quot;keyword control&quot;&gt;catch&lt;&#x2f;span&gt; {
-            errors&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;append(error)
+        } catch {
+            errors.append(error)
         }
     }
 }
 
-&lt;span class=&quot;keyword control&quot;&gt;if&lt;&#x2f;span&gt; !errors&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;isEmpty {
-    &lt;span class=&quot;keyword control&quot;&gt;throw&lt;&#x2f;span&gt; &lt;span class=&quot;support class&quot;&gt;UserFacingError&lt;&#x2f;span&gt;(&lt;span class=&quot;variable parameter&quot;&gt;details&lt;&#x2f;span&gt;: errors)
+if !errors.isEmpty {
+    throw UserFacingError(details: errors)
 }
 
-&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; no error! parsing succeeded&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&#x2f;&#x2f; no error! parsing succeeded
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;This code &amp;quot;synchronizes&amp;quot; the errors from both the syntactical, and semantical level. With some
 additional effort to make the errors &lt;code&gt;CustomStringConvertible&lt;&#x2f;code&gt;, a erroneous TOML document such as&lt;&#x2f;p&gt;
-&lt;pre&gt;a = &quot;Hello
+&lt;pre&gt;&lt;code class=&quot;language-TOML&quot;&gt;a = &amp;quot;Hello
 b = 43
 [b]
-&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;makes the parser generate the following error message:&lt;&#x2f;p&gt;
 &lt;pre&gt;&lt;code&gt;Deserialization failure:
     * Value |1, 5| Missing closing character `&amp;quot;` in string

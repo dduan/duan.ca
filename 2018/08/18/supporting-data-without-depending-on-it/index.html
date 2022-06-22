@@ -34,19 +34,19 @@ Pathos, by accident, does not depend on Swift <code>Foundation</code>. Now what?
 <p>After browsing the <a href="https://developer.apple.com/documentation/foundation/data">documentation</a>, a pretty good solution emerged: <code>Data</code> is
 a sequence of bytes! Lets say we hand our users some bytes, they can easily
 construct a <code>Data</code> from it:</p>
-<pre><span class="source swift"><span class="keyword variable">let</span> <span class="variable parameter">content</span>: [<span class="support class">UInt8</span>] = <span class="keyword control">try</span> readBytes(fromPath <span class="string quoted double">&quot;/tmp/test&quot;</span>)
-<span class="support class">Data</span>(<span class="variable parameter">bytes</span>: content)
-</span></pre>
+<pre><code class="language-swift">let content: [UInt8] = try readBytes(fromPath &quot;/tmp/test&quot;)
+Data(bytes: content)
+</code></pre>
 <p>Okay, so this built-in initializer makes <code>[UInt8]</code> an acceptable substitute for
 returning <code>Data</code>. What can we do about about <code>Data</code> as input? Well, turns out,
 <code>Data</code> is a <code>Collection</code> of <code>UInt8</code>s! So we can accept <code>Data</code> indirectly like
 so:</p>
-<pre><span class="source swift"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">write</span></span><span class="keyword operator">&lt;</span><span class="support class">Bytes</span><span class="keyword operator">&gt;</span>(<span class="constant language other">_</span> <span class="variable parameter">bytes</span>: <span class="support class">Bytes</span>)
-    <span class="keyword control">where</span> <span class="support class">Bytes</span>: <span class="support class">Collection</span>, <span class="support class">Bytes</span><span class="keyword operator">.</span><span class="support class">Element</span> == <span class="support class">UInt8</span>
+<pre><code class="language-swift">func write&lt;Bytes&gt;(_ bytes: Bytes)
+    where Bytes: Collection, Bytes.Element == UInt8
 {
-    <span class="comment line"><span class="punctuation definition comment">//</span> blah</span>
+    // blah
 }
-</span></pre>
+</code></pre>
 <p>User can pass in a <code>Data</code> as argument and it just works™.</p>
 <p>The only disadvantage of supporting <code>Data</code> in these ways is that it requires
 your user to discover it either via your excellent documentation, or through

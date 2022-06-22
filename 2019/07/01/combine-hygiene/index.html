@@ -49,22 +49,22 @@ over <code>var</code>.</p>
 <p>Most of the time, what you want to share is the values pumped into the stream,
 not the privilage to mutate it. Because Subjects conform to <code>Publisher</code>, it's
 easy to hide from the users the fact that your stream is backed by them.</p>
-<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> Bad: now anyone who get a hold of it can mess with your stream!</span>
-<span class="storage modifier">public</span> <span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">GreatInts</span></span></span> {
-    <span class="storage modifier">public</span> <span class="keyword variable">var</span> updates = <span class="support class">CurrentValueSubject</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span>(<span class="constant numeric decimal">0</span>)
+<pre><code class="language-swift">// Bad: now anyone who get a hold of it can mess with your stream!
+public enum GreatInts {
+    public var updates = CurrentValueSubject&lt;Int, Never&gt;(0)
 }
-</span></pre>
+</code></pre>
 <p>With Combine this conversion happens via type-erasure:</p>
-<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> Better: all your users care is the stream (publisher), so give them that!</span>
-<span class="storage modifier">public</span> <span class="entity name type"><span class="keyword entity">enum</span> <span class="entity name type"><span class="support class">GreatInts</span></span></span> {
-    <span class="comment line"><span class="punctuation definition comment">//</span> Internally, it&#39;s backed by a subject.</span>
-    <span class="keyword variable">var</span> subject = <span class="support class">CurrentValueSubject</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span>(<span class="constant numeric decimal">0</span>)
-    <span class="comment line"><span class="punctuation definition comment">//</span> Externally, it&#39;s just a Publisher. </span>
-    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">subject</span>: <span class="support class">AnyPublisher</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span> {
-        subject<span class="keyword operator">.</span>eraseToAnyPublisher()
+<pre><code class="language-swift">// Better: all your users care is the stream (publisher), so give them that!
+public enum GreatInts {
+    // Internally, it's backed by a subject.
+    var subject = CurrentValueSubject&lt;Int, Never&gt;(0)
+    // Externally, it's just a Publisher. 
+    public var subject: AnyPublisher&lt;Int, Never&gt; {
+        subject.eraseToAnyPublisher()
     }
 }
-</span></pre>
+</code></pre>
 <h2>CurrentValueSubject natually caches the latest value</h2>
 <p>RX theorists will hate this: sometimes it's just practical to expose
 a synchronous interface to the latest vaule in the stream!</p>
@@ -75,63 +75,63 @@ a synchronous interface to the latest vaule in the stream!</p>
 A separate interface dedicated to the latest value prevents people from
 polluting your stream.</li>
 </ol>
-<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> (Still) bad</span>
-<span class="storage modifier">public</span> <span class="storage modifier">final</span> <span class="entity name type"><span class="keyword entity">class</span> <span class="entity name type"><span class="support class">GreatInts</span></span></span> {
-    <span class="storage modifier">public</span> <span class="keyword variable">var</span> updates = <span class="support class">CurrentValueSubject</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span>(<span class="constant numeric decimal">0</span>)
+<pre><code class="language-swift">// (Still) bad
+public final class GreatInts {
+    public var updates = CurrentValueSubject&lt;Int, Never&gt;(0)
 }
-</span></pre>
+</code></pre>
 <ol start="2">
 <li>Remember <code>CurrentValueSubject</code> has that <code>.value</code> property! It may seem
 surprising, but I've seen folks transitioning to RX clinging to the old ways:</li>
 </ol>
-<pre><span class="source swift"><span class="storage modifier">public</span> <span class="storage modifier">final</span> <span class="entity name type"><span class="keyword entity">class</span> <span class="entity name type"><span class="support class">GreatInts</span></span></span> {
-    <span class="comment line"><span class="punctuation definition comment">//</span> well, at least it&#39;s not a public subject...</span>
-    <span class="keyword variable">var</span> subject = <span class="support class">CurrentValueSubject</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span>(<span class="constant numeric decimal">0</span>) <span class="comment line"><span class="punctuation definition comment">//</span> &lt;- initial value 0</span>
-    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">updates</span>: <span class="support class">AnyPublisher</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span> {
-        subject<span class="keyword operator">.</span>eraseToAnyPublisher()
+<pre><code class="language-swift">public final class GreatInts {
+    // well, at least it's not a public subject...
+    var subject = CurrentValueSubject&lt;Int, Never&gt;(0) // &lt;- initial value 0
+    public var updates: AnyPublisher&lt;Int, Never&gt; {
+        subject.eraseToAnyPublisher()
     }
 
-    <span class="comment line"><span class="punctuation definition comment">//</span> Wait, there&#39;s that 0 again</span>
-    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">latest</span>: <span class="support class">Int</span> = <span class="constant numeric decimal">0</span> {
-        <span class="keyword control">didSet</span> {
-            subject<span class="keyword operator">.</span>send(latest) <span class="comment line"><span class="punctuation definition comment">//</span> ?</span>
+    // Wait, there's that 0 again
+    public var latest: Int = 0 {
+        didSet {
+            subject.send(latest) // ?
         }
     }
 }
-</span></pre>
+</code></pre>
 <p>First, you'll notice that <code>0</code>, the initial value, is duplicated as both the
 subject's initial value, as well as the value of a stored property. And these
 duplicated sources of truth persist throughout the parent's life time. Weird,
 right?</p>
 <p>Here's a slightly better version:</p>
-<pre><span class="source swift"><span class="storage modifier">public</span> <span class="storage modifier">final</span> <span class="entity name type"><span class="keyword entity">class</span> <span class="entity name type"><span class="support class">GreatInts</span></span></span> {
-    <span class="keyword variable">var</span> subject = <span class="support class">PassthroughSubject</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span>()
-    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">updates</span>: <span class="support class">AnyPublisher</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span> {
-        subject<span class="keyword operator">.</span>eraseToAnyPublisher()
+<pre><code class="language-swift">public final class GreatInts {
+    var subject = PassthroughSubject&lt;Int, Never&gt;()
+    public var updates: AnyPublisher&lt;Int, Never&gt; {
+        subject.eraseToAnyPublisher()
     }
 
-    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">latest</span>: <span class="support class">Int</span> = <span class="constant numeric decimal">0</span> {
-        <span class="keyword control">didSet</span> {
-            subject<span class="keyword operator">.</span>send(latest) <span class="comment line"><span class="punctuation definition comment">//</span> ?</span>
+    public var latest: Int = 0 {
+        didSet {
+            subject.send(latest) // ?
         }
     }
 }
-</span></pre>
+</code></pre>
 <p>Now there's no two copy of the latest value in memory anymore. But in my opinion
 it does not embrace the full power of Combine. Here's the most natual way to do
 this:</p>
-<pre><span class="source swift"><span class="storage modifier">public</span> <span class="storage modifier">final</span> <span class="entity name type"><span class="keyword entity">class</span> <span class="entity name type"><span class="support class">GreatInts</span></span></span> {
-    <span class="comment line"><span class="punctuation definition comment">///</span> This is a CurrentValueSubject again.</span>
-    <span class="keyword variable">var</span> subject = <span class="support class">CurrentValueSubject</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span>(<span class="constant numeric decimal">0</span>)
-    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">updates</span>: <span class="support class">AnyPublisher</span><span class="keyword operator">&lt;</span><span class="support class">Int</span>, <span class="support class">Never</span><span class="keyword operator">&gt;</span> {
-        subject<span class="keyword operator">.</span>eraseToAnyPublisher()
+<pre><code class="language-swift">public final class GreatInts {
+    /// This is a CurrentValueSubject again.
+    var subject = CurrentValueSubject&lt;Int, Never&gt;(0)
+    public var updates: AnyPublisher&lt;Int, Never&gt; {
+        subject.eraseToAnyPublisher()
     }
 
-    <span class="storage modifier">public</span> <span class="keyword variable">var</span> <span class="variable parameter">latest</span>: <span class="support class">Int</span> {
-        subject<span class="keyword operator">.</span>value
+    public var latest: Int {
+        subject.value
     }
 }
-</span></pre>
+</code></pre>
 <p>Essentially, you create separate public interface, each vends a little piece of
 <code>CurrentValueSubject</code>'s power.</p>
 <h2>No really, don't use <code>Subject</code>s</h2>

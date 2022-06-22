@@ -58,10 +58,10 @@ actually supports ANSI codes pretty well). This is our lowest common API
 denominator, which ultimately dictated the design of Dye.</p>
 <p>Dye's API is centered around Swift's built-in protocol <code>TextOutputStream</code>. You
 create a stream object and mutate the style need for upcoming output:</p>
-<pre><span class="source swift"><span class="keyword variable">let</span> output = <span class="support class">OutputStream</span><span class="keyword operator">.</span>standardOutput()
-output<span class="keyword operator">.</span>color<span class="keyword operator">.</span>foreground = .<span class="constant language enum">blue</span>
-print(<span class="string quoted double">&quot;blue text&quot;</span>, to &amp;stream) <span class="comment line"><span class="punctuation definition comment">//</span> blue text is blue</span>
-</span></pre>
+<pre><code class="language-swift">let output = OutputStream.standardOutput()
+output.color.foreground = .blue
+print(&quot;blue text&quot;, to &amp;stream) // blue text is blue
+</code></pre>
 <p>If the stream is redirected to something other than the terminal, styling gets
 automatically disabled. There are various options to customize this behavior.</p>
 <p>Take a look at this <a href="https://github.com/dduan/Dye/blob/master/Examples/main.swift">sample app</a> to get a more concrete picture of

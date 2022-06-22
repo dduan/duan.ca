@@ -48,46 +48,46 @@ business logic that I'm not familiar with. So things took a while to become
 clear. What felt like a long time later, I realized my mistake.</p>
 <p>(I'm sorry if this has been obvious to you. You are a better Swift programmer!)</p>
 <p>Somewhere in project <code>B</code> is the following:</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">Item</span></span></span> {
-    <span class="keyword variable">let</span> <span class="variable parameter">range</span>: <span class="support class">Range</span><span class="keyword operator">&lt;</span><span class="support class">Date</span><span class="keyword operator">&gt;</span>
+<pre><code class="language-swift">struct Item {
+    let range: Range&lt;Date&gt;
 }
 
-<span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">Container</span></span></span> {
-    <span class="keyword variable">let</span> <span class="variable parameter">items</span>: [<span class="support class">Item</span>]
+struct Container {
+    let items: [Item]
 }
 
-<span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">containerFactory</span></span>(<span class="variable parameter">range</span>: <span class="support class">Range</span><span class="keyword operator">&lt;</span><span class="support class">Date</span><span class="keyword operator">&gt;</span>, <span class="variable parameter">items</span>: [<span class="support class">Item</span>])</span></span> -&gt; <span class="support class">Container</span> {
-    <span class="comment line"><span class="punctuation definition comment">///</span> pretend there&#39;s more code here</span>
+func containerFactory(range: Range&lt;Date&gt;, items: [Item]) -&gt; Container {
+    /// pretend there's more code here
 
-    <span class="keyword control">return</span> <span class="support class">Conatiner</span>(<span class="variable parameter">items</span>: items<span class="keyword operator">.</span>filter { $<span class="constant numeric decimal">0</span><span class="keyword operator">.</span>range<span class="keyword operator">.</span>contains(range<span class="keyword operator">.</span>lowerBound) })
+    return Conatiner(items: items.filter { $0.range.contains(range.lowerBound) })
 }
-</span></pre>
+</code></pre>
 <p>And of course, after my &quot;refactor&quot;, it became</p>
-<pre><span class="source swift"><span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">Item</span></span></span> {
-    <span class="keyword variable">let</span> <span class="variable parameter">range</span>: <span class="support class">DateInterval</span>
+<pre><code class="language-swift">struct Item {
+    let range: DateInterval
 }
 
-<span class="entity name type"><span class="keyword entity">struct</span> <span class="entity name type"><span class="support class">Container</span></span></span> {
-    <span class="keyword variable">let</span> <span class="variable parameter">items</span>: [<span class="support class">Item</span>]
+struct Container {
+    let items: [Item]
 }
 
-<span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">containerFactory</span></span>(<span class="variable parameter">range</span>: <span class="support class">DateInterval</span>, <span class="variable parameter">items</span>: [<span class="support class">Item</span>])</span></span> -&gt; <span class="support class">Container</span> {
-    <span class="comment line"><span class="punctuation definition comment">///</span> pretend there&#39;s more code here</span>
+func containerFactory(range: DateInterval, items: [Item]) -&gt; Container {
+    /// pretend there's more code here
 
-    <span class="keyword control">return</span> <span class="support class">Conatiner</span>(<span class="variable parameter">items</span>: items<span class="keyword operator">.</span>filter { $<span class="constant numeric decimal">0</span><span class="keyword operator">.</span>range<span class="keyword operator">.</span>contains(range<span class="keyword operator">.</span>start) })
+    return Conatiner(items: items.filter { $0.range.contains(range.start) })
 }
-</span></pre>
+</code></pre>
 <p>Tests for <code>containerFactory</code> failed. And here's why: <strong><code>DateInterval.contains</code>
 is inclusive for its upper bound (<code>.end</code>), whereas <code>Range.contains</code> isn't!</strong> You
 can see it plainly by running the following</p>
-<pre><span class="source swift"><span class="keyword other import">import</span> <span class="support class">Foundation</span>
+<pre><code class="language-swift">import Foundation
 
-<span class="keyword variable">let</span> sooner = <span class="support class">Date</span>(<span class="variable parameter">timeIntervalSince1970</span>: <span class="constant numeric decimal">0</span>)
-<span class="keyword variable">let</span> later = sooner<span class="keyword operator">.</span>addingTimeInterval(<span class="constant numeric decimal">1000</span>)
+let sooner = Date(timeIntervalSince1970: 0)
+let later = sooner.addingTimeInterval(1000)
 
-<span class="support class">DateInterval</span>(<span class="variable parameter">start</span>: sooner, <span class="variable parameter">end</span>: later)<span class="keyword operator">.</span>contains(later) <span class="comment line"><span class="punctuation definition comment">//</span> true</span>
-(sooner<span class="keyword operator">..&lt;</span>later)<span class="keyword operator">.</span>contains(later)                        <span class="comment line"><span class="punctuation definition comment">//</span> false</span>
-</span></pre>
+DateInterval(start: sooner, end: later).contains(later) // true
+(sooner..&lt;later).contains(later)                        // false
+</code></pre>
 <p>So here's what stumped me:</p>
 <ol>
 <li>

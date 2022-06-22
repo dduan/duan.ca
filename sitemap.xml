@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2022/06/22/control/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2022/05/20/pro-science-yet-anti-research/</loc>
     </url>
     <url>
@@ -548,6 +551,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/censorship/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/culture/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/culture/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/flake/</loc>

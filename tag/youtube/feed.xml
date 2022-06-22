@@ -35,9 +35,7 @@ such a streaming n00b and messed up a few streams. Hilarious.&lt;&#x2f;p&gt;
             <item>
                 <title>Unix File Permissions In Swift</title>
                 <description>&lt;p&gt;Wrap file permissions from &lt;code&gt;stat&lt;&#x2f;code&gt; and &lt;code&gt;chmod&lt;&#x2f;code&gt; in an &lt;code&gt;OptionSet&lt;&#x2f;code&gt; in Swift.&lt;&#x2f;p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;1ZrouR_F-AU&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+&lt;!-- raw HTML omitted --&gt;
 </description>
                 <pubDate>Sun, 06 May 2018 16:43:20 -0700</pubDate>
                 <link>https://duan.ca/2018/05/06/unix-file-permissions-in-swift/</link>
@@ -47,9 +45,7 @@ such a streaming n00b and messed up a few streams. Hilarious.&lt;&#x2f;p&gt;
                 <title>An Interpreter Without A Language</title>
                 <description>&lt;p&gt;From the &lt;a href=&quot;&#x2f;2018&#x2f;01&#x2f;13&#x2f;coding-without-a-language&#x2f;&quot;&gt;AST&lt;&#x2f;a&gt; and &lt;a href=&quot;&#x2f;2018&#x2f;01&#x2f;20&#x2f;scopes&#x2f;&quot;&gt;scopes&lt;&#x2f;a&gt;, come a simple interpreter. This intepreter can &amp;quot;execute&amp;quot; the fibonacci
 function AST and produce a correct results.&lt;&#x2f;p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;C16PD44qyOY&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+&lt;!-- raw HTML omitted --&gt;
 </description>
                 <pubDate>Tue, 30 Jan 2018 12:53:38 -0800</pubDate>
                 <link>https://duan.ca/2018/01/30/an-interpreter-without-a-language/</link>
@@ -58,9 +54,7 @@ function AST and produce a correct results.&lt;&#x2f;p&gt;
             <item>
                 <title>Scopes Without A Language</title>
                 <description>&lt;p&gt;A short video on the concept of static scope.&lt;&#x2f;p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;o0jwyd8nUK4&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+&lt;!-- raw HTML omitted --&gt;
 </description>
                 <pubDate>Sat, 20 Jan 2018 19:50:24 -0800</pubDate>
                 <link>https://duan.ca/2018/01/20/scopes/</link>
@@ -70,9 +64,7 @@ function AST and produce a correct results.&lt;&#x2f;p&gt;
                 <title>Scripting A &#x27;cat&#x27; Under 1 Minute</title>
                 <description>&lt;p&gt;This video demonstrates a few things: the &lt;code&gt;readLine&lt;&#x2f;code&gt; standard library function, scripting with Swift, and
 pattern matching as loop conditions. Enjoy!&lt;&#x2f;p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;8rAqzvChbak&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+&lt;!-- raw HTML omitted --&gt;
 </description>
                 <pubDate>Sat, 06 Jan 2018 18:34:39 -0800</pubDate>
                 <link>https://duan.ca/2018/01/06/cat-under-1-minute/</link>
@@ -85,10 +77,8 @@ around the time of this post and finally found enough tutorials, examples, and
 working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (&lt;em&gt;this article includes all the same information and
 more, so just read on if you don&#x27;t have 15 minutes for YouTube&lt;&#x2f;em&gt;).&lt;&#x2f;p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;yEYtwmI7bDg&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
-&lt;br&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;h2&gt;Our goal:&lt;&#x2f;h2&gt;
 &lt;ol&gt;
 &lt;li&gt;Use as much built-in tools on a Mac as possible. The web development
@@ -121,44 +111,44 @@ WebAssembly, which is in the form of S-expressions. So&lt;&#x2f;p&gt;
 &lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;…will compile your WebAssembly module in &lt;code&gt;main.wat&lt;&#x2f;code&gt; to generate &lt;code&gt;main.wasm&lt;&#x2f;code&gt;, the
 binary file. For now, &lt;code&gt;main.wat&lt;&#x2f;code&gt; can be the simplest WebAssembly program:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source lisp&quot;&gt;&lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;module&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(module)
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Running the binary in a browser demands the bulk of the work. First, we&#x27;ll need
 a web page. It doesn&#x27;t need any content other than invoking some JavaScript
 code.&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;text html basic&quot;&gt;&lt;span class=&quot;meta tag sgml html&quot;&gt;&lt;span class=&quot;punctuation definition tag html&quot;&gt;&amp;lt;!&lt;&#x2f;span&gt;&lt;span class=&quot;meta tag sgml doctype html&quot;&gt;&lt;span class=&quot;entity name tag doctype html&quot;&gt;DOCTYPE&lt;&#x2f;span&gt; html&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-&lt;span class=&quot;meta tag structure any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag structure any html&quot;&gt;html&lt;&#x2f;span&gt; &lt;span class=&quot;meta attribute-with-value html&quot;&gt;&lt;span class=&quot;entity other attribute-name html&quot;&gt;lang&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator key-value html&quot;&gt;=&lt;&#x2f;span&gt;&lt;span class=&quot;string quoted double html&quot;&gt;&lt;span class=&quot;punctuation definition string begin html&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;en&lt;span class=&quot;punctuation definition string end html&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-&lt;span class=&quot;meta tag structure any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag structure any html&quot;&gt;head&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-    &lt;span class=&quot;meta tag inline any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag inline any html&quot;&gt;meta&lt;&#x2f;span&gt; &lt;span class=&quot;meta attribute-with-value html&quot;&gt;&lt;span class=&quot;entity other attribute-name html&quot;&gt;charset&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator key-value html&quot;&gt;=&lt;&#x2f;span&gt;&lt;span class=&quot;string quoted double html&quot;&gt;&lt;span class=&quot;punctuation definition string begin html&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;UTF-8&lt;span class=&quot;punctuation definition string end html&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-    &lt;span class=&quot;meta tag inline any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag inline any html&quot;&gt;title&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta tag inline any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag inline any html&quot;&gt;title&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-&lt;span class=&quot;meta tag structure any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag structure any html&quot;&gt;head&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-&lt;span class=&quot;meta tag structure any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag structure any html&quot;&gt;body&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-    &lt;span class=&quot;comment block html&quot;&gt;&lt;span class=&quot;punctuation definition comment begin html&quot;&gt;&amp;lt;!--&lt;&#x2f;span&gt; The only thing that matters is the following line,
-    although having a valid HTML5 page is nice. &lt;span class=&quot;punctuation definition comment end html&quot;&gt;--&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-    &lt;span class=&quot;meta tag script begin html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag script html&quot;&gt;script&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta tag script begin html&quot;&gt; &lt;span class=&quot;meta attribute-with-value html&quot;&gt;&lt;span class=&quot;entity other attribute-name html&quot;&gt;src&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation separator key-value html&quot;&gt;=&lt;&#x2f;span&gt;&lt;span class=&quot;string quoted double html&quot;&gt;&lt;span class=&quot;punctuation definition string begin html&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;play.js&lt;span class=&quot;punctuation definition string end html&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta tag script end html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag script html&quot;&gt;script&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-&lt;span class=&quot;meta tag structure any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag structure any html&quot;&gt;body&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-&lt;span class=&quot;meta tag structure any html&quot;&gt;&lt;span class=&quot;punctuation definition tag begin html&quot;&gt;&amp;lt;&#x2f;&lt;&#x2f;span&gt;&lt;span class=&quot;entity name tag structure any html&quot;&gt;html&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition tag end html&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
+&amp;lt;head&amp;gt;
+    &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
+    &amp;lt;title&amp;gt;&amp;lt;&#x2f;title&amp;gt;
+&amp;lt;&#x2f;head&amp;gt;
+&amp;lt;body&amp;gt;
+    &amp;lt;!-- The only thing that matters is the following line,
+    although having a valid HTML5 page is nice. --&amp;gt;
+    &amp;lt;script src=&amp;quot;play.js&amp;quot;&amp;gt;&amp;lt;&#x2f;script&amp;gt;
+&amp;lt;&#x2f;body&amp;gt;
+&amp;lt;&#x2f;html&amp;gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;First, the Javascript logic needs to &lt;em&gt;fetch and instantiate the compiled
 WebAssembly module&lt;&#x2f;em&gt;. Since this is not a JS or WebAssembly tutorial, I&#x27;ll point
 you to the docmuntation for &lt;a href=&quot;https:&#x2f;&#x2f;developer.mozilla.org&#x2f;en-US&#x2f;docs&#x2f;Web&#x2f;API&#x2f;Fetch_API&quot;&gt;Fetch API&lt;&#x2f;a&gt;, &lt;a href=&quot;https:&#x2f;&#x2f;developer.mozilla.org&#x2f;en-US&#x2f;docs&#x2f;Web&#x2f;JavaScript&#x2f;Reference&#x2f;Global_Objects&#x2f;Promise&quot;&gt;Promises&lt;&#x2f;a&gt;, and &lt;a href=&quot;https:&#x2f;&#x2f;developer.mozilla.org&#x2f;en-US&#x2f;docs&#x2f;Web&#x2f;JavaScript&#x2f;Reference&#x2f;Global_Objects&#x2f;WebAssembly&quot;&gt;the WebAssembly
 object&lt;&#x2f;a&gt; for details:&lt;&#x2f;p&gt;
-&lt;pre&gt;fetch(&quot;main.wasm&quot;).then(reponse =&gt;
+&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;fetch(&amp;quot;main.wasm&amp;quot;).then(reponse =&amp;gt;
     reponse.arrayBuffer()
-).then(bytes =&gt;
+).then(bytes =&amp;gt;
     WebAssembly.instantiate(bytes, {})
-).then(result =&gt;
+).then(result =&amp;gt;
     result.instance
 ).then(main);
 
-&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;This snippet fetches &lt;code&gt;main.wasm&lt;&#x2f;code&gt; (adjust this URL according to your choosing),
 instantiate it, then pass it into a function named &lt;code&gt;main&lt;&#x2f;code&gt;, we can put
 a placeholder logic for it for now:&lt;&#x2f;p&gt;
-&lt;pre&gt;function main(wasm) {
+&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;function main(wasm) {
     console.log(wasm);
 }
-&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Before we move on, you&#x27;ll find that simply opending your HTML file in browser
 and looking at developer console won&#x27;t work. Safari would complain about
 cross-domain request error for &lt;code&gt;fetch&lt;&#x2f;code&gt;. So we need to serve these resources
@@ -175,32 +165,32 @@ re-compile &lt;code&gt;main.wat&lt;&#x2f;code&gt; with &lt;code&gt;wat2wasm&lt;&
 browser.&lt;&#x2f;p&gt;
 &lt;h2&gt;An Actual &amp;quot;Hello, World!&amp;quot; Implementation&lt;&#x2f;h2&gt;
 &lt;p&gt;This is my implementation:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source lisp&quot;&gt;&lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;module
-  &lt;span class=&quot;comment line semicolon lisp&quot;&gt;&lt;span class=&quot;punctuation definition comment lisp&quot;&gt;;&lt;&#x2f;span&gt;; Allocate a page of linear memory (64kb). Export it as &amp;quot;memory&amp;quot;&lt;&#x2f;span&gt;
-  &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;memory &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;&lt;span class=&quot;support function lisp&quot;&gt;export&lt;&#x2f;span&gt; &lt;span class=&quot;string quoted double lisp&quot;&gt;&lt;span class=&quot;punctuation definition string begin lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;memory&lt;span class=&quot;punctuation definition string end lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;constant numeric lisp&quot;&gt;1&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
+&lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(module
+  ;; Allocate a page of linear memory (64kb). Export it as &amp;quot;memory&amp;quot;
+  (memory (export &amp;quot;memory&amp;quot;) 1)
 
-  &lt;span class=&quot;comment line semicolon lisp&quot;&gt;&lt;span class=&quot;punctuation definition comment lisp&quot;&gt;;&lt;&#x2f;span&gt;; Write the string at the start of the linear memory.&lt;&#x2f;span&gt;
-  &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;data &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;i32.const &lt;span class=&quot;constant numeric lisp&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;string quoted double lisp&quot;&gt;&lt;span class=&quot;punctuation definition string begin lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;Hello, world!&lt;span class=&quot;punctuation definition string end lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; &lt;span class=&quot;comment line semicolon lisp&quot;&gt;&lt;span class=&quot;punctuation definition comment lisp&quot;&gt;;&lt;&#x2f;span&gt;; write string at location 0&lt;&#x2f;span&gt;
+  ;; Write the string at the start of the linear memory.
+  (data (i32.const 0) &amp;quot;Hello, world!&amp;quot;) ;; write string at location 0
 
-  &lt;span class=&quot;comment line semicolon lisp&quot;&gt;&lt;span class=&quot;punctuation definition comment lisp&quot;&gt;;&lt;&#x2f;span&gt;; Export the position and length of the string.&lt;&#x2f;span&gt;
-  &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;global &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;&lt;span class=&quot;support function lisp&quot;&gt;export&lt;&#x2f;span&gt; &lt;span class=&quot;string quoted double lisp&quot;&gt;&lt;span class=&quot;punctuation definition string begin lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;length&lt;span class=&quot;punctuation definition string end lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; i32 &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;i32.const &lt;span class=&quot;constant numeric lisp&quot;&gt;12&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-  &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;global &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;&lt;span class=&quot;support function lisp&quot;&gt;export&lt;&#x2f;span&gt; &lt;span class=&quot;string quoted double lisp&quot;&gt;&lt;span class=&quot;punctuation definition string begin lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;position&lt;span class=&quot;punctuation definition string end lisp&quot;&gt;&amp;quot;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; i32 &lt;span class=&quot;meta group lisp&quot;&gt;&lt;span class=&quot;punctuation definition group begin lisp&quot;&gt;(&lt;&#x2f;span&gt;i32.const &lt;span class=&quot;constant numeric lisp&quot;&gt;0&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;punctuation definition group end lisp&quot;&gt;)&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+  ;; Export the position and length of the string.
+  (global (export &amp;quot;length&amp;quot;) i32 (i32.const 12))
+  (global (export &amp;quot;position&amp;quot;) i32 (i32.const 0)))
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;In other words, we expose information of the linear memory we manipulated to the
 JavaScript environment. Things that has been &lt;code&gt;export&lt;&#x2f;code&gt;ed will show up as
 properties of &lt;code&gt;exports&lt;&#x2f;code&gt; of the &lt;code&gt;WebAssembly&lt;&#x2f;code&gt; instance. We can access them in the
 &lt;code&gt;main&lt;&#x2f;code&gt; JavaScript functions:&lt;&#x2f;p&gt;
-&lt;pre&gt;function main(wasm) {
+&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;function main(wasm) {
     const memory   = wasm.exports.memory;
     const length   = wasm.exports.length;
     const position = wasm.exports.position;
     ...
 }
-&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Then it&#x27;s just plain-old Javascript (tho I had to steal it from tutorials).
 &lt;code&gt;memory.buffer&lt;&#x2f;code&gt; is of type &lt;a href=&quot;https:&#x2f;&#x2f;developer.mozilla.org&#x2f;en-US&#x2f;docs&#x2f;Web&#x2f;JavaScript&#x2f;Reference&#x2f;Global_Objects&#x2f;ArrayBuffer&quot;&gt;ArrayBuffer&lt;&#x2f;a&gt;. We need to convert it into a string
 and log it to the console:&lt;&#x2f;p&gt;
-&lt;pre&gt;function main(wasm) {
+&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;function main(wasm) {
     const memory   = wasm.exports.memory;
     const length   = wasm.exports.length;
     const position = wasm.exports.position;
@@ -210,16 +200,16 @@ and log it to the console:&lt;&#x2f;p&gt;
 
     console.log(s);
 }
-&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Et, voilà! &lt;code&gt;Hello, World!&lt;&#x2f;code&gt; hot off a Web Assembly module in your developer
 console. To conclude, I personally like to use a &lt;code&gt;Makefile&lt;&#x2f;code&gt; to streamline some
 of the typing. Here&#x27;s what I used for this demo:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source makefile&quot;&gt;&lt;span class=&quot;meta function makefile&quot;&gt;&lt;span class=&quot;entity name function makefile&quot;&gt;compile&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator assignment makefile&quot;&gt;:&lt;&#x2f;span&gt;&lt;span class=&quot;meta function arguments makefile&quot;&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta function body makefile&quot;&gt;
-&lt;&#x2f;span&gt;&lt;span class=&quot;meta function body makefile&quot;&gt;	&lt;span class=&quot;source shell&quot;&gt;&lt;span class=&quot;meta function-call shell&quot;&gt;&lt;span class=&quot;variable function shell&quot;&gt;wat2wasm&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta function-call arguments shell&quot;&gt; main.wat&lt;span class=&quot;variable parameter option shell&quot;&gt;&lt;span class=&quot;punctuation definition parameter shell&quot;&gt; -&lt;&#x2f;span&gt;o&lt;&#x2f;span&gt; main.wasm&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;
-&lt;span class=&quot;meta function makefile&quot;&gt;&lt;span class=&quot;entity name function makefile&quot;&gt;serve&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator assignment makefile&quot;&gt;:&lt;&#x2f;span&gt;&lt;span class=&quot;meta function arguments makefile&quot;&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta function body makefile&quot;&gt;
-&lt;&#x2f;span&gt;&lt;span class=&quot;meta function body makefile&quot;&gt;	&lt;span class=&quot;source shell&quot;&gt;&lt;span class=&quot;meta function-call shell&quot;&gt;&lt;span class=&quot;variable function shell&quot;&gt;python&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;span class=&quot;meta function-call arguments shell&quot;&gt;&lt;span class=&quot;variable parameter option shell&quot;&gt;&lt;span class=&quot;punctuation definition parameter shell&quot;&gt; -&lt;&#x2f;span&gt;m&lt;&#x2f;span&gt; SimpleHTTPServer&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-makefile&quot;&gt;compile:
+	wat2wasm main.wat -o main.wasm
+
+serve:
+	python -m SimpleHTTPServer
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;h2&gt;Conclusion&lt;&#x2f;h2&gt;
 &lt;p&gt;No fancy schmancy Javascript build stack, no 3rd-party code dependency. Write
 code, compile, run on your (virtual, in browser) machine, repeat. That sounds like
@@ -234,9 +224,7 @@ code, compile, run on your (virtual, in browser) machine, repeat. That sounds li
                 <description>&lt;p&gt;I guess I&#x27;m starting a series of minute-long videos. In this first video, I built &lt;code&gt;pwd&lt;&#x2f;code&gt; out of &lt;code&gt;getcwd&lt;&#x2f;code&gt;. The
 code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift&#x27;s great C-interop
 capability.&lt;&#x2f;p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Some details are lost in this video, however. For example, the POSIX standard actually says &lt;code&gt;getcwd&lt;&#x2f;code&gt;&#x27;s 2nd
 argument being &lt;code&gt;0&lt;&#x2f;code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
 memory as needed). Swift&#x27;s handling of &lt;code&gt;char *&lt;&#x2f;code&gt; aka &lt;code&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;&#x2f;code&gt; in context of a &lt;code&gt;var&lt;&#x2f;code&gt; array
@@ -249,9 +237,7 @@ is also very cool.&lt;&#x2f;p&gt;
             <item>
                 <title>Contributing To Open-Source Swift</title>
                 <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes, on YouTube.&lt;&#x2f;p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;ul&gt;
 &lt;li&gt;Pull request: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;swift-corelibs-foundation&#x2f;pull&#x2f;1376&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;swift-corelibs-foundation&#x2f;pull&#x2f;1376&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
 &lt;li&gt;SR-6647: &lt;a href=&quot;https:&#x2f;&#x2f;bugs.swift.org&#x2f;browse&#x2f;SR-6647&quot;&gt;https:&#x2f;&#x2f;bugs.swift.org&#x2f;browse&#x2f;SR-6647&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
@@ -269,9 +255,7 @@ completely separate.&lt;&#x2f;p&gt;
 &lt;p&gt;We added more standard library functionalities to BitArray (ExpressibleByArrayLiteral,
 CustomStringConvertible, Equatable, etc). Then, we added documentation and other open-source things left
 undone from &amp;quot;episode 2&amp;quot;.&lt;&#x2f;p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;ckrd_FoFMl0&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+&lt;!-- raw HTML omitted --&gt;
 </description>
                 <pubDate>Tue, 19 Dec 2017 12:17:49 -0800</pubDate>
                 <link>https://duan.ca/2017/12/19/bitarray-final-act/</link>
@@ -284,9 +268,7 @@ I created a framework that supports distribution via Swift Package Manager, Coco
 Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
 SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
 Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;&#x2f;p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
 the version tag, documentation generation, automatic Carthage binary generation, test coverage...&lt;&#x2f;p&gt;
 &lt;p&gt;Anyways, here&#x27;s some stuff mentioned in the video:&lt;&#x2f;p&gt;
@@ -309,9 +291,7 @@ the version tag, documentation generation, automatic Carthage binary generation,
                 <title>Let&#x27;s Build A BitArray In Swift</title>
                 <description>&lt;p&gt;In this video, I build a space-efficient BitArray that confirms to &lt;code&gt;RandomAccessCollection&lt;&#x2f;code&gt; in Swift in
 a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt;&#x2f;p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;-k_jrIoD56k&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;I guess I&#x27;m a YouTuber now. You can subscribe to my &lt;a href=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;channel&#x2f;UCkBVC0dMgyUnxzettP7qE-A&quot;&gt;channel&lt;&#x2f;a&gt; 😛.&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Tue, 12 Dec 2017 22:51:04 -0800</pubDate>

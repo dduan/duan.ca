@@ -71,7 +71,7 @@ the project I work on don't use flake as their package manager. With this approa
 setup for them each, and stay in the comfort of Nix and home-manager.</p>
 <p>direnv and nix-direnv can be configured together with home-manager. To achieve everything mentioned in this
 article, including direnv's shell integration (Fish, for me), it's as simple as</p>
-<pre># In home manager config...
+<pre><code class="language-Nix"># In home manager config...
 programs.direnv = {
   enable = true;
   nix-direnv = {
@@ -79,7 +79,7 @@ programs.direnv = {
     enableFlakes = true;
   };
 }
-</pre>
+</code></pre>
 <p>To recap, having the snippet above in my home-manager setup, I now can enter any project's root directory and
 add a <code>.envrc</code> file with the content <code>use flake ~/src/dotfiles/direnvs/python</code>.
 <code>~/src/dotfiles/direnvs/python</code> contains a <code>flake.nix</code> (and a <code>flake.lock</code>) that has the <code>devShell</code> value

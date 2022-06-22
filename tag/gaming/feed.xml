@@ -15,23 +15,8 @@ characters in these two games are both blob-y, short and colorful. This similari
 for a while, and I&#x27;m getting increasingly anxious because those who frequently play these games
 aren&#x27;t making similar remarks &lt;em&gt;at all&lt;&#x2f;em&gt;. So, in this Sunday evening, I just had to get it out of my
 head:&lt;&#x2f;p&gt;
-&lt;video id=&quot;video-tag&quot; width=&quot;100%&quot; autoplay muted loop playsinline&gt; 
-    &lt;source src=&quot;&#x2f;assets&#x2f;2020&#x2f;08&#x2f;FallGuysAmongUs.mov&quot; type=&quot;video&#x2f;quicktime&quot; &#x2f;&gt;  
-&lt;&#x2f;video&gt;
-&lt;img id=&quot;img-tag&quot; width=&quot;100%&quot; src=&quot;&#x2f;assets&#x2f;2020&#x2f;08&#x2f;FallGuysAmongUs.mov&quot;&gt;
-&lt;script type=&quot;text&#x2f;javascript&quot;&gt;
-    function BrowserDetection() {
-        &#x2f;&#x2f;Check if browser is Safari, if it is, hide the &lt;video&gt; tag, otherwise hide the &lt;img&gt; tag
-        if (navigator.userAgent.search(&quot;Safari&quot;) &gt;= 0 &amp;&amp; navigator.userAgent.search(&quot;Chrome&quot;) &lt; 0) {
-            document.getElementById(&#x27;video-tag&#x27;).style.display= &quot;none&quot;;
-        } else {
-            document.getElementById(&#x27;img-tag&#x27;).style.display= &quot;none&quot;;
-        }
-    }
-
-    &#x2f;&#x2f;And run the script. Note that the script tag needs to be run after HTML so where you place it is important. 
-    BrowserDetection();
-&lt;&#x2f;script&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;This animation is made from Pixelmator and Keynote. Those two along with Sketch and Final Cut Pro
 make me feel invincible these days.&lt;&#x2f;p&gt;
 </description>

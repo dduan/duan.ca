@@ -48,21 +48,21 @@ I'm streaming. It's kind of like writing a commit message, except the message
 describes what happened since the last &quot;commit&quot;. These messages, along with
 their associated timestamps, will be used by StreamLogger to generate the &quot;table
 of content&quot;. Using it in command line looks like this:</p>
-<pre><span class="source shell bash"><span class="comment line number-sign shell"><span class="punctuation definition comment begin shell">#</span></span><span class="comment line number-sign shell"> Turn on stream, maybe check signs of being live, etc. Then
+<pre><code class="language-bash"># Turn on stream, maybe check signs of being live, etc. Then
 slog start # start a new log
 
 # Do stuff, when it comes to a natural conclusion point...
-slog -- &#39;I did stuff&#39;
+slog -- 'I did stuff'
 
 # Do more stuff...
-slog -- &#39;some other stuff&#39;
+slog -- 'some other stuff'
 
 # Some time later... end stream
 # No action is required to end the stream as far as StreamLogger is concerned.
 
 # Now, to generate the table-of-content
 slog stamp -s 1:32
-</span></span></pre>
+</code></pre>
 <p>That last command outputs</p>
 <pre><code>0:01:32 I did stuff
 1:41:59 some other stuff

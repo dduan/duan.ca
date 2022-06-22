@@ -35,14 +35,14 @@ that deals with <a href="https://en.wikipedia.org/wiki/Cartesian_product">Cartes
 of evolution of lambda expressions, since it's much nicer to write one-liners with it in place of <code>map</code>s and
 <code>filter</code>s.</p>
 <p>Here's an example of an list comprehension in Haskell from Wikipedia:</p>
-<pre>a = [(x,y) | x <- [1..5], y <- [3..5]]
+<pre><code class="language-haskell">a = [(x,y) | x &lt;- [1..5], y &lt;- [3..5]]
 -- [(1,3),(1,4),(1,5),(2,3),(2,4) ...
-</pre>
+</code></pre>
 <p>In this example, a list of pair of integers is constructed from 2 lists of integers.</p>
 <p>Here is what that example would be in Python:</p>
-<pre>a = [(x, y) for x in range(1,6) for y in range(3, 6)]
+<pre><code class="language-python">a = [(x, y) for x in range(1,6) for y in range(3, 6)]
 # [(1, 3), (1, 4), (1, 5), (2, 3), (2, 4) ...
-</pre>
+</code></pre>
 <p>Here's what it would be in mathematics (except we are dealing with sets, not lists, but I'll only refer to
 lists from here on.):</p>
 <pre><code>Let (a, b) be an ordered list of elements
@@ -52,10 +52,10 @@ lists from here on.):</p>
 <p>One can filter out unwanted elements with predicates, and apply arbitrary functions to elements of the
 result. Let's say we only want even numbers from the first list, and we want the sum of x and y, continuing on
 our examples:</p>
-<pre>a = [x+y | x <- [1..5], y <- [3..5], x `mod` 2 == 0]
-</pre>
-<pre>a = [x + y for x in range(1,6) for y in range(3, 6) if x % 2 == 0]
-</pre>
+<pre><code class="language-haskell">a = [x+y | x &lt;- [1..5], y &lt;- [3..5], x `mod` 2 == 0]
+</code></pre>
+<pre><code class="language-python">a = [x + y for x in range(1,6) for y in range(3, 6) if x % 2 == 0]
+</code></pre>
 <pre><code>{x+y|x ∈ {1,2,3,4,5}, y ∈ {3,4,5}, x is even}
 </code></pre>
 <p>In theory, this syntax can be applied to an arbitrary number of lists. Putting aside how often this need comes
@@ -69,31 +69,31 @@ up in day-to-day programming in your domain, it should be obvious that it's alte
 <li>a function to process the combination of elements into results.</li>
 </ol>
 <p>In Swift, if our input is only one list, there's a pretty sweet way to achieve that:</p>
-<pre><span class="source swift">list<span class="keyword operator">.</span>filter(predicate)<span class="keyword operator">.</span>map(processor)
-</span></pre>
+<pre><code class="language-swift">list.filter(predicate).map(processor)
+</code></pre>
 <p>To make comprehension work with more lists, we have some syntax options.</p>
 <h3>Option One</h3>
 <p>The &quot;brute force&quot; option would be a function that parameterize all 3 parts of the comprehension. Such as</p>
-<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> going with order of appearance in Python/Haskell syntax</span>
-<span class="storage type function">func</span> <span class="entity name function"><span class="variable function">comprehension</span></span><span class="keyword operator">&lt;</span><span class="support class">Element</span>, <span class="support class">List</span>, <span class="support class">Result</span><span class="keyword operator">&gt;</span>(
-    <span class="variable parameter">predicate</span>: (<span class="support class">Element</span>) -&gt; <span class="support class">Bool</span>,
-    <span class="variable parameter">list</span>: <span class="support class">List</span>,
-    <span class="variable parameter">processor</span>: (<span class="support class">Element</span>) -&gt; <span class="support class">Result</span>
-) <span class="keyword control">where</span>
-    <span class="support class">List</span>: <span class="support class">Sequence</span>, <span class="support class">List</span><span class="keyword operator">.</span><span class="support class">Element</span> == <span class="support class">Element</span>
+<pre><code class="language-swift">// going with order of appearance in Python/Haskell syntax
+func comprehension&lt;Element, List, Result&gt;(
+    predicate: (Element) -&gt; Bool,
+    list: List,
+    processor: (Element) -&gt; Result
+) where
+    List: Sequence, List.Element == Element
 
 {
-    <span class="comment line"><span class="punctuation definition comment">//</span> implementation</span>
+    // implementation
 }
-</span></pre>
+</code></pre>
 <p>To supporting more than one list, just add more parameters to both types and the function itself.</p>
 <p>(Can't wait until we can have <a href="https://github.com/apple/swift/blob/master/docs/GenericsManifesto.md#variadic-generics">variadic generic parameters</a>!)</p>
 <h3>Option Two</h3>
 <p>Deploy more syntax tricks. Somehow make it visually similar to the math/Haskell/Python notation. If we can
 accept some temporary data structure and introduce/implement some operators, there'd be many possibilities.</p>
-<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">///</span> Just an example of the infinite possibilities.</span>
+<pre><code class="language-swift">/// Just an example of the infinite possibilities.
 processor | list0 &amp;&amp;&amp; list1 | predicate
-</span></pre>
+</code></pre>
 <p>I'll leave the implementation of this example as an exercise to the reader.</p>
 <h3>Option That I Like</h3>
 <p>I spent quite some time exploring the realm of possibilities in &quot;option two&quot;. However, introducing data
@@ -102,14 +102,14 @@ entirely clear that doing so would be &quot;Swift-y&quot; anyways! Eventually, I
 Swift, and requires no fancy syntax trickery.</p>
 <p>The result of list comprehension is a list. The goal of this operation is to <em>construct</em> a list. Yep, thinking
 along this line, it became obvious that using a &quot;list&quot;'s initializer is just natural:</p>
-<pre><span class="source swift"><span class="keyword variable">let</span> a = <span class="support class">Array</span>(<span class="constant numeric decimal">1</span><span class="keyword operator">..&lt;</span><span class="constant numeric decimal">5</span>, <span class="constant numeric decimal">3</span><span class="keyword operator">..&lt;</span><span class="constant numeric decimal">5</span>, <span class="keyword control">where</span>: { n, <span class="constant language other">_</span> <span class="keyword control">in</span> n % <span class="constant numeric decimal">2</span> == <span class="constant numeric decimal">0</span> }) { (<span class="keyword operator">$</span><span class="constant numeric decimal">0</span>, $<span class="constant numeric decimal">1</span>) }
-<span class="comment line"><span class="punctuation definition comment">//</span> [(2,3),(2,4),(2,5) ...</span>
-</span></pre>
+<pre><code class="language-swift">let a = Array(1..&lt;5, 3..&lt;5, where: { n, _ in n % 2 == 0 }) { ($0, $1) }
+// [(2,3),(2,4),(2,5) ...
+</code></pre>
 <p>The processing function is at the end to take advantage of the trailing closure syntax. It's nicer when
 there's not predicate:</p>
-<pre><span class="source swift"><span class="keyword variable">let</span> a = <span class="support class">Array</span>(<span class="constant numeric decimal">1</span><span class="keyword operator">..&lt;</span><span class="constant numeric decimal">5</span>, <span class="constant numeric decimal">3</span><span class="keyword operator">..&lt;</span><span class="constant numeric decimal">5</span>) { (<span class="keyword operator">$</span><span class="constant numeric decimal">0</span>, $<span class="constant numeric decimal">1</span>) }
-<span class="comment line"><span class="punctuation definition comment">//</span> [(1,3),(1,4),(1,5),(2,3),(2,4) ...</span>
-</span></pre>
+<pre><code class="language-swift">let a = Array(1..&lt;5, 3..&lt;5) { ($0, $1) }
+// [(1,3),(1,4),(1,5),(2,3),(2,4) ...
+</code></pre>
 <p>This syntax seems both succinct and Swift-y.</p>
 <p>I put an implementation on <a href="https://github.com/dduan/Comprehension">github</a>, in case you find it useful.</p>
 <h2>Parting Thoughts</h2>

@@ -16,13 +16,13 @@
 &lt;h2&gt;Introduction&lt;&#x2f;h2&gt;
 &lt;p&gt;Apple sneakily shipped a &amp;quot;dark mode&amp;quot; in iOS 11, native apps looks &lt;em&gt;gorgeous&lt;&#x2f;em&gt; in this mode (especially on
 iPhone X with it&#x27;s OLED display):&lt;&#x2f;p&gt;
-&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;native-ios-apps-with-smart-invert.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;native-ios-apps-with-smart-invert.png 2x&quot; alt=&quot;iOS 11 apps in smart invert mode&quot;&#x2f;&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;To see it for yourself, go to &lt;em&gt;Settings -&amp;gt; General -&amp;gt; Accessibility Display Accommodations -&amp;gt; Invert Colors&lt;&#x2f;em&gt;
 and toggle the switch to on (I personally set triple tap of the power buttton to toggle this on&#x2f;off):&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;invert-color-settings.png&quot; alt=&quot;turn on smart invert mode in Settings&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
 &lt;p&gt;Note that in Apple&#x27;s first-party apps, not every view&#x27;s color is inverted (hence, &amp;quot;smart&amp;quot;). For apps that we
 built, that would not be the case automatically. Instead, we get the full color inversion under this setting:&lt;&#x2f;p&gt;
-&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;third-party-app-no-change.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;third-party-app-no-change.png 2x&quot; alt=&quot;default third party app before and after smart color&quot;&#x2f;&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;In this article, we&#x27;ll see how to best adapt our apps so they look just as good as first-party iOS apps under
 the smart invert setting.&lt;&#x2f;p&gt;
 &lt;h2&gt;The Basics&lt;&#x2f;h2&gt;
@@ -39,11 +39,11 @@ colors of the view and all of its subviews.&lt;&#x2f;p&gt;
 our sample app&#x27;s source code:&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;setting-accessibilityIgnoresInvertColors-to-true-in-code.png&quot; alt=&quot;setting accessibilityIgnoresInvertColors to true in code&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
 &lt;p&gt;This gives us the desired effect for that view 🎉:&lt;&#x2f;p&gt;
-&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-code-result.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-code-result.png 2x&quot; alt=&quot;result of supporting invert color in code&quot;&#x2f;&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;The same can be done in Interface Builder. Let&#x27;s fix the other view by setting a runtime attribute:&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;setting-accessibilityIgnoresInvertColors-to-true-in-interface-builder.png&quot; alt=&quot;setting accessibilityIgnoresInvertColors to true in Interface Builder&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
 &lt;p&gt;Result:&lt;&#x2f;p&gt;
-&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-interface-builder-result.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-interface-builder-result.png 2x&quot; alt=&quot;result of supporting invert color in interface builder&quot;&#x2f;&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Tada!&lt;&#x2f;p&gt;
 &lt;h2&gt;Compatibility with older iOS versions&lt;&#x2f;h2&gt;
 &lt;p&gt;The story gets slightly complicated when your app need to run on older iOS versions. For one, our code won&#x27;t
@@ -56,27 +56,27 @@ well:&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;xcode-complain-about-runtime-attirbute.png&quot; alt=&quot;Xcode complains about runtime attribute on older iOS&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
 &lt;p&gt;If that bothers you, I recommend writing your own wrapper for this property as an extension to &lt;code&gt;UIView&lt;&#x2f;code&gt;. To
 put a cherry on top, make it &lt;code&gt;@IBInspectable&lt;&#x2f;code&gt;!&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;extension&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;UIView&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&#x2f;&lt;&#x2f;span&gt; Whether or not to set accessibilityIgnoresInvertColors to true for iOS 11.&lt;&#x2f;span&gt;
-    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&#x2f;&lt;&#x2f;span&gt; For older OS, this value is false and setting it has no effect.&lt;&#x2f;span&gt;
-    &lt;span class=&quot;storage type decorator&quot;&gt;@IBInspectable&lt;&#x2f;span&gt;
-    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;ignoreColorInversion&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Bool&lt;&#x2f;span&gt; {
-        &lt;span class=&quot;keyword control&quot;&gt;get&lt;&#x2f;span&gt; {
-            &lt;span class=&quot;keyword control&quot;&gt;if&lt;&#x2f;span&gt; &lt;span class=&quot;keyword control&quot;&gt;#available&lt;&#x2f;span&gt;(iOS &lt;span class=&quot;constant numeric decimal&quot;&gt;11&lt;&#x2f;span&gt;, *) {
-                &lt;span class=&quot;keyword control&quot;&gt;return&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;self&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;accessibilityIgnoresInvertColors
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;extension UIView {
+    &#x2f;&#x2f;&#x2f; Whether or not to set accessibilityIgnoresInvertColors to true for iOS 11.
+    &#x2f;&#x2f;&#x2f; For older OS, this value is false and setting it has no effect.
+    @IBInspectable
+    public var ignoreColorInversion: Bool {
+        get {
+            if #available(iOS 11, *) {
+                return self.accessibilityIgnoresInvertColors
             }
 
-            &lt;span class=&quot;keyword control&quot;&gt;return&lt;&#x2f;span&gt; &lt;span class=&quot;constant language false&quot;&gt;false&lt;&#x2f;span&gt;
+            return false
         }
 
-        &lt;span class=&quot;keyword control&quot;&gt;set&lt;&#x2f;span&gt; {
-            &lt;span class=&quot;keyword control&quot;&gt;if&lt;&#x2f;span&gt; &lt;span class=&quot;keyword control&quot;&gt;#available&lt;&#x2f;span&gt;(iOS &lt;span class=&quot;constant numeric decimal&quot;&gt;11&lt;&#x2f;span&gt;, *) {
-                &lt;span class=&quot;keyword variable&quot;&gt;self&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;accessibilityIgnoresInvertColors = newValue
+        set {
+            if #available(iOS 11, *) {
+                self.accessibilityIgnoresInvertColors = newValue
             }
         }
     }
 }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Having this snippet in the project, we set it in interface builder to any view with a couple of clicks:&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;set-custom-invert-property-in-interface-builder.png&quot; alt=&quot;set custom invert color properties in Interface Builder&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
 &lt;h2&gt;How to screenshot with inverted color settings&lt;&#x2f;h2&gt;

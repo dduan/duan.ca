@@ -15,7 +15,7 @@ contains a single commit. But I can&#x27;t type, say an H3 as &lt;code&gt;### He
 commit message (in Vim, most of the time) because it gets treated as a comment!&lt;&#x2f;p&gt;
 &lt;p&gt;But thanks to this twitter interaction with &lt;a href=&quot;https:&#x2f;&#x2f;twitter.com&#x2f;dmartincy&quot;&gt;@dmartincy&lt;&#x2f;a&gt;, I finally solved
 this problem:&lt;&#x2f;p&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;I haven&amp;#39;t found myself in that situation, but maybe you could do &amp;#39;git config core.commentChar &amp;quot;;&amp;quot;&amp;#39; before creating the commits? That will change the default git commit marker (#) to something that won&amp;#39;t conflict with Markdown titles.&lt;&#x2f;p&gt;&amp;mdash; Daniel Martín (@dmartincy) &lt;a href=&quot;https:&#x2f;&#x2f;twitter.com&#x2f;dmartincy&#x2f;status&#x2f;1247271508420026368?ref_src=twsrc%5Etfw&quot;&gt;April 6, 2020&lt;&#x2f;a&gt;&lt;&#x2f;blockquote&gt; &lt;script async src=&quot;https:&#x2f;&#x2f;platform.twitter.com&#x2f;widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;&#x2f;script&gt;
+&lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;As mentioned by Daniel, Git has introduced a setting called &lt;code&gt;core.commentChar&lt;&#x2f;code&gt;,
 documented &lt;a href=&quot;https:&#x2f;&#x2f;git-scm.com&#x2f;docs&#x2f;git-config#Documentation&#x2f;git-config.txt-corecommentChar&quot;&gt;here&lt;&#x2f;a&gt;, which lets us control which character
 becomes the start of a comment line. Let&#x27;s say we want to replace the default

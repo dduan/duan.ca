@@ -27,22 +27,22 @@ over &lt;code&gt;var&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
 &lt;p&gt;Most of the time, what you want to share is the values pumped into the stream,
 not the privilage to mutate it. Because Subjects conform to &lt;code&gt;Publisher&lt;&#x2f;code&gt;, it&#x27;s
 easy to hide from the users the fact that your stream is backed by them.&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Bad: now anyone who get a hold of it can mess with your stream!&lt;&#x2f;span&gt;
-&lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;enum&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;GreatInts&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; updates = &lt;span class=&quot;support class&quot;&gt;CurrentValueSubject&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;)
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;&#x2f;&#x2f; Bad: now anyone who get a hold of it can mess with your stream!
+public enum GreatInts {
+    public var updates = CurrentValueSubject&amp;lt;Int, Never&amp;gt;(0)
 }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;With Combine this conversion happens via type-erasure:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Better: all your users care is the stream (publisher), so give them that!&lt;&#x2f;span&gt;
-&lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;enum&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;GreatInts&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Internally, it&amp;#39;s backed by a subject.&lt;&#x2f;span&gt;
-    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; subject = &lt;span class=&quot;support class&quot;&gt;CurrentValueSubject&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;)
-    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Externally, it&amp;#39;s just a Publisher. &lt;&#x2f;span&gt;
-    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;subject&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;AnyPublisher&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt; {
-        subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;eraseToAnyPublisher()
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;&#x2f;&#x2f; Better: all your users care is the stream (publisher), so give them that!
+public enum GreatInts {
+    &#x2f;&#x2f; Internally, it&#x27;s backed by a subject.
+    var subject = CurrentValueSubject&amp;lt;Int, Never&amp;gt;(0)
+    &#x2f;&#x2f; Externally, it&#x27;s just a Publisher. 
+    public var subject: AnyPublisher&amp;lt;Int, Never&amp;gt; {
+        subject.eraseToAnyPublisher()
     }
 }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;h2&gt;CurrentValueSubject natually caches the latest value&lt;&#x2f;h2&gt;
 &lt;p&gt;RX theorists will hate this: sometimes it&#x27;s just practical to expose
 a synchronous interface to the latest vaule in the stream!&lt;&#x2f;p&gt;
@@ -53,63 +53,63 @@ a synchronous interface to the latest vaule in the stream!&lt;&#x2f;p&gt;
 A separate interface dedicated to the latest value prevents people from
 polluting your stream.&lt;&#x2f;li&gt;
 &lt;&#x2f;ol&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; (Still) bad&lt;&#x2f;span&gt;
-&lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;storage modifier&quot;&gt;final&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;class&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;GreatInts&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; updates = &lt;span class=&quot;support class&quot;&gt;CurrentValueSubject&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;)
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;&#x2f;&#x2f; (Still) bad
+public final class GreatInts {
+    public var updates = CurrentValueSubject&amp;lt;Int, Never&amp;gt;(0)
 }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;ol start=&quot;2&quot;&gt;
 &lt;li&gt;Remember &lt;code&gt;CurrentValueSubject&lt;&#x2f;code&gt; has that &lt;code&gt;.value&lt;&#x2f;code&gt; property! It may seem
 surprising, but I&#x27;ve seen folks transitioning to RX clinging to the old ways:&lt;&#x2f;li&gt;
 &lt;&#x2f;ol&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;storage modifier&quot;&gt;final&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;class&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;GreatInts&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; well, at least it&amp;#39;s not a public subject...&lt;&#x2f;span&gt;
-    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; subject = &lt;span class=&quot;support class&quot;&gt;CurrentValueSubject&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;) &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; &amp;lt;- initial value 0&lt;&#x2f;span&gt;
-    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;updates&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;AnyPublisher&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt; {
-        subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;eraseToAnyPublisher()
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;public final class GreatInts {
+    &#x2f;&#x2f; well, at least it&#x27;s not a public subject...
+    var subject = CurrentValueSubject&amp;lt;Int, Never&amp;gt;(0) &#x2f;&#x2f; &amp;lt;- initial value 0
+    public var updates: AnyPublisher&amp;lt;Int, Never&amp;gt; {
+        subject.eraseToAnyPublisher()
     }
 
-    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; Wait, there&amp;#39;s that 0 again&lt;&#x2f;span&gt;
-    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;latest&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt; = &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt; {
-        &lt;span class=&quot;keyword control&quot;&gt;didSet&lt;&#x2f;span&gt; {
-            subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;send(latest) &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; ?&lt;&#x2f;span&gt;
+    &#x2f;&#x2f; Wait, there&#x27;s that 0 again
+    public var latest: Int = 0 {
+        didSet {
+            subject.send(latest) &#x2f;&#x2f; ?
         }
     }
 }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;First, you&#x27;ll notice that &lt;code&gt;0&lt;&#x2f;code&gt;, the initial value, is duplicated as both the
 subject&#x27;s initial value, as well as the value of a stored property. And these
 duplicated sources of truth persist throughout the parent&#x27;s life time. Weird,
 right?&lt;&#x2f;p&gt;
 &lt;p&gt;Here&#x27;s a slightly better version:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;storage modifier&quot;&gt;final&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;class&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;GreatInts&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; subject = &lt;span class=&quot;support class&quot;&gt;PassthroughSubject&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;()
-    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;updates&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;AnyPublisher&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt; {
-        subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;eraseToAnyPublisher()
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;public final class GreatInts {
+    var subject = PassthroughSubject&amp;lt;Int, Never&amp;gt;()
+    public var updates: AnyPublisher&amp;lt;Int, Never&amp;gt; {
+        subject.eraseToAnyPublisher()
     }
 
-    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;latest&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt; = &lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt; {
-        &lt;span class=&quot;keyword control&quot;&gt;didSet&lt;&#x2f;span&gt; {
-            subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;send(latest) &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&lt;&#x2f;span&gt; ?&lt;&#x2f;span&gt;
+    public var latest: Int = 0 {
+        didSet {
+            subject.send(latest) &#x2f;&#x2f; ?
         }
     }
 }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Now there&#x27;s no two copy of the latest value in memory anymore. But in my opinion
 it does not embrace the full power of Combine. Here&#x27;s the most natual way to do
 this:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;source swift&quot;&gt;&lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;storage modifier&quot;&gt;final&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;keyword entity&quot;&gt;class&lt;&#x2f;span&gt; &lt;span class=&quot;entity name type&quot;&gt;&lt;span class=&quot;support class&quot;&gt;GreatInts&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt; {
-    &lt;span class=&quot;comment line&quot;&gt;&lt;span class=&quot;punctuation definition comment&quot;&gt;&#x2f;&#x2f;&#x2f;&lt;&#x2f;span&gt; This is a CurrentValueSubject again.&lt;&#x2f;span&gt;
-    &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; subject = &lt;span class=&quot;support class&quot;&gt;CurrentValueSubject&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt;(&lt;span class=&quot;constant numeric decimal&quot;&gt;0&lt;&#x2f;span&gt;)
-    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;updates&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;AnyPublisher&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;lt;&lt;&#x2f;span&gt;&lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt;, &lt;span class=&quot;support class&quot;&gt;Never&lt;&#x2f;span&gt;&lt;span class=&quot;keyword operator&quot;&gt;&amp;gt;&lt;&#x2f;span&gt; {
-        subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;eraseToAnyPublisher()
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;public final class GreatInts {
+    &#x2f;&#x2f;&#x2f; This is a CurrentValueSubject again.
+    var subject = CurrentValueSubject&amp;lt;Int, Never&amp;gt;(0)
+    public var updates: AnyPublisher&amp;lt;Int, Never&amp;gt; {
+        subject.eraseToAnyPublisher()
     }
 
-    &lt;span class=&quot;storage modifier&quot;&gt;public&lt;&#x2f;span&gt; &lt;span class=&quot;keyword variable&quot;&gt;var&lt;&#x2f;span&gt; &lt;span class=&quot;variable parameter&quot;&gt;latest&lt;&#x2f;span&gt;: &lt;span class=&quot;support class&quot;&gt;Int&lt;&#x2f;span&gt; {
-        subject&lt;span class=&quot;keyword operator&quot;&gt;.&lt;&#x2f;span&gt;value
+    public var latest: Int {
+        subject.value
     }
 }
-&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Essentially, you create separate public interface, each vends a little piece of
 &lt;code&gt;CurrentValueSubject&lt;&#x2f;code&gt;&#x27;s power.&lt;&#x2f;p&gt;
 &lt;h2&gt;No really, don&#x27;t use &lt;code&gt;Subject&lt;&#x2f;code&gt;s&lt;&#x2f;h2&gt;

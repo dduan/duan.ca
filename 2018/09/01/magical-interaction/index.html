@@ -29,29 +29,29 @@
             <time datetime="2018-09-01" itemProp="datePublished">2018-09-01</time>
         </p>
     </nav><p>I want to talk about this little function:</p>
-<pre><span class="source swift"><span class="meta function"><span class="meta toc-list"><span class="storage type function">func</span> <span class="entity name function"><span class="variable function">interact</span></span>(<span class="constant language other">_</span> <span class="variable parameter">process</span>: (<span class="support class">String</span>) -&gt; <span class="support class">String</span>)</span></span> {
-    <span class="keyword variable">var</span> input = <span class="string quoted double">&quot;&quot;</span>
-    <span class="keyword control">while</span> <span class="keyword variable">let</span> line = readLine() {
+<pre><code class="language-swift">func interact(_ process: (String) -&gt; String) {
+    var input = &quot;&quot;
+    while let line = readLine() {
         input += line
     }
 
     print(process(input))
 }
-</span></pre>
+</code></pre>
 <p>Brief explanation: it reads all the input from stdin as a <code>String</code>, feeds it
 into a closure <code>process</code>, which it takes in as its only argument, and prints
 <code>process</code>'s output.</p>
 <p>Here's how one might use it:</p>
-<pre><span class="source swift"><span class="comment line"><span class="punctuation definition comment">//</span> counts characters from stdin and prints result to stdout</span>
-interact { <span class="support class">String</span>(<span class="keyword operator">$</span><span class="constant numeric decimal">0</span><span class="keyword operator">.</span>count) }
-</span></pre>
+<pre><code class="language-swift">// counts characters from stdin and prints result to stdout
+interact { String($0.count) }
+</code></pre>
 <p>Got that? Well, now I'm going to rewrite it in a slightly less Swift-y way:</p>
-<pre><span class="source swift"><span class="keyword variable">let</span> <span class="variable parameter">count</span>: (<span class="support class">String</span>) -&gt; <span class="support class">String</span> = {
-    <span class="keyword control">return</span> <span class="support class">String</span>(<span class="keyword operator">$</span><span class="constant numeric decimal">0</span><span class="keyword operator">.</span>count)
+<pre><code class="language-swift">let count: (String) -&gt; String = {
+    return String($0.count)
 }
 
 interact(count)
-</span></pre>
+</code></pre>
 <p>The argument for <code>interact</code> got defined with a name and an explicit type
 signature.</p>
 <p>So, what's so special about this <code>interact</code> function? Two words: <em>side effects</em>.

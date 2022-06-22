@@ -35,15 +35,15 @@ you'll need to codesign the target binary. Otherwise Instruments will give you a
 <ol>
 <li>Create a entitlement file with <code>com.apple.security.get-task-allow</code> set to true:</li>
 </ol>
-<pre><span class="text xml"><span class="meta tag preprocessor xml"><span class="punctuation definition tag begin xml">&lt;?</span><span class="entity name tag xml">xml</span> <span class="entity other attribute-name localname xml">version</span><span class="punctuation separator key-value xml">=</span><span class="string quoted double xml"><span class="punctuation definition string begin xml">&quot;</span>1.0<span class="punctuation definition string end xml">&quot;</span></span> <span class="entity other attribute-name localname xml">encoding</span><span class="punctuation separator key-value xml">=</span><span class="string quoted double xml"><span class="punctuation definition string begin xml">&quot;</span>UTF-8<span class="punctuation definition string end xml">&quot;</span></span><span class="punctuation definition tag end xml">?&gt;</span></span>
-<span class="meta tag sgml doctype xml"><span class="punctuation definition tag begin xml">&lt;!</span><span class="keyword doctype xml">DOCTYPE</span> <span class="variable documentroot xml">plist</span> PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;<span class="punctuation definition tag end xml">&gt;</span></span>
-<span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;</span><span class="entity name tag localname xml">plist</span> <span class="entity other attribute-name localname xml">version</span><span class="punctuation separator key-value xml">=</span><span class="string quoted double xml"><span class="punctuation definition string begin xml">&quot;</span>1.0<span class="punctuation definition string end xml">&quot;</span></span><span class="punctuation definition tag end xml">&gt;</span></span>
-    <span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;</span><span class="entity name tag localname xml">dict</span><span class="punctuation definition tag end xml">&gt;</span></span>
-        <span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;</span><span class="entity name tag localname xml">key</span><span class="punctuation definition tag end xml">&gt;</span></span>com.apple.security.get-task-allow<span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;/</span><span class="entity name tag localname xml">key</span><span class="punctuation definition tag end xml">&gt;</span></span>
-        <span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;</span><span class="entity name tag localname xml">true</span><span class="punctuation definition tag end xml">/&gt;</span></span>
-    <span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;/</span><span class="entity name tag localname xml">dict</span><span class="punctuation definition tag end xml">&gt;</span></span>
-<span class="meta tag xml"><span class="punctuation definition tag begin xml">&lt;/</span><span class="entity name tag localname xml">plist</span><span class="punctuation definition tag end xml">&gt;</span></span>
-</span></pre>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+    &lt;dict&gt;
+        &lt;key&gt;com.apple.security.get-task-allow&lt;/key&gt;
+        &lt;true/&gt;
+    &lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre>
 <p>Let's call it <code>Entitlements.plist</code></p>
 <ol start="2">
 <li>

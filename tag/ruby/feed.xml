@@ -135,12 +135,12 @@ But I made the text version look as &amp;quot;natural&amp;quot; as possible. The
 for beginning and end of the metadata since I know exactly what&#x27;s needed. The
 title is marked as an H1. Date is in RFC3339 format. Tags are comma-separated
 values. So an example of an article&#x27;s beginning looks like:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;span class=&quot;text html markdown&quot;&gt;&lt;span class=&quot;meta block-level markdown&quot;&gt;&lt;span class=&quot;markup heading 1 markdown&quot;&gt;&lt;span class=&quot;punctuation definition heading begin markdown&quot;&gt;#&lt;&#x2f;span&gt; &lt;&#x2f;span&gt;&lt;span class=&quot;markup heading 1 markdown&quot;&gt;&lt;span class=&quot;entity name section markdown&quot;&gt;Site Improvements 2020&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;
-&lt;span class=&quot;meta paragraph markdown&quot;&gt;2020-04-22T21:58:03-07:00
+&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;# Site Improvements 2020
+2020-04-22T21:58:03-07:00
 tags: Rust, HTML, CSS, Ruby, Jekyll, Markdown
-&lt;&#x2f;span&gt;
-&lt;span class=&quot;meta paragraph markdown&quot;&gt;I took back my website...
-&lt;&#x2f;span&gt;&lt;&#x2f;span&gt;&lt;&#x2f;pre&gt;
+
+I took back my website...
+&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;Text supremacy! Glory!&lt;&#x2f;p&gt;
 &lt;h3&gt;Onward&lt;&#x2f;h3&gt;
 &lt;p&gt;Over the course of roughly 15 years, I&#x27;ve had blogs of quite a few variates.

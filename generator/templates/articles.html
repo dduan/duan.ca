@@ -13,12 +13,13 @@
     </section>
     <ul>
         {% for post in items %}<li>
-            <p><a href="{{post.current_url|safe}}/">{{post.meta.title}}</a></p>
-            <p class="metainfo article-meta">
+            <p><a href="{{post.current_url|safe}}/">{{post.meta.title}}</a>
+            <br/>
+            <span class="metainfo article-meta">
                 {{ post.date }}{% for tag in post.tags %}
                 ·
                 <a href="/tag/{{tag.slug}}/">{{tag.name}}</a>{% endfor %}
-            </p>
+            </span></p>
         </li>{% endfor %}
     </ul>
 </main>

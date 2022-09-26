@@ -72,7 +72,8 @@ impl Article {
     }
 }
 pub fn markdown_to_html(syntax_set: &SyntaxSet, markdown: String) -> String {
-    let options = ComrakOptions::default();
+    let mut options = ComrakOptions::default();
+    options.render.unsafe_ = true;
     let html = comrak::markdown_to_html(&markdown, &options);
     let re = Regex::new(r#"(?s)<pre lang="(\w+)"><code>(.+?)</code></pre>"#).unwrap();
     let mut start: usize = 0;

@@ -1,11 +1,8 @@
 use chrono::{DateTime, FixedOffset};
 use comrak::{self, ComrakOptions};
-use regex::Regex;
 use std::clone::Clone;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use syntect::html::ClassedHTMLGenerator;
-use syntect::parsing::SyntaxSet;
 use walkdir::WalkDir;
 
 #[derive(Debug, PartialEq, Clone)]
@@ -71,36 +68,10 @@ impl Article {
             })
     }
 }
-pub fn markdown_to_html(syntax_set: &SyntaxSet, markdown: String) -> String {
+pub fn markdown_to_html(markdown: String) -> String {
     let mut options = ComrakOptions::default();
     options.render.unsafe_ = true;
-    let html = comrak::markdown_to_html(&markdown, &options);
-    let re = Regex::new(r#"(?s)<pre lang="(\w+)"><code>(.+?)</code></pre>"#).unwrap();
-    let mut start: usize = 0;
-    let mut highlighted = String::new();
-    for cap in re.captures_iter(&html) {
-        let lang = &cap[1];
-        let code = htmlescape::decode_html(&cap[2]).unwrap();
-        let highlighted_code = match syntax_set.find_syntax_by_extension(lang) {
-            None => code.to_owned(),
-            Some(syntax) => {
-                let mut code_gen = ClassedHTMLGenerator::new(syntax, syntax_set);
-                for line in code.lines() {
-                    code_gen.parse_html_for_line(line)
-                }
-                code_gen.finalize()
-            }
-        };
-
-        highlighted.push_str(&html[start..cap.get(0).unwrap().start()]);
-        highlighted.push_str("<pre>");
-        highlighted.push_str(&highlighted_code);
-        highlighted.push_str("</pre>");
-        start = cap.get(0).unwrap().end();
-    }
-
-    highlighted.push_str(&html[start..html.len()]);
-    highlighted
+    comrak::markdown_to_html(&markdown, &options)
 }
 
 pub fn articles_from_root_path(root_path: &str) -> Vec<Article> {

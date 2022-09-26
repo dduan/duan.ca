@@ -4,8 +4,6 @@ use crate::site::Site;
 use crate::templates::*;
 use askama::Template;
 use std::error::Error;
-use syntect::dumps;
-use syntect::parsing::SyntaxSet;
 use walkdir::WalkDir;
 
 fn write(text: &str, path: &str, file: &str) -> Result<(), Box<dyn Error>> {
@@ -45,7 +43,6 @@ fn build_page(
 }
 
 fn instantiate_article_template<'a>(
-    syntax_set: &SyntaxSet,
     article: &'a Article,
     base_url: &str,
     root_path: &str,
@@ -53,7 +50,7 @@ fn instantiate_article_template<'a>(
     match article.read_body(root_path) {
         None => None,
         Some(markdown) => {
-            let body = article::markdown_to_html(syntax_set, markdown);
+            let body = article::markdown_to_html(markdown);
             let permalink = format!("{}{}", base_url, article.relative_link);
             let date_string = format!("{}", article.date.format("%Y-%m-%d"));
             let rfc2822date_string = article.date.to_rfc2822();
@@ -229,7 +226,6 @@ fn build_404_page(
 }
 
 pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
-    let syntax_set: SyntaxSet = dumps::from_binary(include_bytes!("syntax.dump"));
     if std::fs::metadata(output_path).is_ok() {
         std::fs::remove_dir_all(output_path)?;
         std::fs::create_dir_all(output_path)?;
@@ -241,7 +237,7 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
         .articles
         .iter()
         .filter_map(|article| {
-            instantiate_article_template(&syntax_set, article, &site.base_url, root_path)
+            instantiate_article_template(article, &site.base_url, root_path)
         })
         .collect::<Vec<ArticleTemplate>>();
 
@@ -264,7 +260,7 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
         let articles = tagged
             .iter()
             .filter_map(|article| {
-                instantiate_article_template(&syntax_set, article, &site.base_url, root_path)
+                instantiate_article_template(article, &site.base_url, root_path)
             })
             .collect::<Vec<ArticleTemplate>>();
         build_tag_list(tag, &articles, &site.base_url, output_path)?;

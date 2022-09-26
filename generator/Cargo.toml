@@ -10,9 +10,4 @@ chrono = "=0.4.11"
 comrak = "=0.10.1"
 regex = "=1.5.5"
 slug = "=0.1.4"
-syntect = "=4"
 walkdir = "=2.3.1"
-htmlescape = "=0.3.1"
-
-[[example]]
-name = "sublime-syntax-dumper"

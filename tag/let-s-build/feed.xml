@@ -11,7 +11,9 @@ I created a framework that supports distribution via Swift Package Manager, Coco
 Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
 SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
 Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
 the version tag, documentation generation, automatic Carthage binary generation, test coverage...&lt;&#x2f;p&gt;
 &lt;p&gt;Anyways, here&#x27;s some stuff mentioned in the video:&lt;&#x2f;p&gt;
@@ -34,7 +36,9 @@ the version tag, documentation generation, automatic Carthage binary generation,
                 <title>Let&#x27;s Build A BitArray In Swift</title>
                 <description>&lt;p&gt;In this video, I build a space-efficient BitArray that confirms to &lt;code&gt;RandomAccessCollection&lt;&#x2f;code&gt; in Swift in
 a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;-k_jrIoD56k&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;I guess I&#x27;m a YouTuber now. You can subscribe to my &lt;a href=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;channel&#x2f;UCkBVC0dMgyUnxzettP7qE-A&quot;&gt;channel&lt;&#x2f;a&gt; 😛.&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Tue, 12 Dec 2017 22:51:04 -0800</pubDate>

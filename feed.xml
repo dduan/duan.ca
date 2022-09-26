@@ -967,8 +967,23 @@ characters in these two games are both blob-y, short and colorful. This similari
 for a while, and I&#x27;m getting increasingly anxious because those who frequently play these games
 aren&#x27;t making similar remarks &lt;em&gt;at all&lt;&#x2f;em&gt;. So, in this Sunday evening, I just had to get it out of my
 head:&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;video id=&quot;video-tag&quot; width=&quot;100%&quot; autoplay muted loop playsinline&gt; 
+    &lt;source src=&quot;&#x2f;assets&#x2f;2020&#x2f;08&#x2f;FallGuysAmongUs.mov&quot; type=&quot;video&#x2f;quicktime&quot; &#x2f;&gt;  
+&lt;&#x2f;video&gt;
+&lt;img id=&quot;img-tag&quot; width=&quot;100%&quot; src=&quot;&#x2f;assets&#x2f;2020&#x2f;08&#x2f;FallGuysAmongUs.mov&quot;&gt;
+&lt;script type=&quot;text&#x2f;javascript&quot;&gt;
+    function BrowserDetection() {
+        &#x2f;&#x2f;Check if browser is Safari, if it is, hide the &lt;video&gt; tag, otherwise hide the &lt;img&gt; tag
+        if (navigator.userAgent.search(&quot;Safari&quot;) &gt;= 0 &amp;&amp; navigator.userAgent.search(&quot;Chrome&quot;) &lt; 0) {
+            document.getElementById(&#x27;video-tag&#x27;).style.display= &quot;none&quot;;
+        } else {
+            document.getElementById(&#x27;img-tag&#x27;).style.display= &quot;none&quot;;
+        }
+    }
+
+    &#x2f;&#x2f;And run the script. Note that the script tag needs to be run after HTML so where you place it is important. 
+    BrowserDetection();
+&lt;&#x2f;script&gt;
 &lt;p&gt;This animation is made from Pixelmator and Keynote. Those two along with Sketch and Final Cut Pro
 make me feel invincible these days.&lt;&#x2f;p&gt;
 </description>
@@ -1371,7 +1386,7 @@ contains a single commit. But I can&#x27;t type, say an H3 as &lt;code&gt;### He
 commit message (in Vim, most of the time) because it gets treated as a comment!&lt;&#x2f;p&gt;
 &lt;p&gt;But thanks to this twitter interaction with &lt;a href=&quot;https:&#x2f;&#x2f;twitter.com&#x2f;dmartincy&quot;&gt;@dmartincy&lt;&#x2f;a&gt;, I finally solved
 this problem:&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;I haven&amp;#39;t found myself in that situation, but maybe you could do &amp;#39;git config core.commentChar &amp;quot;;&amp;quot;&amp;#39; before creating the commits? That will change the default git commit marker (#) to something that won&amp;#39;t conflict with Markdown titles.&lt;&#x2f;p&gt;&amp;mdash; Daniel Martín (@dmartincy) &lt;a href=&quot;https:&#x2f;&#x2f;twitter.com&#x2f;dmartincy&#x2f;status&#x2f;1247271508420026368?ref_src=twsrc%5Etfw&quot;&gt;April 6, 2020&lt;&#x2f;a&gt;&lt;&#x2f;blockquote&gt; &lt;script async src=&quot;https:&#x2f;&#x2f;platform.twitter.com&#x2f;widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;&#x2f;script&gt;
 &lt;p&gt;As mentioned by Daniel, Git has introduced a setting called &lt;code&gt;core.commentChar&lt;&#x2f;code&gt;,
 documented &lt;a href=&quot;https:&#x2f;&#x2f;git-scm.com&#x2f;docs&#x2f;git-config#Documentation&#x2f;git-config.txt-corecommentChar&quot;&gt;here&lt;&#x2f;a&gt;, which lets us control which character
 becomes the start of a comment line. Let&#x27;s say we want to replace the default
@@ -1806,7 +1821,9 @@ I&#x27;m only doing file I&#x2f;O here.&lt;&#x2f;em&gt;&lt;&#x2f;p&gt;
             <item>
                 <title>Unix File Permissions In Swift</title>
                 <description>&lt;p&gt;Wrap file permissions from &lt;code&gt;stat&lt;&#x2f;code&gt; and &lt;code&gt;chmod&lt;&#x2f;code&gt; in an &lt;code&gt;OptionSet&lt;&#x2f;code&gt; in Swift.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;1ZrouR_F-AU&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 </description>
                 <pubDate>Sun, 06 May 2018 16:43:20 -0700</pubDate>
                 <link>https://duan.ca/2018/05/06/unix-file-permissions-in-swift/</link>
@@ -1816,7 +1833,9 @@ I&#x27;m only doing file I&#x2f;O here.&lt;&#x2f;em&gt;&lt;&#x2f;p&gt;
                 <title>An Interpreter Without A Language</title>
                 <description>&lt;p&gt;From the &lt;a href=&quot;&#x2f;2018&#x2f;01&#x2f;13&#x2f;coding-without-a-language&#x2f;&quot;&gt;AST&lt;&#x2f;a&gt; and &lt;a href=&quot;&#x2f;2018&#x2f;01&#x2f;20&#x2f;scopes&#x2f;&quot;&gt;scopes&lt;&#x2f;a&gt;, come a simple interpreter. This intepreter can &amp;quot;execute&amp;quot; the fibonacci
 function AST and produce a correct results.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;C16PD44qyOY&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 </description>
                 <pubDate>Tue, 30 Jan 2018 12:53:38 -0800</pubDate>
                 <link>https://duan.ca/2018/01/30/an-interpreter-without-a-language/</link>
@@ -1825,7 +1844,9 @@ function AST and produce a correct results.&lt;&#x2f;p&gt;
             <item>
                 <title>Scopes Without A Language</title>
                 <description>&lt;p&gt;A short video on the concept of static scope.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;o0jwyd8nUK4&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 </description>
                 <pubDate>Sat, 20 Jan 2018 19:50:24 -0800</pubDate>
                 <link>https://duan.ca/2018/01/20/scopes/</link>
@@ -1833,7 +1854,9 @@ function AST and produce a correct results.&lt;&#x2f;p&gt;
             </item>
             <item>
                 <title>Coding Without A Language</title>
-                <description>&lt;!-- raw HTML omitted --&gt;
+                <description>&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;OKjQtn_Gvug&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;Sorry for the click-baity title. I actually really like this one.&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Sat, 13 Jan 2018 12:07:19 -0800</pubDate>
@@ -1844,7 +1867,9 @@ function AST and produce a correct results.&lt;&#x2f;p&gt;
                 <title>Scripting A &#x27;cat&#x27; Under 1 Minute</title>
                 <description>&lt;p&gt;This video demonstrates a few things: the &lt;code&gt;readLine&lt;&#x2f;code&gt; standard library function, scripting with Swift, and
 pattern matching as loop conditions. Enjoy!&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;8rAqzvChbak&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 </description>
                 <pubDate>Sat, 06 Jan 2018 18:34:39 -0800</pubDate>
                 <link>https://duan.ca/2018/01/06/cat-under-1-minute/</link>
@@ -1857,8 +1882,10 @@ around the time of this post and finally found enough tutorials, examples, and
 working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (&lt;em&gt;this article includes all the same information and
 more, so just read on if you don&#x27;t have 15 minutes for YouTube&lt;&#x2f;em&gt;).&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;yEYtwmI7bDg&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
+&lt;br&gt;
 &lt;h2&gt;Our goal:&lt;&#x2f;h2&gt;
 &lt;ol&gt;
 &lt;li&gt;Use as much built-in tools on a Mac as possible. The web development
@@ -2004,7 +2031,9 @@ code, compile, run on your (virtual, in browser) machine, repeat. That sounds li
                 <description>&lt;p&gt;I guess I&#x27;m starting a series of minute-long videos. In this first video, I built &lt;code&gt;pwd&lt;&#x2f;code&gt; out of &lt;code&gt;getcwd&lt;&#x2f;code&gt;. The
 code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift&#x27;s great C-interop
 capability.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;Some details are lost in this video, however. For example, the POSIX standard actually says &lt;code&gt;getcwd&lt;&#x2f;code&gt;&#x27;s 2nd
 argument being &lt;code&gt;0&lt;&#x2f;code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
 memory as needed). Swift&#x27;s handling of &lt;code&gt;char *&lt;&#x2f;code&gt; aka &lt;code&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;&#x2f;code&gt; in context of a &lt;code&gt;var&lt;&#x2f;code&gt; array
@@ -2017,7 +2046,9 @@ is also very cool.&lt;&#x2f;p&gt;
             <item>
                 <title>Contributing To Open-Source Swift</title>
                 <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes, on YouTube.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;ul&gt;
 &lt;li&gt;Pull request: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;swift-corelibs-foundation&#x2f;pull&#x2f;1376&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;swift-corelibs-foundation&#x2f;pull&#x2f;1376&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
 &lt;li&gt;SR-6647: &lt;a href=&quot;https:&#x2f;&#x2f;bugs.swift.org&#x2f;browse&#x2f;SR-6647&quot;&gt;https:&#x2f;&#x2f;bugs.swift.org&#x2f;browse&#x2f;SR-6647&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
@@ -2039,13 +2070,13 @@ is also very cool.&lt;&#x2f;p&gt;
 &lt;h2&gt;Introduction&lt;&#x2f;h2&gt;
 &lt;p&gt;Apple sneakily shipped a &amp;quot;dark mode&amp;quot; in iOS 11, native apps looks &lt;em&gt;gorgeous&lt;&#x2f;em&gt; in this mode (especially on
 iPhone X with it&#x27;s OLED display):&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;native-ios-apps-with-smart-invert.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;native-ios-apps-with-smart-invert.png 2x&quot; alt=&quot;iOS 11 apps in smart invert mode&quot;&#x2f;&gt;
 &lt;p&gt;To see it for yourself, go to &lt;em&gt;Settings -&amp;gt; General -&amp;gt; Accessibility Display Accommodations -&amp;gt; Invert Colors&lt;&#x2f;em&gt;
 and toggle the switch to on (I personally set triple tap of the power buttton to toggle this on&#x2f;off):&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;invert-color-settings.png&quot; alt=&quot;turn on smart invert mode in Settings&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
 &lt;p&gt;Note that in Apple&#x27;s first-party apps, not every view&#x27;s color is inverted (hence, &amp;quot;smart&amp;quot;). For apps that we
 built, that would not be the case automatically. Instead, we get the full color inversion under this setting:&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;third-party-app-no-change.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;third-party-app-no-change.png 2x&quot; alt=&quot;default third party app before and after smart color&quot;&#x2f;&gt;
 &lt;p&gt;In this article, we&#x27;ll see how to best adapt our apps so they look just as good as first-party iOS apps under
 the smart invert setting.&lt;&#x2f;p&gt;
 &lt;h2&gt;The Basics&lt;&#x2f;h2&gt;
@@ -2062,11 +2093,11 @@ colors of the view and all of its subviews.&lt;&#x2f;p&gt;
 our sample app&#x27;s source code:&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;setting-accessibilityIgnoresInvertColors-to-true-in-code.png&quot; alt=&quot;setting accessibilityIgnoresInvertColors to true in code&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
 &lt;p&gt;This gives us the desired effect for that view 🎉:&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-code-result.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-code-result.png 2x&quot; alt=&quot;result of supporting invert color in code&quot;&#x2f;&gt;
 &lt;p&gt;The same can be done in Interface Builder. Let&#x27;s fix the other view by setting a runtime attribute:&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;setting-accessibilityIgnoresInvertColors-to-true-in-interface-builder.png&quot; alt=&quot;setting accessibilityIgnoresInvertColors to true in Interface Builder&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
 &lt;p&gt;Result:&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-interface-builder-result.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-interface-builder-result.png 2x&quot; alt=&quot;result of supporting invert color in interface builder&quot;&#x2f;&gt;
 &lt;p&gt;Tada!&lt;&#x2f;p&gt;
 &lt;h2&gt;Compatibility with older iOS versions&lt;&#x2f;h2&gt;
 &lt;p&gt;The story gets slightly complicated when your app need to run on older iOS versions. For one, our code won&#x27;t
@@ -2129,7 +2160,9 @@ completely separate.&lt;&#x2f;p&gt;
 &lt;p&gt;We added more standard library functionalities to BitArray (ExpressibleByArrayLiteral,
 CustomStringConvertible, Equatable, etc). Then, we added documentation and other open-source things left
 undone from &amp;quot;episode 2&amp;quot;.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;ckrd_FoFMl0&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 </description>
                 <pubDate>Tue, 19 Dec 2017 12:17:49 -0800</pubDate>
                 <link>https://duan.ca/2017/12/19/bitarray-final-act/</link>
@@ -2142,7 +2175,9 @@ I created a framework that supports distribution via Swift Package Manager, Coco
 Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
 SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
 Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
 the version tag, documentation generation, automatic Carthage binary generation, test coverage...&lt;&#x2f;p&gt;
 &lt;p&gt;Anyways, here&#x27;s some stuff mentioned in the video:&lt;&#x2f;p&gt;
@@ -2165,7 +2200,9 @@ the version tag, documentation generation, automatic Carthage binary generation,
                 <title>Let&#x27;s Build A BitArray In Swift</title>
                 <description>&lt;p&gt;In this video, I build a space-efficient BitArray that confirms to &lt;code&gt;RandomAccessCollection&lt;&#x2f;code&gt; in Swift in
 a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;-k_jrIoD56k&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;I guess I&#x27;m a YouTuber now. You can subscribe to my &lt;a href=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;channel&#x2f;UCkBVC0dMgyUnxzettP7qE-A&quot;&gt;channel&lt;&#x2f;a&gt; 😛.&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Tue, 12 Dec 2017 22:51:04 -0800</pubDate>
@@ -2449,7 +2486,7 @@ the owener and its fate unknown.&lt;&#x2f;p&gt;
 &lt;ul&gt;
 &lt;li&gt;everything.&lt;&#x2f;li&gt;
 &lt;&#x2f;ul&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;br &#x2f;&gt;
 &lt;p&gt;Fastforward to today. I use and write software applications for a living.
 Programs I use directly range from terminal commands to GUI apps and web apps in
 a browser.&lt;&#x2f;p&gt;
@@ -2473,7 +2510,7 @@ no matter how your OS changes.&lt;&#x2f;p&gt;
 &lt;p&gt;Most importantly, they remind me of the programs I built on that electronic
 dictionary. I want to make them today, with my favorite programming language
 Swift!&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;br &#x2f;&gt;
 &lt;p&gt;The go-to library for writing TUI apps is &lt;a href=&quot;https:&#x2f;&#x2f;www.gnu.org&#x2f;software&#x2f;ncurses&#x2f;&quot;&gt;ncurses&lt;&#x2f;a&gt;. Classics such as vim,
 emacs and mutt were written with it to some degree. But I find it hard to dive
 into: it has a large number of strange legacy function names and offers
@@ -2788,7 +2825,7 @@ value for any non-existence keys. It is, unsurpringly, a subclass of &lt;code&gt
 &lt;p&gt;I find my self missing this handy container in Swift. Especially when I use
 a normal &lt;code&gt;Dictionary&lt;&#x2f;code&gt; to accumulate&#x2f;coalesce values under distinct keys. So I
 wrote my own:&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;script src=&quot;https:&#x2f;&#x2f;gist.github.com&#x2f;dduan&#x2f;31ed39c4c98ecb88290f0743cb394c20.js&quot;&gt;&lt;&#x2f;script&gt;
 &lt;p&gt;There are a few noticable things about this implementation:&lt;&#x2f;p&gt;
 &lt;ul&gt;
 &lt;li&gt;It does not conform to the &lt;code&gt;DictionaryLiteralConvertible&lt;&#x2f;code&gt; protocol, for no
@@ -2818,7 +2855,7 @@ we&#x27;d better get to work, right?
 &lt;p&gt;Before going full existential, let&#x27;s limit &amp;quot;order&amp;quot; to Swift&#x27;s set and
 dictionaries -- there is none. Of course, you can take values&#x2f;keys out and
 sort them. But what if all you care about is &lt;em&gt;some&lt;&#x2f;em&gt; order?&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;Recently, I wrote&lt;&#x2f;p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;enum Token {
   static let all = [
@@ -2912,7 +2949,7 @@ code eventually end up like this:&lt;&#x2f;p&gt;
 gets checked with the correct order. We didn&#x27;t need to sort the entire set of
 tokens, nor did we do any heavy data massage upfront, making a bunch of copies
 along the way.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;Looking back, this post really failed to capture the eureka moment as I came
 up with the erasure method. I discovered a series of small challenges and got
 help from Swift&#x27;s designers in each step. Everything fell together in the end.&lt;&#x2f;p&gt;
@@ -2982,7 +3019,7 @@ to have string manipulating functions take this form:&lt;&#x2f;p&gt;
 &lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;To mutate the arugment &lt;code&gt;errorMessage&lt;&#x2f;code&gt; of type &lt;code&gt;char *&lt;&#x2f;code&gt;, &lt;code&gt;foo&lt;&#x2f;code&gt; takes a pointer
 to it, &lt;code&gt;(char *)*&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;How do we call &lt;code&gt;foo&lt;&#x2f;code&gt; in Swift?&lt;&#x2f;p&gt;
 &lt;p&gt;Here&#x27;s the tl;dr. We can wrap it in a Swift function that have the same
 interface:&lt;&#x2f;p&gt;
@@ -2994,7 +3031,7 @@ interface:&lt;&#x2f;p&gt;
 }
 &lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;&lt;code&gt;errorMessage&lt;&#x2f;code&gt; will contain whatever our C function &lt;code&gt;foo&lt;&#x2f;code&gt; assigns to it.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;So, what&#x27;s really going on here?&lt;&#x2f;p&gt;
 &lt;p&gt;Inspecting &lt;code&gt;foo&lt;&#x2f;code&gt;&#x27;s signature in Swift, we see&lt;&#x2f;p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;func foo(errorMessage: UnsafeMutablePointer&amp;lt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&amp;gt;)
@@ -3025,7 +3062,7 @@ methods for converting &lt;code&gt;char *&lt;&#x2f;code&gt; &#x2f; &lt;code&gt;U
 &lt;&#x2f;li&gt;
 &lt;&#x2f;ol&gt;
 &lt;p&gt;Hopefully you can see how &lt;code&gt;fooSwift&lt;&#x2f;code&gt; works now.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;Taking a step back, to deal with &lt;code&gt;char **&lt;&#x2f;code&gt; in Swift, we overcame 2 obstacles:&lt;&#x2f;p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -3068,7 +3105,7 @@ struct Parters {
 get two new types.&lt;&#x2f;p&gt;
 &lt;p&gt;Question: how many potentiol values are there for &lt;code&gt;Actor&lt;&#x2f;code&gt;? How many for
 &lt;code&gt;Parters&lt;&#x2f;code&gt;?&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr&gt;
 &lt;p&gt;An &lt;code&gt;Actor&lt;&#x2f;code&gt; can be either a &lt;code&gt;StarkChild&lt;&#x2f;code&gt; or a &lt;code&gt;DireWolf&lt;&#x2f;code&gt;, therefore it has `6&lt;&#x2f;p&gt;
 &lt;ul&gt;
 &lt;li&gt;6 = 12&lt;code&gt;potential values – the *sum* of&lt;&#x2f;code&gt;Child&lt;code&gt;&#x27;s and &lt;&#x2f;code&gt;DireWolf`&#x27;s values.&lt;&#x2f;li&gt;
@@ -3425,7 +3462,9 @@ it affect work when a &lt;code&gt;git branch --all&lt;&#x2f;code&gt; produces a 
 &lt;p&gt;And no, Git&#x27;s social model doesn&#x27;t add work to the owner of the &amp;quot;official&amp;quot;
 repository. Afterall, Git was designed with he linux kernel in mind!  Linus
 himself explains it the best (summary provided below):&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;http:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;4XpnKHJAok8&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;In short, Linus only review pull requests from a few &amp;quot;lieutenants&amp;quot; he trusts,
 and they each follow the same process with their trusted few.  And the pyramid
 trickles all the way down. Here agian, Git solves a problem by getting out of

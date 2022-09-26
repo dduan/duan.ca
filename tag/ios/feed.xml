@@ -16,13 +16,13 @@
 &lt;h2&gt;Introduction&lt;&#x2f;h2&gt;
 &lt;p&gt;Apple sneakily shipped a &amp;quot;dark mode&amp;quot; in iOS 11, native apps looks &lt;em&gt;gorgeous&lt;&#x2f;em&gt; in this mode (especially on
 iPhone X with it&#x27;s OLED display):&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;native-ios-apps-with-smart-invert.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;native-ios-apps-with-smart-invert.png 2x&quot; alt=&quot;iOS 11 apps in smart invert mode&quot;&#x2f;&gt;
 &lt;p&gt;To see it for yourself, go to &lt;em&gt;Settings -&amp;gt; General -&amp;gt; Accessibility Display Accommodations -&amp;gt; Invert Colors&lt;&#x2f;em&gt;
 and toggle the switch to on (I personally set triple tap of the power buttton to toggle this on&#x2f;off):&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;invert-color-settings.png&quot; alt=&quot;turn on smart invert mode in Settings&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
 &lt;p&gt;Note that in Apple&#x27;s first-party apps, not every view&#x27;s color is inverted (hence, &amp;quot;smart&amp;quot;). For apps that we
 built, that would not be the case automatically. Instead, we get the full color inversion under this setting:&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;third-party-app-no-change.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;third-party-app-no-change.png 2x&quot; alt=&quot;default third party app before and after smart color&quot;&#x2f;&gt;
 &lt;p&gt;In this article, we&#x27;ll see how to best adapt our apps so they look just as good as first-party iOS apps under
 the smart invert setting.&lt;&#x2f;p&gt;
 &lt;h2&gt;The Basics&lt;&#x2f;h2&gt;
@@ -39,11 +39,11 @@ colors of the view and all of its subviews.&lt;&#x2f;p&gt;
 our sample app&#x27;s source code:&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;setting-accessibilityIgnoresInvertColors-to-true-in-code.png&quot; alt=&quot;setting accessibilityIgnoresInvertColors to true in code&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
 &lt;p&gt;This gives us the desired effect for that view 🎉:&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-code-result.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-code-result.png 2x&quot; alt=&quot;result of supporting invert color in code&quot;&#x2f;&gt;
 &lt;p&gt;The same can be done in Interface Builder. Let&#x27;s fix the other view by setting a runtime attribute:&lt;&#x2f;p&gt;
 &lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;setting-accessibilityIgnoresInvertColors-to-true-in-interface-builder.png&quot; alt=&quot;setting accessibilityIgnoresInvertColors to true in Interface Builder&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
 &lt;p&gt;Result:&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-interface-builder-result.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-interface-builder-result.png 2x&quot; alt=&quot;result of supporting invert color in interface builder&quot;&#x2f;&gt;
 &lt;p&gt;Tada!&lt;&#x2f;p&gt;
 &lt;h2&gt;Compatibility with older iOS versions&lt;&#x2f;h2&gt;
 &lt;p&gt;The story gets slightly complicated when your app need to run on older iOS versions. For one, our code won&#x27;t
@@ -105,7 +105,9 @@ I created a framework that supports distribution via Swift Package Manager, Coco
 Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
 SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
 Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
 the version tag, documentation generation, automatic Carthage binary generation, test coverage...&lt;&#x2f;p&gt;
 &lt;p&gt;Anyways, here&#x27;s some stuff mentioned in the video:&lt;&#x2f;p&gt;

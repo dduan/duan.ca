@@ -389,7 +389,9 @@ at the end of &lt;code&gt;storage&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
                 <description>&lt;p&gt;I guess I&#x27;m starting a series of minute-long videos. In this first video, I built &lt;code&gt;pwd&lt;&#x2f;code&gt; out of &lt;code&gt;getcwd&lt;&#x2f;code&gt;. The
 code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift&#x27;s great C-interop
 capability.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;Some details are lost in this video, however. For example, the POSIX standard actually says &lt;code&gt;getcwd&lt;&#x2f;code&gt;&#x27;s 2nd
 argument being &lt;code&gt;0&lt;&#x2f;code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
 memory as needed). Swift&#x27;s handling of &lt;code&gt;char *&lt;&#x2f;code&gt; aka &lt;code&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;&#x2f;code&gt; in context of a &lt;code&gt;var&lt;&#x2f;code&gt; array
@@ -411,7 +413,7 @@ to have string manipulating functions take this form:&lt;&#x2f;p&gt;
 &lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;To mutate the arugment &lt;code&gt;errorMessage&lt;&#x2f;code&gt; of type &lt;code&gt;char *&lt;&#x2f;code&gt;, &lt;code&gt;foo&lt;&#x2f;code&gt; takes a pointer
 to it, &lt;code&gt;(char *)*&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;How do we call &lt;code&gt;foo&lt;&#x2f;code&gt; in Swift?&lt;&#x2f;p&gt;
 &lt;p&gt;Here&#x27;s the tl;dr. We can wrap it in a Swift function that have the same
 interface:&lt;&#x2f;p&gt;
@@ -423,7 +425,7 @@ interface:&lt;&#x2f;p&gt;
 }
 &lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;&lt;code&gt;errorMessage&lt;&#x2f;code&gt; will contain whatever our C function &lt;code&gt;foo&lt;&#x2f;code&gt; assigns to it.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;So, what&#x27;s really going on here?&lt;&#x2f;p&gt;
 &lt;p&gt;Inspecting &lt;code&gt;foo&lt;&#x2f;code&gt;&#x27;s signature in Swift, we see&lt;&#x2f;p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;func foo(errorMessage: UnsafeMutablePointer&amp;lt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&amp;gt;)
@@ -454,7 +456,7 @@ methods for converting &lt;code&gt;char *&lt;&#x2f;code&gt; &#x2f; &lt;code&gt;U
 &lt;&#x2f;li&gt;
 &lt;&#x2f;ol&gt;
 &lt;p&gt;Hopefully you can see how &lt;code&gt;fooSwift&lt;&#x2f;code&gt; works now.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;Taking a step back, to deal with &lt;code&gt;char **&lt;&#x2f;code&gt; in Swift, we overcame 2 obstacles:&lt;&#x2f;p&gt;
 &lt;ol&gt;
 &lt;li&gt;

@@ -1125,7 +1125,9 @@ I&#x27;m only doing file I&#x2f;O here.&lt;&#x2f;em&gt;&lt;&#x2f;p&gt;
             <item>
                 <title>Unix File Permissions In Swift</title>
                 <description>&lt;p&gt;Wrap file permissions from &lt;code&gt;stat&lt;&#x2f;code&gt; and &lt;code&gt;chmod&lt;&#x2f;code&gt; in an &lt;code&gt;OptionSet&lt;&#x2f;code&gt; in Swift.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;1ZrouR_F-AU&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 </description>
                 <pubDate>Sun, 06 May 2018 16:43:20 -0700</pubDate>
                 <link>https://duan.ca/2018/05/06/unix-file-permissions-in-swift/</link>
@@ -1135,7 +1137,9 @@ I&#x27;m only doing file I&#x2f;O here.&lt;&#x2f;em&gt;&lt;&#x2f;p&gt;
                 <title>An Interpreter Without A Language</title>
                 <description>&lt;p&gt;From the &lt;a href=&quot;&#x2f;2018&#x2f;01&#x2f;13&#x2f;coding-without-a-language&#x2f;&quot;&gt;AST&lt;&#x2f;a&gt; and &lt;a href=&quot;&#x2f;2018&#x2f;01&#x2f;20&#x2f;scopes&#x2f;&quot;&gt;scopes&lt;&#x2f;a&gt;, come a simple interpreter. This intepreter can &amp;quot;execute&amp;quot; the fibonacci
 function AST and produce a correct results.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;C16PD44qyOY&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 </description>
                 <pubDate>Tue, 30 Jan 2018 12:53:38 -0800</pubDate>
                 <link>https://duan.ca/2018/01/30/an-interpreter-without-a-language/</link>
@@ -1144,7 +1148,9 @@ function AST and produce a correct results.&lt;&#x2f;p&gt;
             <item>
                 <title>Scopes Without A Language</title>
                 <description>&lt;p&gt;A short video on the concept of static scope.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;o0jwyd8nUK4&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 </description>
                 <pubDate>Sat, 20 Jan 2018 19:50:24 -0800</pubDate>
                 <link>https://duan.ca/2018/01/20/scopes/</link>
@@ -1152,7 +1158,9 @@ function AST and produce a correct results.&lt;&#x2f;p&gt;
             </item>
             <item>
                 <title>Coding Without A Language</title>
-                <description>&lt;!-- raw HTML omitted --&gt;
+                <description>&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;OKjQtn_Gvug&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;Sorry for the click-baity title. I actually really like this one.&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Sat, 13 Jan 2018 12:07:19 -0800</pubDate>
@@ -1163,7 +1171,9 @@ function AST and produce a correct results.&lt;&#x2f;p&gt;
                 <title>Scripting A &#x27;cat&#x27; Under 1 Minute</title>
                 <description>&lt;p&gt;This video demonstrates a few things: the &lt;code&gt;readLine&lt;&#x2f;code&gt; standard library function, scripting with Swift, and
 pattern matching as loop conditions. Enjoy!&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;8rAqzvChbak&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 </description>
                 <pubDate>Sat, 06 Jan 2018 18:34:39 -0800</pubDate>
                 <link>https://duan.ca/2018/01/06/cat-under-1-minute/</link>
@@ -1174,7 +1184,9 @@ pattern matching as loop conditions. Enjoy!&lt;&#x2f;p&gt;
                 <description>&lt;p&gt;I guess I&#x27;m starting a series of minute-long videos. In this first video, I built &lt;code&gt;pwd&lt;&#x2f;code&gt; out of &lt;code&gt;getcwd&lt;&#x2f;code&gt;. The
 code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift&#x27;s great C-interop
 capability.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;Some details are lost in this video, however. For example, the POSIX standard actually says &lt;code&gt;getcwd&lt;&#x2f;code&gt;&#x27;s 2nd
 argument being &lt;code&gt;0&lt;&#x2f;code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
 memory as needed). Swift&#x27;s handling of &lt;code&gt;char *&lt;&#x2f;code&gt; aka &lt;code&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;&#x2f;code&gt; in context of a &lt;code&gt;var&lt;&#x2f;code&gt; array
@@ -1187,7 +1199,9 @@ is also very cool.&lt;&#x2f;p&gt;
             <item>
                 <title>Contributing To Open-Source Swift</title>
                 <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes, on YouTube.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;ul&gt;
 &lt;li&gt;Pull request: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;swift-corelibs-foundation&#x2f;pull&#x2f;1376&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;swift-corelibs-foundation&#x2f;pull&#x2f;1376&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
 &lt;li&gt;SR-6647: &lt;a href=&quot;https:&#x2f;&#x2f;bugs.swift.org&#x2f;browse&#x2f;SR-6647&quot;&gt;https:&#x2f;&#x2f;bugs.swift.org&#x2f;browse&#x2f;SR-6647&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
@@ -1205,7 +1219,9 @@ completely separate.&lt;&#x2f;p&gt;
 &lt;p&gt;We added more standard library functionalities to BitArray (ExpressibleByArrayLiteral,
 CustomStringConvertible, Equatable, etc). Then, we added documentation and other open-source things left
 undone from &amp;quot;episode 2&amp;quot;.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;ckrd_FoFMl0&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 </description>
                 <pubDate>Tue, 19 Dec 2017 12:17:49 -0800</pubDate>
                 <link>https://duan.ca/2017/12/19/bitarray-final-act/</link>
@@ -1218,7 +1234,9 @@ I created a framework that supports distribution via Swift Package Manager, Coco
 Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
 SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
 Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
 the version tag, documentation generation, automatic Carthage binary generation, test coverage...&lt;&#x2f;p&gt;
 &lt;p&gt;Anyways, here&#x27;s some stuff mentioned in the video:&lt;&#x2f;p&gt;
@@ -1241,7 +1259,9 @@ the version tag, documentation generation, automatic Carthage binary generation,
                 <title>Let&#x27;s Build A BitArray In Swift</title>
                 <description>&lt;p&gt;In this video, I build a space-efficient BitArray that confirms to &lt;code&gt;RandomAccessCollection&lt;&#x2f;code&gt; in Swift in
 a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;-k_jrIoD56k&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;p&gt;I guess I&#x27;m a YouTuber now. You can subscribe to my &lt;a href=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;channel&#x2f;UCkBVC0dMgyUnxzettP7qE-A&quot;&gt;channel&lt;&#x2f;a&gt; 😛.&lt;&#x2f;p&gt;
 </description>
                 <pubDate>Tue, 12 Dec 2017 22:51:04 -0800</pubDate>
@@ -1436,7 +1456,7 @@ the owener and its fate unknown.&lt;&#x2f;p&gt;
 &lt;ul&gt;
 &lt;li&gt;everything.&lt;&#x2f;li&gt;
 &lt;&#x2f;ul&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;br &#x2f;&gt;
 &lt;p&gt;Fastforward to today. I use and write software applications for a living.
 Programs I use directly range from terminal commands to GUI apps and web apps in
 a browser.&lt;&#x2f;p&gt;
@@ -1460,7 +1480,7 @@ no matter how your OS changes.&lt;&#x2f;p&gt;
 &lt;p&gt;Most importantly, they remind me of the programs I built on that electronic
 dictionary. I want to make them today, with my favorite programming language
 Swift!&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;br &#x2f;&gt;
 &lt;p&gt;The go-to library for writing TUI apps is &lt;a href=&quot;https:&#x2f;&#x2f;www.gnu.org&#x2f;software&#x2f;ncurses&#x2f;&quot;&gt;ncurses&lt;&#x2f;a&gt;. Classics such as vim,
 emacs and mutt were written with it to some degree. But I find it hard to dive
 into: it has a large number of strange legacy function names and offers
@@ -1742,7 +1762,7 @@ value for any non-existence keys. It is, unsurpringly, a subclass of &lt;code&gt
 &lt;p&gt;I find my self missing this handy container in Swift. Especially when I use
 a normal &lt;code&gt;Dictionary&lt;&#x2f;code&gt; to accumulate&#x2f;coalesce values under distinct keys. So I
 wrote my own:&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;script src=&quot;https:&#x2f;&#x2f;gist.github.com&#x2f;dduan&#x2f;31ed39c4c98ecb88290f0743cb394c20.js&quot;&gt;&lt;&#x2f;script&gt;
 &lt;p&gt;There are a few noticable things about this implementation:&lt;&#x2f;p&gt;
 &lt;ul&gt;
 &lt;li&gt;It does not conform to the &lt;code&gt;DictionaryLiteralConvertible&lt;&#x2f;code&gt; protocol, for no
@@ -1772,7 +1792,7 @@ we&#x27;d better get to work, right?
 &lt;p&gt;Before going full existential, let&#x27;s limit &amp;quot;order&amp;quot; to Swift&#x27;s set and
 dictionaries -- there is none. Of course, you can take values&#x2f;keys out and
 sort them. But what if all you care about is &lt;em&gt;some&lt;&#x2f;em&gt; order?&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;Recently, I wrote&lt;&#x2f;p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;enum Token {
   static let all = [
@@ -1866,7 +1886,7 @@ code eventually end up like this:&lt;&#x2f;p&gt;
 gets checked with the correct order. We didn&#x27;t need to sort the entire set of
 tokens, nor did we do any heavy data massage upfront, making a bunch of copies
 along the way.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;Looking back, this post really failed to capture the eureka moment as I came
 up with the erasure method. I discovered a series of small challenges and got
 help from Swift&#x27;s designers in each step. Everything fell together in the end.&lt;&#x2f;p&gt;
@@ -1887,7 +1907,7 @@ to have string manipulating functions take this form:&lt;&#x2f;p&gt;
 &lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;To mutate the arugment &lt;code&gt;errorMessage&lt;&#x2f;code&gt; of type &lt;code&gt;char *&lt;&#x2f;code&gt;, &lt;code&gt;foo&lt;&#x2f;code&gt; takes a pointer
 to it, &lt;code&gt;(char *)*&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;How do we call &lt;code&gt;foo&lt;&#x2f;code&gt; in Swift?&lt;&#x2f;p&gt;
 &lt;p&gt;Here&#x27;s the tl;dr. We can wrap it in a Swift function that have the same
 interface:&lt;&#x2f;p&gt;
@@ -1899,7 +1919,7 @@ interface:&lt;&#x2f;p&gt;
 }
 &lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
 &lt;p&gt;&lt;code&gt;errorMessage&lt;&#x2f;code&gt; will contain whatever our C function &lt;code&gt;foo&lt;&#x2f;code&gt; assigns to it.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;So, what&#x27;s really going on here?&lt;&#x2f;p&gt;
 &lt;p&gt;Inspecting &lt;code&gt;foo&lt;&#x2f;code&gt;&#x27;s signature in Swift, we see&lt;&#x2f;p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;func foo(errorMessage: UnsafeMutablePointer&amp;lt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&amp;gt;)
@@ -1930,7 +1950,7 @@ methods for converting &lt;code&gt;char *&lt;&#x2f;code&gt; &#x2f; &lt;code&gt;U
 &lt;&#x2f;li&gt;
 &lt;&#x2f;ol&gt;
 &lt;p&gt;Hopefully you can see how &lt;code&gt;fooSwift&lt;&#x2f;code&gt; works now.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr &#x2f;&gt;
 &lt;p&gt;Taking a step back, to deal with &lt;code&gt;char **&lt;&#x2f;code&gt; in Swift, we overcame 2 obstacles:&lt;&#x2f;p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -1973,7 +1993,7 @@ struct Parters {
 get two new types.&lt;&#x2f;p&gt;
 &lt;p&gt;Question: how many potentiol values are there for &lt;code&gt;Actor&lt;&#x2f;code&gt;? How many for
 &lt;code&gt;Parters&lt;&#x2f;code&gt;?&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;hr&gt;
 &lt;p&gt;An &lt;code&gt;Actor&lt;&#x2f;code&gt; can be either a &lt;code&gt;StarkChild&lt;&#x2f;code&gt; or a &lt;code&gt;DireWolf&lt;&#x2f;code&gt;, therefore it has `6&lt;&#x2f;p&gt;
 &lt;ul&gt;
 &lt;li&gt;6 = 12&lt;code&gt;potential values – the *sum* of&lt;&#x2f;code&gt;Child&lt;code&gt;&#x27;s and &lt;&#x2f;code&gt;DireWolf`&#x27;s values.&lt;&#x2f;li&gt;

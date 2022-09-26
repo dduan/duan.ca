@@ -19,7 +19,7 @@ the owener and its fate unknown.&lt;&#x2f;p&gt;
 &lt;ul&gt;
 &lt;li&gt;everything.&lt;&#x2f;li&gt;
 &lt;&#x2f;ul&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;br &#x2f;&gt;
 &lt;p&gt;Fastforward to today. I use and write software applications for a living.
 Programs I use directly range from terminal commands to GUI apps and web apps in
 a browser.&lt;&#x2f;p&gt;
@@ -43,7 +43,7 @@ no matter how your OS changes.&lt;&#x2f;p&gt;
 &lt;p&gt;Most importantly, they remind me of the programs I built on that electronic
 dictionary. I want to make them today, with my favorite programming language
 Swift!&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;br &#x2f;&gt;
 &lt;p&gt;The go-to library for writing TUI apps is &lt;a href=&quot;https:&#x2f;&#x2f;www.gnu.org&#x2f;software&#x2f;ncurses&#x2f;&quot;&gt;ncurses&lt;&#x2f;a&gt;. Classics such as vim,
 emacs and mutt were written with it to some degree. But I find it hard to dive
 into: it has a large number of strange legacy function names and offers

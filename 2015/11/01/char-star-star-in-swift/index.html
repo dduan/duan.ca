@@ -38,7 +38,7 @@ to have string manipulating functions take this form:</p>
 </code></pre>
 <p>To mutate the arugment <code>errorMessage</code> of type <code>char *</code>, <code>foo</code> takes a pointer
 to it, <code>(char *)*</code>.</p>
-<!-- raw HTML omitted -->
+<hr />
 <p>How do we call <code>foo</code> in Swift?</p>
 <p>Here's the tl;dr. We can wrap it in a Swift function that have the same
 interface:</p>
@@ -50,7 +50,7 @@ interface:</p>
 }
 </code></pre>
 <p><code>errorMessage</code> will contain whatever our C function <code>foo</code> assigns to it.</p>
-<!-- raw HTML omitted -->
+<hr />
 <p>So, what's really going on here?</p>
 <p>Inspecting <code>foo</code>'s signature in Swift, we see</p>
 <pre><code class="language-swift">func foo(errorMessage: UnsafeMutablePointer&lt;UnsafeMutablePointer&lt;CChar&gt;&gt;)
@@ -81,7 +81,7 @@ methods for converting <code>char *</code> / <code>UnsafeMutablePointer&lt;CChar
 </li>
 </ol>
 <p>Hopefully you can see how <code>fooSwift</code> works now.</p>
-<!-- raw HTML omitted -->
+<hr />
 <p>Taking a step back, to deal with <code>char **</code> in Swift, we overcame 2 obstacles:</p>
 <ol>
 <li>

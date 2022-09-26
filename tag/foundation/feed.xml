@@ -118,7 +118,9 @@ I&#x27;m only doing file I&#x2f;O here.&lt;&#x2f;em&gt;&lt;&#x2f;p&gt;
             <item>
                 <title>Contributing To Open-Source Swift</title>
                 <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes, on YouTube.&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
 &lt;ul&gt;
 &lt;li&gt;Pull request: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;swift-corelibs-foundation&#x2f;pull&#x2f;1376&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;apple&#x2f;swift-corelibs-foundation&#x2f;pull&#x2f;1376&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
 &lt;li&gt;SR-6647: &lt;a href=&quot;https:&#x2f;&#x2f;bugs.swift.org&#x2f;browse&#x2f;SR-6647&quot;&gt;https:&#x2f;&#x2f;bugs.swift.org&#x2f;browse&#x2f;SR-6647&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;

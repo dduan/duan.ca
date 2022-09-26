@@ -12,7 +12,7 @@ value for any non-existence keys. It is, unsurpringly, a subclass of &lt;code&gt
 &lt;p&gt;I find my self missing this handy container in Swift. Especially when I use
 a normal &lt;code&gt;Dictionary&lt;&#x2f;code&gt; to accumulate&#x2f;coalesce values under distinct keys. So I
 wrote my own:&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;script src=&quot;https:&#x2f;&#x2f;gist.github.com&#x2f;dduan&#x2f;31ed39c4c98ecb88290f0743cb394c20.js&quot;&gt;&lt;&#x2f;script&gt;
 &lt;p&gt;There are a few noticable things about this implementation:&lt;&#x2f;p&gt;
 &lt;ul&gt;
 &lt;li&gt;It does not conform to the &lt;code&gt;DictionaryLiteralConvertible&lt;&#x2f;code&gt; protocol, for no

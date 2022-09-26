@@ -11,8 +11,10 @@ around the time of this post and finally found enough tutorials, examples, and
 working software to get myself started in this area. In doing so, I made a video
 to demo some progress. (&lt;em&gt;this article includes all the same information and
 more, so just read on if you don&#x27;t have 15 minutes for YouTube&lt;&#x2f;em&gt;).&lt;&#x2f;p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;div class=&quot;video-container&quot;&gt;
+    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;yEYtwmI7bDg&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
+&lt;&#x2f;div&gt;
+&lt;br&gt;
 &lt;h2&gt;Our goal:&lt;&#x2f;h2&gt;
 &lt;ol&gt;
 &lt;li&gt;Use as much built-in tools on a Mac as possible. The web development

@@ -34,7 +34,7 @@ we'd better get to work, right?
 <p>Before going full existential, let's limit &quot;order&quot; to Swift's set and
 dictionaries -- there is none. Of course, you can take values/keys out and
 sort them. But what if all you care about is <em>some</em> order?</p>
-<!-- raw HTML omitted -->
+<hr />
 <p>Recently, I wrote</p>
 <pre><code class="language-swift">enum Token {
   static let all = [
@@ -128,7 +128,7 @@ code eventually end up like this:</p>
 gets checked with the correct order. We didn't need to sort the entire set of
 tokens, nor did we do any heavy data massage upfront, making a bunch of copies
 along the way.</p>
-<!-- raw HTML omitted -->
+<hr />
 <p>Looking back, this post really failed to capture the eureka moment as I came
 up with the erasure method. I discovered a series of small challenges and got
 help from Swift's designers in each step. Everything fell together in the end.</p>

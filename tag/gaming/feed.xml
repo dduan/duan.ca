@@ -9,19 +9,19 @@
                 <description>&lt;p&gt;I noticed a lot of people are playing these two games on Twitch recently: Fall Guys and Among Us.
 Personally, I think Fall Guys is a pretty fun game to play and Among Us is an entertaining game to
 watch. I&#x27;m glad these games are out and popular in this strange year, even though I&#x27;m not
-playing either frequently (perhaps that&#x27;s a mistake).&lt;&#x2f;p&gt;
+playing either frequently (perhaps that&#x27;s a mistake).&lt;/p&gt;
 &lt;p&gt;Anyways, I want to write about this observation that seems unique from me: that the in-game
 characters in these two games are both blob-y, short and colorful. This similarity stuck in my head
 for a while, and I&#x27;m getting increasingly anxious because those who frequently play these games
-aren&#x27;t making similar remarks &lt;em&gt;at all&lt;&#x2f;em&gt;. So, in this Sunday evening, I just had to get it out of my
-head:&lt;&#x2f;p&gt;
+aren&#x27;t making similar remarks &lt;em&gt;at all&lt;/em&gt;. So, in this Sunday evening, I just had to get it out of my
+head:&lt;/p&gt;
 &lt;video id=&quot;video-tag&quot; width=&quot;100%&quot; autoplay muted loop playsinline&gt; 
-    &lt;source src=&quot;&#x2f;assets&#x2f;2020&#x2f;08&#x2f;FallGuysAmongUs.mov&quot; type=&quot;video&#x2f;quicktime&quot; &#x2f;&gt;  
-&lt;&#x2f;video&gt;
-&lt;img id=&quot;img-tag&quot; width=&quot;100%&quot; src=&quot;&#x2f;assets&#x2f;2020&#x2f;08&#x2f;FallGuysAmongUs.mov&quot;&gt;
-&lt;script type=&quot;text&#x2f;javascript&quot;&gt;
+    &lt;source src=&quot;/assets/2020/08/FallGuysAmongUs.mov&quot; type=&quot;video/quicktime&quot; /&gt;  
+&lt;/video&gt;
+&lt;img id=&quot;img-tag&quot; width=&quot;100%&quot; src=&quot;/assets/2020/08/FallGuysAmongUs.mov&quot;&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
     function BrowserDetection() {
-        &#x2f;&#x2f;Check if browser is Safari, if it is, hide the &lt;video&gt; tag, otherwise hide the &lt;img&gt; tag
+        //Check if browser is Safari, if it is, hide the &lt;video&gt; tag, otherwise hide the &lt;img&gt; tag
         if (navigator.userAgent.search(&quot;Safari&quot;) &gt;= 0 &amp;&amp; navigator.userAgent.search(&quot;Chrome&quot;) &lt; 0) {
             document.getElementById(&#x27;video-tag&#x27;).style.display= &quot;none&quot;;
         } else {
@@ -29,11 +29,11 @@ head:&lt;&#x2f;p&gt;
         }
     }
 
-    &#x2f;&#x2f;And run the script. Note that the script tag needs to be run after HTML so where you place it is important. 
+    //And run the script. Note that the script tag needs to be run after HTML so where you place it is important. 
     BrowserDetection();
-&lt;&#x2f;script&gt;
+&lt;/script&gt;
 &lt;p&gt;This animation is made from Pixelmator and Keynote. Those two along with Sketch and Final Cut Pro
-make me feel invincible these days.&lt;&#x2f;p&gt;
+make me feel invincible these days.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 16 Aug 2020 23:42:44 -0700</pubDate>
                 <link>https://duan.ca/2020/08/16/fall-guys-and-among-us/</link>

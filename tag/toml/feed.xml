@@ -6,73 +6,73 @@
         <atom:link href="https://duan.ca/tag/toml/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Making of a TOML parser</title>
-                <description>&lt;p&gt;During the holidays, I spent some time on the parser that underlies &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;TOMDecoder&quot;&gt;TOMLDecoder&lt;&#x2f;a&gt;. The original
+                <description>&lt;p&gt;During the holidays, I spent some time on the parser that underlies &lt;a href=&quot;https://github.com/dduan/TOMDecoder&quot;&gt;TOMLDecoder&lt;/a&gt;. The original
 implementation targeted TOML&#x27;s spec version 0.5. A few release-candidates for version 1.0 has come
-out since then. So it&#x27;s a good time to give this project attention.&lt;&#x2f;p&gt;
+out since then. So it&#x27;s a good time to give this project attention.&lt;/p&gt;
 &lt;p&gt;Back in the 0.5 days, the TOML spec was (well) written in English with a few examples for each
-element in the language. The spec document both:&lt;&#x2f;p&gt;
+element in the language. The spec document both:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;how a TOML document should be spelled out (table header should have a &lt;code&gt;[&lt;&#x2f;code&gt;, followed by 0 or more
-whitespace, then, a key, 0 or more whitespace, then &lt;code&gt;]&lt;&#x2f;code&gt;).&lt;&#x2f;li&gt;
-&lt;li&gt;rules for detecting conflicts in a syntactically correct document (if &lt;code&gt;a.b&lt;&#x2f;code&gt; is a table, then it&#x27;s
-invalid to set its value to be a date in the same document).&lt;&#x2f;li&gt;
-&lt;&#x2f;ol&gt;
+&lt;li&gt;how a TOML document should be spelled out (table header should have a &lt;code&gt;[&lt;/code&gt;, followed by 0 or more
+whitespace, then, a key, 0 or more whitespace, then &lt;code&gt;]&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;rules for detecting conflicts in a syntactically correct document (if &lt;code&gt;a.b&lt;/code&gt; is a table, then it&#x27;s
+invalid to set its value to be a date in the same document).&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;My memory of hand-rolling a recursive-descent scanner that conforms to both of the above
 requirements was unpleasant. My lesser understanding of the markup language, the vagueness for the
 validation rules in the spec, as well as (I think?) poorer skill for writing parsers all contributed
 to the unpleasantness. TOML has gained an ABNF for its syntax since then, making it less necessary
-to reply on the English descriptions. It&#x27;s the holidays, maintaining existing code is hard.&lt;&#x2f;p&gt;
+to reply on the English descriptions. It&#x27;s the holidays, maintaining existing code is hard.&lt;/p&gt;
 &lt;p&gt;So, I decided to have some fun, and re-write the parser from scratch. The rest of this post contains
-notable things from the rewrite.&lt;&#x2f;p&gt;
-&lt;p&gt;I translated the ABNF with parser combinators. The recent &lt;a href=&quot;https:&#x2f;&#x2f;pointfree.co&quot;&gt;Pointfree&lt;&#x2f;a&gt; video series made me curious
+notable things from the rewrite.&lt;/p&gt;
+&lt;p&gt;I translated the ABNF with parser combinators. The recent &lt;a href=&quot;https://pointfree.co&quot;&gt;Pointfree&lt;/a&gt; video series made me curious
 about the performance of this parsing style in Swift. At the end of the rewrite, I added benchmarks
-to find out. Here&#x27;s benchmark for parsing an example TOML document&lt;&#x2f;p&gt;
+to find out. Here&#x27;s benchmark for parsing an example TOML document&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;name                    time          std        iterations
 -----------------------------------------------------------
 example-toml.decoder    454840.000 ns ±   3.63 %       3045
 example-toml.combinator 422721.500 ns ±   4.28 %       3266
 example-toml.scanner     82232.000 ns ±   9.39 %      16793
 example-toml.c            5901.000 ns ±  24.72 %     216140
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;&lt;code&gt;example-toml.decoder&lt;&#x2f;code&gt; is time spent on parsing + decoding. &lt;code&gt;example-toml.scanner&lt;&#x2f;code&gt; is the time spent
-by the old parser. &lt;code&gt;example-toml.c&lt;&#x2f;code&gt; is the performance of a C library.&lt;&#x2f;p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;example-toml.decoder&lt;/code&gt; is time spent on parsing + decoding. &lt;code&gt;example-toml.scanner&lt;/code&gt; is the time spent
+by the old parser. &lt;code&gt;example-toml.c&lt;/code&gt; is the performance of a C library.&lt;/p&gt;
 &lt;p&gt;So, the new parser is much much slower! However, I know from debugging through 200+ unit tests that,
 the new parser fixed a few serious bugs compared to the old. It also conforms to diffs between
 version 0.5 and 1.0 of the TOML spec. Speed alone is not good enough of a reason to throw this work
-away! There&#x27;s another reason the new parser is superior, but I&#x27;ll talk about it later.&lt;&#x2f;p&gt;
+away! There&#x27;s another reason the new parser is superior, but I&#x27;ll talk about it later.&lt;/p&gt;
 &lt;p&gt;To be fair to parser combinators, I made several decisions that preferred development speed over
 runtime speed during development. These were conscious decisions. There were no benchmarks at
 time so I didn&#x27;t want to worry about it pre-maturely. Point is, there are rooms for significant
 runtime speed improvements. Perhaps I&#x27;ll write a follow-up post detailing my journey to make the
-parser go fast later; the C library is part of the benchmark for a reason!&lt;&#x2f;p&gt;
-&lt;p&gt;I was also inspired by Joe Groff&#x27;s blog post &lt;a href=&quot;http:&#x2f;&#x2f;duriansoftware.com&#x2f;joe&#x2f;Constructing-human-grade-parsers.html&quot;&gt;Constructing human-grade parsers&lt;&#x2f;a&gt;. Instead of
+parser go fast later; the C library is part of the benchmark for a reason!&lt;/p&gt;
+&lt;p&gt;I was also inspired by Joe Groff&#x27;s blog post &lt;a href=&quot;http://duriansoftware.com/joe/Constructing-human-grade-parsers.html&quot;&gt;Constructing human-grade parsers&lt;/a&gt;. Instead of
 stopping at the first syntax error, a parser (any parser!) should treat the error as part of its
 successful output, deal with the erroneous part of the input, and recover from it. This approach
 means the portion of the input after the first error gets parsed, and any error it may contain can
-be found and reported, too! Joe&#x27;s post explains this well.&lt;&#x2f;p&gt;
-&lt;p&gt;To talk about this further, let&#x27;s dive into some details.&lt;&#x2f;p&gt;
+be found and reported, too! Joe&#x27;s post explains this well.&lt;/p&gt;
+&lt;p&gt;To talk about this further, let&#x27;s dive into some details.&lt;/p&gt;
 &lt;p&gt;As mentioned earlier, to validate a TOML document, there are rules for both syntax and semantics to
 consider. TOML has a few top-level constructs: table header, array-table header, and key-value
 pairs. Each of these alone can be validated purely based on syntax. On a high level, a TOML parser
-can do the following:&lt;&#x2f;p&gt;
+can do the following:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;parse a list of top-level constructs&lt;&#x2f;li&gt;
-&lt;li&gt;iterate over this list, gradually assembly the complete TOML object&lt;&#x2f;li&gt;
-&lt;&#x2f;ol&gt;
-&lt;p&gt;Errors could exist from each of these two steps To make the parser &lt;em&gt;human-grade&lt;&#x2f;em&gt;, the errors must
+&lt;li&gt;parse a list of top-level constructs&lt;/li&gt;
+&lt;li&gt;iterate over this list, gradually assembly the complete TOML object&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Errors could exist from each of these two steps To make the parser &lt;em&gt;human-grade&lt;/em&gt;, the errors must
 not propagate by disrupting the parsing logic. In Swift, this means the code don&#x27;t throw the
-(conceptual) errors, instead, the top-level constructs include error as a possible value:&lt;&#x2f;p&gt;
+(conceptual) errors, instead, the top-level constructs include error as a possible value:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;enum TopLevel: Equatable {
     case table(Key)
     case arrayTable(Key)
     case keyValue(KeyValuePair)
     case error(Reason)
 }
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;Upon evaluating a &lt;code&gt;TopLevel&lt;&#x2f;code&gt; value, the parser must not stop if it generates a conflict according to
-TOML&#x27;s requirement. We take note of this error, and move on to consume the next &lt;code&gt;TopLevel&lt;&#x2f;code&gt;. Errors
-from this step will join the error from &lt;code&gt;TopLevel.error&lt;&#x2f;code&gt; at the end for users to see. Therefore, the
-second step&#x27;s code roughly does this:&lt;&#x2f;p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Upon evaluating a &lt;code&gt;TopLevel&lt;/code&gt; value, the parser must not stop if it generates a conflict according to
+TOML&#x27;s requirement. We take note of this error, and move on to consume the next &lt;code&gt;TopLevel&lt;/code&gt;. Errors
+from this step will join the error from &lt;code&gt;TopLevel.error&lt;/code&gt; at the end for users to see. Therefore, the
+second step&#x27;s code roughly does this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;var errors = [Error]()
 
 for value in topLevelValues {
@@ -92,26 +92,26 @@ if !errors.isEmpty {
     throw UserFacingError(details: errors)
 }
 
-&#x2f;&#x2f; no error! parsing succeeded
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+// no error! parsing succeeded
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This code &amp;quot;synchronizes&amp;quot; the errors from both the syntactical, and semantical level. With some
-additional effort to make the errors &lt;code&gt;CustomStringConvertible&lt;&#x2f;code&gt;, a erroneous TOML document such as&lt;&#x2f;p&gt;
+additional effort to make the errors &lt;code&gt;CustomStringConvertible&lt;/code&gt;, a erroneous TOML document such as&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-TOML&quot;&gt;a = &amp;quot;Hello
 b = 43
 [b]
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;makes the parser generate the following error message:&lt;&#x2f;p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;makes the parser generate the following error message:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Deserialization failure:
     * Value |1, 5| Missing closing character `&amp;quot;` in string
     * Conflict |3, 2| Conflicting value at [b] Existing value is 43
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The explanation I presented above is simplified by a lot. In reality, the &amp;quot;human-grade&amp;quot; upgrade can
-go a lot further. For example, if the definition of &lt;code&gt;a&lt;&#x2f;code&gt; has a syntax error, instead of rejecting it,
+go a lot further. For example, if the definition of &lt;code&gt;a&lt;/code&gt; has a syntax error, instead of rejecting it,
 as long as we can figure out what the intent is, we can pretend it&#x27;s a good value. That way, any
-semantic issues related to &lt;code&gt;a&lt;&#x2f;code&gt; can be discovered. Improvements like this can be added to the parser
-in many places still.&lt;&#x2f;p&gt;
+semantic issues related to &lt;code&gt;a&lt;/code&gt; can be discovered. Improvements like this can be added to the parser
+in many places still.&lt;/p&gt;
 &lt;p&gt;Anyways, here&#x27;s where I abruptly stop the story of my new TOML parser. There are a lot of exciting
-space for improvment. So this article might be a &amp;quot;part 1&amp;quot;. No promises, though.&lt;&#x2f;p&gt;
+space for improvment. So this article might be a &amp;quot;part 1&amp;quot;. No promises, though.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 03 Jan 2021 14:56:10 -0800</pubDate>
                 <link>https://duan.ca/2021/01/03/human-grade-toml-parser-in-swift/</link>
@@ -119,27 +119,27 @@ space for improvment. So this article might be a &amp;quot;part 1&amp;quot;. No 
             </item>
             <item>
                 <title>TOML Decoder Playlist</title>
-                <description>&lt;p&gt;I enjoyed making &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;TOMLDeserializer&quot;&gt;TOMLDeserializer&lt;&#x2f;a&gt; and &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;TOMLDecoder&quot;&gt;TOMLDecoder&lt;&#x2f;a&gt; recently. Let&#x27;s hope
+                <description>&lt;p&gt;I enjoyed making &lt;a href=&quot;https://github.com/dduan/TOMLDeserializer&quot;&gt;TOMLDeserializer&lt;/a&gt; and &lt;a href=&quot;https://github.com/dduan/TOMLDecoder&quot;&gt;TOMLDecoder&lt;/a&gt; recently. Let&#x27;s hope
 some projects will pick them up and TOML as a configuration format will start to
-spead in Swift communities.&lt;&#x2f;p&gt;
+spead in Swift communities.&lt;/p&gt;
 &lt;p&gt;What&#x27;s outstanding about these projects is that I started working on them while
-&lt;a href=&quot;https:&#x2f;&#x2f;twitch.tv&#x2f;daniel_duan&quot;&gt;streaming&lt;&#x2f;a&gt;. Personally, I consume a lot of content like this. So now people
-can watch me writing Swift, too.&lt;&#x2f;p&gt;
+&lt;a href=&quot;https://twitch.tv/daniel_duan&quot;&gt;streaming&lt;/a&gt;. Personally, I consume a lot of content like this. So now people
+can watch me writing Swift, too.&lt;/p&gt;
 &lt;p&gt;I&#x27;ve been archiving recordings of these streams as much as I can. Here are the
-links to these videos, each is around 1-1.5 hours long:&lt;&#x2f;p&gt;
+links to these videos, each is around 1-1.5 hours long:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;XLLlCEfuFLw&quot;&gt;Turn TOML Test Fixtures Into XCTests With Vim Macros&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;Ztq3K3cq8f0&quot;&gt;Passing TOML Deserialization Tests&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;GTCYSIc6n3U&quot;&gt;Finishing TOML Invalidation Tests&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;HP2Wzh8MVvg&quot;&gt;TOML Decoder: The Beginning&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;EZ7VpbrLkH0&quot;&gt;TOML Decoder: Filling In Missing Implementation Pieces&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;bISMVVWOHKg&quot;&gt;TOML Decoder: Adding The First TOML Decoding Strategy!&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;oOOS4bnhwx4&quot;&gt;TOML Decoder: Project Overview And Data Decoding Support&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;9yDtXsrMtbU&quot;&gt;TOML Decoder: Key Decoding Strategies&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;g1V872HL4Dk&quot;&gt;TOML Decoder: Project Updates&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;&#x2f;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/XLLlCEfuFLw&quot;&gt;Turn TOML Test Fixtures Into XCTests With Vim Macros&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/Ztq3K3cq8f0&quot;&gt;Passing TOML Deserialization Tests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/GTCYSIc6n3U&quot;&gt;Finishing TOML Invalidation Tests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/HP2Wzh8MVvg&quot;&gt;TOML Decoder: The Beginning&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/EZ7VpbrLkH0&quot;&gt;TOML Decoder: Filling In Missing Implementation Pieces&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/bISMVVWOHKg&quot;&gt;TOML Decoder: Adding The First TOML Decoding Strategy!&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/oOOS4bnhwx4&quot;&gt;TOML Decoder: Project Overview And Data Decoding Support&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/9yDtXsrMtbU&quot;&gt;TOML Decoder: Key Decoding Strategies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/g1V872HL4Dk&quot;&gt;TOML Decoder: Project Updates&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;The TOMLDecoder projects would&#x27;ve been capture on camera entirely if I weren&#x27;t
-such a streaming n00b and messed up a few streams. Hilarious.&lt;&#x2f;p&gt;
+such a streaming n00b and messed up a few streams. Hilarious.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 10 Mar 2019 20:32:37 -0700</pubDate>
                 <link>https://duan.ca/2019/03/10/toml-decoder/</link>

@@ -7,10 +7,10 @@
             <item>
                 <title>Naive NixOS Rust Development</title>
                 <description>&lt;p&gt;tl;dr: To work on Rust project with nix-shell, rls and extensions such as
-&lt;code&gt;rust-analysis&lt;&#x2f;code&gt;, &lt;code&gt;rust-src&lt;&#x2f;code&gt;, without caring too much about specific Rust
-toolchain version (except for it being &lt;code&gt;stable&lt;&#x2f;code&gt;), use the following &lt;code&gt;shell.nix&lt;&#x2f;code&gt;:&lt;&#x2f;p&gt;
+&lt;code&gt;rust-analysis&lt;/code&gt;, &lt;code&gt;rust-src&lt;/code&gt;, without caring too much about specific Rust
+toolchain version (except for it being &lt;code&gt;stable&lt;/code&gt;), use the following &lt;code&gt;shell.nix&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;let
-  moz_overlay = import (builtins.fetchTarball https:&#x2f;&#x2f;github.com&#x2f;mozilla&#x2f;nixpkgs-mozilla&#x2f;archive&#x2f;master.tar.gz);
+  moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
   nixpkgs = import &amp;lt;nixpkgs&amp;gt; {
     overlays = [ moz_overlay ];
   };
@@ -23,76 +23,76 @@ in
     name = &amp;quot;rust&amp;quot;;
     buildInputs = [ rustup ruststable ];
   }
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;When you have a Nix hammer, everything looks like a Nix expression.&lt;&#x2f;p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When you have a Nix hammer, everything looks like a Nix expression.&lt;/p&gt;
 &lt;p&gt;Having used NixOS on a real PC for a number of days, this is the impression
-I get from the world of Nix. Unfortunately, so far, it&#x27;s been a negative for me.&lt;&#x2f;p&gt;
+I get from the world of Nix. Unfortunately, so far, it&#x27;s been a negative for me.&lt;/p&gt;
 &lt;p&gt;One of the most exciting thing I want to use Nix for is to bootstrap development
-environment with &lt;code&gt;nix-shell&lt;&#x2f;code&gt;. I imagined it to be similar to using &lt;a href=&quot;https:&#x2f;&#x2f;pipenv-fork.readthedocs.io&#x2f;en&#x2f;latest&#x2f;&quot;&gt;pipenv&lt;&#x2f;a&gt;
+environment with &lt;code&gt;nix-shell&lt;/code&gt;. I imagined it to be similar to using &lt;a href=&quot;https://pipenv-fork.readthedocs.io/en/latest/&quot;&gt;pipenv&lt;/a&gt;
 with Python, except for everything. Well, I&#x27;ve since learned that it&#x27;s not true
-(yet?) for many reasons.&lt;&#x2f;p&gt;
-&lt;p&gt;Modern programming languages come with their own attempt at &lt;em&gt;reproducibility&lt;&#x2f;em&gt;.
+(yet?) for many reasons.&lt;/p&gt;
+&lt;p&gt;Modern programming languages come with their own attempt at &lt;em&gt;reproducibility&lt;/em&gt;.
 Some does it better than others. To make it concrete, I&#x27;m talking about things
-like &lt;a href=&quot;https:&#x2f;&#x2f;haskellstack.org&quot;&gt;Stack&lt;&#x2f;a&gt; for Haskell or &lt;a href=&quot;https:&#x2f;&#x2f;rustup.rs&#x2f;&quot;&gt;rustup&lt;&#x2f;a&gt; for Rust: given the source code, how do
+like &lt;a href=&quot;https://haskellstack.org&quot;&gt;Stack&lt;/a&gt; for Haskell or &lt;a href=&quot;https://rustup.rs/&quot;&gt;rustup&lt;/a&gt; for Rust: given the source code, how do
 I make it build in the way the project intended? What&#x27;s the correct version of
 the compiler, runtime, and tools that works best with this revision of the
 source code? The common solution usually follows this pattern: as author of
 a project, specify as much as you can, the environment best suited for the
-current state of the project. As a &amp;quot;builder&amp;quot;, use a &lt;em&gt;single program&lt;&#x2f;em&gt; that&#x27;s
+current state of the project. As a &amp;quot;builder&amp;quot;, use a &lt;em&gt;single program&lt;/em&gt; that&#x27;s
 capable of updating itself, as well as ensuring that the project builds exactly
-as specified, including managing the compiler&#x2f;runtime&#x2f;tooling versions, etc.&lt;&#x2f;p&gt;
-&lt;p&gt;This &lt;em&gt;single program&lt;&#x2f;em&gt;&#x27;s role is very much the same as the Nix system, except the
-latter is independent of programming languages: &lt;code&gt;rustup&lt;&#x2f;code&gt; installs Rust, so does
+as specified, including managing the compiler/runtime/tooling versions, etc.&lt;/p&gt;
+&lt;p&gt;This &lt;em&gt;single program&lt;/em&gt;&#x27;s role is very much the same as the Nix system, except the
+latter is independent of programming languages: &lt;code&gt;rustup&lt;/code&gt; installs Rust, so does
 Nix. That&#x27;s a bad thing. As a package manager, Nix either have to tightly
 integrate with each of these other package managers, leveraging their evolving
 behaviors to give its user the build environment; or, it must replace them.
-The former is impractical; the latter, well, sucks.&lt;&#x2f;p&gt;
+The former is impractical; the latter, well, sucks.&lt;/p&gt;
 &lt;p&gt;Back to reality. This is the experience I want to have with NixOS: Some programs
 I use daily such as Alacritty, NeoVim, Firfox, etc, are installed globally and
-readily available. They are part of my &lt;code&gt;&#x2f;etc&#x2f;nixos&#x2f;configuration.nix&lt;&#x2f;code&gt;. So far so
+readily available. They are part of my &lt;code&gt;/etc/nixos/configuration.nix&lt;/code&gt;. So far so
 good. Now, I regularly program in a few languages. For each of the project, I&#x27;d
-like to have a &lt;code&gt;shell.nix&lt;&#x2f;code&gt; that brings in its compilers, libraries, LSP servers,
-etc. This is what &lt;code&gt;nix-shell&lt;&#x2f;code&gt; is supposed to give me! This is known as the &amp;quot;per
-project&amp;quot; setup.&lt;&#x2f;p&gt;
-&lt;p&gt;Let&#x27;s see: with Rust, that means &lt;code&gt;rustc&lt;&#x2f;code&gt; (compiler), &lt;code&gt;cargo&lt;&#x2f;code&gt; (package manager),
-&lt;code&gt;rls&lt;&#x2f;code&gt;, &lt;code&gt;rust-src&lt;&#x2f;code&gt; and &lt;code&gt;rust-analysis&lt;&#x2f;code&gt; (LSP). In macOS, I&#x27;d install all of these
-globally with &lt;code&gt;rustup&lt;&#x2f;code&gt;. In NixOS...well, I can ask for &lt;code&gt;rustup&lt;&#x2f;code&gt; for my project:&lt;&#x2f;p&gt;
+like to have a &lt;code&gt;shell.nix&lt;/code&gt; that brings in its compilers, libraries, LSP servers,
+etc. This is what &lt;code&gt;nix-shell&lt;/code&gt; is supposed to give me! This is known as the &amp;quot;per
+project&amp;quot; setup.&lt;/p&gt;
+&lt;p&gt;Let&#x27;s see: with Rust, that means &lt;code&gt;rustc&lt;/code&gt; (compiler), &lt;code&gt;cargo&lt;/code&gt; (package manager),
+&lt;code&gt;rls&lt;/code&gt;, &lt;code&gt;rust-src&lt;/code&gt; and &lt;code&gt;rust-analysis&lt;/code&gt; (LSP). In macOS, I&#x27;d install all of these
+globally with &lt;code&gt;rustup&lt;/code&gt;. In NixOS...well, I can ask for &lt;code&gt;rustup&lt;/code&gt; for my project:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;with import &amp;lt;nixpkgs&amp;gt; {};
 
 stdenv.mkDerivation {
   name = &amp;quot;rust&amp;quot;;
   nativeBuildInputs = [ rustup ];
 }
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;...which gives me &lt;code&gt;rustup&lt;&#x2f;code&gt; and nothing else. That&#x27;s right, you don&#x27;t even get
-a &lt;code&gt;rustc&lt;&#x2f;code&gt; after running &lt;code&gt;nix-shell&lt;&#x2f;code&gt;. But &lt;code&gt;rustup&lt;&#x2f;code&gt; can get you everything else,
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;...which gives me &lt;code&gt;rustup&lt;/code&gt; and nothing else. That&#x27;s right, you don&#x27;t even get
+a &lt;code&gt;rustc&lt;/code&gt; after running &lt;code&gt;nix-shell&lt;/code&gt;. But &lt;code&gt;rustup&lt;/code&gt; can get you everything else,
 all I need to do is ask. Hmm, do I need to run a series of set-up commands with
-&lt;code&gt;rustup&lt;&#x2f;code&gt; every time I enter the environment? No? I just need to run it the first
+&lt;code&gt;rustup&lt;/code&gt; every time I enter the environment? No? I just need to run it the first
 time? Until the cached tools get deleted by some garbage collection mechanism?
-That seems unsatisfying, doesn&#x27;t it?&lt;&#x2f;p&gt;
-&lt;p&gt;Instead of &lt;code&gt;rustup&lt;&#x2f;code&gt;, I could also ask Nix to use the &lt;code&gt;rustc&lt;&#x2f;code&gt;&#x2f;&lt;code&gt;cargo&lt;&#x2f;code&gt;&#x2f;&lt;code&gt;rls&lt;&#x2f;code&gt; it
-knows about directly. This is marginally better. Except I still need &lt;code&gt;rust-src&lt;&#x2f;code&gt;
-and &lt;code&gt;rust-analysis&lt;&#x2f;code&gt; for my needs. As far as I can tell, these &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;rust-lang&#x2f;rls&quot;&gt;RLS&lt;&#x2f;a&gt; components
-are out of Nix&#x27;s control (as of today).&lt;&#x2f;p&gt;
+That seems unsatisfying, doesn&#x27;t it?&lt;/p&gt;
+&lt;p&gt;Instead of &lt;code&gt;rustup&lt;/code&gt;, I could also ask Nix to use the &lt;code&gt;rustc&lt;/code&gt;/&lt;code&gt;cargo&lt;/code&gt;/&lt;code&gt;rls&lt;/code&gt; it
+knows about directly. This is marginally better. Except I still need &lt;code&gt;rust-src&lt;/code&gt;
+and &lt;code&gt;rust-analysis&lt;/code&gt; for my needs. As far as I can tell, these &lt;a href=&quot;https://github.com/rust-lang/rls&quot;&gt;RLS&lt;/a&gt; components
+are out of Nix&#x27;s control (as of today).&lt;/p&gt;
 &lt;p&gt;Everywhere on the internet I looked, for every problem that
 Nix-the-package-manager doesn&#x27;t work out-of-the-box, there&#x27;s someone responding
 along the line of &amp;quot;you can write some Nix expression yourself&amp;quot;. In other words,
 Nix-the-language is powerful enough to solve it, probably. In the case of Rust,
 luckily, Mozilla wrote enough Nix expressions for us and provides them via an
-&lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;mozilla&#x2f;nixpkgs-mozilla&quot;&gt;overlay&lt;&#x2f;a&gt;. These expressions are rich enough to meet my needs.
+&lt;a href=&quot;https://github.com/mozilla/nixpkgs-mozilla&quot;&gt;overlay&lt;/a&gt;. These expressions are rich enough to meet my needs.
 As you can see in the tl;dr at the top, when entering the development
 environment, nix-shell would: download the overlay&#x27;s source code (from the
 internet, or local cache), load the expression it includes, mix in my
-customization, and execute it.&lt;&#x2f;p&gt;
+customization, and execute it.&lt;/p&gt;
 &lt;p&gt;That marks the end of my search. I like the final solution because it&#x27;s mostly
 &amp;quot;vanilla&amp;quot; Nix and doesn&#x27;t require me to mess with a bunch of other tools. For
-solutions that do, read &lt;a href=&quot;https:&#x2f;&#x2f;christine.website&#x2f;blog&#x2f;how-i-start-nix-2020-03-08&quot;&gt;this&lt;&#x2f;a&gt;.&lt;&#x2f;p&gt;
-&lt;hr &#x2f;&gt;
+solutions that do, read &lt;a href=&quot;https://christine.website/blog/how-i-start-nix-2020-03-08&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
+&lt;hr /&gt;
 &lt;p&gt;At end of the day, my needs are pretty basic: consistency from rustup and
 convenience from nix-shell. I didn&#x27;t need to pin the compiler to a specific Rust
-release, or checksum the final build output.&lt;&#x2f;p&gt;
+release, or checksum the final build output.&lt;/p&gt;
 &lt;p&gt;I&#x27;m very new to both technologies so there may be a follow-up post sometime in
-the future.&lt;&#x2f;p&gt;
+the future.&lt;/p&gt;
 </description>
                 <pubDate>Thu, 07 May 2020 11:04:58 -0700</pubDate>
                 <link>https://duan.ca/2020/05/07/nix-rust-development/</link>

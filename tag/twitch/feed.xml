@@ -9,19 +9,19 @@
                 <description>&lt;p&gt;I noticed a lot of people are playing these two games on Twitch recently: Fall Guys and Among Us.
 Personally, I think Fall Guys is a pretty fun game to play and Among Us is an entertaining game to
 watch. I&#x27;m glad these games are out and popular in this strange year, even though I&#x27;m not
-playing either frequently (perhaps that&#x27;s a mistake).&lt;&#x2f;p&gt;
+playing either frequently (perhaps that&#x27;s a mistake).&lt;/p&gt;
 &lt;p&gt;Anyways, I want to write about this observation that seems unique from me: that the in-game
 characters in these two games are both blob-y, short and colorful. This similarity stuck in my head
 for a while, and I&#x27;m getting increasingly anxious because those who frequently play these games
-aren&#x27;t making similar remarks &lt;em&gt;at all&lt;&#x2f;em&gt;. So, in this Sunday evening, I just had to get it out of my
-head:&lt;&#x2f;p&gt;
+aren&#x27;t making similar remarks &lt;em&gt;at all&lt;/em&gt;. So, in this Sunday evening, I just had to get it out of my
+head:&lt;/p&gt;
 &lt;video id=&quot;video-tag&quot; width=&quot;100%&quot; autoplay muted loop playsinline&gt; 
-    &lt;source src=&quot;&#x2f;assets&#x2f;2020&#x2f;08&#x2f;FallGuysAmongUs.mov&quot; type=&quot;video&#x2f;quicktime&quot; &#x2f;&gt;  
-&lt;&#x2f;video&gt;
-&lt;img id=&quot;img-tag&quot; width=&quot;100%&quot; src=&quot;&#x2f;assets&#x2f;2020&#x2f;08&#x2f;FallGuysAmongUs.mov&quot;&gt;
-&lt;script type=&quot;text&#x2f;javascript&quot;&gt;
+    &lt;source src=&quot;/assets/2020/08/FallGuysAmongUs.mov&quot; type=&quot;video/quicktime&quot; /&gt;  
+&lt;/video&gt;
+&lt;img id=&quot;img-tag&quot; width=&quot;100%&quot; src=&quot;/assets/2020/08/FallGuysAmongUs.mov&quot;&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
     function BrowserDetection() {
-        &#x2f;&#x2f;Check if browser is Safari, if it is, hide the &lt;video&gt; tag, otherwise hide the &lt;img&gt; tag
+        //Check if browser is Safari, if it is, hide the &lt;video&gt; tag, otherwise hide the &lt;img&gt; tag
         if (navigator.userAgent.search(&quot;Safari&quot;) &gt;= 0 &amp;&amp; navigator.userAgent.search(&quot;Chrome&quot;) &lt; 0) {
             document.getElementById(&#x27;video-tag&#x27;).style.display= &quot;none&quot;;
         } else {
@@ -29,11 +29,11 @@ head:&lt;&#x2f;p&gt;
         }
     }
 
-    &#x2f;&#x2f;And run the script. Note that the script tag needs to be run after HTML so where you place it is important. 
+    //And run the script. Note that the script tag needs to be run after HTML so where you place it is important. 
     BrowserDetection();
-&lt;&#x2f;script&gt;
+&lt;/script&gt;
 &lt;p&gt;This animation is made from Pixelmator and Keynote. Those two along with Sketch and Final Cut Pro
-make me feel invincible these days.&lt;&#x2f;p&gt;
+make me feel invincible these days.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 16 Aug 2020 23:42:44 -0700</pubDate>
                 <link>https://duan.ca/2020/08/16/fall-guys-and-among-us/</link>
@@ -41,26 +41,26 @@ make me feel invincible these days.&lt;&#x2f;p&gt;
             </item>
             <item>
                 <title>StreamLogger</title>
-                <description>&lt;p&gt;After turning off stream on &lt;a href=&quot;https:&#x2f;&#x2f;twitch.tv&#x2f;daniel_duan&quot;&gt;Twitch&lt;&#x2f;a&gt;, the first thing I normally do is
+                <description>&lt;p&gt;After turning off stream on &lt;a href=&quot;https://twitch.tv/daniel_duan&quot;&gt;Twitch&lt;/a&gt;, the first thing I normally do is
 exporting the stream video to YouTube, so that the stream has an archive that
-survives Twitch&#x27;s short-ish retain policy.&lt;&#x2f;p&gt;
+survives Twitch&#x27;s short-ish retain policy.&lt;/p&gt;
 &lt;p&gt;These videos, perhaps surprisingly, get a few views! It&#x27;s not a lot by any
 measures, but I&#x27;m conscientious of the fact that a typical stream archive is
 a multi-hour long video with no content curation, no clear schedule, and
 it sometimes contains breaks. Needless to say, watching them after-the-fact
-requires some (or a lot of) fast-forwarding.&lt;&#x2f;p&gt;
-&lt;p&gt;So, last week &lt;a href=&quot;https:&#x2f;&#x2f;twitch.tv&#x2f;daniel_duan&quot;&gt;on stream&lt;&#x2f;a&gt;, I set out to improve the fast-forwarding
+requires some (or a lot of) fast-forwarding.&lt;/p&gt;
+&lt;p&gt;So, last week &lt;a href=&quot;https://twitch.tv/daniel_duan&quot;&gt;on stream&lt;/a&gt;, I set out to improve the fast-forwarding
 experience. YouTube has this feature that lets you jump to specific timestamp
 in the video through a URL parameter in the video&#x27; link. Further, they generate
 this parameter for text in video&#x27;s description, if the text is in the right
 format. This is handy for generating a &amp;quot;table of content&amp;quot; for the video so that
 viewers can click the timestamp in the description to jump to the section they
-are most interested in.&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;StreamLogger&quot;&gt;StreamLogger&lt;&#x2f;a&gt; is a little utility that lets me note down what happened while
+are most interested in.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/dduan/StreamLogger&quot;&gt;StreamLogger&lt;/a&gt; is a little utility that lets me note down what happened while
 I&#x27;m streaming. It&#x27;s kind of like writing a commit message, except the message
 describes what happened since the last &amp;quot;commit&amp;quot;. These messages, along with
 their associated timestamps, will be used by StreamLogger to generate the &amp;quot;table
-of content&amp;quot;. Using it in command line looks like this:&lt;&#x2f;p&gt;
+of content&amp;quot;. Using it in command line looks like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# Turn on stream, maybe check signs of being live, etc. Then
 slog start # start a new log
 
@@ -75,33 +75,33 @@ slog -- &#x27;some other stuff&#x27;
 
 # Now, to generate the table-of-content
 slog stamp -s 1:32
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;That last command outputs&lt;&#x2f;p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That last command outputs&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;0:01:32 I did stuff
 1:41:59 some other stuff
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;... which goes to the video&#x27;s description.&lt;&#x2f;p&gt;
-&lt;p&gt;There&#x27;s a few subtleties in this overall simple tool.&lt;&#x2f;p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;... which goes to the video&#x27;s description.&lt;/p&gt;
+&lt;p&gt;There&#x27;s a few subtleties in this overall simple tool.&lt;/p&gt;
 &lt;p&gt;Whenever a message is added, it gets associated with the time at which the
-&lt;em&gt;previous&lt;&#x2f;em&gt; message was add. So the act of logging marks both the end of
-a chapter and the beginning of the next.&lt;&#x2f;p&gt;
+&lt;em&gt;previous&lt;/em&gt; message was add. So the act of logging marks both the end of
+a chapter and the beginning of the next.&lt;/p&gt;
 &lt;p&gt;In reality, there&#x27;s always going to be a gap between the start of the stream and
-the time the log is initialized. That&#x27;s what the &lt;code&gt;-s 1:32&lt;&#x2f;code&gt; in the last command
+the time the log is initialized. That&#x27;s what the &lt;code&gt;-s 1:32&lt;/code&gt; in the last command
 is trying to correct. It tells StreamLogger the length of the gap. Now the
 absolute time associated with each event has a relationship with the archive
-video.&lt;&#x2f;p&gt;
-&lt;hr &#x2f;&gt;
+video.&lt;/p&gt;
+&lt;hr /&gt;
 &lt;p&gt;I chose to write this in Rust because I&#x27;m going to need the final product on
 Linux, macOS, and Windows since I stream on all 3 platforms. (fun fact: I never
 built it directly on my PC running Linux. Instead, I simply downloaded the
 musl-based build from the GitHub release, which was built by GitHub Actions. It
 works beautifully.) Maybe one day I&#x27;ll add a GUI for it that works across these
-platforms, too, so that it&#x27;s more friendly to wider group of users.&lt;&#x2f;p&gt;
-&lt;hr &#x2f;&gt;
+platforms, too, so that it&#x27;s more friendly to wider group of users.&lt;/p&gt;
+&lt;hr /&gt;
 &lt;p&gt;The more I use and think about StreamLogger, the more I like it. You can see
-me working its entirety in the following archives ;)&lt;&#x2f;p&gt;
-&lt;p&gt;Part 1: https:&#x2f;&#x2f;youtu.be&#x2f;xWRcdaEjir4
-Part 2: https:&#x2f;&#x2f;youtu.be&#x2f;RS-ZMBzu9Dg&lt;&#x2f;p&gt;
+me working its entirety in the following archives ;)&lt;/p&gt;
+&lt;p&gt;Part 1: https://youtu.be/xWRcdaEjir4
+Part 2: https://youtu.be/RS-ZMBzu9Dg&lt;/p&gt;
 </description>
                 <pubDate>Sat, 13 Jun 2020 12:36:55 -0700</pubDate>
                 <link>https://duan.ca/2020/06/13/stream-logger/</link>
@@ -109,27 +109,27 @@ Part 2: https:&#x2f;&#x2f;youtu.be&#x2f;RS-ZMBzu9Dg&lt;&#x2f;p&gt;
             </item>
             <item>
                 <title>TOML Decoder Playlist</title>
-                <description>&lt;p&gt;I enjoyed making &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;TOMLDeserializer&quot;&gt;TOMLDeserializer&lt;&#x2f;a&gt; and &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;TOMLDecoder&quot;&gt;TOMLDecoder&lt;&#x2f;a&gt; recently. Let&#x27;s hope
+                <description>&lt;p&gt;I enjoyed making &lt;a href=&quot;https://github.com/dduan/TOMLDeserializer&quot;&gt;TOMLDeserializer&lt;/a&gt; and &lt;a href=&quot;https://github.com/dduan/TOMLDecoder&quot;&gt;TOMLDecoder&lt;/a&gt; recently. Let&#x27;s hope
 some projects will pick them up and TOML as a configuration format will start to
-spead in Swift communities.&lt;&#x2f;p&gt;
+spead in Swift communities.&lt;/p&gt;
 &lt;p&gt;What&#x27;s outstanding about these projects is that I started working on them while
-&lt;a href=&quot;https:&#x2f;&#x2f;twitch.tv&#x2f;daniel_duan&quot;&gt;streaming&lt;&#x2f;a&gt;. Personally, I consume a lot of content like this. So now people
-can watch me writing Swift, too.&lt;&#x2f;p&gt;
+&lt;a href=&quot;https://twitch.tv/daniel_duan&quot;&gt;streaming&lt;/a&gt;. Personally, I consume a lot of content like this. So now people
+can watch me writing Swift, too.&lt;/p&gt;
 &lt;p&gt;I&#x27;ve been archiving recordings of these streams as much as I can. Here are the
-links to these videos, each is around 1-1.5 hours long:&lt;&#x2f;p&gt;
+links to these videos, each is around 1-1.5 hours long:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;XLLlCEfuFLw&quot;&gt;Turn TOML Test Fixtures Into XCTests With Vim Macros&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;Ztq3K3cq8f0&quot;&gt;Passing TOML Deserialization Tests&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;GTCYSIc6n3U&quot;&gt;Finishing TOML Invalidation Tests&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;HP2Wzh8MVvg&quot;&gt;TOML Decoder: The Beginning&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;EZ7VpbrLkH0&quot;&gt;TOML Decoder: Filling In Missing Implementation Pieces&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;bISMVVWOHKg&quot;&gt;TOML Decoder: Adding The First TOML Decoding Strategy!&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;oOOS4bnhwx4&quot;&gt;TOML Decoder: Project Overview And Data Decoding Support&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;9yDtXsrMtbU&quot;&gt;TOML Decoder: Key Decoding Strategies&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;https:&#x2f;&#x2f;youtu.be&#x2f;g1V872HL4Dk&quot;&gt;TOML Decoder: Project Updates&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;&#x2f;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/XLLlCEfuFLw&quot;&gt;Turn TOML Test Fixtures Into XCTests With Vim Macros&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/Ztq3K3cq8f0&quot;&gt;Passing TOML Deserialization Tests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/GTCYSIc6n3U&quot;&gt;Finishing TOML Invalidation Tests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/HP2Wzh8MVvg&quot;&gt;TOML Decoder: The Beginning&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/EZ7VpbrLkH0&quot;&gt;TOML Decoder: Filling In Missing Implementation Pieces&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/bISMVVWOHKg&quot;&gt;TOML Decoder: Adding The First TOML Decoding Strategy!&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/oOOS4bnhwx4&quot;&gt;TOML Decoder: Project Overview And Data Decoding Support&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/9yDtXsrMtbU&quot;&gt;TOML Decoder: Key Decoding Strategies&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/g1V872HL4Dk&quot;&gt;TOML Decoder: Project Updates&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;The TOMLDecoder projects would&#x27;ve been capture on camera entirely if I weren&#x27;t
-such a streaming n00b and messed up a few streams. Hilarious.&lt;&#x2f;p&gt;
+such a streaming n00b and messed up a few streams. Hilarious.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 10 Mar 2019 20:32:37 -0700</pubDate>
                 <link>https://duan.ca/2019/03/10/toml-decoder/</link>

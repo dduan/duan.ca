@@ -6,29 +6,29 @@
         <atom:link href="https://duan.ca/tag/oop/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>A Case For OOP?</title>
-                <description>&lt;p&gt;Python&#x27;s standard library includes a very handy &lt;code&gt;defaultdict&lt;&#x2f;code&gt;. It behaves
+                <description>&lt;p&gt;Python&#x27;s standard library includes a very handy &lt;code&gt;defaultdict&lt;/code&gt;. It behaves
 almost exactly like the standard dictionary except it&#x27;ll supply a pre-defined
-value for any non-existence keys. It is, unsurpringly, a subclass of &lt;code&gt;dict&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
+value for any non-existence keys. It is, unsurpringly, a subclass of &lt;code&gt;dict&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;I find my self missing this handy container in Swift. Especially when I use
-a normal &lt;code&gt;Dictionary&lt;&#x2f;code&gt; to accumulate&#x2f;coalesce values under distinct keys. So I
-wrote my own:&lt;&#x2f;p&gt;
-&lt;script src=&quot;https:&#x2f;&#x2f;gist.github.com&#x2f;dduan&#x2f;31ed39c4c98ecb88290f0743cb394c20.js&quot;&gt;&lt;&#x2f;script&gt;
-&lt;p&gt;There are a few noticable things about this implementation:&lt;&#x2f;p&gt;
+a normal &lt;code&gt;Dictionary&lt;/code&gt; to accumulate/coalesce values under distinct keys. So I
+wrote my own:&lt;/p&gt;
+&lt;script src=&quot;https://gist.github.com/dduan/31ed39c4c98ecb88290f0743cb394c20.js&quot;&gt;&lt;/script&gt;
+&lt;p&gt;There are a few noticable things about this implementation:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;It does not conform to the &lt;code&gt;DictionaryLiteralConvertible&lt;&#x2f;code&gt; protocol, for no
+&lt;li&gt;It does not conform to the &lt;code&gt;DictionaryLiteralConvertible&lt;/code&gt; protocol, for no
 good reasons, really. The initializer in this protocol takes a varadic
 argument. There&#x27;s no conevient way to forward this array to a normal
 dictionary&#x27;s initializer (incidentally, this is a Swift feature I really
-want). Plus, I don&#x27;t need &lt;code&gt;DefaultDictionary&lt;&#x2f;code&gt; to be a literal convertible.&lt;&#x2f;li&gt;
-&lt;li&gt;Most of the code, including the imaginary &lt;code&gt;init&lt;&#x2f;code&gt; mentioned in previous
-point, simply reuses stuff from &lt;code&gt;Dictionary&lt;&#x2f;code&gt;: asscociated type, indexes,
-generator, subscript, etc.&lt;&#x2f;li&gt;
-&lt;&#x2f;ul&gt;
-&lt;p&gt;In comparison, Python implements &lt;code&gt;defaultdict&lt;&#x2f;code&gt; in a more intuitive way -- via
-inheritance.&lt;&#x2f;p&gt;
-&lt;p&gt;But do we want inheritance for &lt;code&gt;struct&lt;&#x2f;code&gt;s and &lt;code&gt;enum&lt;&#x2f;code&gt;s in Swift? What does that
+want). Plus, I don&#x27;t need &lt;code&gt;DefaultDictionary&lt;/code&gt; to be a literal convertible.&lt;/li&gt;
+&lt;li&gt;Most of the code, including the imaginary &lt;code&gt;init&lt;/code&gt; mentioned in previous
+point, simply reuses stuff from &lt;code&gt;Dictionary&lt;/code&gt;: asscociated type, indexes,
+generator, subscript, etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In comparison, Python implements &lt;code&gt;defaultdict&lt;/code&gt; in a more intuitive way -- via
+inheritance.&lt;/p&gt;
+&lt;p&gt;But do we want inheritance for &lt;code&gt;struct&lt;/code&gt;s and &lt;code&gt;enum&lt;/code&gt;s in Swift? What does that
 even mean? Is it simply a case that will go away when protocols become more
-powerful?&lt;&#x2f;p&gt;
+powerful?&lt;/p&gt;
 </description>
                 <pubDate>Thu, 19 May 2016 12:03:02 -0700</pubDate>
                 <link>https://duan.ca/2016/05/19/a-case-for-oop/</link>

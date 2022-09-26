@@ -9,45 +9,45 @@
                 <description>&lt;p&gt;There are several ways to build dependencies for a Swift 3 project:
 Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which
 is the best choice for their projects. As a library author who want to help as
-many people as possible, however, they can&#x27;t ignore any of them.&lt;&#x2f;p&gt;
+many people as possible, however, they can&#x27;t ignore any of them.&lt;/p&gt;
 &lt;p&gt;I sometimes question the sanity of that conclusion: instead of becoming an
 export in each package manager, I find myself a novice of all. Did I break
 support for any of them with this project change? Is it still working on
-a particular platform, say, tvOS? Can I &lt;em&gt;really&lt;&#x2f;em&gt; know?&lt;&#x2f;p&gt;
-&lt;p&gt;The only way to &lt;em&gt;really&lt;&#x2f;em&gt; know is to verify yourself: both Cocoapods and
+a particular platform, say, tvOS? Can I &lt;em&gt;really&lt;/em&gt; know?&lt;/p&gt;
+&lt;p&gt;The only way to &lt;em&gt;really&lt;/em&gt; know is to verify yourself: both Cocoapods and
 Carthage support four platforms -- iOS, macOS, watchOS, tvOS; Swift Package
 Manager only works on Mac or Linux. So that&#x27;s 2*4+1=9 targets. All these
 targets need is have the library in question fetched and imported. Every Swift
 library author should have such verification before publishing updates of
-their project.&lt;&#x2f;p&gt;
+their project.&lt;/p&gt;
 &lt;p&gt;The steps to verify can be triggered with commands: fetch and build
-dependencies, build Xcode&#x2f;Swift project. To automate the process, put these
+dependencies, build Xcode/Swift project. To automate the process, put these
 commands in a script or a Makefile. But wait, there&#x27;s more! One shouldn&#x27;t have
 to create these dummy projects every time they create a new library. If all
 these projects do is importing a library and attempt to build, they should
-work for &lt;em&gt;any&lt;&#x2f;em&gt; library. The config in &lt;code&gt;Package.swift&lt;&#x2f;code&gt;&#x2f;&lt;code&gt;Cocoapods&lt;&#x2f;code&gt;&#x2f;&lt;code&gt;Cartfile&lt;&#x2f;code&gt;
-and the &lt;code&gt;import&lt;&#x2f;code&gt; statements just needs some strings replaced: name of the next
+work for &lt;em&gt;any&lt;/em&gt; library. The config in &lt;code&gt;Package.swift&lt;/code&gt;/&lt;code&gt;Cocoapods&lt;/code&gt;/&lt;code&gt;Cartfile&lt;/code&gt;
+and the &lt;code&gt;import&lt;/code&gt; statements just needs some strings replaced: name of the next
 library, URL for its git repository, etc. And that&#x27;s a scriptable process as
-well!&lt;&#x2f;p&gt;
+well!&lt;/p&gt;
 &lt;p&gt;To recap, one could, in theory, copy in some dummy projects, run a command to
 inject information about a new library, run another command to build all these
-project, verifying that support for those package managers remain functional.&lt;&#x2f;p&gt;
-&lt;p&gt;In reality, I have created &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;DistributionTests&quot;&gt;DistributionTests&lt;&#x2f;a&gt; and put it
-on &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;DistributionTests&quot;&gt;Github&lt;&#x2f;a&gt; 😉.&lt;&#x2f;p&gt;
-&lt;p&gt;The script &lt;code&gt;customize&lt;&#x2f;code&gt; requires 3 pieces of information of the library: its
+project, verifying that support for those package managers remain functional.&lt;/p&gt;
+&lt;p&gt;In reality, I have created &lt;a href=&quot;https://github.com/dduan/DistributionTests&quot;&gt;DistributionTests&lt;/a&gt; and put it
+on &lt;a href=&quot;https://github.com/dduan/DistributionTests&quot;&gt;Github&lt;/a&gt; 😉.&lt;/p&gt;
+&lt;p&gt;The script &lt;code&gt;customize&lt;/code&gt; requires 3 pieces of information of the library: its
 import name, its git repository URL and a major version number. The assumption
 here is the library generates uniformly named artifacts: the file name for
-&lt;code&gt;.framework&lt;&#x2f;code&gt; and the name users use to import it are the same. Testing
-distribution of a library is as simple as:&lt;&#x2f;p&gt;
+&lt;code&gt;.framework&lt;/code&gt; and the name users use to import it are the same. Testing
+distribution of a library is as simple as:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;clone the project.&lt;&#x2f;li&gt;
-&lt;li&gt;customize the project with &lt;code&gt;customize&lt;&#x2f;code&gt;.&lt;&#x2f;li&gt;
-&lt;li&gt;run &lt;code&gt;make&lt;&#x2f;code&gt;.&lt;&#x2f;li&gt;
-&lt;&#x2f;ol&gt;
+&lt;li&gt;clone the project.&lt;/li&gt;
+&lt;li&gt;customize the project with &lt;code&gt;customize&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;run &lt;code&gt;make&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;If you do step 1 and 2, include the projects in library&#x27;s repository, then
 only step 3 is necessary! This makes testing distribution methods trivial on
-a continuous integration server.&lt;&#x2f;p&gt;
-&lt;p&gt;Go forth and create fearlessly!&lt;&#x2f;p&gt;
+a continuous integration server.&lt;/p&gt;
+&lt;p&gt;Go forth and create fearlessly!&lt;/p&gt;
 </description>
                 <pubDate>Mon, 10 Oct 2016 10:34:49 -0700</pubDate>
                 <link>https://duan.ca/2016/10/10/distribution-tests/</link>
@@ -56,19 +56,19 @@ a continuous integration server.&lt;&#x2f;p&gt;
             <item>
                 <title>Deploy Jekyll Site To Github With Make</title>
                 <description>&lt;p&gt;At risks of being too meta, I want to talk about how this post is going to go
-from my computer to a repository on Github on both the &lt;code&gt;master&lt;&#x2f;code&gt; and &lt;code&gt;gh-pages&lt;&#x2f;code&gt;
+from my computer to a repository on Github on both the &lt;code&gt;master&lt;/code&gt; and &lt;code&gt;gh-pages&lt;/code&gt;
 branch. The former contains the file I&#x27;m typing, and the latter an updated
-HTML site generated by Jekyll.&lt;&#x2f;p&gt;
-&lt;p&gt;Here&#x27;s how: I type &lt;code&gt;make deploy&lt;&#x2f;code&gt; once I commit this file in my local
-repository.&lt;&#x2f;p&gt;
+HTML site generated by Jekyll.&lt;/p&gt;
+&lt;p&gt;Here&#x27;s how: I type &lt;code&gt;make deploy&lt;/code&gt; once I commit this file in my local
+repository.&lt;/p&gt;
 &lt;p&gt;I spent a day to set up a Jekyll site. The last part involves deploying it to
 Github, my preferred way to host a static site. There are a lot of posts and
 scripts on how to achieve it. And Github seems to have an &amp;quot;afficial&amp;quot; support
-for Jekyll site that disables plugin scripts (understandably so).&lt;&#x2f;p&gt;
+for Jekyll site that disables plugin scripts (understandably so).&lt;/p&gt;
 &lt;p&gt;But having worked with git and make for all these years made me immune to all
-the fanciness the Internet tries to sell.&lt;&#x2f;p&gt;
-&lt;p&gt;Here&#x27;s my script for deploying a Jekyll project to Github pages:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;code&gt;DEPLOY_PATH=&#x2f;tmp&#x2f;jekyll_deploy
+the fanciness the Internet tries to sell.&lt;/p&gt;
+&lt;p&gt;Here&#x27;s my script for deploying a Jekyll project to Github pages:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;DEPLOY_PATH=/tmp/jekyll_deploy
 build:
 	jekyll build
 
@@ -82,21 +82,21 @@ deploy:
 	mkdir ${DEPLOY_PATH}
 	cp -R .git ${DEPLOY_PATH}
 	cd ${DEPLOY_PATH}; git checkout gh-pages; git clean -d -x -f
-	cp -R _site&#x2f;* ${DEPLOY_PATH}
-	cd ${DEPLOY_PATH}; git add .; git commit -m &amp;quot;`curl whatthecommit.com&#x2f;index.txt`&amp;quot;
+	cp -R _site/* ${DEPLOY_PATH}
+	cd ${DEPLOY_PATH}; git add .; git commit -m &amp;quot;`curl whatthecommit.com/index.txt`&amp;quot;
 	cd ${DEPLOY_PATH}; git push -f origin gh-pages
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Drop it into root of your Jekyll project, commit all changes (including the
-&lt;code&gt;Makefile&lt;&#x2f;code&gt;). And type &lt;code&gt;make deploy&lt;&#x2f;code&gt;. BOOM, done.&lt;&#x2f;p&gt;
-&lt;p&gt;There are a couple of assumptions:&lt;&#x2f;p&gt;
+&lt;code&gt;Makefile&lt;/code&gt;). And type &lt;code&gt;make deploy&lt;/code&gt;. BOOM, done.&lt;/p&gt;
+&lt;p&gt;There are a couple of assumptions:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;You build the site in the &lt;code&gt;_site&lt;&#x2f;code&gt; folder&lt;&#x2f;li&gt;
-&lt;li&gt;You store Jekyll source on &lt;code&gt;master&lt;&#x2f;code&gt; and have the &lt;code&gt;gh-pages&lt;&#x2f;code&gt; branch up.&lt;&#x2f;li&gt;
-&lt;li&gt;You can build the site by running &lt;code&gt;jekyll build&lt;&#x2f;code&gt;.&lt;&#x2f;li&gt;
-&lt;li&gt;You don&#x27;t care about commit message on the deploy branch.&lt;&#x2f;li&gt;
-&lt;&#x2f;ul&gt;
+&lt;li&gt;You build the site in the &lt;code&gt;_site&lt;/code&gt; folder&lt;/li&gt;
+&lt;li&gt;You store Jekyll source on &lt;code&gt;master&lt;/code&gt; and have the &lt;code&gt;gh-pages&lt;/code&gt; branch up.&lt;/li&gt;
+&lt;li&gt;You can build the site by running &lt;code&gt;jekyll build&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;You don&#x27;t care about commit message on the deploy branch.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;I like it better than other methods because it does not require installing
-additional software&#x2f;scripts and there&#x27;s no restriction on plugins.&lt;&#x2f;p&gt;
+additional software/scripts and there&#x27;s no restriction on plugins.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 15 May 2016 01:00:00 -0700</pubDate>
                 <link>https://duan.ca/2016/05/15/deploy-jekyll-to-github/</link>

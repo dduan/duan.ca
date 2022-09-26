@@ -6,10 +6,10 @@
         <atom:link href="https://duan.ca/tag/unix/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Unix File Permissions In Swift</title>
-                <description>&lt;p&gt;Wrap file permissions from &lt;code&gt;stat&lt;&#x2f;code&gt; and &lt;code&gt;chmod&lt;&#x2f;code&gt; in an &lt;code&gt;OptionSet&lt;&#x2f;code&gt; in Swift.&lt;&#x2f;p&gt;
+                <description>&lt;p&gt;Wrap file permissions from &lt;code&gt;stat&lt;/code&gt; and &lt;code&gt;chmod&lt;/code&gt; in an &lt;code&gt;OptionSet&lt;/code&gt; in Swift.&lt;/p&gt;
 &lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;1ZrouR_F-AU&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/1ZrouR_F-AU&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
 </description>
                 <pubDate>Sun, 06 May 2018 16:43:20 -0700</pubDate>
                 <link>https://duan.ca/2018/05/06/unix-file-permissions-in-swift/</link>
@@ -17,16 +17,16 @@
             </item>
             <item>
                 <title>Building &#x27;pwd&#x27; Under 1 Minute In Swift</title>
-                <description>&lt;p&gt;I guess I&#x27;m starting a series of minute-long videos. In this first video, I built &lt;code&gt;pwd&lt;&#x2f;code&gt; out of &lt;code&gt;getcwd&lt;&#x2f;code&gt;. The
+                <description>&lt;p&gt;I guess I&#x27;m starting a series of minute-long videos. In this first video, I built &lt;code&gt;pwd&lt;/code&gt; out of &lt;code&gt;getcwd&lt;/code&gt;. The
 code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift&#x27;s great C-interop
-capability.&lt;&#x2f;p&gt;
+capability.&lt;/p&gt;
 &lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
-&lt;p&gt;Some details are lost in this video, however. For example, the POSIX standard actually says &lt;code&gt;getcwd&lt;&#x2f;code&gt;&#x27;s 2nd
-argument being &lt;code&gt;0&lt;&#x2f;code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
-memory as needed). Swift&#x27;s handling of &lt;code&gt;char *&lt;&#x2f;code&gt; aka &lt;code&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;&#x2f;code&gt; in context of a &lt;code&gt;var&lt;&#x2f;code&gt; array
-is also very cool.&lt;&#x2f;p&gt;
+    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;Some details are lost in this video, however. For example, the POSIX standard actually says &lt;code&gt;getcwd&lt;/code&gt;&#x27;s 2nd
+argument being &lt;code&gt;0&lt;/code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
+memory as needed). Swift&#x27;s handling of &lt;code&gt;char *&lt;/code&gt; aka &lt;code&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;/code&gt; in context of a &lt;code&gt;var&lt;/code&gt; array
+is also very cool.&lt;/p&gt;
 </description>
                 <pubDate>Wed, 27 Dec 2017 01:13:07 -0800</pubDate>
                 <link>https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</link>

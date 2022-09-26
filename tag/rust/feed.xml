@@ -6,26 +6,26 @@
         <atom:link href="https://duan.ca/tag/rust/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>StreamLogger</title>
-                <description>&lt;p&gt;After turning off stream on &lt;a href=&quot;https:&#x2f;&#x2f;twitch.tv&#x2f;daniel_duan&quot;&gt;Twitch&lt;&#x2f;a&gt;, the first thing I normally do is
+                <description>&lt;p&gt;After turning off stream on &lt;a href=&quot;https://twitch.tv/daniel_duan&quot;&gt;Twitch&lt;/a&gt;, the first thing I normally do is
 exporting the stream video to YouTube, so that the stream has an archive that
-survives Twitch&#x27;s short-ish retain policy.&lt;&#x2f;p&gt;
+survives Twitch&#x27;s short-ish retain policy.&lt;/p&gt;
 &lt;p&gt;These videos, perhaps surprisingly, get a few views! It&#x27;s not a lot by any
 measures, but I&#x27;m conscientious of the fact that a typical stream archive is
 a multi-hour long video with no content curation, no clear schedule, and
 it sometimes contains breaks. Needless to say, watching them after-the-fact
-requires some (or a lot of) fast-forwarding.&lt;&#x2f;p&gt;
-&lt;p&gt;So, last week &lt;a href=&quot;https:&#x2f;&#x2f;twitch.tv&#x2f;daniel_duan&quot;&gt;on stream&lt;&#x2f;a&gt;, I set out to improve the fast-forwarding
+requires some (or a lot of) fast-forwarding.&lt;/p&gt;
+&lt;p&gt;So, last week &lt;a href=&quot;https://twitch.tv/daniel_duan&quot;&gt;on stream&lt;/a&gt;, I set out to improve the fast-forwarding
 experience. YouTube has this feature that lets you jump to specific timestamp
 in the video through a URL parameter in the video&#x27; link. Further, they generate
 this parameter for text in video&#x27;s description, if the text is in the right
 format. This is handy for generating a &amp;quot;table of content&amp;quot; for the video so that
 viewers can click the timestamp in the description to jump to the section they
-are most interested in.&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;StreamLogger&quot;&gt;StreamLogger&lt;&#x2f;a&gt; is a little utility that lets me note down what happened while
+are most interested in.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/dduan/StreamLogger&quot;&gt;StreamLogger&lt;/a&gt; is a little utility that lets me note down what happened while
 I&#x27;m streaming. It&#x27;s kind of like writing a commit message, except the message
 describes what happened since the last &amp;quot;commit&amp;quot;. These messages, along with
 their associated timestamps, will be used by StreamLogger to generate the &amp;quot;table
-of content&amp;quot;. Using it in command line looks like this:&lt;&#x2f;p&gt;
+of content&amp;quot;. Using it in command line looks like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# Turn on stream, maybe check signs of being live, etc. Then
 slog start # start a new log
 
@@ -40,33 +40,33 @@ slog -- &#x27;some other stuff&#x27;
 
 # Now, to generate the table-of-content
 slog stamp -s 1:32
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;That last command outputs&lt;&#x2f;p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That last command outputs&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;0:01:32 I did stuff
 1:41:59 some other stuff
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;... which goes to the video&#x27;s description.&lt;&#x2f;p&gt;
-&lt;p&gt;There&#x27;s a few subtleties in this overall simple tool.&lt;&#x2f;p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;... which goes to the video&#x27;s description.&lt;/p&gt;
+&lt;p&gt;There&#x27;s a few subtleties in this overall simple tool.&lt;/p&gt;
 &lt;p&gt;Whenever a message is added, it gets associated with the time at which the
-&lt;em&gt;previous&lt;&#x2f;em&gt; message was add. So the act of logging marks both the end of
-a chapter and the beginning of the next.&lt;&#x2f;p&gt;
+&lt;em&gt;previous&lt;/em&gt; message was add. So the act of logging marks both the end of
+a chapter and the beginning of the next.&lt;/p&gt;
 &lt;p&gt;In reality, there&#x27;s always going to be a gap between the start of the stream and
-the time the log is initialized. That&#x27;s what the &lt;code&gt;-s 1:32&lt;&#x2f;code&gt; in the last command
+the time the log is initialized. That&#x27;s what the &lt;code&gt;-s 1:32&lt;/code&gt; in the last command
 is trying to correct. It tells StreamLogger the length of the gap. Now the
 absolute time associated with each event has a relationship with the archive
-video.&lt;&#x2f;p&gt;
-&lt;hr &#x2f;&gt;
+video.&lt;/p&gt;
+&lt;hr /&gt;
 &lt;p&gt;I chose to write this in Rust because I&#x27;m going to need the final product on
 Linux, macOS, and Windows since I stream on all 3 platforms. (fun fact: I never
 built it directly on my PC running Linux. Instead, I simply downloaded the
 musl-based build from the GitHub release, which was built by GitHub Actions. It
 works beautifully.) Maybe one day I&#x27;ll add a GUI for it that works across these
-platforms, too, so that it&#x27;s more friendly to wider group of users.&lt;&#x2f;p&gt;
-&lt;hr &#x2f;&gt;
+platforms, too, so that it&#x27;s more friendly to wider group of users.&lt;/p&gt;
+&lt;hr /&gt;
 &lt;p&gt;The more I use and think about StreamLogger, the more I like it. You can see
-me working its entirety in the following archives ;)&lt;&#x2f;p&gt;
-&lt;p&gt;Part 1: https:&#x2f;&#x2f;youtu.be&#x2f;xWRcdaEjir4
-Part 2: https:&#x2f;&#x2f;youtu.be&#x2f;RS-ZMBzu9Dg&lt;&#x2f;p&gt;
+me working its entirety in the following archives ;)&lt;/p&gt;
+&lt;p&gt;Part 1: https://youtu.be/xWRcdaEjir4
+Part 2: https://youtu.be/RS-ZMBzu9Dg&lt;/p&gt;
 </description>
                 <pubDate>Sat, 13 Jun 2020 12:36:55 -0700</pubDate>
                 <link>https://duan.ca/2020/06/13/stream-logger/</link>
@@ -75,10 +75,10 @@ Part 2: https:&#x2f;&#x2f;youtu.be&#x2f;RS-ZMBzu9Dg&lt;&#x2f;p&gt;
             <item>
                 <title>Naive NixOS Rust Development</title>
                 <description>&lt;p&gt;tl;dr: To work on Rust project with nix-shell, rls and extensions such as
-&lt;code&gt;rust-analysis&lt;&#x2f;code&gt;, &lt;code&gt;rust-src&lt;&#x2f;code&gt;, without caring too much about specific Rust
-toolchain version (except for it being &lt;code&gt;stable&lt;&#x2f;code&gt;), use the following &lt;code&gt;shell.nix&lt;&#x2f;code&gt;:&lt;&#x2f;p&gt;
+&lt;code&gt;rust-analysis&lt;/code&gt;, &lt;code&gt;rust-src&lt;/code&gt;, without caring too much about specific Rust
+toolchain version (except for it being &lt;code&gt;stable&lt;/code&gt;), use the following &lt;code&gt;shell.nix&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;let
-  moz_overlay = import (builtins.fetchTarball https:&#x2f;&#x2f;github.com&#x2f;mozilla&#x2f;nixpkgs-mozilla&#x2f;archive&#x2f;master.tar.gz);
+  moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
   nixpkgs = import &amp;lt;nixpkgs&amp;gt; {
     overlays = [ moz_overlay ];
   };
@@ -91,76 +91,76 @@ in
     name = &amp;quot;rust&amp;quot;;
     buildInputs = [ rustup ruststable ];
   }
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;When you have a Nix hammer, everything looks like a Nix expression.&lt;&#x2f;p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When you have a Nix hammer, everything looks like a Nix expression.&lt;/p&gt;
 &lt;p&gt;Having used NixOS on a real PC for a number of days, this is the impression
-I get from the world of Nix. Unfortunately, so far, it&#x27;s been a negative for me.&lt;&#x2f;p&gt;
+I get from the world of Nix. Unfortunately, so far, it&#x27;s been a negative for me.&lt;/p&gt;
 &lt;p&gt;One of the most exciting thing I want to use Nix for is to bootstrap development
-environment with &lt;code&gt;nix-shell&lt;&#x2f;code&gt;. I imagined it to be similar to using &lt;a href=&quot;https:&#x2f;&#x2f;pipenv-fork.readthedocs.io&#x2f;en&#x2f;latest&#x2f;&quot;&gt;pipenv&lt;&#x2f;a&gt;
+environment with &lt;code&gt;nix-shell&lt;/code&gt;. I imagined it to be similar to using &lt;a href=&quot;https://pipenv-fork.readthedocs.io/en/latest/&quot;&gt;pipenv&lt;/a&gt;
 with Python, except for everything. Well, I&#x27;ve since learned that it&#x27;s not true
-(yet?) for many reasons.&lt;&#x2f;p&gt;
-&lt;p&gt;Modern programming languages come with their own attempt at &lt;em&gt;reproducibility&lt;&#x2f;em&gt;.
+(yet?) for many reasons.&lt;/p&gt;
+&lt;p&gt;Modern programming languages come with their own attempt at &lt;em&gt;reproducibility&lt;/em&gt;.
 Some does it better than others. To make it concrete, I&#x27;m talking about things
-like &lt;a href=&quot;https:&#x2f;&#x2f;haskellstack.org&quot;&gt;Stack&lt;&#x2f;a&gt; for Haskell or &lt;a href=&quot;https:&#x2f;&#x2f;rustup.rs&#x2f;&quot;&gt;rustup&lt;&#x2f;a&gt; for Rust: given the source code, how do
+like &lt;a href=&quot;https://haskellstack.org&quot;&gt;Stack&lt;/a&gt; for Haskell or &lt;a href=&quot;https://rustup.rs/&quot;&gt;rustup&lt;/a&gt; for Rust: given the source code, how do
 I make it build in the way the project intended? What&#x27;s the correct version of
 the compiler, runtime, and tools that works best with this revision of the
 source code? The common solution usually follows this pattern: as author of
 a project, specify as much as you can, the environment best suited for the
-current state of the project. As a &amp;quot;builder&amp;quot;, use a &lt;em&gt;single program&lt;&#x2f;em&gt; that&#x27;s
+current state of the project. As a &amp;quot;builder&amp;quot;, use a &lt;em&gt;single program&lt;/em&gt; that&#x27;s
 capable of updating itself, as well as ensuring that the project builds exactly
-as specified, including managing the compiler&#x2f;runtime&#x2f;tooling versions, etc.&lt;&#x2f;p&gt;
-&lt;p&gt;This &lt;em&gt;single program&lt;&#x2f;em&gt;&#x27;s role is very much the same as the Nix system, except the
-latter is independent of programming languages: &lt;code&gt;rustup&lt;&#x2f;code&gt; installs Rust, so does
+as specified, including managing the compiler/runtime/tooling versions, etc.&lt;/p&gt;
+&lt;p&gt;This &lt;em&gt;single program&lt;/em&gt;&#x27;s role is very much the same as the Nix system, except the
+latter is independent of programming languages: &lt;code&gt;rustup&lt;/code&gt; installs Rust, so does
 Nix. That&#x27;s a bad thing. As a package manager, Nix either have to tightly
 integrate with each of these other package managers, leveraging their evolving
 behaviors to give its user the build environment; or, it must replace them.
-The former is impractical; the latter, well, sucks.&lt;&#x2f;p&gt;
+The former is impractical; the latter, well, sucks.&lt;/p&gt;
 &lt;p&gt;Back to reality. This is the experience I want to have with NixOS: Some programs
 I use daily such as Alacritty, NeoVim, Firfox, etc, are installed globally and
-readily available. They are part of my &lt;code&gt;&#x2f;etc&#x2f;nixos&#x2f;configuration.nix&lt;&#x2f;code&gt;. So far so
+readily available. They are part of my &lt;code&gt;/etc/nixos/configuration.nix&lt;/code&gt;. So far so
 good. Now, I regularly program in a few languages. For each of the project, I&#x27;d
-like to have a &lt;code&gt;shell.nix&lt;&#x2f;code&gt; that brings in its compilers, libraries, LSP servers,
-etc. This is what &lt;code&gt;nix-shell&lt;&#x2f;code&gt; is supposed to give me! This is known as the &amp;quot;per
-project&amp;quot; setup.&lt;&#x2f;p&gt;
-&lt;p&gt;Let&#x27;s see: with Rust, that means &lt;code&gt;rustc&lt;&#x2f;code&gt; (compiler), &lt;code&gt;cargo&lt;&#x2f;code&gt; (package manager),
-&lt;code&gt;rls&lt;&#x2f;code&gt;, &lt;code&gt;rust-src&lt;&#x2f;code&gt; and &lt;code&gt;rust-analysis&lt;&#x2f;code&gt; (LSP). In macOS, I&#x27;d install all of these
-globally with &lt;code&gt;rustup&lt;&#x2f;code&gt;. In NixOS...well, I can ask for &lt;code&gt;rustup&lt;&#x2f;code&gt; for my project:&lt;&#x2f;p&gt;
+like to have a &lt;code&gt;shell.nix&lt;/code&gt; that brings in its compilers, libraries, LSP servers,
+etc. This is what &lt;code&gt;nix-shell&lt;/code&gt; is supposed to give me! This is known as the &amp;quot;per
+project&amp;quot; setup.&lt;/p&gt;
+&lt;p&gt;Let&#x27;s see: with Rust, that means &lt;code&gt;rustc&lt;/code&gt; (compiler), &lt;code&gt;cargo&lt;/code&gt; (package manager),
+&lt;code&gt;rls&lt;/code&gt;, &lt;code&gt;rust-src&lt;/code&gt; and &lt;code&gt;rust-analysis&lt;/code&gt; (LSP). In macOS, I&#x27;d install all of these
+globally with &lt;code&gt;rustup&lt;/code&gt;. In NixOS...well, I can ask for &lt;code&gt;rustup&lt;/code&gt; for my project:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;with import &amp;lt;nixpkgs&amp;gt; {};
 
 stdenv.mkDerivation {
   name = &amp;quot;rust&amp;quot;;
   nativeBuildInputs = [ rustup ];
 }
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;...which gives me &lt;code&gt;rustup&lt;&#x2f;code&gt; and nothing else. That&#x27;s right, you don&#x27;t even get
-a &lt;code&gt;rustc&lt;&#x2f;code&gt; after running &lt;code&gt;nix-shell&lt;&#x2f;code&gt;. But &lt;code&gt;rustup&lt;&#x2f;code&gt; can get you everything else,
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;...which gives me &lt;code&gt;rustup&lt;/code&gt; and nothing else. That&#x27;s right, you don&#x27;t even get
+a &lt;code&gt;rustc&lt;/code&gt; after running &lt;code&gt;nix-shell&lt;/code&gt;. But &lt;code&gt;rustup&lt;/code&gt; can get you everything else,
 all I need to do is ask. Hmm, do I need to run a series of set-up commands with
-&lt;code&gt;rustup&lt;&#x2f;code&gt; every time I enter the environment? No? I just need to run it the first
+&lt;code&gt;rustup&lt;/code&gt; every time I enter the environment? No? I just need to run it the first
 time? Until the cached tools get deleted by some garbage collection mechanism?
-That seems unsatisfying, doesn&#x27;t it?&lt;&#x2f;p&gt;
-&lt;p&gt;Instead of &lt;code&gt;rustup&lt;&#x2f;code&gt;, I could also ask Nix to use the &lt;code&gt;rustc&lt;&#x2f;code&gt;&#x2f;&lt;code&gt;cargo&lt;&#x2f;code&gt;&#x2f;&lt;code&gt;rls&lt;&#x2f;code&gt; it
-knows about directly. This is marginally better. Except I still need &lt;code&gt;rust-src&lt;&#x2f;code&gt;
-and &lt;code&gt;rust-analysis&lt;&#x2f;code&gt; for my needs. As far as I can tell, these &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;rust-lang&#x2f;rls&quot;&gt;RLS&lt;&#x2f;a&gt; components
-are out of Nix&#x27;s control (as of today).&lt;&#x2f;p&gt;
+That seems unsatisfying, doesn&#x27;t it?&lt;/p&gt;
+&lt;p&gt;Instead of &lt;code&gt;rustup&lt;/code&gt;, I could also ask Nix to use the &lt;code&gt;rustc&lt;/code&gt;/&lt;code&gt;cargo&lt;/code&gt;/&lt;code&gt;rls&lt;/code&gt; it
+knows about directly. This is marginally better. Except I still need &lt;code&gt;rust-src&lt;/code&gt;
+and &lt;code&gt;rust-analysis&lt;/code&gt; for my needs. As far as I can tell, these &lt;a href=&quot;https://github.com/rust-lang/rls&quot;&gt;RLS&lt;/a&gt; components
+are out of Nix&#x27;s control (as of today).&lt;/p&gt;
 &lt;p&gt;Everywhere on the internet I looked, for every problem that
 Nix-the-package-manager doesn&#x27;t work out-of-the-box, there&#x27;s someone responding
 along the line of &amp;quot;you can write some Nix expression yourself&amp;quot;. In other words,
 Nix-the-language is powerful enough to solve it, probably. In the case of Rust,
 luckily, Mozilla wrote enough Nix expressions for us and provides them via an
-&lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;mozilla&#x2f;nixpkgs-mozilla&quot;&gt;overlay&lt;&#x2f;a&gt;. These expressions are rich enough to meet my needs.
+&lt;a href=&quot;https://github.com/mozilla/nixpkgs-mozilla&quot;&gt;overlay&lt;/a&gt;. These expressions are rich enough to meet my needs.
 As you can see in the tl;dr at the top, when entering the development
 environment, nix-shell would: download the overlay&#x27;s source code (from the
 internet, or local cache), load the expression it includes, mix in my
-customization, and execute it.&lt;&#x2f;p&gt;
+customization, and execute it.&lt;/p&gt;
 &lt;p&gt;That marks the end of my search. I like the final solution because it&#x27;s mostly
 &amp;quot;vanilla&amp;quot; Nix and doesn&#x27;t require me to mess with a bunch of other tools. For
-solutions that do, read &lt;a href=&quot;https:&#x2f;&#x2f;christine.website&#x2f;blog&#x2f;how-i-start-nix-2020-03-08&quot;&gt;this&lt;&#x2f;a&gt;.&lt;&#x2f;p&gt;
-&lt;hr &#x2f;&gt;
+solutions that do, read &lt;a href=&quot;https://christine.website/blog/how-i-start-nix-2020-03-08&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
+&lt;hr /&gt;
 &lt;p&gt;At end of the day, my needs are pretty basic: consistency from rustup and
 convenience from nix-shell. I didn&#x27;t need to pin the compiler to a specific Rust
-release, or checksum the final build output.&lt;&#x2f;p&gt;
+release, or checksum the final build output.&lt;/p&gt;
 &lt;p&gt;I&#x27;m very new to both technologies so there may be a follow-up post sometime in
-the future.&lt;&#x2f;p&gt;
+the future.&lt;/p&gt;
 </description>
                 <pubDate>Thu, 07 May 2020 11:04:58 -0700</pubDate>
                 <link>https://duan.ca/2020/05/07/nix-rust-development/</link>
@@ -168,28 +168,28 @@ the future.&lt;&#x2f;p&gt;
             </item>
             <item>
                 <title>Site Improvements 2020</title>
-                <description>&lt;p&gt;I took back my website.&lt;&#x2f;p&gt;
+                <description>&lt;p&gt;I took back my website.&lt;/p&gt;
 &lt;p&gt;I took it back from the claws of Jekyll and Ruby. I took it back from some
 random template among a few that were immediately available. I took it back
-from my own ignorance of modern web technology.&lt;&#x2f;p&gt;
-&lt;p&gt;This time, I rewrote the hole effing thing from scratch.&lt;&#x2f;p&gt;
-&lt;h3&gt;The Why&lt;&#x2f;h3&gt;
-&lt;p&gt;The &lt;a href=&quot;&#x2f;2017&#x2f;01&#x2f;16&#x2f;site-changes&#x2f;&quot;&gt;last time&lt;&#x2f;a&gt; I ended with&lt;&#x2f;p&gt;
+from my own ignorance of modern web technology.&lt;/p&gt;
+&lt;p&gt;This time, I rewrote the hole effing thing from scratch.&lt;/p&gt;
+&lt;h3&gt;The Why&lt;/h3&gt;
+&lt;p&gt;The &lt;a href=&quot;/2017/01/16/site-changes/&quot;&gt;last time&lt;/a&gt; I ended with&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;I wrote the most Ruby in my life today. Yay?&lt;&#x2f;p&gt;
-&lt;&#x2f;blockquote&gt;
+&lt;p&gt;I wrote the most Ruby in my life today. Yay?&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;That question mark turned out to be prescient. Ruby is not my thing. No
 judgement against the language per ce. But the Ruby ecosystem is not friendly to
 a casual user who needs it once every few months. No really, when I write an
 article, it&#x27;s a toss-up whether I can deploy it without being forced to mess
-with Ruby&#x2f;Gems&#x2f;Jekyll&#x2f;Homebrew etc. I&#x27;m almost certain there&#x27;s a set of best
+with Ruby/Gems/Jekyll/Homebrew etc. I&#x27;m almost certain there&#x27;s a set of best
 practices I could learn to improve this. But it&#x27;d be a skill that I barely need
 and probably forget a few times. Meanwhile I just want to translate a new
-Markdown file to HTML and put it on Github.&lt;&#x2f;p&gt;
+Markdown file to HTML and put it on Github.&lt;/p&gt;
 &lt;p&gt;As a teen, one of my favorite things about the web is how accessible it is.
 I could sit in front of anyone&#x27;s computer, open Notepad.exe and type in some
 tags, and open the file with a browser to see the result. That simple bootstrap
-process, however repetitive, never got old for me.&lt;&#x2f;p&gt;
+process, however repetitive, never got old for me.&lt;/p&gt;
 &lt;p&gt;In the last decade, my professional work is focused on native, mobile
 applications. This experience biased me in a few ways. &amp;quot;Native&amp;quot; made me
 appreciate the closeness to &amp;quot;the metal&amp;quot;: you have an OS; you get the executable;
@@ -197,121 +197,121 @@ you launch strace, and boom, everything the OS thinks what your code does is
 revealed to you. &amp;quot;Mobile&amp;quot; forced me to reckon with the reality: desktop
 experience has become a niche. It&#x27;s nowhere near as important as it was prior to
 the iPhone. Not making your software run well on mobile devices is a particular
-kind of choice that come with some severe trade-offs.&lt;&#x2f;p&gt;
-&lt;p&gt;And, finally, I subscribe to the idea that &lt;em&gt;plain text is supreme&lt;&#x2f;em&gt;. Yes, even
+kind of choice that come with some severe trade-offs.&lt;/p&gt;
+&lt;p&gt;And, finally, I subscribe to the idea that &lt;em&gt;plain text is supreme&lt;/em&gt;. Yes, even
 more supreme than the web. This website is a derivative of the articles I write
 in Markdown. Plain text as a format will out-last the web in the long run (not
-necessarily &lt;em&gt;these&lt;&#x2f;em&gt; texts). So it really bothers me when I have to put &amp;quot;front
-matter&amp;quot; in YAML&#x2f;TOML&#x2f;whatever in front of the real Markdown. Yes, if you want
-reasonable HTMLs, these metadata is necessary. But the text is &lt;em&gt;Supreme&lt;&#x2f;em&gt;. The
+necessarily &lt;em&gt;these&lt;/em&gt; texts). So it really bothers me when I have to put &amp;quot;front
+matter&amp;quot; in YAML/TOML/whatever in front of the real Markdown. Yes, if you want
+reasonable HTMLs, these metadata is necessary. But the text is &lt;em&gt;Supreme&lt;/em&gt;. The
 text is to be readable directly. Succumbing the supreme to the derivative is
-&lt;em&gt;wrong&lt;&#x2f;em&gt;.&lt;&#x2f;p&gt;
+&lt;em&gt;wrong&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Okay, so where does all that leave me? In this iteration of this website,
 I wrote every single line of CSS and HTML (there&#x27;s barely any JavaScript) which
 look decent on mobile. It&#x27;s generated by portable Linux and Darwin executables
 that are part of the website. As long as the OSes stay relatively stable, the
 site will build without any dependencies, in a matter of milliseconds. The best
-part?  It&#x27;ll stay like this unless I wish it otherwise.&lt;&#x2f;p&gt;
-&lt;h3&gt;The Frontend&lt;&#x2f;h3&gt;
-&lt;p&gt;A few words on the design of the site.&lt;&#x2f;p&gt;
-&lt;p&gt;This site gained the concept of &amp;quot;links&amp;quot; the &lt;a href=&quot;&#x2f;2017&#x2f;01&#x2f;16&#x2f;site-changes&#x2f;&quot;&gt;last time&lt;&#x2f;a&gt;. It has since become
+part?  It&#x27;ll stay like this unless I wish it otherwise.&lt;/p&gt;
+&lt;h3&gt;The Frontend&lt;/h3&gt;
+&lt;p&gt;A few words on the design of the site.&lt;/p&gt;
+&lt;p&gt;This site gained the concept of &amp;quot;links&amp;quot; the &lt;a href=&quot;/2017/01/16/site-changes/&quot;&gt;last time&lt;/a&gt;. It has since become
 clear that I don&#x27;t use this feature (blame Twitter). It&#x27;s gone, for now. The old
-&amp;quot;about&amp;quot; page is replaced by the home page.&lt;&#x2f;p&gt;
+&amp;quot;about&amp;quot; page is replaced by the home page.&lt;/p&gt;
 &lt;p&gt;When I decided the site needed a rewrite, I fantasized a place with only HTML.
 Perhaps users who want a better reading experience can simply put it in Reader
 mode. Alas, if browsers (with the exception of Safari) implemented automatic
-dark mode with a &lt;a href=&quot;https:&#x2f;&#x2f;drafts.csswg.org&#x2f;css-color-adjust-1&#x2f;#color-scheme-meta&quot;&gt;color-scheme meta&lt;&#x2f;a&gt; tag, it&#x27;d almost be a working idea.&lt;&#x2f;p&gt;
-&lt;p&gt;So, that&#x27;s my starting point.&lt;&#x2f;p&gt;
+dark mode with a &lt;a href=&quot;https://drafts.csswg.org/css-color-adjust-1/#color-scheme-meta&quot;&gt;color-scheme meta&lt;/a&gt; tag, it&#x27;d almost be a working idea.&lt;/p&gt;
+&lt;p&gt;So, that&#x27;s my starting point.&lt;/p&gt;
 &lt;p&gt;The site is a list of articles organized by tags and dates, and a few web pages.
-&lt;em&gt;I want you to read the site, not navigate it&lt;&#x2f;em&gt;. So text is the point. It&#x27;s the
+&lt;em&gt;I want you to read the site, not navigate it&lt;/em&gt;. So text is the point. It&#x27;s the
 only design element. The site uses 2 fonts and 2 text-color (not counting
 highlighted code). Links are always underscored (because you can&#x27;t hover in
-mobile browsers to find something clickable).&lt;&#x2f;p&gt;
+mobile browsers to find something clickable).&lt;/p&gt;
 &lt;p&gt;The site is responsive to mobile layout, and dark mode. It&#x27;s aware that it could
 be added to the home screen of a mobile device, or linked to some external site
-that wants to generate a preview.&lt;&#x2f;p&gt;
-&lt;p&gt;I did end up using &lt;a href=&quot;https:&#x2f;&#x2f;ethanschoonover.com&#x2f;solarized&#x2f;&quot;&gt;solarized&lt;&#x2f;a&gt; theme for code highlighting, which lead to 2
+that wants to generate a preview.&lt;/p&gt;
+&lt;p&gt;I did end up using &lt;a href=&quot;https://ethanschoonover.com/solarized/&quot;&gt;solarized&lt;/a&gt; theme for code highlighting, which lead to 2
 static CSS files. Other than that, all CSS and HTML are hand-written. There&#x27;s no
-build step for them, farm to table, Vim to your browser.&lt;&#x2f;p&gt;
+build step for them, farm to table, Vim to your browser.&lt;/p&gt;
 &lt;p&gt;It turned out standardized CSS variable is game-changing. Combined with media
-queries, I barely needed any class to support dark mode&#x2f;mobile layout. More
+queries, I barely needed any class to support dark mode/mobile layout. More
 importantly, it makes my programmer brain happy. Oh, yes I&#x27;m talking about them
 here because this is the first time I truly attempted to catch up since they
 were introduced to the world. It&#x27;s freeing to let go of constrains of an
-read-to-use theme, or some CSS frameworks.&lt;&#x2f;p&gt;
-&lt;h3&gt;The Backend&lt;&#x2f;h3&gt;
+read-to-use theme, or some CSS frameworks.&lt;/p&gt;
+&lt;h3&gt;The Backend&lt;/h3&gt;
 &lt;p&gt;This site is a collection of static files. The so-called backend is a program
 that assembles these files from some HTML templates and Markdown files. In the
-past, this program had been &lt;a href=&quot;https:&#x2f;&#x2f;jekyllrb.com&#x2f;&quot;&gt;Jekyll&lt;&#x2f;a&gt;. This time around, I replaced it with
-some Rust code.&lt;&#x2f;p&gt;
+past, this program had been &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;. This time around, I replaced it with
+some Rust code.&lt;/p&gt;
 &lt;p&gt;Boy, this thing is cool, if I say so myself. I&#x27;m going to refer to it as &amp;quot;the
-generator&amp;quot;.&lt;&#x2f;p&gt;
+generator&amp;quot;.&lt;/p&gt;
 &lt;p&gt;The biggest &amp;quot;feature&amp;quot; is the fact that it doesn&#x27;t pretend to be re-usable.
-The generator is as part of this site as the articles.&lt;&#x2f;p&gt;
+The generator is as part of this site as the articles.&lt;/p&gt;
 &lt;p&gt;Thanks to Rust, the programs are built into executable binaries. On macOS, it
-requires libSystem to run. On Linux, I can (and prefer) build with &lt;a href=&quot;https:&#x2f;&#x2f;www.musl-libc.org&#x2f;&quot;&gt;musl&lt;&#x2f;a&gt;. The
+requires libSystem to run. On Linux, I can (and prefer) build with &lt;a href=&quot;https://www.musl-libc.org/&quot;&gt;musl&lt;/a&gt;. The
 binaries for these two OSes are checked in with the content of the site. So
 it requires zero installation to &amp;quot;build&amp;quot; the site. (I may need to
-include a 3rd executable for the upcoming ARM-based Macs soon).&lt;&#x2f;p&gt;
+include a 3rd executable for the upcoming ARM-based Macs soon).&lt;/p&gt;
 &lt;p&gt;The generator spits out the final content of the website. It&#x27;s deployed without
-further modification.&lt;&#x2f;p&gt;
+further modification.&lt;/p&gt;
 &lt;p&gt;The build process is pretty fast. As of this writing, it averages around 250 ms.
 I could probably make it faster by avoiding some repeated reads when it comes to
-article inputs.&lt;&#x2f;p&gt;
-&lt;p&gt;The generator handles HTML&#x2f;XML templating with a library named &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;djc&#x2f;askama&quot;&gt;Askama&lt;&#x2f;a&gt;.
+article inputs.&lt;/p&gt;
+&lt;p&gt;The generator handles HTML/XML templating with a library named &lt;a href=&quot;https://github.com/djc/askama&quot;&gt;Askama&lt;/a&gt;.
 Learning it had been an eye opening experience. Askama is built atop Rust&#x27;s
 macro system. For each template (e.g. web page), it requires users to write
 a Rust data structure that fulfills its variable requirements.  Here&#x27;s the
-kicker: in this data structure, you &lt;em&gt;cannot&lt;&#x2f;em&gt; miss any variable the corresponding
+kicker: in this data structure, you &lt;em&gt;cannot&lt;/em&gt; miss any variable the corresponding
 template requires.  When you do, the Rust project won&#x27;t compile! Rust&#x27;s tooling
 is so good that these errors were surfaced in my editor as I wrote this part
-in real time. This level of type-safety for template language felt like magic.&lt;&#x2f;p&gt;
-&lt;p&gt;Syntax highlighting is powered by &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;trishume&#x2f;syntect&quot;&gt;syntect&lt;&#x2f;a&gt;, the library behind &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;sharkdp&#x2f;bat&quot;&gt;bat&lt;&#x2f;a&gt;. But
+in real time. This level of type-safety for template language felt like magic.&lt;/p&gt;
+&lt;p&gt;Syntax highlighting is powered by &lt;a href=&quot;https://github.com/trishume/syntect&quot;&gt;syntect&lt;/a&gt;, the library behind &lt;a href=&quot;https://github.com/sharkdp/bat&quot;&gt;bat&lt;/a&gt;. But
 the interesting bit here is how the syntax definitions are embedded within the
 final executable. To support a particular syntax, syntect takes the syntax&#x27;s
 SublimeText definition. So this is a configurable, extendible system. The
 generator includes 118 syntax definitions. Uncompressed, their files take up 5MB
 of disk space. As one can imagine, loading 5MB from 118 files each time the
 program runs is quite slow. Turns out, Rust has a standard library macro
-&lt;a href=&quot;https:&#x2f;&#x2f;doc.rust-lang.org&#x2f;std&#x2f;macro.include_bytes.html%60&quot;&gt;include_bytes!&lt;&#x2f;a&gt; that solves this problem. &lt;a href=&quot;https:&#x2f;&#x2f;doc.rust-lang.org&#x2f;std&#x2f;macro.include_bytes.html%60&quot;&gt;include_bytes!&lt;&#x2f;a&gt; embeds
+&lt;a href=&quot;https://doc.rust-lang.org/std/macro.include_bytes.html%60&quot;&gt;include_bytes!&lt;/a&gt; that solves this problem. &lt;a href=&quot;https://doc.rust-lang.org/std/macro.include_bytes.html%60&quot;&gt;include_bytes!&lt;/a&gt; embeds
 contents of a file as literals in source code, as if it&#x27;s hand-written. syntect
 takes advantage of this feature by supporting serialization of its in-memory
 representation of syntaxes into bytes, and accepting in-line byte literals in
 reverse in order to create these representations. This system solves two
-problems for me:&lt;&#x2f;p&gt;
+problems for me:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;I no longer need to ship the SublimeText syntax files along with the
-generator.&lt;&#x2f;li&gt;
-&lt;li&gt;The generator doesn&#x27;t need to perform all that disk I&#x2f;O, so it runs
-significantly faster.&lt;&#x2f;li&gt;
-&lt;&#x2f;ol&gt;
+generator.&lt;/li&gt;
+&lt;li&gt;The generator doesn&#x27;t need to perform all that disk I/O, so it runs
+significantly faster.&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;Overall, the Rust ecosystem delivered. Although a lot of library are still in
-rough shape&#x2f;early stage, there usually are multiple alternatives for roughly the
+rough shape/early stage, there usually are multiple alternatives for roughly the
 same purpose. Gluing a few of them together for this generator project had been
-fun.&lt;&#x2f;p&gt;
+fun.&lt;/p&gt;
 &lt;p&gt;Finally, let&#x27;s talk metadata, I can&#x27;t realistically manage to generate the site
 without them.  Articles and static pages each define their URL by their file
-locations relative to the root. For example, &lt;code&gt;&#x2f;articles&#x2f;2020&#x2f;04&#x2f;23&#x2f;hello.md&lt;&#x2f;code&gt;
-means the URL is &lt;code&gt;&#x2f;2020&#x2f;04&#x2f;23&#x2f;hello&#x2f;&lt;&#x2f;code&gt;. Each article still has a front matter.
+locations relative to the root. For example, &lt;code&gt;/articles/2020/04/23/hello.md&lt;/code&gt;
+means the URL is &lt;code&gt;/2020/04/23/hello/&lt;/code&gt;. Each article still has a front matter.
 But I made the text version look as &amp;quot;natural&amp;quot; as possible. There&#x27;s no markers
 for beginning and end of the metadata since I know exactly what&#x27;s needed. The
 title is marked as an H1. Date is in RFC3339 format. Tags are comma-separated
-values. So an example of an article&#x27;s beginning looks like:&lt;&#x2f;p&gt;
+values. So an example of an article&#x27;s beginning looks like:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;# Site Improvements 2020
 2020-04-22T21:58:03-07:00
 tags: Rust, HTML, CSS, Ruby, Jekyll, Markdown
 
 I took back my website...
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;Text supremacy! Glory!&lt;&#x2f;p&gt;
-&lt;h3&gt;Onward&lt;&#x2f;h3&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Text supremacy! Glory!&lt;/p&gt;
+&lt;h3&gt;Onward&lt;/h3&gt;
 &lt;p&gt;Over the course of roughly 15 years, I&#x27;ve had blogs of quite a few variates.
 I wish I&#x27;d done a better job archiving them as I moved on from one to the next.
 This is not the first time I attempted to gain full control over the theming,
 generating, hosting, and deployment of a site. But I&#x27;m hopeful that it&#x27;ll last
 longer. You could say that&#x27;s what I optimized for. And who knew, maybe my
-experience from past failures counts for something.&lt;&#x2f;p&gt;
-&lt;p&gt;Here&#x27;s to less stressful deploys and more writing!&lt;&#x2f;p&gt;
+experience from past failures counts for something.&lt;/p&gt;
+&lt;p&gt;Here&#x27;s to less stressful deploys and more writing!&lt;/p&gt;
 </description>
                 <pubDate>Wed, 22 Apr 2020 21:58:03 -0700</pubDate>
                 <link>https://duan.ca/2020/04/22/site-improvements-2020/</link>

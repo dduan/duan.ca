@@ -6,46 +6,46 @@
         <atom:link href="https://duan.ca/tag/macos/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Installing Nix on macOS 11 Big Sur</title>
-                <description>&lt;p&gt;&lt;em&gt;Note: as of Feburary, 2022, the steps written below has been incorporated by the official Nix install script for macOS. This article is, therefore, obsolete.&lt;&#x2f;em&gt;&lt;&#x2f;p&gt;
-&lt;p&gt;Here are the steps for installing nix on macOS 11 Big Sur.&lt;&#x2f;p&gt;
-&lt;h3&gt;Preparation&lt;&#x2f;h3&gt;
+                <description>&lt;p&gt;&lt;em&gt;Note: as of Feburary, 2022, the steps written below has been incorporated by the official Nix install script for macOS. This article is, therefore, obsolete.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Here are the steps for installing nix on macOS 11 Big Sur.&lt;/p&gt;
+&lt;h3&gt;Preparation&lt;/h3&gt;
 &lt;p&gt;Decide on which disk the nix store is to be installed. By end of this process, you&#x27;ll have a disk
-name like &lt;code&gt;disk4&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
-&lt;p&gt;Personally, I like looking it up in the Disk Utility app:&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2020&#x2f;12&#x2f;disk-utility.png&quot; alt=&quot;Disk Utility&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
-&lt;p&gt;You can also use other methods, such us the &lt;code&gt;diskutil list&lt;&#x2f;code&gt; command.&lt;&#x2f;p&gt;
-&lt;p&gt;Have this disk name ready.&lt;&#x2f;p&gt;
-&lt;h3&gt;Installation&lt;&#x2f;h3&gt;
-&lt;h4&gt;1. Create the path &lt;code&gt;&#x2f;nix&lt;&#x2f;code&gt; the macOS way.&lt;&#x2f;h4&gt;
-&lt;p&gt;Edit or create the file &lt;code&gt;&#x2f;etc&#x2f;synthetic.conf&lt;&#x2f;code&gt;, adding this line:&lt;&#x2f;p&gt;
+name like &lt;code&gt;disk4&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Personally, I like looking it up in the Disk Utility app:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2020/12/disk-utility.png&quot; alt=&quot;Disk Utility&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;You can also use other methods, such us the &lt;code&gt;diskutil list&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;Have this disk name ready.&lt;/p&gt;
+&lt;h3&gt;Installation&lt;/h3&gt;
+&lt;h4&gt;1. Create the path &lt;code&gt;/nix&lt;/code&gt; the macOS way.&lt;/h4&gt;
+&lt;p&gt;Edit or create the file &lt;code&gt;/etc/synthetic.conf&lt;/code&gt;, adding this line:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;nix
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;Reboot the Mac.&lt;&#x2f;p&gt;
-&lt;h4&gt;2. Create a APFS volume for the nix store.&lt;&#x2f;h4&gt;
-&lt;pre&gt;&lt;code&gt;sudo diskutil apfs addVolume diskX APFS &#x27;Nix Store&#x27; -mountpoint &#x2f;nix
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;Make sure to replace &lt;code&gt;diskX&lt;&#x2f;code&gt; with the disk you identified in the preparation step.&lt;&#x2f;p&gt;
-&lt;h4&gt;3. Mount the volume.&lt;&#x2f;h4&gt;
-&lt;p&gt;Edit or create the file &lt;code&gt;&#x2f;etc&#x2f;fstab&lt;&#x2f;code&gt;, adding this line:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;code&gt;LABEL=Nix\040Store &#x2f;nix apfs rw,nobrowse
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;Reboot the Mac.&lt;&#x2f;p&gt;
-&lt;h4&gt;4. Install Nix the &amp;quot;normal&amp;quot; way&lt;&#x2f;h4&gt;
-&lt;pre&gt;&lt;code&gt;sh &amp;lt;(curl -L https:&#x2f;&#x2f;nixos.org&#x2f;nix&#x2f;install)
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;h4&gt;5. You are done! Try it out. I ran this little &lt;a href=&quot;https:&#x2f;&#x2f;nix.dev&#x2f;tutorials&#x2f;dev-environment.html&quot;&gt;example&lt;&#x2f;a&gt; as a test and things appears to work as expected.&lt;&#x2f;h4&gt;
-&lt;h3&gt;Bonus: using Nix in Fish shell&lt;&#x2f;h3&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Reboot the Mac.&lt;/p&gt;
+&lt;h4&gt;2. Create a APFS volume for the nix store.&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;sudo diskutil apfs addVolume diskX APFS &#x27;Nix Store&#x27; -mountpoint /nix
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Make sure to replace &lt;code&gt;diskX&lt;/code&gt; with the disk you identified in the preparation step.&lt;/p&gt;
+&lt;h4&gt;3. Mount the volume.&lt;/h4&gt;
+&lt;p&gt;Edit or create the file &lt;code&gt;/etc/fstab&lt;/code&gt;, adding this line:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;LABEL=Nix\040Store /nix apfs rw,nobrowse
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Reboot the Mac.&lt;/p&gt;
+&lt;h4&gt;4. Install Nix the &amp;quot;normal&amp;quot; way&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;sh &amp;lt;(curl -L https://nixos.org/nix/install)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;5. You are done! Try it out. I ran this little &lt;a href=&quot;https://nix.dev/tutorials/dev-environment.html&quot;&gt;example&lt;/a&gt; as a test and things appears to work as expected.&lt;/h4&gt;
+&lt;h3&gt;Bonus: using Nix in Fish shell&lt;/h3&gt;
 &lt;p&gt;As a fish user, I&#x27;m used to fixing things up myself since software from non-fish users usually
 pretends fish doesn&#x27;t exist. Anyways, in the final steps of its installation, Nix sets up a few
 environment variables in a bash script. I&#x27;ve adapted these specifically for fish on macOS. Add these
-to your config.fish:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;code&gt;set -x NIX_PROFILES &amp;quot;&#x2f;nix&#x2f;var&#x2f;nix&#x2f;profiles&#x2f;default $HOME&#x2f;.nix-profile&amp;quot;
-set -x NIX_SSL_CERT_FILE &amp;quot;$HOME&#x2f;.nix-profile&#x2f;etc&#x2f;ssl&#x2f;certs&#x2f;ca-bundle.crt&amp;quot;
-set -x NIX_PATH &#x2f;nix $HOME&#x2f;.nix-defexpr&#x2f;channels
-set -x PATH $HOME&#x2f;.nix-profile&#x2f;bin $PATH
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+to your config.fish:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;set -x NIX_PROFILES &amp;quot;/nix/var/nix/profiles/default $HOME/.nix-profile&amp;quot;
+set -x NIX_SSL_CERT_FILE &amp;quot;$HOME/.nix-profile/etc/ssl/certs/ca-bundle.crt&amp;quot;
+set -x NIX_PATH /nix $HOME/.nix-defexpr/channels
+set -x PATH $HOME/.nix-profile/bin $PATH
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;It shouldn&#x27;t be to hard to do this on other OSes. The relevant information is in
-&lt;code&gt;~&#x2f;.nix-profile&#x2f;etc&#x2f;profile.d&#x2f;nix.sh&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
+&lt;code&gt;~/.nix-profile/etc/profile.d/nix.sh&lt;/code&gt;.&lt;/p&gt;
 </description>
                 <pubDate>Sun, 13 Dec 2020 12:00:52 -0800</pubDate>
                 <link>https://duan.ca/2020/12/13/nix-on-macos-11-big-sur/</link>
@@ -54,20 +54,20 @@ set -x PATH $HOME&#x2f;.nix-profile&#x2f;bin $PATH
             <item>
                 <title>Taking Screenshots On Linux</title>
                 <description>&lt;p&gt;Having used macOS for a number of years, I&#x27;ve formed some habit that I&#x27;m never
-going to shake. Among them is taking screenshots with &lt;code&gt;Alt-Shift-3&lt;&#x2f;code&gt; and
-&lt;code&gt;Alt-Shift-4&lt;&#x2f;code&gt;, follow up with area or window selection. So, when I bought a PC
-and put Linux on it, it&#x27;s time to mess with it for these habits!&lt;&#x2f;p&gt;
-&lt;p&gt;And, it didn&#x27;t take too long to solve. I&#x27;ve found &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;naelstrof&#x2f;maim&quot;&gt;maim&lt;&#x2f;a&gt;. Writing this down
-for mine and maybe, yours, future reference.&lt;&#x2f;p&gt;
-&lt;p&gt;To capture the entire screen:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;code&gt;bash -c &amp;quot;maim ~&#x2f;Screenshots&#x2f;fullscreen_$(date +%s).png&amp;quot;
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;To active area&#x2f;windows selection for the capture:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;code&gt;bash -c &amp;quot;maim -s ~&#x2f;Screenshots&#x2f;area_$(date +%s).png&amp;quot;
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+going to shake. Among them is taking screenshots with &lt;code&gt;Alt-Shift-3&lt;/code&gt; and
+&lt;code&gt;Alt-Shift-4&lt;/code&gt;, follow up with area or window selection. So, when I bought a PC
+and put Linux on it, it&#x27;s time to mess with it for these habits!&lt;/p&gt;
+&lt;p&gt;And, it didn&#x27;t take too long to solve. I&#x27;ve found &lt;a href=&quot;https://github.com/naelstrof/maim&quot;&gt;maim&lt;/a&gt;. Writing this down
+for mine and maybe, yours, future reference.&lt;/p&gt;
+&lt;p&gt;To capture the entire screen:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bash -c &amp;quot;maim ~/Screenshots/fullscreen_$(date +%s).png&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To active area/windows selection for the capture:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;bash -c &amp;quot;maim -s ~/Screenshots/area_$(date +%s).png&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here&#x27;s how the latter in action (with keybinds via Ubuntu 20.20 desktop&#x27;s
-Settings app).&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2020&#x2f;06&#x2f;18&#x2f;area-screenshot-on-ubuntu.gif&quot; alt=&quot;How selecting an area with maim works on Ubuntu&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
+Settings app).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2020/06/18/area-screenshot-on-ubuntu.gif&quot; alt=&quot;How selecting an area with maim works on Ubuntu&quot; /&gt;&lt;/p&gt;
 </description>
                 <pubDate>Thu, 18 Jun 2020 13:22:01 -0700</pubDate>
                 <link>https://duan.ca/2020/06/18/taking-linux-screenshots/</link>
@@ -79,23 +79,23 @@ Settings app).&lt;&#x2f;p&gt;
 I created a framework that supports distribution via Swift Package Manager, CocoaPods, Xcode project and
 Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
 SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
-Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;&#x2f;p&gt;
+Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;/p&gt;
 &lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
-the version tag, documentation generation, automatic Carthage binary generation, test coverage...&lt;&#x2f;p&gt;
-&lt;p&gt;Anyways, here&#x27;s some stuff mentioned in the video:&lt;&#x2f;p&gt;
+the version tag, documentation generation, automatic Carthage binary generation, test coverage...&lt;/p&gt;
+&lt;p&gt;Anyways, here&#x27;s some stuff mentioned in the video:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Sample project from the video: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;BitArray&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;BitArray&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;Video of me writing the code in this project: &lt;a href=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;watch?v=-k_jrIoD56k&quot;&gt;https:&#x2f;&#x2f;www.youtube.com&#x2f;watch?v=-k_jrIoD56k&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;Swift Package Manager: &lt;a href=&quot;https:&#x2f;&#x2f;swift.org&#x2f;package-manager&#x2f;&quot;&gt;https:&#x2f;&#x2f;swift.org&#x2f;package-manager&#x2f;&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;CocoaPods: &lt;a href=&quot;https:&#x2f;&#x2f;cocoapods.org&quot;&gt;https:&#x2f;&#x2f;cocoapods.org&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;Carthage: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;Carthage&#x2f;Carthage&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;Carthage&#x2f;Carthage&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;Xcconfigs for universal framework: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;mrackwitz&#x2f;xcconfigs&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;mrackwitz&#x2f;xcconfigs&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;SwiftLint: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;realm&#x2f;SwiftLint&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;realm&#x2f;SwiftLint&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;Travis CI: &lt;a href=&quot;https:&#x2f;&#x2f;travis-ci.org&quot;&gt;https:&#x2f;&#x2f;travis-ci.org&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;&#x2f;ul&gt;
+&lt;li&gt;Sample project from the video: &lt;a href=&quot;https://github.com/dduan/BitArray&quot;&gt;https://github.com/dduan/BitArray&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Video of me writing the code in this project: &lt;a href=&quot;https://www.youtube.com/watch?v=-k_jrIoD56k&quot;&gt;https://www.youtube.com/watch?v=-k_jrIoD56k&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Swift Package Manager: &lt;a href=&quot;https://swift.org/package-manager/&quot;&gt;https://swift.org/package-manager/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;CocoaPods: &lt;a href=&quot;https://cocoapods.org&quot;&gt;https://cocoapods.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Carthage: &lt;a href=&quot;https://github.com/Carthage/Carthage&quot;&gt;https://github.com/Carthage/Carthage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Xcconfigs for universal framework: &lt;a href=&quot;https://github.com/mrackwitz/xcconfigs&quot;&gt;https://github.com/mrackwitz/xcconfigs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;SwiftLint: &lt;a href=&quot;https://github.com/realm/SwiftLint&quot;&gt;https://github.com/realm/SwiftLint&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Travis CI: &lt;a href=&quot;https://travis-ci.org&quot;&gt;https://travis-ci.org&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
                 <link>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</link>

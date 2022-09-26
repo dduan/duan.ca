@@ -7,81 +7,81 @@
             <item>
                 <title>On the Subject of Interface Hygiene</title>
                 <description>&lt;p&gt;In a purly reactive world, your entire program merge into a single stream. Now,
-close your eyes, and envision: your project as one, beautiful, stream.&lt;&#x2f;p&gt;
+close your eyes, and envision: your project as one, beautiful, stream.&lt;/p&gt;
 &lt;p&gt;Now open your eyes. Yeah, it&#x27;s not. Your project is a Mac or iOS app. It&#x27;s full
 of your memories, sweat, and blood. And you are ready to sweat and bleed some
 more by putting some Combine and SwiftUI into it. You watched the WWDC19
 sessions and learned that &amp;quot;Subjcets are super powerful&amp;quot;. You looked into your
-code and realized you can&#x27;t really do anything with Combine without &lt;code&gt;Subject&lt;&#x2f;code&gt;s
-at the current state of the project.&lt;&#x2f;p&gt;
-&lt;p&gt;Well…&lt;&#x2f;p&gt;
+code and realized you can&#x27;t really do anything with Combine without &lt;code&gt;Subject&lt;/code&gt;s
+at the current state of the project.&lt;/p&gt;
+&lt;p&gt;Well…&lt;/p&gt;
 &lt;p&gt;Here are a few habits that help keeping your project that prevasively uses
-&lt;code&gt;Combine.Subject&lt;&#x2f;code&gt; &lt;em&gt;sane&lt;&#x2f;em&gt;. They should seem obvious to anyone who understands
+&lt;code&gt;Combine.Subject&lt;/code&gt; &lt;em&gt;sane&lt;/em&gt;. They should seem obvious to anyone who understands
 Murphy&#x27;s law and the value of minialism in interfaces. If you already are using
 some reactive stream implementation, substitute the types with their
-counterparts in your framework and these rules should seem down right &lt;strong&gt;basic&lt;&#x2f;strong&gt;.&lt;&#x2f;p&gt;
-&lt;h2&gt;Vend &lt;code&gt;Subject&lt;&#x2f;code&gt;s as &lt;code&gt;Publisher&lt;&#x2f;code&gt;s&lt;&#x2f;h2&gt;
-&lt;p&gt;&lt;code&gt;Subject&lt;&#x2f;code&gt;s help bridge from the imperitive to the reactive world. Somewhat
-paradoxically, sharing them is not very &amp;quot;RX-y&amp;quot;. This is akin to prefering &lt;code&gt;let&lt;&#x2f;code&gt;s
-over &lt;code&gt;var&lt;&#x2f;code&gt;.&lt;&#x2f;p&gt;
+counterparts in your framework and these rules should seem down right &lt;strong&gt;basic&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;Vend &lt;code&gt;Subject&lt;/code&gt;s as &lt;code&gt;Publisher&lt;/code&gt;s&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Subject&lt;/code&gt;s help bridge from the imperitive to the reactive world. Somewhat
+paradoxically, sharing them is not very &amp;quot;RX-y&amp;quot;. This is akin to prefering &lt;code&gt;let&lt;/code&gt;s
+over &lt;code&gt;var&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Most of the time, what you want to share is the values pumped into the stream,
-not the privilage to mutate it. Because Subjects conform to &lt;code&gt;Publisher&lt;&#x2f;code&gt;, it&#x27;s
-easy to hide from the users the fact that your stream is backed by them.&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;&#x2f;&#x2f; Bad: now anyone who get a hold of it can mess with your stream!
+not the privilage to mutate it. Because Subjects conform to &lt;code&gt;Publisher&lt;/code&gt;, it&#x27;s
+easy to hide from the users the fact that your stream is backed by them.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;// Bad: now anyone who get a hold of it can mess with your stream!
 public enum GreatInts {
     public var updates = CurrentValueSubject&amp;lt;Int, Never&amp;gt;(0)
 }
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;With Combine this conversion happens via type-erasure:&lt;&#x2f;p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;&#x2f;&#x2f; Better: all your users care is the stream (publisher), so give them that!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With Combine this conversion happens via type-erasure:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;// Better: all your users care is the stream (publisher), so give them that!
 public enum GreatInts {
-    &#x2f;&#x2f; Internally, it&#x27;s backed by a subject.
+    // Internally, it&#x27;s backed by a subject.
     var subject = CurrentValueSubject&amp;lt;Int, Never&amp;gt;(0)
-    &#x2f;&#x2f; Externally, it&#x27;s just a Publisher. 
+    // Externally, it&#x27;s just a Publisher. 
     public var subject: AnyPublisher&amp;lt;Int, Never&amp;gt; {
         subject.eraseToAnyPublisher()
     }
 }
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;h2&gt;CurrentValueSubject natually caches the latest value&lt;&#x2f;h2&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;CurrentValueSubject natually caches the latest value&lt;/h2&gt;
 &lt;p&gt;RX theorists will hate this: sometimes it&#x27;s just practical to expose
-a synchronous interface to the latest vaule in the stream!&lt;&#x2f;p&gt;
-&lt;p&gt;Two things.&lt;&#x2f;p&gt;
+a synchronous interface to the latest vaule in the stream!&lt;/p&gt;
+&lt;p&gt;Two things.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;It might be tempting to expose the subject and let your user use its
-&lt;code&gt;.value&lt;&#x2f;code&gt;. Well, you shouldn&#x27;t (as explained in the previous section).
+&lt;code&gt;.value&lt;/code&gt;. Well, you shouldn&#x27;t (as explained in the previous section).
 A separate interface dedicated to the latest value prevents people from
-polluting your stream.&lt;&#x2f;li&gt;
-&lt;&#x2f;ol&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;&#x2f;&#x2f; (Still) bad
+polluting your stream.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;// (Still) bad
 public final class GreatInts {
     public var updates = CurrentValueSubject&amp;lt;Int, Never&amp;gt;(0)
 }
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;Remember &lt;code&gt;CurrentValueSubject&lt;&#x2f;code&gt; has that &lt;code&gt;.value&lt;&#x2f;code&gt; property! It may seem
-surprising, but I&#x27;ve seen folks transitioning to RX clinging to the old ways:&lt;&#x2f;li&gt;
-&lt;&#x2f;ol&gt;
+&lt;li&gt;Remember &lt;code&gt;CurrentValueSubject&lt;/code&gt; has that &lt;code&gt;.value&lt;/code&gt; property! It may seem
+surprising, but I&#x27;ve seen folks transitioning to RX clinging to the old ways:&lt;/li&gt;
+&lt;/ol&gt;
 &lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;public final class GreatInts {
-    &#x2f;&#x2f; well, at least it&#x27;s not a public subject...
-    var subject = CurrentValueSubject&amp;lt;Int, Never&amp;gt;(0) &#x2f;&#x2f; &amp;lt;- initial value 0
+    // well, at least it&#x27;s not a public subject...
+    var subject = CurrentValueSubject&amp;lt;Int, Never&amp;gt;(0) // &amp;lt;- initial value 0
     public var updates: AnyPublisher&amp;lt;Int, Never&amp;gt; {
         subject.eraseToAnyPublisher()
     }
 
-    &#x2f;&#x2f; Wait, there&#x27;s that 0 again
+    // Wait, there&#x27;s that 0 again
     public var latest: Int = 0 {
         didSet {
-            subject.send(latest) &#x2f;&#x2f; ?
+            subject.send(latest) // ?
         }
     }
 }
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;First, you&#x27;ll notice that &lt;code&gt;0&lt;&#x2f;code&gt;, the initial value, is duplicated as both the
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First, you&#x27;ll notice that &lt;code&gt;0&lt;/code&gt;, the initial value, is duplicated as both the
 subject&#x27;s initial value, as well as the value of a stored property. And these
 duplicated sources of truth persist throughout the parent&#x27;s life time. Weird,
-right?&lt;&#x2f;p&gt;
-&lt;p&gt;Here&#x27;s a slightly better version:&lt;&#x2f;p&gt;
+right?&lt;/p&gt;
+&lt;p&gt;Here&#x27;s a slightly better version:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;public final class GreatInts {
     var subject = PassthroughSubject&amp;lt;Int, Never&amp;gt;()
     public var updates: AnyPublisher&amp;lt;Int, Never&amp;gt; {
@@ -90,16 +90,16 @@ right?&lt;&#x2f;p&gt;
 
     public var latest: Int = 0 {
         didSet {
-            subject.send(latest) &#x2f;&#x2f; ?
+            subject.send(latest) // ?
         }
     }
 }
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now there&#x27;s no two copy of the latest value in memory anymore. But in my opinion
 it does not embrace the full power of Combine. Here&#x27;s the most natual way to do
-this:&lt;&#x2f;p&gt;
+this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;public final class GreatInts {
-    &#x2f;&#x2f;&#x2f; This is a CurrentValueSubject again.
+    /// This is a CurrentValueSubject again.
     var subject = CurrentValueSubject&amp;lt;Int, Never&amp;gt;(0)
     public var updates: AnyPublisher&amp;lt;Int, Never&amp;gt; {
         subject.eraseToAnyPublisher()
@@ -109,23 +109,23 @@ this:&lt;&#x2f;p&gt;
         subject.value
     }
 }
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Essentially, you create separate public interface, each vends a little piece of
-&lt;code&gt;CurrentValueSubject&lt;&#x2f;code&gt;&#x27;s power.&lt;&#x2f;p&gt;
-&lt;h2&gt;No really, don&#x27;t use &lt;code&gt;Subject&lt;&#x2f;code&gt;s&lt;&#x2f;h2&gt;
-&lt;p&gt;Even a well-scoped &lt;code&gt;Subject&lt;&#x2f;code&gt; (properly being private or internal, depending on
+&lt;code&gt;CurrentValueSubject&lt;/code&gt;&#x27;s power.&lt;/p&gt;
+&lt;h2&gt;No really, don&#x27;t use &lt;code&gt;Subject&lt;/code&gt;s&lt;/h2&gt;
+&lt;p&gt;Even a well-scoped &lt;code&gt;Subject&lt;/code&gt; (properly being private or internal, depending on
 your tool of choice for access control) still has a mutable state that you
 probably don&#x27;t want: its stream can go from &amp;quot;alive&amp;quot; to &amp;quot;complete&amp;quot;. And, again,
 anyone with access can make this state transition happen, leaving you in the
 undefensible position of … hoping everyone on your team to not misuse your
-stuff?&lt;&#x2f;p&gt;
+stuff?&lt;/p&gt;
 &lt;p&gt;Lucky for you (and me), a &amp;quot;incompletable&amp;quot; subject is a established concept -- a
-&amp;quot;Relay&amp;quot;. I&#x27;ve put together a repo for you to look and&#x2f;or use:&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;relay&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;relay&lt;&#x2f;a&gt;&lt;&#x2f;p&gt;
-&lt;p&gt;Yeah, ban all Subjects in your project with a linter. Seriously.&lt;&#x2f;p&gt;
-&lt;h2&gt;Fin&lt;&#x2f;h2&gt;
+&amp;quot;Relay&amp;quot;. I&#x27;ve put together a repo for you to look and/or use:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/dduan/relay&quot;&gt;https://github.com/dduan/relay&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Yeah, ban all Subjects in your project with a linter. Seriously.&lt;/p&gt;
+&lt;h2&gt;Fin&lt;/h2&gt;
 &lt;p&gt;That&#x27;s all for now. I&#x27;m not an expert with RX myself. Hopefully these
-perspective can help you avoid some nasties.&lt;&#x2f;p&gt;
+perspective can help you avoid some nasties.&lt;/p&gt;
 </description>
                 <pubDate>Mon, 01 Jul 2019 20:22:48 -0700</pubDate>
                 <link>https://duan.ca/2019/07/01/combine-hygiene/</link>

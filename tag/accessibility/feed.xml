@@ -7,58 +7,58 @@
             <item>
                 <title>Smart Color Invert And Your iOS Apps</title>
                 <description>&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;#the-basics&quot;&gt;The Basics&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;#compatibility-with-older-ios-versions&quot;&gt;Compatibility with older iOS versions&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;#how-to-screenshot-with-inverted-color-settings&quot;&gt;How to screenshot with inverted color settings&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;&lt;a href=&quot;#conclusion&quot;&gt;Conclusion&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;&#x2f;ol&gt;
-&lt;h2&gt;Introduction&lt;&#x2f;h2&gt;
-&lt;p&gt;Apple sneakily shipped a &amp;quot;dark mode&amp;quot; in iOS 11, native apps looks &lt;em&gt;gorgeous&lt;&#x2f;em&gt; in this mode (especially on
-iPhone X with it&#x27;s OLED display):&lt;&#x2f;p&gt;
-&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;native-ios-apps-with-smart-invert.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;native-ios-apps-with-smart-invert.png 2x&quot; alt=&quot;iOS 11 apps in smart invert mode&quot;&#x2f;&gt;
-&lt;p&gt;To see it for yourself, go to &lt;em&gt;Settings -&amp;gt; General -&amp;gt; Accessibility Display Accommodations -&amp;gt; Invert Colors&lt;&#x2f;em&gt;
-and toggle the switch to on (I personally set triple tap of the power buttton to toggle this on&#x2f;off):&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;invert-color-settings.png&quot; alt=&quot;turn on smart invert mode in Settings&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
+&lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#the-basics&quot;&gt;The Basics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#compatibility-with-older-ios-versions&quot;&gt;Compatibility with older iOS versions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#how-to-screenshot-with-inverted-color-settings&quot;&gt;How to screenshot with inverted color settings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#conclusion&quot;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Apple sneakily shipped a &amp;quot;dark mode&amp;quot; in iOS 11, native apps looks &lt;em&gt;gorgeous&lt;/em&gt; in this mode (especially on
+iPhone X with it&#x27;s OLED display):&lt;/p&gt;
+&lt;img src=&quot;/assets/2017/12/native-ios-apps-with-smart-invert.png&quot; srcset=&quot;/assets/2017/12/native-ios-apps-with-smart-invert.png 2x&quot; alt=&quot;iOS 11 apps in smart invert mode&quot;/&gt;
+&lt;p&gt;To see it for yourself, go to &lt;em&gt;Settings -&amp;gt; General -&amp;gt; Accessibility Display Accommodations -&amp;gt; Invert Colors&lt;/em&gt;
+and toggle the switch to on (I personally set triple tap of the power buttton to toggle this on/off):&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2017/12/invert-color-settings.png&quot; alt=&quot;turn on smart invert mode in Settings&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;Note that in Apple&#x27;s first-party apps, not every view&#x27;s color is inverted (hence, &amp;quot;smart&amp;quot;). For apps that we
-built, that would not be the case automatically. Instead, we get the full color inversion under this setting:&lt;&#x2f;p&gt;
-&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;third-party-app-no-change.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;third-party-app-no-change.png 2x&quot; alt=&quot;default third party app before and after smart color&quot;&#x2f;&gt;
+built, that would not be the case automatically. Instead, we get the full color inversion under this setting:&lt;/p&gt;
+&lt;img src=&quot;/assets/2017/12/third-party-app-no-change.png&quot; srcset=&quot;/assets/2017/12/third-party-app-no-change.png 2x&quot; alt=&quot;default third party app before and after smart color&quot;/&gt;
 &lt;p&gt;In this article, we&#x27;ll see how to best adapt our apps so they look just as good as first-party iOS apps under
-the smart invert setting.&lt;&#x2f;p&gt;
-&lt;h2&gt;The Basics&lt;&#x2f;h2&gt;
-&lt;p&gt;&lt;em&gt;TL;DR: use &lt;a href=&quot;https:&#x2f;&#x2f;developer.apple.com&#x2f;documentation&#x2f;uikit&#x2f;uiview&#x2f;2865843-accessibilityignoresinvertcolors&quot;&gt;accessibilityIgnoresInvertColors&lt;&#x2f;a&gt; on your &lt;code&gt;UIView&lt;&#x2f;code&gt;s to prevent their color to be
-inverted.&lt;&#x2f;em&gt;&lt;&#x2f;p&gt;
-&lt;p&gt;iOS 11 introduced &lt;code&gt;accessibilityIgnoresInvertColors&lt;&#x2f;code&gt;, a property on &lt;code&gt;UIView&lt;&#x2f;code&gt;. From the &lt;a href=&quot;https:&#x2f;&#x2f;developer.apple.com&#x2f;documentation&#x2f;uikit&#x2f;uiview&#x2f;2865843-accessibilityignoresinvertcolors&quot;&gt;offical
-documentation&lt;&#x2f;a&gt;:&lt;&#x2f;p&gt;
+the smart invert setting.&lt;/p&gt;
+&lt;h2&gt;The Basics&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;TL;DR: use &lt;a href=&quot;https://developer.apple.com/documentation/uikit/uiview/2865843-accessibilityignoresinvertcolors&quot;&gt;accessibilityIgnoresInvertColors&lt;/a&gt; on your &lt;code&gt;UIView&lt;/code&gt;s to prevent their color to be
+inverted.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;iOS 11 introduced &lt;code&gt;accessibilityIgnoresInvertColors&lt;/code&gt;, a property on &lt;code&gt;UIView&lt;/code&gt;. From the &lt;a href=&quot;https://developer.apple.com/documentation/uikit/uiview/2865843-accessibilityignoresinvertcolors&quot;&gt;offical
+documentation&lt;/a&gt;:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;If inverting the colors would have a negative impact on your view&#x27;s content, set this property to true to
 prevent it from inverting its colors. Setting the property to true prevents the system from inverting the
-colors of the view and all of its subviews.&lt;&#x2f;p&gt;
-&lt;&#x2f;blockquote&gt;
-&lt;p&gt;So, for views containing photos or videos with real-world content, we probably want to set it to &lt;code&gt;true&lt;&#x2f;code&gt;. In
-our sample app&#x27;s source code:&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;setting-accessibilityIgnoresInvertColors-to-true-in-code.png&quot; alt=&quot;setting accessibilityIgnoresInvertColors to true in code&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
-&lt;p&gt;This gives us the desired effect for that view 🎉:&lt;&#x2f;p&gt;
-&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-code-result.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-code-result.png 2x&quot; alt=&quot;result of supporting invert color in code&quot;&#x2f;&gt;
-&lt;p&gt;The same can be done in Interface Builder. Let&#x27;s fix the other view by setting a runtime attribute:&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;setting-accessibilityIgnoresInvertColors-to-true-in-interface-builder.png&quot; alt=&quot;setting accessibilityIgnoresInvertColors to true in Interface Builder&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
-&lt;p&gt;Result:&lt;&#x2f;p&gt;
-&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-interface-builder-result.png&quot; srcset=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;smart-invert-in-interface-builder-result.png 2x&quot; alt=&quot;result of supporting invert color in interface builder&quot;&#x2f;&gt;
-&lt;p&gt;Tada!&lt;&#x2f;p&gt;
-&lt;h2&gt;Compatibility with older iOS versions&lt;&#x2f;h2&gt;
+colors of the view and all of its subviews.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, for views containing photos or videos with real-world content, we probably want to set it to &lt;code&gt;true&lt;/code&gt;. In
+our sample app&#x27;s source code:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2017/12/setting-accessibilityIgnoresInvertColors-to-true-in-code.png&quot; alt=&quot;setting accessibilityIgnoresInvertColors to true in code&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;This gives us the desired effect for that view 🎉:&lt;/p&gt;
+&lt;img src=&quot;/assets/2017/12/smart-invert-in-code-result.png&quot; srcset=&quot;/assets/2017/12/smart-invert-in-code-result.png 2x&quot; alt=&quot;result of supporting invert color in code&quot;/&gt;
+&lt;p&gt;The same can be done in Interface Builder. Let&#x27;s fix the other view by setting a runtime attribute:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2017/12/setting-accessibilityIgnoresInvertColors-to-true-in-interface-builder.png&quot; alt=&quot;setting accessibilityIgnoresInvertColors to true in Interface Builder&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Result:&lt;/p&gt;
+&lt;img src=&quot;/assets/2017/12/smart-invert-in-interface-builder-result.png&quot; srcset=&quot;/assets/2017/12/smart-invert-in-interface-builder-result.png 2x&quot; alt=&quot;result of supporting invert color in interface builder&quot;/&gt;
+&lt;p&gt;Tada!&lt;/p&gt;
+&lt;h2&gt;Compatibility with older iOS versions&lt;/h2&gt;
 &lt;p&gt;The story gets slightly complicated when your app need to run on older iOS versions. For one, our code won&#x27;t
-compile:&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;compile-error-on-older-oses.png&quot; alt=&quot;compile error on older iOS versions&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
-&lt;p&gt;But that&#x27;s nothing new to iOS developers, really. We can fix that with a &lt;code&gt;#available&lt;&#x2f;code&gt;:&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;fix-compile-error.png&quot; alt=&quot;fix compile error on older iOS versions&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
+compile:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2017/12/compile-error-on-older-oses.png&quot; alt=&quot;compile error on older iOS versions&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;But that&#x27;s nothing new to iOS developers, really. We can fix that with a &lt;code&gt;#available&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2017/12/fix-compile-error.png&quot; alt=&quot;fix compile error on older iOS versions&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;When you run the app in older iOS devices or simulators, Xcode will complain about our runtime attribute as
-well:&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;xcode-complain-about-runtime-attirbute.png&quot; alt=&quot;Xcode complains about runtime attribute on older iOS&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
-&lt;p&gt;If that bothers you, I recommend writing your own wrapper for this property as an extension to &lt;code&gt;UIView&lt;&#x2f;code&gt;. To
-put a cherry on top, make it &lt;code&gt;@IBInspectable&lt;&#x2f;code&gt;!&lt;&#x2f;p&gt;
+well:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2017/12/xcode-complain-about-runtime-attirbute.png&quot; alt=&quot;Xcode complains about runtime attribute on older iOS&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;If that bothers you, I recommend writing your own wrapper for this property as an extension to &lt;code&gt;UIView&lt;/code&gt;. To
+put a cherry on top, make it &lt;code&gt;@IBInspectable&lt;/code&gt;!&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;extension UIView {
-    &#x2f;&#x2f;&#x2f; Whether or not to set accessibilityIgnoresInvertColors to true for iOS 11.
-    &#x2f;&#x2f;&#x2f; For older OS, this value is false and setting it has no effect.
+    /// Whether or not to set accessibilityIgnoresInvertColors to true for iOS 11.
+    /// For older OS, this value is false and setting it has no effect.
     @IBInspectable
     public var ignoreColorInversion: Bool {
         get {
@@ -76,23 +76,23 @@ put a cherry on top, make it &lt;code&gt;@IBInspectable&lt;&#x2f;code&gt;!&lt;&#
         }
     }
 }
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;Having this snippet in the project, we set it in interface builder to any view with a couple of clicks:&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;set-custom-invert-property-in-interface-builder.png&quot; alt=&quot;set custom invert color properties in Interface Builder&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
-&lt;h2&gt;How to screenshot with inverted color settings&lt;&#x2f;h2&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Having this snippet in the project, we set it in interface builder to any view with a couple of clicks:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2017/12/set-custom-invert-property-in-interface-builder.png&quot; alt=&quot;set custom invert color properties in Interface Builder&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;How to screenshot with inverted color settings&lt;/h2&gt;
 &lt;p&gt;Here&#x27;s a bonus hint: screenshots taken on device won&#x27;t have their color inverted even if you have the setting
-set to &amp;quot;on&amp;quot;! Go ahead, try it :).&lt;&#x2f;p&gt;
+set to &amp;quot;on&amp;quot;! Go ahead, try it :).&lt;/p&gt;
 &lt;p&gt;To show off our handy work for supporting smart invert color, we&#x27;ll need
 some other means to take screenshots. All screenshots in this article is taken using QuickTime on a Mac. So
-plug in your iOS device, open QuickTime Player, in menu select &lt;em&gt;File -&amp;gt; New Movie Recording&lt;&#x2f;em&gt; and select your
-device from the drop-down menu by clicking the arrow next to the record button:&lt;&#x2f;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;select-ios-device-in-quicktime-player.png&quot; alt=&quot;Select iOS device for screenshots in QuickTime Player&quot; &#x2f;&gt;&lt;&#x2f;p&gt;
-&lt;p&gt;Now you can screen shot the QuickTime Player window the normal way.&lt;&#x2f;p&gt;
-&lt;h2&gt;Conclusion&lt;&#x2f;h2&gt;
-&lt;p&gt;You can &lt;a href=&quot;&#x2f;assets&#x2f;2017&#x2f;12&#x2f;SmartInvert.zip&quot;&gt;download the sample project&lt;&#x2f;a&gt; and play with it.&lt;&#x2f;p&gt;
+plug in your iOS device, open QuickTime Player, in menu select &lt;em&gt;File -&amp;gt; New Movie Recording&lt;/em&gt; and select your
+device from the drop-down menu by clicking the arrow next to the record button:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/2017/12/select-ios-device-in-quicktime-player.png&quot; alt=&quot;Select iOS device for screenshots in QuickTime Player&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Now you can screen shot the QuickTime Player window the normal way.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;You can &lt;a href=&quot;/assets/2017/12/SmartInvert.zip&quot;&gt;download the sample project&lt;/a&gt; and play with it.&lt;/p&gt;
 &lt;p&gt;Smart invert is awesome and I personally wish all 3rd-party apps will update their apps for it as time goes
 on. If your favorite app (including your own!) doesn&#x27;t support it properly, please consider informing the
-developer about &lt;a href=&quot;https:&#x2f;&#x2f;developer.apple.com&#x2f;documentation&#x2f;uikit&#x2f;uiview&#x2f;2865843-accessibilityignoresinvertcolors&quot;&gt;accessibilityIgnoresInvertColors&lt;&#x2f;a&gt;, or just send this article their way!&lt;&#x2f;p&gt;
+developer about &lt;a href=&quot;https://developer.apple.com/documentation/uikit/uiview/2865843-accessibilityignoresinvertcolors&quot;&gt;accessibilityIgnoresInvertColors&lt;/a&gt;, or just send this article their way!&lt;/p&gt;
 </description>
                 <pubDate>Wed, 20 Dec 2017 13:17:44 -0800</pubDate>
                 <link>https://duan.ca/2017/12/20/smart-invert-support-for-you-app/</link>

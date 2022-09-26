@@ -10,23 +10,23 @@
 I created a framework that supports distribution via Swift Package Manager, CocoaPods, Xcode project and
 Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
 SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
-Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;&#x2f;p&gt;
+Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;/p&gt;
 &lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
 &lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
-the version tag, documentation generation, automatic Carthage binary generation, test coverage...&lt;&#x2f;p&gt;
-&lt;p&gt;Anyways, here&#x27;s some stuff mentioned in the video:&lt;&#x2f;p&gt;
+the version tag, documentation generation, automatic Carthage binary generation, test coverage...&lt;/p&gt;
+&lt;p&gt;Anyways, here&#x27;s some stuff mentioned in the video:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Sample project from the video: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;BitArray&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;dduan&#x2f;BitArray&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;Video of me writing the code in this project: &lt;a href=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;watch?v=-k_jrIoD56k&quot;&gt;https:&#x2f;&#x2f;www.youtube.com&#x2f;watch?v=-k_jrIoD56k&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;Swift Package Manager: &lt;a href=&quot;https:&#x2f;&#x2f;swift.org&#x2f;package-manager&#x2f;&quot;&gt;https:&#x2f;&#x2f;swift.org&#x2f;package-manager&#x2f;&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;CocoaPods: &lt;a href=&quot;https:&#x2f;&#x2f;cocoapods.org&quot;&gt;https:&#x2f;&#x2f;cocoapods.org&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;Carthage: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;Carthage&#x2f;Carthage&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;Carthage&#x2f;Carthage&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;Xcconfigs for universal framework: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;mrackwitz&#x2f;xcconfigs&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;mrackwitz&#x2f;xcconfigs&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;SwiftLint: &lt;a href=&quot;https:&#x2f;&#x2f;github.com&#x2f;realm&#x2f;SwiftLint&quot;&gt;https:&#x2f;&#x2f;github.com&#x2f;realm&#x2f;SwiftLint&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;li&gt;Travis CI: &lt;a href=&quot;https:&#x2f;&#x2f;travis-ci.org&quot;&gt;https:&#x2f;&#x2f;travis-ci.org&lt;&#x2f;a&gt;&lt;&#x2f;li&gt;
-&lt;&#x2f;ul&gt;
+&lt;li&gt;Sample project from the video: &lt;a href=&quot;https://github.com/dduan/BitArray&quot;&gt;https://github.com/dduan/BitArray&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Video of me writing the code in this project: &lt;a href=&quot;https://www.youtube.com/watch?v=-k_jrIoD56k&quot;&gt;https://www.youtube.com/watch?v=-k_jrIoD56k&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Swift Package Manager: &lt;a href=&quot;https://swift.org/package-manager/&quot;&gt;https://swift.org/package-manager/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;CocoaPods: &lt;a href=&quot;https://cocoapods.org&quot;&gt;https://cocoapods.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Carthage: &lt;a href=&quot;https://github.com/Carthage/Carthage&quot;&gt;https://github.com/Carthage/Carthage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Xcconfigs for universal framework: &lt;a href=&quot;https://github.com/mrackwitz/xcconfigs&quot;&gt;https://github.com/mrackwitz/xcconfigs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;SwiftLint: &lt;a href=&quot;https://github.com/realm/SwiftLint&quot;&gt;https://github.com/realm/SwiftLint&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Travis CI: &lt;a href=&quot;https://travis-ci.org&quot;&gt;https://travis-ci.org&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
                 <link>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</link>
@@ -34,12 +34,12 @@ the version tag, documentation generation, automatic Carthage binary generation,
             </item>
             <item>
                 <title>Let&#x27;s Build A BitArray In Swift</title>
-                <description>&lt;p&gt;In this video, I build a space-efficient BitArray that confirms to &lt;code&gt;RandomAccessCollection&lt;&#x2f;code&gt; in Swift in
-a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt;&#x2f;p&gt;
+                <description>&lt;p&gt;In this video, I build a space-efficient BitArray that confirms to &lt;code&gt;RandomAccessCollection&lt;/code&gt; in Swift in
+a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt;/p&gt;
 &lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;embed&#x2f;-k_jrIoD56k&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;&#x2f;iframe&gt;
-&lt;&#x2f;div&gt;
-&lt;p&gt;I guess I&#x27;m a YouTuber now. You can subscribe to my &lt;a href=&quot;https:&#x2f;&#x2f;www.youtube.com&#x2f;channel&#x2f;UCkBVC0dMgyUnxzettP7qE-A&quot;&gt;channel&lt;&#x2f;a&gt; 😛.&lt;&#x2f;p&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/-k_jrIoD56k&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;p&gt;I guess I&#x27;m a YouTuber now. You can subscribe to my &lt;a href=&quot;https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A&quot;&gt;channel&lt;/a&gt; 😛.&lt;/p&gt;
 </description>
                 <pubDate>Tue, 12 Dec 2017 22:51:04 -0800</pubDate>
                 <link>https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/</link>

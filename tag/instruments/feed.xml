@@ -8,33 +8,33 @@
                 <title>Using Instruments on Non-macOS, Non-iOS Executables</title>
                 <description>&lt;p&gt;How do you use use Instruments, the instrumentation tool distributed alongside Xcode? It&#x27;s easy if you are
 profiling a macOS or iOS app. No so with a regular old command-line tool built, say, with SwiftPM. To do so,
-you&#x27;ll need to codesign the target binary. Otherwise Instruments will give you a &lt;code&gt;&amp;quot;Failed to gain authorization&amp;quot;&lt;&#x2f;code&gt; error message.&lt;&#x2f;p&gt;
-&lt;p&gt;Here&#x27;s the steps:&lt;&#x2f;p&gt;
+you&#x27;ll need to codesign the target binary. Otherwise Instruments will give you a &lt;code&gt;&amp;quot;Failed to gain authorization&amp;quot;&lt;/code&gt; error message.&lt;/p&gt;
+&lt;p&gt;Here&#x27;s the steps:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Create a entitlement file with &lt;code&gt;com.apple.security.get-task-allow&lt;&#x2f;code&gt; set to true:&lt;&#x2f;li&gt;
-&lt;&#x2f;ol&gt;
+&lt;li&gt;Create a entitlement file with &lt;code&gt;com.apple.security.get-task-allow&lt;/code&gt; set to true:&lt;/li&gt;
+&lt;/ol&gt;
 &lt;pre&gt;&lt;code class=&quot;language-xml&quot;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
-&amp;lt;!DOCTYPE plist PUBLIC &amp;quot;-&#x2f;&#x2f;Apple&#x2f;&#x2f;DTD PLIST 1.0&#x2f;&#x2f;EN&amp;quot; &amp;quot;http:&#x2f;&#x2f;www.apple.com&#x2f;DTDs&#x2f;PropertyList-1.0.dtd&amp;quot;&amp;gt;
+&amp;lt;!DOCTYPE plist PUBLIC &amp;quot;-//Apple//DTD PLIST 1.0//EN&amp;quot; &amp;quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&amp;quot;&amp;gt;
 &amp;lt;plist version=&amp;quot;1.0&amp;quot;&amp;gt;
     &amp;lt;dict&amp;gt;
-        &amp;lt;key&amp;gt;com.apple.security.get-task-allow&amp;lt;&#x2f;key&amp;gt;
-        &amp;lt;true&#x2f;&amp;gt;
-    &amp;lt;&#x2f;dict&amp;gt;
-&amp;lt;&#x2f;plist&amp;gt;
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;Let&#x27;s call it &lt;code&gt;Entitlements.plist&lt;&#x2f;code&gt;&lt;&#x2f;p&gt;
+        &amp;lt;key&amp;gt;com.apple.security.get-task-allow&amp;lt;/key&amp;gt;
+        &amp;lt;true/&amp;gt;
+    &amp;lt;/dict&amp;gt;
+&amp;lt;/plist&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let&#x27;s call it &lt;code&gt;Entitlements.plist&lt;/code&gt;&lt;/p&gt;
 &lt;ol start=&quot;2&quot;&gt;
 &lt;li&gt;
-&lt;p&gt;Build the executable.&lt;&#x2f;p&gt;
-&lt;&#x2f;li&gt;
+&lt;p&gt;Build the executable.&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Codesign your executable with the entitlement file&lt;&#x2f;p&gt;
-&lt;&#x2f;li&gt;
-&lt;&#x2f;ol&gt;
-&lt;pre&gt;&lt;code&gt;codesign -s - -f --entitlements path&#x2f;to&#x2f;Entitlements.plist path&#x2f;to&#x2f;executable
-&lt;&#x2f;code&gt;&lt;&#x2f;pre&gt;
-&lt;p&gt;Now proceed with your profiling in Instruments.&lt;&#x2f;p&gt;
-&lt;p&gt;Not sure where this is officially documented. So I&#x27;m officially documenting it here.&lt;&#x2f;p&gt;
+&lt;p&gt;Codesign your executable with the entitlement file&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;codesign -s - -f --entitlements path/to/Entitlements.plist path/to/executable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now proceed with your profiling in Instruments.&lt;/p&gt;
+&lt;p&gt;Not sure where this is officially documented. So I&#x27;m officially documenting it here.&lt;/p&gt;
 </description>
                 <pubDate>Thu, 31 Mar 2022 20:39:05 -0700</pubDate>
                 <link>https://duan.ca/2022/03/31/instrumenting-commandline-executables/</link>

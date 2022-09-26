@@ -1,129 +1,60 @@
-@import url("theme-light.css") (prefers-color-scheme: light);
-@import url("theme-dark.css") (prefers-color-scheme: dark);
-
 :root {
-    --main-text-color: black;
-    --content-margin: 64px;
-    --font-normal: -apple-system, BlinkMacSystemFont, "avenir next", avenir, "segoe ui", "helvetica neue", helvetica, Ubuntu, roboto, noto, arial, sans-serif;
-    --font-emphasize: "Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", "Droid Serif", Times, "Source Serif Pro", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    --article-meta-color: rgba(0, 0, 0, 0.54);
-    --article-meta-font-size: 16px;
-    --background-color: white;
-    --content-font-size: 19px;
-    --code-background: #eeeeee;
-    --quote-padding-left: 23px;
-    --quote-margin-left: -20px;
-    --quote-left-shadow-size: 3px;
-    font-size: var(--content-font-size);
-    background: var(--background-color);
-    color: var(--main-text-color);
-    font-family: var(--font-normal);
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-}
-@media (max-width: 551.98px) {
-    :root {
-        --content-font-size: 17px;
-        --content-margin: 24px;
-        --article-meta-font-size: 14px;
-        --quote-padding-left: 14px;
-        --quote-margin-left: -11px;
-        --quote-left-shadow-size: 1px;
-    }
+    max-width: 70ch;
+    padding: 3em 1em;
+    margin: auto;
+    line-height: 1.75;
+    font-size: 1.25em;
+    color: var(--text-color);
 }
 @media (prefers-color-scheme: dark) {
     :root {
-        --background-color: rgb(20, 20, 17);
-        --main-text-color: rgb(200, 200, 200);
+        background: #232323;
+        --text-color: white;
         --article-meta-color: rgba(255, 255, 255, 0.54);
-        --code-background: #272727;
     }
 }
+@media (prefers-color-scheme: light) {
+    :root {
+        --text-color: #1d1d1d;
+        --article-meta-color: rgba(0, 0, 0, 0.54);
+    }
+}
+h1,h2,h3,h4,h5,h6 {
+    margin: 2em 0 1em;
+}
+p,ul,ol {
+    margin-bottom: 2em;
+    font-family: sans-serif;
+}
 a:link, a:hover, a:visited, a:active {
-    color: var(--main-text-color);
+    color: var(--text-color);
 }
-body {
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-}
-header, footer, main, article {
-    margin: 0 var(--content-margin);
-    max-width: 680px;
-}
-main, article {
-    line-height: 1.58;
+img {
+    max-width: 100%;
 }
 main > ul {
     list-style-type: none;
     padding: 0;
 }
-code {
-    background: var(--code-background);
-    padding-left: 0.3em;
-    padding-right: 0.3em;
-}
-pre, pre code {
-    overflow: scroll;
-    background: var(--background-color) !important;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    font-family: Menlo, Consolas, Monaco, "Liberation Mono", "Lucida Console", monospace;
-}
-pre::-webkit-scrollbar, pre code::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-}
-pre, code {
-    font-size: 90%;
-}
-
-code {
-    background: var(--code-background);
-    font-size: 87%;
-    padding-left: 0.1em;
-    padding-right: 0.1em;
-}
-
-blockquote {
-    font-family: var(--font-emphasize);
-}
-
-blockquote, pre {
-    box-shadow: var(--main-text-color) var(--quote-left-shadow-size) 0px 0px 0px inset;
-    margin: 0;
-    padding-left: var(--quote-padding-left);
-    margin-left: var(--quote-margin-left);
-}
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-emphasize);
-}
-h1 {
-    font-size: 30px;
-}
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-td, th {
-    border: 1px solid var(--main-text-color);
-    padding: 10px;
-}
 .metainfo, .metainfo a {
     color: var(--article-meta-color);
-    font-size: var(--article-meta-font-size);
+    font-size: 90%;
 }
 .article-meta, .article-meta a {
     text-transform: uppercase;
 }
 .article-meta {
-    margin-top: -10px;
+    margin-top: -0.4em;
 }
-img {
-    max-width: 100%;
+pre, pre code {
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
-hr {
-    border-color: var(--article-meta-color);
-}
-footer .article-meta {
-    margin-top: 0;
+
+blockquote, pre {
+    box-shadow: var(--text-color) 3px 0px 0px 0px inset;
+    margin: 0;
+    padding-left: 23px;
+    margin-left: -20px;
 }

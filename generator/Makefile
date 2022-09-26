@@ -17,5 +17,5 @@ endif
 	    -v "$(PWD)":/usr/src/duan.ca \
 	    -w /usr/src/duan.ca \
 	    $(image) \
-	    /bin/bash -c "cargo build --release --target x86_64-unknown-linux-musl"
+	    /bin/sh -c "cargo build --release --target x86_64-unknown-linux-musl"
 	@cp target/x86_64-unknown-linux-musl/release/generator ../bin/generate-Linux

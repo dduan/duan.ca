@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2022/11/20/the-social-graph/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2022/06/22/control/</loc>
     </url>
     <url>
@@ -281,6 +284,12 @@
         <loc>https://duan.ca/tag/github/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/google-reader/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/google-reader/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/html/</loc>
     </url>
     <url>
@@ -297,6 +306,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/indexstoredb/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/indie-web/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/indie-web/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/instruments/</loc>
@@ -345,6 +360,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/markdown/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/mastodon/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/mastodon/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/minute-swift/</loc>
@@ -501,6 +522,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/twitch/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/twitter/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/twitter/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/unix/</loc>

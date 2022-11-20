@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Indie Web</title>
+        <link>https://duan.ca/tag/indie-web/</link>
+        <atom:link href="https://duan.ca/tag/indie-web/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>The Social Graph</title>
+                <description>&lt;p&gt;From a purely personal perspective, connecting with people via the internet is good. I&#x27;m grateful that services such as Twitter exist. Since the year 2008, a significant amount of my life happened on Twitter. The only important component of Twitter is the connections. I&#x27;m lucky that some people likes what I post. I&#x27;m used to a small stream of thoughts from those I follow.&lt;/p&gt;
+&lt;p&gt;These days, those I follow aren&#x27;t posting much. They are posting on other websites. The connection I so depend on are broken. It saddens me. Therefore, I&#x27;m forced to move to maintain the connections.&lt;/p&gt;
+&lt;p&gt;I have many thoughts. A tweet storm? Well, if the cool people are there to read it, sure. Knowing myself, I&#x27;ll probably cross-post it to the many places my people are. That&#x27;s hustle that I don&#x27;t have the patience for. That saddens me, too.&lt;/p&gt;
+&lt;p&gt;So, here we are, the good old blog post. Cross-posting a link is doable.&lt;/p&gt;
+&lt;h2&gt;The Twexit&lt;/h2&gt;
+&lt;p&gt;Remember when we make Brexit jokes about everything on Twitter? Good times! Here&#x27;s what I think about the &amp;quot;Twexit&amp;quot;.&lt;/p&gt;
+&lt;p&gt;Thanks to email archive and 1Password, I found my mastodon.social login credentials. According to the site, I joined in 2018 (coincidentally, an exact decade later that me joining Twitter). 4 years ago was when me, and, more importantly, a lot of the people I follow on Twitter, first learned about Mastodon. They had their reasons to give it a try. They were my reason to give it a try. We did.&lt;/p&gt;
+&lt;p&gt;I honestly can&#x27;t tell if this time is more different than that last time. We were, and are, voting with our feet.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Warning: the following is a cynical take.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;We are leaving this time, partially, because a lot of Twitter employee were forced to leave. They built the site for us, we are grateful for their work. We find them getting laid off / forced to change life style unacceptable, so much so that we... abandon the product they built for lesser ones.&lt;/p&gt;
+&lt;p&gt;Of course, that illogicality was based on some superficial analysis. An easier, logical path to follow, but also a harder truth to swallow, is that the Twexit, both times, were motivated by hate. Hate over a person that possess outsized influence on the platform.&lt;/p&gt;
+&lt;p&gt;To hate is not wrong. Again, I don&#x27;t have this reason to leave. Simply, I want to maintain my connections. I wish I shared the hate, though. Because that would&#x27;ve made me less sad.&lt;/p&gt;
+&lt;p&gt;(Perhaps &amp;quot;hate&amp;quot; is too strong of a word. Substitute it with the word you associate with the big personalities that drove you or your followees off to other platforms).&lt;/p&gt;
+&lt;p&gt;Will Twexit succeed this time?&lt;/p&gt;
+&lt;p&gt;I&#x27;ve observed (to my relief!) that my timeline on Twitter hasn&#x27;t completely died. It would&#x27;ve been chilling to see it die (remember those empty streets during early COVID? NOT great, no). I hold out hope that better the user experience will ultimately prevail (more on that in the next section); and negative emotions alone won&#x27;t sustain this round of Twexit.&lt;/p&gt;
+&lt;h2&gt;A Better Social Graph&lt;/h2&gt;
+&lt;p&gt;That is not to say &amp;quot;I hope everyone return to Twitter&amp;quot;. If Mastodon in late 2022 turns out to be a better product, I&#x27;m happy to migrate/establish new connections there.&lt;/p&gt;
+&lt;p&gt;Now, I, the master of the Daniel-verse, will tell you what the best user experience for &amp;quot;social media&amp;quot;
+could/should have been.&lt;/p&gt;
+&lt;p&gt;This text you are reading is originally published on a personal website composed of purely static assets
+(mainly HTML, minimal amount of CSS, and essentially, no JavasSript). Critically, it also includes this
+advanced technology called an RSS feed.&lt;/p&gt;
+&lt;p&gt;If I have to psyco-analyze the young Danial from early 2010s (why not?), an important reason he became
+hopelessly dependent on Twitter was the death of Google Reader. Prior to that event, the web service he
+habitually check was not predominately Twitter.&lt;/p&gt;
+&lt;p&gt;Some of us remember how the connections were built prior to Facebook and Twitter. There were many sites that served similar purposes, sure. But there&#x27;s also a community that subscribed to each others&#x27; RSS feed. We commented on others&#x27; posts, we linked and reposted, and commented on the comments. There were conversations, connections. An event that stood out for me during that era was when &lt;a href=&quot;https://en.wikipedia.org/wiki/Larry_Wall&quot;&gt;Larry Wall&lt;/a&gt; commented on my post about his Perl book. You see, the connections included cool people, too.&lt;/p&gt;
+&lt;p&gt;So, Google Reader. What if a API for posting comments for a web link became standardized? What if the RSS readers includes a text box for that API? What if everyone also include comments (ignore spams for now) in their feeds?&lt;/p&gt;
+&lt;p&gt;Yeah, that would be, arguably, a similar experience to Twitter or Mastodon today. In fact, this isn&#x27;t even
+a new idea. The &lt;a href=&quot;https://indieweb.org/&quot;&gt;IndieWeb&lt;/a&gt; folks did their Twexit before Google Reader was killed. In
+retrospect, they were smart as hell. We didn&#x27;t follow their footsteps because Twitter turned out to be
+a better user experience for people that don&#x27;t own a website. Things could easily have played out differently,
+though. Blogging and RSS could&#x27;ve become more mainstream sooner. Web 2.0 could&#x27;ve improved interactivity of
+these blogs and feeds. Facebook and Twitter wouldn&#x27;t have become so big of a deal.&lt;/p&gt;
+&lt;p&gt;Oh well.&lt;/p&gt;
+&lt;h2&gt;We Are All Indie Web&lt;/h2&gt;
+&lt;p&gt;That&#x27;s an inspirational statement. In this moment, I&#x27;m more convinced of this inspiration than ever. More
+Mastodon-like open-source software, more protocols such as ActivityPub, smarter economic structures for
+content ownership. All of these, and more.&lt;/p&gt;
+&lt;p&gt;In late 2022, this opening prose from the ancient Chinese book Romance of the Three Kingdoms keeps open echoing
+in my mind:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;...分久必合，合久必分&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Literally, it means &amp;quot;Long periods of division precede unity and long periods of unity precede division.&amp;quot;&lt;/p&gt;
+&lt;p&gt;From Google Reader to Twitter to Mastodon, this tension between centralization and decentralization is oh-so-familiar. An equilibrium that could stabilize, IMHO, is a centralized user experience running on a decentralized infrastructure. Naively, that&#x27;s a software thing. Realistically, it all rely on the mind of collective social graph. Our connections forms the graph, the graph funnels in money, the money makes the good user experience. Sorry, money plays a role in the real world, like it or not.&lt;/p&gt;
+&lt;p&gt;For now, though, I&#x27;m happy to work to maintain my connections. I&#x27;ll use many sites. I&#x27;ll also try to become &amp;quot;indie&amp;quot;. Maybe I&#x27;ll set up a feed for &amp;quot;microblogging&amp;quot;, and write some service to cross-post to those sites. Maybe I&#x27;ll write my own mastodon-compatible ActivityHub implementation. Maybe these will turn out to be some more ill-fated personal projects -- that sounds awfully fun.&lt;/p&gt;
+</description>
+                <pubDate>Sun, 20 Nov 2022 13:06:48 -0800</pubDate>
+                <link>https://duan.ca/2022/11/20/the-social-graph/</link>
+                <guid isPermaLink="true">https://duan.ca/2022/11/20/the-social-graph/</guid>
+            </item>
+    </channel>
+</rss>

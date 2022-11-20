@@ -73,6 +73,6 @@ in my mind:
 
 Literally, it means "Long periods of division precede unity and long periods of unity precede division."
 
-From Google Reader to Twitter to Mastodon, this tension between centralization and decentralization is oh-so-familiar. An equilibrium that could stabilize, IMHO, is a centralized user experience running on a decentralized infrastructure. Naively, that's a software thing. Realistically, it all rely on the mind of collective social graph. Our connections forms the graph, the graph funnels in money, the money makes the good user experience. Sorry, money plays a role in the real world, like it or not.
+From Google Reader to Twitter to Mastodon, this tension between centralization and decentralization is oh-so-familiar. An equilibrium that could stabilize, IMHO, is a centralized user experience running on a decentralized infrastructure. Naively, that's a software thing. Realistically, it all rely on the collective mind of our social graph. Our connections forms the graph, the graph funnels in money, the money makes the good user experience. Sorry, money plays a role in the real world, like it or not.
 
 For now, though, I'm happy to work to maintain my connections. I'll use many sites. I'll also try to become "indie". Maybe I'll set up a feed for "microblogging", and write some service to cross-post to those sites. Maybe I'll write my own mastodon-compatible ActivityHub implementation. Maybe these will turn out to be some more ill-fated personal projects -- that sounds awfully fun.

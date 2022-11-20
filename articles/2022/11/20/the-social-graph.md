@@ -66,7 +66,7 @@ That's an inspirational statement. In this moment, I'm more convinced of this in
 Mastodon-like open-source software, more protocols such as ActivityPub, smarter economic structures for
 content ownership. All of these, and more.
 
-In late 2022, this opening prose from the ancient Chinese book Romance of the Three Kingdoms keeps open echoing
+In late 2022, this opening prose from the ancient Chinese book Romance of the Three Kingdoms keeps echoing
 in my mind:
 
 > ...分久必合，合久必分

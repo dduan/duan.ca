@@ -2,7 +2,7 @@
 2022-11-20T13:06:48-08:00
 tag: Twitter, Mastodon, Google Reader, Indie Web
 
-From a purely personal perspective, connecting with people via the internet is good. I'm grateful that services such as Twitter exist. Since the year 2008, a significant amount of my life happened on Twitter. The only important component of Twitter is the connections. I'm lucky that some people likes what I post. I'm used to a small stream of thoughts from those I follow.
+From a purely personal perspective, connecting with people via the internet is good. I'm grateful that services such as Twitter exist. Since the year 2008, a significant amount of my life happened on Twitter. The only important component of Twitter is the connections. I'm lucky that some people like what I post. I'm used to a small stream of thoughts from those I follow.
 
 These days, those I follow aren't posting much. They are posting on other websites. The connection I so depend on are broken. It saddens me. Therefore, I'm forced to move to maintain the connections.
 

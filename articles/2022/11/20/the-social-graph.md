@@ -6,7 +6,7 @@ From a purely personal perspective, connecting with people via the internet is g
 
 These days, those I follow aren't posting much. They are posting on other websites. The connection I so depend on are broken. It saddens me. Therefore, I'm forced to move to maintain the connections.
 
-I have many thoughts. A tweet storm? Well, if the cool people are there to read it, sure. Knowing myself, I'll probably cross-post it to the many places my people are. That's hustle that I don't have the patience for. That saddens me, too.
+I have many thoughts. A tweet storm? Well, if the cool people are there to read it, sure. Knowing myself, I'll probably cross-post it to the many places where my people are. That's a hustle that I don't have the patience for. That saddens me, too.
 
 So, here we are, the good old blog post. Cross-posting a link is doable.
 

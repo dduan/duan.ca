@@ -26,6 +26,7 @@ pub struct ArticleTemplate<'a> {
     pub current_url: &'a str,
     pub date: String,
     pub rfc2822_date: String,
+    pub rfc3339_date: String,
     pub content: String,
     pub tags: Vec<RenderedTag>,
 }

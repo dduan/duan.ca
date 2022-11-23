@@ -53,7 +53,6 @@ fn instantiate_article_template<'a>(
             let body = article::markdown_to_html(markdown);
             let permalink = format!("{}{}", base_url, article.relative_link);
             let date_string = format!("{}", article.date.format("%Y-%m-%d"));
-            let rfc2822date_string = article.date.to_rfc2822();
             Some(ArticleTemplate {
                 meta: RenderedMetadata {
                     permalink,
@@ -61,7 +60,8 @@ fn instantiate_article_template<'a>(
                 },
                 current_url: &article.relative_link,
                 date: date_string,
-                rfc2822_date: rfc2822date_string,
+                rfc2822_date: article.date.to_rfc2822(),
+                rfc3339_date: article.date.to_rfc3339(),
                 content: body,
                 tags: article
                     .tags

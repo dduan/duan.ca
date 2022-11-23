@@ -45,6 +45,38 @@ becomes its URL. For example, `/pages/you/Have a nice day.html` will become
 
 Put it in `/static`. Its relative path to `/static` becomes its URL.
 
+### Adding a micro post
+
+Add a Markdown document in `/quickie`, it must be in the following format:
+
+```markdown
+2022-11-22T15:34:49-08:00
+
+Content
+
+---
+
+Links to attched media
+
+---
+
+Links to syndications
+
+---
+
+A link to a related post
+```
+
+In order, that is:
+
+1. RFC3339 date followed by two new lines
+2. Content of the post
+3. Newline, 3 `-`s, 2 newlines, followed by links to media related to the post. This part is optional.
+4. Newline, 3 `-`s, 2 newlines, followed by links to known syndications of this post.
+5. Newline, 3 `-`s, 2 newlines, followed by a link to a related post. This is the "reply-to" field.
+
+If any of the fields in 3-5 are present, the previous fields must also be present, even if it's empty.
+
 ### Adding a new type of page
 
 1. Add a template in `generator/templates`.

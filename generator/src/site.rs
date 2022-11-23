@@ -1,22 +1,27 @@
-use crate::article::{self, Article};
+use crate::article::Article;
 use crate::page::{self, Page};
+use crate::quickie::Quickie;
 use std::collections::HashMap;
+use crate::markdown_post::posts_from_root_path;
 
 #[derive(Debug, PartialEq)]
 pub struct Site {
     pub base_url: String,
     pub articles: Vec<Article>,
+    pub quickies: Vec<Quickie>,
     pub pages: Vec<Page>,
     pub tags: Vec<(String, Vec<Article>)>,
 }
 
 impl Site {
     pub fn from_root_path(base_url: &str, root_path: &str) -> Site {
-        let articles = article::articles_from_root_path(root_path);
+        let articles: Vec<Article> = posts_from_root_path(root_path, "articles");
+        let quickies: Vec<Quickie> = posts_from_root_path(root_path, "quickies");
         let map = Site::tag_article_map_from(&articles);
         Site {
             base_url: base_url.to_string(),
             articles,
+            quickies,
             pages: page::pages_from_root_path(root_path),
             tags: map,
         }

@@ -1,9 +1,8 @@
+use crate::markdown_post::{relative_link, MarkdownPost};
 use chrono::{DateTime, FixedOffset};
-use comrak::{self, ComrakOptions};
 use std::clone::Clone;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use walkdir::WalkDir;
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct Article {
@@ -14,38 +13,14 @@ pub struct Article {
 }
 
 impl Article {
-    fn from_path(root_path: &str, path: &str) -> Option<Article> {
-        File::open(path)
-            .ok()
-            .and_then(|file| -> Option<Vec<String>> {
-                let lines = BufReader::new(file)
-                    .lines()
-                    .take(3)
-                    .flat_map(|x| x.ok())
-                    .collect::<Vec<String>>();
-                if lines.len() == 3 {
-                    Some(lines)
-                } else {
-                    None
-                }
-            })
-            .map(|lines| Article::from_path_lines(root_path, path, lines))
-            .unwrap_or(None)
-    }
-
     fn from_path_lines(root_path: &str, path: &str, lines: Vec<String>) -> Option<Article> {
         let time = DateTime::parse_from_rfc3339(&lines[1]).ok();
         let parts = lines[2].splitn(2, ": ").collect::<Vec<&str>>();
         if parts.len() == 2 {
             let list = parts[1];
             let tags = list.split(", ").map(|x| x.to_string()).collect();
-            let relative_link = path[root_path.len()..]
-                .rsplitn(2, '.')
-                .last()
-                .unwrap_or("")
-                .to_string();
             Some(Article {
-                relative_link,
+                relative_link: relative_link(path, root_path),
                 title: lines[0][2..].to_owned(),
                 date: time.unwrap(),
                 tags,
@@ -68,42 +43,29 @@ impl Article {
             })
     }
 }
-pub fn markdown_to_html(markdown: String) -> String {
-    let mut options = ComrakOptions::default();
-    options.render.unsafe_ = true;
-    comrak::markdown_to_html(&markdown, &options)
-}
 
-pub fn articles_from_root_path(root_path: &str) -> Vec<Article> {
-    let root_path = format!(
-        "{}/articles",
-        if root_path.ends_with('/') {
-            &root_path[0..root_path.len() - 1]
-        } else {
-            root_path
-        }
-    );
+impl MarkdownPost for Article {
+    fn from_path(root_path: &str, path: &str) -> Option<Article> {
+        File::open(path)
+            .ok()
+            .and_then(|file| -> Option<Vec<String>> {
+                let lines = BufReader::new(file)
+                    .lines()
+                    .take(3)
+                    .flat_map(|x| x.ok())
+                    .collect::<Vec<String>>();
+                if lines.len() == 3 {
+                    Some(lines)
+                } else {
+                    None
+                }
+            })
+            .and_then(|lines| Article::from_path_lines(root_path, path, lines))
+    }
 
-    let mut articles: Vec<Article> = WalkDir::new(&root_path)
-        .into_iter()
-        .flat_map(|e| e.ok())
-        .filter(|e| {
-            e.file_type().is_file()
-                && e.file_name()
-                    .to_str()
-                    .map(|s| s.ends_with(".md"))
-                    .unwrap_or(false)
-        })
-        .flat_map(|entry| {
-            entry
-                .path()
-                .to_str()
-                .map(|path| Article::from_path(&root_path, path))
-        })
-        .flatten()
-        .collect();
-    articles.sort_by(|a, b| b.date.cmp(&a.date));
-    articles
+    fn publish_date(&self) -> DateTime<FixedOffset> {
+        self.date
+    }
 }
 
 #[cfg(test)]

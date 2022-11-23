@@ -20,6 +20,19 @@ impl RenderedTag {
 }
 
 #[derive(Template)]
+#[template(path = "quickie.html")]
+pub struct QuickieTemplate<'a> {
+    pub meta: RenderedMetadata,
+    pub current_url: &'a str,
+    pub rfc3339_date: String,
+    pub rfc2822_date: String,
+    pub content: String,
+    pub related_media: Vec<String>,
+    pub syndicate_links: &'a Vec<String>,
+    pub related_link: &'a Option<String>,
+}
+
+#[derive(Template)]
 #[template(path = "article.html")]
 pub struct ArticleTemplate<'a> {
     pub meta: RenderedMetadata,

@@ -1,13 +1,14 @@
 mod article;
-mod page;
-mod templates;
-mod site;
 mod builder;
+mod page;
+mod quickie;
+mod site;
+mod templates;
+mod markdown_post;
 
 use site::Site;
 use std::env;
 use std::error::Error;
-
 
 fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().collect();
@@ -19,4 +20,3 @@ fn main() -> Result<(), Box<dyn Error>> {
     builder::build_site(site, &root_path, &output_path)?;
     Ok(())
 }
-

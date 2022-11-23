@@ -1,14 +1,18 @@
-use crate::article::{self, Article};
+use crate::article::Article;
+use crate::markdown_post;
 use crate::page::Page;
+use crate::quickie::Quickie;
 use crate::site::Site;
 use crate::templates::*;
 use askama::Template;
 use std::error::Error;
+use std::fs;
 use walkdir::WalkDir;
 
 fn write(text: &str, path: &str, file: &str) -> Result<(), Box<dyn Error>> {
-    std::fs::create_dir_all(&path)?;
-    std::fs::write(format!("{}/{}", path, file), text)?;
+    fs::create_dir_all(&path)?;
+    let p = format!("{}/{}", path, file);
+    fs::write(&p, text)?;
     Ok(())
 }
 
@@ -50,7 +54,7 @@ fn instantiate_article_template<'a>(
     match article.read_body(root_path) {
         None => None,
         Some(markdown) => {
-            let body = article::markdown_to_html(markdown);
+            let body = markdown_post::markdown_to_html(&markdown);
             let permalink = format!("{}{}", base_url, article.relative_link);
             let date_string = format!("{}", article.date.format("%Y-%m-%d"));
             Some(ArticleTemplate {
@@ -161,7 +165,7 @@ fn build_tag_feed(
 
 fn copy_static_assets(root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
     let asset_path = format!("{}/static", root_path);
-    if std::fs::metadata(&asset_path).is_err() {
+    if fs::metadata(&asset_path).is_err() {
         return Ok(());
     }
 
@@ -171,9 +175,9 @@ fn copy_static_assets(root_path: &str, output_path: &str) -> Result<(), Box<dyn 
             Some(path) => {
                 let target = format!("{}{}", output_path, &path[asset_path.len()..]);
                 if entry.file_type().is_dir() {
-                    std::fs::create_dir_all(target)?;
+                    fs::create_dir_all(target)?;
                 } else if entry.file_type().is_file() {
-                    std::fs::copy(path, target)?;
+                    fs::copy(path, target)?;
                 }
             }
         }
@@ -208,7 +212,7 @@ fn build_404_page(
     output_path: &str,
 ) -> Result<(), Box<dyn Error>> {
     let permalink = format!("{}/404.html", base_url);
-    match std::fs::read_to_string(format!("{}/404.html", root_path)) {
+    match fs::read_to_string(format!("{}/404.html", root_path)) {
         Err(_) => {}
         Ok(body) => {
             let template = PageTemplate {
@@ -225,10 +229,64 @@ fn build_404_page(
     Ok(())
 }
 
+fn media_link_to_display(link: &str) -> Option<String> {
+    let lowered = link.to_ascii_lowercase();
+    if lowered.ends_with(".png") ||
+        lowered.ends_with(".jpg") ||
+        lowered.ends_with(".jpeg") 
+    {
+        Some(format!(r#"<img src="{}">"#, link))
+    } else if lowered.ends_with(".mov") {
+        Some(
+            format!(
+                r#"<video id="video-tag" autoplay="" muted="" loop="" playsinline="" width="100%"><source src="{}" type="video/quicktime"></video>
+"#,
+                link
+            )
+        )
+    } else if lowered.ends_with(".mp4") {
+        Some(
+            format!(
+                r#"<video id="video-tag" autoplay="" muted="" loop="" playsinline="" width="100%"><source src="{}" type="video/mp4"></video>
+"#,
+                link
+            )
+        )
+    } else {
+        None
+    }
+}
+
+fn instantiate_quickie_template<'a>(
+    quickie: &'a Quickie,
+    base_url: &'a str,
+) -> QuickieTemplate<'a> {
+    let permalink = format!("{}{}", base_url, quickie.relative_link);
+    let date_string = quickie.date.to_rfc3339();
+    let rfc2822_date = quickie.date.to_rfc2822();
+    let media_snippets: Vec<String> = (&quickie.media_links)
+        .into_iter()
+        .filter_map(|link| media_link_to_display(&link))
+        .collect();
+    QuickieTemplate {
+        meta: RenderedMetadata {
+            permalink,
+            title: quickie.content[0..usize::min(quickie.content.len(), 80)].to_string(),
+        },
+        current_url: &quickie.relative_link,
+        rfc3339_date: date_string,
+        rfc2822_date,
+        content: markdown_post::markdown_to_html(&quickie.content),
+        related_media: media_snippets,
+        syndicate_links: &quickie.syndicate_links,
+        related_link: &quickie.related_link,
+    }
+}
+
 pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), Box<dyn Error>> {
-    if std::fs::metadata(output_path).is_ok() {
-        std::fs::remove_dir_all(output_path)?;
-        std::fs::create_dir_all(output_path)?;
+    if fs::metadata(output_path).is_ok() {
+        fs::remove_dir_all(output_path)?;
+        fs::create_dir_all(output_path)?;
     }
 
     copy_static_assets(root_path, output_path)?;
@@ -236,9 +294,7 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
     let article_templates = site
         .articles
         .iter()
-        .filter_map(|article| {
-            instantiate_article_template(article, &site.base_url, root_path)
-        })
+        .filter_map(|article| instantiate_article_template(article, &site.base_url, root_path))
         .collect::<Vec<ArticleTemplate>>();
 
     build_article_list(&article_templates, &site.base_url, output_path)?;
@@ -252,6 +308,20 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
         )?;
     }
 
+    let quickie_templates = site
+        .quickies
+        .iter()
+        .map(|quickie| instantiate_quickie_template(quickie, &site.base_url))
+        .collect::<Vec<QuickieTemplate>>();
+
+    for quickie_templete in quickie_templates {
+        write(
+            &quickie_templete.render()?,
+            &format!("{}{}", output_path, quickie_templete.current_url),
+            "index.html",
+        )?;
+    }
+
     for page in &site.pages {
         build_page(page, &site.base_url, root_path, output_path)?;
     }
@@ -259,9 +329,7 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
     for (tag, tagged) in &site.tags {
         let articles = tagged
             .iter()
-            .filter_map(|article| {
-                instantiate_article_template(article, &site.base_url, root_path)
-            })
+            .filter_map(|article| instantiate_article_template(article, &site.base_url, root_path))
             .collect::<Vec<ArticleTemplate>>();
         build_tag_list(tag, &articles, &site.base_url, output_path)?;
         build_tag_feed(tag, &articles, &site.base_url, output_path)?;

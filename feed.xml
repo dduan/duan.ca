@@ -55,7 +55,7 @@ able to type your subdomain in a browser and see Mastodon! Log in with your user
 the guide. Upload a profile photo to test whether your media service is set up correctly.&lt;/li&gt;
 &lt;li&gt;DO NOT DO THIS YET! At this point, if you go to an existing Mastodon instance, and look yourself up! If
 your subdomain is &lt;code&gt;social.duan.ca&lt;/code&gt;, username &lt;code&gt;daniel&lt;/code&gt;, you should be discoverable as
-&lt;code&gt;@daniel@social.duan.ca&lt;/code&gt; on a site such as [mastodon.social][] now. But if you do this, that existing site
+&lt;code&gt;@daniel@social.duan.ca&lt;/code&gt; on a site such as &lt;a href=&quot;https://mastodon.social&quot;&gt;mastodon.social&lt;/a&gt; now. But if you do this, that existing site
 may get confused and permanently consider that as your fediverse identity. So don&#x27;t do that! Finish the
 next step.&lt;/li&gt;
 &lt;li&gt;To use your root domain instead of this subdomain, you 301 redirect &lt;code&gt;/.well-known/host-meta*&lt;/code&gt; from root to

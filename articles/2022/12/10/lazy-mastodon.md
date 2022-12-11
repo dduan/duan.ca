@@ -19,10 +19,10 @@ What database to use? How? What's the best way to host a Rails app? I need a ema
 media files I post?
 
 There are a lot of step-by-step set-up tutorials on the internet. This post is, definitively, not one of
-those. But having gone through the process of [setting up an instance on DigitalOcean][], I end up with a few tips
-and tricks to share! Let's through them:
+those. But having gone through the process of [setting up an instance on DigitalOcean][], I end up with a few
+tips and tricks to share! Let's through them:
 
-1. If you have a Digital Ocean account, setting a server up is as simple as searching up "Mastodon" in their
+1. If you have a DigitalOcean account, setting a server up is as simple as searching up "Mastodon" in their
    market place as a step in creating your Droplet.
 2. You _do not_ need an email server for a single-user instance. Think about it, you have root access to the
    database, what do you need email for? Verify your own identity? Spam yourself?
@@ -30,16 +30,16 @@ and tricks to share! Let's through them:
 4. Ok, you ssh into your Droplet, the first thing you see is a guided CLI experience for setting things up.
    Don't go through it just yet! For me, my root domain `duan.ca` hosts an entirely different site. So I have
    to pick a subdomain to host Mastodon. Make sure you set up an A record in your website's DNS for your
-   chosen subdomain. If this record isn't set up, the set up will fail when it tries to get an certificate
+   chosen subdomain. If this record isn't read, the guided setup will fail when it tries to get an certificate
    from Let's Encrypt.
-5. Unless you want to buy a new DNS service from Digital Ocean, your A record should be set with your existing
-   DNS server provider! I needed a few minutes to un-confuse myself about this fact. Digital Ocean's
-   documentation made it really hard to discover this fact.
-6. The only thing you need to get right is your subdomain, and DNS record for it. In the rest of the guided
-   setup experience, you can make mistakes, and fix them later.
-7. I used an S3 bucket for media. S3's UX is kind of terrible, so if you are doing it for the first time, good
+5. Unless you want to buy a new DNS service from DigitalOcean, your A record should be configured with your
+   existing DNS server provider! I needed a few minutes to un-confuse myself about this fact. DigitalOcean's
+   documentation makes it really hard to discover this fact.
+6. The only thing you need to get right is your subdomain, and the DNS record for it. In the rest of the
+   guided setup, you can make mistakes, and you can fix them later.
+7. I used an s3 bucket for media. s3's UX is kind of terrible, so if you are doing it for the first time, good
    luck.
-8. Instead of "admin", choose your Mastodon username right then, and there. This user does not have special
+8. Instead of "admin", choose your Mastodon username in the setup guide. This user does not have special
    privilege for the site anyways, despite what the default name suggests. After this step, the guide will
    provide you with a password, take note of that if you want to log in with this user later :)
 9. Again, you could figure out how to get an STMP server to send emails on your Mastodon instance's behalf.
@@ -51,15 +51,15 @@ and tricks to share! Let's through them:
     anyways).
 11. Mastodon ships with an admin [CLI tool][] `tootctl`. It's located in `bin/tootctl`.
 12. Before attempting to run this tool, switch to user `mastodon` by running `su mastodon`. Otherwise, you'd
-    be confused as to why you need to install Ruby stuff, and why you can't connect to the Postgres database.
+    be confused as to why you need to install Ruby stuff, and can't connect to the Postgres database.
 13. If the guide didn't tell you an error, and your values in `.env.production` are all right, you will be
-    able to type your subdomain in a browser and see Mastodon! Log in with your username, and password from
+    able to type your subdomain in a browser and see Mastodon! Log in with your username and password from
     the guide. Upload a profile photo to test whether your media service is set up correctly.
-14. DO NOT DO THIS YET! At this point, if you go to an existing Mastodon instance, and look yourself up! If
-    your subdomain is `social.duan.ca`, username `daniel`, you should be discoverable as
-    `@daniel@social.duan.ca` on a site such as [mastodon.social][] now. But if you do this, that existing site
-    may get confused and permanently consider that as your fediverse identity. So don't do that! Finish the
-    next step.
+14. (DO NOT DO THIS until you finish the next step!) At this point, you'd be able to go to an existing
+    Mastodon instance, and look yourself up! If your subdomain is `social.duan.ca`, username `daniel`, you
+    should be discoverable as `@daniel@social.duan.ca` on a site such as [mastodon.social][] now. But if you
+    do this, that site may get confused, and permanently consider `@daniel@social.duan.ca` as your fediverse
+    identity. So don't do that! Finish the next step.
 15. To use your root domain instead of this subdomain, you 301 redirect `/.well-known/host-meta*` from root to
     the real location. [this article][Redirect] explains it very well. Make sure to both set up the URL
     redirect, as well as `LOCAL_DOMAIN`, and `WEB_DOMAIN` in `.env.production`.

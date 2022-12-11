@@ -19,7 +19,7 @@ What database to use? How? What's the best way to host a Rails app? I need a ema
 media files I post?
 
 There are a lot of step-by-step set-up tutorials on the internet. This post is, definitively, not one of
-those. But having gone through the process of [setting up an instance on Mastodon][], I end up with a few tips
+those. But having gone through the process of [setting up an instance on DigitalOcean][], I end up with a few tips
 and tricks to share! Let's through them:
 
 1. If you have a Digital Ocean account, setting a server up is as simple as searching up "Mastodon" in their
@@ -69,7 +69,7 @@ of times in the end.
 
 [Redirect]: https://masto.host/mastodon-usernames-different-from-the-domain-used-for-installation/
 [CLI tool]: https://docs.joinmastodon.org/admin/tootctl/
-[setting up an instance on Mastodon]: https://marketplace.digitalocean.com/apps/mastodon
+[setting up an instance on DigitalOcean]: https://marketplace.digitalocean.com/apps/mastodon
 
 ## Why?
 

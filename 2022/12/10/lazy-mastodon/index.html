@@ -40,10 +40,10 @@ instance of Mastodon with a single user <code>@daniel</code>. This user is disco
 What database to use? How? What's the best way to host a Rails app? I need a email server? Where to host the
 media files I post?</p>
 <p>There are a lot of step-by-step set-up tutorials on the internet. This post is, definitively, not one of
-those. But having gone through the process of <a href="https://marketplace.digitalocean.com/apps/mastodon">setting up an instance on DigitalOcean</a>, I end up with a few tips
-and tricks to share! Let's through them:</p>
+those. But having gone through the process of <a href="https://marketplace.digitalocean.com/apps/mastodon">setting up an instance on DigitalOcean</a>, I end up with a few
+tips and tricks to share! Let's through them:</p>
 <ol>
-<li>If you have a Digital Ocean account, setting a server up is as simple as searching up &quot;Mastodon&quot; in their
+<li>If you have a DigitalOcean account, setting a server up is as simple as searching up &quot;Mastodon&quot; in their
 market place as a step in creating your Droplet.</li>
 <li>You <em>do not</em> need an email server for a single-user instance. Think about it, you have root access to the
 database, what do you need email for? Verify your own identity? Spam yourself?</li>
@@ -51,16 +51,16 @@ database, what do you need email for? Verify your own identity? Spam yourself?</
 <li>Ok, you ssh into your Droplet, the first thing you see is a guided CLI experience for setting things up.
 Don't go through it just yet! For me, my root domain <code>duan.ca</code> hosts an entirely different site. So I have
 to pick a subdomain to host Mastodon. Make sure you set up an A record in your website's DNS for your
-chosen subdomain. If this record isn't set up, the set up will fail when it tries to get an certificate
+chosen subdomain. If this record isn't read, the guided setup will fail when it tries to get an certificate
 from Let's Encrypt.</li>
-<li>Unless you want to buy a new DNS service from Digital Ocean, your A record should be set with your existing
-DNS server provider! I needed a few minutes to un-confuse myself about this fact. Digital Ocean's
-documentation made it really hard to discover this fact.</li>
-<li>The only thing you need to get right is your subdomain, and DNS record for it. In the rest of the guided
-setup experience, you can make mistakes, and fix them later.</li>
-<li>I used an S3 bucket for media. S3's UX is kind of terrible, so if you are doing it for the first time, good
+<li>Unless you want to buy a new DNS service from DigitalOcean, your A record should be configured with your
+existing DNS server provider! I needed a few minutes to un-confuse myself about this fact. DigitalOcean's
+documentation makes it really hard to discover this fact.</li>
+<li>The only thing you need to get right is your subdomain, and the DNS record for it. In the rest of the
+guided setup, you can make mistakes, and you can fix them later.</li>
+<li>I used an s3 bucket for media. s3's UX is kind of terrible, so if you are doing it for the first time, good
 luck.</li>
-<li>Instead of &quot;admin&quot;, choose your Mastodon username right then, and there. This user does not have special
+<li>Instead of &quot;admin&quot;, choose your Mastodon username in the setup guide. This user does not have special
 privilege for the site anyways, despite what the default name suggests. After this step, the guide will
 provide you with a password, take note of that if you want to log in with this user later :)</li>
 <li>Again, you could figure out how to get an STMP server to send emails on your Mastodon instance's behalf.
@@ -72,15 +72,15 @@ guided setup. You can use Vim instead of Nano. (Although if you like Vim, you'd 
 anyways).</li>
 <li>Mastodon ships with an admin <a href="https://docs.joinmastodon.org/admin/tootctl/">CLI tool</a> <code>tootctl</code>. It's located in <code>bin/tootctl</code>.</li>
 <li>Before attempting to run this tool, switch to user <code>mastodon</code> by running <code>su mastodon</code>. Otherwise, you'd
-be confused as to why you need to install Ruby stuff, and why you can't connect to the Postgres database.</li>
+be confused as to why you need to install Ruby stuff, and can't connect to the Postgres database.</li>
 <li>If the guide didn't tell you an error, and your values in <code>.env.production</code> are all right, you will be
-able to type your subdomain in a browser and see Mastodon! Log in with your username, and password from
+able to type your subdomain in a browser and see Mastodon! Log in with your username and password from
 the guide. Upload a profile photo to test whether your media service is set up correctly.</li>
-<li>DO NOT DO THIS YET! At this point, if you go to an existing Mastodon instance, and look yourself up! If
-your subdomain is <code>social.duan.ca</code>, username <code>daniel</code>, you should be discoverable as
-<code>@daniel@social.duan.ca</code> on a site such as <a href="https://mastodon.social">mastodon.social</a> now. But if you do this, that existing site
-may get confused and permanently consider that as your fediverse identity. So don't do that! Finish the
-next step.</li>
+<li>(DO NOT DO THIS until you finish the next step!) At this point, you'd be able to go to an existing
+Mastodon instance, and look yourself up! If your subdomain is <code>social.duan.ca</code>, username <code>daniel</code>, you
+should be discoverable as <code>@daniel@social.duan.ca</code> on a site such as <a href="https://mastodon.social">mastodon.social</a> now. But if you
+do this, that site may get confused, and permanently consider <code>@daniel@social.duan.ca</code> as your fediverse
+identity. So don't do that! Finish the next step.</li>
 <li>To use your root domain instead of this subdomain, you 301 redirect <code>/.well-known/host-meta*</code> from root to
 the real location. <a href="https://masto.host/mastodon-usernames-different-from-the-domain-used-for-installation/">this article</a> explains it very well. Make sure to both set up the URL
 redirect, as well as <code>LOCAL_DOMAIN</code>, and <code>WEB_DOMAIN</code> in <code>.env.production</code>.</li>

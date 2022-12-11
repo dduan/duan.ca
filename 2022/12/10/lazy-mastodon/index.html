@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2022/12/10/lazy-mastodon/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="The Lazy Programmer&#x27;s Guide to Private Mastodon">
+    <meta property="article:published_time" content="2022-12-10T18:21:11-08:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>The Lazy Programmer&#x27;s Guide to Private Mastodon</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2022/12/10/lazy-mastodon/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>The Lazy Programmer&#x27;s Guide to Private Mastodon</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles">Daniel Duan</a>
+            ·
+            <time datetime="2022-12-10T18:21:11-08:00" itemProp="datePublished">2022-12-10</time>
+        </p>
+    </nav><p>As of today, my identity in the &quot;fediverse&quot; has become <code>@daniel@duan.ca</code>. This post was originally published
+on <code>duan.ca</code>. Pretty neat, eh? I achieved this buy hosting a private instance of the open-source Mastodon
+project. Here's my experience setting that up, and why it seemed harder than it is.</p>
+<h2>What exactly did I achieve?</h2>
+<p>I own the domain <code>duan.ca</code>, which serves as the root of an existing website. I set up an functioning
+instance of Mastodon with a single user <code>@daniel</code>. This user is discoverable in other Mastodon instances as
+<code>@daniel@duan.ca</code>.</p>
+<h2>How did I do it?</h2>
+<p>As someone who barely touch server-side programming, running a Mastodon instance seemed very daunting to me.
+What database to use? How? What's the best way to host a Rails app? I need a email server? Where to host the
+media files I post?</p>
+<p>There are a lot of step-by-step set-up tutorials on the internet. This post is, definitively, not one of
+those. But having gone through the process of <a href="https://marketplace.digitalocean.com/apps/mastodon">setting up an instance on Mastodon</a>, I end up with a few tips
+and tricks to share! Let's through them:</p>
+<ol>
+<li>If you have a Digital Ocean account, setting a server up is as simple as searching up &quot;Mastodon&quot; in their
+market place as a step in creating your Droplet.</li>
+<li>You <em>do not</em> need an email server for a single-user instance. Think about it, you have root access to the
+database, what do you need email for? Verify your own identity? Spam yourself?</li>
+<li>That said, Sendgrid is free for low-volume emails.</li>
+<li>Ok, you ssh into your Droplet, the first thing you see is a guided CLI experience for setting things up.
+Don't go through it just yet! For me, my root domain <code>duan.ca</code> hosts an entirely different site. So I have
+to pick a subdomain to host Mastodon. Make sure you set up an A record in your website's DNS for your
+chosen subdomain. If this record isn't set up, the set up will fail when it tries to get an certificate
+from Let's Encrypt.</li>
+<li>Unless you want to buy a new DNS service from Digital Ocean, your A record should be set with your existing
+DNS server provider! I needed a few minutes to un-confuse myself about this fact. Digital Ocean's
+documentation made it really hard to discover this fact.</li>
+<li>The only thing you need to get right is your subdomain, and DNS record for it. In the rest of the guided
+setup experience, you can make mistakes, and fix them later.</li>
+<li>I used an S3 bucket for media. S3's UX is kind of terrible, so if you are doing it for the first time, good
+luck.</li>
+<li>Instead of &quot;admin&quot;, choose your Mastodon username right then, and there. This user does not have special
+privilege for the site anyways, despite what the default name suggests. After this step, the guide will
+provide you with a password, take note of that if you want to log in with this user later :)</li>
+<li>Again, you could figure out how to get an STMP server to send emails on your Mastodon instance's behalf.
+But you are the only user, right? So you can just make some value up for all things SMTP/email related. At
+the end, when the guide asks whether to send a test Email, choose &quot;no&quot;.</li>
+<li>The Mastodon code is located at <code>/home/mastodon/live</code>. Most of the information is stored in
+<code>.env.production</code> in that directory. This is where you can change your mind/fix your mistake from the
+guided setup. You can use Vim instead of Nano. (Although if you like Vim, you'd probably find out anyways).</li>
+<li>Mastodon ships with an admin <a href="https://docs.joinmastodon.org/admin/tootctl/">CLI tool</a> <code>tootctl</code>. It's located in <code>bin/tootcli</code>.</li>
+<li>Before attempting to run this tool, switch to user <code>mastodon</code> by running <code>su mastodon</code>. Otherwise, you'd
+be confused as to why you need to install Ruby stuff, and why you can't connect to the Postgres database.</li>
+<li>If the guide didn't tell you an error, and your values in <code>.env.production</code> are all right, you will be
+able to type your subdomain in a browser and see Mastodon! Log in with your username, and password from
+the guide. Upload a profile photo to test whether your media service is set up correctly.</li>
+<li>DO NOT DO THIS YET! At this point, if you go to an existing Mastodon instance, and look yourself up! If
+your subdomain is <code>social.duan.ca</code>, username <code>daniel</code>, you should be discoverable as
+<code>@daniel@social.duan.ca</code> on a site such as [mastodon.social][] now. But if you do this, that existing site
+may get confused and permanently consider that as your fediverse identity. So don't do that! Finish the
+next step.</li>
+<li>To use your root domain instead of this subdomain, you 301 redirect <code>/.well-known/host-meta*</code> from root to
+the real location. <a href="https://masto.host/mastodon-usernames-different-from-the-domain-used-for-installation/">this article</a> explains it very well. Make sure to both set up the URL
+redirect, as well as <code>LOCAL_DOMAIN</code>, and <code>WEB_DOMAIN</code> in <code>.env.production</code>.</li>
+</ol>
+<p>That it! These may seem like a lot of tips, but I think, as a smart programmer, you can eventually figure all
+of these things out pretty easily. I put them down here because, had I known these, I would've saved a bunch
+of times in the end.</p>
+<h2>Why?</h2>
+<p>Why spend the time, and money, to go through all of this?</p>
+<p>This is a really good question. I [wished][https://duan.ca/2022/11/20/the-social-graph/] less people would
+leave Twitter. I host my personal site/blog on my own domain, as opposed to using a Medium site or something.
+So, if I have to &quot;federate&quot; my microblogs, why shouldn't I try to gain more independence? How many of these
+mastodon instances can do better than Twitter, in terms of site maintenance, and content moderation? Instinct
+tells me, something between self-hosting, and Twitter, might be the right balance. But I'm here for the long
+haul, and, if self-hosting proves to be the wrong direction, I'll pivot.</p>
+<p>Until then, this has been fun.</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/mastodon/">Mastodon</a>
+        ·
+        <a href="/tag/twitter/">Twitter</a>
+        ·
+        <a href="/tag/digital-ocean/">Digital Ocean</a>
+        ·
+        <a href="/tag/dns/">DNS</a>
+    </p>
+</footer></body>
+</html>

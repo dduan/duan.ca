@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2022/12/10/lazy-mastodon/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2022/11/20/the-social-graph/</loc>
     </url>
     <url>
@@ -246,6 +249,18 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/composable-architecture/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/dns/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/dns/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/digital-ocean/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/digital-ocean/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/email/</loc>

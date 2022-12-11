@@ -5,6 +5,81 @@
         <link>https://duan.ca/tag/mastodon/</link>
         <atom:link href="https://duan.ca/tag/mastodon/feed.xml" rel="self" type="application/rss+xml" />
             <item>
+                <title>The Lazy Programmer&#x27;s Guide to Private Mastodon</title>
+                <description>&lt;p&gt;As of today, my identity in the &amp;quot;fediverse&amp;quot; has become &lt;code&gt;@daniel@duan.ca&lt;/code&gt;. This post was originally published
+on &lt;code&gt;duan.ca&lt;/code&gt;. Pretty neat, eh? I achieved this buy hosting a private instance of the open-source Mastodon
+project. Here&#x27;s my experience setting that up, and why it seemed harder than it is.&lt;/p&gt;
+&lt;h2&gt;What exactly did I achieve?&lt;/h2&gt;
+&lt;p&gt;I own the domain &lt;code&gt;duan.ca&lt;/code&gt;, which serves as the root of an existing website. I set up an functioning
+instance of Mastodon with a single user &lt;code&gt;@daniel&lt;/code&gt;. This user is discoverable in other Mastodon instances as
+&lt;code&gt;@daniel@duan.ca&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;How did I do it?&lt;/h2&gt;
+&lt;p&gt;As someone who barely touch server-side programming, running a Mastodon instance seemed very daunting to me.
+What database to use? How? What&#x27;s the best way to host a Rails app? I need a email server? Where to host the
+media files I post?&lt;/p&gt;
+&lt;p&gt;There are a lot of step-by-step set-up tutorials on the internet. This post is, definitively, not one of
+those. But having gone through the process of &lt;a href=&quot;https://marketplace.digitalocean.com/apps/mastodon&quot;&gt;setting up an instance on Mastodon&lt;/a&gt;, I end up with a few tips
+and tricks to share! Let&#x27;s through them:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;If you have a Digital Ocean account, setting a server up is as simple as searching up &amp;quot;Mastodon&amp;quot; in their
+market place as a step in creating your Droplet.&lt;/li&gt;
+&lt;li&gt;You &lt;em&gt;do not&lt;/em&gt; need an email server for a single-user instance. Think about it, you have root access to the
+database, what do you need email for? Verify your own identity? Spam yourself?&lt;/li&gt;
+&lt;li&gt;That said, Sendgrid is free for low-volume emails.&lt;/li&gt;
+&lt;li&gt;Ok, you ssh into your Droplet, the first thing you see is a guided CLI experience for setting things up.
+Don&#x27;t go through it just yet! For me, my root domain &lt;code&gt;duan.ca&lt;/code&gt; hosts an entirely different site. So I have
+to pick a subdomain to host Mastodon. Make sure you set up an A record in your website&#x27;s DNS for your
+chosen subdomain. If this record isn&#x27;t set up, the set up will fail when it tries to get an certificate
+from Let&#x27;s Encrypt.&lt;/li&gt;
+&lt;li&gt;Unless you want to buy a new DNS service from Digital Ocean, your A record should be set with your existing
+DNS server provider! I needed a few minutes to un-confuse myself about this fact. Digital Ocean&#x27;s
+documentation made it really hard to discover this fact.&lt;/li&gt;
+&lt;li&gt;The only thing you need to get right is your subdomain, and DNS record for it. In the rest of the guided
+setup experience, you can make mistakes, and fix them later.&lt;/li&gt;
+&lt;li&gt;I used an S3 bucket for media. S3&#x27;s UX is kind of terrible, so if you are doing it for the first time, good
+luck.&lt;/li&gt;
+&lt;li&gt;Instead of &amp;quot;admin&amp;quot;, choose your Mastodon username right then, and there. This user does not have special
+privilege for the site anyways, despite what the default name suggests. After this step, the guide will
+provide you with a password, take note of that if you want to log in with this user later :)&lt;/li&gt;
+&lt;li&gt;Again, you could figure out how to get an STMP server to send emails on your Mastodon instance&#x27;s behalf.
+But you are the only user, right? So you can just make some value up for all things SMTP/email related. At
+the end, when the guide asks whether to send a test Email, choose &amp;quot;no&amp;quot;.&lt;/li&gt;
+&lt;li&gt;The Mastodon code is located at &lt;code&gt;/home/mastodon/live&lt;/code&gt;. Most of the information is stored in
+&lt;code&gt;.env.production&lt;/code&gt; in that directory. This is where you can change your mind/fix your mistake from the
+guided setup. You can use Vim instead of Nano. (Although if you like Vim, you&#x27;d probably find out anyways).&lt;/li&gt;
+&lt;li&gt;Mastodon ships with an admin &lt;a href=&quot;https://docs.joinmastodon.org/admin/tootctl/&quot;&gt;CLI tool&lt;/a&gt; &lt;code&gt;tootctl&lt;/code&gt;. It&#x27;s located in &lt;code&gt;bin/tootcli&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Before attempting to run this tool, switch to user &lt;code&gt;mastodon&lt;/code&gt; by running &lt;code&gt;su mastodon&lt;/code&gt;. Otherwise, you&#x27;d
+be confused as to why you need to install Ruby stuff, and why you can&#x27;t connect to the Postgres database.&lt;/li&gt;
+&lt;li&gt;If the guide didn&#x27;t tell you an error, and your values in &lt;code&gt;.env.production&lt;/code&gt; are all right, you will be
+able to type your subdomain in a browser and see Mastodon! Log in with your username, and password from
+the guide. Upload a profile photo to test whether your media service is set up correctly.&lt;/li&gt;
+&lt;li&gt;DO NOT DO THIS YET! At this point, if you go to an existing Mastodon instance, and look yourself up! If
+your subdomain is &lt;code&gt;social.duan.ca&lt;/code&gt;, username &lt;code&gt;daniel&lt;/code&gt;, you should be discoverable as
+&lt;code&gt;@daniel@social.duan.ca&lt;/code&gt; on a site such as [mastodon.social][] now. But if you do this, that existing site
+may get confused and permanently consider that as your fediverse identity. So don&#x27;t do that! Finish the
+next step.&lt;/li&gt;
+&lt;li&gt;To use your root domain instead of this subdomain, you 301 redirect &lt;code&gt;/.well-known/host-meta*&lt;/code&gt; from root to
+the real location. &lt;a href=&quot;https://masto.host/mastodon-usernames-different-from-the-domain-used-for-installation/&quot;&gt;this article&lt;/a&gt; explains it very well. Make sure to both set up the URL
+redirect, as well as &lt;code&gt;LOCAL_DOMAIN&lt;/code&gt;, and &lt;code&gt;WEB_DOMAIN&lt;/code&gt; in &lt;code&gt;.env.production&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;That it! These may seem like a lot of tips, but I think, as a smart programmer, you can eventually figure all
+of these things out pretty easily. I put them down here because, had I known these, I would&#x27;ve saved a bunch
+of times in the end.&lt;/p&gt;
+&lt;h2&gt;Why?&lt;/h2&gt;
+&lt;p&gt;Why spend the time, and money, to go through all of this?&lt;/p&gt;
+&lt;p&gt;This is a really good question. I [wished][https://duan.ca/2022/11/20/the-social-graph/] less people would
+leave Twitter. I host my personal site/blog on my own domain, as opposed to using a Medium site or something.
+So, if I have to &amp;quot;federate&amp;quot; my microblogs, why shouldn&#x27;t I try to gain more independence? How many of these
+mastodon instances can do better than Twitter, in terms of site maintenance, and content moderation? Instinct
+tells me, something between self-hosting, and Twitter, might be the right balance. But I&#x27;m here for the long
+haul, and, if self-hosting proves to be the wrong direction, I&#x27;ll pivot.&lt;/p&gt;
+&lt;p&gt;Until then, this has been fun.&lt;/p&gt;
+</description>
+                <pubDate>Sat, 10 Dec 2022 18:21:11 -0800</pubDate>
+                <link>https://duan.ca/2022/12/10/lazy-mastodon/</link>
+                <guid isPermaLink="true">https://duan.ca/2022/12/10/lazy-mastodon/</guid>
+            </item>
+            <item>
                 <title>The Social Graph</title>
                 <description>&lt;p&gt;From a purely personal perspective, connecting with people via the internet is good. I&#x27;m grateful that services such as Twitter exist. Since the year 2008, a significant amount of my life happened on Twitter. The only important component of Twitter is the connections. I&#x27;m lucky that some people like what I post. I&#x27;m used to a small stream of thoughts from those I follow.&lt;/p&gt;
 &lt;p&gt;These days, those I follow aren&#x27;t posting much. They are posting on other websites. The connection I so depend on are broken. It saddens me. Therefore, I&#x27;m forced to move to maintain the connections.&lt;/p&gt;

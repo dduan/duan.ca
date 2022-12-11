@@ -46,8 +46,9 @@ But you are the only user, right? So you can just make some value up for all thi
 the end, when the guide asks whether to send a test Email, choose &amp;quot;no&amp;quot;.&lt;/li&gt;
 &lt;li&gt;The Mastodon code is located at &lt;code&gt;/home/mastodon/live&lt;/code&gt;. Most of the information is stored in
 &lt;code&gt;.env.production&lt;/code&gt; in that directory. This is where you can change your mind/fix your mistake from the
-guided setup. You can use Vim instead of Nano. (Although if you like Vim, you&#x27;d probably find out anyways).&lt;/li&gt;
-&lt;li&gt;Mastodon ships with an admin &lt;a href=&quot;https://docs.joinmastodon.org/admin/tootctl/&quot;&gt;CLI tool&lt;/a&gt; &lt;code&gt;tootctl&lt;/code&gt;. It&#x27;s located in &lt;code&gt;bin/tootcli&lt;/code&gt;.&lt;/li&gt;
+guided setup. You can use Vim instead of Nano. (Although if you like Vim, you&#x27;d probably find out
+anyways).&lt;/li&gt;
+&lt;li&gt;Mastodon ships with an admin &lt;a href=&quot;https://docs.joinmastodon.org/admin/tootctl/&quot;&gt;CLI tool&lt;/a&gt; &lt;code&gt;tootctl&lt;/code&gt;. It&#x27;s located in &lt;code&gt;bin/tootctl&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Before attempting to run this tool, switch to user &lt;code&gt;mastodon&lt;/code&gt; by running &lt;code&gt;su mastodon&lt;/code&gt;. Otherwise, you&#x27;d
 be confused as to why you need to install Ruby stuff, and why you can&#x27;t connect to the Postgres database.&lt;/li&gt;
 &lt;li&gt;If the guide didn&#x27;t tell you an error, and your values in &lt;code&gt;.env.production&lt;/code&gt; are all right, you will be
@@ -61,6 +62,8 @@ next step.&lt;/li&gt;
 &lt;li&gt;To use your root domain instead of this subdomain, you 301 redirect &lt;code&gt;/.well-known/host-meta*&lt;/code&gt; from root to
 the real location. &lt;a href=&quot;https://masto.host/mastodon-usernames-different-from-the-domain-used-for-installation/&quot;&gt;this article&lt;/a&gt; explains it very well. Make sure to both set up the URL
 redirect, as well as &lt;code&gt;LOCAL_DOMAIN&lt;/code&gt;, and &lt;code&gt;WEB_DOMAIN&lt;/code&gt; in &lt;code&gt;.env.production&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Make your user the owner of the site (RTFM). You&#x27;ll see additional, site-wide settings afterwards. Make
+sure to disable signup, either in the GUI, or with &lt;code&gt;tootctl&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;That it! These may seem like a lot of tips, but I think, as a smart programmer, you can eventually figure all
 of these things out pretty easily. I put them down here because, had I known these, I would&#x27;ve saved a bunch

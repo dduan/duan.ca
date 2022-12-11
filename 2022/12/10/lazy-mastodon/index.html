@@ -68,8 +68,9 @@ But you are the only user, right? So you can just make some value up for all thi
 the end, when the guide asks whether to send a test Email, choose &quot;no&quot;.</li>
 <li>The Mastodon code is located at <code>/home/mastodon/live</code>. Most of the information is stored in
 <code>.env.production</code> in that directory. This is where you can change your mind/fix your mistake from the
-guided setup. You can use Vim instead of Nano. (Although if you like Vim, you'd probably find out anyways).</li>
-<li>Mastodon ships with an admin <a href="https://docs.joinmastodon.org/admin/tootctl/">CLI tool</a> <code>tootctl</code>. It's located in <code>bin/tootcli</code>.</li>
+guided setup. You can use Vim instead of Nano. (Although if you like Vim, you'd probably find out
+anyways).</li>
+<li>Mastodon ships with an admin <a href="https://docs.joinmastodon.org/admin/tootctl/">CLI tool</a> <code>tootctl</code>. It's located in <code>bin/tootctl</code>.</li>
 <li>Before attempting to run this tool, switch to user <code>mastodon</code> by running <code>su mastodon</code>. Otherwise, you'd
 be confused as to why you need to install Ruby stuff, and why you can't connect to the Postgres database.</li>
 <li>If the guide didn't tell you an error, and your values in <code>.env.production</code> are all right, you will be
@@ -83,6 +84,8 @@ next step.</li>
 <li>To use your root domain instead of this subdomain, you 301 redirect <code>/.well-known/host-meta*</code> from root to
 the real location. <a href="https://masto.host/mastodon-usernames-different-from-the-domain-used-for-installation/">this article</a> explains it very well. Make sure to both set up the URL
 redirect, as well as <code>LOCAL_DOMAIN</code>, and <code>WEB_DOMAIN</code> in <code>.env.production</code>.</li>
+<li>Make your user the owner of the site (RTFM). You'll see additional, site-wide settings afterwards. Make
+sure to disable signup, either in the GUI, or with <code>tootctl</code>.</li>
 </ol>
 <p>That it! These may seem like a lot of tips, but I think, as a smart programmer, you can eventually figure all
 of these things out pretty easily. I put them down here because, had I known these, I would've saved a bunch

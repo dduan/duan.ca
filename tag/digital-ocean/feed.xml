@@ -5,7 +5,7 @@
         <link>https://duan.ca/tag/digital-ocean/</link>
         <atom:link href="https://duan.ca/tag/digital-ocean/feed.xml" rel="self" type="application/rss+xml" />
             <item>
-                <title>The Lazy Programmer&#x27;s Guide to Private Mastodon</title>
+                <title>The Lazy Programmer&#x27;s Guide to Single-user Mastodon</title>
                 <description>&lt;p&gt;As of today, my identity in the &amp;quot;fediverse&amp;quot; has become &lt;code&gt;@daniel@duan.ca&lt;/code&gt;. This post was originally published
 on &lt;code&gt;duan.ca&lt;/code&gt;. Pretty neat, eh? I achieved this by hosting a private instance of the open-source Mastodon
 project. Here&#x27;s my experience setting that up, and why it seemed harder than it is.&lt;/p&gt;

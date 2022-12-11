@@ -79,7 +79,7 @@ of times in the end.
 
 Why spend the time, and money, to go through all of this?
 
-This is a really good question. I [wished][https://duan.ca/2022/11/20/the-social-graph/] less people would
+This is a really good question. I [wished](https://duan.ca/2022/11/20/the-social-graph/) less people would
 leave Twitter. I host my personal site/blog on my own domain, as opposed to using a Medium site or something.
 So, if I have to "federate" my microblogs, why shouldn't I try to gain more independence? How many of these
 mastodon instances can do better than Twitter, in terms of site maintenance, and content moderation? Instinct

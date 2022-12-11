@@ -70,6 +70,7 @@ of times in the end.
 [Redirect]: https://masto.host/mastodon-usernames-different-from-the-domain-used-for-installation/
 [CLI tool]: https://docs.joinmastodon.org/admin/tootctl/
 [setting up an instance on DigitalOcean]: https://marketplace.digitalocean.com/apps/mastodon
+[mastodon.social]: https://mastodon.social
 
 ## Why?
 

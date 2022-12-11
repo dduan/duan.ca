@@ -18,7 +18,7 @@ instance of Mastodon with a single user &lt;code&gt;@daniel&lt;/code&gt;. This u
 What database to use? How? What&#x27;s the best way to host a Rails app? I need a email server? Where to host the
 media files I post?&lt;/p&gt;
 &lt;p&gt;There are a lot of step-by-step set-up tutorials on the internet. This post is, definitively, not one of
-those. But having gone through the process of &lt;a href=&quot;https://marketplace.digitalocean.com/apps/mastodon&quot;&gt;setting up an instance on Mastodon&lt;/a&gt;, I end up with a few tips
+those. But having gone through the process of &lt;a href=&quot;https://marketplace.digitalocean.com/apps/mastodon&quot;&gt;setting up an instance on DigitalOcean&lt;/a&gt;, I end up with a few tips
 and tricks to share! Let&#x27;s through them:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;If you have a Digital Ocean account, setting a server up is as simple as searching up &amp;quot;Mastodon&amp;quot; in their

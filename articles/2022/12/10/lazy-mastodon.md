@@ -35,33 +35,36 @@ and tricks to share! Let's through them:
 5. Unless you want to buy a new DNS service from Digital Ocean, your A record should be set with your existing
    DNS server provider! I needed a few minutes to un-confuse myself about this fact. Digital Ocean's
    documentation made it really hard to discover this fact.
-5. The only thing you need to get right is your subdomain, and DNS record for it. In the rest of the guided
+6. The only thing you need to get right is your subdomain, and DNS record for it. In the rest of the guided
    setup experience, you can make mistakes, and fix them later.
-6. I used an S3 bucket for media. S3's UX is kind of terrible, so if you are doing it for the first time, good
+7. I used an S3 bucket for media. S3's UX is kind of terrible, so if you are doing it for the first time, good
    luck.
-7. Instead of "admin", choose your Mastodon username right then, and there. This user does not have special
+8. Instead of "admin", choose your Mastodon username right then, and there. This user does not have special
    privilege for the site anyways, despite what the default name suggests. After this step, the guide will
    provide you with a password, take note of that if you want to log in with this user later :)
-8. Again, you could figure out how to get an STMP server to send emails on your Mastodon instance's behalf.
+9. Again, you could figure out how to get an STMP server to send emails on your Mastodon instance's behalf.
    But you are the only user, right? So you can just make some value up for all things SMTP/email related. At
    the end, when the guide asks whether to send a test Email, choose "no".
-9. The Mastodon code is located at `/home/mastodon/live`. Most of the information is stored in
-   `.env.production` in that directory. This is where you can change your mind/fix your mistake from the
-   guided setup. You can use Vim instead of Nano. (Although if you like Vim, you'd probably find out anyways).
-10. Mastodon ships with an admin [CLI tool][] `tootctl`. It's located in `bin/tootcli`.
-11. Before attempting to run this tool, switch to user `mastodon` by running `su mastodon`. Otherwise, you'd
+10. The Mastodon code is located at `/home/mastodon/live`. Most of the information is stored in
+    `.env.production` in that directory. This is where you can change your mind/fix your mistake from the
+    guided setup. You can use Vim instead of Nano. (Although if you like Vim, you'd probably find out
+    anyways).
+11. Mastodon ships with an admin [CLI tool][] `tootctl`. It's located in `bin/tootctl`.
+12. Before attempting to run this tool, switch to user `mastodon` by running `su mastodon`. Otherwise, you'd
     be confused as to why you need to install Ruby stuff, and why you can't connect to the Postgres database.
-12. If the guide didn't tell you an error, and your values in `.env.production` are all right, you will be
+13. If the guide didn't tell you an error, and your values in `.env.production` are all right, you will be
     able to type your subdomain in a browser and see Mastodon! Log in with your username, and password from
     the guide. Upload a profile photo to test whether your media service is set up correctly.
-13. DO NOT DO THIS YET! At this point, if you go to an existing Mastodon instance, and look yourself up! If
+14. DO NOT DO THIS YET! At this point, if you go to an existing Mastodon instance, and look yourself up! If
     your subdomain is `social.duan.ca`, username `daniel`, you should be discoverable as
     `@daniel@social.duan.ca` on a site such as [mastodon.social][] now. But if you do this, that existing site
     may get confused and permanently consider that as your fediverse identity. So don't do that! Finish the
     next step.
-14. To use your root domain instead of this subdomain, you 301 redirect `/.well-known/host-meta*` from root to
+15. To use your root domain instead of this subdomain, you 301 redirect `/.well-known/host-meta*` from root to
     the real location. [this article][Redirect] explains it very well. Make sure to both set up the URL
     redirect, as well as `LOCAL_DOMAIN`, and `WEB_DOMAIN` in `.env.production`.
+16. Make your user the owner of the site (RTFM). You'll see additional, site-wide settings afterwards. Make
+    sure to disable signup, either in the GUI, or with `tootctl`.
 
 That it! These may seem like a lot of tips, but I think, as a smart programmer, you can eventually figure all
 of these things out pretty easily. I put them down here because, had I known these, I would've saved a bunch

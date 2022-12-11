@@ -1,4 +1,4 @@
-# The Lazy Programmer's Guide to Private Mastodon
+# The Lazy Programmer's Guide to Single-user Mastodon
 2022-12-10T18:21:11-08:00
 tag: Mastodon, Twitter, Digital Ocean, DNS
 

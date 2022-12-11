@@ -3,7 +3,7 @@
 tag: Mastodon, Twitter, Digital Ocean, DNS
 
 As of today, my identity in the "fediverse" has become `@daniel@duan.ca`. This post was originally published
-on `duan.ca`. Pretty neat, eh? I achieved this buy hosting a private instance of the open-source Mastodon
+on `duan.ca`. Pretty neat, eh? I achieved this by hosting a private instance of the open-source Mastodon
 project. Here's my experience setting that up, and why it seemed harder than it is.
 
 ## What exactly did I achieve?

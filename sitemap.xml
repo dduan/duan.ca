@@ -174,15 +174,15 @@
     <url>
         <loc>https://duan.ca/Markra/</loc>
     </url><url>
-        <loc>https://duan.ca/projects/</loc>
-    </url><url>
         <loc>https://duan.ca//</loc>
     </url><url>
-        <loc>https://duan.ca/DrString/privacy/</loc>
+        <loc>https://duan.ca/projects/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/release-notes/</loc>
+    </url><url>
+        <loc>https://duan.ca/DrString/privacy/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/api-design-guidelines/</loc>

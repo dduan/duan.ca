@@ -5,6 +5,21 @@
         <link>https://duan.ca/</link>
         <atom:link href="https://duan.ca/feed.xml" rel="self" type="application/rss+xml" />
             <item>
+                <title>e Qualia that was Coding</title>
+                <description>&lt;p&gt;As of this writing, I&#x27;m deeply skeptical of LLM replacing our needs for skilled programmers. Problem solving is a creative process. When a new tool takes away the repetitive part of a job, the worker can focus more on being creative.&lt;/p&gt;
+&lt;p&gt;However, if one believes that LLM, or some alternative models, will bring about the end of programming as a wide-spread human activity, then we&#x27;ll have a problem (well, probably a few problems) at hand.&lt;/p&gt;
+&lt;p&gt;Programming is a lonely activity. Yes, let&#x27;s acknowledge the existence of peer programming, code reviews, design meetings, etc. But the deep work -- exploring the problem space, grappling with known/unknown constraints, iterating on the design… these things happen in the programmer&#x27;s own head. When the satisfying answer emerges in the end, so many paths has been traveled that the traveler can&#x27;t even retread them in themselves, let alone sharing it with others. This is blatantly obvious to anyone who&#x27;s accomplished non-trivial programming tasks.&lt;/p&gt;
+&lt;p&gt;The end of programming means the end of such experience.&lt;/p&gt;
+&lt;p&gt;I have no doubt that people will keep writing code even if machines are more capable of doing it wholesale. To what degree would those people share the level of challenges, passion, skill, or, let&#x27;s face it, pain in writing code, I cannot predict. But it seems abundantly clear that, those people would amass to a small fraction of the total number of programmers today.&lt;/p&gt;
+&lt;p&gt;If you believe you are the last generation of human programmers, the human experience, the &lt;em&gt;qualia&lt;/em&gt; of programming is yours to lose.&lt;/p&gt;
+&lt;p&gt;Does that make sense? When AI models can replace us, we will forget what&#x27;s like to write code without them &lt;em&gt;really&lt;/em&gt; soon. Maybe the literal we, who lived through it won&#x27;t, but future generations may never truly know it. Difficult as it is, it might be worth your time to leave records of what it&#x27;s like to be in the flow state, what it&#x27;s like to feel stuck, what it&#x27;s like to steadily traverse and eliminate alternative theories for a bug, what it&#x27;s like to perform mastery with primitive tools to generate clues, what it&#x27;s like to critic a working prototype, what it&#x27;s like to lay out a suite of tests, what it&#x27;s like to replace a huge amount of code with better, shorter code...&lt;/p&gt;
+&lt;p&gt;If God is coming, the least we can do is to give future anthropologist a helping hand, and document what it was like to be a human.&lt;/p&gt;
+</description>
+                <pubDate>Fri, 03 Mar 2023 23:42:34 -0800</pubDate>
+                <link>https://duan.ca/2023/03/03/qualia-that-was-coding/</link>
+                <guid isPermaLink="true">https://duan.ca/2023/03/03/qualia-that-was-coding/</guid>
+            </item>
+            <item>
                 <title>The Lazy Programmer&#x27;s Guide to Single-user Mastodon</title>
                 <description>&lt;p&gt;As of today, my identity in the &amp;quot;fediverse&amp;quot; has become &lt;code&gt;@daniel@duan.ca&lt;/code&gt;. This post was originally published
 on &lt;code&gt;duan.ca&lt;/code&gt;. Pretty neat, eh? I achieved this by hosting a private instance of the open-source Mastodon

@@ -5,7 +5,7 @@
         <link>https://duan.ca/</link>
         <atom:link href="https://duan.ca/feed.xml" rel="self" type="application/rss+xml" />
             <item>
-                <title>e Qualia that was Coding</title>
+                <title>The Qualia that was Coding</title>
                 <description>&lt;p&gt;As of this writing, I&#x27;m deeply skeptical of LLM replacing our needs for skilled programmers. Problem solving is a creative process. When a new tool takes away the repetitive part of a job, the worker can focus more on being creative.&lt;/p&gt;
 &lt;p&gt;However, if one believes that LLM, or some alternative models, will bring about the end of programming as a wide-spread human activity, then we&#x27;ll have a problem (well, probably a few problems) at hand.&lt;/p&gt;
 &lt;p&gt;Programming is a lonely activity. Yes, let&#x27;s acknowledge the existence of peer programming, code reviews, design meetings, etc. But the deep work -- exploring the problem space, grappling with known/unknown constraints, iterating on the design… these things happen in the programmer&#x27;s own head. When the satisfying answer emerges in the end, so many paths has been traveled that the traveler can&#x27;t even retread them in themselves, let alone sharing it with others. This is blatantly obvious to anyone who&#x27;s accomplished non-trivial programming tasks.&lt;/p&gt;

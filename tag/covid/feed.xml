@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About COVID</title>
+        <link>https://duan.ca/tag/covid/</link>
+        <atom:link href="https://duan.ca/tag/covid/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>Don&#x27;t say that</title>
+                <description>&lt;p&gt;&lt;em&gt;Alice: Hey, did you know that COVID virus was leaked from a lab?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Bob: No no, you don’t know that. Don’t be racist!&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Alice: Oh, sorry I didn’t know. How so?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Bob: Because the lab is in China.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Alice: Ok, so where DID the virus come from?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Bob: It jumped from bats to pangolin, and then to humans in a wet market.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Alice: A what market?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Bob: Wet market in China. People buy animals from there.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Alice: Who would want to buy a bat. or a … what’s the other one?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Bob: They eat bats. It&#x27;s normal for them.&lt;/p&gt;
+</description>
+                <pubDate>Sat, 11 Mar 2023 22:03:03 -0800</pubDate>
+                <link>https://duan.ca/2023/03/11/do-not-say-that/</link>
+                <guid isPermaLink="true">https://duan.ca/2023/03/11/do-not-say-that/</guid>
+            </item>
+    </channel>
+</rss>

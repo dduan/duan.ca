@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2023/03/27/ai-coding/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2023/03/11/do-not-say-that/</loc>
     </url>
     <url>
@@ -180,15 +183,15 @@
     <url>
         <loc>https://duan.ca/projects/</loc>
     </url><url>
-        <loc>https://duan.ca/Markra/</loc>
-    </url><url>
-        <loc>https://duan.ca/DrString/</loc>
-    </url><url>
         <loc>https://duan.ca/DrString/release-notes/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/privacy/</loc>
     </url><url>
+        <loc>https://duan.ca/DrString/</loc>
+    </url><url>
         <loc>https://duan.ca//</loc>
+    </url><url>
+        <loc>https://duan.ca/Markra/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/ai/</loc>
@@ -291,6 +294,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/foundation/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/gpt/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/gpt/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/gaming/</loc>

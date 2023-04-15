@@ -6,7 +6,7 @@
         <atom:link href="https://duan.ca/tag/toml/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Making of a TOML parser</title>
-                <description>&lt;p&gt;During the holidays, I spent some time on the parser that underlies &lt;a href=&quot;https://github.com/dduan/TOMDecoder&quot;&gt;TOMLDecoder&lt;/a&gt;. The original
+                <description>&lt;p&gt;During the holidays, I spent some time on the parser that underlies &lt;a href=&quot;https://github.com/dduan/TOMLDecoder&quot;&gt;TOMLDecoder&lt;/a&gt;. The original
 implementation targeted TOML&#x27;s spec version 0.5. A few release-candidates for version 1.0 has come
 out since then. So it&#x27;s a good time to give this project attention.&lt;/p&gt;
 &lt;p&gt;Back in the 0.5 days, the TOML spec was (well) written in English with a few examples for each

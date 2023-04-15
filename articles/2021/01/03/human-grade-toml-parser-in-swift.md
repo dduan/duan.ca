@@ -133,6 +133,6 @@ in many places still.
 Anyways, here's where I abruptly stop the story of my new TOML parser. There are a lot of exciting
 space for improvment. So this article might be a "part 1". No promises, though.
 
-[TOMLDecoder]: https://github.com/dduan/TOMDecoder
+[TOMLDecoder]: https://github.com/dduan/TOMLDecoder
 [Pointfree]: https://pointfree.co
 [Constructing human-grade parsers]: http://duriansoftware.com/joe/Constructing-human-grade-parsers.html

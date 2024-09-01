@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2024/08/swift-mlir-cmake/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Notes on Using the MLIR C API in Swift">
+    <meta property="article:published_time" content="2024-08-31T18:44:48-07:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Notes on Using the MLIR C API in Swift</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2024/08/swift-mlir-cmake/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>Notes on Using the MLIR C API in Swift</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles">Daniel Duan</a>
+            ·
+            <time datetime="2024-08-31T18:44:48-07:00" itemProp="datePublished">2024-08-31</time>
+        </p>
+    </nav><p>For curiosity's sake, I decided I want to play with MLIR's C API with Swift.
+I spent quite some time to get a skeleton project up and running on my Mac.
+Here's my notes for future reference. (If you find this useful, I'd be curious
+to know what you're working on!).</p>
+<p>Modern LLVM comes shipped with MLIR. At the time of writing, all I had to do to
+get it is <code>brew install llvm</code>. If you used the default Homebrew installation
+options, you'll find <code>libMLIR.dylib</code> and friends under
+<code>/opt/homebrew/opt/llvm/</code>. Building MLIR following the
+<a href="https://mlir.llvm.org/getting_started/">instructions</a> on the website is also
+fairly straightforward.</p>
+<p>You'll want <code>llvm-config</code> from your version of LLVM to be in your path. For the
+Homebrew-installed version, you want <code>/opt/homebrew/opt/llvm/bin/</code> to be one of
+the place the shell looks.</p>
+<p>Now, it's time to make the project. With CMake, of course. Because I couldn't
+figure out how to tell SwiftPM to link the right dylib :) But worry not, CMake
+ain't that bad.</p>
+<p>Like with SwiftPM, we want to make a module for the MLIR C API. I call the module
+<code>cmlir</code>. Make a directory with that name, and create 2 text files:</p>
+<p>First, <code>module.modulemap</code>:</p>
+<pre><code>module cmlir [system] {
+  header &quot;shim.h&quot;
+  export *
+}
+</code></pre>
+<p>Second, <code>shim.h</code>:</p>
+<pre><code class="language-c">#include &lt;mlir-c/IR.h&gt;
+</code></pre>
+<p>Amazing.</p>
+<p>Let's assume we want to have a Swift library that uses <code>cmlir</code>. And a executable
+that depends on the library. You can organize the Swift source files for these
+as you like (yay CMake!).</p>
+<p>The sample library has one file, <code>lib.swift</code>:</p>
+<pre><code class="language-swift">import cmlir
+
+public func makeAContext() -&gt; MlirContext {
+    mlirContextCreate()
+}
+</code></pre>
+<p>The sample app is just a <code>main.swift</code>:</p>
+<pre><code class="language-swift">import MLIRSwift
+
+print(makeContext())
+</code></pre>
+<p>... as you can see, through these targets, we are expecting to properly execute
+some code from MLIR.</p>
+<p>All that's left is to build all these stuff. AKA, the hard part! But the
+<code>CMakeLists.txt</code> really isn't that bad. I'll just leave it here with comments:</p>
+<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.22)
+
+# Note we include &quot;C&quot; here, without it there'd be a build error 🤷
+project(swift-mlir LANGUAGES C CXX Swift)
+
+# This is where llvm-config comes to play
+find_package(MLIR REQUIRED CONFIG)
+
+include_directories(${MLIR_INCLUDE_DIRS})
+
+# Include our modulemap
+include_directories(cmlir)
+
+# I can't believe this is all it takes to make a Swift dylib!
+add_library(MLIRSwift SHARED lib.swift)
+
+# Wasted a lot of time on figuring out the right library to link T-T
+target_link_libraries(MLIRSwift PRIVATE MLIRCAPIIR)
+
+# Nothing special here
+add_executable(myapp main.swift)
+target_link_libraries(myapp PRIVATE MLIRSwift)
+</code></pre>
+<p>And there you have it. Here's the file structure in the end:</p>
+<pre><code>.
+├── CMakeLists.txt
+├── cmlir
+│   ├── module.modulemap
+│   └── shim.h
+├── lib.swift
+└── main.swift
+</code></pre>
+<p>For completeness, I'll also include commands that builds this project. It's just
+the simplest cmake commands. But it may not be obvious for Swift programmers:</p>
+<pre><code>make build # make a bulid direcory anywhere, make sure you .gitignore it if necessary
+cd build
+cmake -G Ninja ..
+cmake --build .
+</code></pre>
+<p>With this sample project, running <code>build/myapp</code> should get you this output:</p>
+<pre><code>MlirContext(ptr: Optional(0x0000600001784180))
+</code></pre>
+<p>And that's just exciting, isn't it?</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/mlir/">MLIR</a>
+        ·
+        <a href="/tag/cmake/">CMake</a>
+        ·
+        <a href="/tag/llvm/">LLVM</a>
+    </p>
+</footer></body>
+</html>

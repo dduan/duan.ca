@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2024/08/swift-mlir-cmake/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2023/03/27/ai-coding/</loc>
     </url>
     <url>
@@ -181,17 +184,17 @@
         <loc>https://duan.ca/2012/10/31/keep-git-social/</loc>
     </url>
     <url>
-        <loc>https://duan.ca//</loc>
-    </url><url>
-        <loc>https://duan.ca/DrString/privacy/</loc>
-    </url><url>
-        <loc>https://duan.ca/DrString/release-notes/</loc>
+        <loc>https://duan.ca/Markra/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/</loc>
     </url><url>
-        <loc>https://duan.ca/projects/</loc>
+        <loc>https://duan.ca/DrString/release-notes/</loc>
     </url><url>
-        <loc>https://duan.ca/Markra/</loc>
+        <loc>https://duan.ca/DrString/privacy/</loc>
+    </url><url>
+        <loc>https://duan.ca//</loc>
+    </url><url>
+        <loc>https://duan.ca/projects/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/ai/</loc>
@@ -228,6 +231,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/cli/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/cmake/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/cmake/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/covid/</loc>
@@ -386,6 +395,12 @@
         <loc>https://duan.ca/tag/llm/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/llvm/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/llvm/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/let-s-build/</loc>
     </url>
     <url>
@@ -396,6 +411,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/linux/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/mlir/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/mlir/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/make/</loc>

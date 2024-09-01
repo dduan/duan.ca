@@ -85,8 +85,9 @@ target_link_libraries(myapp PRIVATE MLIRSwift)
 ├── lib.swift
 └── main.swift
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For completeness, I&#x27;ll also include commands that builds this project. It&#x27;s just
-the simplest cmake commands. But it may not be obvious for Swift programmers:&lt;/p&gt;
+&lt;p&gt;For completeness, I&#x27;ll also include commands that produces the final
+executables. It&#x27;s just the simplest cmake commands. But it may not be obvious
+for Swift programmers:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;make build # make a bulid direcory anywhere, make sure you .gitignore it if necessary
 cd build
 cmake -G Ninja ..

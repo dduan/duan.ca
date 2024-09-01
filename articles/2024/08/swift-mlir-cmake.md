@@ -106,8 +106,9 @@ And there you have it. Here's the file structure in the end:
 └── main.swift
 ```
 
-For completeness, I'll also include commands that builds this project. It's just
-the simplest cmake commands. But it may not be obvious for Swift programmers:
+For completeness, I'll also include commands that produces the final
+executables. It's just the simplest cmake commands. But it may not be obvious
+for Swift programmers:
 
 ```
 make build # make a bulid direcory anywhere, make sure you .gitignore it if necessary

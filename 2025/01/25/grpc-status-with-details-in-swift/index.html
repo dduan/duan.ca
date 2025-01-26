@@ -132,19 +132,19 @@ a custom receive method, for the &quot;.end&quot; part of the response:</p>
 }
 </code></pre>
 <p>... the &quot;end&quot; part contains the error status, as well as some trailing metadata.
-The metadat includes our status details under the key <code>grpc-status-details-bin</code>.
+The metadata includes our status details under the key <code>grpc-status-details-bin</code>.
 It's base64 encoded, so we'll need to decode it...</p>
-<pre><code class="language-swift">    switch part {
-    case .end(var status, let headers):
-        guard
-            // grab the status details
-            let statusDetails = headers[&quot;grpc-status-details-bin&quot;].first,
-            // decode to data
-            let data = Data(base64Encoded: statusDetails),
-        // ...
-    default:
-      context.receive(part)
-    }
+<pre><code class="language-swift">switch part {
+case .end(var status, let headers):
+    guard
+        // grab the status details
+        let statusDetails = headers[&quot;grpc-status-details-bin&quot;].first,
+        // decode to data
+        let data = Data(base64Encoded: statusDetails),
+    // ...
+default:
+  context.receive(part)
+}
 </code></pre>
 <p>At this point, with some experience with GRPC in Swift, you might think it's
 time to instantiate your custom error type with <code>.init(seralizedData:)</code>. But
@@ -157,24 +157,24 @@ says.</li>
 </ol>
 <p>In fact, the data is of the well-known type <code>Google_Rpc_Status</code>. And our stutus
 details, well, one its <code>.details</code> element. So:</p>
-<pre><code class="language-swift">    switch part {
-    case .end(var status, let headers):
-        guard
-            let statusDetails = headers[&quot;grpc-status-details-bin&quot;].first,
-            let data = Data(base64Encoded: statusDetails),
-            // the data, despite being under &quot;grpc-status-details-bin&quot;, is
-            // indeed not the status detail, but the statu itself:
-            let googleStatus = try? Google_Rpc_Status(serializedData: data)
-            // and the `details` field contains the actual status detail:
-            let details = googleStatus.details.first,
-        else {
-            context.receive(part)
-            break
-        }
-        // ...
-    default:
-      context.receive(part)
+<pre><code class="language-swift">switch part {
+case .end(var status, let headers):
+    guard
+        let statusDetails = headers[&quot;grpc-status-details-bin&quot;].first,
+        let data = Data(base64Encoded: statusDetails),
+        // the data, despite being under &quot;grpc-status-details-bin&quot;, is
+        // indeed not the status detail, but the statu itself:
+        let googleStatus = try? Google_Rpc_Status(serializedData: data)
+        // and the `details` field contains the actual status detail:
+        let details = googleStatus.details.first,
+    else {
+        context.receive(part)
+        break
     }
+    // ...
+default:
+  context.receive(part)
+}
 </code></pre>
 <p>... <code>details</code> is of type <code>Google_Protobuf_Any</code>. It is indeed a payload with the
 content for <code>SignUpWithEmailErrorResponse</code> as defined in the Protobuf. One
@@ -188,24 +188,24 @@ version of <code>grpc-swift</code>, the field has the following docstring:</p>
 public var cause: Error? { ... }
 </code></pre>
 <p>It seems like a perfect vessel for our status details!</p>
-<pre><code class="language-swift">    switch part {
-    case .end(var status, let headers):
-        guard
-            let statusDetails = headers[&quot;grpc-status-details-bin&quot;].first,
-            let data = Data(base64Encoded: statusDetails),
-            let googleStatus = try? Google_Rpc_Status(serializedData: data)
-            let details = googleStatus.details.first,
-        else {
-            context.receive(part)
-            break
-        }
-        // isn't it convenient that we declared `status` as a `var` ealier 😉?
-        status.cause = details
-        // forward to the caller, yay!
-        context.receive(.end(status, headers))
-    default:
-      context.receive(part)
+<pre><code class="language-swift">switch part {
+case .end(var status, let headers):
+    guard
+        let statusDetails = headers[&quot;grpc-status-details-bin&quot;].first,
+        let data = Data(base64Encoded: statusDetails),
+        let googleStatus = try? Google_Rpc_Status(serializedData: data)
+        let details = googleStatus.details.first,
+    else {
+        context.receive(part)
+        break
     }
+    // isn't it convenient that we declared `status` as a `var` ealier 😉?
+    status.cause = details
+    // forward to the caller, yay!
+    context.receive(.end(status, headers))
+default:
+  context.receive(part)
+}
 </code></pre>
 <p>Now our client will get the details of type <code>Google_Protobuf_Any</code> from the
 <code>.cause</code> field of the thrown error. The client can proceed to decode it using

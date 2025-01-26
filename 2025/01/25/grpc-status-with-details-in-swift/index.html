@@ -29,8 +29,8 @@
             <time datetime="2025-01-25T19:53:30-08:00" itemProp="datePublished">2025-01-25</time>
         </p>
     </nav><h2>Introduction</h2>
-<p>In GRPC, one could define an RPC that, in addition to taking a request message,
-and a response message, it also defines a custom message to represent errors:</p>
+<p>In GRPC, one could define an RPC that, in addition to the normal
+request-response messages, it also defines a custom message to represent errors:</p>
 <pre><code class="language-proto">message SignUpWithEmailRequest {
   string email = 1;
   string password = 2;

@@ -1,4 +1,4 @@
-# GRPC Status With Details in Swift
+# GRPC Status With Error Details in Swift
 2025-01-25T19:53:30-08:00
 tag: Swift, GRPC, Protobuf, Go
 
@@ -98,7 +98,7 @@ But, you, being a responsible client developer/tech lead/CTO, want to use the
 type-safe enum from the protobuf definition so that you can display the error in
 the right context, or perhaps localize it properly.
 
-Here's the big picture: there maybe many such custom RPC error types. Our
+Here's the big picture: there may be many such custom RPC error types. Our
 solution should be universal, and flexible to handle each of them. Enter
 interceptors! I mean, chances are, you know about them because you are working
 with gRPC. Let's write one to get our type-safe status details. Starting with

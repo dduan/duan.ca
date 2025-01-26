@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2025/01/25/grpc-status-with-details-in-swift/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="GRPC Status With Details in Swift">
+    <meta property="article:published_time" content="2025-01-25T19:53:30-08:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>GRPC Status With Details in Swift</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2025/01/25/grpc-status-with-details-in-swift/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>GRPC Status With Details in Swift</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles">Daniel Duan</a>
+            ·
+            <time datetime="2025-01-25T19:53:30-08:00" itemProp="datePublished">2025-01-25</time>
+        </p>
+    </nav><h2>Introduction</h2>
+<p>In GRPC, one could define an RPC that, in addition to taking a request message,
+and a response message, it also defines a custom message to represent errors:</p>
+<pre><code class="language-proto">message SignUpWithEmailRequest {
+  string email = 1;
+  string password = 2;
+  string referral_code = 3;
+}
+
+message SignUpWithEmailResponse {
+  AccessTokenDTO token = 1;
+}
+
+message SignUpWithEmailErrorResponse {
+  enum Kind {
+    KIND_UNKNOWN = 0;
+    KIND_EMAIL_ALREADY_REGISTERED = 1;
+    KIND_INVALID_PASSWORD = 2;
+    KIND_INVALID_EMAIL = 3;
+    KIND_INVALID_CODE = 4;
+  }
+
+  Kind kind = 1;
+  repeated string reasons = 2;
+}
+
+service AuthenticationService {
+  rpc SignUpWithEmail(SignUpWithEmailRequest) returns (SignUpWithEmailResponse) {}
+}
+</code></pre>
+<p>... in this example, <code>SignUpWithEmailErrorResponse</code> is not directly referenced
+in by <code>AuthenticationService</code>. But a server can use it as GRPC status with
+details. In Go the code might look like this:</p>
+<pre><code class="language-go">import (
+	&quot;google.golang.org/grpc/codes&quot;
+	&quot;google.golang.org/grpc/status&quot;
+)
+
+// ...
+
+_, err = queries.GetUserByEmail(ctx, email)
+if err == nil {
+    response := &amp;SignUpWithEmailErrorResponse{
+        Kind:    SignUpWithEmailErrorResponse_KIND_EMAIL_ALREADY_REGISTERED,
+        Reasons: []string{},
+    }
+
+    st := status.New(codes.AlreadyExists, &quot;Email already registered&quot;)
+    stWithDetails, err := st.WithDetails(response)
+    if err != nil {
+        return nil, err
+    }
+
+    return nil, stWithDetails.Err()
+}
+</code></pre>
+<p>This is all very type-safe, very demure, until you realize that in grpc-swift
+1.X there's no API to retrieve this &quot;status with detail&quot;. When the information
+is transimitted over the wire, you will have to dig it out manually. In this
+post, I'll document how I did this with a client-side interceptor.</p>
+<h2>The Swift interceptor</h2>
+<p>In Swift, when you make the RPC request, you'll get a standard error code and
+error message if the server returns an error with the code shown earlier:</p>
+<pre><code class="language-swift">// Use the generated client code to make the gRPC request
+var request = SignUpWithEmailRequest()
+request.email = // ...
+request.password = // ...
+request.referralCode = // ...
+do {
+    let response = try await client.signUpWithEmail(request)
+} catch {
+    guard let error = error as? GRPCStatus else {
+        print(&quot;Error: \(error)&quot;)
+        return
+    }
+    print(error.code) // AlreadyExists
+    print(error.message) // &quot;Email already registered&quot;
+}
+</code></pre>
+<p>But, you, being a responsible client developer/tech lead/CTO, want to use the
+type-safe enum from the protobuf definition so that you can display the error in
+the right context, or perhaps localize it properly.</p>
+<p>Here's the big picture: there maybe many such custom RPC error types. Our
+solution should be universal, and flexible to handle each of them. Enter
+interceptors! I mean, chances are, you know about them because you are working
+with gRPC. Let's write one to get our type-safe status details. Starting with
+a custom receive method, for the &quot;.end&quot; part of the response:</p>
+<pre><code class="language-swift">final class GRPCErrorDetailsInterceptor&lt;Request, Response&gt;:
+  ClientInterceptor&lt;Request, Response&gt;, @unchecked Sendable
+{
+  override func receive(
+    _ part: GRPCClientResponsePart&lt;Response&gt;,
+    context: ClientInterceptorContext&lt;Request, Response&gt;
+  ) {
+    switch part {
+    case .end(var status, let headers):
+      // extract the error details, and forward it.
+    default:
+      context.receive(part)
+    }
+  }
+}
+</code></pre>
+<p>... the &quot;end&quot; part contains the error status, as well as some trailing metadata.
+The metadat includes our status details under the key <code>grpc-status-details-bin</code>.
+It's base64 encoded, so we'll need to decode it...</p>
+<pre><code class="language-swift">    switch part {
+    case .end(var status, let headers):
+        guard
+            // grab the status details
+            let statusDetails = headers[&quot;grpc-status-details-bin&quot;].first,
+            // decode to data
+            let data = Data(base64Encoded: statusDetails),
+        // ...
+    default:
+      context.receive(part)
+    }
+</code></pre>
+<p>At this point, with some experience with GRPC in Swift, you might think it's
+time to instantiate your custom error type with <code>.init(seralizedData:)</code>. But
+there'd be 2 problems:</p>
+<ol>
+<li>You don't want each custom types from protobuf to make an appearance in an
+interceptor.</li>
+<li>This data would not be in the right shape, despite what the metadata key
+says.</li>
+</ol>
+<p>In fact, the data is of the well-known type <code>Google_Rpc_Status</code>. And our stutus
+details, well, one its <code>.details</code> element. So:</p>
+<pre><code class="language-swift">    switch part {
+    case .end(var status, let headers):
+        guard
+            let statusDetails = headers[&quot;grpc-status-details-bin&quot;].first,
+            let data = Data(base64Encoded: statusDetails),
+            // the data, despite being under &quot;grpc-status-details-bin&quot;, is
+            // indeed not the status detail, but the statu itself:
+            let googleStatus = try? Google_Rpc_Status(serializedData: data)
+            // and the `details` field contains the actual status detail:
+            let details = googleStatus.details.first,
+        else {
+            context.receive(part)
+            break
+        }
+        // ...
+    default:
+      context.receive(part)
+    }
+</code></pre>
+<p>... <code>details</code> is of type <code>Google_Protobuf_Any</code>. It is indeed a payload with the
+content for <code>SignUpWithEmailErrorResponse</code> as defined in the Protobuf. One
+question remains: how do we pass it from our intereceptor to the RPC call site?</p>
+<p>Look at the call site from earlier: we have 2 code paths. If the call succeeds,
+we get a <code>SignUpWithEmailResponse</code>. If it fails, we get a <code>GRPCStatus</code> as the
+thrown error. Lucky for us, <code>GRPCStatus</code> has an unused field, <code>cause</code>. In my
+version of <code>grpc-swift</code>, the field has the following docstring:</p>
+<pre><code class="language-swift">/// The cause of an error (not 'ok') status. This value is never transmitted
+/// over the wire and is **not** included in equality checks.
+public var cause: Error? { ... }
+</code></pre>
+<p>It seems like a perfect vessel for our status details!</p>
+<pre><code class="language-swift">    switch part {
+    case .end(var status, let headers):
+        guard
+            let statusDetails = headers[&quot;grpc-status-details-bin&quot;].first,
+            let data = Data(base64Encoded: statusDetails),
+            let googleStatus = try? Google_Rpc_Status(serializedData: data)
+            let details = googleStatus.details.first,
+        else {
+            context.receive(part)
+            break
+        }
+        // isn't it convenient that we declared `status` as a `var` ealier 😉?
+        status.cause = details
+        // forward to the caller, yay!
+        context.receive(.end(status, headers))
+    default:
+      context.receive(part)
+    }
+</code></pre>
+<p>Now our client will get the details of type <code>Google_Protobuf_Any</code> from the
+<code>.cause</code> field of the thrown error. The client can proceed to decode it using
+the protobuf-generated specific type with its built-in <code>.init(decodingAny:)</code>
+initializer:</p>
+<pre><code class="language-swift">// Use the generated client code to make the gRPC request
+var request = SignUpWithEmailRequest()
+request.email = // ...
+request.password = // ...
+request.referralCode = // ...
+do {
+    let response = try await client.signUpWithEmail(request)
+} catch {
+    guard let error = error as? GRPCStatus else {
+        print(&quot;Error: \(error)&quot;)
+        return
+    }
+
+    // let's be type-safe, finally!
+    guard
+        let details = error.cause as? Google_Protobuf_Any,
+        let signUpError = try? SignUpWithEmailErrorResponse(decodingAny: details)
+    else {
+        print(&quot;Error: \(error)&quot;)
+        return
+    }
+
+    // 🎉
+    switch signUpError.kind {
+    // ...
+    }
+}
+</code></pre>
+<h2>Conclusion</h2>
+<p>I find this to be clean, targeted solution. Knowing the error detail's
+transmission format is key to making this work. The fact that we also got
+a clean architecture from exploiting an unused field is also very cool.</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/grpc/">GRPC</a>
+        ·
+        <a href="/tag/protobuf/">Protobuf</a>
+        ·
+        <a href="/tag/go/">Go</a>
+    </p>
+</footer></body>
+</html>

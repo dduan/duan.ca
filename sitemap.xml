@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2025/01/25/grpc-status-with-details-in-swift/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2024/08/swift-mlir-cmake/</loc>
     </url>
     <url>
@@ -184,17 +187,17 @@
         <loc>https://duan.ca/2012/10/31/keep-git-social/</loc>
     </url>
     <url>
-        <loc>https://duan.ca/Markra/</loc>
+        <loc>https://duan.ca/DrString/privacy/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/release-notes/</loc>
     </url><url>
-        <loc>https://duan.ca/DrString/privacy/</loc>
+        <loc>https://duan.ca/projects/</loc>
+    </url><url>
+        <loc>https://duan.ca/Markra/</loc>
     </url><url>
         <loc>https://duan.ca//</loc>
-    </url><url>
-        <loc>https://duan.ca/projects/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/ai/</loc>
@@ -311,6 +314,12 @@
         <loc>https://duan.ca/tag/gpt/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/grpc/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/grpc/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/gaming/</loc>
     </url>
     <url>
@@ -333,6 +342,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/github/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/go/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/go/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/google-reader/</loc>
@@ -495,6 +510,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/programming-language/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/protobuf/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/protobuf/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/python/</loc>

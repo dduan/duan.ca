@@ -5,7 +5,7 @@
         <link>https://duan.ca/tag/grpc/</link>
         <atom:link href="https://duan.ca/tag/grpc/feed.xml" rel="self" type="application/rss+xml" />
             <item>
-                <title>GRPC Status With Details in Swift</title>
+                <title>GRPC Status With Error Details in Swift</title>
                 <description>&lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;In GRPC, one could define an RPC that, in addition to taking a request message,
 and a response message, it also defines a custom message to represent errors:&lt;/p&gt;
@@ -88,7 +88,7 @@ do {
 &lt;p&gt;But, you, being a responsible client developer/tech lead/CTO, want to use the
 type-safe enum from the protobuf definition so that you can display the error in
 the right context, or perhaps localize it properly.&lt;/p&gt;
-&lt;p&gt;Here&#x27;s the big picture: there maybe many such custom RPC error types. Our
+&lt;p&gt;Here&#x27;s the big picture: there may be many such custom RPC error types. Our
 solution should be universal, and flexible to handle each of them. Enter
 interceptors! I mean, chances are, you know about them because you are working
 with gRPC. Let&#x27;s write one to get our type-safe status details. Starting with

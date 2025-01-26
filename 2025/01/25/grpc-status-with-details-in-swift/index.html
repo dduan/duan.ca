@@ -9,19 +9,19 @@
     <meta property="og:url" content="https://duan.ca/2025/01/25/grpc-status-with-details-in-swift/">
     <meta property="og:site_name" content="Daniel Duan's Website">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="GRPC Status With Details in Swift">
+    <meta property="og:title" content="GRPC Status With Error Details in Swift">
     <meta property="article:published_time" content="2025-01-25T19:53:30-08:00"><meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@daniel_duan">
     <meta name="twitter:creator" content="@Daniel Duan">
     <meta name="apple-mobile-web-app-title" content="Daniel Duan">
-    <title>GRPC Status With Details in Swift</title>
+    <title>GRPC Status With Error Details in Swift</title>
     <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
     <link rel="canonical" href="https://duan.ca/2025/01/25/grpc-status-with-details-in-swift/">
     <link rel="stylesheet" href="/styles.css"></link>
     <link rel="shortcut icon" href="/favicon.ico">
 </head>
 <body><article>
-    <h1>GRPC Status With Details in Swift</h1>
+    <h1>GRPC Status With Error Details in Swift</h1>
     <nav>
         <p class="metainfo article-meta">
             <a href="/articles">Daniel Duan</a>
@@ -110,7 +110,7 @@ do {
 <p>But, you, being a responsible client developer/tech lead/CTO, want to use the
 type-safe enum from the protobuf definition so that you can display the error in
 the right context, or perhaps localize it properly.</p>
-<p>Here's the big picture: there maybe many such custom RPC error types. Our
+<p>Here's the big picture: there may be many such custom RPC error types. Our
 solution should be universal, and flexible to handle each of them. Enter
 interceptors! I mean, chances are, you know about them because you are working
 with gRPC. Let's write one to get our type-safe status details. Starting with

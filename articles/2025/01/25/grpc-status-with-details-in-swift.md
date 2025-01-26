@@ -4,8 +4,8 @@ tag: Swift, GRPC, Protobuf, Go
 
 ## Introduction
 
-In GRPC, one could define an RPC that, in addition to taking a request message,
-and a response message, it also defines a custom message to represent errors:
+In GRPC, one could define an RPC that, in addition to the normal
+request-response messages, it also defines a custom message to represent errors:
 
 
 ```proto

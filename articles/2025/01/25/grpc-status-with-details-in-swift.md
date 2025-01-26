@@ -123,22 +123,22 @@ final class GRPCErrorDetailsInterceptor<Request, Response>:
 ```
 
 ... the "end" part contains the error status, as well as some trailing metadata.
-The metadat includes our status details under the key `grpc-status-details-bin`.
+The metadata includes our status details under the key `grpc-status-details-bin`.
 It's base64 encoded, so we'll need to decode it...
 
 
 ```swift
-    switch part {
-    case .end(var status, let headers):
-        guard
-            // grab the status details
-            let statusDetails = headers["grpc-status-details-bin"].first,
-            // decode to data
-            let data = Data(base64Encoded: statusDetails),
-        // ...
-    default:
-      context.receive(part)
-    }
+switch part {
+case .end(var status, let headers):
+    guard
+        // grab the status details
+        let statusDetails = headers["grpc-status-details-bin"].first,
+        // decode to data
+        let data = Data(base64Encoded: statusDetails),
+    // ...
+default:
+  context.receive(part)
+}
 ```
 
 At this point, with some experience with GRPC in Swift, you might think it's
@@ -154,24 +154,24 @@ In fact, the data is of the well-known type `Google_Rpc_Status`. And our stutus
 details, well, one its `.details` element. So:
 
 ```swift
-    switch part {
-    case .end(var status, let headers):
-        guard
-            let statusDetails = headers["grpc-status-details-bin"].first,
-            let data = Data(base64Encoded: statusDetails),
-            // the data, despite being under "grpc-status-details-bin", is
-            // indeed not the status detail, but the statu itself:
-            let googleStatus = try? Google_Rpc_Status(serializedData: data)
-            // and the `details` field contains the actual status detail:
-            let details = googleStatus.details.first,
-        else {
-            context.receive(part)
-            break
-        }
-        // ...
-    default:
-      context.receive(part)
+switch part {
+case .end(var status, let headers):
+    guard
+        let statusDetails = headers["grpc-status-details-bin"].first,
+        let data = Data(base64Encoded: statusDetails),
+        // the data, despite being under "grpc-status-details-bin", is
+        // indeed not the status detail, but the statu itself:
+        let googleStatus = try? Google_Rpc_Status(serializedData: data)
+        // and the `details` field contains the actual status detail:
+        let details = googleStatus.details.first,
+    else {
+        context.receive(part)
+        break
     }
+    // ...
+default:
+  context.receive(part)
+}
 ```
 
 ... `details` is of type `Google_Protobuf_Any`. It is indeed a payload with the
@@ -192,24 +192,24 @@ public var cause: Error? { ... }
 It seems like a perfect vessel for our status details!
 
 ```swift
-    switch part {
-    case .end(var status, let headers):
-        guard
-            let statusDetails = headers["grpc-status-details-bin"].first,
-            let data = Data(base64Encoded: statusDetails),
-            let googleStatus = try? Google_Rpc_Status(serializedData: data)
-            let details = googleStatus.details.first,
-        else {
-            context.receive(part)
-            break
-        }
-        // isn't it convenient that we declared `status` as a `var` ealier 😉?
-        status.cause = details
-        // forward to the caller, yay!
-        context.receive(.end(status, headers))
-    default:
-      context.receive(part)
+switch part {
+case .end(var status, let headers):
+    guard
+        let statusDetails = headers["grpc-status-details-bin"].first,
+        let data = Data(base64Encoded: statusDetails),
+        let googleStatus = try? Google_Rpc_Status(serializedData: data)
+        let details = googleStatus.details.first,
+    else {
+        context.receive(part)
+        break
     }
+    // isn't it convenient that we declared `status` as a `var` ealier 😉?
+    status.cause = details
+    // forward to the caller, yay!
+    context.receive(.end(status, headers))
+default:
+  context.receive(part)
+}
 ```
 
 Now our client will get the details of type `Google_Protobuf_Any` from the

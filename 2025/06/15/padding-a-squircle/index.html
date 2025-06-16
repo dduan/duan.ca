@@ -37,13 +37,13 @@
 <p>In FreeCAD, we want to include these <strong>AB</strong> lines as guides. They will define both the straight lines on the side, as well as the correct space for the curves. The guide lines and the sides will form a cross shape. Make sure everything is symmetrical, and the <strong>AB</strong> lines all have the same size.</p>
 <p><img src="/assets/2025/06/squircle-02-sketch-cross-shape.png" alt="Screenshot of the FreeCAD sketch of a cross outline" /></p>
 <p>Note that the <strong>AB</strong> lines are in construction mode represented by dashes.</p>
-<p>Exit the Sketch. Switch to the Curves workbench, and select 2 of the 4 concrete edges from the sketch. Use the Blend Curve option from the work brench. And you'll get some funky looking curves connecting the straight lines, and it's represented by a &quot;Blend_Curve&quot; in the object tree.</p>
+<p>Exit the Sketch. Switch to the Curves workbench, and select 2 of the 4 concrete edges from the sketch. Use the Blend Curve option from the workbench. And you'll get some funky looking curves connecting the straight lines, and it's represented by a &quot;Blend_Curve&quot; in the object tree.</p>
 <p><img src="/assets/2025/06/squircle-03-curve-unfixed.png" alt="Screenshot of adding the blend curve" /></p>
 <p>Select the &quot;Blend_Curve&quot; in the tree and tweak its Data fields.</p>
 <ul>
 <li>Set <code>Auto Scale</code> to <code>true</code>.</li>
 <li>Set <code>Parameter</code> to <code>0mm</code> for both edges.</li>
-<li>The new curve should smoothes connect with the ends of the sides that's close to the other straight side. If not, set <code>Reverse</code> to <code>true</code>.</li>
+<li>The new curve should smoothely connect with the ends of the sides that's close to the other straight side. If not, set <code>Reverse</code> to <code>true</code>.</li>
 <li>Most importantly, set <code>Continuity</code> for both edges to <code>G3</code>.</li>
 </ul>
 <p><img src="/assets/2025/06/squircle-04-curve-fixed.png" alt="Screenshot of fixed blend curve" /></p>

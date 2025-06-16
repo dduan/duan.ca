@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2025/06/15/padding-a-squircle/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Padding a Squircle in FreeCAD 1.0">
+    <meta property="article:published_time" content="2025-06-15T16:00:00-08:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Padding a Squircle in FreeCAD 1.0</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2025/06/15/padding-a-squircle/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>Padding a Squircle in FreeCAD 1.0</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles">Daniel Duan</a>
+            ·
+            <time datetime="2025-06-15T16:00:00-08:00" itemProp="datePublished">2025-06-15</time>
+        </p>
+    </nav><p><em>I bought a 3D printer, and, as a result, got into 3D modeling recently. I'm still super new to everything. From experience, this means I should write down things I'm learning. The beginner's perspective is valuable to other beginners!</em></p>
+<p>A <a href="https://en.wikipedia.org/wiki/Squircle">squircle</a> is a square who's corners are replaced by curves with g3 continuity, which can be thought of as <em>really hecking smooth</em> curves where the derivatives of the curve must also be smooth. In <a href="https://www.freecad.org/">FreeCAD</a> 1.0.x, it's not immediately obvious how to sketch such a shape, in order to create solid shapes out of it. With the help of ChatGPT, and the internet, I figured out a somewhat cohesive way to do this recently. Now I need to write it down lest I forget!</p>
+<p><img src="/assets/2025/06/squircle-00-finished.png" alt="Finished 3D shape with a squircle front profile" /></p>
+<p>Our goal is to have a sketch of a squircle that we can use to pad or pocket to create 3D shapes. In the sketch, we want to first create the sides of the squire that's straight, and connect them with the g3 curve, which can be done via the Curves workbench.</p>
+<p>But first, let's break down the squircle's geometry a bit. A squircel is both a square and a circle. Each side of the squire has a straight line, it ends at a specific point, let's call it <strong>A</strong>, where the curve of the circle begins. From this point, if you draw a line perpendicluar to the straight part, and repeatly draw it on every such point, the new lines will intercect at point <strong>B</strong>. The length of the line <strong>AB</strong> is the <em>radius</em> of the squircle.</p>
+<p><img src="/assets/2025/06/squircle-01-radius.png" alt="Image illustrating the radius of a squircle" /></p>
+<p>In FreeCAD, we want to include these <strong>AB</strong> lines as guides. They will define both the straight lines on the side, as well as the correct space for the curves. The guide lines and the sides will form a cross shape. Make sure everything is symmetrical, and the <strong>AB</strong> lines all have the same size.</p>
+<p><img src="/assets/2025/06/squircle-02-sketch-cross-shape.png" alt="Screenshot of the FreeCAD sketch of a cross outline" /></p>
+<p>Note that the <strong>AB</strong> lines are in construction mode represented by dashes.</p>
+<p>Exit the Sketch. Switch to the Curves workbench, and select 2 of the 4 concrete edges from the sketch. Use the Blend Curve option from the work brench. And you'll get some funky looking curves connecting the straight lines, and it's represented by a &quot;Blend_Curve&quot; in the object tree.</p>
+<p><img src="/assets/2025/06/squircle-03-curve-unfixed.png" alt="Screenshot of adding the blend curve" /></p>
+<p>Select the &quot;Blend_Curve&quot; in the tree and tweak its Data fields.</p>
+<ul>
+<li>Set <code>Auto Scale</code> to <code>true</code>.</li>
+<li>Set <code>Parameter</code> to <code>0mm</code> for both edges.</li>
+<li>The new curve should smoothes connect with the ends of the sides that's close to the other straight side. If not, set <code>Reverse</code> to <code>true</code>.</li>
+<li>Most importantly, set <code>Continuity</code> for both edges to <code>G3</code>.</li>
+</ul>
+<p><img src="/assets/2025/06/squircle-04-curve-fixed.png" alt="Screenshot of fixed blend curve" /></p>
+<p>That completes 1 of the 4 corners. Repeat for the other 3. And now you have a 2D squircle!</p>
+<p>There should be 4 &quot;Blend_Curve&quot;s in the object tree, as well as the original sketch.</p>
+<p>Now things get a little convoluted. Although things on screen look like a closed wire, we can't use it to create a 3D shape for 2 reasons:</p>
+<ol>
+<li>the &quot;Blend_Curve&quot;s aren't part of any body.</li>
+<li>the curves and the straights don't belong to the same geometry.</li>
+</ol>
+<p>To fix problem #2, we'll switch to the Draft workbench. Select all 4 blend curves in the object tree, and the sketch. You should see the entire wire highlighted in a uniform color. Then from the menu choose <code>Modification</code> -&gt; <code>Upgrade</code>. This will result in all the &quot;Blend_Curve&quot;s disappearing in the object tree, and a new &quot;Wire&quot; object.</p>
+<p>We're almost there! This wire can be referred to in other bodies as a shape binder. Switch back to the Part Design workbench. Activate a body (existing or new), select the wire in the object tree, and create a sub-object binder.</p>
+<p>At this point, you can hide the Wire, and you should see the binder on screen. You should be able to select the edges from it, all 8 of them! After that, you can use the Pad tool to create a 3D shape. And that's it!</p>
+<hr />
+<p>Obviously, a squircle is the simpliest shape to incorporate a g3 continous curve. But once we have the curve as a wire, anything is possible in FreeCAD.</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/freecad-3d-printing/">FreeCAD,3D Printing</a>
+    </p>
+</footer></body>
+</html>

@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2025/06/15/padding-a-squircle/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2025/01/25/grpc-status-with-details-in-swift/</loc>
     </url>
     <url>
@@ -187,6 +190,8 @@
         <loc>https://duan.ca/2012/10/31/keep-git-social/</loc>
     </url>
     <url>
+        <loc>https://duan.ca//</loc>
+    </url><url>
         <loc>https://duan.ca/DrString/privacy/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/</loc>
@@ -196,8 +201,6 @@
         <loc>https://duan.ca/projects/</loc>
     </url><url>
         <loc>https://duan.ca/Markra/</loc>
-    </url><url>
-        <loc>https://duan.ca//</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/ai/</loc>
@@ -306,6 +309,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/foundation/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/freecad-3d-printing/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/freecad-3d-printing/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/gpt/</loc>

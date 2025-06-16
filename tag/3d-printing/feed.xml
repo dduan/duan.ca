@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Daniel Duan's Articles About FreeCAD,3D Printing</title>
-        <link>https://duan.ca/tag/freecad-3d-printing/</link>
-        <atom:link href="https://duan.ca/tag/freecad-3d-printing/feed.xml" rel="self" type="application/rss+xml" />
+        <title>Daniel Duan's Articles About 3D Printing</title>
+        <link>https://duan.ca/tag/3d-printing/</link>
+        <atom:link href="https://duan.ca/tag/3d-printing/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Padding a Squircle in FreeCAD 1.0</title>
                 <description>&lt;p&gt;&lt;em&gt;I bought a 3D printer, and, as a result, got into 3D modeling recently. I&#x27;m still super new to everything. From experience, this means I should write down things I&#x27;m learning. The beginner&#x27;s perspective is valuable to other beginners!&lt;/em&gt;&lt;/p&gt;

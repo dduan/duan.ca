@@ -203,6 +203,12 @@
         <loc>https://duan.ca/Markra/</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/3d-printing/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/3d-printing/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/ai/</loc>
     </url>
     <url>
@@ -311,10 +317,10 @@
         <loc>https://duan.ca/tag/foundation/feed.xml</loc>
     </url>
     <url>
-        <loc>https://duan.ca/tag/freecad-3d-printing/</loc>
+        <loc>https://duan.ca/tag/freecad/</loc>
     </url>
     <url>
-        <loc>https://duan.ca/tag/freecad-3d-printing/feed.xml</loc>
+        <loc>https://duan.ca/tag/freecad/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/gpt/</loc>

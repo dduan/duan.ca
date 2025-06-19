@@ -46,12 +46,11 @@ Now things get a little convoluted. Although things on screen look like a closed
 1. the "Blend_Curve"s aren't part of any body.
 2. the curves and the straights don't belong to the same geometry.
 
-To fix problem #2, we'll switch to the Draft workbench. Select all 4 blend curves in the object tree, and the sketch. You should see the entire wire highlighted in a uniform color. Then from the menu choose `Modification` -> `Upgrade`. This will result in all the "Blend_Curve"s disappearing in the object tree, and a new "Wire" object.
+There's a easy way to fix both problems, thanks to the fact that multiple shapes in FreeCAD 1.0 can comine into a single sub-objects shape binder.
 
+Switch back to the Part Design workbench. Activate the body you want the final 3D shape in (can be an existing or new body). Select all 4 blend curves in the object tree, and the sketch. You should see the entire wire highlighted in a uniform color. Then use the sub-objects shape binder tool, which gets you a single binder in the tree of the active body.
 
-We're almost there! This wire can be referred to in other bodies as a shape binder. Switch back to the Part Design workbench. Activate a body (existing or new), select the wire in the object tree, and create a sub-object binder.
-
-At this point, you can hide the Wire, and you should see the binder on screen. You should be able to select the edges from it, all 8 of them! After that, you can use the Pad tool to create a 3D shape. And that's it!
+You should see the binder on screen. Hide other things if they are distracting you. Now, select the edges in the binder -- all 8 of them! After that, you can use the Pad tool to create a 3D shape. And that's it!
 
 ---
 

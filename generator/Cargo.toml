@@ -7,7 +7,7 @@ edition = "2018"
 [dependencies]
 askama = "=0.10"
 chrono = "=0.4"
-comrak = { version = "0.14", default-features = false }
+comrak = { version = "0.17", default-features = false }
 regex = "=1.6"
 slug = "=0.1"
 walkdir = "=2.3"

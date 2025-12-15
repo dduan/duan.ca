@@ -5,12 +5,12 @@
         <link>https://duan.ca/tag/toml/</link>
         <atom:link href="https://duan.ca/tag/toml/feed.xml" rel="self" type="application/rss+xml" />
             <item>
-                <title>TOMLDecoder 0.4 is 100% Faster</title>
+                <title>TOMLDecoder 0.4 is 800% Faster</title>
                 <description>&lt;p&gt;I just released version 0.4.1 of TOMLDecoder,
 a TOML 1.0 parser,
 and &lt;a href=&quot;https://developer.apple.com/documentation/swift/codable&quot;&gt;decoder&lt;/a&gt; implemented in pure Swift.
 When decoding a TOMLDocument such as &lt;a href=&quot;https://github.com/dduan/TOMLDecoder/blob/cea8f0bee33f37e0fcc33b566a742485c71196e7/Sources/Resources/fixtures/twitter.toml&quot;&gt;this twitter payload&lt;/a&gt;,
-TOMLDecoder 0.4.1 is roughly 100% faster than 0.3.x.
+TOMLDecoder 0.4.1 is roughly 800% faster by wall clock time than 0.3.x.
 In this post, I’ll discuss how this was achieved.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;tl;dr: among other things,
 the gains comes from making the parsing algorithm lazier,

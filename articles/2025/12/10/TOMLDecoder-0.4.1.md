@@ -218,13 +218,12 @@ func parse(bytes: ${byte_type}) throws -> TOMLTable {
 ... and there's a single place that checks for the OS at runtime:
 
 ```swift
-let source: String = // TOML string
-    if #available(iOS 26, macOS 26, watchOS 26, tvOS 26, visionOS 26, *) {
-        let bytes = source.utf8Span.span
-        try parse(bytes: bytes)
-    } else {
-        try source.withUTF8 { try parse(bytes: $0) }
-    }
+let source: String = ... // TOML string
+if #available(iOS 26, macOS 26, watchOS 26, tvOS 26, visionOS 26, *) {
+    let bytes = source.utf8Span.span
+    try parse(bytes: bytes)
+} else {
+    try source.withUTF8 { try parse(bytes: $0) }
 }
 ```
 

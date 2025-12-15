@@ -1,4 +1,4 @@
-# TOMLDecoder 0.4 is 100% Faster
+# TOMLDecoder 0.4 is 800% Faster
 2025-12-10T17:44:34-08:00
 tag: Swift, TOML, TOMLDecoder, OSS, Performance
 
@@ -6,7 +6,7 @@ I just released version 0.4.1 of TOMLDecoder,
 a TOML 1.0 parser,
 and [decoder](https://developer.apple.com/documentation/swift/codable) implemented in pure Swift. 
 When decoding a TOMLDocument such as [this twitter payload](https://github.com/dduan/TOMLDecoder/blob/cea8f0bee33f37e0fcc33b566a742485c71196e7/Sources/Resources/fixtures/twitter.toml),
-TOMLDecoder 0.4.1 is roughly 100% faster than 0.3.x.
+TOMLDecoder 0.4.1 is roughly 800% faster by wall clock time than 0.3.x.
 In this post, I’ll discuss how this was achieved.
 
 _tl;dr: among other things,

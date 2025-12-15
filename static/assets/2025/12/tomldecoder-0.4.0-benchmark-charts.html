@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+        }
+        .charts-row {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .chart-container {
+            width: 100%;
+        }
+        canvas {
+            max-height: 400px;
+        }
+        .chart-container h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #000 !important;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #232323;
+            }
+            .chart-container h3 {
+                color: #fff !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="charts-row">
+        <div class="chart-container">
+            <h3>Wall Clock Time</h3>
+            <canvas id="chart_wallclock"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3>Instructions</h3>
+            <canvas id="chart_instructions"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3>Retain Count</h3>
+            <canvas id="chart_retains"></canvas>
+        </div>
+    </div>
+    <script>
+        new Chart(document.getElementById('chart_wallclock'), {
+            type: 'line',
+            data: {
+                labels: ["0.3.x", "pre-span", "0.4.1"],
+                datasets: [
+                    {"label": "decode twitter.toml", "data": [109.641728, 30.3104, 13.197312], "borderColor": "rgba(54, 162, 235, 1)", "backgroundColor": "rgba(54, 162, 235, 0.2)", "borderWidth": 2, "pointRadius": 5, "pointHoverRadius": 7},
+                    {"label": "parse twitter.toml", "data": [111.345664, 22.921216, 6.561792], "borderColor": "rgba(255, 99, 132, 1)", "backgroundColor": "rgba(255, 99, 132, 0.2)", "borderWidth": 2, "pointRadius": 5, "pointHoverRadius": 7}
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Time (ms)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y.toFixed(3) + ' ms';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('chart_instructions'), {
+            type: 'line',
+            data: {
+                labels: ["0.3.x", "pre-span", "0.4.1"],
+                datasets: [
+                    {"label": "decode twitter.toml", "data": [2016411648, 552075264, 240779264], "borderColor": "rgba(54, 162, 235, 1)", "backgroundColor": "rgba(54, 162, 235, 0.2)", "borderWidth": 2, "pointRadius": 5, "pointHoverRadius": 7},
+                    {"label": "parse twitter.toml", "data": [1993342976, 425984000, 123600896], "borderColor": "rgba(255, 99, 132, 1)", "backgroundColor": "rgba(255, 99, 132, 0.2)", "borderWidth": 2, "pointRadius": 5, "pointHoverRadius": 7}
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Instructions'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y.toLocaleString() + ' instructions';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('chart_retains'), {
+            type: 'line',
+            data: {
+                labels: ["0.3.x", "pre-span", "0.4.1"],
+                datasets: [
+                    {"label": "decode twitter.toml", "data": [3575808, 1260544, 143616], "borderColor": "rgba(54, 162, 235, 1)", "backgroundColor": "rgba(54, 162, 235, 0.2)", "borderWidth": 2, "pointRadius": 5, "pointHoverRadius": 7},
+                    {"label": "parse twitter.toml", "data": [3538944, 1193984, 72896], "borderColor": "rgba(255, 99, 132, 1)", "backgroundColor": "rgba(255, 99, 132, 0.2)", "borderWidth": 2, "pointRadius": 5, "pointHoverRadius": 7}
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Retain Count'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y.toLocaleString() + ' retains';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        // Send height to parent window after charts are rendered
+        function sendHeight() {
+            const height = document.body.scrollHeight;
+            window.parent.postMessage({ type: 'resize', height: height }, '*');
+        }
+
+        // Send height after charts are fully rendered
+        setTimeout(sendHeight, 100);
+        window.addEventListener('resize', sendHeight);
+    </script>
+</body>
+</html>

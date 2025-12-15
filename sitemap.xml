@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2025/12/10/TOMLDecoder-0.4.1/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2025/06/15/padding-a-squircle/</loc>
     </url>
     <url>
@@ -192,13 +195,13 @@
     <url>
         <loc>https://duan.ca//</loc>
     </url><url>
-        <loc>https://duan.ca/DrString/privacy/</loc>
-    </url><url>
-        <loc>https://duan.ca/DrString/</loc>
+        <loc>https://duan.ca/projects/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/release-notes/</loc>
     </url><url>
-        <loc>https://duan.ca/projects/</loc>
+        <loc>https://duan.ca/DrString/privacy/</loc>
+    </url><url>
+        <loc>https://duan.ca/DrString/</loc>
     </url><url>
         <loc>https://duan.ca/Markra/</loc>
     </url>
@@ -521,6 +524,12 @@
         <loc>https://duan.ca/tag/pathos/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/performance/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/performance/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/programming-language/</loc>
     </url>
     <url>
@@ -609,6 +618,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/toml/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/tomldecoder/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/tomldecoder/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/tui/</loc>

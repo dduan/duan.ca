@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
-        <title>Daniel Duan's Articles About OSS</title>
-        <link>https://duan.ca/tag/oss/</link>
-        <atom:link href="https://duan.ca/tag/oss/feed.xml" rel="self" type="application/rss+xml" />
+        <title>Daniel Duan's Articles About TOMLDecoder</title>
+        <link>https://duan.ca/tag/tomldecoder/</link>
+        <atom:link href="https://duan.ca/tag/tomldecoder/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>TOMLDecoder 0.4 is 100% Faster</title>
                 <description>&lt;p&gt;I just released version 0.4.1 of TOMLDecoder,
@@ -224,25 +224,6 @@ That&#x27;s exciting.&lt;/p&gt;
                 <pubDate>Wed, 10 Dec 2025 17:44:34 -0800</pubDate>
                 <link>https://duan.ca/2025/12/10/TOMLDecoder-0.4.1/</link>
                 <guid isPermaLink="true">https://duan.ca/2025/12/10/TOMLDecoder-0.4.1/</guid>
-            </item>
-            <item>
-                <title>Markra 1.0</title>
-                <description>&lt;p&gt;I&#x27;ve never been patient enough to learn the JIRA plain-text syntax, depite being
-a frequent user throughout the years. So a while ago I wrote this little utility
-that lets me compose JIRA ticket in Markdown. Some thoughts were put into
-whether this should be an OSS and free (as in beer) app, or something
-I distribute via the Mac App Store. Ultimately, the first option prevailed. So,
-without further adiue, here&#x27;s the repo for &lt;a href=&quot;https://github.com/dduan/Markra&quot;&gt;Markra&lt;/a&gt; with &lt;a href=&quot;https://github.com/dduan/Markra/releases/tag/1.0&quot;&gt;version 1.0 macOS
-app download in the release page&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2020/11/markra-screenshot.png&quot; alt=&quot;A Marka macOS app screenshot&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;As far as I&#x27;m concerned, the app is pretty much done. And its feature set is
-small and self-explanatory. So I don&#x27;t expect more releases other than minor
-bug fix in the future.&lt;/p&gt;
-&lt;p&gt;I hope some find it as useful as I do.&lt;/p&gt;
-</description>
-                <pubDate>Sun, 22 Nov 2020 12:53:52 -0800</pubDate>
-                <link>https://duan.ca/2020/11/22/marka/</link>
-                <guid isPermaLink="true">https://duan.ca/2020/11/22/marka/</guid>
             </item>
     </channel>
 </rss>

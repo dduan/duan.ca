@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2025/12/10/TOMLDecoder-0.4.1/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="TOMLDecoder 0.4 is 100% Faster">
+    <meta property="article:published_time" content="2025-12-10T17:44:34-08:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>TOMLDecoder 0.4 is 100% Faster</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2025/12/10/TOMLDecoder-0.4.1/">
+    <link rel="stylesheet" href="/styles.css"></link>
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body><article>
+    <h1>TOMLDecoder 0.4 is 100% Faster</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles">Daniel Duan</a>
+            ·
+            <time datetime="2025-12-10T17:44:34-08:00" itemProp="datePublished">2025-12-10</time>
+        </p>
+    </nav><p>I just released version 0.4.1 of TOMLDecoder,
+a TOML 1.0 parser,
+and <a href="https://developer.apple.com/documentation/swift/codable">decoder</a> implemented in pure Swift.
+When decoding a TOMLDocument such as <a href="https://github.com/dduan/TOMLDecoder/blob/cea8f0bee33f37e0fcc33b566a742485c71196e7/Sources/Resources/fixtures/twitter.toml">this twitter payload</a>,
+TOMLDecoder 0.4.1 is roughly 100% faster than 0.3.x.
+In this post, I’ll discuss how this was achieved.</p>
+<p><em>tl;dr: among other things,
+the gains comes from making the parsing algorithm lazier,
+and eliminating overheads from bound checking when accessing substrings.</em></p>
+<h2>The Benchmark</h2>
+<p>TOMLDecoder now includes benchmarks implemented with <a href="https://github.com/ordo-one/package-benchmark">ordo-one/package-benchmark</a>.
+I plotted the median from the aforementioned benchmark results below.
+Each chart includes data points for deserializing the TOML document,
+and decoding it on top.
+(Unsurprisingly, decoding takes a bit longer.)</p>
+<p>The results show
+wall clock time,
+CPU instructions,
+as well as retain count all trending down significantly.</p>
+<p>In addition to the before and after,
+there's an extra data point measured specifically prior to adopting Swift's <code>Span</code>.
+More on that later.</p>
+<iframe id="benchmark-iframe" src="/assets/2025/12/tomldecoder-0.4.0-benchmark-charts.html" width="100%" height="1200" frameborder="0" style="border: none; display: block; margin: 20px 0; min-height: 1200px;"></iframe>
+<script>
+window.addEventListener('message', function(event) {
+    if (event.data.type === 'resize') {
+        const iframe = document.getElementById('benchmark-iframe');
+        if (iframe) {
+            iframe.style.height = event.data.height + 'px';
+            iframe.style.transition = 'none';
+        }
+    }
+});
+</script>
+<h2>How to make a parser go fast</h2>
+<h3>Improving data structure and algorithms</h3>
+<p>... also known as cheating.
+Yes, really.</p>
+<p>In 0.3.x, <code>TOMLDecoder</code> behaves like <a href="https://developer.apple.com/documentation/foundation/jsonserialization">JSONSerialization</a>.
+When you ask it to decode TOML data,
+with <code>TOMLDecoder.tomlTable(from:)</code>
+it goes through the entire document,
+creates matching container structures within it.
+For each TOML table, it creates a <code>[String: Any]</code>,
+for each TOML array, it creates a <code>[Any]</code>.
+When a table contains an array,
+for example,
+a corresponding <code>[&quot;key&quot;: [...]]</code> entry is created to match.
+Along the way, the parser also validates the leaf types,
+so things like a ill-formed date causes an error to be thrown.
+The end result is a <code>[String: Any]</code> in which
+everything is known to be valid.</p>
+<p>A number of things are slow in this process:</p>
+<ul>
+<li>The frequent creation and subsequent usage of intermediary Swift arrays and dictionaries require heap allocations.</li>
+<li>Validating every leaf value takes time.</li>
+<li>Retrieved values are <code>Any</code>s, so you have to cast it to the expected type to consume them.</li>
+</ul>
+<p>TOMLDecoder 0.4 does away with all of that.</p>
+<p>To represent the containers,
+and leaf values,
+0.4 introduces some light-weight structs,
+These structs don't manage the actual memory used to store their contents.
+As the parser work through the bytes of a TOML document,
+it creates these light weight data types to record the shape of the document,
+as well as the byte-offsets of the leaf values.
+These intermediary data are stored in a centralized location
+to avoid unnecessary heap allocations.</p>
+<p>Here's what I mean by &quot;cheating&quot;:
+during this phase,
+the parser doesn't do much validation of the leaf values.
+What it does is more akin to &quot;lexing&quot;,
+it finds the tokens that could represent a leaf value,
+and remembers where they are.
+No work is done to actually validate and create the leaf values.</p>
+<p>To retrieve any values from the result,
+you must state what type is expected:</p>
+<pre><code class="language-swift">// a valid TOML document is always a table at the root level
+let serverIP = try TOMLTable(source: tomlString)
+	.string(forKey: &quot;ip&quot;) // validate this token as a `String`
+</code></pre>
+<p>This is an API change.
+It delays the validation work,
+and helps avoid conversions from <code>Any</code>.
+If you only need one field,
+no validation is necessary on the rest of the leaf values in the entire document.</p>
+<p>Swift's decoding APIs ask for typed access:
+if your <code>Codable</code> type has a <code>Date</code> field,
+you ask the container for a <code>Date</code>,
+if the matching value at the spot is of a different type,
+an error is thrown.
+So the more efficient access pattern benefits the decoding process as well.</p>
+<h3>Avoiding bound checks</h3>
+<p>A major source of slowness in TOMLDecoder 0.3.x is the cost of bound checks in Swift.
+The parser holds a reference to the original string,
+and hands <code>Substring</code>s to small functions to descend on.
+A typical piece of the parser might look like this:</p>
+<pre><code class="language-swift">func skipWhitespaces(_ text: inout Substring) {
+    let bytes = text.utf8
+    var i = bytes.startIndex
+    while i &lt; bytes.endIndex {
+        if !isWhitespace(bytes[i]) { // bound checks!
+            break
+        }
+        bytes.formIndex(after: &amp;i)
+    }
+    text = Substring(bytes[i...])
+}
+</code></pre>
+<p>To avoid out-of-bound access,
+Swift inserts logic that checks the validity of the index
+for every subscript access of the string's buffer.
+A parser does a whole lot of that.
+The cost of these bound checks seriously adds up.</p>
+<p>Since the release of TOMLDecoder 0.3.0,
+Swift has gained a whole set of features that led to the introduction of <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0447-span-access-shared-contiguous-storage.md">Span</a>.
+<code>Span</code> is built on compile-time lifetime checks.
+These checks guarantee the safety when accessing its content.
+The same function updated for <code>Span</code> looks extremely similar to the original:</p>
+<pre><code class="language-swift">func skipWhitespace(
+    bytes: Span&lt;UTF8.CodeUnit&gt;, // aka Span&lt;UInt8&gt;
+    remainingBytes: inout Range&lt;Int&gt;,
+) {
+    var i = remainingBytes.lowerBound
+    while i &lt; bytes.count {
+        if !isWhitespace(bytes[i]) { break }
+        i += 1
+    }
+    remainingBytes = i ..&lt; remainingBytes.upperBound
+}
+</code></pre>
+<p>Here,
+the subscript access of <code>bytes</code> does not incur a bound check!
+This created significant performance gains as shown in the benchmark results.</p>
+<p><em>Here's the kicker</em>.
+The bound checks are eliminated
+because the compiler is confident that the access is safe by construction.
+If you make a mistake that would lead to unsafe access,
+Swift will refuse to compile your code.
+But <code>Span</code> is a language feature that requires new language runtime.
+You cannot use it on older operating systems.
+There's other, older ways to avoid bound checks,
+using <code>UnsafeBufferPointer</code>s.
+The problem of doing so is that you are responsible for ensuring that the access is safe.
+In particular, the point of access must occur in a valid scope for the pointer.
+A piece of parser using such API may look like this:</p>
+<pre><code class="language-swift">func skipWhitespace(
+    bytes: UnsafeBufferPointer&lt;UTF8.CodeUnit&gt;,
+    remainingBytes: inout Range&lt;Int&gt;,
+) {
+    var i = remainingBytes.lowerBound
+    while i &lt; bytes.count {
+        if !isWhitespace(bytes[i]) { break }
+        i += 1
+    }
+    remainingBytes = i ..&lt; remainingBytes.upperBound
+}
+</code></pre>
+<p>But WAIT!  This code using the buffer pointer look extremely similar to the <code>Span</code> version!
+And if you think carefully,
+the requirement for maintaining valid scope for the <code>UnsafeBufferPointer</code> is already <em>enforced</em> for any <code>Span</code>s, syntactically!</p>
+<p>Enter <a href="https://nshipster.com/swift-gyb/">gyb</a>. A script that Swift uses to generate repetitive code in the complier.
+In TOMLDecoder 0.4,
+the parser implementation uses it to generate 2 version of the same set of parsing logic:</p>
+<pre><code class="language-swift">configs = [
+    (&quot;Span&lt;UInt8&gt;&quot;, &quot;@available(iOS 26, macOS 26, watchOS 26, tvOS 26, visionOS 26, *)&quot;),
+    (&quot;UnsafeBufferPointer&lt;UInt8&gt;&quot;, &quot;@available(iOS 13, macOS 10.15, watchOS 6, tvOS 13, visionOS 1, *)&quot;),
+]
+}%
+% for byte_type, availability in configs:
+${availability}
+func parse(bytes: ${byte_type}) throws -&gt; TOMLTable {
+	// same code
+}
+% end
+</code></pre>
+<p>... and there's a single place that checks for the OS at runtime:</p>
+<pre><code class="language-swift">let source: String = // TOML string
+    if #available(iOS 26, macOS 26, watchOS 26, tvOS 26, visionOS 26, *) {
+        let bytes = source.utf8Span.span
+        try parse(bytes: bytes)
+    } else {
+        try source.withUTF8 { try parse(bytes: $0) }
+    }
+}
+</code></pre>
+<p>The beauty here,
+is that the compiler does all the work to ensure the access to the <code>Span</code>
+as well as the buffer pointer are safe,
+because the logic that does the accessing are identical thanks to <code>gyb</code>.</p>
+<h2>Conclusion</h2>
+<p>In reality, there are a ton of other optimizations applied in TOMLDecoder 0.4.
+For example,
+instead of doing dictionary look ups,
+looking up things from a TOMLDocument actually involves a linear search.
+I know, I know, this goes against what we were taught in CS.
+But in modern computers,
+and for typical sizes of TOML documents,
+a linear search is often faster that computing a hash value,
+and the subsequent lookups.</p>
+<p>As part of the release,
+the project also gained a bunch of infra improvements.</p>
+<ul>
+<li>It has a <a href="https://www.swift.org/documentation/docc/">DocC</a>-based <a href="https://dduan.github.io/TOMLDecoder/main/documentation/tomldecoder/">documentation site</a>.</li>
+<li>The entirety of the <a href="https://github.com/toml-lang/toml-test">official test suite</a> is now programmatically imported as unit tests.</li>
+<li>The source code style is now enforced by <a href="https://github.com/nicklockwood/SwiftFormat">swiftformat</a>.</li>
+<li>Platform checks are more comprehensive and modern on CI.</li>
+<li>Benchmarks are now modernized with <a href="https://github.com/ordo-one/package-benchmark">ordo-one/package-benchmark</a></li>
+</ul>
+<p>I think of this release as a preparation for a eventual 1.0 release,
+which will support the <a href="https://forums.swift.org/t/the-future-of-serialization-deserialization-apis/78585/171">new deserialization APIs from Swift</a>.</p>
+<p>Even through I went through some optimizations for speed in this post,
+I still have a bunch of ideas I want to try to squeeze out more performance gains.
+That's exciting.</p>
+
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/toml/">TOML</a>
+        ·
+        <a href="/tag/tomldecoder/">TOMLDecoder</a>
+        ·
+        <a href="/tag/oss/">OSS</a>
+        ·
+        <a href="/tag/performance/">Performance</a>
+    </p>
+</footer></body>
+</html>

@@ -50,7 +50,6 @@ pub struct GlobalFeedTemplate<'a> {
 #[template(path = "tag.html")]
 pub struct TagArticleListTemplate<'a> {
     pub meta: RenderedMetadata,
-    pub base_url: &'a str,
     pub tag: RenderedTag,
     pub items: &'a [ArticleTemplate<'a>],
 }
@@ -58,7 +57,6 @@ pub struct TagArticleListTemplate<'a> {
 #[derive(Template)]
 #[template(path = "tag-feed.xml")]
 pub struct TagFeedTemplate<'a> {
-    pub meta: RenderedMetadata,
     pub base_url: &'a str,
     pub tag: RenderedTag,
     pub items: &'a [ArticleTemplate<'a>],

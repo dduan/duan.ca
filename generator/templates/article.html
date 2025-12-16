@@ -6,15 +6,30 @@
 
 {% block title %}{{meta.title}}{% endblock title %}
 
-{% block content %}<article>
+{% block content %}<article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="{{meta.title}}">
+    <meta itemprop="datePublished" content="{{rfc3339_date}}">
+    <meta itemprop="dateModified" content="{{rfc3339_date}}">
+    <link itemprop="url" href="{{meta.permalink|safe}}/">
+    <link itemprop="mainEntityOfPage" href="{{meta.permalink|safe}}/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>{% for tag in tags %}
+    <meta itemprop="keywords" content="{{tag.name}}">{% endfor %}
     <h1>{{meta.title}}</h1>
     <nav>
         <p class="metainfo article-meta">
-            <a href="/articles">Daniel Duan</a>
+            <a href="/articles/">Daniel Duan</a>
             ·
-            <time datetime="{{rfc3339_date}}" itemProp="datePublished">{{date}}</time>
+            <time datetime="{{rfc3339_date}}">{{date}}</time>
         </p>
-    </nav>{{content|safe}}
+    </nav>
+    <div itemprop="articleBody">{{content|safe}}</div>
 </article>
 <footer>
     <hr />

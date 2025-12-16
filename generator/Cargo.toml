@@ -5,7 +5,7 @@ authors = ["Daniel Duan <daniel@duan.ca>"]
 edition = "2018"
 
 [dependencies]
-askama = "=0.10"
+askama = "=0.14"
 chrono = "=0.4"
 comrak = { version = "0.14", default-features = false }
 regex = "=1.6"

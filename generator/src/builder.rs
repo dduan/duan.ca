@@ -121,7 +121,6 @@ fn build_tag_list(
             permalink: format!("{}/tag/{}", base_url, slug),
             title: format!("Daniel Duan's Articles About {}", tag),
         },
-        base_url,
         tag: RenderedTag::from_name(tag),
         items: article_templates,
     };
@@ -142,10 +141,6 @@ fn build_tag_feed(
 ) -> Result<(), Box<dyn Error>> {
     let slug = slug::slugify(tag);
     let template = TagFeedTemplate {
-        meta: RenderedMetadata {
-            permalink: format!("{}/tag/{}/feed.xml", base_url, slug),
-            title: format!("Daniel Duan's Articles About {}", tag),
-        },
         base_url,
         tag: RenderedTag::from_name(tag),
         items: article_templates,
@@ -236,9 +231,7 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
     let article_templates = site
         .articles
         .iter()
-        .filter_map(|article| {
-            instantiate_article_template(article, &site.base_url, root_path)
-        })
+        .filter_map(|article| instantiate_article_template(article, &site.base_url, root_path))
         .collect::<Vec<ArticleTemplate>>();
 
     build_article_list(&article_templates, &site.base_url, output_path)?;
@@ -259,9 +252,7 @@ pub fn build_site(site: Site, root_path: &str, output_path: &str) -> Result<(), 
     for (tag, tagged) in &site.tags {
         let articles = tagged
             .iter()
-            .filter_map(|article| {
-                instantiate_article_template(article, &site.base_url, root_path)
-            })
+            .filter_map(|article| instantiate_article_template(article, &site.base_url, root_path))
             .collect::<Vec<ArticleTemplate>>();
         build_tag_list(tag, &articles, &site.base_url, output_path)?;
         build_tag_feed(tag, &articles, &site.base_url, output_path)?;

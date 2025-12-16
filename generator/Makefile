@@ -13,7 +13,7 @@ ifeq ($(shell docker image inspect $(image) 2>/dev/null),[])
 	@docker build --tag $(image) .
 endif
 	@docker run --rm \
-	    --user "$(id -u)":"$(id -g)" \
+	    --user "$(shell id -u)":"$(shell id -g)" \
 	    -v "$(PWD)":/usr/src/duan.ca \
 	    -w /usr/src/duan.ca \
 	    $(image) \

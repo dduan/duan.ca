@@ -1,60 +1,53 @@
 :root {
-    max-width: 70ch;
-    padding: 0 1em;
-    margin: auto;
-    line-height: 1.75;
-    font-size: 1.25em;
-    color: var(--text-color);
+  max-width: 650px;
+  padding: 0 10px;
+  margin: 40px auto;
+  line-height: 1.6;
+  font-size: 18px;
+  color: var(--text-color);
 }
 @media (prefers-color-scheme: dark) {
-    :root {
-        background: #232323;
-        --text-color: white;
-        --article-meta-color: rgba(255, 255, 255, 0.54);
-    }
+  :root {
+    background: #232323;
+    --text-color: white;
+    --article-meta-color: rgba(255, 255, 255, 0.54);
+  }
 }
 @media (prefers-color-scheme: light) {
-    :root {
-        --text-color: #1d1d1d;
-        --article-meta-color: rgba(0, 0, 0, 0.62);
-    }
+  :root {
+    --text-color: #1d1d1d;
+    --article-meta-color: rgba(0, 0, 0, 0.62);
+  }
 }
 h1,h2,h3,h4,h5,h6 {
-    margin: 2em 0 1em;
+  line-height:1.2
 }
 p,ul,ol {
-    margin-bottom: 2em;
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
 a:link, a:hover, a:visited, a:active {
-    color: var(--text-color);
+  color: var(--text-color);
 }
-img {
-    max-width: 100%;
-}
+img { max-width: 100% }
 main > ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 .metainfo, .metainfo a {
-    color: var(--article-meta-color);
-    font-size: 90%;
+  color: var(--article-meta-color);
+  font-size: 90%;
 }
-.article-meta, .article-meta a {
-    text-transform: uppercase;
-}
-.article-meta {
-    margin-top: -0.4em;
-}
+.article-meta, .article-meta a { text-transform: uppercase }
+.article-meta { margin-top: -0.4em }
 pre, pre code {
-    overflow: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  overflow: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  font-size: 90%
 }
-
 blockquote, pre {
-    box-shadow: var(--text-color) 3px 0px 0px 0px inset;
-    margin: 0;
-    padding-left: 23px;
-    margin-left: -20px;
+  box-shadow: var(--text-color) 3px 0px 0px 0px inset;
+  margin: 0;
+  padding-left: 23px;
+  margin-left: -20px;
 }

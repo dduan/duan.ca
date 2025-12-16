@@ -6,27 +6,27 @@
         <atom:link href="https://duan.ca/tag/xcode/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Making An Open-Source Swift Project</title>
-                <description>&lt;p&gt;This video shows what it takes to open source a Swift project. Starting from some code in a playground,
+                <description>&#60;p&#62;This video shows what it takes to open source a Swift project. Starting from some code in a playground,
 I created a framework that supports distribution via Swift Package Manager, CocoaPods, Xcode project and
 Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
 SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
-Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
-the version tag, documentation generation, automatic Carthage binary generation, test coverage...&lt;/p&gt;
-&lt;p&gt;Anyways, here&#x27;s some stuff mentioned in the video:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Sample project from the video: &lt;a href=&quot;https://github.com/dduan/BitArray&quot;&gt;https://github.com/dduan/BitArray&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Video of me writing the code in this project: &lt;a href=&quot;https://www.youtube.com/watch?v=-k_jrIoD56k&quot;&gt;https://www.youtube.com/watch?v=-k_jrIoD56k&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Swift Package Manager: &lt;a href=&quot;https://swift.org/package-manager/&quot;&gt;https://swift.org/package-manager/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;CocoaPods: &lt;a href=&quot;https://cocoapods.org&quot;&gt;https://cocoapods.org&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Carthage: &lt;a href=&quot;https://github.com/Carthage/Carthage&quot;&gt;https://github.com/Carthage/Carthage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Xcconfigs for universal framework: &lt;a href=&quot;https://github.com/mrackwitz/xcconfigs&quot;&gt;https://github.com/mrackwitz/xcconfigs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;SwiftLint: &lt;a href=&quot;https://github.com/realm/SwiftLint&quot;&gt;https://github.com/realm/SwiftLint&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Travis CI: &lt;a href=&quot;https://travis-ci.org&quot;&gt;https://travis-ci.org&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/pA0T1CdqMt8&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
+&#60;p&#62;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
+the version tag, documentation generation, automatic Carthage binary generation, test coverage...&#60;/p&#62;
+&#60;p&#62;Anyways, here&#39;s some stuff mentioned in the video:&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;Sample project from the video: &#60;a href=&#34;https://github.com/dduan/BitArray&#34;&#62;https://github.com/dduan/BitArray&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Video of me writing the code in this project: &#60;a href=&#34;https://www.youtube.com/watch?v=-k_jrIoD56k&#34;&#62;https://www.youtube.com/watch?v=-k_jrIoD56k&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Swift Package Manager: &#60;a href=&#34;https://swift.org/package-manager/&#34;&#62;https://swift.org/package-manager/&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;CocoaPods: &#60;a href=&#34;https://cocoapods.org&#34;&#62;https://cocoapods.org&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Carthage: &#60;a href=&#34;https://github.com/Carthage/Carthage&#34;&#62;https://github.com/Carthage/Carthage&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Xcconfigs for universal framework: &#60;a href=&#34;https://github.com/mrackwitz/xcconfigs&#34;&#62;https://github.com/mrackwitz/xcconfigs&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;SwiftLint: &#60;a href=&#34;https://github.com/realm/SwiftLint&#34;&#62;https://github.com/realm/SwiftLint&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Travis CI: &#60;a href=&#34;https://travis-ci.org&#34;&#62;https://travis-ci.org&#60;/a&#62;&#60;/li&#62;
+&#60;/ul&#62;
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
                 <link>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</link>
@@ -34,71 +34,71 @@ the version tag, documentation generation, automatic Carthage binary generation,
             </item>
             <item>
                 <title>Building Swift Projects In Source Compatibility Mode</title>
-                <description>&lt;p&gt;It&#x27;s a few weeks before WWDC, so naturally¹ it&#x27;s time to try build your Swift
-projects in the compiler&#x27;s compatibility mode!&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Download and install a snapshot for the next major version &lt;a href=&quot;https://swift.org/download/&quot;&gt;on
-Swift.org&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2017/05/download-swift-snapshot.png&quot; alt=&quot;download swift toolchain&quot; /&gt;
-&lt;img src=&quot;/assets/2017/05/install-swift-snapshot.png&quot; alt=&quot;install swift toolchain&quot; /&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Choose the newly installed toolchain in Xcode.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2017/05/choose-toolchain.png&quot; alt=&quot;choose swift toolchain in Xcode&quot; /&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Ask the compiler to use compatibility mode. This means using the complier
-flag &lt;code&gt;-swift-version X&lt;/code&gt;, where &amp;quot;X&amp;quot; is the &lt;em&gt;current&lt;/em&gt; major Swift version.&lt;/p&gt;
-&lt;p&gt;In project&#x27;s &amp;quot;Build Settings&amp;quot;, value for &amp;quot;Other Swift Flags&amp;quot; should
-contain &lt;code&gt;-swift-version X&lt;/code&gt;. This could mean setting it in Xcode, in
-&lt;code&gt;.xcconfig&lt;/code&gt; files you are using and/or in your dependency managers such
-as Cocoapods.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2017/05/compat-mode-flag.png&quot; alt=&quot;compatibility flag in xcode&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;For example, with Cocoapods, you&#x27;ll need to add the following in your
-&lt;code&gt;Podfile&lt;/code&gt; to compile 3rd party libraries in compatibility mode:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt; post_install do |installer|
+                <description>&#60;p&#62;It&#39;s a few weeks before WWDC, so naturally¹ it&#39;s time to try build your Swift
+projects in the compiler&#39;s compatibility mode!&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;
+&#60;p&#62;Download and install a snapshot for the next major version &#60;a href=&#34;https://swift.org/download/&#34;&#62;on
+Swift.org&#60;/a&#62;.&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2017/05/download-swift-snapshot.png&#34; alt=&#34;download swift toolchain&#34; /&#62;
+&#60;img src=&#34;/assets/2017/05/install-swift-snapshot.png&#34; alt=&#34;install swift toolchain&#34; /&#62;&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Choose the newly installed toolchain in Xcode.&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2017/05/choose-toolchain.png&#34; alt=&#34;choose swift toolchain in Xcode&#34; /&#62;&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Ask the compiler to use compatibility mode. This means using the complier
+flag &#60;code&#62;-swift-version X&#60;/code&#62;, where &#38;quot;X&#38;quot; is the &#60;em&#62;current&#60;/em&#62; major Swift version.&#60;/p&#62;
+&#60;p&#62;In project&#39;s &#38;quot;Build Settings&#38;quot;, value for &#38;quot;Other Swift Flags&#38;quot; should
+contain &#60;code&#62;-swift-version X&#60;/code&#62;. This could mean setting it in Xcode, in
+&#60;code&#62;.xcconfig&#60;/code&#62; files you are using and/or in your dependency managers such
+as Cocoapods.&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2017/05/compat-mode-flag.png&#34; alt=&#34;compatibility flag in xcode&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;For example, with Cocoapods, you&#39;ll need to add the following in your
+&#60;code&#62;Podfile&#60;/code&#62; to compile 3rd party libraries in compatibility mode:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62; post_install do |installer|
      installer.pods_projects.targets.each do |target|
          target.build_configurations.each do |config|
-             config.build_settings[&amp;quot;OTHER_SWIFT_FLAGS&amp;quot;] = &amp;quot;$(inherited) -swift-version 3&amp;quot;
+             config.build_settings[&#38;quot;OTHER_SWIFT_FLAGS&#38;quot;] = &#38;quot;$(inherited) -swift-version 3&#38;quot;
          end
      end
  end
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Build your project! This is where things start to get exciting.&lt;/p&gt;
-&lt;p&gt;You should expect some warnings. Hopefully they are self-explanatory
-enough. Most of them should correspond to &lt;a href=&quot;https://apple.github.io/swift-evolution/&quot;&gt;a swift-evolution
-proposal&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Improvement to the language or compiler usually means some of these
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Build your project! This is where things start to get exciting.&#60;/p&#62;
+&#60;p&#62;You should expect some warnings. Hopefully they are self-explanatory
+enough. Most of them should correspond to &#60;a href=&#34;https://apple.github.io/swift-evolution/&#34;&#62;a swift-evolution
+proposal&#60;/a&#62;.&#60;/p&#62;
+&#60;p&#62;Improvement to the language or compiler usually means some of these
 warnings tell you problems in your code that has been ignored by the
-compiler previously. Fix them today!&lt;/p&gt;
-&lt;p&gt;The project should compile successfully in compatibility mode (despite
+compiler previously. Fix them today!&#60;/p&#62;
+&#60;p&#62;The project should compile successfully in compatibility mode (despite
 warnings). This where you can stop reading. Go celebrate with your
-coworkers, friends, and family!&lt;/p&gt;
-&lt;p&gt;Things could go wrong for compiler snapshots, of course. Read on if see
-errors or crashes (whaaaaat 😸).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;It&#x27;s time to tell the compiler team about the error or crash you encountered.&lt;/p&gt;
-&lt;p&gt;Reduce the error or crash to a state that your are comfortable reporting in
-public. Then go to &lt;a href=&quot;https://bugs.swift.org&quot;&gt;bugs.swift.org&lt;/a&gt; and file a JIRA
-ticket describing the error or compiler crash.&lt;/p&gt;
-&lt;p&gt;During the process of code reduction you may find ways to work around the
+coworkers, friends, and family!&#60;/p&#62;
+&#60;p&#62;Things could go wrong for compiler snapshots, of course. Read on if see
+errors or crashes (whaaaaat 😸).&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;It&#39;s time to tell the compiler team about the error or crash you encountered.&#60;/p&#62;
+&#60;p&#62;Reduce the error or crash to a state that your are comfortable reporting in
+public. Then go to &#60;a href=&#34;https://bugs.swift.org&#34;&#62;bugs.swift.org&#60;/a&#62; and file a JIRA
+ticket describing the error or compiler crash.&#60;/p&#62;
+&#60;p&#62;During the process of code reduction you may find ways to work around the
 compile error or crash. Make the changes for the workaround and repeat
-steps 4-5. Maybe your project will compile this time.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The issue you discovered will be fixed in the official Swift release come
-fall. You&#x27;ve ensured a smooth Swift upgrade for your project and contributed
-to the Swift community 🎉!&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr /&gt;
-&lt;p&gt;¹ source compatibility mode is a thing starting with Swift 4. As new
+steps 4-5. Maybe your project will compile this time.&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;The issue you discovered will be fixed in the official Swift release come
+fall. You&#39;ve ensured a smooth Swift upgrade for your project and contributed
+to the Swift community 🎉!&#60;/p&#62;
+&#60;/li&#62;
+&#60;/ol&#62;
+&#60;hr /&#62;
+&#60;p&#62;¹ source compatibility mode is a thing starting with Swift 4. As new
 major version of Swift is released, code written in the previous version should
-compile without change in compatibility mode.&lt;/p&gt;
+compile without change in compatibility mode.&#60;/p&#62;
 </description>
                 <pubDate>Mon, 22 May 2017 09:04:01 -0700</pubDate>
                 <link>https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/</link>

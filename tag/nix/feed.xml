@@ -6,50 +6,50 @@
         <atom:link href="https://duan.ca/tag/nix/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Flake For Non-Nix Projects</title>
-                <description>&lt;p&gt;The ideal outcome of using Nix or home-manager is to have as many things as possible under their control.
-Among these things are developer tools for coding. You may need &lt;code&gt;cargo&lt;/code&gt;, and &lt;code&gt;rust-analyzer&lt;/code&gt; for Rust projects;
-&lt;code&gt;ipython&lt;/code&gt;, and &lt;code&gt;python-lsp-server&lt;/code&gt; for Python projects, etc.&lt;/p&gt;
-&lt;p&gt;Of course, the simplest solution is to have them all installed and configured in home-manager or the OS level.
-But, over time, you&#x27;ll end up with a ton of stuff.&lt;/p&gt;
-&lt;p&gt;Maybe that won&#x27;t bother you. Fine, but this approach is at odds with some convention of the Nix community. You
-see, there&#x27;s this command called &lt;code&gt;nix-shell&lt;/code&gt;, or &lt;code&gt;nix develop&lt;/code&gt;, which sets up a environment with certain
+                <description>&#60;p&#62;The ideal outcome of using Nix or home-manager is to have as many things as possible under their control.
+Among these things are developer tools for coding. You may need &#60;code&#62;cargo&#60;/code&#62;, and &#60;code&#62;rust-analyzer&#60;/code&#62; for Rust projects;
+&#60;code&#62;ipython&#60;/code&#62;, and &#60;code&#62;python-lsp-server&#60;/code&#62; for Python projects, etc.&#60;/p&#62;
+&#60;p&#62;Of course, the simplest solution is to have them all installed and configured in home-manager or the OS level.
+But, over time, you&#39;ll end up with a ton of stuff.&#60;/p&#62;
+&#60;p&#62;Maybe that won&#39;t bother you. Fine, but this approach is at odds with some convention of the Nix community. You
+see, there&#39;s this command called &#60;code&#62;nix-shell&#60;/code&#62;, or &#60;code&#62;nix develop&#60;/code&#62;, which sets up a environment with certain
 packages, with the expectation that you only need them sometimes, usually within the context of developing
-a certain software project.&lt;/p&gt;
-&lt;p&gt;So, arguably, a better alternative to installing everything you possibly need is to keep only the essential
-tools you always need, regardless of what you are working on. Things like &lt;code&gt;neovim&lt;/code&gt;, &lt;code&gt;git&lt;/code&gt;, &lt;code&gt;ripgrep&lt;/code&gt;, etc.
-When a project demands things such as &lt;code&gt;rust-analyzer&lt;/code&gt;, running &lt;code&gt;nix develop&lt;/code&gt; should set it up for you.&lt;/p&gt;
-&lt;p&gt;How do we implement that? In a imaginary world where every single software project is built with a flake.nix,
-the &lt;code&gt;devShell&lt;/code&gt; property should provide everything the software project owner expect you to need. And you just
-&lt;code&gt;cd&lt;/code&gt; into the root of the project, run &lt;code&gt;nix develop&lt;/code&gt;, and you are off to the races.&lt;/p&gt;
-&lt;p&gt;Several problems:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;running &lt;code&gt;nix develop&lt;/code&gt; is repetitive, and therefore, annoying.&lt;/li&gt;
-&lt;li&gt;the owner of a flake.nix may have drastically different taste for the best dev tools for their project
-(bet!).&lt;/li&gt;
-&lt;li&gt;we don&#x27;t live in a world built with Nix flakes.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Yikes.&lt;/p&gt;
-&lt;p&gt;To solve &lt;code&gt;1&lt;/code&gt;, enter &lt;a href=&quot;https://github.com/nix-community/nix-direnv&quot;&gt;direnv&lt;/a&gt;. It&#x27;s a piece of software that let you create a environment for a directory,
-and automatically switch to it when you enter said directory. The &amp;quot;environment&amp;quot; could contain envvars, and,
-you guessed it: a Nix developer shell. If you have a flake.nix, add &lt;code&gt;use flake&lt;/code&gt; in your project directory&#x27;s
-&lt;code&gt;.envrc&lt;/code&gt; file, direnv will automatically call &lt;code&gt;nix develop&lt;/code&gt; the next time you &lt;code&gt;cd&lt;/code&gt; in. Neat!&lt;/p&gt;
-&lt;p&gt;To make this work in practice, you&#x27;ll want to add &lt;code&gt;.envrc&lt;/code&gt; and &lt;code&gt;.direnv/&lt;/code&gt; to your global git ignore list, as
-they are personal preferences that probably shouldn&#x27;t end up in git history.&lt;/p&gt;
-&lt;p&gt;Ok, we are so close to solve problem &lt;code&gt;2&lt;/code&gt;, and &lt;code&gt;3&lt;/code&gt; now. In short, &lt;code&gt;nix develop&lt;/code&gt; may set up &lt;strong&gt;a&lt;/strong&gt; environment,
-but it may not be &lt;strong&gt;the&lt;/strong&gt; environment that suits you the best. &lt;a href=&quot;https://github.com/nix-community/nix-direnv&quot;&gt;nix-direnv&lt;/a&gt; extends direnv to save us:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;use flake path/to/flake#target
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;... with this in &lt;code&gt;.envrc&lt;/code&gt;, direnv will set up the Nix environment according to &lt;code&gt;path/to/flake#target&lt;/code&gt;. That
-could point to any location on your hard drive! You can have a flake.nix whose &lt;code&gt;devShell&lt;/code&gt; has &lt;code&gt;cargo&lt;/code&gt;, and
-&lt;code&gt;rust-analyzer&lt;/code&gt;. You can have another with &lt;code&gt;ipython&lt;/code&gt;, and &lt;code&gt;python-lsp-server&lt;/code&gt;. Mix and match to your liking to
-the infinite degree...&lt;/p&gt;
-&lt;p&gt;For now, I&#x27;ve decided to give nix-direnv a try. Alongside my home-manager configuration, I&#x27;ve also included
+a certain software project.&#60;/p&#62;
+&#60;p&#62;So, arguably, a better alternative to installing everything you possibly need is to keep only the essential
+tools you always need, regardless of what you are working on. Things like &#60;code&#62;neovim&#60;/code&#62;, &#60;code&#62;git&#60;/code&#62;, &#60;code&#62;ripgrep&#60;/code&#62;, etc.
+When a project demands things such as &#60;code&#62;rust-analyzer&#60;/code&#62;, running &#60;code&#62;nix develop&#60;/code&#62; should set it up for you.&#60;/p&#62;
+&#60;p&#62;How do we implement that? In a imaginary world where every single software project is built with a flake.nix,
+the &#60;code&#62;devShell&#60;/code&#62; property should provide everything the software project owner expect you to need. And you just
+&#60;code&#62;cd&#60;/code&#62; into the root of the project, run &#60;code&#62;nix develop&#60;/code&#62;, and you are off to the races.&#60;/p&#62;
+&#60;p&#62;Several problems:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;running &#60;code&#62;nix develop&#60;/code&#62; is repetitive, and therefore, annoying.&#60;/li&#62;
+&#60;li&#62;the owner of a flake.nix may have drastically different taste for the best dev tools for their project
+(bet!).&#60;/li&#62;
+&#60;li&#62;we don&#39;t live in a world built with Nix flakes.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Yikes.&#60;/p&#62;
+&#60;p&#62;To solve &#60;code&#62;1&#60;/code&#62;, enter &#60;a href=&#34;https://github.com/nix-community/nix-direnv&#34;&#62;direnv&#60;/a&#62;. It&#39;s a piece of software that let you create a environment for a directory,
+and automatically switch to it when you enter said directory. The &#38;quot;environment&#38;quot; could contain envvars, and,
+you guessed it: a Nix developer shell. If you have a flake.nix, add &#60;code&#62;use flake&#60;/code&#62; in your project directory&#39;s
+&#60;code&#62;.envrc&#60;/code&#62; file, direnv will automatically call &#60;code&#62;nix develop&#60;/code&#62; the next time you &#60;code&#62;cd&#60;/code&#62; in. Neat!&#60;/p&#62;
+&#60;p&#62;To make this work in practice, you&#39;ll want to add &#60;code&#62;.envrc&#60;/code&#62; and &#60;code&#62;.direnv/&#60;/code&#62; to your global git ignore list, as
+they are personal preferences that probably shouldn&#39;t end up in git history.&#60;/p&#62;
+&#60;p&#62;Ok, we are so close to solve problem &#60;code&#62;2&#60;/code&#62;, and &#60;code&#62;3&#60;/code&#62; now. In short, &#60;code&#62;nix develop&#60;/code&#62; may set up &#60;strong&#62;a&#60;/strong&#62; environment,
+but it may not be &#60;strong&#62;the&#60;/strong&#62; environment that suits you the best. &#60;a href=&#34;https://github.com/nix-community/nix-direnv&#34;&#62;nix-direnv&#60;/a&#62; extends direnv to save us:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;use flake path/to/flake#target
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;... with this in &#60;code&#62;.envrc&#60;/code&#62;, direnv will set up the Nix environment according to &#60;code&#62;path/to/flake#target&#60;/code&#62;. That
+could point to any location on your hard drive! You can have a flake.nix whose &#60;code&#62;devShell&#60;/code&#62; has &#60;code&#62;cargo&#60;/code&#62;, and
+&#60;code&#62;rust-analyzer&#60;/code&#62;. You can have another with &#60;code&#62;ipython&#60;/code&#62;, and &#60;code&#62;python-lsp-server&#60;/code&#62;. Mix and match to your liking to
+the infinite degree...&#60;/p&#62;
+&#60;p&#62;For now, I&#39;ve decided to give nix-direnv a try. Alongside my home-manager configuration, I&#39;ve also included
 extra flakes for generic Python/Rust projects, and specific projects that may require a mix of tools. A lot of
-the project I work on don&#x27;t use flake as their package manager. With this approach, I get to customize my
-setup for them each, and stay in the comfort of Nix and home-manager.&lt;/p&gt;
-&lt;p&gt;direnv and nix-direnv can be configured together with home-manager. To achieve everything mentioned in this
-article, including direnv&#x27;s shell integration (Fish, for me), it&#x27;s as simple as&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-Nix&quot;&gt;# In home manager config...
+the project I work on don&#39;t use flake as their package manager. With this approach, I get to customize my
+setup for them each, and stay in the comfort of Nix and home-manager.&#60;/p&#62;
+&#60;p&#62;direnv and nix-direnv can be configured together with home-manager. To achieve everything mentioned in this
+article, including direnv&#39;s shell integration (Fish, for me), it&#39;s as simple as&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-Nix&#34;&#62;# In home manager config...
 programs.direnv = {
   enable = true;
   nix-direnv = {
@@ -57,14 +57,14 @@ programs.direnv = {
     enableFlakes = true;
   };
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To recap, having the snippet above in my home-manager setup, I now can enter any project&#x27;s root directory and
-add a &lt;code&gt;.envrc&lt;/code&gt; file with the content &lt;code&gt;use flake ~/src/dotfiles/direnvs/python&lt;/code&gt;.
-&lt;code&gt;~/src/dotfiles/direnvs/python&lt;/code&gt; contains a &lt;code&gt;flake.nix&lt;/code&gt; (and a &lt;code&gt;flake.lock&lt;/code&gt;) that has the &lt;code&gt;devShell&lt;/code&gt; value
-I like for all Python projects. When I &lt;code&gt;cd&lt;/code&gt; into this project, &lt;code&gt;(nix-)direnv&lt;/code&gt; will read from that &lt;code&gt;devShell&lt;/code&gt;
-and set every tool listed under there. The tools are cached in a &lt;code&gt;.direnv&lt;/code&gt; directory so when I return here,
-the setup is basically instantaneous. Since I make &lt;code&gt;git&lt;/code&gt; to ignore &lt;code&gt;.envrc&lt;/code&gt;, and &lt;code&gt;.direnv&lt;/code&gt; no matter where
-they are, this project I&#x27;m working on is unaffected by all this.&lt;/p&gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;To recap, having the snippet above in my home-manager setup, I now can enter any project&#39;s root directory and
+add a &#60;code&#62;.envrc&#60;/code&#62; file with the content &#60;code&#62;use flake ~/src/dotfiles/direnvs/python&#60;/code&#62;.
+&#60;code&#62;~/src/dotfiles/direnvs/python&#60;/code&#62; contains a &#60;code&#62;flake.nix&#60;/code&#62; (and a &#60;code&#62;flake.lock&#60;/code&#62;) that has the &#60;code&#62;devShell&#60;/code&#62; value
+I like for all Python projects. When I &#60;code&#62;cd&#60;/code&#62; into this project, &#60;code&#62;(nix-)direnv&#60;/code&#62; will read from that &#60;code&#62;devShell&#60;/code&#62;
+and set every tool listed under there. The tools are cached in a &#60;code&#62;.direnv&#60;/code&#62; directory so when I return here,
+the setup is basically instantaneous. Since I make &#60;code&#62;git&#60;/code&#62; to ignore &#60;code&#62;.envrc&#60;/code&#62;, and &#60;code&#62;.direnv&#60;/code&#62; no matter where
+they are, this project I&#39;m working on is unaffected by all this.&#60;/p&#62;
 </description>
                 <pubDate>Sat, 19 Mar 2022 00:37:01 -0700</pubDate>
                 <link>https://duan.ca/2022/03/19/nix-dirnev/</link>
@@ -72,21 +72,21 @@ they are, this project I&#x27;m working on is unaffected by all this.&lt;/p&gt;
             </item>
             <item>
                 <title>Flake, Home Manager, and Extra Packages</title>
-                <description>&lt;p&gt;So, you use a standalone home-manager, it&#x27;s set up with flake, tracking a particular nixpkgs channel. How do
+                <description>&#60;p&#62;So, you use a standalone home-manager, it&#39;s set up with flake, tracking a particular nixpkgs channel. How do
 you use a package from another channel? This seemingly simple task took me, a Nix noob, quite a bit of
-research to solve. Here&#x27;s how I did it.&lt;/p&gt;
-&lt;p&gt;A simple flake.nix for home-manager might look like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;{
+research to solve. Here&#39;s how I did it.&#60;/p&#62;
+&#60;p&#62;A simple flake.nix for home-manager might look like this:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-nix&#34;&#62;{
   inputs = {
-    nixpkgs.url = &amp;quot;github:nixos/nixpkgs/nixos-21.11&amp;quot;;
-    home-manager.url = &amp;quot;github:nix-community/home-manager/release-21.11&amp;quot;;
-    home-manager.inputs.nixpkgs.follows = &amp;quot;nixpkgs&amp;quot;;
+    nixpkgs.url = &#38;quot;github:nixos/nixpkgs/nixos-21.11&#38;quot;;
+    home-manager.url = &#38;quot;github:nix-community/home-manager/release-21.11&#38;quot;;
+    home-manager.inputs.nixpkgs.follows = &#38;quot;nixpkgs&#38;quot;;
   };
   outputs = { self, nixpkgs, home-manager }: {
-    &amp;quot;dan@some-mac&amp;quot; = home-manager.lib.homeManagerConfiguration {
-      username = &amp;quot;dan&amp;quot;;
-      system = &amp;quot;x86_64-darwin&amp;quot;;
-      homeDirectory = &amp;quot;/home/dan&amp;quot;;
+    &#38;quot;dan@some-mac&#38;quot; = home-manager.lib.homeManagerConfiguration {
+      username = &#38;quot;dan&#38;quot;;
+      system = &#38;quot;x86_64-darwin&#38;quot;;
+      homeDirectory = &#38;quot;/home/dan&#38;quot;;
       configuration = { config, pkgs ... }: {
           home.packages = [
             pkgs.hello
@@ -95,30 +95,30 @@ research to solve. Here&#x27;s how I did it.&lt;/p&gt;
     };
   };
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A few things of note:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;home manager is set to follow &lt;code&gt;nixpkgs&lt;/code&gt;, which tracks &lt;code&gt;nixos-21.11&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;pkgs.hello&lt;/code&gt; refers to the package in &lt;code&gt;nixos-21.11&lt;/code&gt; as well.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;To put things in concrete terms, our goal is to put a package from a channel other than &lt;code&gt;nixos-21.11&lt;/code&gt;
-alongside &lt;code&gt;pkgs.hello&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The key to my solution is the &lt;code&gt;extraModules&lt;/code&gt; in &lt;code&gt;home-manager.lib.homeManagerConfiguration&lt;/code&gt;&#x27;s argument set.
-We&#x27;ll leverage it to modify the environment made available to its sibling, &lt;code&gt;configuration&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;First, add the new channel as input &lt;code&gt;nixpkgs-unstable&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;{
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;A few things of note:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;home manager is set to follow &#60;code&#62;nixpkgs&#60;/code&#62;, which tracks &#60;code&#62;nixos-21.11&#60;/code&#62;.&#60;/li&#62;
+&#60;li&#62;&#60;code&#62;pkgs.hello&#60;/code&#62; refers to the package in &#60;code&#62;nixos-21.11&#60;/code&#62; as well.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;To put things in concrete terms, our goal is to put a package from a channel other than &#60;code&#62;nixos-21.11&#60;/code&#62;
+alongside &#60;code&#62;pkgs.hello&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;The key to my solution is the &#60;code&#62;extraModules&#60;/code&#62; in &#60;code&#62;home-manager.lib.homeManagerConfiguration&#60;/code&#62;&#39;s argument set.
+We&#39;ll leverage it to modify the environment made available to its sibling, &#60;code&#62;configuration&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;First, add the new channel as input &#60;code&#62;nixpkgs-unstable&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-nix&#34;&#62;{
   inputs = {
     # ...
-    nixpkgs-unstable.url = &amp;quot;github:nixos/nixpkgs&amp;quot;;
+    nixpkgs-unstable.url = &#38;quot;github:nixos/nixpkgs&#38;quot;;
   };
   ...
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Then, add a small module to &lt;code&gt;extraModules&lt;/code&gt;. In it we make &lt;code&gt;nixpkgs-unstable&lt;/code&gt; an argument to &lt;code&gt;_module&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;{
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Then, add a small module to &#60;code&#62;extraModules&#60;/code&#62;. In it we make &#60;code&#62;nixpkgs-unstable&#60;/code&#62; an argument to &#60;code&#62;_module&#60;/code&#62;.&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-nix&#34;&#62;{
   input = { ... };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager }: { # Note we also pass in nixpkgs-unstable here
-    &amp;quot;dan@some-mac&amp;quot; = home-manager.lib.homeManagerConfiguration {
+    &#38;quot;dan@some-mac&#38;quot; = home-manager.lib.homeManagerConfiguration {
       extraModules = [
         ({ pkgs, ... }: rec {
           _module.args.nixpkgs-unstable = import nixpkgs-unstable { inherit system; };
@@ -128,12 +128,12 @@ We&#x27;ll leverage it to modify the environment made available to its sibling, 
     };
   };
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;... now that we added &lt;code&gt;args.nixpkgs-unstable&lt;/code&gt;, it becomes available in the configuration:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;{
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;... now that we added &#60;code&#62;args.nixpkgs-unstable&#60;/code&#62;, it becomes available in the configuration:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-nix&#34;&#62;{
   input = { ... };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager }: { # Note we also pass in nixpkgs-unstable here
-    &amp;quot;dan@some-mac&amp;quot; = home-manager.lib.homeManagerConfiguration {
+    &#38;quot;dan@some-mac&#38;quot; = home-manager.lib.homeManagerConfiguration {
       # ...
       configuration = { config, pkgs, nixpkgs-unstable, ... }:
           home.packages = [
@@ -144,10 +144,10 @@ We&#x27;ll leverage it to modify the environment made available to its sibling, 
     };
   };
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There, we made &lt;code&gt;python39Packages.python-lsp-server&lt;/code&gt; from nixpkgs&#x27;s master branch appear alongside our
-standard, default channel.&lt;/p&gt;
-&lt;p&gt;And that&#x27;s how you add packages from a different channel in a flake setup for standalone home-manager.&lt;/p&gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;There, we made &#60;code&#62;python39Packages.python-lsp-server&#60;/code&#62; from nixpkgs&#39;s master branch appear alongside our
+standard, default channel.&#60;/p&#62;
+&#60;p&#62;And that&#39;s how you add packages from a different channel in a flake setup for standalone home-manager.&#60;/p&#62;
 </description>
                 <pubDate>Tue, 15 Mar 2022 18:53:59 -0700</pubDate>
                 <link>https://duan.ca/2022/03/15/standalone-home-manager-flake-channels/</link>
@@ -155,46 +155,46 @@ standard, default channel.&lt;/p&gt;
             </item>
             <item>
                 <title>Installing Nix on macOS 11 Big Sur</title>
-                <description>&lt;p&gt;&lt;em&gt;Note: as of Feburary, 2022, the steps written below has been incorporated by the official Nix install script for macOS. This article is, therefore, obsolete.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Here are the steps for installing nix on macOS 11 Big Sur.&lt;/p&gt;
-&lt;h3&gt;Preparation&lt;/h3&gt;
-&lt;p&gt;Decide on which disk the nix store is to be installed. By end of this process, you&#x27;ll have a disk
-name like &lt;code&gt;disk4&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Personally, I like looking it up in the Disk Utility app:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2020/12/disk-utility.png&quot; alt=&quot;Disk Utility&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;You can also use other methods, such us the &lt;code&gt;diskutil list&lt;/code&gt; command.&lt;/p&gt;
-&lt;p&gt;Have this disk name ready.&lt;/p&gt;
-&lt;h3&gt;Installation&lt;/h3&gt;
-&lt;h4&gt;1. Create the path &lt;code&gt;/nix&lt;/code&gt; the macOS way.&lt;/h4&gt;
-&lt;p&gt;Edit or create the file &lt;code&gt;/etc/synthetic.conf&lt;/code&gt;, adding this line:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;nix
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Reboot the Mac.&lt;/p&gt;
-&lt;h4&gt;2. Create a APFS volume for the nix store.&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;sudo diskutil apfs addVolume diskX APFS &#x27;Nix Store&#x27; -mountpoint /nix
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Make sure to replace &lt;code&gt;diskX&lt;/code&gt; with the disk you identified in the preparation step.&lt;/p&gt;
-&lt;h4&gt;3. Mount the volume.&lt;/h4&gt;
-&lt;p&gt;Edit or create the file &lt;code&gt;/etc/fstab&lt;/code&gt;, adding this line:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;LABEL=Nix\040Store /nix apfs rw,nobrowse
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Reboot the Mac.&lt;/p&gt;
-&lt;h4&gt;4. Install Nix the &amp;quot;normal&amp;quot; way&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;sh &amp;lt;(curl -L https://nixos.org/nix/install)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;5. You are done! Try it out. I ran this little &lt;a href=&quot;https://nix.dev/tutorials/dev-environment.html&quot;&gt;example&lt;/a&gt; as a test and things appears to work as expected.&lt;/h4&gt;
-&lt;h3&gt;Bonus: using Nix in Fish shell&lt;/h3&gt;
-&lt;p&gt;As a fish user, I&#x27;m used to fixing things up myself since software from non-fish users usually
-pretends fish doesn&#x27;t exist. Anyways, in the final steps of its installation, Nix sets up a few
-environment variables in a bash script. I&#x27;ve adapted these specifically for fish on macOS. Add these
-to your config.fish:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;set -x NIX_PROFILES &amp;quot;/nix/var/nix/profiles/default $HOME/.nix-profile&amp;quot;
-set -x NIX_SSL_CERT_FILE &amp;quot;$HOME/.nix-profile/etc/ssl/certs/ca-bundle.crt&amp;quot;
+                <description>&#60;p&#62;&#60;em&#62;Note: as of Feburary, 2022, the steps written below has been incorporated by the official Nix install script for macOS. This article is, therefore, obsolete.&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;Here are the steps for installing nix on macOS 11 Big Sur.&#60;/p&#62;
+&#60;h3&#62;Preparation&#60;/h3&#62;
+&#60;p&#62;Decide on which disk the nix store is to be installed. By end of this process, you&#39;ll have a disk
+name like &#60;code&#62;disk4&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;Personally, I like looking it up in the Disk Utility app:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2020/12/disk-utility.png&#34; alt=&#34;Disk Utility&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;You can also use other methods, such us the &#60;code&#62;diskutil list&#60;/code&#62; command.&#60;/p&#62;
+&#60;p&#62;Have this disk name ready.&#60;/p&#62;
+&#60;h3&#62;Installation&#60;/h3&#62;
+&#60;h4&#62;1. Create the path &#60;code&#62;/nix&#60;/code&#62; the macOS way.&#60;/h4&#62;
+&#60;p&#62;Edit or create the file &#60;code&#62;/etc/synthetic.conf&#60;/code&#62;, adding this line:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;nix
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Reboot the Mac.&#60;/p&#62;
+&#60;h4&#62;2. Create a APFS volume for the nix store.&#60;/h4&#62;
+&#60;pre&#62;&#60;code&#62;sudo diskutil apfs addVolume diskX APFS &#39;Nix Store&#39; -mountpoint /nix
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Make sure to replace &#60;code&#62;diskX&#60;/code&#62; with the disk you identified in the preparation step.&#60;/p&#62;
+&#60;h4&#62;3. Mount the volume.&#60;/h4&#62;
+&#60;p&#62;Edit or create the file &#60;code&#62;/etc/fstab&#60;/code&#62;, adding this line:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;LABEL=Nix\040Store /nix apfs rw,nobrowse
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Reboot the Mac.&#60;/p&#62;
+&#60;h4&#62;4. Install Nix the &#38;quot;normal&#38;quot; way&#60;/h4&#62;
+&#60;pre&#62;&#60;code&#62;sh &#38;lt;(curl -L https://nixos.org/nix/install)
+&#60;/code&#62;&#60;/pre&#62;
+&#60;h4&#62;5. You are done! Try it out. I ran this little &#60;a href=&#34;https://nix.dev/tutorials/dev-environment.html&#34;&#62;example&#60;/a&#62; as a test and things appears to work as expected.&#60;/h4&#62;
+&#60;h3&#62;Bonus: using Nix in Fish shell&#60;/h3&#62;
+&#60;p&#62;As a fish user, I&#39;m used to fixing things up myself since software from non-fish users usually
+pretends fish doesn&#39;t exist. Anyways, in the final steps of its installation, Nix sets up a few
+environment variables in a bash script. I&#39;ve adapted these specifically for fish on macOS. Add these
+to your config.fish:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;set -x NIX_PROFILES &#38;quot;/nix/var/nix/profiles/default $HOME/.nix-profile&#38;quot;
+set -x NIX_SSL_CERT_FILE &#38;quot;$HOME/.nix-profile/etc/ssl/certs/ca-bundle.crt&#38;quot;
 set -x NIX_PATH /nix $HOME/.nix-defexpr/channels
 set -x PATH $HOME/.nix-profile/bin $PATH
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It shouldn&#x27;t be to hard to do this on other OSes. The relevant information is in
-&lt;code&gt;~/.nix-profile/etc/profile.d/nix.sh&lt;/code&gt;.&lt;/p&gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It shouldn&#39;t be to hard to do this on other OSes. The relevant information is in
+&#60;code&#62;~/.nix-profile/etc/profile.d/nix.sh&#60;/code&#62;.&#60;/p&#62;
 </description>
                 <pubDate>Sun, 13 Dec 2020 12:00:52 -0800</pubDate>
                 <link>https://duan.ca/2020/12/13/nix-on-macos-11-big-sur/</link>
@@ -202,93 +202,93 @@ set -x PATH $HOME/.nix-profile/bin $PATH
             </item>
             <item>
                 <title>Naive NixOS Rust Development</title>
-                <description>&lt;p&gt;tl;dr: To work on Rust project with nix-shell, rls and extensions such as
-&lt;code&gt;rust-analysis&lt;/code&gt;, &lt;code&gt;rust-src&lt;/code&gt;, without caring too much about specific Rust
-toolchain version (except for it being &lt;code&gt;stable&lt;/code&gt;), use the following &lt;code&gt;shell.nix&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;let
+                <description>&#60;p&#62;tl;dr: To work on Rust project with nix-shell, rls and extensions such as
+&#60;code&#62;rust-analysis&#60;/code&#62;, &#60;code&#62;rust-src&#60;/code&#62;, without caring too much about specific Rust
+toolchain version (except for it being &#60;code&#62;stable&#60;/code&#62;), use the following &#60;code&#62;shell.nix&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-nix&#34;&#62;let
   moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
-  nixpkgs = import &amp;lt;nixpkgs&amp;gt; {
+  nixpkgs = import &#38;lt;nixpkgs&#38;gt; {
     overlays = [ moz_overlay ];
   };
   ruststable = (nixpkgs.latest.rustChannels.stable.rust.override {
-    extensions = [ &amp;quot;rust-src&amp;quot; &amp;quot;rust-analysis&amp;quot; ];}
+    extensions = [ &#38;quot;rust-src&#38;quot; &#38;quot;rust-analysis&#38;quot; ];}
   );
 in
   with nixpkgs;
   stdenv.mkDerivation {
-    name = &amp;quot;rust&amp;quot;;
+    name = &#38;quot;rust&#38;quot;;
     buildInputs = [ rustup ruststable ];
   }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;When you have a Nix hammer, everything looks like a Nix expression.&lt;/p&gt;
-&lt;p&gt;Having used NixOS on a real PC for a number of days, this is the impression
-I get from the world of Nix. Unfortunately, so far, it&#x27;s been a negative for me.&lt;/p&gt;
-&lt;p&gt;One of the most exciting thing I want to use Nix for is to bootstrap development
-environment with &lt;code&gt;nix-shell&lt;/code&gt;. I imagined it to be similar to using &lt;a href=&quot;https://pipenv-fork.readthedocs.io/en/latest/&quot;&gt;pipenv&lt;/a&gt;
-with Python, except for everything. Well, I&#x27;ve since learned that it&#x27;s not true
-(yet?) for many reasons.&lt;/p&gt;
-&lt;p&gt;Modern programming languages come with their own attempt at &lt;em&gt;reproducibility&lt;/em&gt;.
-Some does it better than others. To make it concrete, I&#x27;m talking about things
-like &lt;a href=&quot;https://haskellstack.org&quot;&gt;Stack&lt;/a&gt; for Haskell or &lt;a href=&quot;https://rustup.rs/&quot;&gt;rustup&lt;/a&gt; for Rust: given the source code, how do
-I make it build in the way the project intended? What&#x27;s the correct version of
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;When you have a Nix hammer, everything looks like a Nix expression.&#60;/p&#62;
+&#60;p&#62;Having used NixOS on a real PC for a number of days, this is the impression
+I get from the world of Nix. Unfortunately, so far, it&#39;s been a negative for me.&#60;/p&#62;
+&#60;p&#62;One of the most exciting thing I want to use Nix for is to bootstrap development
+environment with &#60;code&#62;nix-shell&#60;/code&#62;. I imagined it to be similar to using &#60;a href=&#34;https://pipenv-fork.readthedocs.io/en/latest/&#34;&#62;pipenv&#60;/a&#62;
+with Python, except for everything. Well, I&#39;ve since learned that it&#39;s not true
+(yet?) for many reasons.&#60;/p&#62;
+&#60;p&#62;Modern programming languages come with their own attempt at &#60;em&#62;reproducibility&#60;/em&#62;.
+Some does it better than others. To make it concrete, I&#39;m talking about things
+like &#60;a href=&#34;https://haskellstack.org&#34;&#62;Stack&#60;/a&#62; for Haskell or &#60;a href=&#34;https://rustup.rs/&#34;&#62;rustup&#60;/a&#62; for Rust: given the source code, how do
+I make it build in the way the project intended? What&#39;s the correct version of
 the compiler, runtime, and tools that works best with this revision of the
 source code? The common solution usually follows this pattern: as author of
 a project, specify as much as you can, the environment best suited for the
-current state of the project. As a &amp;quot;builder&amp;quot;, use a &lt;em&gt;single program&lt;/em&gt; that&#x27;s
+current state of the project. As a &#38;quot;builder&#38;quot;, use a &#60;em&#62;single program&#60;/em&#62; that&#39;s
 capable of updating itself, as well as ensuring that the project builds exactly
-as specified, including managing the compiler/runtime/tooling versions, etc.&lt;/p&gt;
-&lt;p&gt;This &lt;em&gt;single program&lt;/em&gt;&#x27;s role is very much the same as the Nix system, except the
-latter is independent of programming languages: &lt;code&gt;rustup&lt;/code&gt; installs Rust, so does
-Nix. That&#x27;s a bad thing. As a package manager, Nix either have to tightly
+as specified, including managing the compiler/runtime/tooling versions, etc.&#60;/p&#62;
+&#60;p&#62;This &#60;em&#62;single program&#60;/em&#62;&#39;s role is very much the same as the Nix system, except the
+latter is independent of programming languages: &#60;code&#62;rustup&#60;/code&#62; installs Rust, so does
+Nix. That&#39;s a bad thing. As a package manager, Nix either have to tightly
 integrate with each of these other package managers, leveraging their evolving
 behaviors to give its user the build environment; or, it must replace them.
-The former is impractical; the latter, well, sucks.&lt;/p&gt;
-&lt;p&gt;Back to reality. This is the experience I want to have with NixOS: Some programs
+The former is impractical; the latter, well, sucks.&#60;/p&#62;
+&#60;p&#62;Back to reality. This is the experience I want to have with NixOS: Some programs
 I use daily such as Alacritty, NeoVim, Firfox, etc, are installed globally and
-readily available. They are part of my &lt;code&gt;/etc/nixos/configuration.nix&lt;/code&gt;. So far so
-good. Now, I regularly program in a few languages. For each of the project, I&#x27;d
-like to have a &lt;code&gt;shell.nix&lt;/code&gt; that brings in its compilers, libraries, LSP servers,
-etc. This is what &lt;code&gt;nix-shell&lt;/code&gt; is supposed to give me! This is known as the &amp;quot;per
-project&amp;quot; setup.&lt;/p&gt;
-&lt;p&gt;Let&#x27;s see: with Rust, that means &lt;code&gt;rustc&lt;/code&gt; (compiler), &lt;code&gt;cargo&lt;/code&gt; (package manager),
-&lt;code&gt;rls&lt;/code&gt;, &lt;code&gt;rust-src&lt;/code&gt; and &lt;code&gt;rust-analysis&lt;/code&gt; (LSP). In macOS, I&#x27;d install all of these
-globally with &lt;code&gt;rustup&lt;/code&gt;. In NixOS...well, I can ask for &lt;code&gt;rustup&lt;/code&gt; for my project:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;with import &amp;lt;nixpkgs&amp;gt; {};
+readily available. They are part of my &#60;code&#62;/etc/nixos/configuration.nix&#60;/code&#62;. So far so
+good. Now, I regularly program in a few languages. For each of the project, I&#39;d
+like to have a &#60;code&#62;shell.nix&#60;/code&#62; that brings in its compilers, libraries, LSP servers,
+etc. This is what &#60;code&#62;nix-shell&#60;/code&#62; is supposed to give me! This is known as the &#38;quot;per
+project&#38;quot; setup.&#60;/p&#62;
+&#60;p&#62;Let&#39;s see: with Rust, that means &#60;code&#62;rustc&#60;/code&#62; (compiler), &#60;code&#62;cargo&#60;/code&#62; (package manager),
+&#60;code&#62;rls&#60;/code&#62;, &#60;code&#62;rust-src&#60;/code&#62; and &#60;code&#62;rust-analysis&#60;/code&#62; (LSP). In macOS, I&#39;d install all of these
+globally with &#60;code&#62;rustup&#60;/code&#62;. In NixOS...well, I can ask for &#60;code&#62;rustup&#60;/code&#62; for my project:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-nix&#34;&#62;with import &#38;lt;nixpkgs&#38;gt; {};
 
 stdenv.mkDerivation {
-  name = &amp;quot;rust&amp;quot;;
+  name = &#38;quot;rust&#38;quot;;
   nativeBuildInputs = [ rustup ];
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;...which gives me &lt;code&gt;rustup&lt;/code&gt; and nothing else. That&#x27;s right, you don&#x27;t even get
-a &lt;code&gt;rustc&lt;/code&gt; after running &lt;code&gt;nix-shell&lt;/code&gt;. But &lt;code&gt;rustup&lt;/code&gt; can get you everything else,
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;...which gives me &#60;code&#62;rustup&#60;/code&#62; and nothing else. That&#39;s right, you don&#39;t even get
+a &#60;code&#62;rustc&#60;/code&#62; after running &#60;code&#62;nix-shell&#60;/code&#62;. But &#60;code&#62;rustup&#60;/code&#62; can get you everything else,
 all I need to do is ask. Hmm, do I need to run a series of set-up commands with
-&lt;code&gt;rustup&lt;/code&gt; every time I enter the environment? No? I just need to run it the first
+&#60;code&#62;rustup&#60;/code&#62; every time I enter the environment? No? I just need to run it the first
 time? Until the cached tools get deleted by some garbage collection mechanism?
-That seems unsatisfying, doesn&#x27;t it?&lt;/p&gt;
-&lt;p&gt;Instead of &lt;code&gt;rustup&lt;/code&gt;, I could also ask Nix to use the &lt;code&gt;rustc&lt;/code&gt;/&lt;code&gt;cargo&lt;/code&gt;/&lt;code&gt;rls&lt;/code&gt; it
-knows about directly. This is marginally better. Except I still need &lt;code&gt;rust-src&lt;/code&gt;
-and &lt;code&gt;rust-analysis&lt;/code&gt; for my needs. As far as I can tell, these &lt;a href=&quot;https://github.com/rust-lang/rls&quot;&gt;RLS&lt;/a&gt; components
-are out of Nix&#x27;s control (as of today).&lt;/p&gt;
-&lt;p&gt;Everywhere on the internet I looked, for every problem that
-Nix-the-package-manager doesn&#x27;t work out-of-the-box, there&#x27;s someone responding
-along the line of &amp;quot;you can write some Nix expression yourself&amp;quot;. In other words,
+That seems unsatisfying, doesn&#39;t it?&#60;/p&#62;
+&#60;p&#62;Instead of &#60;code&#62;rustup&#60;/code&#62;, I could also ask Nix to use the &#60;code&#62;rustc&#60;/code&#62;/&#60;code&#62;cargo&#60;/code&#62;/&#60;code&#62;rls&#60;/code&#62; it
+knows about directly. This is marginally better. Except I still need &#60;code&#62;rust-src&#60;/code&#62;
+and &#60;code&#62;rust-analysis&#60;/code&#62; for my needs. As far as I can tell, these &#60;a href=&#34;https://github.com/rust-lang/rls&#34;&#62;RLS&#60;/a&#62; components
+are out of Nix&#39;s control (as of today).&#60;/p&#62;
+&#60;p&#62;Everywhere on the internet I looked, for every problem that
+Nix-the-package-manager doesn&#39;t work out-of-the-box, there&#39;s someone responding
+along the line of &#38;quot;you can write some Nix expression yourself&#38;quot;. In other words,
 Nix-the-language is powerful enough to solve it, probably. In the case of Rust,
 luckily, Mozilla wrote enough Nix expressions for us and provides them via an
-&lt;a href=&quot;https://github.com/mozilla/nixpkgs-mozilla&quot;&gt;overlay&lt;/a&gt;. These expressions are rich enough to meet my needs.
+&#60;a href=&#34;https://github.com/mozilla/nixpkgs-mozilla&#34;&#62;overlay&#60;/a&#62;. These expressions are rich enough to meet my needs.
 As you can see in the tl;dr at the top, when entering the development
-environment, nix-shell would: download the overlay&#x27;s source code (from the
+environment, nix-shell would: download the overlay&#39;s source code (from the
 internet, or local cache), load the expression it includes, mix in my
-customization, and execute it.&lt;/p&gt;
-&lt;p&gt;That marks the end of my search. I like the final solution because it&#x27;s mostly
-&amp;quot;vanilla&amp;quot; Nix and doesn&#x27;t require me to mess with a bunch of other tools. For
-solutions that do, read &lt;a href=&quot;https://christine.website/blog/how-i-start-nix-2020-03-08&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;At end of the day, my needs are pretty basic: consistency from rustup and
-convenience from nix-shell. I didn&#x27;t need to pin the compiler to a specific Rust
-release, or checksum the final build output.&lt;/p&gt;
-&lt;p&gt;I&#x27;m very new to both technologies so there may be a follow-up post sometime in
-the future.&lt;/p&gt;
+customization, and execute it.&#60;/p&#62;
+&#60;p&#62;That marks the end of my search. I like the final solution because it&#39;s mostly
+&#38;quot;vanilla&#38;quot; Nix and doesn&#39;t require me to mess with a bunch of other tools. For
+solutions that do, read &#60;a href=&#34;https://christine.website/blog/how-i-start-nix-2020-03-08&#34;&#62;this&#60;/a&#62;.&#60;/p&#62;
+&#60;hr /&#62;
+&#60;p&#62;At end of the day, my needs are pretty basic: consistency from rustup and
+convenience from nix-shell. I didn&#39;t need to pin the compiler to a specific Rust
+release, or checksum the final build output.&#60;/p&#62;
+&#60;p&#62;I&#39;m very new to both technologies so there may be a follow-up post sometime in
+the future.&#60;/p&#62;
 </description>
                 <pubDate>Thu, 07 May 2020 11:04:58 -0700</pubDate>
                 <link>https://duan.ca/2020/05/07/nix-rust-development/</link>

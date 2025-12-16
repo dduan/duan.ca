@@ -6,10 +6,10 @@
         <atom:link href="https://duan.ca/tag/scheme/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Coding Without A Language</title>
-                <description>&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/OKjQtn_Gvug&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;p&gt;Sorry for the click-baity title. I actually really like this one.&lt;/p&gt;
+                <description>&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/OKjQtn_Gvug&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen=&#34;&#34;&#62;&#60;/iframe&#62;
+&#60;/div&#62;
+&#60;p&#62;Sorry for the click-baity title. I actually really like this one.&#60;/p&#62;
 </description>
                 <pubDate>Sat, 13 Jan 2018 12:07:19 -0800</pubDate>
                 <link>https://duan.ca/2018/01/13/coding-without-a-language/</link>

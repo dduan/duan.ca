@@ -6,150 +6,150 @@
         <atom:link href="https://duan.ca/tag/webassembly/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Hello World In WebAssembly</title>
-                <description>&lt;p&gt;Every now and then, I check on the progress of Web Assembly. I did it again
+                <description>&#60;p&#62;Every now and then, I check on the progress of Web Assembly. I did it again
 around the time of this post and finally found enough tutorials, examples, and
 working software to get myself started in this area. In doing so, I made a video
-to demo some progress. (&lt;em&gt;this article includes all the same information and
-more, so just read on if you don&#x27;t have 15 minutes for YouTube&lt;/em&gt;).&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/yEYtwmI7bDg&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;br&gt;
-&lt;h2&gt;Our goal:&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Use as much built-in tools on a Mac as possible. The web development
-toolchain scares me.&lt;/li&gt;
-&lt;li&gt;Target the browser. That&#x27;s where the value of WebAssembly is. (Node supports
-it as well. BUT, WHY THO?)&lt;/li&gt;
-&lt;li&gt;Build from scratch. In the video I started from &lt;code&gt;mkdir&lt;/code&gt; a folder. We should
+to demo some progress. (&#60;em&#62;this article includes all the same information and
+more, so just read on if you don&#39;t have 15 minutes for YouTube&#60;/em&#62;).&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/yEYtwmI7bDg&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
+&#60;br&#62;
+&#60;h2&#62;Our goal:&#60;/h2&#62;
+&#60;ol&#62;
+&#60;li&#62;Use as much built-in tools on a Mac as possible. The web development
+toolchain scares me.&#60;/li&#62;
+&#60;li&#62;Target the browser. That&#39;s where the value of WebAssembly is. (Node supports
+it as well. BUT, WHY THO?)&#60;/li&#62;
+&#60;li&#62;Build from scratch. In the video I started from &#60;code&#62;mkdir&#60;/code&#62; a folder. We should
 strive to understand details on every level whenever possible. Boilerplates
-and dependencies should come later.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Things you&#x27;ll need:&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Safari 11+&lt;/li&gt;
-&lt;li&gt;Xcode. More specifically, you should be able to run &lt;code&gt;clang&lt;/code&gt; in a shell.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;The Workflow&lt;/h2&gt;
-&lt;p&gt;Having these things installed, get a copy of &lt;a href=&quot;https://github.com/WebAssembly/wabt&quot;&gt;The WebAssembly Binary
-Toolkit&lt;/a&gt; (wabt). Build it. The README has detailed instructions. I just went
-into the folder and ran&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;make clang-release
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This will generate a bunch of binary files in &lt;code&gt;out/clang/Release&lt;/code&gt; and you need
+and dependencies should come later.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;h2&#62;Things you&#39;ll need:&#60;/h2&#62;
+&#60;ol&#62;
+&#60;li&#62;Safari 11+&#60;/li&#62;
+&#60;li&#62;Xcode. More specifically, you should be able to run &#60;code&#62;clang&#60;/code&#62; in a shell.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;h2&#62;The Workflow&#60;/h2&#62;
+&#60;p&#62;Having these things installed, get a copy of &#60;a href=&#34;https://github.com/WebAssembly/wabt&#34;&#62;The WebAssembly Binary
+Toolkit&#60;/a&#62; (wabt). Build it. The README has detailed instructions. I just went
+into the folder and ran&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;make clang-release
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This will generate a bunch of binary files in &#60;code&#62;out/clang/Release&#60;/code&#62; and you need
 to make sure you can run them from wherever you want to work on WebAssembly
-project (so either copy them into a folder included in your &lt;code&gt;PATH&lt;/code&gt; environment
-variable or add the absolute path to &lt;code&gt;out/clang/Release&lt;/code&gt; to &lt;code&gt;PATH&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;Among the binaries &amp;quot;wabt&amp;quot; builds, &lt;code&gt;wat2wasm&lt;/code&gt; takes a &lt;code&gt;.wat&lt;/code&gt; file and compiles it
-to a WebAssembly binary. A &lt;code&gt;.wat&lt;/code&gt; is a source file in the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format&quot;&gt;text format&lt;/a&gt; for
-WebAssembly, which is in the form of S-expressions. So&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;wat2wasm main.wat -o main.wasm
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;…will compile your WebAssembly module in &lt;code&gt;main.wat&lt;/code&gt; to generate &lt;code&gt;main.wasm&lt;/code&gt;, the
-binary file. For now, &lt;code&gt;main.wat&lt;/code&gt; can be the simplest WebAssembly program:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(module)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Running the binary in a browser demands the bulk of the work. First, we&#x27;ll need
-a web page. It doesn&#x27;t need any content other than invoking some JavaScript
-code.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
-&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
-&amp;lt;head&amp;gt;
-    &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
-    &amp;lt;title&amp;gt;&amp;lt;/title&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-    &amp;lt;!-- The only thing that matters is the following line,
-    although having a valid HTML5 page is nice. --&amp;gt;
-    &amp;lt;script src=&amp;quot;play.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;First, the Javascript logic needs to &lt;em&gt;fetch and instantiate the compiled
-WebAssembly module&lt;/em&gt;. Since this is not a JS or WebAssembly tutorial, I&#x27;ll point
-you to the docmuntation for &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API&quot;&gt;Fetch API&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise&quot;&gt;Promises&lt;/a&gt;, and &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly&quot;&gt;the WebAssembly
-object&lt;/a&gt; for details:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;fetch(&amp;quot;main.wasm&amp;quot;).then(reponse =&amp;gt;
+project (so either copy them into a folder included in your &#60;code&#62;PATH&#60;/code&#62; environment
+variable or add the absolute path to &#60;code&#62;out/clang/Release&#60;/code&#62; to &#60;code&#62;PATH&#60;/code&#62;).&#60;/p&#62;
+&#60;p&#62;Among the binaries &#38;quot;wabt&#38;quot; builds, &#60;code&#62;wat2wasm&#60;/code&#62; takes a &#60;code&#62;.wat&#60;/code&#62; file and compiles it
+to a WebAssembly binary. A &#60;code&#62;.wat&#60;/code&#62; is a source file in the &#60;a href=&#34;https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format&#34;&#62;text format&#60;/a&#62; for
+WebAssembly, which is in the form of S-expressions. So&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;wat2wasm main.wat -o main.wasm
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;…will compile your WebAssembly module in &#60;code&#62;main.wat&#60;/code&#62; to generate &#60;code&#62;main.wasm&#60;/code&#62;, the
+binary file. For now, &#60;code&#62;main.wat&#60;/code&#62; can be the simplest WebAssembly program:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-lisp&#34;&#62;(module)
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Running the binary in a browser demands the bulk of the work. First, we&#39;ll need
+a web page. It doesn&#39;t need any content other than invoking some JavaScript
+code.&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-html&#34;&#62;&#38;lt;!DOCTYPE html&#38;gt;
+&#38;lt;html lang=&#38;quot;en&#38;quot;&#38;gt;
+&#38;lt;head&#38;gt;
+    &#38;lt;meta charset=&#38;quot;UTF-8&#38;quot;&#38;gt;
+    &#38;lt;title&#38;gt;&#38;lt;/title&#38;gt;
+&#38;lt;/head&#38;gt;
+&#38;lt;body&#38;gt;
+    &#38;lt;!-- The only thing that matters is the following line,
+    although having a valid HTML5 page is nice. --&#38;gt;
+    &#38;lt;script src=&#38;quot;play.js&#38;quot;&#38;gt;&#38;lt;/script&#38;gt;
+&#38;lt;/body&#38;gt;
+&#38;lt;/html&#38;gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;First, the Javascript logic needs to &#60;em&#62;fetch and instantiate the compiled
+WebAssembly module&#60;/em&#62;. Since this is not a JS or WebAssembly tutorial, I&#39;ll point
+you to the docmuntation for &#60;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API&#34;&#62;Fetch API&#60;/a&#62;, &#60;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise&#34;&#62;Promises&#60;/a&#62;, and &#60;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly&#34;&#62;the WebAssembly
+object&#60;/a&#62; for details:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-javascript&#34;&#62;fetch(&#38;quot;main.wasm&#38;quot;).then(reponse =&#38;gt;
     reponse.arrayBuffer()
-).then(bytes =&amp;gt;
+).then(bytes =&#38;gt;
     WebAssembly.instantiate(bytes, {})
-).then(result =&amp;gt;
+).then(result =&#38;gt;
     result.instance
 ).then(main);
 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This snippet fetches &lt;code&gt;main.wasm&lt;/code&gt; (adjust this URL according to your choosing),
-instantiate it, then pass it into a function named &lt;code&gt;main&lt;/code&gt;, we can put
-a placeholder logic for it for now:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;function main(wasm) {
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This snippet fetches &#60;code&#62;main.wasm&#60;/code&#62; (adjust this URL according to your choosing),
+instantiate it, then pass it into a function named &#60;code&#62;main&#60;/code&#62;, we can put
+a placeholder logic for it for now:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-javascript&#34;&#62;function main(wasm) {
     console.log(wasm);
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Before we move on, you&#x27;ll find that simply opending your HTML file in browser
-and looking at developer console won&#x27;t work. Safari would complain about
-cross-domain request error for &lt;code&gt;fetch&lt;/code&gt;. So we need to serve these resources
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Before we move on, you&#39;ll find that simply opending your HTML file in browser
+and looking at developer console won&#39;t work. Safari would complain about
+cross-domain request error for &#60;code&#62;fetch&#60;/code&#62;. So we need to serve these resources
 locally. I usually use the built in server module from Python standard library
-for this kind of things:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# In your source folder, run
+for this kind of things:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;# In your source folder, run
 python -m SimpleHTTPServer
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now go to &lt;a href=&quot;http://localhost:8000&quot;&gt;http://localhost:8000&lt;/a&gt; and click on your HTML file. If everything
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Now go to &#60;a href=&#34;http://localhost:8000&#34;&#62;http://localhost:8000&#60;/a&#62; and click on your HTML file. If everything
 went well, you should see a WebAssembly instance logged in the developer
-console.&lt;/p&gt;
-&lt;p&gt;Congratulations! You can start writing WebAssembly locally. Just remember to
-re-compile &lt;code&gt;main.wat&lt;/code&gt; with &lt;code&gt;wat2wasm&lt;/code&gt; whenever you want to test things out in
-browser.&lt;/p&gt;
-&lt;h2&gt;An Actual &amp;quot;Hello, World!&amp;quot; Implementation&lt;/h2&gt;
-&lt;p&gt;This is my implementation:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(module
-  ;; Allocate a page of linear memory (64kb). Export it as &amp;quot;memory&amp;quot;
-  (memory (export &amp;quot;memory&amp;quot;) 1)
+console.&#60;/p&#62;
+&#60;p&#62;Congratulations! You can start writing WebAssembly locally. Just remember to
+re-compile &#60;code&#62;main.wat&#60;/code&#62; with &#60;code&#62;wat2wasm&#60;/code&#62; whenever you want to test things out in
+browser.&#60;/p&#62;
+&#60;h2&#62;An Actual &#38;quot;Hello, World!&#38;quot; Implementation&#60;/h2&#62;
+&#60;p&#62;This is my implementation:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-lisp&#34;&#62;(module
+  ;; Allocate a page of linear memory (64kb). Export it as &#38;quot;memory&#38;quot;
+  (memory (export &#38;quot;memory&#38;quot;) 1)
 
   ;; Write the string at the start of the linear memory.
-  (data (i32.const 0) &amp;quot;Hello, world!&amp;quot;) ;; write string at location 0
+  (data (i32.const 0) &#38;quot;Hello, world!&#38;quot;) ;; write string at location 0
 
   ;; Export the position and length of the string.
-  (global (export &amp;quot;length&amp;quot;) i32 (i32.const 12))
-  (global (export &amp;quot;position&amp;quot;) i32 (i32.const 0)))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In other words, we expose information of the linear memory we manipulated to the
-JavaScript environment. Things that has been &lt;code&gt;export&lt;/code&gt;ed will show up as
-properties of &lt;code&gt;exports&lt;/code&gt; of the &lt;code&gt;WebAssembly&lt;/code&gt; instance. We can access them in the
-&lt;code&gt;main&lt;/code&gt; JavaScript functions:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;function main(wasm) {
+  (global (export &#38;quot;length&#38;quot;) i32 (i32.const 12))
+  (global (export &#38;quot;position&#38;quot;) i32 (i32.const 0)))
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;In other words, we expose information of the linear memory we manipulated to the
+JavaScript environment. Things that has been &#60;code&#62;export&#60;/code&#62;ed will show up as
+properties of &#60;code&#62;exports&#60;/code&#62; of the &#60;code&#62;WebAssembly&#60;/code&#62; instance. We can access them in the
+&#60;code&#62;main&#60;/code&#62; JavaScript functions:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-javascript&#34;&#62;function main(wasm) {
     const memory   = wasm.exports.memory;
     const length   = wasm.exports.length;
     const position = wasm.exports.position;
     ...
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Then it&#x27;s just plain-old Javascript (tho I had to steal it from tutorials).
-&lt;code&gt;memory.buffer&lt;/code&gt; is of type &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer&quot;&gt;ArrayBuffer&lt;/a&gt;. We need to convert it into a string
-and log it to the console:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;function main(wasm) {
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Then it&#39;s just plain-old Javascript (tho I had to steal it from tutorials).
+&#60;code&#62;memory.buffer&#60;/code&#62; is of type &#60;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer&#34;&#62;ArrayBuffer&#60;/a&#62;. We need to convert it into a string
+and log it to the console:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-javascript&#34;&#62;function main(wasm) {
     const memory   = wasm.exports.memory;
     const length   = wasm.exports.length;
     const position = wasm.exports.position;
 
     const bytes = new Uint8Array(memory.buffer, position, length);
-    const s = new TextDecoder(&#x27;utf8&#x27;).decode(bytes);
+    const s = new TextDecoder(&#39;utf8&#39;).decode(bytes);
 
     console.log(s);
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Et, voilà! &lt;code&gt;Hello, World!&lt;/code&gt; hot off a Web Assembly module in your developer
-console. To conclude, I personally like to use a &lt;code&gt;Makefile&lt;/code&gt; to streamline some
-of the typing. Here&#x27;s what I used for this demo:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-makefile&quot;&gt;compile:
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Et, voilà! &#60;code&#62;Hello, World!&#60;/code&#62; hot off a Web Assembly module in your developer
+console. To conclude, I personally like to use a &#60;code&#62;Makefile&#60;/code&#62; to streamline some
+of the typing. Here&#39;s what I used for this demo:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-makefile&#34;&#62;compile:
 	wat2wasm main.wat -o main.wasm
 
 serve:
 	python -m SimpleHTTPServer
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;No fancy schmancy Javascript build stack, no 3rd-party code dependency. Write
+&#60;/code&#62;&#60;/pre&#62;
+&#60;h2&#62;Conclusion&#60;/h2&#62;
+&#60;p&#62;No fancy schmancy Javascript build stack, no 3rd-party code dependency. Write
 code, compile, run on your (virtual, in browser) machine, repeat. That sounds like
-&amp;quot;assembly&amp;quot; to me!&lt;/p&gt;
+&#38;quot;assembly&#38;quot; to me!&#60;/p&#62;
 </description>
                 <pubDate>Sat, 30 Dec 2017 18:43:49 -0800</pubDate>
                 <link>https://duan.ca/2017/12/30/hello-world-in-webassembly/</link>

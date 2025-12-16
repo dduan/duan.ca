@@ -6,48 +6,48 @@
         <atom:link href="https://duan.ca/tag/swift-package-manager/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Distribution Tests</title>
-                <description>&lt;p&gt;There are several ways to build dependencies for a Swift 3 project:
+                <description>&#60;p&#62;There are several ways to build dependencies for a Swift 3 project:
 Swift Package Manager, Cocoapods, Carthage, etc. Many have an opinion on which
 is the best choice for their projects. As a library author who want to help as
-many people as possible, however, they can&#x27;t ignore any of them.&lt;/p&gt;
-&lt;p&gt;I sometimes question the sanity of that conclusion: instead of becoming an
+many people as possible, however, they can&#39;t ignore any of them.&#60;/p&#62;
+&#60;p&#62;I sometimes question the sanity of that conclusion: instead of becoming an
 export in each package manager, I find myself a novice of all. Did I break
 support for any of them with this project change? Is it still working on
-a particular platform, say, tvOS? Can I &lt;em&gt;really&lt;/em&gt; know?&lt;/p&gt;
-&lt;p&gt;The only way to &lt;em&gt;really&lt;/em&gt; know is to verify yourself: both Cocoapods and
+a particular platform, say, tvOS? Can I &#60;em&#62;really&#60;/em&#62; know?&#60;/p&#62;
+&#60;p&#62;The only way to &#60;em&#62;really&#60;/em&#62; know is to verify yourself: both Cocoapods and
 Carthage support four platforms -- iOS, macOS, watchOS, tvOS; Swift Package
-Manager only works on Mac or Linux. So that&#x27;s 2*4+1=9 targets. All these
+Manager only works on Mac or Linux. So that&#39;s 2*4+1=9 targets. All these
 targets need is have the library in question fetched and imported. Every Swift
 library author should have such verification before publishing updates of
-their project.&lt;/p&gt;
-&lt;p&gt;The steps to verify can be triggered with commands: fetch and build
+their project.&#60;/p&#62;
+&#60;p&#62;The steps to verify can be triggered with commands: fetch and build
 dependencies, build Xcode/Swift project. To automate the process, put these
-commands in a script or a Makefile. But wait, there&#x27;s more! One shouldn&#x27;t have
+commands in a script or a Makefile. But wait, there&#39;s more! One shouldn&#39;t have
 to create these dummy projects every time they create a new library. If all
 these projects do is importing a library and attempt to build, they should
-work for &lt;em&gt;any&lt;/em&gt; library. The config in &lt;code&gt;Package.swift&lt;/code&gt;/&lt;code&gt;Cocoapods&lt;/code&gt;/&lt;code&gt;Cartfile&lt;/code&gt;
-and the &lt;code&gt;import&lt;/code&gt; statements just needs some strings replaced: name of the next
-library, URL for its git repository, etc. And that&#x27;s a scriptable process as
-well!&lt;/p&gt;
-&lt;p&gt;To recap, one could, in theory, copy in some dummy projects, run a command to
+work for &#60;em&#62;any&#60;/em&#62; library. The config in &#60;code&#62;Package.swift&#60;/code&#62;/&#60;code&#62;Cocoapods&#60;/code&#62;/&#60;code&#62;Cartfile&#60;/code&#62;
+and the &#60;code&#62;import&#60;/code&#62; statements just needs some strings replaced: name of the next
+library, URL for its git repository, etc. And that&#39;s a scriptable process as
+well!&#60;/p&#62;
+&#60;p&#62;To recap, one could, in theory, copy in some dummy projects, run a command to
 inject information about a new library, run another command to build all these
-project, verifying that support for those package managers remain functional.&lt;/p&gt;
-&lt;p&gt;In reality, I have created &lt;a href=&quot;https://github.com/dduan/DistributionTests&quot;&gt;DistributionTests&lt;/a&gt; and put it
-on &lt;a href=&quot;https://github.com/dduan/DistributionTests&quot;&gt;Github&lt;/a&gt; 😉.&lt;/p&gt;
-&lt;p&gt;The script &lt;code&gt;customize&lt;/code&gt; requires 3 pieces of information of the library: its
+project, verifying that support for those package managers remain functional.&#60;/p&#62;
+&#60;p&#62;In reality, I have created &#60;a href=&#34;https://github.com/dduan/DistributionTests&#34;&#62;DistributionTests&#60;/a&#62; and put it
+on &#60;a href=&#34;https://github.com/dduan/DistributionTests&#34;&#62;Github&#60;/a&#62; 😉.&#60;/p&#62;
+&#60;p&#62;The script &#60;code&#62;customize&#60;/code&#62; requires 3 pieces of information of the library: its
 import name, its git repository URL and a major version number. The assumption
 here is the library generates uniformly named artifacts: the file name for
-&lt;code&gt;.framework&lt;/code&gt; and the name users use to import it are the same. Testing
-distribution of a library is as simple as:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;clone the project.&lt;/li&gt;
-&lt;li&gt;customize the project with &lt;code&gt;customize&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;run &lt;code&gt;make&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;If you do step 1 and 2, include the projects in library&#x27;s repository, then
+&#60;code&#62;.framework&#60;/code&#62; and the name users use to import it are the same. Testing
+distribution of a library is as simple as:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;clone the project.&#60;/li&#62;
+&#60;li&#62;customize the project with &#60;code&#62;customize&#60;/code&#62;.&#60;/li&#62;
+&#60;li&#62;run &#60;code&#62;make&#60;/code&#62;.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;If you do step 1 and 2, include the projects in library&#39;s repository, then
 only step 3 is necessary! This makes testing distribution methods trivial on
-a continuous integration server.&lt;/p&gt;
-&lt;p&gt;Go forth and create fearlessly!&lt;/p&gt;
+a continuous integration server.&#60;/p&#62;
+&#60;p&#62;Go forth and create fearlessly!&#60;/p&#62;
 </description>
                 <pubDate>Mon, 10 Oct 2016 10:34:49 -0700</pubDate>
                 <link>https://duan.ca/2016/10/10/distribution-tests/</link>

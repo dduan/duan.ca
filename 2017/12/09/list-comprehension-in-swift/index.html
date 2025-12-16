@@ -12,23 +12,41 @@
     <meta property="og:title" content="List Comprehension In Swift">
     <meta property="article:published_time" content="2017-12-09T12:26:30-08:00"><meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@daniel_duan">
-    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="twitter:creator" content="@daniel_duan">
     <meta name="apple-mobile-web-app-title" content="Daniel Duan">
     <title>List Comprehension In Swift</title>
     <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
     <link rel="canonical" href="https://duan.ca/2017/12/09/list-comprehension-in-swift/">
-    <link rel="stylesheet" href="/styles.css"></link>
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
 </head>
-<body><article>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="List Comprehension In Swift">
+    <meta itemprop="datePublished" content="2017-12-09T12:26:30-08:00">
+    <meta itemprop="dateModified" content="2017-12-09T12:26:30-08:00">
+    <link itemprop="url" href="https://duan.ca/2017/12/09/list-comprehension-in-swift/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2017/12/09/list-comprehension-in-swift/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="Swift">
+    <meta itemprop="keywords" content="Python">
+    <meta itemprop="keywords" content="Haskell">
     <h1>List Comprehension In Swift</h1>
     <nav>
         <p class="metainfo article-meta">
-            <a href="/articles">Daniel Duan</a>
+            <a href="/articles/">Daniel Duan</a>
             ·
-            <time datetime="2017-12-09T12:26:30-08:00" itemProp="datePublished">2017-12-09</time>
+            <time datetime="2017-12-09T12:26:30-08:00">2017-12-09</time>
         </p>
-    </nav><p>Let's explore ways to add list comprehension to Swift.</p>
+    </nav>
+    <div itemprop="articleBody"><p>Let's explore ways to add list comprehension to Swift.</p>
 <h2>Motivation</h2>
 <p><a href="https://en.wikipedia.org/wiki/List_comprehension">List comprehension</a> should be no stranger to a Python or (and?) Haskell user. It's a really compact syntax
 that deals with <a href="https://en.wikipedia.org/wiki/Cartesian_product">Cartesian product</a> of lists. In the case of Python, it's probably responsible for the lack
@@ -122,7 +140,7 @@ negatively affect compilation speed in large projects.</p>
 <p>Not all of these issues are temporary.</p>
 <p>Does list comprehension warrant a language change in Swift? Can you think of better ways to implement it
 with the current compiler?</p>
-
+</div>
 </article>
 <footer>
     <hr />

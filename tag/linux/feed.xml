@@ -6,21 +6,21 @@
         <atom:link href="https://duan.ca/tag/linux/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Taking Screenshots On Linux</title>
-                <description>&lt;p&gt;Having used macOS for a number of years, I&#x27;ve formed some habit that I&#x27;m never
-going to shake. Among them is taking screenshots with &lt;code&gt;Alt-Shift-3&lt;/code&gt; and
-&lt;code&gt;Alt-Shift-4&lt;/code&gt;, follow up with area or window selection. So, when I bought a PC
-and put Linux on it, it&#x27;s time to mess with it for these habits!&lt;/p&gt;
-&lt;p&gt;And, it didn&#x27;t take too long to solve. I&#x27;ve found &lt;a href=&quot;https://github.com/naelstrof/maim&quot;&gt;maim&lt;/a&gt;. Writing this down
-for mine and maybe, yours, future reference.&lt;/p&gt;
-&lt;p&gt;To capture the entire screen:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bash -c &amp;quot;maim ~/Screenshots/fullscreen_$(date +%s).png&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To active area/windows selection for the capture:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bash -c &amp;quot;maim -s ~/Screenshots/area_$(date +%s).png&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here&#x27;s how the latter in action (with keybinds via Ubuntu 20.20 desktop&#x27;s
-Settings app).&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2020/06/18/area-screenshot-on-ubuntu.gif&quot; alt=&quot;How selecting an area with maim works on Ubuntu&quot; /&gt;&lt;/p&gt;
+                <description>&#60;p&#62;Having used macOS for a number of years, I&#39;ve formed some habit that I&#39;m never
+going to shake. Among them is taking screenshots with &#60;code&#62;Alt-Shift-3&#60;/code&#62; and
+&#60;code&#62;Alt-Shift-4&#60;/code&#62;, follow up with area or window selection. So, when I bought a PC
+and put Linux on it, it&#39;s time to mess with it for these habits!&#60;/p&#62;
+&#60;p&#62;And, it didn&#39;t take too long to solve. I&#39;ve found &#60;a href=&#34;https://github.com/naelstrof/maim&#34;&#62;maim&#60;/a&#62;. Writing this down
+for mine and maybe, yours, future reference.&#60;/p&#62;
+&#60;p&#62;To capture the entire screen:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;bash -c &#38;quot;maim ~/Screenshots/fullscreen_$(date +%s).png&#38;quot;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;To active area/windows selection for the capture:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;bash -c &#38;quot;maim -s ~/Screenshots/area_$(date +%s).png&#38;quot;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Here&#39;s how the latter in action (with keybinds via Ubuntu 20.20 desktop&#39;s
+Settings app).&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2020/06/18/area-screenshot-on-ubuntu.gif&#34; alt=&#34;How selecting an area with maim works on Ubuntu&#34; /&#62;&#60;/p&#62;
 </description>
                 <pubDate>Thu, 18 Jun 2020 13:22:01 -0700</pubDate>
                 <link>https://duan.ca/2020/06/18/taking-linux-screenshots/</link>

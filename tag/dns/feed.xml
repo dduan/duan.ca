@@ -5,78 +5,78 @@
         <link>https://duan.ca/tag/dns/</link>
         <atom:link href="https://duan.ca/tag/dns/feed.xml" rel="self" type="application/rss+xml" />
             <item>
-                <title>The Lazy Programmer&#x27;s Guide to Single-user Mastodon</title>
-                <description>&lt;p&gt;As of today, my identity in the &amp;quot;fediverse&amp;quot; has become &lt;code&gt;@daniel@duan.ca&lt;/code&gt;. This post was originally published
-on &lt;code&gt;duan.ca&lt;/code&gt;. Pretty neat, eh? I achieved this by hosting a private instance of the open-source Mastodon
-project. Here&#x27;s my experience setting that up, and why it seemed harder than it is.&lt;/p&gt;
-&lt;h2&gt;What exactly did I achieve?&lt;/h2&gt;
-&lt;p&gt;I own the domain &lt;code&gt;duan.ca&lt;/code&gt;, which serves as the root of an existing website. I set up an functioning
-instance of Mastodon with a single user &lt;code&gt;@daniel&lt;/code&gt;. This user is discoverable in other Mastodon instances as
-&lt;code&gt;@daniel@duan.ca&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;How did I do it?&lt;/h2&gt;
-&lt;p&gt;As someone who barely touch server-side programming, running a Mastodon instance seemed very daunting to me.
-What database to use? How? What&#x27;s the best way to host a Rails app? I need a email server? Where to host the
-media files I post?&lt;/p&gt;
-&lt;p&gt;There are a lot of step-by-step set-up tutorials on the internet. This post is, definitively, not one of
-those. But having gone through the process of &lt;a href=&quot;https://marketplace.digitalocean.com/apps/mastodon&quot;&gt;setting up an instance on DigitalOcean&lt;/a&gt;, I end up with a few
-tips and tricks to share! Let&#x27;s through them:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;If you have a DigitalOcean account, setting a server up is as simple as searching up &amp;quot;Mastodon&amp;quot; in their
-market place as a step in creating your Droplet.&lt;/li&gt;
-&lt;li&gt;You &lt;em&gt;do not&lt;/em&gt; need an email server for a single-user instance. Think about it, you have root access to the
-database, what do you need email for? Verify your own identity? Spam yourself?&lt;/li&gt;
-&lt;li&gt;That said, Sendgrid is free for low-volume emails.&lt;/li&gt;
-&lt;li&gt;Ok, you ssh into your Droplet, the first thing you see is a guided CLI experience for setting things up.
-Don&#x27;t go through it just yet! For me, my root domain &lt;code&gt;duan.ca&lt;/code&gt; hosts an entirely different site. So I have
-to pick a subdomain to host Mastodon. Make sure you set up an A record in your website&#x27;s DNS for your
-chosen subdomain. If this record isn&#x27;t read, the guided setup will fail when it tries to get an certificate
-from Let&#x27;s Encrypt.&lt;/li&gt;
-&lt;li&gt;Unless you want to buy a new DNS service from DigitalOcean, your A record should be configured with your
-existing DNS server provider! I needed a few minutes to un-confuse myself about this fact. DigitalOcean&#x27;s
-documentation makes it really hard to discover this fact.&lt;/li&gt;
-&lt;li&gt;The only thing you need to get right is your subdomain, and the DNS record for it. In the rest of the
-guided setup, you can make mistakes, and you can fix them later.&lt;/li&gt;
-&lt;li&gt;I used an s3 bucket for media. s3&#x27;s UX is kind of terrible, so if you are doing it for the first time, good
-luck.&lt;/li&gt;
-&lt;li&gt;Instead of &amp;quot;admin&amp;quot;, choose your Mastodon username in the setup guide. This user does not have special
+                <title>The Lazy Programmer&#39;s Guide to Single-user Mastodon</title>
+                <description>&#60;p&#62;As of today, my identity in the &#38;quot;fediverse&#38;quot; has become &#60;code&#62;@daniel@duan.ca&#60;/code&#62;. This post was originally published
+on &#60;code&#62;duan.ca&#60;/code&#62;. Pretty neat, eh? I achieved this by hosting a private instance of the open-source Mastodon
+project. Here&#39;s my experience setting that up, and why it seemed harder than it is.&#60;/p&#62;
+&#60;h2&#62;What exactly did I achieve?&#60;/h2&#62;
+&#60;p&#62;I own the domain &#60;code&#62;duan.ca&#60;/code&#62;, which serves as the root of an existing website. I set up an functioning
+instance of Mastodon with a single user &#60;code&#62;@daniel&#60;/code&#62;. This user is discoverable in other Mastodon instances as
+&#60;code&#62;@daniel@duan.ca&#60;/code&#62;.&#60;/p&#62;
+&#60;h2&#62;How did I do it?&#60;/h2&#62;
+&#60;p&#62;As someone who barely touch server-side programming, running a Mastodon instance seemed very daunting to me.
+What database to use? How? What&#39;s the best way to host a Rails app? I need a email server? Where to host the
+media files I post?&#60;/p&#62;
+&#60;p&#62;There are a lot of step-by-step set-up tutorials on the internet. This post is, definitively, not one of
+those. But having gone through the process of &#60;a href=&#34;https://marketplace.digitalocean.com/apps/mastodon&#34;&#62;setting up an instance on DigitalOcean&#60;/a&#62;, I end up with a few
+tips and tricks to share! Let&#39;s through them:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;If you have a DigitalOcean account, setting a server up is as simple as searching up &#38;quot;Mastodon&#38;quot; in their
+market place as a step in creating your Droplet.&#60;/li&#62;
+&#60;li&#62;You &#60;em&#62;do not&#60;/em&#62; need an email server for a single-user instance. Think about it, you have root access to the
+database, what do you need email for? Verify your own identity? Spam yourself?&#60;/li&#62;
+&#60;li&#62;That said, Sendgrid is free for low-volume emails.&#60;/li&#62;
+&#60;li&#62;Ok, you ssh into your Droplet, the first thing you see is a guided CLI experience for setting things up.
+Don&#39;t go through it just yet! For me, my root domain &#60;code&#62;duan.ca&#60;/code&#62; hosts an entirely different site. So I have
+to pick a subdomain to host Mastodon. Make sure you set up an A record in your website&#39;s DNS for your
+chosen subdomain. If this record isn&#39;t read, the guided setup will fail when it tries to get an certificate
+from Let&#39;s Encrypt.&#60;/li&#62;
+&#60;li&#62;Unless you want to buy a new DNS service from DigitalOcean, your A record should be configured with your
+existing DNS server provider! I needed a few minutes to un-confuse myself about this fact. DigitalOcean&#39;s
+documentation makes it really hard to discover this fact.&#60;/li&#62;
+&#60;li&#62;The only thing you need to get right is your subdomain, and the DNS record for it. In the rest of the
+guided setup, you can make mistakes, and you can fix them later.&#60;/li&#62;
+&#60;li&#62;I used an s3 bucket for media. s3&#39;s UX is kind of terrible, so if you are doing it for the first time, good
+luck.&#60;/li&#62;
+&#60;li&#62;Instead of &#38;quot;admin&#38;quot;, choose your Mastodon username in the setup guide. This user does not have special
 privilege for the site anyways, despite what the default name suggests. After this step, the guide will
-provide you with a password, take note of that if you want to log in with this user later :)&lt;/li&gt;
-&lt;li&gt;Again, you could figure out how to get an STMP server to send emails on your Mastodon instance&#x27;s behalf.
+provide you with a password, take note of that if you want to log in with this user later :)&#60;/li&#62;
+&#60;li&#62;Again, you could figure out how to get an STMP server to send emails on your Mastodon instance&#39;s behalf.
 But you are the only user, right? So you can just make some value up for all things SMTP/email related. At
-the end, when the guide asks whether to send a test Email, choose &amp;quot;no&amp;quot;.&lt;/li&gt;
-&lt;li&gt;The Mastodon code is located at &lt;code&gt;/home/mastodon/live&lt;/code&gt;. Most of the information is stored in
-&lt;code&gt;.env.production&lt;/code&gt; in that directory. This is where you can change your mind/fix your mistake from the
-guided setup. You can use Vim instead of Nano. (Although if you like Vim, you&#x27;d probably find out
-anyways).&lt;/li&gt;
-&lt;li&gt;Mastodon ships with an admin &lt;a href=&quot;https://docs.joinmastodon.org/admin/tootctl/&quot;&gt;CLI tool&lt;/a&gt; &lt;code&gt;tootctl&lt;/code&gt;. It&#x27;s located in &lt;code&gt;bin/tootctl&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Before attempting to run this tool, switch to user &lt;code&gt;mastodon&lt;/code&gt; by running &lt;code&gt;su mastodon&lt;/code&gt;. Otherwise, you&#x27;d
-be confused as to why you need to install Ruby stuff, and can&#x27;t connect to the Postgres database.&lt;/li&gt;
-&lt;li&gt;If the guide didn&#x27;t tell you an error, and your values in &lt;code&gt;.env.production&lt;/code&gt; are all right, you will be
+the end, when the guide asks whether to send a test Email, choose &#38;quot;no&#38;quot;.&#60;/li&#62;
+&#60;li&#62;The Mastodon code is located at &#60;code&#62;/home/mastodon/live&#60;/code&#62;. Most of the information is stored in
+&#60;code&#62;.env.production&#60;/code&#62; in that directory. This is where you can change your mind/fix your mistake from the
+guided setup. You can use Vim instead of Nano. (Although if you like Vim, you&#39;d probably find out
+anyways).&#60;/li&#62;
+&#60;li&#62;Mastodon ships with an admin &#60;a href=&#34;https://docs.joinmastodon.org/admin/tootctl/&#34;&#62;CLI tool&#60;/a&#62; &#60;code&#62;tootctl&#60;/code&#62;. It&#39;s located in &#60;code&#62;bin/tootctl&#60;/code&#62;.&#60;/li&#62;
+&#60;li&#62;Before attempting to run this tool, switch to user &#60;code&#62;mastodon&#60;/code&#62; by running &#60;code&#62;su mastodon&#60;/code&#62;. Otherwise, you&#39;d
+be confused as to why you need to install Ruby stuff, and can&#39;t connect to the Postgres database.&#60;/li&#62;
+&#60;li&#62;If the guide didn&#39;t tell you an error, and your values in &#60;code&#62;.env.production&#60;/code&#62; are all right, you will be
 able to type your subdomain in a browser and see Mastodon! Log in with your username and password from
-the guide. Upload a profile photo to test whether your media service is set up correctly.&lt;/li&gt;
-&lt;li&gt;(DO NOT DO THIS until you finish the next step!) At this point, you&#x27;d be able to go to an existing
-Mastodon instance, and look yourself up! If your subdomain is &lt;code&gt;social.duan.ca&lt;/code&gt;, username &lt;code&gt;daniel&lt;/code&gt;, you
-should be discoverable as &lt;code&gt;@daniel@social.duan.ca&lt;/code&gt; on a site such as &lt;a href=&quot;https://mastodon.social&quot;&gt;mastodon.social&lt;/a&gt; now. But if you
-do this, that site may get confused, and permanently consider &lt;code&gt;@daniel@social.duan.ca&lt;/code&gt; as your fediverse
-identity. So don&#x27;t do that! Finish the next step.&lt;/li&gt;
-&lt;li&gt;To use your root domain instead of this subdomain, you 301 redirect &lt;code&gt;/.well-known/host-meta*&lt;/code&gt; from root to
-the real location. &lt;a href=&quot;https://masto.host/mastodon-usernames-different-from-the-domain-used-for-installation/&quot;&gt;this article&lt;/a&gt; explains it very well. Make sure to both set up the URL
-redirect, as well as &lt;code&gt;LOCAL_DOMAIN&lt;/code&gt;, and &lt;code&gt;WEB_DOMAIN&lt;/code&gt; in &lt;code&gt;.env.production&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Make your user the owner of the site (RTFM). You&#x27;ll see additional, site-wide settings afterwards. Make
-sure to disable signup, either in the GUI, or with &lt;code&gt;tootctl&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;That it! These may seem like a lot of tips, but I think, as a smart programmer, you can eventually figure all
-of these things out pretty easily. I put them down here because, had I known these, I would&#x27;ve saved a bunch
-of times in the end.&lt;/p&gt;
-&lt;h2&gt;Why?&lt;/h2&gt;
-&lt;p&gt;Why spend the time, and money, to go through all of this?&lt;/p&gt;
-&lt;p&gt;This is a really good question. I &lt;a href=&quot;https://duan.ca/2022/11/20/the-social-graph/&quot;&gt;wished&lt;/a&gt; less people would
+the guide. Upload a profile photo to test whether your media service is set up correctly.&#60;/li&#62;
+&#60;li&#62;(DO NOT DO THIS until you finish the next step!) At this point, you&#39;d be able to go to an existing
+Mastodon instance, and look yourself up! If your subdomain is &#60;code&#62;social.duan.ca&#60;/code&#62;, username &#60;code&#62;daniel&#60;/code&#62;, you
+should be discoverable as &#60;code&#62;@daniel@social.duan.ca&#60;/code&#62; on a site such as &#60;a href=&#34;https://mastodon.social&#34;&#62;mastodon.social&#60;/a&#62; now. But if you
+do this, that site may get confused, and permanently consider &#60;code&#62;@daniel@social.duan.ca&#60;/code&#62; as your fediverse
+identity. So don&#39;t do that! Finish the next step.&#60;/li&#62;
+&#60;li&#62;To use your root domain instead of this subdomain, you 301 redirect &#60;code&#62;/.well-known/host-meta*&#60;/code&#62; from root to
+the real location. &#60;a href=&#34;https://masto.host/mastodon-usernames-different-from-the-domain-used-for-installation/&#34;&#62;this article&#60;/a&#62; explains it very well. Make sure to both set up the URL
+redirect, as well as &#60;code&#62;LOCAL_DOMAIN&#60;/code&#62;, and &#60;code&#62;WEB_DOMAIN&#60;/code&#62; in &#60;code&#62;.env.production&#60;/code&#62;.&#60;/li&#62;
+&#60;li&#62;Make your user the owner of the site (RTFM). You&#39;ll see additional, site-wide settings afterwards. Make
+sure to disable signup, either in the GUI, or with &#60;code&#62;tootctl&#60;/code&#62;.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;That it! These may seem like a lot of tips, but I think, as a smart programmer, you can eventually figure all
+of these things out pretty easily. I put them down here because, had I known these, I would&#39;ve saved a bunch
+of times in the end.&#60;/p&#62;
+&#60;h2&#62;Why?&#60;/h2&#62;
+&#60;p&#62;Why spend the time, and money, to go through all of this?&#60;/p&#62;
+&#60;p&#62;This is a really good question. I &#60;a href=&#34;https://duan.ca/2022/11/20/the-social-graph/&#34;&#62;wished&#60;/a&#62; less people would
 leave Twitter. I host my personal site/blog on my own domain, as opposed to using a Medium site or something.
-So, if I have to &amp;quot;federate&amp;quot; my microblogs, why shouldn&#x27;t I try to gain more independence? How many of these
+So, if I have to &#38;quot;federate&#38;quot; my microblogs, why shouldn&#39;t I try to gain more independence? How many of these
 mastodon instances can do better than Twitter, in terms of site maintenance, and content moderation? Instinct
-tells me, something between self-hosting, and Twitter, might be the right balance. But I&#x27;m here for the long
-haul, and, if self-hosting proves to be the wrong direction, I&#x27;ll pivot.&lt;/p&gt;
-&lt;p&gt;Until then, this has been fun.&lt;/p&gt;
+tells me, something between self-hosting, and Twitter, might be the right balance. But I&#39;m here for the long
+haul, and, if self-hosting proves to be the wrong direction, I&#39;ll pivot.&#60;/p&#62;
+&#60;p&#62;Until then, this has been fun.&#60;/p&#62;
 </description>
                 <pubDate>Sat, 10 Dec 2022 18:21:11 -0800</pubDate>
                 <link>https://duan.ca/2022/12/10/lazy-mastodon/</link>

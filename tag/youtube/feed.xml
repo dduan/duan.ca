@@ -6,27 +6,27 @@
         <atom:link href="https://duan.ca/tag/youtube/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>TOML Decoder Playlist</title>
-                <description>&lt;p&gt;I enjoyed making &lt;a href=&quot;https://github.com/dduan/TOMLDeserializer&quot;&gt;TOMLDeserializer&lt;/a&gt; and &lt;a href=&quot;https://github.com/dduan/TOMLDecoder&quot;&gt;TOMLDecoder&lt;/a&gt; recently. Let&#x27;s hope
+                <description>&#60;p&#62;I enjoyed making &#60;a href=&#34;https://github.com/dduan/TOMLDeserializer&#34;&#62;TOMLDeserializer&#60;/a&#62; and &#60;a href=&#34;https://github.com/dduan/TOMLDecoder&#34;&#62;TOMLDecoder&#60;/a&#62; recently. Let&#39;s hope
 some projects will pick them up and TOML as a configuration format will start to
-spead in Swift communities.&lt;/p&gt;
-&lt;p&gt;What&#x27;s outstanding about these projects is that I started working on them while
-&lt;a href=&quot;https://twitch.tv/daniel_duan&quot;&gt;streaming&lt;/a&gt;. Personally, I consume a lot of content like this. So now people
-can watch me writing Swift, too.&lt;/p&gt;
-&lt;p&gt;I&#x27;ve been archiving recordings of these streams as much as I can. Here are the
-links to these videos, each is around 1-1.5 hours long:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://youtu.be/XLLlCEfuFLw&quot;&gt;Turn TOML Test Fixtures Into XCTests With Vim Macros&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://youtu.be/Ztq3K3cq8f0&quot;&gt;Passing TOML Deserialization Tests&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://youtu.be/GTCYSIc6n3U&quot;&gt;Finishing TOML Invalidation Tests&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://youtu.be/HP2Wzh8MVvg&quot;&gt;TOML Decoder: The Beginning&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://youtu.be/EZ7VpbrLkH0&quot;&gt;TOML Decoder: Filling In Missing Implementation Pieces&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://youtu.be/bISMVVWOHKg&quot;&gt;TOML Decoder: Adding The First TOML Decoding Strategy!&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://youtu.be/oOOS4bnhwx4&quot;&gt;TOML Decoder: Project Overview And Data Decoding Support&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://youtu.be/9yDtXsrMtbU&quot;&gt;TOML Decoder: Key Decoding Strategies&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://youtu.be/g1V872HL4Dk&quot;&gt;TOML Decoder: Project Updates&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The TOMLDecoder projects would&#x27;ve been capture on camera entirely if I weren&#x27;t
-such a streaming n00b and messed up a few streams. Hilarious.&lt;/p&gt;
+spead in Swift communities.&#60;/p&#62;
+&#60;p&#62;What&#39;s outstanding about these projects is that I started working on them while
+&#60;a href=&#34;https://twitch.tv/daniel_duan&#34;&#62;streaming&#60;/a&#62;. Personally, I consume a lot of content like this. So now people
+can watch me writing Swift, too.&#60;/p&#62;
+&#60;p&#62;I&#39;ve been archiving recordings of these streams as much as I can. Here are the
+links to these videos, each is around 1-1.5 hours long:&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;&#60;a href=&#34;https://youtu.be/XLLlCEfuFLw&#34;&#62;Turn TOML Test Fixtures Into XCTests With Vim Macros&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;https://youtu.be/Ztq3K3cq8f0&#34;&#62;Passing TOML Deserialization Tests&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;https://youtu.be/GTCYSIc6n3U&#34;&#62;Finishing TOML Invalidation Tests&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;https://youtu.be/HP2Wzh8MVvg&#34;&#62;TOML Decoder: The Beginning&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;https://youtu.be/EZ7VpbrLkH0&#34;&#62;TOML Decoder: Filling In Missing Implementation Pieces&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;https://youtu.be/bISMVVWOHKg&#34;&#62;TOML Decoder: Adding The First TOML Decoding Strategy!&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;https://youtu.be/oOOS4bnhwx4&#34;&#62;TOML Decoder: Project Overview And Data Decoding Support&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;https://youtu.be/9yDtXsrMtbU&#34;&#62;TOML Decoder: Key Decoding Strategies&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;https://youtu.be/g1V872HL4Dk&#34;&#62;TOML Decoder: Project Updates&#60;/a&#62;&#60;/li&#62;
+&#60;/ul&#62;
+&#60;p&#62;The TOMLDecoder projects would&#39;ve been capture on camera entirely if I weren&#39;t
+such a streaming n00b and messed up a few streams. Hilarious.&#60;/p&#62;
 </description>
                 <pubDate>Sun, 10 Mar 2019 20:32:37 -0700</pubDate>
                 <link>https://duan.ca/2019/03/10/toml-decoder/</link>
@@ -34,10 +34,10 @@ such a streaming n00b and messed up a few streams. Hilarious.&lt;/p&gt;
             </item>
             <item>
                 <title>Unix File Permissions In Swift</title>
-                <description>&lt;p&gt;Wrap file permissions from &lt;code&gt;stat&lt;/code&gt; and &lt;code&gt;chmod&lt;/code&gt; in an &lt;code&gt;OptionSet&lt;/code&gt; in Swift.&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/1ZrouR_F-AU&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+                <description>&#60;p&#62;Wrap file permissions from &#60;code&#62;stat&#60;/code&#62; and &#60;code&#62;chmod&#60;/code&#62; in an &#60;code&#62;OptionSet&#60;/code&#62; in Swift.&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/1ZrouR_F-AU&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
 </description>
                 <pubDate>Sun, 06 May 2018 16:43:20 -0700</pubDate>
                 <link>https://duan.ca/2018/05/06/unix-file-permissions-in-swift/</link>
@@ -45,11 +45,11 @@ such a streaming n00b and messed up a few streams. Hilarious.&lt;/p&gt;
             </item>
             <item>
                 <title>An Interpreter Without A Language</title>
-                <description>&lt;p&gt;From the &lt;a href=&quot;/2018/01/13/coding-without-a-language/&quot;&gt;AST&lt;/a&gt; and &lt;a href=&quot;/2018/01/20/scopes/&quot;&gt;scopes&lt;/a&gt;, come a simple interpreter. This intepreter can &amp;quot;execute&amp;quot; the fibonacci
-function AST and produce a correct results.&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/C16PD44qyOY&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+                <description>&#60;p&#62;From the &#60;a href=&#34;/2018/01/13/coding-without-a-language/&#34;&#62;AST&#60;/a&#62; and &#60;a href=&#34;/2018/01/20/scopes/&#34;&#62;scopes&#60;/a&#62;, come a simple interpreter. This intepreter can &#38;quot;execute&#38;quot; the fibonacci
+function AST and produce a correct results.&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/C16PD44qyOY&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen=&#34;&#34;&#62;&#60;/iframe&#62;
+&#60;/div&#62;
 </description>
                 <pubDate>Tue, 30 Jan 2018 12:53:38 -0800</pubDate>
                 <link>https://duan.ca/2018/01/30/an-interpreter-without-a-language/</link>
@@ -57,22 +57,22 @@ function AST and produce a correct results.&lt;/p&gt;
             </item>
             <item>
                 <title>Scopes Without A Language</title>
-                <description>&lt;p&gt;A short video on the concept of static scope.&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/o0jwyd8nUK4&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+                <description>&#60;p&#62;A short video on the concept of static scope.&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/o0jwyd8nUK4&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
 </description>
                 <pubDate>Sat, 20 Jan 2018 19:50:24 -0800</pubDate>
                 <link>https://duan.ca/2018/01/20/scopes/</link>
                 <guid isPermaLink="true">https://duan.ca/2018/01/20/scopes/</guid>
             </item>
             <item>
-                <title>Scripting A &#x27;cat&#x27; Under 1 Minute</title>
-                <description>&lt;p&gt;This video demonstrates a few things: the &lt;code&gt;readLine&lt;/code&gt; standard library function, scripting with Swift, and
-pattern matching as loop conditions. Enjoy!&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/8rAqzvChbak&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+                <title>Scripting A &#39;cat&#39; Under 1 Minute</title>
+                <description>&#60;p&#62;This video demonstrates a few things: the &#60;code&#62;readLine&#60;/code&#62; standard library function, scripting with Swift, and
+pattern matching as loop conditions. Enjoy!&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/8rAqzvChbak&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
 </description>
                 <pubDate>Sat, 06 Jan 2018 18:34:39 -0800</pubDate>
                 <link>https://duan.ca/2018/01/06/cat-under-1-minute/</link>
@@ -80,167 +80,167 @@ pattern matching as loop conditions. Enjoy!&lt;/p&gt;
             </item>
             <item>
                 <title>Hello World In WebAssembly</title>
-                <description>&lt;p&gt;Every now and then, I check on the progress of Web Assembly. I did it again
+                <description>&#60;p&#62;Every now and then, I check on the progress of Web Assembly. I did it again
 around the time of this post and finally found enough tutorials, examples, and
 working software to get myself started in this area. In doing so, I made a video
-to demo some progress. (&lt;em&gt;this article includes all the same information and
-more, so just read on if you don&#x27;t have 15 minutes for YouTube&lt;/em&gt;).&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/yEYtwmI7bDg&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;br&gt;
-&lt;h2&gt;Our goal:&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Use as much built-in tools on a Mac as possible. The web development
-toolchain scares me.&lt;/li&gt;
-&lt;li&gt;Target the browser. That&#x27;s where the value of WebAssembly is. (Node supports
-it as well. BUT, WHY THO?)&lt;/li&gt;
-&lt;li&gt;Build from scratch. In the video I started from &lt;code&gt;mkdir&lt;/code&gt; a folder. We should
+to demo some progress. (&#60;em&#62;this article includes all the same information and
+more, so just read on if you don&#39;t have 15 minutes for YouTube&#60;/em&#62;).&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/yEYtwmI7bDg&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
+&#60;br&#62;
+&#60;h2&#62;Our goal:&#60;/h2&#62;
+&#60;ol&#62;
+&#60;li&#62;Use as much built-in tools on a Mac as possible. The web development
+toolchain scares me.&#60;/li&#62;
+&#60;li&#62;Target the browser. That&#39;s where the value of WebAssembly is. (Node supports
+it as well. BUT, WHY THO?)&#60;/li&#62;
+&#60;li&#62;Build from scratch. In the video I started from &#60;code&#62;mkdir&#60;/code&#62; a folder. We should
 strive to understand details on every level whenever possible. Boilerplates
-and dependencies should come later.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Things you&#x27;ll need:&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;Safari 11+&lt;/li&gt;
-&lt;li&gt;Xcode. More specifically, you should be able to run &lt;code&gt;clang&lt;/code&gt; in a shell.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;The Workflow&lt;/h2&gt;
-&lt;p&gt;Having these things installed, get a copy of &lt;a href=&quot;https://github.com/WebAssembly/wabt&quot;&gt;The WebAssembly Binary
-Toolkit&lt;/a&gt; (wabt). Build it. The README has detailed instructions. I just went
-into the folder and ran&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;make clang-release
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This will generate a bunch of binary files in &lt;code&gt;out/clang/Release&lt;/code&gt; and you need
+and dependencies should come later.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;h2&#62;Things you&#39;ll need:&#60;/h2&#62;
+&#60;ol&#62;
+&#60;li&#62;Safari 11+&#60;/li&#62;
+&#60;li&#62;Xcode. More specifically, you should be able to run &#60;code&#62;clang&#60;/code&#62; in a shell.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;h2&#62;The Workflow&#60;/h2&#62;
+&#60;p&#62;Having these things installed, get a copy of &#60;a href=&#34;https://github.com/WebAssembly/wabt&#34;&#62;The WebAssembly Binary
+Toolkit&#60;/a&#62; (wabt). Build it. The README has detailed instructions. I just went
+into the folder and ran&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;make clang-release
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This will generate a bunch of binary files in &#60;code&#62;out/clang/Release&#60;/code&#62; and you need
 to make sure you can run them from wherever you want to work on WebAssembly
-project (so either copy them into a folder included in your &lt;code&gt;PATH&lt;/code&gt; environment
-variable or add the absolute path to &lt;code&gt;out/clang/Release&lt;/code&gt; to &lt;code&gt;PATH&lt;/code&gt;).&lt;/p&gt;
-&lt;p&gt;Among the binaries &amp;quot;wabt&amp;quot; builds, &lt;code&gt;wat2wasm&lt;/code&gt; takes a &lt;code&gt;.wat&lt;/code&gt; file and compiles it
-to a WebAssembly binary. A &lt;code&gt;.wat&lt;/code&gt; is a source file in the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format&quot;&gt;text format&lt;/a&gt; for
-WebAssembly, which is in the form of S-expressions. So&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;wat2wasm main.wat -o main.wasm
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;…will compile your WebAssembly module in &lt;code&gt;main.wat&lt;/code&gt; to generate &lt;code&gt;main.wasm&lt;/code&gt;, the
-binary file. For now, &lt;code&gt;main.wat&lt;/code&gt; can be the simplest WebAssembly program:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(module)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Running the binary in a browser demands the bulk of the work. First, we&#x27;ll need
-a web page. It doesn&#x27;t need any content other than invoking some JavaScript
-code.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
-&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
-&amp;lt;head&amp;gt;
-    &amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;
-    &amp;lt;title&amp;gt;&amp;lt;/title&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-    &amp;lt;!-- The only thing that matters is the following line,
-    although having a valid HTML5 page is nice. --&amp;gt;
-    &amp;lt;script src=&amp;quot;play.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;First, the Javascript logic needs to &lt;em&gt;fetch and instantiate the compiled
-WebAssembly module&lt;/em&gt;. Since this is not a JS or WebAssembly tutorial, I&#x27;ll point
-you to the docmuntation for &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API&quot;&gt;Fetch API&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise&quot;&gt;Promises&lt;/a&gt;, and &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly&quot;&gt;the WebAssembly
-object&lt;/a&gt; for details:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;fetch(&amp;quot;main.wasm&amp;quot;).then(reponse =&amp;gt;
+project (so either copy them into a folder included in your &#60;code&#62;PATH&#60;/code&#62; environment
+variable or add the absolute path to &#60;code&#62;out/clang/Release&#60;/code&#62; to &#60;code&#62;PATH&#60;/code&#62;).&#60;/p&#62;
+&#60;p&#62;Among the binaries &#38;quot;wabt&#38;quot; builds, &#60;code&#62;wat2wasm&#60;/code&#62; takes a &#60;code&#62;.wat&#60;/code&#62; file and compiles it
+to a WebAssembly binary. A &#60;code&#62;.wat&#60;/code&#62; is a source file in the &#60;a href=&#34;https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format&#34;&#62;text format&#60;/a&#62; for
+WebAssembly, which is in the form of S-expressions. So&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;wat2wasm main.wat -o main.wasm
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;…will compile your WebAssembly module in &#60;code&#62;main.wat&#60;/code&#62; to generate &#60;code&#62;main.wasm&#60;/code&#62;, the
+binary file. For now, &#60;code&#62;main.wat&#60;/code&#62; can be the simplest WebAssembly program:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-lisp&#34;&#62;(module)
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Running the binary in a browser demands the bulk of the work. First, we&#39;ll need
+a web page. It doesn&#39;t need any content other than invoking some JavaScript
+code.&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-html&#34;&#62;&#38;lt;!DOCTYPE html&#38;gt;
+&#38;lt;html lang=&#38;quot;en&#38;quot;&#38;gt;
+&#38;lt;head&#38;gt;
+    &#38;lt;meta charset=&#38;quot;UTF-8&#38;quot;&#38;gt;
+    &#38;lt;title&#38;gt;&#38;lt;/title&#38;gt;
+&#38;lt;/head&#38;gt;
+&#38;lt;body&#38;gt;
+    &#38;lt;!-- The only thing that matters is the following line,
+    although having a valid HTML5 page is nice. --&#38;gt;
+    &#38;lt;script src=&#38;quot;play.js&#38;quot;&#38;gt;&#38;lt;/script&#38;gt;
+&#38;lt;/body&#38;gt;
+&#38;lt;/html&#38;gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;First, the Javascript logic needs to &#60;em&#62;fetch and instantiate the compiled
+WebAssembly module&#60;/em&#62;. Since this is not a JS or WebAssembly tutorial, I&#39;ll point
+you to the docmuntation for &#60;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API&#34;&#62;Fetch API&#60;/a&#62;, &#60;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise&#34;&#62;Promises&#60;/a&#62;, and &#60;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly&#34;&#62;the WebAssembly
+object&#60;/a&#62; for details:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-javascript&#34;&#62;fetch(&#38;quot;main.wasm&#38;quot;).then(reponse =&#38;gt;
     reponse.arrayBuffer()
-).then(bytes =&amp;gt;
+).then(bytes =&#38;gt;
     WebAssembly.instantiate(bytes, {})
-).then(result =&amp;gt;
+).then(result =&#38;gt;
     result.instance
 ).then(main);
 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This snippet fetches &lt;code&gt;main.wasm&lt;/code&gt; (adjust this URL according to your choosing),
-instantiate it, then pass it into a function named &lt;code&gt;main&lt;/code&gt;, we can put
-a placeholder logic for it for now:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;function main(wasm) {
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This snippet fetches &#60;code&#62;main.wasm&#60;/code&#62; (adjust this URL according to your choosing),
+instantiate it, then pass it into a function named &#60;code&#62;main&#60;/code&#62;, we can put
+a placeholder logic for it for now:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-javascript&#34;&#62;function main(wasm) {
     console.log(wasm);
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Before we move on, you&#x27;ll find that simply opending your HTML file in browser
-and looking at developer console won&#x27;t work. Safari would complain about
-cross-domain request error for &lt;code&gt;fetch&lt;/code&gt;. So we need to serve these resources
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Before we move on, you&#39;ll find that simply opending your HTML file in browser
+and looking at developer console won&#39;t work. Safari would complain about
+cross-domain request error for &#60;code&#62;fetch&#60;/code&#62;. So we need to serve these resources
 locally. I usually use the built in server module from Python standard library
-for this kind of things:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;# In your source folder, run
+for this kind of things:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;# In your source folder, run
 python -m SimpleHTTPServer
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now go to &lt;a href=&quot;http://localhost:8000&quot;&gt;http://localhost:8000&lt;/a&gt; and click on your HTML file. If everything
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Now go to &#60;a href=&#34;http://localhost:8000&#34;&#62;http://localhost:8000&#60;/a&#62; and click on your HTML file. If everything
 went well, you should see a WebAssembly instance logged in the developer
-console.&lt;/p&gt;
-&lt;p&gt;Congratulations! You can start writing WebAssembly locally. Just remember to
-re-compile &lt;code&gt;main.wat&lt;/code&gt; with &lt;code&gt;wat2wasm&lt;/code&gt; whenever you want to test things out in
-browser.&lt;/p&gt;
-&lt;h2&gt;An Actual &amp;quot;Hello, World!&amp;quot; Implementation&lt;/h2&gt;
-&lt;p&gt;This is my implementation:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-lisp&quot;&gt;(module
-  ;; Allocate a page of linear memory (64kb). Export it as &amp;quot;memory&amp;quot;
-  (memory (export &amp;quot;memory&amp;quot;) 1)
+console.&#60;/p&#62;
+&#60;p&#62;Congratulations! You can start writing WebAssembly locally. Just remember to
+re-compile &#60;code&#62;main.wat&#60;/code&#62; with &#60;code&#62;wat2wasm&#60;/code&#62; whenever you want to test things out in
+browser.&#60;/p&#62;
+&#60;h2&#62;An Actual &#38;quot;Hello, World!&#38;quot; Implementation&#60;/h2&#62;
+&#60;p&#62;This is my implementation:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-lisp&#34;&#62;(module
+  ;; Allocate a page of linear memory (64kb). Export it as &#38;quot;memory&#38;quot;
+  (memory (export &#38;quot;memory&#38;quot;) 1)
 
   ;; Write the string at the start of the linear memory.
-  (data (i32.const 0) &amp;quot;Hello, world!&amp;quot;) ;; write string at location 0
+  (data (i32.const 0) &#38;quot;Hello, world!&#38;quot;) ;; write string at location 0
 
   ;; Export the position and length of the string.
-  (global (export &amp;quot;length&amp;quot;) i32 (i32.const 12))
-  (global (export &amp;quot;position&amp;quot;) i32 (i32.const 0)))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In other words, we expose information of the linear memory we manipulated to the
-JavaScript environment. Things that has been &lt;code&gt;export&lt;/code&gt;ed will show up as
-properties of &lt;code&gt;exports&lt;/code&gt; of the &lt;code&gt;WebAssembly&lt;/code&gt; instance. We can access them in the
-&lt;code&gt;main&lt;/code&gt; JavaScript functions:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;function main(wasm) {
+  (global (export &#38;quot;length&#38;quot;) i32 (i32.const 12))
+  (global (export &#38;quot;position&#38;quot;) i32 (i32.const 0)))
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;In other words, we expose information of the linear memory we manipulated to the
+JavaScript environment. Things that has been &#60;code&#62;export&#60;/code&#62;ed will show up as
+properties of &#60;code&#62;exports&#60;/code&#62; of the &#60;code&#62;WebAssembly&#60;/code&#62; instance. We can access them in the
+&#60;code&#62;main&#60;/code&#62; JavaScript functions:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-javascript&#34;&#62;function main(wasm) {
     const memory   = wasm.exports.memory;
     const length   = wasm.exports.length;
     const position = wasm.exports.position;
     ...
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Then it&#x27;s just plain-old Javascript (tho I had to steal it from tutorials).
-&lt;code&gt;memory.buffer&lt;/code&gt; is of type &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer&quot;&gt;ArrayBuffer&lt;/a&gt;. We need to convert it into a string
-and log it to the console:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;function main(wasm) {
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Then it&#39;s just plain-old Javascript (tho I had to steal it from tutorials).
+&#60;code&#62;memory.buffer&#60;/code&#62; is of type &#60;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer&#34;&#62;ArrayBuffer&#60;/a&#62;. We need to convert it into a string
+and log it to the console:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-javascript&#34;&#62;function main(wasm) {
     const memory   = wasm.exports.memory;
     const length   = wasm.exports.length;
     const position = wasm.exports.position;
 
     const bytes = new Uint8Array(memory.buffer, position, length);
-    const s = new TextDecoder(&#x27;utf8&#x27;).decode(bytes);
+    const s = new TextDecoder(&#39;utf8&#39;).decode(bytes);
 
     console.log(s);
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Et, voilà! &lt;code&gt;Hello, World!&lt;/code&gt; hot off a Web Assembly module in your developer
-console. To conclude, I personally like to use a &lt;code&gt;Makefile&lt;/code&gt; to streamline some
-of the typing. Here&#x27;s what I used for this demo:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-makefile&quot;&gt;compile:
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Et, voilà! &#60;code&#62;Hello, World!&#60;/code&#62; hot off a Web Assembly module in your developer
+console. To conclude, I personally like to use a &#60;code&#62;Makefile&#60;/code&#62; to streamline some
+of the typing. Here&#39;s what I used for this demo:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-makefile&#34;&#62;compile:
 	wat2wasm main.wat -o main.wasm
 
 serve:
 	python -m SimpleHTTPServer
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;No fancy schmancy Javascript build stack, no 3rd-party code dependency. Write
+&#60;/code&#62;&#60;/pre&#62;
+&#60;h2&#62;Conclusion&#60;/h2&#62;
+&#60;p&#62;No fancy schmancy Javascript build stack, no 3rd-party code dependency. Write
 code, compile, run on your (virtual, in browser) machine, repeat. That sounds like
-&amp;quot;assembly&amp;quot; to me!&lt;/p&gt;
+&#38;quot;assembly&#38;quot; to me!&#60;/p&#62;
 </description>
                 <pubDate>Sat, 30 Dec 2017 18:43:49 -0800</pubDate>
                 <link>https://duan.ca/2017/12/30/hello-world-in-webassembly/</link>
                 <guid isPermaLink="true">https://duan.ca/2017/12/30/hello-world-in-webassembly/</guid>
             </item>
             <item>
-                <title>Building &#x27;pwd&#x27; Under 1 Minute In Swift</title>
-                <description>&lt;p&gt;I guess I&#x27;m starting a series of minute-long videos. In this first video, I built &lt;code&gt;pwd&lt;/code&gt; out of &lt;code&gt;getcwd&lt;/code&gt;. The
-code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift&#x27;s great C-interop
-capability.&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/YR4MCcMnHrI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;p&gt;Some details are lost in this video, however. For example, the POSIX standard actually says &lt;code&gt;getcwd&lt;/code&gt;&#x27;s 2nd
-argument being &lt;code&gt;0&lt;/code&gt; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
-memory as needed). Swift&#x27;s handling of &lt;code&gt;char *&lt;/code&gt; aka &lt;code&gt;UnsafeMutablePointer&amp;lt;CChar&amp;gt;&lt;/code&gt; in context of a &lt;code&gt;var&lt;/code&gt; array
-is also very cool.&lt;/p&gt;
+                <title>Building &#39;pwd&#39; Under 1 Minute In Swift</title>
+                <description>&#60;p&#62;I guess I&#39;m starting a series of minute-long videos. In this first video, I built &#60;code&#62;pwd&#60;/code&#62; out of &#60;code&#62;getcwd&#60;/code&#62;. The
+code turned out shorter than I imagined (1 line). Which is a good demonstration of Swift&#39;s great C-interop
+capability.&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/YR4MCcMnHrI&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
+&#60;p&#62;Some details are lost in this video, however. For example, the POSIX standard actually says &#60;code&#62;getcwd&#60;/code&#62;&#39;s 2nd
+argument being &#60;code&#62;0&#60;/code&#62; is undefined. Luckily, both macOS and Linux define it the way we want (allocate as much
+memory as needed). Swift&#39;s handling of &#60;code&#62;char *&#60;/code&#62; aka &#60;code&#62;UnsafeMutablePointer&#38;lt;CChar&#38;gt;&#60;/code&#62; in context of a &#60;code&#62;var&#60;/code&#62; array
+is also very cool.&#60;/p&#62;
 </description>
                 <pubDate>Wed, 27 Dec 2017 01:13:07 -0800</pubDate>
                 <link>https://duan.ca/2017/12/27/building-pwd-under-1-minute-in-swift/</link>
@@ -248,14 +248,14 @@ is also very cool.&lt;/p&gt;
             </item>
             <item>
                 <title>Contributing To Open-Source Swift</title>
-                <description>&lt;p&gt;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes, on YouTube.&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/rwuj80W8TtI&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;Pull request: &lt;a href=&quot;https://github.com/apple/swift-corelibs-foundation/pull/1376&quot;&gt;https://github.com/apple/swift-corelibs-foundation/pull/1376&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;SR-6647: &lt;a href=&quot;https://bugs.swift.org/browse/SR-6647&quot;&gt;https://bugs.swift.org/browse/SR-6647&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+                <description>&#60;p&#62;I discover, report, fix and merge a bug in the open-source Foundation project. And why, yes, on YouTube.&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/rwuj80W8TtI&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
+&#60;ul&#62;
+&#60;li&#62;Pull request: &#60;a href=&#34;https://github.com/apple/swift-corelibs-foundation/pull/1376&#34;&#62;https://github.com/apple/swift-corelibs-foundation/pull/1376&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;SR-6647: &#60;a href=&#34;https://bugs.swift.org/browse/SR-6647&#34;&#62;https://bugs.swift.org/browse/SR-6647&#60;/a&#62;&#60;/li&#62;
+&#60;/ul&#62;
 </description>
                 <pubDate>Sat, 23 Dec 2017 13:21:10 -0800</pubDate>
                 <link>https://duan.ca/2017/12/23/contributing-to-open-source-foundation/</link>
@@ -263,15 +263,15 @@ is also very cool.&lt;/p&gt;
             </item>
             <item>
                 <title>BitArray The Final Act</title>
-                <description>&lt;p&gt;Alas, there&#x27;s the 3rd and last video about &lt;code&gt;BitArray&lt;/code&gt;, originated on my spark of inspiration on a Caltrain
+                <description>&#60;p&#62;Alas, there&#39;s the 3rd and last video about &#60;code&#62;BitArray&#60;/code&#62;, originated on my spark of inspiration on a Caltrain
 ride home. This makes my first YouTube playlist as well, even tho the first 2 videos were planned to be
-completely separate.&lt;/p&gt;
-&lt;p&gt;We added more standard library functionalities to BitArray (ExpressibleByArrayLiteral,
+completely separate.&#60;/p&#62;
+&#60;p&#62;We added more standard library functionalities to BitArray (ExpressibleByArrayLiteral,
 CustomStringConvertible, Equatable, etc). Then, we added documentation and other open-source things left
-undone from &amp;quot;episode 2&amp;quot;.&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/ckrd_FoFMl0&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+undone from &#38;quot;episode 2&#38;quot;.&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/ckrd_FoFMl0&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
 </description>
                 <pubDate>Tue, 19 Dec 2017 12:17:49 -0800</pubDate>
                 <link>https://duan.ca/2017/12/19/bitarray-final-act/</link>
@@ -279,40 +279,40 @@ undone from &amp;quot;episode 2&amp;quot;.&lt;/p&gt;
             </item>
             <item>
                 <title>Making An Open-Source Swift Project</title>
-                <description>&lt;p&gt;This video shows what it takes to open source a Swift project. Starting from some code in a playground,
+                <description>&#60;p&#62;This video shows what it takes to open source a Swift project. Starting from some code in a playground,
 I created a framework that supports distribution via Swift Package Manager, CocoaPods, Xcode project and
 Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
 SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
-Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
-the version tag, documentation generation, automatic Carthage binary generation, test coverage...&lt;/p&gt;
-&lt;p&gt;Anyways, here&#x27;s some stuff mentioned in the video:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Sample project from the video: &lt;a href=&quot;https://github.com/dduan/BitArray&quot;&gt;https://github.com/dduan/BitArray&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Video of me writing the code in this project: &lt;a href=&quot;https://www.youtube.com/watch?v=-k_jrIoD56k&quot;&gt;https://www.youtube.com/watch?v=-k_jrIoD56k&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Swift Package Manager: &lt;a href=&quot;https://swift.org/package-manager/&quot;&gt;https://swift.org/package-manager/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;CocoaPods: &lt;a href=&quot;https://cocoapods.org&quot;&gt;https://cocoapods.org&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Carthage: &lt;a href=&quot;https://github.com/Carthage/Carthage&quot;&gt;https://github.com/Carthage/Carthage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Xcconfigs for universal framework: &lt;a href=&quot;https://github.com/mrackwitz/xcconfigs&quot;&gt;https://github.com/mrackwitz/xcconfigs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;SwiftLint: &lt;a href=&quot;https://github.com/realm/SwiftLint&quot;&gt;https://github.com/realm/SwiftLint&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Travis CI: &lt;a href=&quot;https://travis-ci.org&quot;&gt;https://travis-ci.org&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/pA0T1CdqMt8&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
+&#60;p&#62;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
+the version tag, documentation generation, automatic Carthage binary generation, test coverage...&#60;/p&#62;
+&#60;p&#62;Anyways, here&#39;s some stuff mentioned in the video:&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;Sample project from the video: &#60;a href=&#34;https://github.com/dduan/BitArray&#34;&#62;https://github.com/dduan/BitArray&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Video of me writing the code in this project: &#60;a href=&#34;https://www.youtube.com/watch?v=-k_jrIoD56k&#34;&#62;https://www.youtube.com/watch?v=-k_jrIoD56k&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Swift Package Manager: &#60;a href=&#34;https://swift.org/package-manager/&#34;&#62;https://swift.org/package-manager/&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;CocoaPods: &#60;a href=&#34;https://cocoapods.org&#34;&#62;https://cocoapods.org&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Carthage: &#60;a href=&#34;https://github.com/Carthage/Carthage&#34;&#62;https://github.com/Carthage/Carthage&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Xcconfigs for universal framework: &#60;a href=&#34;https://github.com/mrackwitz/xcconfigs&#34;&#62;https://github.com/mrackwitz/xcconfigs&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;SwiftLint: &#60;a href=&#34;https://github.com/realm/SwiftLint&#34;&#62;https://github.com/realm/SwiftLint&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Travis CI: &#60;a href=&#34;https://travis-ci.org&#34;&#62;https://travis-ci.org&#60;/a&#62;&#60;/li&#62;
+&#60;/ul&#62;
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
                 <link>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</link>
                 <guid isPermaLink="true">https://duan.ca/2017/12/17/making-an-open-source-swift-project/</guid>
             </item>
             <item>
-                <title>Let&#x27;s Build A BitArray In Swift</title>
-                <description>&lt;p&gt;In this video, I build a space-efficient BitArray that confirms to &lt;code&gt;RandomAccessCollection&lt;/code&gt; in Swift in
-a playground. It involves some basic (but neat!) bitwise manipulation tricks.&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/-k_jrIoD56k&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;p&gt;I guess I&#x27;m a YouTuber now. You can subscribe to my &lt;a href=&quot;https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A&quot;&gt;channel&lt;/a&gt; 😛.&lt;/p&gt;
+                <title>Let&#39;s Build A BitArray In Swift</title>
+                <description>&#60;p&#62;In this video, I build a space-efficient BitArray that confirms to &#60;code&#62;RandomAccessCollection&#60;/code&#62; in Swift in
+a playground. It involves some basic (but neat!) bitwise manipulation tricks.&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/-k_jrIoD56k&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
+&#60;p&#62;I guess I&#39;m a YouTuber now. You can subscribe to my &#60;a href=&#34;https://www.youtube.com/channel/UCkBVC0dMgyUnxzettP7qE-A&#34;&#62;channel&#60;/a&#62; 😛.&#60;/p&#62;
 </description>
                 <pubDate>Tue, 12 Dec 2017 22:51:04 -0800</pubDate>
                 <link>https://duan.ca/2017/12/12/lets-build-a-bitarray-in-swift/</link>

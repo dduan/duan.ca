@@ -6,13 +6,13 @@
         <atom:link href="https://duan.ca/tag/pathos/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Fantastic Beasts in C and Where To Find Them in Swift</title>
-                <description>&lt;p&gt;Swift has a pretty decent C-interoperability story. But C has many features! Today, I&#x27;ll tell you
-a story involving a few not-so-well supported C features and Swift.&lt;/p&gt;
-&lt;p&gt;It all started when I decided to re-write &lt;a href=&quot;https://github.com/dduan/Pathos&quot;&gt;Pathos&lt;/a&gt; with Windows support. One of the library&#x27;s
-offering is reading the literal target of a symbolic link: if &lt;code&gt;b&lt;/code&gt; is a link to &lt;code&gt;a&lt;/code&gt;, then
-&lt;code&gt;Path(&amp;quot;b&amp;quot;).readSymlink()&lt;/code&gt; should return a another path that&#x27;s equivalent to &lt;code&gt;Path(&amp;quot;a&amp;quot;)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The Windows API that returns this information is &lt;a href=&quot;https://docs.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-deviceiocontrol&quot;&gt;DeviceIoControl&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;BOOL DeviceIoControl(
+                <description>&#60;p&#62;Swift has a pretty decent C-interoperability story. But C has many features! Today, I&#39;ll tell you
+a story involving a few not-so-well supported C features and Swift.&#60;/p&#62;
+&#60;p&#62;It all started when I decided to re-write &#60;a href=&#34;https://github.com/dduan/Pathos&#34;&#62;Pathos&#60;/a&#62; with Windows support. One of the library&#39;s
+offering is reading the literal target of a symbolic link: if &#60;code&#62;b&#60;/code&#62; is a link to &#60;code&#62;a&#60;/code&#62;, then
+&#60;code&#62;Path(&#38;quot;b&#38;quot;).readSymlink()&#60;/code&#62; should return a another path that&#39;s equivalent to &#60;code&#62;Path(&#38;quot;a&#38;quot;)&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;The Windows API that returns this information is &#60;a href=&#34;https://docs.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-deviceiocontrol&#34;&#62;DeviceIoControl&#60;/a&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-c&#34;&#62;BOOL DeviceIoControl(
   HANDLE       hDevice,
   DWORD        dwIoControlCode,
   LPVOID       lpInBuffer,
@@ -22,17 +22,17 @@ offering is reading the literal target of a symbolic link: if &lt;code&gt;b&lt;/
   LPDWORD      lpBytesReturned,
   LPOVERLAPPED lpOverlapped
 );
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Notice anything weird? Hint: &lt;code&gt;LPVOID&lt;/code&gt; is &lt;code&gt;void *&lt;/code&gt; in standard C.&lt;/p&gt;
-&lt;p&gt;This function is, for the lack of better words, polymorphic: depending on your input, it can intake
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Notice anything weird? Hint: &#60;code&#62;LPVOID&#60;/code&#62; is &#60;code&#62;void *&#60;/code&#62; in standard C.&#60;/p&#62;
+&#60;p&#62;This function is, for the lack of better words, polymorphic: depending on your input, it can intake
 and output different types. As a caller, it is your responsibility to look up what type is needed
-and cast them to and from those &lt;code&gt;void *&lt;/code&gt;s. The size of the data structure is returned as well. We&#x27;ll
-have a lot to talk about that later.&lt;/p&gt;
-&lt;p&gt;Perhaps, surprisingly, this is not too hard to deal with in Swift. In my &lt;a href=&quot;/2020/09/09/free-c-strings&quot;&gt;last article&lt;/a&gt;,
-I detailed how we can use an Swift API to work with C buffers:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;/// get the file `handle`...
+and cast them to and from those &#60;code&#62;void *&#60;/code&#62;s. The size of the data structure is returned as well. We&#39;ll
+have a lot to talk about that later.&#60;/p&#62;
+&#60;p&#62;Perhaps, surprisingly, this is not too hard to deal with in Swift. In my &#60;a href=&#34;/2020/09/09/free-c-strings&#34;&#62;last article&#60;/a&#62;,
+I detailed how we can use an Swift API to work with C buffers:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;/// get the file `handle`...
 /// now call `DeviceIoControl`
-var data = ContiguousArray&amp;lt;CChar&amp;gt;(
+var data = ContiguousArray&#38;lt;CChar&#38;gt;(
     unsafeUninitializedCapacity: kMax
 ) { buffer, count in
     var size: DWORD = 0
@@ -43,19 +43,19 @@ var data = ContiguousArray&amp;lt;CChar&amp;gt;(
         0,
         buffer.baseAddress,
         DWORD(buffer.count),
-        &amp;amp;size,
+        &#38;amp;size,
         nil
     )
     count = Int(size)
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So this fills the array of &lt;code&gt;CChar&lt;/code&gt;s with the necessary bytes for out result. I named the variable
-&lt;code&gt;data&lt;/code&gt; because it is exactly the same concept as &lt;code&gt;Foundation&lt;/code&gt;&#x27;s Data, as most Swift programmers
-know.&lt;/p&gt;
-&lt;p&gt;As promised, we&#x27;ll cast this data to the actual type so that we can retrieve information from its
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;So this fills the array of &#60;code&#62;CChar&#60;/code&#62;s with the necessary bytes for out result. I named the variable
+&#60;code&#62;data&#60;/code&#62; because it is exactly the same concept as &#60;code&#62;Foundation&#60;/code&#62;&#39;s Data, as most Swift programmers
+know.&#60;/p&#62;
+&#60;p&#62;As promised, we&#39;ll cast this data to the actual type so that we can retrieve information from its
 bytes. Side note: casting in this context is a documented usage, So it really is more awkward rather
-than bad. And there&#x27;s a safe way to do it:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;withUnsafePointer(to: data) {
+than bad. And there&#39;s a safe way to do it:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;withUnsafePointer(to: data) {
     $0.withMemoryRebound(
         to: [ReparseDataBuffer].self,
         capacity: 1
@@ -64,14 +64,14 @@ than bad. And there&#x27;s a safe way to do it:&lt;/p&gt;
         /// a `ReparseDataBuffer`! Yay
     }
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;em&gt;It&#x27;s very important to note that &lt;code&gt;ReparseDataBuffer&lt;/code&gt; is a struct with fixed, predictable layout,
-that the API &lt;code&gt;DeviceIoControl&lt;/code&gt; promises to return. In practice, this means it is defined in C. Swift
-does not currently guarantee struct layout. So unless you really know what you are doing and don&#x27;t
-care about forward compatibility, you should not do this with Swift structs.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;So far this story has been boring for avid Swift programmers. Fear not, things will get spicy now.&lt;/p&gt;
-&lt;p&gt;Let&#x27;s talk about this &lt;code&gt;ReparseDataBuffer&lt;/code&gt;. It&#x27;s an imported C type with a few notable features.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;typedef struct {
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;&#60;em&#62;It&#39;s very important to note that &#60;code&#62;ReparseDataBuffer&#60;/code&#62; is a struct with fixed, predictable layout,
+that the API &#60;code&#62;DeviceIoControl&#60;/code&#62; promises to return. In practice, this means it is defined in C. Swift
+does not currently guarantee struct layout. So unless you really know what you are doing and don&#39;t
+care about forward compatibility, you should not do this with Swift structs.&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;So far this story has been boring for avid Swift programmers. Fear not, things will get spicy now.&#60;/p&#62;
+&#60;p&#62;Let&#39;s talk about this &#60;code&#62;ReparseDataBuffer&#60;/code&#62;. It&#39;s an imported C type with a few notable features.&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-c&#34;&#62;typedef struct {
   unsigned long  ReparseTag;
   unsigned short ReparseDataLength;
   unsigned short Reserved;
@@ -96,26 +96,26 @@ care about forward compatibility, you should not do this with Swift structs.&lt;
     } GenericReparseBuffer;
   };
 } ReparseDataBuffer;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Feature #1: it has a &lt;em&gt;union member&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;A &lt;code&gt;union&lt;/code&gt; in C is an area in memory that could be any of the types specified in the union:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// X.a is a `char` and X.b is a `uint64_t`. 
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Feature #1: it has a &#60;em&#62;union member&#60;/em&#62;.&#60;/p&#62;
+&#60;p&#62;A &#60;code&#62;union&#60;/code&#62; in C is an area in memory that could be any of the types specified in the union:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-c&#34;&#62;// X.a is a `char` and X.b is a `uint64_t`. 
 // And they occupy the same memory because
 // only 1 of them exists at a time.
 typedef union {
     char a;
     uint64_t b;
 } X;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Swift does not own a direct analog for this. So if we import this &lt;code&gt;ReparseDataBuffer&lt;/code&gt; definition,
-there wouldn&#x27;t be a good way to access the data inside the union.&lt;/p&gt;
-&lt;p&gt;As I pointed out in the comment, members of a union occupy the same space in memory. The largest
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Swift does not own a direct analog for this. So if we import this &#60;code&#62;ReparseDataBuffer&#60;/code&#62; definition,
+there wouldn&#39;t be a good way to access the data inside the union.&#60;/p&#62;
+&#60;p&#62;As I pointed out in the comment, members of a union occupy the same space in memory. The largest
 member defines the size of that space, so everyone can fit inside of it. Each union member
 interprets the same bytes according to their own definition. Given this knowledge, we can derive
-a solution that works around Swift&#x27;s limitations: break up the union (sorry, this whole paragraph
-reads super suggestive of the real world union. It&#x27;s probably why this word is picked for this data
-structure in the first place. But I do not intend to say anything about the real world here)!&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;typedef struct {
+a solution that works around Swift&#39;s limitations: break up the union (sorry, this whole paragraph
+reads super suggestive of the real world union. It&#39;s probably why this word is picked for this data
+structure in the first place. But I do not intend to say anything about the real world here)!&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-c&#34;&#62;typedef struct {
   unsigned long reparseTag;
   unsigned short reparseDataLength;
   unsigned short reserved;
@@ -138,45 +138,45 @@ typedef struct {
   wchar_t pathBuffer[1];
 } MountPointReparseBuffer;
 
-// we don&#x27;t care about the 3rd union
+// we don&#39;t care about the 3rd union
 // member in this use case
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Conveniently for us, the union member in &lt;code&gt;ReparseDataBuffer&lt;/code&gt; is at the end. So we don&#x27;t need to
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Conveniently for us, the union member in &#60;code&#62;ReparseDataBuffer&#60;/code&#62; is at the end. So we don&#39;t need to
 worry about padding the unused space for smaller alternatives. Back in Swift, instead of dealing
-with &lt;code&gt;ReparseDataBuffer&lt;/code&gt; directly, we can work with &lt;code&gt;SymbolicLinkReparseBuffer&lt;/code&gt; or
-&lt;code&gt;MountPointReparseBuffer&lt;/code&gt;, depending on our expectation of which union member to read.&lt;/p&gt;
-&lt;p&gt;Yeah, this is a good time to mention that, &lt;a href=&quot;https://github.com/dduan/Pathos&quot;&gt;Pathos&lt;/a&gt; has to include copies of these definition in a
-separate C module. Not only because we need to &amp;quot;break up the union&amp;quot;, the original definition is also
-only accessible after importing some headers in the NT kernel. So the standard &lt;code&gt;import WinSDK&lt;/code&gt; won&#x27;t
-suffice.&lt;/p&gt;
-&lt;p&gt;Moving on to notable feature #2. The last member of both &lt;code&gt;SymbolicLinkReparseBuffer&lt;/code&gt; and
-&lt;code&gt;MountPointReparseBuffer&lt;/code&gt; &lt;code&gt;pathBuffer&lt;/code&gt; is a 1-character long array...why?&lt;/p&gt;
-&lt;p&gt;In C, this is a &lt;em&gt;flexible array member&lt;/em&gt;. Such member must always appear at the end of a struct.
-The word &amp;quot;flexible&amp;quot; in this context refers to the amount of memory allocated for this type of
+with &#60;code&#62;ReparseDataBuffer&#60;/code&#62; directly, we can work with &#60;code&#62;SymbolicLinkReparseBuffer&#60;/code&#62; or
+&#60;code&#62;MountPointReparseBuffer&#60;/code&#62;, depending on our expectation of which union member to read.&#60;/p&#62;
+&#60;p&#62;Yeah, this is a good time to mention that, &#60;a href=&#34;https://github.com/dduan/Pathos&#34;&#62;Pathos&#60;/a&#62; has to include copies of these definition in a
+separate C module. Not only because we need to &#38;quot;break up the union&#38;quot;, the original definition is also
+only accessible after importing some headers in the NT kernel. So the standard &#60;code&#62;import WinSDK&#60;/code&#62; won&#39;t
+suffice.&#60;/p&#62;
+&#60;p&#62;Moving on to notable feature #2. The last member of both &#60;code&#62;SymbolicLinkReparseBuffer&#60;/code&#62; and
+&#60;code&#62;MountPointReparseBuffer&#60;/code&#62; &#60;code&#62;pathBuffer&#60;/code&#62; is a 1-character long array...why?&#60;/p&#62;
+&#60;p&#62;In C, this is a &#60;em&#62;flexible array member&#60;/em&#62;. Such member must always appear at the end of a struct.
+The word &#38;quot;flexible&#38;quot; in this context refers to the amount of memory allocated for this type of
 structs : it can vary according to the length of the array as needed. The member such as
-&lt;code&gt;pathBuffer&lt;/code&gt; is here to provide access to the beginning of the buffer.&lt;/p&gt;
-&lt;p&gt;To Swift, &lt;code&gt;pathBuffer&lt;/code&gt; looks like a single &lt;code&gt;UInt16&lt;/code&gt;. The language obviously don&#x27;t have a good idea
-of this C feature. So how to we get the rest of the data from this array?&lt;/p&gt;
-&lt;p&gt;Once again, we have to lean on our understanding of memory layout in C structs.&lt;/p&gt;
-&lt;p&gt;As is common in APIs for flexible array members, the length of the array trailing the struct is
-provide to us. Let&#x27;s call it &lt;code&gt;flexibleLength&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2020/09/flexible_array_member.png&quot; alt=&quot;Illustration of memory layout for a C struct with flexible array member&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;We already have the memory for these structs in bytes (remember &lt;code&gt;data&lt;/code&gt;?). And we can get the size
-for the fixed potion of the structs with&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;let fixedStructSize = MemoryLayout&amp;lt;
+&#60;code&#62;pathBuffer&#60;/code&#62; is here to provide access to the beginning of the buffer.&#60;/p&#62;
+&#60;p&#62;To Swift, &#60;code&#62;pathBuffer&#60;/code&#62; looks like a single &#60;code&#62;UInt16&#60;/code&#62;. The language obviously don&#39;t have a good idea
+of this C feature. So how to we get the rest of the data from this array?&#60;/p&#62;
+&#60;p&#62;Once again, we have to lean on our understanding of memory layout in C structs.&#60;/p&#62;
+&#60;p&#62;As is common in APIs for flexible array members, the length of the array trailing the struct is
+provide to us. Let&#39;s call it &#60;code&#62;flexibleLength&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2020/09/flexible_array_member.png&#34; alt=&#34;Illustration of memory layout for a C struct with flexible array member&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;We already have the memory for these structs in bytes (remember &#60;code&#62;data&#60;/code&#62;?). And we can get the size
+for the fixed potion of the structs with&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;let fixedStructSize = MemoryLayout&#38;lt;
     SymbolicLinkReparseBuffer
-&amp;gt;.stride
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Putting it all together, we can get the full content of the array by&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;chopping off the content for struct itself,&lt;/li&gt;
-&lt;li&gt;casting the rest of the raw buffer to the expected element type, and&lt;/li&gt;
-&lt;li&gt;include the last member in this struct as the first element in the array&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;// Include the first element, which is at
+&#38;gt;.stride
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Putting it all together, we can get the full content of the array by&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;chopping off the content for struct itself,&#60;/li&#62;
+&#60;li&#62;casting the rest of the raw buffer to the expected element type, and&#60;/li&#62;
+&#60;li&#62;include the last member in this struct as the first element in the array&#60;/li&#62;
+&#60;/ol&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;// Include the first element, which is at
 // the end of the fixed struct potion.
 let arrayStart = fixedStructSize - 1
-// Cast the data buffer so it&#x27;s composed 
+// Cast the data buffer so it&#39;s composed 
 // of `wchar_t` aka `UInt16`s.
 let array = withUnsafePointer(to: data) {
     $0.withMemoryRebound(
@@ -185,19 +185,19 @@ let array = withUnsafePointer(to: data) {
     ) { sixteenBitData in
         // chop off the non-array potion
         sixteenBitData.pointee[
-            arrayStart ..&amp;lt; (arrayStart + flexibleLength)
+            arrayStart ..&#38;lt; (arrayStart + flexibleLength)
         ]
     }
 }
 
 // now, go nuts on the array! You earned it!
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Considerations such as error handling are intentionally left out in this article. You can checkout
-the source code of &lt;a href=&quot;https://github.com/dduan/Pathos&quot;&gt;Pathos&lt;/a&gt; (on the &lt;code&gt;next&lt;/code&gt; branch) for the full glory.&lt;/p&gt;
-&lt;p&gt;Anyways, the flexible array member turns out to be the literal target of the symbolic link. So here
-is the end of our story. I&#x27;m interested to hear about alternative approaches for dealing with union
-members and flexible array members in Swift. Let me know on &lt;a href=&quot;https://twitter.com/daniel_duan&quot;&gt;Twitter&lt;/a&gt;, or &lt;a href=&quot;&quot;&gt;Twitch&lt;/a&gt; when I&#x27;m
-streaming!&lt;/p&gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Considerations such as error handling are intentionally left out in this article. You can checkout
+the source code of &#60;a href=&#34;https://github.com/dduan/Pathos&#34;&#62;Pathos&#60;/a&#62; (on the &#60;code&#62;next&#60;/code&#62; branch) for the full glory.&#60;/p&#62;
+&#60;p&#62;Anyways, the flexible array member turns out to be the literal target of the symbolic link. So here
+is the end of our story. I&#39;m interested to hear about alternative approaches for dealing with union
+members and flexible array members in Swift. Let me know on &#60;a href=&#34;https://twitter.com/daniel_duan&#34;&#62;Twitter&#60;/a&#62;, or &#60;a href=&#34;&#34;&#62;Twitch&#60;/a&#62; when I&#39;m
+streaming!&#60;/p&#62;
 </description>
                 <pubDate>Sat, 12 Sep 2020 23:11:48 -0700</pubDate>
                 <link>https://duan.ca/2020/09/12/fantastic-c-beasts-and-where-to-find-them-in-swift/</link>
@@ -205,18 +205,18 @@ streaming!&lt;/p&gt;
             </item>
             <item>
                 <title>Faster C Strings in Swift</title>
-                <description>&lt;p&gt;One of the goals in the re-write of my VFS library &lt;a href=&quot;https://github.com/dduan/Pathos&quot;&gt;Pathos&lt;/a&gt; is to make it go
+                <description>&#60;p&#62;One of the goals in the re-write of my VFS library &#60;a href=&#34;https://github.com/dduan/Pathos&#34;&#62;Pathos&#60;/a&#62; is to make it go
 fast. What does that mean when most of the time users are hitting the hard
-drive when running your code? Well, let&#x27;s not dwell on that for now.&lt;/p&gt;
-&lt;p&gt;A library like this passes &lt;em&gt;file paths&lt;/em&gt; back and forth with C APIs from the OS
+drive when running your code? Well, let&#39;s not dwell on that for now.&#60;/p&#62;
+&#60;p&#62;A library like this passes &#60;em&#62;file paths&#60;/em&#62; back and forth with C APIs from the OS
 a lot. So one way to go fast is to keep the original representation of the paths
 as they are provided to us. On macOS and Linux (and other OSes that Swift
-doesn&#x27;t officially support yet), paths are bought and sold in the so called
-&amp;quot;C strings&amp;quot;: &lt;code&gt;NUL&lt;/code&gt;-terminated bytes (8-bit integers) with POSIX APIs and 16-bit
-values on Windows with &lt;code&gt;UNICODE&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Let&#x27;s walk over a couple of examples. Here&#x27;s how to get the current working
-directory:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// POSIX
+doesn&#39;t officially support yet), paths are bought and sold in the so called
+&#38;quot;C strings&#38;quot;: &#60;code&#62;NUL&#60;/code&#62;-terminated bytes (8-bit integers) with POSIX APIs and 16-bit
+values on Windows with &#60;code&#62;UNICODE&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;Let&#39;s walk over a couple of examples. Here&#39;s how to get the current working
+directory:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-c&#34;&#62;// POSIX
 char *getcwd(char *buf, size_t size);
 
 // Windows
@@ -225,58 +225,58 @@ DWORD GetCurrentDirectory(
     DWORD nBufferLength,
     LPTSTR lpBuffer
 );
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The expected steps for using APIs like this are the following:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;you allocate a buffer large enough to store any result you expect.&lt;/li&gt;
-&lt;li&gt;you give the buffer to the C function.&lt;/li&gt;
-&lt;li&gt;the C function fills the buffer with some characters, and a &lt;code&gt;NUL&lt;/code&gt; (or &lt;code&gt;0&lt;/code&gt;)
-right after the last character in the result.&lt;/li&gt;
-&lt;li&gt;the function use a separate variable to tell you the size of the actual
-result, not counting the &lt;code&gt;NUL&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;It&#x27;s very generous of these functions to give us the size of the result. Because
-the point of using &lt;code&gt;NUL&lt;/code&gt; to terminate &amp;quot;strings&amp;quot; is to avoid having to use
-a separate size. Let&#x27;s use &lt;em&gt;setting the current working directory&lt;/em&gt; as the next
-example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// POSIX
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;The expected steps for using APIs like this are the following:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;you allocate a buffer large enough to store any result you expect.&#60;/li&#62;
+&#60;li&#62;you give the buffer to the C function.&#60;/li&#62;
+&#60;li&#62;the C function fills the buffer with some characters, and a &#60;code&#62;NUL&#60;/code&#62; (or &#60;code&#62;0&#60;/code&#62;)
+right after the last character in the result.&#60;/li&#62;
+&#60;li&#62;the function use a separate variable to tell you the size of the actual
+result, not counting the &#60;code&#62;NUL&#60;/code&#62;.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;It&#39;s very generous of these functions to give us the size of the result. Because
+the point of using &#60;code&#62;NUL&#60;/code&#62; to terminate &#38;quot;strings&#38;quot; is to avoid having to use
+a separate size. Let&#39;s use &#60;em&#62;setting the current working directory&#60;/em&#62; as the next
+example:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-c&#34;&#62;// POSIX
 int chdir(const char *path);
 
 // Windows
 BOOL SetCurrentDirectory(LPCTSTR lpPathName);
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Yup, these APIs don&#x27;t need you to tell them the content size of your buffer. But
-if your content doesn&#x27;t end with a &lt;code&gt;NUL&lt;/code&gt;, they&#x27;ll happily read beyond your
-intended stopping point until it finds a random &lt;code&gt;0&lt;/code&gt; in memory.&lt;/p&gt;
-&lt;p&gt;Anyways, this is pretty classic C stuff. Now let&#x27;s talk about Swift!&lt;/p&gt;
-&lt;p&gt;The default option to store a file path for most should be a &lt;code&gt;Swift.String&lt;/code&gt;,
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Yup, these APIs don&#39;t need you to tell them the content size of your buffer. But
+if your content doesn&#39;t end with a &#60;code&#62;NUL&#60;/code&#62;, they&#39;ll happily read beyond your
+intended stopping point until it finds a random &#60;code&#62;0&#60;/code&#62; in memory.&#60;/p&#62;
+&#60;p&#62;Anyways, this is pretty classic C stuff. Now let&#39;s talk about Swift!&#60;/p&#62;
+&#60;p&#62;The default option to store a file path for most should be a &#60;code&#62;Swift.String&#60;/code&#62;,
 which is a encoding-agnostic, Unicode glyph based list of characters. But as
 I mentioned earlier, I want to avoid the cost of decoding and encoding in the
 case where the path is only passing through the Swift code from C to C, without
-being analyzed or modified. (If you need a refresher, &lt;a href=&quot;https://youtu.be/Vy2r21kli0Q&quot;&gt;I recently made a video
-on Unicode and encoding&lt;/a&gt;.) So I chose to use an
-&lt;a href=&quot;https://developer.apple.com/documentation/swift/contiguousarray&quot;&gt;ContiguousArray&lt;/a&gt; to store these C values:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;// Simplified for POSIX
+being analyzed or modified. (If you need a refresher, &#60;a href=&#34;https://youtu.be/Vy2r21kli0Q&#34;&#62;I recently made a video
+on Unicode and encoding&#60;/a&#62;.) So I chose to use an
+&#60;a href=&#34;https://developer.apple.com/documentation/swift/contiguousarray&#34;&#62;ContiguousArray&#60;/a&#62; to store these C values:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;// Simplified for POSIX
 struct Path {
-    let storage: ContiguousArray&amp;lt;CChar&amp;gt;
+    let storage: ContiguousArray&#38;lt;CChar&#38;gt;
     // ...
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;ContiguousArray&lt;/code&gt; (and &lt;code&gt;Array&lt;/code&gt;) provides an excellent way to interact with C
-APIs we encountered earlier:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;init(
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;&#60;code&#62;ContiguousArray&#60;/code&#62; (and &#60;code&#62;Array&#60;/code&#62;) provides an excellent way to interact with C
+APIs we encountered earlier:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;init(
     unsafeUninitializedCapacity: Int,
     initializingWith initializer: (
-        inout UnsafeMutableBufferPointer&amp;lt;Element&amp;gt;,
+        inout UnsafeMutableBufferPointer&#38;lt;Element&#38;gt;,
         inout Int
-    ) throws -&amp;gt; Void
+    ) throws -&#38;gt; Void
 ) rethrows
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Don&#x27;t let the complex-looking signature intimidate you. Essentially, it gives
-you write access to the array&#x27;s memory right after its allocation, but before
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Don&#39;t let the complex-looking signature intimidate you. Essentially, it gives
+you write access to the array&#39;s memory right after its allocation, but before
 Swift does standard initialization to it. It works really well with the C APIs
-we looked at earlier:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;// Store the current directory in a ContiguousArray
+we looked at earlier:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;// Store the current directory in a ContiguousArray
 // Using the Windows API
 let storage = ContiguousArray(
     unsafeUninitializedCapacity: Int(MAX_PATH)
@@ -288,36 +288,36 @@ let storage = ContiguousArray(
 
     count = length // you are responsible for setting size of the array
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Read the steps 1-4 again from earlier, it&#x27;s easy to see how this initializer is
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Read the steps 1-4 again from earlier, it&#39;s easy to see how this initializer is
 designed to fit that pattern. The resulting array will have all the characters
-as its content, and carries the correct size.&lt;/p&gt;
-&lt;p&gt;When it&#x27;s time to pass the array back to C, we can provide a pointer easily:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;storage.withUnsafeBufferPointer {
+as its content, and carries the correct size.&#60;/p&#62;
+&#60;p&#62;When it&#39;s time to pass the array back to C, we can provide a pointer easily:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;storage.withUnsafeBufferPointer {
     SetCurrentDirectory($0.baseAddress!)
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This is not great, because we don&#x27;t have a &lt;code&gt;NUL&lt;/code&gt; at the end of our array.  The
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This is not great, because we don&#39;t have a &#60;code&#62;NUL&#60;/code&#62; at the end of our array.  The
 C function that read our array will sometimes read over the contents memory
-until it finds a 0! Yikes.&lt;/p&gt;
-&lt;p&gt;So here&#x27;s an easy fix:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;(storage + [0]).withUnsafeBufferPointer {
+until it finds a 0! Yikes.&#60;/p&#62;
+&#60;p&#62;So here&#39;s an easy fix:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;(storage + [0]).withUnsafeBufferPointer {
     SetCurrentDirectory($0.baseAddress!)
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Instead of using the memory of &lt;code&gt;storage&lt;/code&gt;, we construct a new array with an 0 as
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Instead of using the memory of &#60;code&#62;storage&#60;/code&#62;, we construct a new array with an 0 as
 its last value. This lets C APIs pick the right place to stop reading.
-(Incidentally, Swift includes a built-in version of this &lt;a href=&quot;https://developer.apple.com/documentation/swift/string/2430818-utf8cstring&quot;&gt;for converting String
-to UTF-8 (8-bit) C strings&lt;/a&gt;,
-which includes the &lt;code&gt;NUL&lt;/code&gt; and it&#x27;s possible to further encode with different
-encodings.)&lt;/p&gt;
-&lt;p&gt;Although we&#x27;ve fixed the correctness bug, doing this defeats the purpose of
+(Incidentally, Swift includes a built-in version of this &#60;a href=&#34;https://developer.apple.com/documentation/swift/string/2430818-utf8cstring&#34;&#62;for converting String
+to UTF-8 (8-bit) C strings&#60;/a&#62;,
+which includes the &#60;code&#62;NUL&#60;/code&#62; and it&#39;s possible to further encode with different
+encodings.)&#60;/p&#62;
+&#60;p&#62;Although we&#39;ve fixed the correctness bug, doing this defeats the purpose of
 storing the C string directly somewhat: constructing a new array each time we
 want to call a C API is kind of expensive. It involves allocating new memories
-and copying over the content, etc.&lt;/p&gt;
-&lt;p&gt;Alright. How about we carry around the &lt;code&gt;NUL&lt;/code&gt; in our array? Let&#x27;s update the
-construction code:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;let storage = ContiguousArray(
+and copying over the content, etc.&#60;/p&#62;
+&#60;p&#62;Alright. How about we carry around the &#60;code&#62;NUL&#60;/code&#62; in our array? Let&#39;s update the
+construction code:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;let storage = ContiguousArray(
     unsafeUninitializedCapacity: Int(MAX_PATH) + 1
 ) { buffer, count
     let length = GetCurrentWorkingDirectoryW(
@@ -328,33 +328,33 @@ construction code:&lt;/p&gt;
     buffer[length] = 0
     count = length + 1
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We add 1 every time we have a say in size. Then we manually set a 0 at the end
-of the stuff from C. Having done this, we&#x27;ve solved both the correctness problem
-and performance concern from earlier!&lt;/p&gt;
-&lt;p&gt;The last bit of of this journey is ergonomics. Carrying an extra &lt;code&gt;NUL&lt;/code&gt; is fine
-if you never look at the array&#x27;s content. But when you do, it&#x27;s important to
-remember that the content we care about is &lt;em&gt;almost&lt;/em&gt; all of the array, except for
-the &lt;code&gt;NUL&lt;/code&gt; at the end. In other words, simply don&#x27;t make off-by-1 mistakes and
-everything will be fine.&lt;/p&gt;
-&lt;p&gt;Alright, that&#x27;s easier said than done. To alleviate this off-by-1 painfulness,
-I ended up exposing a &amp;quot;view&amp;quot; into the array storage that excludes the last
-element. Here&#x27;s the actual definition in &lt;a href=&quot;https://github.com/dduan/Pathos&quot;&gt;Pathos&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;struct CString&amp;lt;Unit: BinaryInteger&amp;gt;: Equatable, Hashable {
-    private var storage: ContiguousArray&amp;lt;Unit&amp;gt;
-    var content: ContiguousArray&amp;lt;Unit&amp;gt;.SubSequence {
-        storage[0 ..&amp;lt; storage.count - 1]
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;We add 1 every time we have a say in size. Then we manually set a 0 at the end
+of the stuff from C. Having done this, we&#39;ve solved both the correctness problem
+and performance concern from earlier!&#60;/p&#62;
+&#60;p&#62;The last bit of of this journey is ergonomics. Carrying an extra &#60;code&#62;NUL&#60;/code&#62; is fine
+if you never look at the array&#39;s content. But when you do, it&#39;s important to
+remember that the content we care about is &#60;em&#62;almost&#60;/em&#62; all of the array, except for
+the &#60;code&#62;NUL&#60;/code&#62; at the end. In other words, simply don&#39;t make off-by-1 mistakes and
+everything will be fine.&#60;/p&#62;
+&#60;p&#62;Alright, that&#39;s easier said than done. To alleviate this off-by-1 painfulness,
+I ended up exposing a &#38;quot;view&#38;quot; into the array storage that excludes the last
+element. Here&#39;s the actual definition in &#60;a href=&#34;https://github.com/dduan/Pathos&#34;&#62;Pathos&#60;/a&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;struct CString&#38;lt;Unit: BinaryInteger&#38;gt;: Equatable, Hashable {
+    private var storage: ContiguousArray&#38;lt;Unit&#38;gt;
+    var content: ContiguousArray&#38;lt;Unit&#38;gt;.SubSequence {
+        storage[0 ..&#38;lt; storage.count - 1]
     }
 
-    public func c&amp;lt;T&amp;gt;(
-        action: (UnsafePointer&amp;lt;Unit&amp;gt;) throws -&amp;gt; T) throws -&amp;gt; T
+    public func c&#38;lt;T&#38;gt;(
+        action: (UnsafePointer&#38;lt;Unit&#38;gt;) throws -&#38;gt; T) throws -&#38;gt; T
     {
         try content.withUnsafeBufferPointer {
             try action($0.baseAddress!)
         }
     }
 
-    init(cString: UnsafePointer&amp;lt;Unit&amp;gt;) {
+    init(cString: UnsafePointer&#38;lt;Unit&#38;gt;) {
        var length = 0
        while cString.advanced(by: length).pointee != 0 {
            length += 1
@@ -363,7 +363,7 @@ element. Here&#x27;s the actual definition in &lt;a href=&quot;https://github.co
        storage = ContiguousArray(
            unsafeUninitializedCapacity: length + 1
        ) { buffer, count in
-           for offset in 0 ..&amp;lt; length {
+           for offset in 0 ..&#38;lt; length {
                buffer[offset] = cString.advanced(by: offset).pointee
            }
 
@@ -374,11 +374,11 @@ element. Here&#x27;s the actual definition in &lt;a href=&quot;https://github.co
 
     // ... more stuff
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;storage&lt;/code&gt; in this solution is an private implementation detail. &lt;code&gt;content&lt;/code&gt; is
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;&#60;code&#62;storage&#60;/code&#62; in this solution is an private implementation detail. &#60;code&#62;content&#60;/code&#62; is
 the primary access to the content of the string. And finally, this type
-interops with C APIs correctly and efficiently because of the extra &lt;code&gt;NUL&lt;/code&gt; we put
-at the end of &lt;code&gt;storage&lt;/code&gt;.&lt;/p&gt;
+interops with C APIs correctly and efficiently because of the extra &#60;code&#62;NUL&#60;/code&#62; we put
+at the end of &#60;code&#62;storage&#60;/code&#62;.&#60;/p&#62;
 </description>
                 <pubDate>Wed, 09 Sep 2020 01:21:26 -0700</pubDate>
                 <link>https://duan.ca/2020/09/09/free-c-strings/</link>

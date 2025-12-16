@@ -6,56 +6,56 @@
         <atom:link href="https://duan.ca/tag/mlir/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Notes on Using the MLIR C API in Swift</title>
-                <description>&lt;p&gt;For curiosity&#x27;s sake, I decided I want to play with MLIR&#x27;s C API with Swift.
+                <description>&#60;p&#62;For curiosity&#39;s sake, I decided I want to play with MLIR&#39;s C API with Swift.
 I spent quite some time to get a skeleton project up and running on my Mac.
-Here&#x27;s my notes for future reference. (If you find this useful, I&#x27;d be curious
-to know what you&#x27;re working on!).&lt;/p&gt;
-&lt;p&gt;Modern LLVM comes shipped with MLIR. At the time of writing, all I had to do to
-get it is &lt;code&gt;brew install llvm&lt;/code&gt;. If you used the default Homebrew installation
-options, you&#x27;ll find &lt;code&gt;libMLIR.dylib&lt;/code&gt; and friends under
-&lt;code&gt;/opt/homebrew/opt/llvm/&lt;/code&gt;. Building MLIR following the
-&lt;a href=&quot;https://mlir.llvm.org/getting_started/&quot;&gt;instructions&lt;/a&gt; on the website is also
-fairly straightforward.&lt;/p&gt;
-&lt;p&gt;You&#x27;ll want &lt;code&gt;llvm-config&lt;/code&gt; from your version of LLVM to be in your path. For the
-Homebrew-installed version, you want &lt;code&gt;/opt/homebrew/opt/llvm/bin/&lt;/code&gt; to be one of
-the place the shell looks.&lt;/p&gt;
-&lt;p&gt;Now, it&#x27;s time to make the project. With CMake, of course. Because I couldn&#x27;t
+Here&#39;s my notes for future reference. (If you find this useful, I&#39;d be curious
+to know what you&#39;re working on!).&#60;/p&#62;
+&#60;p&#62;Modern LLVM comes shipped with MLIR. At the time of writing, all I had to do to
+get it is &#60;code&#62;brew install llvm&#60;/code&#62;. If you used the default Homebrew installation
+options, you&#39;ll find &#60;code&#62;libMLIR.dylib&#60;/code&#62; and friends under
+&#60;code&#62;/opt/homebrew/opt/llvm/&#60;/code&#62;. Building MLIR following the
+&#60;a href=&#34;https://mlir.llvm.org/getting_started/&#34;&#62;instructions&#60;/a&#62; on the website is also
+fairly straightforward.&#60;/p&#62;
+&#60;p&#62;You&#39;ll want &#60;code&#62;llvm-config&#60;/code&#62; from your version of LLVM to be in your path. For the
+Homebrew-installed version, you want &#60;code&#62;/opt/homebrew/opt/llvm/bin/&#60;/code&#62; to be one of
+the place the shell looks.&#60;/p&#62;
+&#60;p&#62;Now, it&#39;s time to make the project. With CMake, of course. Because I couldn&#39;t
 figure out how to tell SwiftPM to link the right dylib :) But worry not, CMake
-ain&#x27;t that bad.&lt;/p&gt;
-&lt;p&gt;Like with SwiftPM, we want to make a module for the MLIR C API. I call the module
-&lt;code&gt;cmlir&lt;/code&gt;. Make a directory with that name, and create 2 text files:&lt;/p&gt;
-&lt;p&gt;First, &lt;code&gt;module.modulemap&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;module cmlir [system] {
-  header &amp;quot;shim.h&amp;quot;
+ain&#39;t that bad.&#60;/p&#62;
+&#60;p&#62;Like with SwiftPM, we want to make a module for the MLIR C API. I call the module
+&#60;code&#62;cmlir&#60;/code&#62;. Make a directory with that name, and create 2 text files:&#60;/p&#62;
+&#60;p&#62;First, &#60;code&#62;module.modulemap&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;module cmlir [system] {
+  header &#38;quot;shim.h&#38;quot;
   export *
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Second, &lt;code&gt;shim.h&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;#include &amp;lt;mlir-c/IR.h&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Amazing.&lt;/p&gt;
-&lt;p&gt;Let&#x27;s assume we want to have a Swift library that uses &lt;code&gt;cmlir&lt;/code&gt;. And a executable
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Second, &#60;code&#62;shim.h&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-c&#34;&#62;#include &#38;lt;mlir-c/IR.h&#38;gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Amazing.&#60;/p&#62;
+&#60;p&#62;Let&#39;s assume we want to have a Swift library that uses &#60;code&#62;cmlir&#60;/code&#62;. And a executable
 that depends on the library. You can organize the Swift source files for these
-as you like (yay CMake!).&lt;/p&gt;
-&lt;p&gt;The sample library has one file, &lt;code&gt;lib.swift&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;import cmlir
+as you like (yay CMake!).&#60;/p&#62;
+&#60;p&#62;The sample library has one file, &#60;code&#62;lib.swift&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;import cmlir
 
-public func makeAContext() -&amp;gt; MlirContext {
+public func makeAContext() -&#38;gt; MlirContext {
     mlirContextCreate()
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The sample app is just a &lt;code&gt;main.swift&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;import MLIRSwift
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;The sample app is just a &#60;code&#62;main.swift&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;import MLIRSwift
 
 print(makeContext())
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;... as you can see, through these targets, we are expecting to properly execute
-some code from MLIR.&lt;/p&gt;
-&lt;p&gt;All that&#x27;s left is to build all these stuff. AKA, the hard part! But the
-&lt;code&gt;CMakeLists.txt&lt;/code&gt; really isn&#x27;t that bad. I&#x27;ll just leave it here with comments:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-cmake&quot;&gt;cmake_minimum_required(VERSION 3.22)
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;... as you can see, through these targets, we are expecting to properly execute
+some code from MLIR.&#60;/p&#62;
+&#60;p&#62;All that&#39;s left is to build all these stuff. AKA, the hard part! But the
+&#60;code&#62;CMakeLists.txt&#60;/code&#62; really isn&#39;t that bad. I&#39;ll just leave it here with comments:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-cmake&#34;&#62;cmake_minimum_required(VERSION 3.22)
 
-# Note we include &amp;quot;C&amp;quot; here, without it there&#x27;d be a build error 🤷
+# Note we include &#38;quot;C&#38;quot; here, without it there&#39;d be a build error 🤷
 project(swift-mlir LANGUAGES C CXX Swift)
 
 # This is where llvm-config comes to play
@@ -66,7 +66,7 @@ include_directories(${MLIR_INCLUDE_DIRS})
 # Include our modulemap
 include_directories(cmlir)
 
-# I can&#x27;t believe this is all it takes to make a Swift dylib!
+# I can&#39;t believe this is all it takes to make a Swift dylib!
 add_library(MLIRSwift SHARED lib.swift)
 
 # Wasted a lot of time on figuring out the right library to link T-T
@@ -75,28 +75,28 @@ target_link_libraries(MLIRSwift PRIVATE MLIRCAPIIR)
 # Nothing special here
 add_executable(myapp main.swift)
 target_link_libraries(myapp PRIVATE MLIRSwift)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And there you have it. Here&#x27;s the file structure in the end:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;.
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;And there you have it. Here&#39;s the file structure in the end:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;.
 ├── CMakeLists.txt
 ├── cmlir
 │   ├── module.modulemap
 │   └── shim.h
 ├── lib.swift
 └── main.swift
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;For completeness, I&#x27;ll also include commands that produces the final
-executables. It&#x27;s just the simplest cmake commands. But it may not be obvious
-for Swift programmers:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;make build # make a bulid direcory anywhere, make sure you .gitignore it if necessary
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;For completeness, I&#39;ll also include commands that produces the final
+executables. It&#39;s just the simplest cmake commands. But it may not be obvious
+for Swift programmers:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;make build # make a bulid direcory anywhere, make sure you .gitignore it if necessary
 cd build
 cmake -G Ninja ..
 cmake --build .
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;With this sample project, running &lt;code&gt;build/myapp&lt;/code&gt; should get you this output:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;MlirContext(ptr: Optional(0x0000600001784180))
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And that&#x27;s just exciting, isn&#x27;t it?&lt;/p&gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;With this sample project, running &#60;code&#62;build/myapp&#60;/code&#62; should get you this output:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;MlirContext(ptr: Optional(0x0000600001784180))
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;And that&#39;s just exciting, isn&#39;t it?&#60;/p&#62;
 </description>
                 <pubDate>Sat, 31 Aug 2024 18:44:48 -0700</pubDate>
                 <link>https://duan.ca/2024/08/swift-mlir-cmake/</link>

@@ -6,70 +6,70 @@
         <atom:link href="https://duan.ca/tag/email/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Replying To Old Mailing List Threads</title>
-                <description>&lt;p&gt;&lt;em&gt;One common complains on the Swift Evolution mailing list is about its
+                <description>&#60;p&#62;&#60;em&#62;One common complains on the Swift Evolution mailing list is about its
 inscrutable interface. If you see an inactive thread on the web archive but
-haven&#x27;t subscribed, there seems to be no way to participate or &amp;quot;revive&amp;quot; it
-since you never received any of its emails.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;With a &lt;a href=&quot;https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20170206/031537.html&quot;&gt;hint&lt;/a&gt; and some experiments, I&#x27;ve discovered that there is
+haven&#39;t subscribed, there seems to be no way to participate or &#38;quot;revive&#38;quot; it
+since you never received any of its emails.&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;&#60;em&#62;With a &#60;a href=&#34;https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20170206/031537.html&#34;&#62;hint&#60;/a&#62; and some experiments, I&#39;ve discovered that there is
 a way. This post reveals the magic step by step (without commenting on the
-merits of email or this solution).&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Like HTTP, Email is a text-based &lt;a href=&quot;https://tools.ietf.org/html/rfc2822&quot;&gt;protocol&lt;/a&gt;. Unlike HTTP, we directly
-consume payloads of this protocol and, as a consequence, don&#x27;t think much about
-that very fact.&lt;/p&gt;
-&lt;p&gt;Like HTTP, each email includes headers hidden by normal email clients. Each
+merits of email or this solution).&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;Like HTTP, Email is a text-based &#60;a href=&#34;https://tools.ietf.org/html/rfc2822&#34;&#62;protocol&#60;/a&#62;. Unlike HTTP, we directly
+consume payloads of this protocol and, as a consequence, don&#39;t think much about
+that very fact.&#60;/p&#62;
+&#60;p&#62;Like HTTP, each email includes headers hidden by normal email clients. Each
 header is essentially two strings, a key and a value, separated by a colon.
-Among these headers are &lt;code&gt;Message-Id&lt;/code&gt; and &lt;code&gt;In-Reply-To&lt;/code&gt;. When we tell our email
-client applications to start a reply, they take the value from &lt;code&gt;Message-Id&lt;/code&gt;
-and use it as value for &lt;code&gt;In-Reply-To&lt;/code&gt; automatically.&lt;/p&gt;
-&lt;p&gt;To observe all this in action, we can open some emails with our favorite text
+Among these headers are &#60;code&#62;Message-Id&#60;/code&#62; and &#60;code&#62;In-Reply-To&#60;/code&#62;. When we tell our email
+client applications to start a reply, they take the value from &#60;code&#62;Message-Id&#60;/code&#62;
+and use it as value for &#60;code&#62;In-Reply-To&#60;/code&#62; automatically.&#60;/p&#62;
+&#60;p&#62;To observe all this in action, we can open some emails with our favorite text
 editors and look for these headers. Of course, this require us to know where the
 emails exist as files. On macOS, an easy thing to do is to drag from Mail.app to
-Finder/Desktop and open the resulting .eml file:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2017/02/open-email.gif&quot; alt=&quot;Open an email in text editors&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Among the (perhaps overwhelming amount of) headers, we&#x27;ll find the two fields we
-are looking for:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2017/02/email-headers.png&quot; alt=&quot;Email Headers Message-Id and In-Reply-To&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;… I&#x27;ll leave the clients&#x27; reply behavior regarding these fields for the reader
-to verify.&lt;/p&gt;
-&lt;p&gt;Mailing list software such as GNU Mailman, which &lt;a href=&quot;https://swift.org&quot;&gt;swift.org&lt;/a&gt; and &lt;a href=&quot;http://llvm.org&quot;&gt;llvm.org&lt;/a&gt;
+Finder/Desktop and open the resulting .eml file:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2017/02/open-email.gif&#34; alt=&#34;Open an email in text editors&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;Among the (perhaps overwhelming amount of) headers, we&#39;ll find the two fields we
+are looking for:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2017/02/email-headers.png&#34; alt=&#34;Email Headers Message-Id and In-Reply-To&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;… I&#39;ll leave the clients&#39; reply behavior regarding these fields for the reader
+to verify.&#60;/p&#62;
+&#60;p&#62;Mailing list software such as GNU Mailman, which &#60;a href=&#34;https://swift.org&#34;&#62;swift.org&#60;/a&#62; and &#60;a href=&#34;http://llvm.org&#34;&#62;llvm.org&#60;/a&#62;
 use to host various mailing lists, associate emails in threads by chaining them
 with the headers explained above, among other things. As long as we have
-a message&#x27;s &lt;code&gt;Message-Id&lt;/code&gt;, we can reply to it &amp;quot;officially&amp;quot; by adding its value to
-the &lt;code&gt;In-Reply-To&lt;/code&gt; header in our email, regardless of whether we have received
-that email ourselves previously.&lt;/p&gt;
-&lt;p&gt;So here are the steps to reply retroactively to a mailing list thread.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;find &lt;code&gt;Message-Id&lt;/code&gt; of the mailing list message we want to reply to.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;This value is contained in the mailing list web archive&#x27;s &lt;code&gt;mailto&lt;/code&gt; link.
-Unfortunately Mail.app doesn&#x27;t recognize it. It&#x27;s easy enough to find it
-ourselves though:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2017/02/find-message-id.gif&quot; alt=&quot;Finding Message-Id on mailman archive&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Note the &lt;code&gt;&amp;lt;&lt;/code&gt;, &lt;code&gt;&amp;gt;&lt;/code&gt;, &lt;code&gt;@&lt;/code&gt; characters are percent-quoted. We have to recover the
+a message&#39;s &#60;code&#62;Message-Id&#60;/code&#62;, we can reply to it &#38;quot;officially&#38;quot; by adding its value to
+the &#60;code&#62;In-Reply-To&#60;/code&#62; header in our email, regardless of whether we have received
+that email ourselves previously.&#60;/p&#62;
+&#60;p&#62;So here are the steps to reply retroactively to a mailing list thread.&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;
+&#60;p&#62;&#60;strong&#62;find &#60;code&#62;Message-Id&#60;/code&#62; of the mailing list message we want to reply to.&#60;/strong&#62;&#60;/p&#62;
+&#60;p&#62;This value is contained in the mailing list web archive&#39;s &#60;code&#62;mailto&#60;/code&#62; link.
+Unfortunately Mail.app doesn&#39;t recognize it. It&#39;s easy enough to find it
+ourselves though:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2017/02/find-message-id.gif&#34; alt=&#34;Finding Message-Id on mailman archive&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;Note the &#60;code&#62;&#38;lt;&#60;/code&#62;, &#60;code&#62;&#38;gt;&#60;/code&#62;, &#60;code&#62;@&#60;/code&#62; characters are percent-quoted. We have to recover the
 id values to the format
-&lt;code&gt;&amp;lt;alphanumerics-potentially-separated-by-dash@address.com&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Another way to acquire this value is from the gzip&#x27;d archive. There they
+&#60;code&#62;&#38;lt;alphanumerics-potentially-separated-by-dash@address.com&#38;gt;&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;Another way to acquire this value is from the gzip&#39;d archive. There they
 just exist as plain text. The downside is you have to dig out the message
-itself first.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Add &lt;code&gt;In-Reply-To&lt;/code&gt; header to our email.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Draft a new email, make its title the same as our email chain&#x27;s title (this
-is a good idea because lots of email &lt;em&gt;clients&lt;/em&gt; do use the title to thread
+itself first.&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;&#60;strong&#62;Add &#60;code&#62;In-Reply-To&#60;/code&#62; header to our email.&#60;/strong&#62;&#60;/p&#62;
+&#60;p&#62;Draft a new email, make its title the same as our email chain&#39;s title (this
+is a good idea because lots of email &#60;em&#62;clients&#60;/em&#62; do use the title to thread
 messages). Set the appropriate recipients, and CCs, including the mailing
-list&#x27;s address. Now save this email as draft and open it in a text editor as
+list&#39;s address. Now save this email as draft and open it in a text editor as
 we did in our investigations.  Add in the line
-&lt;code&gt;In-Reply-To: &amp;lt;id-we-found-in-step-one.address.com&amp;gt;&lt;/code&gt;, save it. Then send this
-email (for example, open it with Mail.app and use Message-&amp;gt;Send Again in the
-menu).&lt;/p&gt;
-&lt;p&gt;Of course, some email client &lt;a href=&quot;http://www.pixelbeat.org/docs/thunderbird-threading.html&quot;&gt;supports&lt;/a&gt; adding it
-from their GUI.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;You&#x27;ll find the in addition to functioning as an normal message to the
+&#60;code&#62;In-Reply-To: &#38;lt;id-we-found-in-step-one.address.com&#38;gt;&#60;/code&#62;, save it. Then send this
+email (for example, open it with Mail.app and use Message-&#38;gt;Send Again in the
+menu).&#60;/p&#62;
+&#60;p&#62;Of course, some email client &#60;a href=&#34;http://www.pixelbeat.org/docs/thunderbird-threading.html&#34;&#62;supports&#60;/a&#62; adding it
+from their GUI.&#60;/p&#62;
+&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;You&#39;ll find the in addition to functioning as an normal message to the
 recipients, the mailing list will properly put your message to the original
 thread (in the case of swift-evolution, only if your reply is within the same
-week).&lt;/p&gt;
+week).&#60;/p&#62;
 </description>
                 <pubDate>Tue, 07 Feb 2017 10:21:19 -0800</pubDate>
                 <link>https://duan.ca/2017/02/07/replying-to-old-mailing-list-threads/</link>

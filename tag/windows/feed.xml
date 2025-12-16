@@ -6,13 +6,13 @@
         <atom:link href="https://duan.ca/tag/windows/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Fantastic Beasts in C and Where To Find Them in Swift</title>
-                <description>&lt;p&gt;Swift has a pretty decent C-interoperability story. But C has many features! Today, I&#x27;ll tell you
-a story involving a few not-so-well supported C features and Swift.&lt;/p&gt;
-&lt;p&gt;It all started when I decided to re-write &lt;a href=&quot;https://github.com/dduan/Pathos&quot;&gt;Pathos&lt;/a&gt; with Windows support. One of the library&#x27;s
-offering is reading the literal target of a symbolic link: if &lt;code&gt;b&lt;/code&gt; is a link to &lt;code&gt;a&lt;/code&gt;, then
-&lt;code&gt;Path(&amp;quot;b&amp;quot;).readSymlink()&lt;/code&gt; should return a another path that&#x27;s equivalent to &lt;code&gt;Path(&amp;quot;a&amp;quot;)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The Windows API that returns this information is &lt;a href=&quot;https://docs.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-deviceiocontrol&quot;&gt;DeviceIoControl&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;BOOL DeviceIoControl(
+                <description>&#60;p&#62;Swift has a pretty decent C-interoperability story. But C has many features! Today, I&#39;ll tell you
+a story involving a few not-so-well supported C features and Swift.&#60;/p&#62;
+&#60;p&#62;It all started when I decided to re-write &#60;a href=&#34;https://github.com/dduan/Pathos&#34;&#62;Pathos&#60;/a&#62; with Windows support. One of the library&#39;s
+offering is reading the literal target of a symbolic link: if &#60;code&#62;b&#60;/code&#62; is a link to &#60;code&#62;a&#60;/code&#62;, then
+&#60;code&#62;Path(&#38;quot;b&#38;quot;).readSymlink()&#60;/code&#62; should return a another path that&#39;s equivalent to &#60;code&#62;Path(&#38;quot;a&#38;quot;)&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;The Windows API that returns this information is &#60;a href=&#34;https://docs.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-deviceiocontrol&#34;&#62;DeviceIoControl&#60;/a&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-c&#34;&#62;BOOL DeviceIoControl(
   HANDLE       hDevice,
   DWORD        dwIoControlCode,
   LPVOID       lpInBuffer,
@@ -22,17 +22,17 @@ offering is reading the literal target of a symbolic link: if &lt;code&gt;b&lt;/
   LPDWORD      lpBytesReturned,
   LPOVERLAPPED lpOverlapped
 );
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Notice anything weird? Hint: &lt;code&gt;LPVOID&lt;/code&gt; is &lt;code&gt;void *&lt;/code&gt; in standard C.&lt;/p&gt;
-&lt;p&gt;This function is, for the lack of better words, polymorphic: depending on your input, it can intake
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Notice anything weird? Hint: &#60;code&#62;LPVOID&#60;/code&#62; is &#60;code&#62;void *&#60;/code&#62; in standard C.&#60;/p&#62;
+&#60;p&#62;This function is, for the lack of better words, polymorphic: depending on your input, it can intake
 and output different types. As a caller, it is your responsibility to look up what type is needed
-and cast them to and from those &lt;code&gt;void *&lt;/code&gt;s. The size of the data structure is returned as well. We&#x27;ll
-have a lot to talk about that later.&lt;/p&gt;
-&lt;p&gt;Perhaps, surprisingly, this is not too hard to deal with in Swift. In my &lt;a href=&quot;/2020/09/09/free-c-strings&quot;&gt;last article&lt;/a&gt;,
-I detailed how we can use an Swift API to work with C buffers:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;/// get the file `handle`...
+and cast them to and from those &#60;code&#62;void *&#60;/code&#62;s. The size of the data structure is returned as well. We&#39;ll
+have a lot to talk about that later.&#60;/p&#62;
+&#60;p&#62;Perhaps, surprisingly, this is not too hard to deal with in Swift. In my &#60;a href=&#34;/2020/09/09/free-c-strings&#34;&#62;last article&#60;/a&#62;,
+I detailed how we can use an Swift API to work with C buffers:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;/// get the file `handle`...
 /// now call `DeviceIoControl`
-var data = ContiguousArray&amp;lt;CChar&amp;gt;(
+var data = ContiguousArray&#38;lt;CChar&#38;gt;(
     unsafeUninitializedCapacity: kMax
 ) { buffer, count in
     var size: DWORD = 0
@@ -43,19 +43,19 @@ var data = ContiguousArray&amp;lt;CChar&amp;gt;(
         0,
         buffer.baseAddress,
         DWORD(buffer.count),
-        &amp;amp;size,
+        &#38;amp;size,
         nil
     )
     count = Int(size)
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So this fills the array of &lt;code&gt;CChar&lt;/code&gt;s with the necessary bytes for out result. I named the variable
-&lt;code&gt;data&lt;/code&gt; because it is exactly the same concept as &lt;code&gt;Foundation&lt;/code&gt;&#x27;s Data, as most Swift programmers
-know.&lt;/p&gt;
-&lt;p&gt;As promised, we&#x27;ll cast this data to the actual type so that we can retrieve information from its
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;So this fills the array of &#60;code&#62;CChar&#60;/code&#62;s with the necessary bytes for out result. I named the variable
+&#60;code&#62;data&#60;/code&#62; because it is exactly the same concept as &#60;code&#62;Foundation&#60;/code&#62;&#39;s Data, as most Swift programmers
+know.&#60;/p&#62;
+&#60;p&#62;As promised, we&#39;ll cast this data to the actual type so that we can retrieve information from its
 bytes. Side note: casting in this context is a documented usage, So it really is more awkward rather
-than bad. And there&#x27;s a safe way to do it:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;withUnsafePointer(to: data) {
+than bad. And there&#39;s a safe way to do it:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;withUnsafePointer(to: data) {
     $0.withMemoryRebound(
         to: [ReparseDataBuffer].self,
         capacity: 1
@@ -64,14 +64,14 @@ than bad. And there&#x27;s a safe way to do it:&lt;/p&gt;
         /// a `ReparseDataBuffer`! Yay
     }
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;em&gt;It&#x27;s very important to note that &lt;code&gt;ReparseDataBuffer&lt;/code&gt; is a struct with fixed, predictable layout,
-that the API &lt;code&gt;DeviceIoControl&lt;/code&gt; promises to return. In practice, this means it is defined in C. Swift
-does not currently guarantee struct layout. So unless you really know what you are doing and don&#x27;t
-care about forward compatibility, you should not do this with Swift structs.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;So far this story has been boring for avid Swift programmers. Fear not, things will get spicy now.&lt;/p&gt;
-&lt;p&gt;Let&#x27;s talk about this &lt;code&gt;ReparseDataBuffer&lt;/code&gt;. It&#x27;s an imported C type with a few notable features.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;typedef struct {
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;&#60;em&#62;It&#39;s very important to note that &#60;code&#62;ReparseDataBuffer&#60;/code&#62; is a struct with fixed, predictable layout,
+that the API &#60;code&#62;DeviceIoControl&#60;/code&#62; promises to return. In practice, this means it is defined in C. Swift
+does not currently guarantee struct layout. So unless you really know what you are doing and don&#39;t
+care about forward compatibility, you should not do this with Swift structs.&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;So far this story has been boring for avid Swift programmers. Fear not, things will get spicy now.&#60;/p&#62;
+&#60;p&#62;Let&#39;s talk about this &#60;code&#62;ReparseDataBuffer&#60;/code&#62;. It&#39;s an imported C type with a few notable features.&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-c&#34;&#62;typedef struct {
   unsigned long  ReparseTag;
   unsigned short ReparseDataLength;
   unsigned short Reserved;
@@ -96,26 +96,26 @@ care about forward compatibility, you should not do this with Swift structs.&lt;
     } GenericReparseBuffer;
   };
 } ReparseDataBuffer;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Feature #1: it has a &lt;em&gt;union member&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;A &lt;code&gt;union&lt;/code&gt; in C is an area in memory that could be any of the types specified in the union:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;// X.a is a `char` and X.b is a `uint64_t`. 
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Feature #1: it has a &#60;em&#62;union member&#60;/em&#62;.&#60;/p&#62;
+&#60;p&#62;A &#60;code&#62;union&#60;/code&#62; in C is an area in memory that could be any of the types specified in the union:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-c&#34;&#62;// X.a is a `char` and X.b is a `uint64_t`. 
 // And they occupy the same memory because
 // only 1 of them exists at a time.
 typedef union {
     char a;
     uint64_t b;
 } X;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Swift does not own a direct analog for this. So if we import this &lt;code&gt;ReparseDataBuffer&lt;/code&gt; definition,
-there wouldn&#x27;t be a good way to access the data inside the union.&lt;/p&gt;
-&lt;p&gt;As I pointed out in the comment, members of a union occupy the same space in memory. The largest
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Swift does not own a direct analog for this. So if we import this &#60;code&#62;ReparseDataBuffer&#60;/code&#62; definition,
+there wouldn&#39;t be a good way to access the data inside the union.&#60;/p&#62;
+&#60;p&#62;As I pointed out in the comment, members of a union occupy the same space in memory. The largest
 member defines the size of that space, so everyone can fit inside of it. Each union member
 interprets the same bytes according to their own definition. Given this knowledge, we can derive
-a solution that works around Swift&#x27;s limitations: break up the union (sorry, this whole paragraph
-reads super suggestive of the real world union. It&#x27;s probably why this word is picked for this data
-structure in the first place. But I do not intend to say anything about the real world here)!&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-c&quot;&gt;typedef struct {
+a solution that works around Swift&#39;s limitations: break up the union (sorry, this whole paragraph
+reads super suggestive of the real world union. It&#39;s probably why this word is picked for this data
+structure in the first place. But I do not intend to say anything about the real world here)!&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-c&#34;&#62;typedef struct {
   unsigned long reparseTag;
   unsigned short reparseDataLength;
   unsigned short reserved;
@@ -138,45 +138,45 @@ typedef struct {
   wchar_t pathBuffer[1];
 } MountPointReparseBuffer;
 
-// we don&#x27;t care about the 3rd union
+// we don&#39;t care about the 3rd union
 // member in this use case
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Conveniently for us, the union member in &lt;code&gt;ReparseDataBuffer&lt;/code&gt; is at the end. So we don&#x27;t need to
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Conveniently for us, the union member in &#60;code&#62;ReparseDataBuffer&#60;/code&#62; is at the end. So we don&#39;t need to
 worry about padding the unused space for smaller alternatives. Back in Swift, instead of dealing
-with &lt;code&gt;ReparseDataBuffer&lt;/code&gt; directly, we can work with &lt;code&gt;SymbolicLinkReparseBuffer&lt;/code&gt; or
-&lt;code&gt;MountPointReparseBuffer&lt;/code&gt;, depending on our expectation of which union member to read.&lt;/p&gt;
-&lt;p&gt;Yeah, this is a good time to mention that, &lt;a href=&quot;https://github.com/dduan/Pathos&quot;&gt;Pathos&lt;/a&gt; has to include copies of these definition in a
-separate C module. Not only because we need to &amp;quot;break up the union&amp;quot;, the original definition is also
-only accessible after importing some headers in the NT kernel. So the standard &lt;code&gt;import WinSDK&lt;/code&gt; won&#x27;t
-suffice.&lt;/p&gt;
-&lt;p&gt;Moving on to notable feature #2. The last member of both &lt;code&gt;SymbolicLinkReparseBuffer&lt;/code&gt; and
-&lt;code&gt;MountPointReparseBuffer&lt;/code&gt; &lt;code&gt;pathBuffer&lt;/code&gt; is a 1-character long array...why?&lt;/p&gt;
-&lt;p&gt;In C, this is a &lt;em&gt;flexible array member&lt;/em&gt;. Such member must always appear at the end of a struct.
-The word &amp;quot;flexible&amp;quot; in this context refers to the amount of memory allocated for this type of
+with &#60;code&#62;ReparseDataBuffer&#60;/code&#62; directly, we can work with &#60;code&#62;SymbolicLinkReparseBuffer&#60;/code&#62; or
+&#60;code&#62;MountPointReparseBuffer&#60;/code&#62;, depending on our expectation of which union member to read.&#60;/p&#62;
+&#60;p&#62;Yeah, this is a good time to mention that, &#60;a href=&#34;https://github.com/dduan/Pathos&#34;&#62;Pathos&#60;/a&#62; has to include copies of these definition in a
+separate C module. Not only because we need to &#38;quot;break up the union&#38;quot;, the original definition is also
+only accessible after importing some headers in the NT kernel. So the standard &#60;code&#62;import WinSDK&#60;/code&#62; won&#39;t
+suffice.&#60;/p&#62;
+&#60;p&#62;Moving on to notable feature #2. The last member of both &#60;code&#62;SymbolicLinkReparseBuffer&#60;/code&#62; and
+&#60;code&#62;MountPointReparseBuffer&#60;/code&#62; &#60;code&#62;pathBuffer&#60;/code&#62; is a 1-character long array...why?&#60;/p&#62;
+&#60;p&#62;In C, this is a &#60;em&#62;flexible array member&#60;/em&#62;. Such member must always appear at the end of a struct.
+The word &#38;quot;flexible&#38;quot; in this context refers to the amount of memory allocated for this type of
 structs : it can vary according to the length of the array as needed. The member such as
-&lt;code&gt;pathBuffer&lt;/code&gt; is here to provide access to the beginning of the buffer.&lt;/p&gt;
-&lt;p&gt;To Swift, &lt;code&gt;pathBuffer&lt;/code&gt; looks like a single &lt;code&gt;UInt16&lt;/code&gt;. The language obviously don&#x27;t have a good idea
-of this C feature. So how to we get the rest of the data from this array?&lt;/p&gt;
-&lt;p&gt;Once again, we have to lean on our understanding of memory layout in C structs.&lt;/p&gt;
-&lt;p&gt;As is common in APIs for flexible array members, the length of the array trailing the struct is
-provide to us. Let&#x27;s call it &lt;code&gt;flexibleLength&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2020/09/flexible_array_member.png&quot; alt=&quot;Illustration of memory layout for a C struct with flexible array member&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;We already have the memory for these structs in bytes (remember &lt;code&gt;data&lt;/code&gt;?). And we can get the size
-for the fixed potion of the structs with&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;let fixedStructSize = MemoryLayout&amp;lt;
+&#60;code&#62;pathBuffer&#60;/code&#62; is here to provide access to the beginning of the buffer.&#60;/p&#62;
+&#60;p&#62;To Swift, &#60;code&#62;pathBuffer&#60;/code&#62; looks like a single &#60;code&#62;UInt16&#60;/code&#62;. The language obviously don&#39;t have a good idea
+of this C feature. So how to we get the rest of the data from this array?&#60;/p&#62;
+&#60;p&#62;Once again, we have to lean on our understanding of memory layout in C structs.&#60;/p&#62;
+&#60;p&#62;As is common in APIs for flexible array members, the length of the array trailing the struct is
+provide to us. Let&#39;s call it &#60;code&#62;flexibleLength&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2020/09/flexible_array_member.png&#34; alt=&#34;Illustration of memory layout for a C struct with flexible array member&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;We already have the memory for these structs in bytes (remember &#60;code&#62;data&#60;/code&#62;?). And we can get the size
+for the fixed potion of the structs with&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;let fixedStructSize = MemoryLayout&#38;lt;
     SymbolicLinkReparseBuffer
-&amp;gt;.stride
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Putting it all together, we can get the full content of the array by&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;chopping off the content for struct itself,&lt;/li&gt;
-&lt;li&gt;casting the rest of the raw buffer to the expected element type, and&lt;/li&gt;
-&lt;li&gt;include the last member in this struct as the first element in the array&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;// Include the first element, which is at
+&#38;gt;.stride
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Putting it all together, we can get the full content of the array by&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;chopping off the content for struct itself,&#60;/li&#62;
+&#60;li&#62;casting the rest of the raw buffer to the expected element type, and&#60;/li&#62;
+&#60;li&#62;include the last member in this struct as the first element in the array&#60;/li&#62;
+&#60;/ol&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;// Include the first element, which is at
 // the end of the fixed struct potion.
 let arrayStart = fixedStructSize - 1
-// Cast the data buffer so it&#x27;s composed 
+// Cast the data buffer so it&#39;s composed 
 // of `wchar_t` aka `UInt16`s.
 let array = withUnsafePointer(to: data) {
     $0.withMemoryRebound(
@@ -185,19 +185,19 @@ let array = withUnsafePointer(to: data) {
     ) { sixteenBitData in
         // chop off the non-array potion
         sixteenBitData.pointee[
-            arrayStart ..&amp;lt; (arrayStart + flexibleLength)
+            arrayStart ..&#38;lt; (arrayStart + flexibleLength)
         ]
     }
 }
 
 // now, go nuts on the array! You earned it!
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Considerations such as error handling are intentionally left out in this article. You can checkout
-the source code of &lt;a href=&quot;https://github.com/dduan/Pathos&quot;&gt;Pathos&lt;/a&gt; (on the &lt;code&gt;next&lt;/code&gt; branch) for the full glory.&lt;/p&gt;
-&lt;p&gt;Anyways, the flexible array member turns out to be the literal target of the symbolic link. So here
-is the end of our story. I&#x27;m interested to hear about alternative approaches for dealing with union
-members and flexible array members in Swift. Let me know on &lt;a href=&quot;https://twitter.com/daniel_duan&quot;&gt;Twitter&lt;/a&gt;, or &lt;a href=&quot;&quot;&gt;Twitch&lt;/a&gt; when I&#x27;m
-streaming!&lt;/p&gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Considerations such as error handling are intentionally left out in this article. You can checkout
+the source code of &#60;a href=&#34;https://github.com/dduan/Pathos&#34;&#62;Pathos&#60;/a&#62; (on the &#60;code&#62;next&#60;/code&#62; branch) for the full glory.&#60;/p&#62;
+&#60;p&#62;Anyways, the flexible array member turns out to be the literal target of the symbolic link. So here
+is the end of our story. I&#39;m interested to hear about alternative approaches for dealing with union
+members and flexible array members in Swift. Let me know on &#60;a href=&#34;https://twitter.com/daniel_duan&#34;&#62;Twitter&#60;/a&#62;, or &#60;a href=&#34;&#34;&#62;Twitch&#60;/a&#62; when I&#39;m
+streaming!&#60;/p&#62;
 </description>
                 <pubDate>Sat, 12 Sep 2020 23:11:48 -0700</pubDate>
                 <link>https://duan.ca/2020/09/12/fantastic-c-beasts-and-where-to-find-them-in-swift/</link>
@@ -205,48 +205,48 @@ streaming!&lt;/p&gt;
             </item>
             <item>
                 <title>Introducing Dye</title>
-                <description>&lt;p&gt;&lt;em&gt;Recently, I got a PC. And I started writing some code on Windows for the
+                <description>&#60;p&#62;&#60;em&#62;Recently, I got a PC. And I started writing some code on Windows for the
 giggles. Naturally, I gravitate towards stuff I use on macOS and Linux when it
 comes to tooling. To my delight, NeoVim, ripgrep and fzf all work out of the box
-in terminal simulators, which brings us to todays main topic...&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;I made a terminal coloring library for Swift that works on Windows,
-&lt;a href=&quot;https://github.com/dduan/Dye/releases/tag/0.0.1&quot;&gt;Dye 0.0.1 is available now&lt;/a&gt;!&lt;/p&gt;
-&lt;h2&gt;So, why?&lt;/h2&gt;
-&lt;p&gt;When I started working on &lt;a href=&quot;https://github.com/dduan/tre&quot;&gt;tre&lt;/a&gt;, I search in the
+in terminal simulators, which brings us to todays main topic...&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;I made a terminal coloring library for Swift that works on Windows,
+&#60;a href=&#34;https://github.com/dduan/Dye/releases/tag/0.0.1&#34;&#62;Dye 0.0.1 is available now&#60;/a&#62;!&#60;/p&#62;
+&#60;h2&#62;So, why?&#60;/h2&#62;
+&#60;p&#62;When I started working on &#60;a href=&#34;https://github.com/dduan/tre&#34;&#62;tre&#60;/a&#62;, I search in the
 Rust ecosystem for a CLI interface library that supports as many platforms as
-possible. Eventually I found &lt;a href=&quot;https://github.com/BurntSushi/termcolor&quot;&gt;termcolor&lt;/a&gt; among an ocean of options. As
+possible. Eventually I found &#60;a href=&#34;https://github.com/BurntSushi/termcolor&#34;&#62;termcolor&#60;/a&#62; among an ocean of options. As
 a result, tre, like a lot of other CLI tools (like rg) written in Rust, has
 a consistent UI on Windows and Unix. This experience has brought lots of joy, as
 a user of both the library, and the app. I want to pay it forward to my fellow
-Swift CLI makers, and their users.&lt;/p&gt;
-&lt;p&gt;Zooming out slightly, success of Swift on Windows makes Swift as a skill more
-valuable. And &lt;a href=&quot;https://duan.ca/2019/01/20/kick-ass-cli-tools-in-swift/&quot;&gt;I want more CLI tools written in Swift&lt;/a&gt;. So it&#x27;s
-a double-win, really.&lt;/p&gt;
-&lt;p&gt;Lastly, it&#x27;s a small library, all things considered. Being able to get it to
-a shippable state on a weekend is a key reason I decided to work on it.&lt;/p&gt;
-&lt;h2&gt;Technical tidbits&lt;/h2&gt;
-&lt;p&gt;I love Max Howell&#x27;s &lt;a href=&quot;https://github.com/mxcl/Chalk&quot;&gt;Chalk&lt;/a&gt; library. It&#x27;s a 100-line Swift file that
-implements &lt;a href=&quot;https://en.wikipedia.org/wiki/ANSI_escape_code&quot;&gt;ANSI escape code&lt;/a&gt; with Swift&#x27;s custom string interpolation
-API. It demonstrates well how simple it is to customize your terminal output.&lt;/p&gt;
-&lt;p&gt;Enter Windows, where ANSI sequences are ignored by built-in terminal simulators
+Swift CLI makers, and their users.&#60;/p&#62;
+&#60;p&#62;Zooming out slightly, success of Swift on Windows makes Swift as a skill more
+valuable. And &#60;a href=&#34;https://duan.ca/2019/01/20/kick-ass-cli-tools-in-swift/&#34;&#62;I want more CLI tools written in Swift&#60;/a&#62;. So it&#39;s
+a double-win, really.&#60;/p&#62;
+&#60;p&#62;Lastly, it&#39;s a small library, all things considered. Being able to get it to
+a shippable state on a weekend is a key reason I decided to work on it.&#60;/p&#62;
+&#60;h2&#62;Technical tidbits&#60;/h2&#62;
+&#60;p&#62;I love Max Howell&#39;s &#60;a href=&#34;https://github.com/mxcl/Chalk&#34;&#62;Chalk&#60;/a&#62; library. It&#39;s a 100-line Swift file that
+implements &#60;a href=&#34;https://en.wikipedia.org/wiki/ANSI_escape_code&#34;&#62;ANSI escape code&#60;/a&#62; with Swift&#39;s custom string interpolation
+API. It demonstrates well how simple it is to customize your terminal output.&#60;/p&#62;
+&#60;p&#62;Enter Windows, where ANSI sequences are ignored by built-in terminal simulators
 from the past. The console is customized via a entirely separate, stateful,
-imperative APIs (Newer simulators such as the freshly released &lt;a href=&quot;&quot;&gt;Terminal&lt;/a&gt;
+imperative APIs (Newer simulators such as the freshly released &#60;a href=&#34;&#34;&#62;Terminal&#60;/a&#62;
 actually supports ANSI codes pretty well). This is our lowest common API
-denominator, which ultimately dictated the design of Dye.&lt;/p&gt;
-&lt;p&gt;Dye&#x27;s API is centered around Swift&#x27;s built-in protocol &lt;code&gt;TextOutputStream&lt;/code&gt;. You
-create a stream object and mutate the style need for upcoming output:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;let output = OutputStream.standardOutput()
+denominator, which ultimately dictated the design of Dye.&#60;/p&#62;
+&#60;p&#62;Dye&#39;s API is centered around Swift&#39;s built-in protocol &#60;code&#62;TextOutputStream&#60;/code&#62;. You
+create a stream object and mutate the style need for upcoming output:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;let output = OutputStream.standardOutput()
 output.color.foreground = .blue
-print(&amp;quot;blue text&amp;quot;, to &amp;amp;stream) // blue text is blue
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If the stream is redirected to something other than the terminal, styling gets
-automatically disabled. There are various options to customize this behavior.&lt;/p&gt;
-&lt;p&gt;Take a look at this &lt;a href=&quot;https://github.com/dduan/Dye/blob/master/Examples/main.swift&quot;&gt;sample app&lt;/a&gt; to get a more concrete picture of
-how things work.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;I&#x27;ll end with a screenshot of the sample app running in Command Prompt:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2020/06/01/windows-example-screenshot.jpg&quot; alt=&quot;Dye sample app running in Windows Command Prompt&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Let&#x27;s build more.&lt;/p&gt;
+print(&#38;quot;blue text&#38;quot;, to &#38;amp;stream) // blue text is blue
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;If the stream is redirected to something other than the terminal, styling gets
+automatically disabled. There are various options to customize this behavior.&#60;/p&#62;
+&#60;p&#62;Take a look at this &#60;a href=&#34;https://github.com/dduan/Dye/blob/master/Examples/main.swift&#34;&#62;sample app&#60;/a&#62; to get a more concrete picture of
+how things work.&#60;/p&#62;
+&#60;hr /&#62;
+&#60;p&#62;I&#39;ll end with a screenshot of the sample app running in Command Prompt:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2020/06/01/windows-example-screenshot.jpg&#34; alt=&#34;Dye sample app running in Windows Command Prompt&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;Let&#39;s build more.&#60;/p&#62;
 </description>
                 <pubDate>Mon, 01 Jun 2020 15:08:01 -0700</pubDate>
                 <link>https://duan.ca/2020/06/01/dye/</link>

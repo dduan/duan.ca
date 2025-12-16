@@ -12,23 +12,41 @@
     <meta property="og:title" content="A Case For OOP?">
     <meta property="article:published_time" content="2016-05-19T12:03:02-07:00"><meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@daniel_duan">
-    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="twitter:creator" content="@daniel_duan">
     <meta name="apple-mobile-web-app-title" content="Daniel Duan">
     <title>A Case For OOP?</title>
     <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
     <link rel="canonical" href="https://duan.ca/2016/05/19/a-case-for-oop/">
-    <link rel="stylesheet" href="/styles.css"></link>
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
 </head>
-<body><article>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="A Case For OOP?">
+    <meta itemprop="datePublished" content="2016-05-19T12:03:02-07:00">
+    <meta itemprop="dateModified" content="2016-05-19T12:03:02-07:00">
+    <link itemprop="url" href="https://duan.ca/2016/05/19/a-case-for-oop/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2016/05/19/a-case-for-oop/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="Python">
+    <meta itemprop="keywords" content="OOP">
+    <meta itemprop="keywords" content="Swift">
     <h1>A Case For OOP?</h1>
     <nav>
         <p class="metainfo article-meta">
-            <a href="/articles">Daniel Duan</a>
+            <a href="/articles/">Daniel Duan</a>
             ·
-            <time datetime="2016-05-19T12:03:02-07:00" itemProp="datePublished">2016-05-19</time>
+            <time datetime="2016-05-19T12:03:02-07:00">2016-05-19</time>
         </p>
-    </nav><p>Python's standard library includes a very handy <code>defaultdict</code>. It behaves
+    </nav>
+    <div itemprop="articleBody"><p>Python's standard library includes a very handy <code>defaultdict</code>. It behaves
 almost exactly like the standard dictionary except it'll supply a pre-defined
 value for any non-existence keys. It is, unsurpringly, a subclass of <code>dict</code>.</p>
 <p>I find my self missing this handy container in Swift. Especially when I use
@@ -51,7 +69,7 @@ inheritance.</p>
 <p>But do we want inheritance for <code>struct</code>s and <code>enum</code>s in Swift? What does that
 even mean? Is it simply a case that will go away when protocols become more
 powerful?</p>
-
+</div>
 </article>
 <footer>
     <hr />

@@ -6,35 +6,35 @@
         <atom:link href="https://duan.ca/tag/swiftpm/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Using Instruments on Non-macOS, Non-iOS Executables</title>
-                <description>&lt;p&gt;How do you use use Instruments, the instrumentation tool distributed alongside Xcode? It&#x27;s easy if you are
+                <description>&#60;p&#62;How do you use use Instruments, the instrumentation tool distributed alongside Xcode? It&#39;s easy if you are
 profiling a macOS or iOS app. No so with a regular old command-line tool built, say, with SwiftPM. To do so,
-you&#x27;ll need to codesign the target binary. Otherwise Instruments will give you a &lt;code&gt;&amp;quot;Failed to gain authorization&amp;quot;&lt;/code&gt; error message.&lt;/p&gt;
-&lt;p&gt;Here&#x27;s the steps:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Create a entitlement file with &lt;code&gt;com.apple.security.get-task-allow&lt;/code&gt; set to true:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code class=&quot;language-xml&quot;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
-&amp;lt;!DOCTYPE plist PUBLIC &amp;quot;-//Apple//DTD PLIST 1.0//EN&amp;quot; &amp;quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&amp;quot;&amp;gt;
-&amp;lt;plist version=&amp;quot;1.0&amp;quot;&amp;gt;
-    &amp;lt;dict&amp;gt;
-        &amp;lt;key&amp;gt;com.apple.security.get-task-allow&amp;lt;/key&amp;gt;
-        &amp;lt;true/&amp;gt;
-    &amp;lt;/dict&amp;gt;
-&amp;lt;/plist&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Let&#x27;s call it &lt;code&gt;Entitlements.plist&lt;/code&gt;&lt;/p&gt;
-&lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Build the executable.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Codesign your executable with the entitlement file&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;codesign -s - -f --entitlements path/to/Entitlements.plist path/to/executable
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now proceed with your profiling in Instruments.&lt;/p&gt;
-&lt;p&gt;Not sure where this is officially documented. So I&#x27;m officially documenting it here.&lt;/p&gt;
+you&#39;ll need to codesign the target binary. Otherwise Instruments will give you a &#60;code&#62;&#38;quot;Failed to gain authorization&#38;quot;&#60;/code&#62; error message.&#60;/p&#62;
+&#60;p&#62;Here&#39;s the steps:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;Create a entitlement file with &#60;code&#62;com.apple.security.get-task-allow&#60;/code&#62; set to true:&#60;/li&#62;
+&#60;/ol&#62;
+&#60;pre&#62;&#60;code class=&#34;language-xml&#34;&#62;&#38;lt;?xml version=&#38;quot;1.0&#38;quot; encoding=&#38;quot;UTF-8&#38;quot;?&#38;gt;
+&#38;lt;!DOCTYPE plist PUBLIC &#38;quot;-//Apple//DTD PLIST 1.0//EN&#38;quot; &#38;quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#38;quot;&#38;gt;
+&#38;lt;plist version=&#38;quot;1.0&#38;quot;&#38;gt;
+    &#38;lt;dict&#38;gt;
+        &#38;lt;key&#38;gt;com.apple.security.get-task-allow&#38;lt;/key&#38;gt;
+        &#38;lt;true/&#38;gt;
+    &#38;lt;/dict&#38;gt;
+&#38;lt;/plist&#38;gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Let&#39;s call it &#60;code&#62;Entitlements.plist&#60;/code&#62;&#60;/p&#62;
+&#60;ol start=&#34;2&#34;&#62;
+&#60;li&#62;
+&#60;p&#62;Build the executable.&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Codesign your executable with the entitlement file&#60;/p&#62;
+&#60;/li&#62;
+&#60;/ol&#62;
+&#60;pre&#62;&#60;code&#62;codesign -s - -f --entitlements path/to/Entitlements.plist path/to/executable
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Now proceed with your profiling in Instruments.&#60;/p&#62;
+&#60;p&#62;Not sure where this is officially documented. So I&#39;m officially documenting it here.&#60;/p&#62;
 </description>
                 <pubDate>Thu, 31 Mar 2022 20:39:05 -0700</pubDate>
                 <link>https://duan.ca/2022/03/31/instrumenting-commandline-executables/</link>
@@ -42,87 +42,87 @@ you&#x27;ll need to codesign the target binary. Otherwise Instruments will give 
             </item>
             <item>
                 <title>Building IndexStoreDB on Linux: The Portable Technique</title>
-                <description>&lt;h2&gt;The problem&lt;/h2&gt;
-&lt;p&gt;As of writing of this article, when you attempt to use Apple&#x27;s Swift library &lt;a href=&quot;https://github.com/apple/indexstore-db&quot;&gt;IndexStoreDB&lt;/a&gt; on Linux as
-a normal SwiftPM dependency, it won&#x27;t build successfully:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-fish&quot;&gt;❯ cat Package.resolved
+                <description>&#60;h2&#62;The problem&#60;/h2&#62;
+&#60;p&#62;As of writing of this article, when you attempt to use Apple&#39;s Swift library &#60;a href=&#34;https://github.com/apple/indexstore-db&#34;&#62;IndexStoreDB&#60;/a&#62; on Linux as
+a normal SwiftPM dependency, it won&#39;t build successfully:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-fish&#34;&#62;❯ cat Package.resolved
 {
-  &amp;quot;object&amp;quot;: {
-    &amp;quot;pins&amp;quot;: [
+  &#38;quot;object&#38;quot;: {
+    &#38;quot;pins&#38;quot;: [
       {
-        &amp;quot;package&amp;quot;: &amp;quot;IndexStoreDB&amp;quot;,
-        &amp;quot;repositoryURL&amp;quot;: &amp;quot;https://github.com/apple/indexstore-db&amp;quot;,
-        &amp;quot;state&amp;quot;: {
-          &amp;quot;branch&amp;quot;: &amp;quot;swift-5.5.2-RELEASE&amp;quot;,
-          &amp;quot;revision&amp;quot;: &amp;quot;e771994778265c2efe8d33a7ca30adf5f3d2065a&amp;quot;,
-          &amp;quot;version&amp;quot;: null
+        &#38;quot;package&#38;quot;: &#38;quot;IndexStoreDB&#38;quot;,
+        &#38;quot;repositoryURL&#38;quot;: &#38;quot;https://github.com/apple/indexstore-db&#38;quot;,
+        &#38;quot;state&#38;quot;: {
+          &#38;quot;branch&#38;quot;: &#38;quot;swift-5.5.2-RELEASE&#38;quot;,
+          &#38;quot;revision&#38;quot;: &#38;quot;e771994778265c2efe8d33a7ca30adf5f3d2065a&#38;quot;,
+          &#38;quot;version&#38;quot;: null
         }
       }
     ]
   },
-  &amp;quot;version&amp;quot;: 1
+  &#38;quot;version&#38;quot;: 1
 }
 
-❯ swift build &amp;gt; /dev/null
+❯ swift build &#38;gt; /dev/null
 
 ❯ echo $status
 1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The issue is documented in the build instruction for Linux:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The C++ code in the index requires &lt;code&gt;libdispatch&lt;/code&gt;, but unlike Swift code, it cannot find it automatically on Linux. You can work around this by adding a search path manually.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code&gt;$ swift build -Xcxx -I&amp;lt;path_to_swift_toolchain&amp;gt;/usr/lib/swift -Xcxx -I&amp;lt;path_to_swift_toolchain&amp;gt;/usr/lib/swift/Block
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Okay, so, how would my package build in Linux environments where the Swift toolchain&#x27;s setup is unknown? How
-do we avoid building with one toolchain while mixing in &lt;code&gt;libdispatch&lt;/code&gt; from another toolchain somewhere? Here&#x27;s
-what I did for my command-line tool &lt;a href=&quot;https://github.com/dduan/Clue&quot;&gt;Clue&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;The solution&lt;/h2&gt;
-&lt;p&gt;The essence of the problem is about the installation location of the Swift toolchain. Our solution makes the
-following assumptions:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;A Swift toolchain is installed on the file system on Linux (duh!).&lt;/li&gt;
-&lt;li&gt;The toolchain is at least similar to the one distributed on Swift.org. So &lt;code&gt;libdispatch&lt;/code&gt; is distributed
-alongside the other binaries, in a stable relative directory.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Having the &lt;code&gt;swift&lt;/code&gt; command available (assumption #1), we can just let it tell us about itself with the
-&lt;code&gt;-print-target-info&lt;/code&gt; flag:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-fish&quot;&gt;❯ swift -print-target-info
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;The issue is documented in the build instruction for Linux:&#60;/p&#62;
+&#60;blockquote&#62;
+&#60;p&#62;The C++ code in the index requires &#60;code&#62;libdispatch&#60;/code&#62;, but unlike Swift code, it cannot find it automatically on Linux. You can work around this by adding a search path manually.&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;pre&#62;&#60;code&#62;$ swift build -Xcxx -I&#38;lt;path_to_swift_toolchain&#38;gt;/usr/lib/swift -Xcxx -I&#38;lt;path_to_swift_toolchain&#38;gt;/usr/lib/swift/Block
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Okay, so, how would my package build in Linux environments where the Swift toolchain&#39;s setup is unknown? How
+do we avoid building with one toolchain while mixing in &#60;code&#62;libdispatch&#60;/code&#62; from another toolchain somewhere? Here&#39;s
+what I did for my command-line tool &#60;a href=&#34;https://github.com/dduan/Clue&#34;&#62;Clue&#60;/a&#62;.&#60;/p&#62;
+&#60;h2&#62;The solution&#60;/h2&#62;
+&#60;p&#62;The essence of the problem is about the installation location of the Swift toolchain. Our solution makes the
+following assumptions:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;A Swift toolchain is installed on the file system on Linux (duh!).&#60;/li&#62;
+&#60;li&#62;The toolchain is at least similar to the one distributed on Swift.org. So &#60;code&#62;libdispatch&#60;/code&#62; is distributed
+alongside the other binaries, in a stable relative directory.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Having the &#60;code&#62;swift&#60;/code&#62; command available (assumption #1), we can just let it tell us about itself with the
+&#60;code&#62;-print-target-info&#60;/code&#62; flag:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-fish&#34;&#62;❯ swift -print-target-info
 {
-  &amp;quot;compilerVersion&amp;quot;: &amp;quot;Swift version 5.5.2 (swift-5.5.2-RELEASE)&amp;quot;,
-  &amp;quot;target&amp;quot;: {
-    &amp;quot;triple&amp;quot;: &amp;quot;x86_64-unknown-linux-gnu&amp;quot;,
-    &amp;quot;unversionedTriple&amp;quot;: &amp;quot;x86_64-unknown-linux-gnu&amp;quot;,
-    &amp;quot;moduleTriple&amp;quot;: &amp;quot;x86_64-unknown-linux-gnu&amp;quot;,
-    &amp;quot;compatibilityLibraries&amp;quot;: [ ],
-    &amp;quot;librariesRequireRPath&amp;quot;: false
+  &#38;quot;compilerVersion&#38;quot;: &#38;quot;Swift version 5.5.2 (swift-5.5.2-RELEASE)&#38;quot;,
+  &#38;quot;target&#38;quot;: {
+    &#38;quot;triple&#38;quot;: &#38;quot;x86_64-unknown-linux-gnu&#38;quot;,
+    &#38;quot;unversionedTriple&#38;quot;: &#38;quot;x86_64-unknown-linux-gnu&#38;quot;,
+    &#38;quot;moduleTriple&#38;quot;: &#38;quot;x86_64-unknown-linux-gnu&#38;quot;,
+    &#38;quot;compatibilityLibraries&#38;quot;: [ ],
+    &#38;quot;librariesRequireRPath&#38;quot;: false
   },
-  &amp;quot;paths&amp;quot;: {
-    &amp;quot;runtimeLibraryPaths&amp;quot;: [
-      &amp;quot;/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/linux&amp;quot;
+  &#38;quot;paths&#38;quot;: {
+    &#38;quot;runtimeLibraryPaths&#38;quot;: [
+      &#38;quot;/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/linux&#38;quot;
     ],
-    &amp;quot;runtimeLibraryImportPaths&amp;quot;: [
-      &amp;quot;/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/linux&amp;quot;,
-      &amp;quot;/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/linux/x86_64&amp;quot;
+    &#38;quot;runtimeLibraryImportPaths&#38;quot;: [
+      &#38;quot;/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/linux&#38;quot;,
+      &#38;quot;/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/linux/x86_64&#38;quot;
     ],
-    &amp;quot;runtimeResourcePath&amp;quot;: &amp;quot;/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift&amp;quot;
+    &#38;quot;runtimeResourcePath&#38;quot;: &#38;quot;/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift&#38;quot;
   }
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Great! We see where the runtime is installed. Now we can invoke assumption #2, that &lt;code&gt;libdispatch&lt;/code&gt; is at
-a relative location to the rest of the runtime. In the output from above, the value for &lt;code&gt;runtimeResourcePath&lt;/code&gt;
-happens to be the parent directory for &lt;code&gt;libdispatch&lt;/code&gt;&#x27;s headers. The &lt;code&gt;&amp;lt;path_to_swift_toolchain&amp;gt;&lt;/code&gt; value in
-&lt;a href=&quot;https://github.com/apple/indexstore-db&quot;&gt;IndexStoreDB&lt;/a&gt;&#x27;s official instruction in this particular setup would be
-&lt;code&gt;/home/dan/.swiftenv/versions/5.5.2&lt;/code&gt;.  So the following command would have worked:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;swift build -Xcxx -I/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift -Xcxx -I/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/Block
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;All we need to do is parse this information at build time, and it should work on every Linux setup! Choose
-whatever parsing method you like. Here&#x27;s (more or less) the &lt;code&gt;Makefile&lt;/code&gt; for &lt;a href=&quot;https://github.com/dduan/Clue&quot;&gt;Clue&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-make&quot;&gt;SHELL = /bin/bash
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Great! We see where the runtime is installed. Now we can invoke assumption #2, that &#60;code&#62;libdispatch&#60;/code&#62; is at
+a relative location to the rest of the runtime. In the output from above, the value for &#60;code&#62;runtimeResourcePath&#60;/code&#62;
+happens to be the parent directory for &#60;code&#62;libdispatch&#60;/code&#62;&#39;s headers. The &#60;code&#62;&#38;lt;path_to_swift_toolchain&#38;gt;&#60;/code&#62; value in
+&#60;a href=&#34;https://github.com/apple/indexstore-db&#34;&#62;IndexStoreDB&#60;/a&#62;&#39;s official instruction in this particular setup would be
+&#60;code&#62;/home/dan/.swiftenv/versions/5.5.2&#60;/code&#62;.  So the following command would have worked:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;swift build -Xcxx -I/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift -Xcxx -I/home/dan/.swiftenv/versions/5.5.2/usr/lib/swift/Block
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;All we need to do is parse this information at build time, and it should work on every Linux setup! Choose
+whatever parsing method you like. Here&#39;s (more or less) the &#60;code&#62;Makefile&#60;/code&#62; for &#60;a href=&#34;https://github.com/dduan/Clue&#34;&#62;Clue&#60;/a&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-make&#34;&#62;SHELL = /bin/bash
 ifeq ($(shell uname),Darwin)
-EXTRA_SWIFT_FLAGS = &amp;quot;--disable-sandbox&amp;quot;
+EXTRA_SWIFT_FLAGS = &#38;quot;--disable-sandbox&#38;quot;
 else
-SWIFT_TOOLCHAIN = &amp;quot;$(shell swift -print-target-info | grep runtimeResourcePath | cut -f 2 -d &#x27;:&#x27; | cut -f 2 -d &#x27;&amp;quot;&#x27;)&amp;quot;
+SWIFT_TOOLCHAIN = &#38;quot;$(shell swift -print-target-info | grep runtimeResourcePath | cut -f 2 -d &#39;:&#39; | cut -f 2 -d &#39;&#38;quot;&#39;)&#38;quot;
 EXTRA_SWIFT_FLAGS = -Xcxx -I${SWIFT_TOOLCHAIN} -Xcxx -I${SWIFT_TOOLCHAIN}/Block
 endif
 
@@ -141,13 +141,13 @@ test:
 .PHONY: debug
 debug:
 	$(call build,debug)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;make build&lt;/code&gt; / &lt;code&gt;make test&lt;/code&gt; / &lt;code&gt;make debug&lt;/code&gt; all work as expected, building IndexStoreDB successfully.&lt;/li&gt;
-&lt;li&gt;As-is, this snippet is project-agnostic. So you can throw it in your SwiftPM project and it should &amp;quot;just
-work&amp;quot;.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Alright!&lt;/p&gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;ol&#62;
+&#60;li&#62;&#60;code&#62;make build&#60;/code&#62; / &#60;code&#62;make test&#60;/code&#62; / &#60;code&#62;make debug&#60;/code&#62; all work as expected, building IndexStoreDB successfully.&#60;/li&#62;
+&#60;li&#62;As-is, this snippet is project-agnostic. So you can throw it in your SwiftPM project and it should &#38;quot;just
+work&#38;quot;.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Alright!&#60;/p&#62;
 </description>
                 <pubDate>Wed, 09 Feb 2022 15:58:41 -0800</pubDate>
                 <link>https://duan.ca/2022/02/09/building-indexstoredb-on-linux/</link>

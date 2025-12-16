@@ -12,23 +12,41 @@
     <meta property="og:title" content="Building IndexStoreDB on Linux: The Portable Technique">
     <meta property="article:published_time" content="2022-02-09T15:58:41-08:00"><meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@daniel_duan">
-    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="twitter:creator" content="@daniel_duan">
     <meta name="apple-mobile-web-app-title" content="Daniel Duan">
     <title>Building IndexStoreDB on Linux: The Portable Technique</title>
     <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
     <link rel="canonical" href="https://duan.ca/2022/02/09/building-indexstoredb-on-linux/">
-    <link rel="stylesheet" href="/styles.css"></link>
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
 </head>
-<body><article>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="Building IndexStoreDB on Linux: The Portable Technique">
+    <meta itemprop="datePublished" content="2022-02-09T15:58:41-08:00">
+    <meta itemprop="dateModified" content="2022-02-09T15:58:41-08:00">
+    <link itemprop="url" href="https://duan.ca/2022/02/09/building-indexstoredb-on-linux/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2022/02/09/building-indexstoredb-on-linux/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="Swift">
+    <meta itemprop="keywords" content="IndexStoreDB">
+    <meta itemprop="keywords" content="SwiftPM">
     <h1>Building IndexStoreDB on Linux: The Portable Technique</h1>
     <nav>
         <p class="metainfo article-meta">
-            <a href="/articles">Daniel Duan</a>
+            <a href="/articles/">Daniel Duan</a>
             ·
-            <time datetime="2022-02-09T15:58:41-08:00" itemProp="datePublished">2022-02-09</time>
+            <time datetime="2022-02-09T15:58:41-08:00">2022-02-09</time>
         </p>
-    </nav><h2>The problem</h2>
+    </nav>
+    <div itemprop="articleBody"><h2>The problem</h2>
 <p>As of writing of this article, when you attempt to use Apple's Swift library <a href="https://github.com/apple/indexstore-db">IndexStoreDB</a> on Linux as
 a normal SwiftPM dependency, it won't build successfully:</p>
 <pre><code class="language-fish">❯ cat Package.resolved
@@ -134,7 +152,7 @@ debug:
 work&quot;.</li>
 </ol>
 <p>Alright!</p>
-
+</div>
 </article>
 <footer>
     <hr />

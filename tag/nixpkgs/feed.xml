@@ -6,21 +6,21 @@
         <atom:link href="https://duan.ca/tag/nixpkgs/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Flake, Home Manager, and Extra Packages</title>
-                <description>&lt;p&gt;So, you use a standalone home-manager, it&#x27;s set up with flake, tracking a particular nixpkgs channel. How do
+                <description>&#60;p&#62;So, you use a standalone home-manager, it&#39;s set up with flake, tracking a particular nixpkgs channel. How do
 you use a package from another channel? This seemingly simple task took me, a Nix noob, quite a bit of
-research to solve. Here&#x27;s how I did it.&lt;/p&gt;
-&lt;p&gt;A simple flake.nix for home-manager might look like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;{
+research to solve. Here&#39;s how I did it.&#60;/p&#62;
+&#60;p&#62;A simple flake.nix for home-manager might look like this:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-nix&#34;&#62;{
   inputs = {
-    nixpkgs.url = &amp;quot;github:nixos/nixpkgs/nixos-21.11&amp;quot;;
-    home-manager.url = &amp;quot;github:nix-community/home-manager/release-21.11&amp;quot;;
-    home-manager.inputs.nixpkgs.follows = &amp;quot;nixpkgs&amp;quot;;
+    nixpkgs.url = &#38;quot;github:nixos/nixpkgs/nixos-21.11&#38;quot;;
+    home-manager.url = &#38;quot;github:nix-community/home-manager/release-21.11&#38;quot;;
+    home-manager.inputs.nixpkgs.follows = &#38;quot;nixpkgs&#38;quot;;
   };
   outputs = { self, nixpkgs, home-manager }: {
-    &amp;quot;dan@some-mac&amp;quot; = home-manager.lib.homeManagerConfiguration {
-      username = &amp;quot;dan&amp;quot;;
-      system = &amp;quot;x86_64-darwin&amp;quot;;
-      homeDirectory = &amp;quot;/home/dan&amp;quot;;
+    &#38;quot;dan@some-mac&#38;quot; = home-manager.lib.homeManagerConfiguration {
+      username = &#38;quot;dan&#38;quot;;
+      system = &#38;quot;x86_64-darwin&#38;quot;;
+      homeDirectory = &#38;quot;/home/dan&#38;quot;;
       configuration = { config, pkgs ... }: {
           home.packages = [
             pkgs.hello
@@ -29,30 +29,30 @@ research to solve. Here&#x27;s how I did it.&lt;/p&gt;
     };
   };
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A few things of note:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;home manager is set to follow &lt;code&gt;nixpkgs&lt;/code&gt;, which tracks &lt;code&gt;nixos-21.11&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;pkgs.hello&lt;/code&gt; refers to the package in &lt;code&gt;nixos-21.11&lt;/code&gt; as well.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;To put things in concrete terms, our goal is to put a package from a channel other than &lt;code&gt;nixos-21.11&lt;/code&gt;
-alongside &lt;code&gt;pkgs.hello&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The key to my solution is the &lt;code&gt;extraModules&lt;/code&gt; in &lt;code&gt;home-manager.lib.homeManagerConfiguration&lt;/code&gt;&#x27;s argument set.
-We&#x27;ll leverage it to modify the environment made available to its sibling, &lt;code&gt;configuration&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;First, add the new channel as input &lt;code&gt;nixpkgs-unstable&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;{
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;A few things of note:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;home manager is set to follow &#60;code&#62;nixpkgs&#60;/code&#62;, which tracks &#60;code&#62;nixos-21.11&#60;/code&#62;.&#60;/li&#62;
+&#60;li&#62;&#60;code&#62;pkgs.hello&#60;/code&#62; refers to the package in &#60;code&#62;nixos-21.11&#60;/code&#62; as well.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;To put things in concrete terms, our goal is to put a package from a channel other than &#60;code&#62;nixos-21.11&#60;/code&#62;
+alongside &#60;code&#62;pkgs.hello&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;The key to my solution is the &#60;code&#62;extraModules&#60;/code&#62; in &#60;code&#62;home-manager.lib.homeManagerConfiguration&#60;/code&#62;&#39;s argument set.
+We&#39;ll leverage it to modify the environment made available to its sibling, &#60;code&#62;configuration&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;First, add the new channel as input &#60;code&#62;nixpkgs-unstable&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-nix&#34;&#62;{
   inputs = {
     # ...
-    nixpkgs-unstable.url = &amp;quot;github:nixos/nixpkgs&amp;quot;;
+    nixpkgs-unstable.url = &#38;quot;github:nixos/nixpkgs&#38;quot;;
   };
   ...
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Then, add a small module to &lt;code&gt;extraModules&lt;/code&gt;. In it we make &lt;code&gt;nixpkgs-unstable&lt;/code&gt; an argument to &lt;code&gt;_module&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;{
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Then, add a small module to &#60;code&#62;extraModules&#60;/code&#62;. In it we make &#60;code&#62;nixpkgs-unstable&#60;/code&#62; an argument to &#60;code&#62;_module&#60;/code&#62;.&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-nix&#34;&#62;{
   input = { ... };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager }: { # Note we also pass in nixpkgs-unstable here
-    &amp;quot;dan@some-mac&amp;quot; = home-manager.lib.homeManagerConfiguration {
+    &#38;quot;dan@some-mac&#38;quot; = home-manager.lib.homeManagerConfiguration {
       extraModules = [
         ({ pkgs, ... }: rec {
           _module.args.nixpkgs-unstable = import nixpkgs-unstable { inherit system; };
@@ -62,12 +62,12 @@ We&#x27;ll leverage it to modify the environment made available to its sibling, 
     };
   };
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;... now that we added &lt;code&gt;args.nixpkgs-unstable&lt;/code&gt;, it becomes available in the configuration:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-nix&quot;&gt;{
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;... now that we added &#60;code&#62;args.nixpkgs-unstable&#60;/code&#62;, it becomes available in the configuration:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-nix&#34;&#62;{
   input = { ... };
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager }: { # Note we also pass in nixpkgs-unstable here
-    &amp;quot;dan@some-mac&amp;quot; = home-manager.lib.homeManagerConfiguration {
+    &#38;quot;dan@some-mac&#38;quot; = home-manager.lib.homeManagerConfiguration {
       # ...
       configuration = { config, pkgs, nixpkgs-unstable, ... }:
           home.packages = [
@@ -78,10 +78,10 @@ We&#x27;ll leverage it to modify the environment made available to its sibling, 
     };
   };
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There, we made &lt;code&gt;python39Packages.python-lsp-server&lt;/code&gt; from nixpkgs&#x27;s master branch appear alongside our
-standard, default channel.&lt;/p&gt;
-&lt;p&gt;And that&#x27;s how you add packages from a different channel in a flake setup for standalone home-manager.&lt;/p&gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;There, we made &#60;code&#62;python39Packages.python-lsp-server&#60;/code&#62; from nixpkgs&#39;s master branch appear alongside our
+standard, default channel.&#60;/p&#62;
+&#60;p&#62;And that&#39;s how you add packages from a different channel in a flake setup for standalone home-manager.&#60;/p&#62;
 </description>
                 <pubDate>Tue, 15 Mar 2022 18:53:59 -0700</pubDate>
                 <link>https://duan.ca/2022/03/15/standalone-home-manager-flake-channels/</link>

@@ -6,118 +6,118 @@
         <atom:link href="https://duan.ca/tag/naming/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>How To Omit Needless Words</title>
-                <description>&lt;p&gt;A typical experience in adopting Swift 3 may look like this:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Run the migrator.&lt;/li&gt;
-&lt;li&gt;Fix up what the migrator left undone so your project complies.&lt;/li&gt;
-&lt;li&gt;Remove artifacts that migrator added to ensure successful compilation (you
+                <description>&#60;p&#62;A typical experience in adopting Swift 3 may look like this:&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;Run the migrator.&#60;/li&#62;
+&#60;li&#62;Fix up what the migrator left undone so your project complies.&#60;/li&#62;
+&#60;li&#62;Remove artifacts that migrator added to ensure successful compilation (you
 know what this means if you finished previous step in a mildly sized code
-base).&lt;/li&gt;
-&lt;li&gt;Fix bugs caused by mechanical changes.&lt;/li&gt;
-&lt;li&gt;Try to adapt your code base to the new style: lowercased static members, etc.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The last step is particularly challenging in a team environment because it
-involves naming things. Luckily we have (IMHO) the best &amp;quot;features&amp;quot; in Swift
-3 for help: the &lt;a href=&quot;https://swift.org/documentation/api-design-guidelines/&quot;&gt;API Design Guidelines&lt;/a&gt;.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;a href=&quot;https://swift.org/documentation/api-design-guidelines/#omit-needless-words&quot;&gt;Omit needless words&lt;/a&gt; is one of the most differentiating
+base).&#60;/li&#62;
+&#60;li&#62;Fix bugs caused by mechanical changes.&#60;/li&#62;
+&#60;li&#62;Try to adapt your code base to the new style: lowercased static members, etc.&#60;/li&#62;
+&#60;/ul&#62;
+&#60;p&#62;The last step is particularly challenging in a team environment because it
+involves naming things. Luckily we have (IMHO) the best &#38;quot;features&#38;quot; in Swift
+3 for help: the &#60;a href=&#34;https://swift.org/documentation/api-design-guidelines/&#34;&#62;API Design Guidelines&#60;/a&#62;.&#60;/p&#62;
+&#60;hr /&#62;
+&#60;p&#62;&#60;a href=&#34;https://swift.org/documentation/api-design-guidelines/#omit-needless-words&#34;&#62;Omit needless words&#60;/a&#62; is one of the most differentiating
 guideline for function names between Swift 2 and 3. In Swift 2 we used to name
-things like so…&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;func doStuffWithThing(thing: Thing) { … }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;… and use it like …&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;doStuffWithThing(someThing)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That&#x27;s a lot of &amp;quot;thing&amp;quot;s, have you noticed?&lt;/p&gt;
-&lt;p&gt;Since the word &amp;quot;Thing&amp;quot; is &lt;em&gt;merely repeating&lt;/em&gt; the type information, we can omit
-it in Swift 3:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;// declare
+things like so…&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;func doStuffWithThing(thing: Thing) { … }
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;… and use it like …&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;doStuffWithThing(someThing)
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;That&#39;s a lot of &#38;quot;thing&#38;quot;s, have you noticed?&#60;/p&#62;
+&#60;p&#62;Since the word &#38;quot;Thing&#38;quot; is &#60;em&#62;merely repeating&#60;/em&#62; the type information, we can omit
+it in Swift 3:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;// declare
 func doStuff(with thing: Thing) { … }
 
 // use
 doStuff(with: someThing)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It&#x27;s clear at both declaration and use site what we are doing stuff to.&lt;/p&gt;
-&lt;p&gt;So … you should go through you code base and make this change! In the next
-section, we&#x27;ll discuss one way to make it happen.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h2&gt;Step 1: Automate&lt;/h2&gt;
-&lt;p&gt;A good indicator of &amp;quot;merely repeating type information&amp;quot; is repetition of words.
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It&#39;s clear at both declaration and use site what we are doing stuff to.&#60;/p&#62;
+&#60;p&#62;So … you should go through you code base and make this change! In the next
+section, we&#39;ll discuss one way to make it happen.&#60;/p&#62;
+&#60;hr /&#62;
+&#60;h2&#62;Step 1: Automate&#60;/h2&#62;
+&#60;p&#62;A good indicator of &#38;quot;merely repeating type information&#38;quot; is repetition of words.
 If you have been disciplined about naming your functions in Swift 2, finding
 such repetition should take no more than one or two good regular expressions.
-After the migrator, your code may contain a mixture of these:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;func doStuffWithX(_: X) { … }
+After the migrator, your code may contain a mixture of these:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;func doStuffWithX(_: X) { … }
 func doStuff(forY y: Y) { … }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In other words, the repeating word (&lt;code&gt;X&lt;/code&gt; or &lt;code&gt;Y&lt;/code&gt;) is preceded by a
-&lt;a href=&quot;https://www.englishclub.com/grammar/prepositions-list.htm&quot;&gt;preposition&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Finding these in a large code base is quite fun. If you don&#x27;t feel like writing
-the scripts yourself, I&#x27;ve made a little tool for it &lt;a href=&quot;https://github.com/dduan/needless&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;(Sometimes the repeating words aren&#x27;t a exact match because of prefixes such as
-&amp;quot;CG&amp;quot; in &lt;code&gt;CGSize&lt;/code&gt;. That&#x27;s covered by the tool as well.)&lt;/p&gt;
-&lt;h2&gt;Step 2: Update&lt;/h2&gt;
-&lt;p&gt;You can further rearrange the pieces in function name mechanically to:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;func doStuff(preposition originalArgName: Type) { … }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;a href=&quot;https://github.com/dduan/needless&quot;&gt;tool&lt;/a&gt; I wrote can suggest alternatives like this. Applying them
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;In other words, the repeating word (&#60;code&#62;X&#60;/code&#62; or &#60;code&#62;Y&#60;/code&#62;) is preceded by a
+&#60;a href=&#34;https://www.englishclub.com/grammar/prepositions-list.htm&#34;&#62;preposition&#60;/a&#62;.&#60;/p&#62;
+&#60;p&#62;Finding these in a large code base is quite fun. If you don&#39;t feel like writing
+the scripts yourself, I&#39;ve made a little tool for it &#60;a href=&#34;https://github.com/dduan/needless&#34;&#62;here&#60;/a&#62;.&#60;/p&#62;
+&#60;p&#62;(Sometimes the repeating words aren&#39;t a exact match because of prefixes such as
+&#38;quot;CG&#38;quot; in &#60;code&#62;CGSize&#60;/code&#62;. That&#39;s covered by the tool as well.)&#60;/p&#62;
+&#60;h2&#62;Step 2: Update&#60;/h2&#62;
+&#60;p&#62;You can further rearrange the pieces in function name mechanically to:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;func doStuff(preposition originalArgName: Type) { … }
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;The &#60;a href=&#34;https://github.com/dduan/needless&#34;&#62;tool&#60;/a&#62; I wrote can suggest alternatives like this. Applying them
 is technically automatable. But I find manually doing tasks such as fixing up
 indentation for multi-line functions or updating their use site to be easier.
-Your conclusion may depend the size of your code base and your patience.&lt;/p&gt;
-&lt;h2&gt;Step 3: Audit&lt;/h2&gt;
-&lt;p&gt;The main goal for the API Design Guidelines is &amp;quot;clarity at the point of use&amp;quot;.
-Our automated process will yield some undesirable results. I&#x27;ll list a few
-scenarios here.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Poorly named function name becomes poorer&lt;/strong&gt;. Example:
-&lt;code&gt;alertForScreenSize(_ size CGRize)&lt;/code&gt; becomes &lt;code&gt;alert(forScreen size: CGSize)&lt;/code&gt;.
-Obviously, &amp;quot;for screen&amp;quot; is misleading since a &lt;code&gt;CGSize&lt;/code&gt; is not a screen. The
-problem here is the &amp;quot;alert&amp;quot; is not for a &amp;quot;size&amp;quot; to begin with. We as human
-intuitively pick up that it&#x27;s for a &amp;quot;screen with a certain size&amp;quot;. So the correct
-renaming here should be &lt;code&gt;alertForScreen(with size: CGSize)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Awkward literal values results in ungrammatical phrases&lt;/strong&gt;. Imagine our
-argument is a enum:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;enum Mode {
+Your conclusion may depend the size of your code base and your patience.&#60;/p&#62;
+&#60;h2&#62;Step 3: Audit&#60;/h2&#62;
+&#60;p&#62;The main goal for the API Design Guidelines is &#38;quot;clarity at the point of use&#38;quot;.
+Our automated process will yield some undesirable results. I&#39;ll list a few
+scenarios here.&#60;/p&#62;
+&#60;p&#62;&#60;strong&#62;Poorly named function name becomes poorer&#60;/strong&#62;. Example:
+&#60;code&#62;alertForScreenSize(_ size CGRize)&#60;/code&#62; becomes &#60;code&#62;alert(forScreen size: CGSize)&#60;/code&#62;.
+Obviously, &#38;quot;for screen&#38;quot; is misleading since a &#60;code&#62;CGSize&#60;/code&#62; is not a screen. The
+problem here is the &#38;quot;alert&#38;quot; is not for a &#38;quot;size&#38;quot; to begin with. We as human
+intuitively pick up that it&#39;s for a &#38;quot;screen with a certain size&#38;quot;. So the correct
+renaming here should be &#60;code&#62;alertForScreen(with size: CGSize)&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;&#60;strong&#62;Awkward literal values results in ungrammatical phrases&#60;/strong&#62;. Imagine our
+argument is a enum:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;enum Mode {
   case add
   case edit
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;… and we renamed a function &lt;code&gt;updateUIForMode(mode: Mode)&lt;/code&gt; to
-&lt;code&gt;update(for mode: Mode)&lt;/code&gt;. The call site, therefore, becomes
-&lt;code&gt;update(for: .add)&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;What makes it feels wrong? Well, a preposition followed by a verb (&amp;quot;for add&amp;quot;)
-is not very grammatical. Normally we would say &amp;quot;update UI for &lt;em&gt;adding&lt;/em&gt;&amp;quot;. So here
-we need to update the literals in that enum to &amp;quot;adding&amp;quot; and &amp;quot;editing&amp;quot;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Type information becomes too weak&lt;/strong&gt;. This can happen very often with enum
-literals. We often name enum values with an adjective to qualify its name:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;enum UIControlState {
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;… and we renamed a function &#60;code&#62;updateUIForMode(mode: Mode)&#60;/code&#62; to
+&#60;code&#62;update(for mode: Mode)&#60;/code&#62;. The call site, therefore, becomes
+&#60;code&#62;update(for: .add)&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;What makes it feels wrong? Well, a preposition followed by a verb (&#38;quot;for add&#38;quot;)
+is not very grammatical. Normally we would say &#38;quot;update UI for &#60;em&#62;adding&#60;/em&#62;&#38;quot;. So here
+we need to update the literals in that enum to &#38;quot;adding&#38;quot; and &#38;quot;editing&#38;quot;.&#60;/p&#62;
+&#60;p&#62;&#60;strong&#62;Type information becomes too weak&#60;/strong&#62;. This can happen very often with enum
+literals. We often name enum values with an adjective to qualify its name:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;enum UIControlState {
     case automatic // which state? the *automatic* state!
     …
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;After renaming, we&#x27;ll have functions that simply becomes too generic and
-mysterious at call site:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;update(for: .automatic) // automatic what? 😂
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This is where we need to be flexible and use our own good judgement. Perhaps
-it&#x27;s simply better to keep the qualifying postfix:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-swift&quot;&gt;update(forControlState: .automatic) // better
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In the guideline&#x27;s parlance, this is &lt;a href=&quot;https://swift.org/documentation/api-design-guidelines/#weak-type-information&quot;&gt;compensate for weak type
-information&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Other argument labels needs updates too&lt;/strong&gt;. A function at call site should read
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;After renaming, we&#39;ll have functions that simply becomes too generic and
+mysterious at call site:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;update(for: .automatic) // automatic what? 😂
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This is where we need to be flexible and use our own good judgement. Perhaps
+it&#39;s simply better to keep the qualifying postfix:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;update(forControlState: .automatic) // better
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;In the guideline&#39;s parlance, this is &#60;a href=&#34;https://swift.org/documentation/api-design-guidelines/#weak-type-information&#34;&#62;compensate for weak type
+information&#60;/a&#62;.&#60;/p&#62;
+&#60;p&#62;&#60;strong&#62;Other argument labels needs updates too&#60;/strong&#62;. A function at call site should read
 like a sentence as much as possible. We removed words at beginning of the
-&amp;quot;sentence&amp;quot;, it&#x27;s important to take a look at labels for the rest of the sentence
-and ensure the whole thing fits together.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;There are &lt;em&gt;many&lt;/em&gt;, &lt;em&gt;many&lt;/em&gt; other fallouts from mechanically omitting needless
-words that I didn&#x27;t cover in this post. There are many many other things in the
+&#38;quot;sentence&#38;quot;, it&#39;s important to take a look at labels for the rest of the sentence
+and ensure the whole thing fits together.&#60;/p&#62;
+&#60;hr /&#62;
+&#60;p&#62;There are &#60;em&#62;many&#60;/em&#62;, &#60;em&#62;many&#60;/em&#62; other fallouts from mechanically omitting needless
+words that I didn&#39;t cover in this post. There are many many other things in the
 API Design Guidelines that are worth conforming to. There will be much much bike
-shedding among your team members.&lt;/p&gt;
-&lt;p&gt;Just remember, the API guidelines don&#x27;t provide an answer to every naming
+shedding among your team members.&#60;/p&#62;
+&#60;p&#62;Just remember, the API guidelines don&#39;t provide an answer to every naming
 decision. Following it means your code base will fit in with the rest of the
 community and APIs from Foundation/Swift standard library. But find what feels
 right for your team is the most important thing. In the end, you should be glad
-that everyone cares so much about your code base&#x27;s &amp;quot;Swiftness&amp;quot; and it&#x27;ll be all
-worth it!&lt;/p&gt;
+that everyone cares so much about your code base&#39;s &#38;quot;Swiftness&#38;quot; and it&#39;ll be all
+worth it!&#60;/p&#62;
 </description>
                 <pubDate>Sat, 22 Oct 2016 17:08:41 -0700</pubDate>
                 <link>https://duan.ca/2016/10/22/how-to-omit-needless-words/</link>

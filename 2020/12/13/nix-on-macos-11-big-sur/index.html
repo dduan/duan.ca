@@ -12,23 +12,40 @@
     <meta property="og:title" content="Installing Nix on macOS 11 Big Sur">
     <meta property="article:published_time" content="2020-12-13T12:00:52-08:00"><meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@daniel_duan">
-    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="twitter:creator" content="@daniel_duan">
     <meta name="apple-mobile-web-app-title" content="Daniel Duan">
     <title>Installing Nix on macOS 11 Big Sur</title>
     <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
     <link rel="canonical" href="https://duan.ca/2020/12/13/nix-on-macos-11-big-sur/">
-    <link rel="stylesheet" href="/styles.css"></link>
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
 </head>
-<body><article>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="Installing Nix on macOS 11 Big Sur">
+    <meta itemprop="datePublished" content="2020-12-13T12:00:52-08:00">
+    <meta itemprop="dateModified" content="2020-12-13T12:00:52-08:00">
+    <link itemprop="url" href="https://duan.ca/2020/12/13/nix-on-macos-11-big-sur/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2020/12/13/nix-on-macos-11-big-sur/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="Nix">
+    <meta itemprop="keywords" content="macOS">
     <h1>Installing Nix on macOS 11 Big Sur</h1>
     <nav>
         <p class="metainfo article-meta">
-            <a href="/articles">Daniel Duan</a>
+            <a href="/articles/">Daniel Duan</a>
             ·
-            <time datetime="2020-12-13T12:00:52-08:00" itemProp="datePublished">2020-12-13</time>
+            <time datetime="2020-12-13T12:00:52-08:00">2020-12-13</time>
         </p>
-    </nav><p><em>Note: as of Feburary, 2022, the steps written below has been incorporated by the official Nix install script for macOS. This article is, therefore, obsolete.</em></p>
+    </nav>
+    <div itemprop="articleBody"><p><em>Note: as of Feburary, 2022, the steps written below has been incorporated by the official Nix install script for macOS. This article is, therefore, obsolete.</em></p>
 <p>Here are the steps for installing nix on macOS 11 Big Sur.</p>
 <h3>Preparation</h3>
 <p>Decide on which disk the nix store is to be installed. By end of this process, you'll have a disk
@@ -68,7 +85,7 @@ set -x PATH $HOME/.nix-profile/bin $PATH
 </code></pre>
 <p>It shouldn't be to hard to do this on other OSes. The relevant information is in
 <code>~/.nix-profile/etc/profile.d/nix.sh</code>.</p>
-
+</div>
 </article>
 <footer>
     <hr />

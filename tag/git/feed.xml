@@ -6,34 +6,34 @@
         <atom:link href="https://duan.ca/tag/git/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Git Commit Message, Vim, and Markdown</title>
-                <description>&lt;p&gt;It&#x27;s been bothering me for years.&lt;/p&gt;
-&lt;p&gt;That is, &lt;code&gt;#&lt;/code&gt; is both the start of a comment in a git commit message, but also
-the syntax for headings in Markdown.&lt;/p&gt;
-&lt;p&gt;Personally, I prefer using commit messages to populate pull request descriptions
+                <description>&#60;p&#62;It&#39;s been bothering me for years.&#60;/p&#62;
+&#60;p&#62;That is, &#60;code&#62;#&#60;/code&#62; is both the start of a comment in a git commit message, but also
+the syntax for headings in Markdown.&#60;/p&#62;
+&#60;p&#62;Personally, I prefer using commit messages to populate pull request descriptions
 whenever possible. On GitHub, This happens automatically when the pull request
-contains a single commit. But I can&#x27;t type, say an H3 as &lt;code&gt;### Heading&lt;/code&gt; in the
-commit message (in Vim, most of the time) because it gets treated as a comment!&lt;/p&gt;
-&lt;p&gt;But thanks to this twitter interaction with &lt;a href=&quot;https://twitter.com/dmartincy&quot;&gt;@dmartincy&lt;/a&gt;, I finally solved
-this problem:&lt;/p&gt;
-&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;I haven&amp;#39;t found myself in that situation, but maybe you could do &amp;#39;git config core.commentChar &amp;quot;;&amp;quot;&amp;#39; before creating the commits? That will change the default git commit marker (#) to something that won&amp;#39;t conflict with Markdown titles.&lt;/p&gt;&amp;mdash; Daniel Martín (@dmartincy) &lt;a href=&quot;https://twitter.com/dmartincy/status/1247271508420026368?ref_src=twsrc%5Etfw&quot;&gt;April 6, 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;p&gt;As mentioned by Daniel, Git has introduced a setting called &lt;code&gt;core.commentChar&lt;/code&gt;,
-documented &lt;a href=&quot;https://git-scm.com/docs/git-config#Documentation/git-config.txt-corecommentChar&quot;&gt;here&lt;/a&gt;, which lets us control which character
-becomes the start of a comment line. Let&#x27;s say we want to replace the default
-&lt;code&gt;#&lt;/code&gt; with &lt;code&gt;;&lt;/code&gt;, we can edit &lt;code&gt;~/.gitconfig&lt;/code&gt; to include this preference:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;[core]
-	commentChar = &amp;quot;;&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;… and this will affect every Git repository on this computer.&lt;/p&gt;
-&lt;p&gt;For me, though, this broke git commit syntax highlighting in Vim: the comments,
-beginning with &lt;code&gt;;&lt;/code&gt;, are no longer recognized as comments. To fix this, I updated
-Vim&#x27;s syntax for file type &lt;code&gt;gitcommit&lt;/code&gt;. In your Vim setting directory
-(&lt;code&gt;~/.config/nvim/&lt;/code&gt; for me), create a file &lt;code&gt;syntax/gitcommit.vim&lt;/code&gt; file (unless
-you already have one), add the following line:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;syn match gitcommitComment	&amp;quot;^;.*&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note &lt;code&gt;;&lt;/code&gt; matches my preferred &lt;code&gt;core.commentChar&lt;/code&gt; for Git.&lt;/p&gt;
-&lt;p&gt;Et voilà! Git commit message looks tippy-top in Vim again!&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2020/04/gitcommit.png&quot; alt=&quot;editing git commit in vim, with alternative character being the beginning of a comment&quot; /&gt;&lt;/p&gt;
+contains a single commit. But I can&#39;t type, say an H3 as &#60;code&#62;### Heading&#60;/code&#62; in the
+commit message (in Vim, most of the time) because it gets treated as a comment!&#60;/p&#62;
+&#60;p&#62;But thanks to this twitter interaction with &#60;a href=&#34;https://twitter.com/dmartincy&#34;&#62;@dmartincy&#60;/a&#62;, I finally solved
+this problem:&#60;/p&#62;
+&#60;blockquote class=&#34;twitter-tweet&#34;&#62;&#60;p lang=&#34;en&#34; dir=&#34;ltr&#34;&#62;I haven&#38;#39;t found myself in that situation, but maybe you could do &#38;#39;git config core.commentChar &#38;quot;;&#38;quot;&#38;#39; before creating the commits? That will change the default git commit marker (#) to something that won&#38;#39;t conflict with Markdown titles.&#60;/p&#62;&#38;mdash; Daniel Martín (@dmartincy) &#60;a href=&#34;https://twitter.com/dmartincy/status/1247271508420026368?ref_src=twsrc%5Etfw&#34;&#62;April 6, 2020&#60;/a&#62;&#60;/blockquote&#62; &#60;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&#62;&#60;/script&#62;
+&#60;p&#62;As mentioned by Daniel, Git has introduced a setting called &#60;code&#62;core.commentChar&#60;/code&#62;,
+documented &#60;a href=&#34;https://git-scm.com/docs/git-config#Documentation/git-config.txt-corecommentChar&#34;&#62;here&#60;/a&#62;, which lets us control which character
+becomes the start of a comment line. Let&#39;s say we want to replace the default
+&#60;code&#62;#&#60;/code&#62; with &#60;code&#62;;&#60;/code&#62;, we can edit &#60;code&#62;~/.gitconfig&#60;/code&#62; to include this preference:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;[core]
+	commentChar = &#38;quot;;&#38;quot;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;… and this will affect every Git repository on this computer.&#60;/p&#62;
+&#60;p&#62;For me, though, this broke git commit syntax highlighting in Vim: the comments,
+beginning with &#60;code&#62;;&#60;/code&#62;, are no longer recognized as comments. To fix this, I updated
+Vim&#39;s syntax for file type &#60;code&#62;gitcommit&#60;/code&#62;. In your Vim setting directory
+(&#60;code&#62;~/.config/nvim/&#60;/code&#62; for me), create a file &#60;code&#62;syntax/gitcommit.vim&#60;/code&#62; file (unless
+you already have one), add the following line:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;syn match gitcommitComment	&#38;quot;^;.*&#38;quot;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Note &#60;code&#62;;&#60;/code&#62; matches my preferred &#60;code&#62;core.commentChar&#60;/code&#62; for Git.&#60;/p&#62;
+&#60;p&#62;Et voilà! Git commit message looks tippy-top in Vim again!&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2020/04/gitcommit.png&#34; alt=&#34;editing git commit in vim, with alternative character being the beginning of a comment&#34; /&#62;&#60;/p&#62;
 </description>
                 <pubDate>Mon, 13 Apr 2020 13:41:02 -0700</pubDate>
                 <link>https://duan.ca/2020/04/13/git-commit-comment/</link>
@@ -41,32 +41,32 @@ you already have one), add the following line:&lt;/p&gt;
             </item>
             <item>
                 <title>Rebase And Sign Multiple Git Commits</title>
-                <description>&lt;p&gt;I never bothered &lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work&quot;&gt;signing&lt;/a&gt; my git commits until Github started putting
-those shiny badges on them. Since then I&#x27;ve encountered a problem: rebased
-commits lose their hash and their signed-ness.&lt;/p&gt;
-&lt;p&gt;That&#x27;s not a big deal for a single commit. Just run &lt;code&gt;git commit -S --amend --no-edit&lt;/code&gt; after rebase. And that commit, which is at &lt;code&gt;HEAD&lt;/code&gt; will have a new
-hash and be signed.&lt;/p&gt;
-&lt;p&gt;What if we have more than one commit to rebase? My instinctive answer was sign
-the one on &lt;code&gt;HEAD&lt;/code&gt;, then use interactive rebase to rotate the next one on top and
-sign it, repeat until each one is signed and reorder them. But that doesn&#x27;t work
-at all because a commit&#x27;s position in history is part of its content. That means
+                <description>&#60;p&#62;I never bothered &#60;a href=&#34;https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work&#34;&#62;signing&#60;/a&#62; my git commits until Github started putting
+those shiny badges on them. Since then I&#39;ve encountered a problem: rebased
+commits lose their hash and their signed-ness.&#60;/p&#62;
+&#60;p&#62;That&#39;s not a big deal for a single commit. Just run &#60;code&#62;git commit -S --amend --no-edit&#60;/code&#62; after rebase. And that commit, which is at &#60;code&#62;HEAD&#60;/code&#62; will have a new
+hash and be signed.&#60;/p&#62;
+&#60;p&#62;What if we have more than one commit to rebase? My instinctive answer was sign
+the one on &#60;code&#62;HEAD&#60;/code&#62;, then use interactive rebase to rotate the next one on top and
+sign it, repeat until each one is signed and reorder them. But that doesn&#39;t work
+at all because a commit&#39;s position in history is part of its content. That means
 after a commit is rebased, it and every commits following it will have a new
-hash and git doesn&#x27;t give us an oppurtunity to say &amp;quot;include my signature,
-please&amp;quot;. You cannot rebase and keep the commits signed!&lt;/p&gt;
-&lt;p&gt;Well, that kind of sucks. But you are reading about it here, so I&#x27;d better give
-you something to help, right?&lt;/p&gt;
-&lt;p&gt;There is, at least, one way to achieve &lt;em&gt;rebase and sign multiple commits&lt;/em&gt;:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Run interactive rebase: &lt;code&gt;git rebase -i branch&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Mark all commits and &amp;quot;edit&amp;quot; or &amp;quot;e&amp;quot;.&lt;/li&gt;
-&lt;li&gt;Git now stops at every commit for you to make changes. This is an oppurtunity
-to sign it! &lt;code&gt;git commit -S --amend --no-edit&lt;/code&gt;, just like how you would sign
-&lt;code&gt;HEAD&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;git rebase --continue&lt;/code&gt;, move on the next commit until all every one is
-edited.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;There&#x27;s virtually nothing you cannot do with git. Hence the reputation for it&#x27;s
-glorious UI, ya know?&lt;/p&gt;
+hash and git doesn&#39;t give us an oppurtunity to say &#38;quot;include my signature,
+please&#38;quot;. You cannot rebase and keep the commits signed!&#60;/p&#62;
+&#60;p&#62;Well, that kind of sucks. But you are reading about it here, so I&#39;d better give
+you something to help, right?&#60;/p&#62;
+&#60;p&#62;There is, at least, one way to achieve &#60;em&#62;rebase and sign multiple commits&#60;/em&#62;:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;Run interactive rebase: &#60;code&#62;git rebase -i branch&#60;/code&#62;.&#60;/li&#62;
+&#60;li&#62;Mark all commits and &#38;quot;edit&#38;quot; or &#38;quot;e&#38;quot;.&#60;/li&#62;
+&#60;li&#62;Git now stops at every commit for you to make changes. This is an oppurtunity
+to sign it! &#60;code&#62;git commit -S --amend --no-edit&#60;/code&#62;, just like how you would sign
+&#60;code&#62;HEAD&#60;/code&#62;.&#60;/li&#62;
+&#60;li&#62;&#60;code&#62;git rebase --continue&#60;/code&#62;, move on the next commit until all every one is
+edited.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;There&#39;s virtually nothing you cannot do with git. Hence the reputation for it&#39;s
+glorious UI, ya know?&#60;/p&#62;
 </description>
                 <pubDate>Sat, 24 Dec 2016 01:31:14 -0800</pubDate>
                 <link>https://duan.ca/2016/12/24/rebase-multiple-git-commits-with-signing/</link>
@@ -74,20 +74,20 @@ glorious UI, ya know?&lt;/p&gt;
             </item>
             <item>
                 <title>Deploy Jekyll Site To Github With Make</title>
-                <description>&lt;p&gt;At risks of being too meta, I want to talk about how this post is going to go
-from my computer to a repository on Github on both the &lt;code&gt;master&lt;/code&gt; and &lt;code&gt;gh-pages&lt;/code&gt;
-branch. The former contains the file I&#x27;m typing, and the latter an updated
-HTML site generated by Jekyll.&lt;/p&gt;
-&lt;p&gt;Here&#x27;s how: I type &lt;code&gt;make deploy&lt;/code&gt; once I commit this file in my local
-repository.&lt;/p&gt;
-&lt;p&gt;I spent a day to set up a Jekyll site. The last part involves deploying it to
+                <description>&#60;p&#62;At risks of being too meta, I want to talk about how this post is going to go
+from my computer to a repository on Github on both the &#60;code&#62;master&#60;/code&#62; and &#60;code&#62;gh-pages&#60;/code&#62;
+branch. The former contains the file I&#39;m typing, and the latter an updated
+HTML site generated by Jekyll.&#60;/p&#62;
+&#60;p&#62;Here&#39;s how: I type &#60;code&#62;make deploy&#60;/code&#62; once I commit this file in my local
+repository.&#60;/p&#62;
+&#60;p&#62;I spent a day to set up a Jekyll site. The last part involves deploying it to
 Github, my preferred way to host a static site. There are a lot of posts and
-scripts on how to achieve it. And Github seems to have an &amp;quot;afficial&amp;quot; support
-for Jekyll site that disables plugin scripts (understandably so).&lt;/p&gt;
-&lt;p&gt;But having worked with git and make for all these years made me immune to all
-the fanciness the Internet tries to sell.&lt;/p&gt;
-&lt;p&gt;Here&#x27;s my script for deploying a Jekyll project to Github pages:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;DEPLOY_PATH=/tmp/jekyll_deploy
+scripts on how to achieve it. And Github seems to have an &#38;quot;afficial&#38;quot; support
+for Jekyll site that disables plugin scripts (understandably so).&#60;/p&#62;
+&#60;p&#62;But having worked with git and make for all these years made me immune to all
+the fanciness the Internet tries to sell.&#60;/p&#62;
+&#60;p&#62;Here&#39;s my script for deploying a Jekyll project to Github pages:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;DEPLOY_PATH=/tmp/jekyll_deploy
 build:
 	jekyll build
 
@@ -102,20 +102,20 @@ deploy:
 	cp -R .git ${DEPLOY_PATH}
 	cd ${DEPLOY_PATH}; git checkout gh-pages; git clean -d -x -f
 	cp -R _site/* ${DEPLOY_PATH}
-	cd ${DEPLOY_PATH}; git add .; git commit -m &amp;quot;`curl whatthecommit.com/index.txt`&amp;quot;
+	cd ${DEPLOY_PATH}; git add .; git commit -m &#38;quot;`curl whatthecommit.com/index.txt`&#38;quot;
 	cd ${DEPLOY_PATH}; git push -f origin gh-pages
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Drop it into root of your Jekyll project, commit all changes (including the
-&lt;code&gt;Makefile&lt;/code&gt;). And type &lt;code&gt;make deploy&lt;/code&gt;. BOOM, done.&lt;/p&gt;
-&lt;p&gt;There are a couple of assumptions:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;You build the site in the &lt;code&gt;_site&lt;/code&gt; folder&lt;/li&gt;
-&lt;li&gt;You store Jekyll source on &lt;code&gt;master&lt;/code&gt; and have the &lt;code&gt;gh-pages&lt;/code&gt; branch up.&lt;/li&gt;
-&lt;li&gt;You can build the site by running &lt;code&gt;jekyll build&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;You don&#x27;t care about commit message on the deploy branch.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I like it better than other methods because it does not require installing
-additional software/scripts and there&#x27;s no restriction on plugins.&lt;/p&gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Drop it into root of your Jekyll project, commit all changes (including the
+&#60;code&#62;Makefile&#60;/code&#62;). And type &#60;code&#62;make deploy&#60;/code&#62;. BOOM, done.&#60;/p&#62;
+&#60;p&#62;There are a couple of assumptions:&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;You build the site in the &#60;code&#62;_site&#60;/code&#62; folder&#60;/li&#62;
+&#60;li&#62;You store Jekyll source on &#60;code&#62;master&#60;/code&#62; and have the &#60;code&#62;gh-pages&#60;/code&#62; branch up.&#60;/li&#62;
+&#60;li&#62;You can build the site by running &#60;code&#62;jekyll build&#60;/code&#62;.&#60;/li&#62;
+&#60;li&#62;You don&#39;t care about commit message on the deploy branch.&#60;/li&#62;
+&#60;/ul&#62;
+&#60;p&#62;I like it better than other methods because it does not require installing
+additional software/scripts and there&#39;s no restriction on plugins.&#60;/p&#62;
 </description>
                 <pubDate>Sun, 15 May 2016 01:00:00 -0700</pubDate>
                 <link>https://duan.ca/2016/05/15/deploy-jekyll-to-github/</link>
@@ -123,70 +123,70 @@ additional software/scripts and there&#x27;s no restriction on plugins.&lt;/p&gt
             </item>
             <item>
                 <title>Keep Git Social</title>
-                <description>&lt;p&gt;&lt;em&gt;A project I&#x27;m working on uses &lt;a href=&quot;http://gitlabhq.com&quot;&gt;GitlabHQ&lt;/a&gt;, I think it is a cool open source
+                <description>&#60;p&#62;&#60;em&#62;A project I&#39;m working on uses &#60;a href=&#34;http://gitlabhq.com&#34;&#62;GitlabHQ&#60;/a&#62;, I think it is a cool open source
 project and the developers are doing an excellent job of making a sweet web
-interface for Git projects. However, as I found out today, &lt;a href=&quot;https://github.com/gitlabhq/gitlabhq/issues/1298&quot; title=&quot;Gitlab Issue: Closed&quot;&gt;my one issue&lt;/a&gt;
-with it was closed without fixing. And that&#x27;s what finally propelled me to
-writing this airticle.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Do you know, the Linux kernel is broken by hundreds of commited patches
-everyday?&lt;/p&gt;
-&lt;p&gt;That, of course, is a trick question. Yes, &lt;em&gt;technically&lt;/em&gt;, hundreds (if not
-thousands) of patches were commited to &lt;em&gt;a&lt;/em&gt; git repository of the Linux kernel
-that isn&#x27;t different in anyway from &lt;em&gt;the&lt;/em&gt; repository. What makes the
-repository &amp;quot;conanical&amp;quot; is the fact that Linus Torvalds owns it. If the world
+interface for Git projects. However, as I found out today, &#60;a href=&#34;https://github.com/gitlabhq/gitlabhq/issues/1298&#34; title=&#34;Gitlab Issue: Closed&#34;&#62;my one issue&#60;/a&#62;
+with it was closed without fixing. And that&#39;s what finally propelled me to
+writing this airticle.&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;Do you know, the Linux kernel is broken by hundreds of commited patches
+everyday?&#60;/p&#62;
+&#60;p&#62;That, of course, is a trick question. Yes, &#60;em&#62;technically&#60;/em&#62;, hundreds (if not
+thousands) of patches were commited to &#60;em&#62;a&#60;/em&#62; git repository of the Linux kernel
+that isn&#39;t different in anyway from &#60;em&#62;the&#60;/em&#62; repository. What makes the
+repository &#38;quot;conanical&#38;quot; is the fact that Linus Torvalds owns it. If the world
 lost access to his hard drive because Linus was hit by a bus (I would never
 wish this to happen) today, all the Linux community need to do is figure out
-who is next BDFL. Then his/hers would become &lt;em&gt;the&lt;/em&gt; Linux repository.&lt;/p&gt;
-&lt;p&gt;In other words, what makes the difference is purely social.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Not trying to fit the social structure of a software project into a
-repository is the biggest strength of git.&lt;/strong&gt; This is why I frown everytime
-I see a discussion about locking down branches of a Git repository.&lt;/p&gt;
-&lt;p&gt;Making developers &amp;quot;own&amp;quot; branches on a shared repository is a pratice
-inheritated from the days of centralized version control. Git doesn&#x27;t provide
-built-in support for this, for good reasons.&lt;/p&gt;
-&lt;p&gt;With Subversion, the ultimate goal of branch-wise access control is to keep
+who is next BDFL. Then his/hers would become &#60;em&#62;the&#60;/em&#62; Linux repository.&#60;/p&#62;
+&#60;p&#62;In other words, what makes the difference is purely social.&#60;/p&#62;
+&#60;p&#62;&#60;strong&#62;Not trying to fit the social structure of a software project into a
+repository is the biggest strength of git.&#60;/strong&#62; This is why I frown everytime
+I see a discussion about locking down branches of a Git repository.&#60;/p&#62;
+&#60;p&#62;Making developers &#38;quot;own&#38;quot; branches on a shared repository is a pratice
+inheritated from the days of centralized version control. Git doesn&#39;t provide
+built-in support for this, for good reasons.&#60;/p&#62;
+&#60;p&#62;With Subversion, the ultimate goal of branch-wise access control is to keep
 out
 bad changes made by developers while give them the benefits of version
-control, namely:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;provide a backup of the change history&lt;/li&gt;
-&lt;li&gt;let others to follow his/her progress so that they can contribute via
-patches or collaborate if they have write access.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;With Git, these are easily achieved by a personal repository read-accessible
-for the team.&lt;/p&gt;
-&lt;p&gt;Meanwhile, write access is granted at the repository level, but only to very
+control, namely:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;provide a backup of the change history&#60;/li&#62;
+&#60;li&#62;let others to follow his/her progress so that they can contribute via
+patches or collaborate if they have write access.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;With Git, these are easily achieved by a personal repository read-accessible
+for the team.&#60;/p&#62;
+&#60;p&#62;Meanwhile, write access is granted at the repository level, but only to very
 few or, more preferably, one person. This is possible because each team member
 can have and only push to his/her own repositories. No change made by others
-will make their way to the &amp;quot;conanical&amp;quot; repository unless its owner(s) activaly
-pulls them in. Bad changes therefore is kept out.&lt;/p&gt;
-&lt;p&gt;Additionally, Git has &lt;a href=&quot;http://git-scm.com/book/en/Git-Branching&quot;&gt;features&lt;/a&gt; flexible enough to support all kinds of
-&lt;a href=&quot;http://nvie.com/posts/a-successful-git-branching-model&quot;&gt;development process&lt;/a&gt;es, partially because its branches, by design, are not
-responsible for enforcing access permissions.&lt;/p&gt;
-&lt;p&gt;Consider developer John working on a shared git repository with locked
+will make their way to the &#38;quot;conanical&#38;quot; repository unless its owner(s) activaly
+pulls them in. Bad changes therefore is kept out.&#60;/p&#62;
+&#60;p&#62;Additionally, Git has &#60;a href=&#34;http://git-scm.com/book/en/Git-Branching&#34;&#62;features&#60;/a&#62; flexible enough to support all kinds of
+&#60;a href=&#34;http://nvie.com/posts/a-successful-git-branching-model&#34;&#62;development process&#60;/a&#62;es, partially because its branches, by design, are not
+responsible for enforcing access permissions.&#60;/p&#62;
+&#60;p&#62;Consider developer John working on a shared git repository with locked
 branches: where would he push his temporary branch to for backup, if he can
-only write to &lt;code&gt;feature42&lt;/code&gt; and &lt;code&gt;johns_branch&lt;/code&gt;? How does he get
-&lt;code&gt;emergency_bugfix_14159&lt;/code&gt; pair reviewed at 4am? If he uses his own repo for
+only write to &#60;code&#62;feature42&#60;/code&#62; and &#60;code&#62;johns_branch&#60;/code&#62;? How does he get
+&#60;code&#62;emergency_bugfix_14159&#60;/code&#62; pair reviewed at 4am? If he uses his own repo for
 those, does it mean he has to force the whole team to know about it?  How does
-it affect work when a &lt;code&gt;git branch --all&lt;/code&gt; produces a phone book?&lt;/p&gt;
-&lt;p&gt;Break Git&#x27;s design gets you no where nice.&lt;/p&gt;
-&lt;p&gt;And no, Git&#x27;s social model doesn&#x27;t add work to the owner of the &amp;quot;official&amp;quot;
+it affect work when a &#60;code&#62;git branch --all&#60;/code&#62; produces a phone book?&#60;/p&#62;
+&#60;p&#62;Break Git&#39;s design gets you no where nice.&#60;/p&#62;
+&#60;p&#62;And no, Git&#39;s social model doesn&#39;t add work to the owner of the &#38;quot;official&#38;quot;
 repository. Afterall, Git was designed with he linux kernel in mind!  Linus
-himself explains it the best (summary provided below):&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;http://www.youtube.com/embed/4XpnKHJAok8&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;p&gt;In short, Linus only review pull requests from a few &amp;quot;lieutenants&amp;quot; he trusts,
+himself explains it the best (summary provided below):&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;http://www.youtube.com/embed/4XpnKHJAok8&#34; frameborder=&#34;0&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
+&#60;p&#62;In short, Linus only review pull requests from a few &#38;quot;lieutenants&#38;quot; he trusts,
 and they each follow the same process with their trusted few.  And the pyramid
 trickles all the way down. Here agian, Git solves a problem by getting out of
-the way of the project&#x27;s social stucture, instead of trying to encapsulate it.&lt;/p&gt;
-&lt;p&gt;Git was the first version control system I&#x27;ve ever used starting in 2008.
-I&#x27;ve since gradually realized that not everyone is lucky like me, in the sense
+the way of the project&#39;s social stucture, instead of trying to encapsulate it.&#60;/p&#62;
+&#60;p&#62;Git was the first version control system I&#39;ve ever used starting in 2008.
+I&#39;ve since gradually realized that not everyone is lucky like me, in the sense
 that svn has been working just fine for a lot of people. When their project
 switches to Git, emulating the svn/old workflow with functionality provided by
-projects like &lt;code&gt;gitolite&lt;/code&gt; is only natural. But if you are one of them, and want
+projects like &#60;code&#62;gitolite&#60;/code&#62; is only natural. But if you are one of them, and want
 more creativity from your team, perhaps embracing the social aspect of Git by
-breaking the shackles on their hand is a good thing to try.&lt;/p&gt;
+breaking the shackles on their hand is a good thing to try.&#60;/p&#62;
 </description>
                 <pubDate>Wed, 31 Oct 2012 10:02:30 -0600</pubDate>
                 <link>https://duan.ca/2012/10/31/keep-git-social/</link>

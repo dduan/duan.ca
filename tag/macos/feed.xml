@@ -6,46 +6,46 @@
         <atom:link href="https://duan.ca/tag/macos/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Installing Nix on macOS 11 Big Sur</title>
-                <description>&lt;p&gt;&lt;em&gt;Note: as of Feburary, 2022, the steps written below has been incorporated by the official Nix install script for macOS. This article is, therefore, obsolete.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Here are the steps for installing nix on macOS 11 Big Sur.&lt;/p&gt;
-&lt;h3&gt;Preparation&lt;/h3&gt;
-&lt;p&gt;Decide on which disk the nix store is to be installed. By end of this process, you&#x27;ll have a disk
-name like &lt;code&gt;disk4&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Personally, I like looking it up in the Disk Utility app:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2020/12/disk-utility.png&quot; alt=&quot;Disk Utility&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;You can also use other methods, such us the &lt;code&gt;diskutil list&lt;/code&gt; command.&lt;/p&gt;
-&lt;p&gt;Have this disk name ready.&lt;/p&gt;
-&lt;h3&gt;Installation&lt;/h3&gt;
-&lt;h4&gt;1. Create the path &lt;code&gt;/nix&lt;/code&gt; the macOS way.&lt;/h4&gt;
-&lt;p&gt;Edit or create the file &lt;code&gt;/etc/synthetic.conf&lt;/code&gt;, adding this line:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;nix
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Reboot the Mac.&lt;/p&gt;
-&lt;h4&gt;2. Create a APFS volume for the nix store.&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;sudo diskutil apfs addVolume diskX APFS &#x27;Nix Store&#x27; -mountpoint /nix
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Make sure to replace &lt;code&gt;diskX&lt;/code&gt; with the disk you identified in the preparation step.&lt;/p&gt;
-&lt;h4&gt;3. Mount the volume.&lt;/h4&gt;
-&lt;p&gt;Edit or create the file &lt;code&gt;/etc/fstab&lt;/code&gt;, adding this line:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;LABEL=Nix\040Store /nix apfs rw,nobrowse
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Reboot the Mac.&lt;/p&gt;
-&lt;h4&gt;4. Install Nix the &amp;quot;normal&amp;quot; way&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;sh &amp;lt;(curl -L https://nixos.org/nix/install)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;5. You are done! Try it out. I ran this little &lt;a href=&quot;https://nix.dev/tutorials/dev-environment.html&quot;&gt;example&lt;/a&gt; as a test and things appears to work as expected.&lt;/h4&gt;
-&lt;h3&gt;Bonus: using Nix in Fish shell&lt;/h3&gt;
-&lt;p&gt;As a fish user, I&#x27;m used to fixing things up myself since software from non-fish users usually
-pretends fish doesn&#x27;t exist. Anyways, in the final steps of its installation, Nix sets up a few
-environment variables in a bash script. I&#x27;ve adapted these specifically for fish on macOS. Add these
-to your config.fish:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;set -x NIX_PROFILES &amp;quot;/nix/var/nix/profiles/default $HOME/.nix-profile&amp;quot;
-set -x NIX_SSL_CERT_FILE &amp;quot;$HOME/.nix-profile/etc/ssl/certs/ca-bundle.crt&amp;quot;
+                <description>&#60;p&#62;&#60;em&#62;Note: as of Feburary, 2022, the steps written below has been incorporated by the official Nix install script for macOS. This article is, therefore, obsolete.&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;Here are the steps for installing nix on macOS 11 Big Sur.&#60;/p&#62;
+&#60;h3&#62;Preparation&#60;/h3&#62;
+&#60;p&#62;Decide on which disk the nix store is to be installed. By end of this process, you&#39;ll have a disk
+name like &#60;code&#62;disk4&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;Personally, I like looking it up in the Disk Utility app:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2020/12/disk-utility.png&#34; alt=&#34;Disk Utility&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;You can also use other methods, such us the &#60;code&#62;diskutil list&#60;/code&#62; command.&#60;/p&#62;
+&#60;p&#62;Have this disk name ready.&#60;/p&#62;
+&#60;h3&#62;Installation&#60;/h3&#62;
+&#60;h4&#62;1. Create the path &#60;code&#62;/nix&#60;/code&#62; the macOS way.&#60;/h4&#62;
+&#60;p&#62;Edit or create the file &#60;code&#62;/etc/synthetic.conf&#60;/code&#62;, adding this line:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;nix
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Reboot the Mac.&#60;/p&#62;
+&#60;h4&#62;2. Create a APFS volume for the nix store.&#60;/h4&#62;
+&#60;pre&#62;&#60;code&#62;sudo diskutil apfs addVolume diskX APFS &#39;Nix Store&#39; -mountpoint /nix
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Make sure to replace &#60;code&#62;diskX&#60;/code&#62; with the disk you identified in the preparation step.&#60;/p&#62;
+&#60;h4&#62;3. Mount the volume.&#60;/h4&#62;
+&#60;p&#62;Edit or create the file &#60;code&#62;/etc/fstab&#60;/code&#62;, adding this line:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;LABEL=Nix\040Store /nix apfs rw,nobrowse
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Reboot the Mac.&#60;/p&#62;
+&#60;h4&#62;4. Install Nix the &#38;quot;normal&#38;quot; way&#60;/h4&#62;
+&#60;pre&#62;&#60;code&#62;sh &#38;lt;(curl -L https://nixos.org/nix/install)
+&#60;/code&#62;&#60;/pre&#62;
+&#60;h4&#62;5. You are done! Try it out. I ran this little &#60;a href=&#34;https://nix.dev/tutorials/dev-environment.html&#34;&#62;example&#60;/a&#62; as a test and things appears to work as expected.&#60;/h4&#62;
+&#60;h3&#62;Bonus: using Nix in Fish shell&#60;/h3&#62;
+&#60;p&#62;As a fish user, I&#39;m used to fixing things up myself since software from non-fish users usually
+pretends fish doesn&#39;t exist. Anyways, in the final steps of its installation, Nix sets up a few
+environment variables in a bash script. I&#39;ve adapted these specifically for fish on macOS. Add these
+to your config.fish:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;set -x NIX_PROFILES &#38;quot;/nix/var/nix/profiles/default $HOME/.nix-profile&#38;quot;
+set -x NIX_SSL_CERT_FILE &#38;quot;$HOME/.nix-profile/etc/ssl/certs/ca-bundle.crt&#38;quot;
 set -x NIX_PATH /nix $HOME/.nix-defexpr/channels
 set -x PATH $HOME/.nix-profile/bin $PATH
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It shouldn&#x27;t be to hard to do this on other OSes. The relevant information is in
-&lt;code&gt;~/.nix-profile/etc/profile.d/nix.sh&lt;/code&gt;.&lt;/p&gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It shouldn&#39;t be to hard to do this on other OSes. The relevant information is in
+&#60;code&#62;~/.nix-profile/etc/profile.d/nix.sh&#60;/code&#62;.&#60;/p&#62;
 </description>
                 <pubDate>Sun, 13 Dec 2020 12:00:52 -0800</pubDate>
                 <link>https://duan.ca/2020/12/13/nix-on-macos-11-big-sur/</link>
@@ -53,21 +53,21 @@ set -x PATH $HOME/.nix-profile/bin $PATH
             </item>
             <item>
                 <title>Taking Screenshots On Linux</title>
-                <description>&lt;p&gt;Having used macOS for a number of years, I&#x27;ve formed some habit that I&#x27;m never
-going to shake. Among them is taking screenshots with &lt;code&gt;Alt-Shift-3&lt;/code&gt; and
-&lt;code&gt;Alt-Shift-4&lt;/code&gt;, follow up with area or window selection. So, when I bought a PC
-and put Linux on it, it&#x27;s time to mess with it for these habits!&lt;/p&gt;
-&lt;p&gt;And, it didn&#x27;t take too long to solve. I&#x27;ve found &lt;a href=&quot;https://github.com/naelstrof/maim&quot;&gt;maim&lt;/a&gt;. Writing this down
-for mine and maybe, yours, future reference.&lt;/p&gt;
-&lt;p&gt;To capture the entire screen:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bash -c &amp;quot;maim ~/Screenshots/fullscreen_$(date +%s).png&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;To active area/windows selection for the capture:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;bash -c &amp;quot;maim -s ~/Screenshots/area_$(date +%s).png&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here&#x27;s how the latter in action (with keybinds via Ubuntu 20.20 desktop&#x27;s
-Settings app).&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/2020/06/18/area-screenshot-on-ubuntu.gif&quot; alt=&quot;How selecting an area with maim works on Ubuntu&quot; /&gt;&lt;/p&gt;
+                <description>&#60;p&#62;Having used macOS for a number of years, I&#39;ve formed some habit that I&#39;m never
+going to shake. Among them is taking screenshots with &#60;code&#62;Alt-Shift-3&#60;/code&#62; and
+&#60;code&#62;Alt-Shift-4&#60;/code&#62;, follow up with area or window selection. So, when I bought a PC
+and put Linux on it, it&#39;s time to mess with it for these habits!&#60;/p&#62;
+&#60;p&#62;And, it didn&#39;t take too long to solve. I&#39;ve found &#60;a href=&#34;https://github.com/naelstrof/maim&#34;&#62;maim&#60;/a&#62;. Writing this down
+for mine and maybe, yours, future reference.&#60;/p&#62;
+&#60;p&#62;To capture the entire screen:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;bash -c &#38;quot;maim ~/Screenshots/fullscreen_$(date +%s).png&#38;quot;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;To active area/windows selection for the capture:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;bash -c &#38;quot;maim -s ~/Screenshots/area_$(date +%s).png&#38;quot;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Here&#39;s how the latter in action (with keybinds via Ubuntu 20.20 desktop&#39;s
+Settings app).&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2020/06/18/area-screenshot-on-ubuntu.gif&#34; alt=&#34;How selecting an area with maim works on Ubuntu&#34; /&#62;&#60;/p&#62;
 </description>
                 <pubDate>Thu, 18 Jun 2020 13:22:01 -0700</pubDate>
                 <link>https://duan.ca/2020/06/18/taking-linux-screenshots/</link>
@@ -75,27 +75,27 @@ Settings app).&lt;/p&gt;
             </item>
             <item>
                 <title>Making An Open-Source Swift Project</title>
-                <description>&lt;p&gt;This video shows what it takes to open source a Swift project. Starting from some code in a playground,
+                <description>&#60;p&#62;This video shows what it takes to open source a Swift project. Starting from some code in a playground,
 I created a framework that supports distribution via Swift Package Manager, CocoaPods, Xcode project and
 Carthage. The framework can be used across iOS, macOS, watchOS, tvOS and Linux. In addition, we also added
 SwiftLint to the project, added a Makefile, put everything on GitHub and set up continuous integration via
-Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&lt;/p&gt;
-&lt;div class=&quot;video-container&quot;&gt;
-    &lt;iframe src=&quot;https://www.youtube.com/embed/pA0T1CdqMt8&quot; frameborder=&quot;0&quot; gesture=&quot;media&quot; allow=&quot;encrypted-media&quot; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/div&gt;
-&lt;p&gt;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
-the version tag, documentation generation, automatic Carthage binary generation, test coverage...&lt;/p&gt;
-&lt;p&gt;Anyways, here&#x27;s some stuff mentioned in the video:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Sample project from the video: &lt;a href=&quot;https://github.com/dduan/BitArray&quot;&gt;https://github.com/dduan/BitArray&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Video of me writing the code in this project: &lt;a href=&quot;https://www.youtube.com/watch?v=-k_jrIoD56k&quot;&gt;https://www.youtube.com/watch?v=-k_jrIoD56k&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Swift Package Manager: &lt;a href=&quot;https://swift.org/package-manager/&quot;&gt;https://swift.org/package-manager/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;CocoaPods: &lt;a href=&quot;https://cocoapods.org&quot;&gt;https://cocoapods.org&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Carthage: &lt;a href=&quot;https://github.com/Carthage/Carthage&quot;&gt;https://github.com/Carthage/Carthage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Xcconfigs for universal framework: &lt;a href=&quot;https://github.com/mrackwitz/xcconfigs&quot;&gt;https://github.com/mrackwitz/xcconfigs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;SwiftLint: &lt;a href=&quot;https://github.com/realm/SwiftLint&quot;&gt;https://github.com/realm/SwiftLint&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Travis CI: &lt;a href=&quot;https://travis-ci.org&quot;&gt;https://travis-ci.org&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+Travis. README, COC, LICENSE and CHANGELOG are stubbed in as well.&#60;/p&#62;
+&#60;div class=&#34;video-container&#34;&#62;
+    &#60;iframe src=&#34;https://www.youtube.com/embed/pA0T1CdqMt8&#34; frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34; allowfullscreen&#62;&#60;/iframe&#62;
+&#60;/div&#62;
+&#60;p&#62;This is not at all a comprehensive list of things a good Open Source project should have. We are still missing
+the version tag, documentation generation, automatic Carthage binary generation, test coverage...&#60;/p&#62;
+&#60;p&#62;Anyways, here&#39;s some stuff mentioned in the video:&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;Sample project from the video: &#60;a href=&#34;https://github.com/dduan/BitArray&#34;&#62;https://github.com/dduan/BitArray&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Video of me writing the code in this project: &#60;a href=&#34;https://www.youtube.com/watch?v=-k_jrIoD56k&#34;&#62;https://www.youtube.com/watch?v=-k_jrIoD56k&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Swift Package Manager: &#60;a href=&#34;https://swift.org/package-manager/&#34;&#62;https://swift.org/package-manager/&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;CocoaPods: &#60;a href=&#34;https://cocoapods.org&#34;&#62;https://cocoapods.org&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Carthage: &#60;a href=&#34;https://github.com/Carthage/Carthage&#34;&#62;https://github.com/Carthage/Carthage&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Xcconfigs for universal framework: &#60;a href=&#34;https://github.com/mrackwitz/xcconfigs&#34;&#62;https://github.com/mrackwitz/xcconfigs&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;SwiftLint: &#60;a href=&#34;https://github.com/realm/SwiftLint&#34;&#62;https://github.com/realm/SwiftLint&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;Travis CI: &#60;a href=&#34;https://travis-ci.org&#34;&#62;https://travis-ci.org&#60;/a&#62;&#60;/li&#62;
+&#60;/ul&#62;
 </description>
                 <pubDate>Sun, 17 Dec 2017 21:24:43 -0800</pubDate>
                 <link>https://duan.ca/2017/12/17/making-an-open-source-swift-project/</link>

@@ -12,23 +12,40 @@
     <meta property="og:title" content="Supporting Foundation.Data Without Depending On It">
     <meta property="article:published_time" content="2018-08-18T11:00:41-07:00"><meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@daniel_duan">
-    <meta name="twitter:creator" content="@Daniel Duan">
+    <meta name="twitter:creator" content="@daniel_duan">
     <meta name="apple-mobile-web-app-title" content="Daniel Duan">
     <title>Supporting Foundation.Data Without Depending On It</title>
     <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
     <link rel="canonical" href="https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/">
-    <link rel="stylesheet" href="/styles.css"></link>
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
 </head>
-<body><article>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="Supporting Foundation.Data Without Depending On It">
+    <meta itemprop="datePublished" content="2018-08-18T11:00:41-07:00">
+    <meta itemprop="dateModified" content="2018-08-18T11:00:41-07:00">
+    <link itemprop="url" href="https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2018/08/18/supporting-data-without-depending-on-it/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="Swift">
+    <meta itemprop="keywords" content="Foundation">
     <h1>Supporting Foundation.Data Without Depending On It</h1>
     <nav>
         <p class="metainfo article-meta">
-            <a href="/articles">Daniel Duan</a>
+            <a href="/articles/">Daniel Duan</a>
             ·
-            <time datetime="2018-08-18T11:00:41-07:00" itemProp="datePublished">2018-08-18</time>
+            <time datetime="2018-08-18T11:00:41-07:00">2018-08-18</time>
         </p>
-    </nav><p>While implementing some file I/O APIs in <a href="https://github.com/dduan/Pathos">Pathos</a>, I decided reading/writing
+    </nav>
+    <div itemprop="articleBody"><p>While implementing some file I/O APIs in <a href="https://github.com/dduan/Pathos">Pathos</a>, I decided reading/writing
 file content as <code>Foundation.Data</code> is kind of important (can you blame me?). But
 Pathos, by accident, does not depend on Swift <code>Foundation</code>. Now what?</p>
 <p>After browsing the <a href="https://developer.apple.com/documentation/foundation/data">documentation</a>, a pretty good solution emerged: <code>Data</code> is
@@ -54,7 +71,7 @@ their super good knowledge of <code>Foundation</code>.</p>
 <p><em>Update: this could also <a href="https://mastodon.social/@helge/100573358160444340">be</a> <a href="https://twitter.com/daniel_dunbar/status/1030938273047179264">slower</a> than using Data directly. Luckily
 I'm only doing file I/O here.</em></p>
 <p>But this is pretty nice, regardless.</p>
-
+</div>
 </article>
 <footer>
     <hr />

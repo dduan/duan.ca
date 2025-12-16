@@ -6,150 +6,150 @@
         <atom:link href="https://duan.ca/tag/css/feed.xml" rel="self" type="application/rss+xml" />
             <item>
                 <title>Site Improvements 2020</title>
-                <description>&lt;p&gt;I took back my website.&lt;/p&gt;
-&lt;p&gt;I took it back from the claws of Jekyll and Ruby. I took it back from some
+                <description>&#60;p&#62;I took back my website.&#60;/p&#62;
+&#60;p&#62;I took it back from the claws of Jekyll and Ruby. I took it back from some
 random template among a few that were immediately available. I took it back
-from my own ignorance of modern web technology.&lt;/p&gt;
-&lt;p&gt;This time, I rewrote the hole effing thing from scratch.&lt;/p&gt;
-&lt;h3&gt;The Why&lt;/h3&gt;
-&lt;p&gt;The &lt;a href=&quot;/2017/01/16/site-changes/&quot;&gt;last time&lt;/a&gt; I ended with&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I wrote the most Ruby in my life today. Yay?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;That question mark turned out to be prescient. Ruby is not my thing. No
+from my own ignorance of modern web technology.&#60;/p&#62;
+&#60;p&#62;This time, I rewrote the hole effing thing from scratch.&#60;/p&#62;
+&#60;h3&#62;The Why&#60;/h3&#62;
+&#60;p&#62;The &#60;a href=&#34;/2017/01/16/site-changes/&#34;&#62;last time&#60;/a&#62; I ended with&#60;/p&#62;
+&#60;blockquote&#62;
+&#60;p&#62;I wrote the most Ruby in my life today. Yay?&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;That question mark turned out to be prescient. Ruby is not my thing. No
 judgement against the language per ce. But the Ruby ecosystem is not friendly to
 a casual user who needs it once every few months. No really, when I write an
-article, it&#x27;s a toss-up whether I can deploy it without being forced to mess
-with Ruby/Gems/Jekyll/Homebrew etc. I&#x27;m almost certain there&#x27;s a set of best
-practices I could learn to improve this. But it&#x27;d be a skill that I barely need
+article, it&#39;s a toss-up whether I can deploy it without being forced to mess
+with Ruby/Gems/Jekyll/Homebrew etc. I&#39;m almost certain there&#39;s a set of best
+practices I could learn to improve this. But it&#39;d be a skill that I barely need
 and probably forget a few times. Meanwhile I just want to translate a new
-Markdown file to HTML and put it on Github.&lt;/p&gt;
-&lt;p&gt;As a teen, one of my favorite things about the web is how accessible it is.
-I could sit in front of anyone&#x27;s computer, open Notepad.exe and type in some
+Markdown file to HTML and put it on Github.&#60;/p&#62;
+&#60;p&#62;As a teen, one of my favorite things about the web is how accessible it is.
+I could sit in front of anyone&#39;s computer, open Notepad.exe and type in some
 tags, and open the file with a browser to see the result. That simple bootstrap
-process, however repetitive, never got old for me.&lt;/p&gt;
-&lt;p&gt;In the last decade, my professional work is focused on native, mobile
-applications. This experience biased me in a few ways. &amp;quot;Native&amp;quot; made me
-appreciate the closeness to &amp;quot;the metal&amp;quot;: you have an OS; you get the executable;
+process, however repetitive, never got old for me.&#60;/p&#62;
+&#60;p&#62;In the last decade, my professional work is focused on native, mobile
+applications. This experience biased me in a few ways. &#38;quot;Native&#38;quot; made me
+appreciate the closeness to &#38;quot;the metal&#38;quot;: you have an OS; you get the executable;
 you launch strace, and boom, everything the OS thinks what your code does is
-revealed to you. &amp;quot;Mobile&amp;quot; forced me to reckon with the reality: desktop
-experience has become a niche. It&#x27;s nowhere near as important as it was prior to
+revealed to you. &#38;quot;Mobile&#38;quot; forced me to reckon with the reality: desktop
+experience has become a niche. It&#39;s nowhere near as important as it was prior to
 the iPhone. Not making your software run well on mobile devices is a particular
-kind of choice that come with some severe trade-offs.&lt;/p&gt;
-&lt;p&gt;And, finally, I subscribe to the idea that &lt;em&gt;plain text is supreme&lt;/em&gt;. Yes, even
+kind of choice that come with some severe trade-offs.&#60;/p&#62;
+&#60;p&#62;And, finally, I subscribe to the idea that &#60;em&#62;plain text is supreme&#60;/em&#62;. Yes, even
 more supreme than the web. This website is a derivative of the articles I write
 in Markdown. Plain text as a format will out-last the web in the long run (not
-necessarily &lt;em&gt;these&lt;/em&gt; texts). So it really bothers me when I have to put &amp;quot;front
-matter&amp;quot; in YAML/TOML/whatever in front of the real Markdown. Yes, if you want
-reasonable HTMLs, these metadata is necessary. But the text is &lt;em&gt;Supreme&lt;/em&gt;. The
+necessarily &#60;em&#62;these&#60;/em&#62; texts). So it really bothers me when I have to put &#38;quot;front
+matter&#38;quot; in YAML/TOML/whatever in front of the real Markdown. Yes, if you want
+reasonable HTMLs, these metadata is necessary. But the text is &#60;em&#62;Supreme&#60;/em&#62;. The
 text is to be readable directly. Succumbing the supreme to the derivative is
-&lt;em&gt;wrong&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;Okay, so where does all that leave me? In this iteration of this website,
-I wrote every single line of CSS and HTML (there&#x27;s barely any JavaScript) which
-look decent on mobile. It&#x27;s generated by portable Linux and Darwin executables
+&#60;em&#62;wrong&#60;/em&#62;.&#60;/p&#62;
+&#60;p&#62;Okay, so where does all that leave me? In this iteration of this website,
+I wrote every single line of CSS and HTML (there&#39;s barely any JavaScript) which
+look decent on mobile. It&#39;s generated by portable Linux and Darwin executables
 that are part of the website. As long as the OSes stay relatively stable, the
 site will build without any dependencies, in a matter of milliseconds. The best
-part?  It&#x27;ll stay like this unless I wish it otherwise.&lt;/p&gt;
-&lt;h3&gt;The Frontend&lt;/h3&gt;
-&lt;p&gt;A few words on the design of the site.&lt;/p&gt;
-&lt;p&gt;This site gained the concept of &amp;quot;links&amp;quot; the &lt;a href=&quot;/2017/01/16/site-changes/&quot;&gt;last time&lt;/a&gt;. It has since become
-clear that I don&#x27;t use this feature (blame Twitter). It&#x27;s gone, for now. The old
-&amp;quot;about&amp;quot; page is replaced by the home page.&lt;/p&gt;
-&lt;p&gt;When I decided the site needed a rewrite, I fantasized a place with only HTML.
+part?  It&#39;ll stay like this unless I wish it otherwise.&#60;/p&#62;
+&#60;h3&#62;The Frontend&#60;/h3&#62;
+&#60;p&#62;A few words on the design of the site.&#60;/p&#62;
+&#60;p&#62;This site gained the concept of &#38;quot;links&#38;quot; the &#60;a href=&#34;/2017/01/16/site-changes/&#34;&#62;last time&#60;/a&#62;. It has since become
+clear that I don&#39;t use this feature (blame Twitter). It&#39;s gone, for now. The old
+&#38;quot;about&#38;quot; page is replaced by the home page.&#60;/p&#62;
+&#60;p&#62;When I decided the site needed a rewrite, I fantasized a place with only HTML.
 Perhaps users who want a better reading experience can simply put it in Reader
 mode. Alas, if browsers (with the exception of Safari) implemented automatic
-dark mode with a &lt;a href=&quot;https://drafts.csswg.org/css-color-adjust-1/#color-scheme-meta&quot;&gt;color-scheme meta&lt;/a&gt; tag, it&#x27;d almost be a working idea.&lt;/p&gt;
-&lt;p&gt;So, that&#x27;s my starting point.&lt;/p&gt;
-&lt;p&gt;The site is a list of articles organized by tags and dates, and a few web pages.
-&lt;em&gt;I want you to read the site, not navigate it&lt;/em&gt;. So text is the point. It&#x27;s the
+dark mode with a &#60;a href=&#34;https://drafts.csswg.org/css-color-adjust-1/#color-scheme-meta&#34;&#62;color-scheme meta&#60;/a&#62; tag, it&#39;d almost be a working idea.&#60;/p&#62;
+&#60;p&#62;So, that&#39;s my starting point.&#60;/p&#62;
+&#60;p&#62;The site is a list of articles organized by tags and dates, and a few web pages.
+&#60;em&#62;I want you to read the site, not navigate it&#60;/em&#62;. So text is the point. It&#39;s the
 only design element. The site uses 2 fonts and 2 text-color (not counting
-highlighted code). Links are always underscored (because you can&#x27;t hover in
-mobile browsers to find something clickable).&lt;/p&gt;
-&lt;p&gt;The site is responsive to mobile layout, and dark mode. It&#x27;s aware that it could
+highlighted code). Links are always underscored (because you can&#39;t hover in
+mobile browsers to find something clickable).&#60;/p&#62;
+&#60;p&#62;The site is responsive to mobile layout, and dark mode. It&#39;s aware that it could
 be added to the home screen of a mobile device, or linked to some external site
-that wants to generate a preview.&lt;/p&gt;
-&lt;p&gt;I did end up using &lt;a href=&quot;https://ethanschoonover.com/solarized/&quot;&gt;solarized&lt;/a&gt; theme for code highlighting, which lead to 2
-static CSS files. Other than that, all CSS and HTML are hand-written. There&#x27;s no
-build step for them, farm to table, Vim to your browser.&lt;/p&gt;
-&lt;p&gt;It turned out standardized CSS variable is game-changing. Combined with media
+that wants to generate a preview.&#60;/p&#62;
+&#60;p&#62;I did end up using &#60;a href=&#34;https://ethanschoonover.com/solarized/&#34;&#62;solarized&#60;/a&#62; theme for code highlighting, which lead to 2
+static CSS files. Other than that, all CSS and HTML are hand-written. There&#39;s no
+build step for them, farm to table, Vim to your browser.&#60;/p&#62;
+&#60;p&#62;It turned out standardized CSS variable is game-changing. Combined with media
 queries, I barely needed any class to support dark mode/mobile layout. More
-importantly, it makes my programmer brain happy. Oh, yes I&#x27;m talking about them
+importantly, it makes my programmer brain happy. Oh, yes I&#39;m talking about them
 here because this is the first time I truly attempted to catch up since they
-were introduced to the world. It&#x27;s freeing to let go of constrains of an
-read-to-use theme, or some CSS frameworks.&lt;/p&gt;
-&lt;h3&gt;The Backend&lt;/h3&gt;
-&lt;p&gt;This site is a collection of static files. The so-called backend is a program
+were introduced to the world. It&#39;s freeing to let go of constrains of an
+read-to-use theme, or some CSS frameworks.&#60;/p&#62;
+&#60;h3&#62;The Backend&#60;/h3&#62;
+&#60;p&#62;This site is a collection of static files. The so-called backend is a program
 that assembles these files from some HTML templates and Markdown files. In the
-past, this program had been &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;. This time around, I replaced it with
-some Rust code.&lt;/p&gt;
-&lt;p&gt;Boy, this thing is cool, if I say so myself. I&#x27;m going to refer to it as &amp;quot;the
-generator&amp;quot;.&lt;/p&gt;
-&lt;p&gt;The biggest &amp;quot;feature&amp;quot; is the fact that it doesn&#x27;t pretend to be re-usable.
-The generator is as part of this site as the articles.&lt;/p&gt;
-&lt;p&gt;Thanks to Rust, the programs are built into executable binaries. On macOS, it
-requires libSystem to run. On Linux, I can (and prefer) build with &lt;a href=&quot;https://www.musl-libc.org/&quot;&gt;musl&lt;/a&gt;. The
+past, this program had been &#60;a href=&#34;https://jekyllrb.com/&#34;&#62;Jekyll&#60;/a&#62;. This time around, I replaced it with
+some Rust code.&#60;/p&#62;
+&#60;p&#62;Boy, this thing is cool, if I say so myself. I&#39;m going to refer to it as &#38;quot;the
+generator&#38;quot;.&#60;/p&#62;
+&#60;p&#62;The biggest &#38;quot;feature&#38;quot; is the fact that it doesn&#39;t pretend to be re-usable.
+The generator is as part of this site as the articles.&#60;/p&#62;
+&#60;p&#62;Thanks to Rust, the programs are built into executable binaries. On macOS, it
+requires libSystem to run. On Linux, I can (and prefer) build with &#60;a href=&#34;https://www.musl-libc.org/&#34;&#62;musl&#60;/a&#62;. The
 binaries for these two OSes are checked in with the content of the site. So
-it requires zero installation to &amp;quot;build&amp;quot; the site. (I may need to
-include a 3rd executable for the upcoming ARM-based Macs soon).&lt;/p&gt;
-&lt;p&gt;The generator spits out the final content of the website. It&#x27;s deployed without
-further modification.&lt;/p&gt;
-&lt;p&gt;The build process is pretty fast. As of this writing, it averages around 250 ms.
+it requires zero installation to &#38;quot;build&#38;quot; the site. (I may need to
+include a 3rd executable for the upcoming ARM-based Macs soon).&#60;/p&#62;
+&#60;p&#62;The generator spits out the final content of the website. It&#39;s deployed without
+further modification.&#60;/p&#62;
+&#60;p&#62;The build process is pretty fast. As of this writing, it averages around 250 ms.
 I could probably make it faster by avoiding some repeated reads when it comes to
-article inputs.&lt;/p&gt;
-&lt;p&gt;The generator handles HTML/XML templating with a library named &lt;a href=&quot;https://github.com/djc/askama&quot;&gt;Askama&lt;/a&gt;.
-Learning it had been an eye opening experience. Askama is built atop Rust&#x27;s
+article inputs.&#60;/p&#62;
+&#60;p&#62;The generator handles HTML/XML templating with a library named &#60;a href=&#34;https://github.com/djc/askama&#34;&#62;Askama&#60;/a&#62;.
+Learning it had been an eye opening experience. Askama is built atop Rust&#39;s
 macro system. For each template (e.g. web page), it requires users to write
-a Rust data structure that fulfills its variable requirements.  Here&#x27;s the
-kicker: in this data structure, you &lt;em&gt;cannot&lt;/em&gt; miss any variable the corresponding
-template requires.  When you do, the Rust project won&#x27;t compile! Rust&#x27;s tooling
+a Rust data structure that fulfills its variable requirements.  Here&#39;s the
+kicker: in this data structure, you &#60;em&#62;cannot&#60;/em&#62; miss any variable the corresponding
+template requires.  When you do, the Rust project won&#39;t compile! Rust&#39;s tooling
 is so good that these errors were surfaced in my editor as I wrote this part
-in real time. This level of type-safety for template language felt like magic.&lt;/p&gt;
-&lt;p&gt;Syntax highlighting is powered by &lt;a href=&quot;https://github.com/trishume/syntect&quot;&gt;syntect&lt;/a&gt;, the library behind &lt;a href=&quot;https://github.com/sharkdp/bat&quot;&gt;bat&lt;/a&gt;. But
+in real time. This level of type-safety for template language felt like magic.&#60;/p&#62;
+&#60;p&#62;Syntax highlighting is powered by &#60;a href=&#34;https://github.com/trishume/syntect&#34;&#62;syntect&#60;/a&#62;, the library behind &#60;a href=&#34;https://github.com/sharkdp/bat&#34;&#62;bat&#60;/a&#62;. But
 the interesting bit here is how the syntax definitions are embedded within the
-final executable. To support a particular syntax, syntect takes the syntax&#x27;s
+final executable. To support a particular syntax, syntect takes the syntax&#39;s
 SublimeText definition. So this is a configurable, extendible system. The
 generator includes 118 syntax definitions. Uncompressed, their files take up 5MB
 of disk space. As one can imagine, loading 5MB from 118 files each time the
 program runs is quite slow. Turns out, Rust has a standard library macro
-&lt;a href=&quot;https://doc.rust-lang.org/std/macro.include_bytes.html%60&quot;&gt;include_bytes!&lt;/a&gt; that solves this problem. &lt;a href=&quot;https://doc.rust-lang.org/std/macro.include_bytes.html%60&quot;&gt;include_bytes!&lt;/a&gt; embeds
-contents of a file as literals in source code, as if it&#x27;s hand-written. syntect
+&#60;a href=&#34;https://doc.rust-lang.org/std/macro.include_bytes.html%60&#34;&#62;include_bytes!&#60;/a&#62; that solves this problem. &#60;a href=&#34;https://doc.rust-lang.org/std/macro.include_bytes.html%60&#34;&#62;include_bytes!&#60;/a&#62; embeds
+contents of a file as literals in source code, as if it&#39;s hand-written. syntect
 takes advantage of this feature by supporting serialization of its in-memory
 representation of syntaxes into bytes, and accepting in-line byte literals in
 reverse in order to create these representations. This system solves two
-problems for me:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;I no longer need to ship the SublimeText syntax files along with the
-generator.&lt;/li&gt;
-&lt;li&gt;The generator doesn&#x27;t need to perform all that disk I/O, so it runs
-significantly faster.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Overall, the Rust ecosystem delivered. Although a lot of library are still in
+problems for me:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;I no longer need to ship the SublimeText syntax files along with the
+generator.&#60;/li&#62;
+&#60;li&#62;The generator doesn&#39;t need to perform all that disk I/O, so it runs
+significantly faster.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Overall, the Rust ecosystem delivered. Although a lot of library are still in
 rough shape/early stage, there usually are multiple alternatives for roughly the
 same purpose. Gluing a few of them together for this generator project had been
-fun.&lt;/p&gt;
-&lt;p&gt;Finally, let&#x27;s talk metadata, I can&#x27;t realistically manage to generate the site
+fun.&#60;/p&#62;
+&#60;p&#62;Finally, let&#39;s talk metadata, I can&#39;t realistically manage to generate the site
 without them.  Articles and static pages each define their URL by their file
-locations relative to the root. For example, &lt;code&gt;/articles/2020/04/23/hello.md&lt;/code&gt;
-means the URL is &lt;code&gt;/2020/04/23/hello/&lt;/code&gt;. Each article still has a front matter.
-But I made the text version look as &amp;quot;natural&amp;quot; as possible. There&#x27;s no markers
-for beginning and end of the metadata since I know exactly what&#x27;s needed. The
+locations relative to the root. For example, &#60;code&#62;/articles/2020/04/23/hello.md&#60;/code&#62;
+means the URL is &#60;code&#62;/2020/04/23/hello/&#60;/code&#62;. Each article still has a front matter.
+But I made the text version look as &#38;quot;natural&#38;quot; as possible. There&#39;s no markers
+for beginning and end of the metadata since I know exactly what&#39;s needed. The
 title is marked as an H1. Date is in RFC3339 format. Tags are comma-separated
-values. So an example of an article&#x27;s beginning looks like:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;# Site Improvements 2020
+values. So an example of an article&#39;s beginning looks like:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-markdown&#34;&#62;# Site Improvements 2020
 2020-04-22T21:58:03-07:00
 tags: Rust, HTML, CSS, Ruby, Jekyll, Markdown
 
 I took back my website...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Text supremacy! Glory!&lt;/p&gt;
-&lt;h3&gt;Onward&lt;/h3&gt;
-&lt;p&gt;Over the course of roughly 15 years, I&#x27;ve had blogs of quite a few variates.
-I wish I&#x27;d done a better job archiving them as I moved on from one to the next.
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Text supremacy! Glory!&#60;/p&#62;
+&#60;h3&#62;Onward&#60;/h3&#62;
+&#60;p&#62;Over the course of roughly 15 years, I&#39;ve had blogs of quite a few variates.
+I wish I&#39;d done a better job archiving them as I moved on from one to the next.
 This is not the first time I attempted to gain full control over the theming,
-generating, hosting, and deployment of a site. But I&#x27;m hopeful that it&#x27;ll last
-longer. You could say that&#x27;s what I optimized for. And who knew, maybe my
-experience from past failures counts for something.&lt;/p&gt;
-&lt;p&gt;Here&#x27;s to less stressful deploys and more writing!&lt;/p&gt;
+generating, hosting, and deployment of a site. But I&#39;m hopeful that it&#39;ll last
+longer. You could say that&#39;s what I optimized for. And who knew, maybe my
+experience from past failures counts for something.&#60;/p&#62;
+&#60;p&#62;Here&#39;s to less stressful deploys and more writing!&#60;/p&#62;
 </description>
                 <pubDate>Wed, 22 Apr 2020 21:58:03 -0700</pubDate>
                 <link>https://duan.ca/2020/04/22/site-improvements-2020/</link>

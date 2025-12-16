@@ -2,7 +2,7 @@
 2025-12-10T17:44:34-08:00
 tag: Swift, TOML, TOMLDecoder, OSS, Performance
 
-I just released version 0.4.1 of TOMLDecoder,
+I just released version 0.4.1 of [TOMLDecoder](https://github.com/dduan/TOMLDecoder),
 a TOML 1.0 parser,
 and [decoder](https://developer.apple.com/documentation/swift/codable) implemented in pure Swift. 
 When decoding a TOMLDocument such as [this twitter payload](https://github.com/dduan/TOMLDecoder/blob/cea8f0bee33f37e0fcc33b566a742485c71196e7/Sources/Resources/fixtures/twitter.toml),

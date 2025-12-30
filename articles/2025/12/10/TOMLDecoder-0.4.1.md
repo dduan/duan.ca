@@ -4,7 +4,7 @@ tag: Swift, TOML, TOMLDecoder, OSS, Performance
 
 I just released version 0.4.1 of [TOMLDecoder](https://github.com/dduan/TOMLDecoder),
 a TOML 1.0 parser,
-and [decoder](https://developer.apple.com/documentation/swift/codable) implemented in pure Swift. 
+and [decoder](https://developer.apple.com/documentation/swift/codable) implemented in pure Swift.
 When decoding a TOMLDocument such as [this twitter payload](https://github.com/dduan/TOMLDecoder/blob/cea8f0bee33f37e0fcc33b566a742485c71196e7/Sources/Resources/fixtures/twitter.toml),
 TOMLDecoder 0.4.1 is roughly 800% faster by wall clock time than 0.3.x.
 In this post, I’ll discuss how this was achieved.
@@ -13,17 +13,25 @@ _tl;dr: among other things,
 the gains comes from making the parsing algorithm lazier,
 and eliminating overheads from bound checking when accessing substrings._
 
+*Update:
+An earlier version of this post claimed that adopting Span eliminates cost of all bound checking
+when accessing the underlying bytes of the TOML content,
+that turns out to be wrong.
+The reality is more interesting.
+The post has been revised to discuss what really brought the performance gains
+after adopting Span.*
+
 ## The Benchmark
 
-TOMLDecoder now includes benchmarks implemented with [ordo-one/package-benchmark](https://github.com/ordo-one/package-benchmark). 
+TOMLDecoder now includes benchmarks implemented with [ordo-one/package-benchmark](https://github.com/ordo-one/package-benchmark).
 I plotted the median from the aforementioned benchmark results below.
 Each chart includes data points for deserializing the TOML document,
 and decoding it on top.
 (Unsurprisingly, decoding takes a bit longer.)
 
-The results show 
-wall clock time, 
-CPU instructions, 
+The results show
+wall clock time,
+CPU instructions,
 as well as retain count all trending down significantly.
 
 In addition to the before and after,
@@ -83,7 +91,7 @@ As the parser work through the bytes of a TOML document,
 it creates these light weight data types to record the shape of the document,
 as well as the byte-offsets of the leaf values.
 These intermediary data are stored in a centralized location
-to avoid unnecessary heap allocations. 
+to avoid unnecessary heap allocations.
 
 Here's what I mean by "cheating":
 during this phase,
@@ -115,31 +123,45 @@ if the matching value at the spot is of a different type,
 an error is thrown.
 So the more efficient access pattern benefits the decoding process as well.
 
-### Avoiding bound checks
+### Eliminating bound checks
 
-A major source of slowness in TOMLDecoder 0.3.x is the cost of bound checks in Swift.
+A major source of slowness in TOMLDecoder 0.3.x
+comes from inefficient patterns when the underyling bytes of a TOML document.
+
 The parser holds a reference to the original string,
-and hands `Substring`s to small functions to descend on.
+and hands `String.UTF8View.SubSequence`s to small functions to descend on.
 A typical piece of the parser might look like this:
 
 ```swift
-func skipWhitespaces(_ text: inout Substring) {
+func skipWhitespaces(_ text: inout String.UTF8View.SubSequence) {
     let bytes = text.utf8
     var i = bytes.startIndex
     while i < bytes.endIndex {
-        if !isWhitespace(bytes[i]) { // bound checks!
+        if !isWhitespace(bytes[i]) { // very slow!
             break
         }
         bytes.formIndex(after: &i)
     }
-    text = Substring(bytes[i...])
+    text = bytes[i...]
 }
 ```
 
-To avoid out-of-bound access,
-Swift inserts logic that checks the validity of the index
-for every subscript access of the string's buffer.
-A parser does a whole lot of that.
+Using UTF8View makes sure that we aren't dealing with `Character`s,
+which could have variable lengths.
+However,
+accessing the bytes in this way introduces multiple rounds of bound checks
+that ends up being super expensive in the hot path of the parser:
+
+1. The standard library needs to check that a index is valid for the `SubSequence` aka `Substring`
+   by comparing it against the start and end indices.
+2. Then, the index is used to access the underlying `UTF8View`, at this point,
+   the standard library checks whether the index is out of bound again.
+3. A the end, the library goes into the buffer pointer of the string to retrieve the actual byte.
+
+(All of that assumes that the string's buffer is contiguously stored in memory.
+There's a even slower path that I could eliminate by ensuring the string is native.)
+
+A parser does a whole lot of such accesses.
 The cost of these bound checks seriously adds up.
 
 Since the release of TOMLDecoder 0.3.0,
@@ -163,18 +185,27 @@ func skipWhitespace(
 ```
 
 Here,
-the subscript access of `bytes` does not incur a bound check!
-This created significant performance gains as shown in the benchmark results.
+the subscript access of `bytes` does not incur multiple rounds of bound checks!
+Rather, it skips step 1,
+which eliminates 2 integer comparisons per access,
+a 2/3 reduction in bound check overhead.
+Further, the compiler can see the access pattern more clearly,
+it can heuristically eliminate even the final remaning bound checks in some casse.
+
+Not having to perform all the bound checks
+in the tight loop of the parser results significant performance gains
+as shown in the benchmark results.
 
 *Here's the kicker*.
-The bound checks are eliminated 
+With `Span`,
+the bound checks are eliminated
 because the compiler is confident that the access is safe by construction.
 If you make a mistake that would lead to unsafe access,
 Swift will refuse to compile your code.
 But `Span` is a language feature that requires new language runtime.
 You cannot use it on older operating systems.
 There's other, older ways to avoid bound checks,
-using `UnsafeBufferPointer`s. 
+using `UnsafeBufferPointer`s.
 The problem of doing so is that you are responsible for ensuring that the access is safe.
 In particular, the point of access must occur in a valid scope for the pointer.
 A piece of parser using such API may look like this:
@@ -227,10 +258,11 @@ if #available(iOS 26, macOS 26, watchOS 26, tvOS 26, visionOS 26, *) {
 }
 ```
 
-The beauty here, 
+The beauty here,
 is that the compiler does all the work to ensure the access to the `Span`
 as well as the buffer pointer are safe,
 because the logic that does the accessing are identical thanks to `gyb`.
+
 ## Conclusion
 
 In reality, there are a ton of other optimizations applied in TOMLDecoder 0.4.
@@ -243,7 +275,7 @@ and for typical sizes of TOML documents,
 a linear search is often faster that computing a hash value,
 and the subsequent lookups.
 
-As part of the release, 
+As part of the release,
 the project also gained a bunch of infra improvements.
 * It has a [DocC](https://www.swift.org/documentation/docc/)-based [documentation site](https://dduan.github.io/TOMLDecoder/main/documentation/tomldecoder/).
 * The entirety of the [official test suite](https://github.com/toml-lang/toml-test) is now programmatically imported as unit tests.

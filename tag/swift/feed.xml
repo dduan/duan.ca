@@ -15,6 +15,13 @@ In this post, I’ll discuss how this was achieved.&#60;/p&#62;
 &#60;p&#62;&#60;em&#62;tl;dr: among other things,
 the gains comes from making the parsing algorithm lazier,
 and eliminating overheads from bound checking when accessing substrings.&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;&#60;em&#62;Update:
+An earlier version of this post claimed that adopting Span eliminates cost of all bound checking
+when accessing the underlying bytes of the TOML content,
+that turns out to be wrong.
+The reality is more interesting.
+The post has been revised to discuss what really brought the performance gains
+after adopting Span.&#60;/em&#62;&#60;/p&#62;
 &#60;h2&#62;The Benchmark&#60;/h2&#62;
 &#60;p&#62;TOMLDecoder now includes benchmarks implemented with &#60;a href=&#34;https://github.com/ordo-one/package-benchmark&#34;&#62;ordo-one/package-benchmark&#60;/a&#62;.
 I plotted the median from the aforementioned benchmark results below.
@@ -98,27 +105,39 @@ you ask the container for a &#60;code&#62;Date&#60;/code&#62;,
 if the matching value at the spot is of a different type,
 an error is thrown.
 So the more efficient access pattern benefits the decoding process as well.&#60;/p&#62;
-&#60;h3&#62;Avoiding bound checks&#60;/h3&#62;
-&#60;p&#62;A major source of slowness in TOMLDecoder 0.3.x is the cost of bound checks in Swift.
-The parser holds a reference to the original string,
-and hands &#60;code&#62;Substring&#60;/code&#62;s to small functions to descend on.
+&#60;h3&#62;Eliminating bound checks&#60;/h3&#62;
+&#60;p&#62;A major source of slowness in TOMLDecoder 0.3.x
+comes from inefficient patterns when the underyling bytes of a TOML document.&#60;/p&#62;
+&#60;p&#62;The parser holds a reference to the original string,
+and hands &#60;code&#62;String.UTF8View.SubSequence&#60;/code&#62;s to small functions to descend on.
 A typical piece of the parser might look like this:&#60;/p&#62;
-&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;func skipWhitespaces(_ text: inout Substring) {
+&#60;pre&#62;&#60;code class=&#34;language-swift&#34;&#62;func skipWhitespaces(_ text: inout String.UTF8View.SubSequence) {
     let bytes = text.utf8
     var i = bytes.startIndex
     while i &#38;lt; bytes.endIndex {
-        if !isWhitespace(bytes[i]) { // bound checks!
+        if !isWhitespace(bytes[i]) { // very slow!
             break
         }
         bytes.formIndex(after: &#38;amp;i)
     }
-    text = Substring(bytes[i...])
+    text = bytes[i...]
 }
 &#60;/code&#62;&#60;/pre&#62;
-&#60;p&#62;To avoid out-of-bound access,
-Swift inserts logic that checks the validity of the index
-for every subscript access of the string&#39;s buffer.
-A parser does a whole lot of that.
+&#60;p&#62;Using UTF8View makes sure that we aren&#39;t dealing with &#60;code&#62;Character&#60;/code&#62;s,
+which could have variable lengths.
+However,
+accessing the bytes in this way introduces multiple rounds of bound checks
+that ends up being super expensive in the hot path of the parser:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;The standard library needs to check that a index is valid for the &#60;code&#62;SubSequence&#60;/code&#62; aka &#60;code&#62;Substring&#60;/code&#62;
+by comparing it against the start and end indices.&#60;/li&#62;
+&#60;li&#62;Then, the index is used to access the underlying &#60;code&#62;UTF8View&#60;/code&#62;, at this point,
+the standard library checks whether the index is out of bound again.&#60;/li&#62;
+&#60;li&#62;A the end, the library goes into the buffer pointer of the string to retrieve the actual byte.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;(All of that assumes that the string&#39;s buffer is contiguously stored in memory.
+There&#39;s a even slower path that I could eliminate by ensuring the string is native.)&#60;/p&#62;
+&#60;p&#62;A parser does a whole lot of such accesses.
 The cost of these bound checks seriously adds up.&#60;/p&#62;
 &#60;p&#62;Since the release of TOMLDecoder 0.3.0,
 Swift has gained a whole set of features that led to the introduction of &#60;a href=&#34;https://github.com/swiftlang/swift-evolution/blob/main/proposals/0447-span-access-shared-contiguous-storage.md&#34;&#62;Span&#60;/a&#62;.
@@ -138,10 +157,18 @@ The same function updated for &#60;code&#62;Span&#60;/code&#62; looks extremely 
 }
 &#60;/code&#62;&#60;/pre&#62;
 &#60;p&#62;Here,
-the subscript access of &#60;code&#62;bytes&#60;/code&#62; does not incur a bound check!
-This created significant performance gains as shown in the benchmark results.&#60;/p&#62;
+the subscript access of &#60;code&#62;bytes&#60;/code&#62; does not incur multiple rounds of bound checks!
+Rather, it skips step 1,
+which eliminates 2 integer comparisons per access,
+a 2/3 reduction in bound check overhead.
+Further, the compiler can see the access pattern more clearly,
+it can heuristically eliminate even the final remaning bound checks in some casse.&#60;/p&#62;
+&#60;p&#62;Not having to perform all the bound checks
+in the tight loop of the parser results significant performance gains
+as shown in the benchmark results.&#60;/p&#62;
 &#60;p&#62;&#60;em&#62;Here&#39;s the kicker&#60;/em&#62;.
-The bound checks are eliminated
+With &#60;code&#62;Span&#60;/code&#62;,
+the bound checks are eliminated
 because the compiler is confident that the access is safe by construction.
 If you make a mistake that would lead to unsafe access,
 Swift will refuse to compile your code.

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2026/01/01/TOMLDecoder-Is-Faster-Than-C/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="TOMLDecoder Is Now Faster Than C (Thanks to AI)">
+    <meta property="article:published_time" content="2026-01-01T11:07:05-08:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@daniel_duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>TOMLDecoder Is Now Faster Than C (Thanks to AI)</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2026/01/01/TOMLDecoder-Is-Faster-Than-C/">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
+</head>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="TOMLDecoder Is Now Faster Than C (Thanks to AI)">
+    <meta itemprop="datePublished" content="2026-01-01T11:07:05-08:00">
+    <meta itemprop="dateModified" content="2026-01-01T11:07:05-08:00">
+    <link itemprop="url" href="https://duan.ca/2026/01/01/TOMLDecoder-Is-Faster-Than-C/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2026/01/01/TOMLDecoder-Is-Faster-Than-C/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="AI">
+    <meta itemprop="keywords" content="TOML">
+    <meta itemprop="keywords" content="Swift">
+    <meta itemprop="keywords" content="Performance">
+    <meta itemprop="keywords" content="C">
+    <h1>TOMLDecoder Is Now Faster Than C (Thanks to AI)</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles/">Daniel Duan</a>
+            ·
+            <time datetime="2026-01-01T11:07:05-08:00">2026-01-01</time>
+        </p>
+    </nav>
+    <div itemprop="articleBody"><p>Recently,
+I gave my TOML library written in Swift <a href="/2025/12/10/TOMLDecoder-0.4.1/">an 800% speed boost</a>.
+The natural question after that is:
+how much faster can I push it?</p>
+<details>
+<summary>
+I'm happy to report that TOMLDecoder now parses the <a href="https://github.com/dduan/TOMLDecoder/blob/cea8f0bee33f37e0fcc33b566a742485c71196e7/Sources/Resources/fixtures/twitter.toml">Twitter payload example</a> 1.8x faster than the C library <a href="https://github.com/cktan/tomlc99">tomlc99</a>, and 5x faster than <a href="https://github.com/marzer/tomlplusplus">TOML++</a>.
+</summary>
+<p>I tried to be as charitable as possible for the non-Swift libraries while keeping the call sites in Swift.
+For example,
+it takes time to create or copy the UTF-8 bytes of a <code>Swift.String</code> into a contiguous region.
+And that's not counted towards the other libraries' parsing time.
+TOML++ runs faster with exceptions enabled.
+So that's the path I chose to benchmark.
+When bridging the C++ code,
+I made sure there's no allocation,
+no checking for input/output, etc,
+so that the bridging overhead is trivial.</p>
+<p>Here's the benchmark code run repeatedly to collect an average,
+with warmups ahead of time:</p>
+<pre><code class="language-swift">func benchmarkTOMLDecoder(source: String) throws -&gt; Double {
+    let start = CFAbsoluteTimeGetCurrent()
+    let table = try TOMLTable(source: source)
+    let end = CFAbsoluteTimeGetCurrent()
+    blackhole(table)
+    return end - start
+}
+
+func benchmarkCTOML99(source: String) -&gt; Double {
+    var source = source
+    var duration: Double = 0
+    source.withUTF8 {
+        $0.withMemoryRebound(to: CChar.self) { buffer in
+            let baseAddress = UnsafeMutableRawPointer(mutating: buffer.baseAddress!)
+            let start = CFAbsoluteTimeGetCurrent()
+            let table = toml_parse(baseAddress, nil, 0)
+            duration = CFAbsoluteTimeGetCurrent() - start
+            blackhole(table)
+        }
+    }
+    return duration
+}
+
+func benchmarkCTOMLPlusPlus(source: String) -&gt; Double {
+    var source = source
+    var duration: Double = 0
+    source.withUTF8 {
+        $0.withMemoryRebound(to: CChar.self) { buffer in
+            let start = CFAbsoluteTimeGetCurrent()
+            let table = tomlpp_parse(buffer.baseAddress, buffer.count)
+            duration = CFAbsoluteTimeGetCurrent() - start
+            blackhole(table)
+        }
+    }
+    return duration
+}
+</code></pre>
+<p>where <code>tomlpp_parse</code> is a minimal wrapper for the TOML++ library:</p>
+<pre><code class="language-cpp">void *tomlpp_parse(const char *conf, size_t conf_len) {
+    try {
+        static toml::table table{};
+        table = toml::parse(std::string_view{conf, conf_len});
+        return static_cast&lt;void *&gt;(&amp;table);
+    } catch (...) {
+        return nullptr;
+    }
+}
+</code></pre>
+<p>If any of these measures are unfair to the C/C++ libraries,
+I'd love your feedback!</p>
+</details>
+<p>Here's the output of the benchmark program I wrote:</p>
+<pre><code>Benchmarking TOML parsers...
+File size: 443461 bytes
+
+Warming up...
+Running 100 iterations...
+
+Results:
+═══════════════════════════════════════════════════════════
+TOMLDecoder:
+  Average: 1.232 ms
+  Min:     1.203 ms
+  Max:     1.332 ms
+
+cTOML99:
+  Average: 2.226 ms
+  Min:     2.190 ms
+  Max:     2.341 ms
+
+cTOMLPlusPlus:
+  Average: 6.107 ms
+  Min:     6.038 ms
+  Max:     6.377 ms
+
+TOMLDecoder is 1.81x faster than cTOML99
+TOMLDecoder is 4.96x faster than cTOMLPlusPlus
+═══════════════════════════════════════════════════════════
+</code></pre>
+<p>I charted the wall clock time and instruction counts over the commit history.
+You can see that the latest release is a lot faster than 0.4.1:</p>
+<iframe id="benchmark-iframe" src="/assets/2026/01/tomldecoder-0.4.3-improvements.html" width="100%" height="1200" frameborder="0" style="border: none; display: block; margin: 20px 0;"></iframe>
+<script>
+window.addEventListener('message', function(event) {
+    if (event.data.type === 'resize') {
+        const iframe = document.getElementById('benchmark-iframe');
+        if (iframe) {
+            iframe.style.height = event.data.height + 'px';
+            iframe.style.transition = 'none';
+        }
+    }
+});
+</script>
+<p>... and, the majority of these commits are authored by AI! How did that happen?</p>
+<h2>It's old-fashioned engineering, baby!</h2>
+<p>I ended the <a href="/2025/12/10/TOMLDecoder-0.4.1/">last post</a> with the following (emphasize in <strong>bold</strong>):</p>
+<blockquote>
+<p>...the project also gained a bunch of infra improvements.</p>
+<ul>
+<li>It has a DocC-based documentation site.</li>
+<li><strong>The entirety of the official test suite is now programmatically imported as unit tests.</strong></li>
+<li><strong>The source code style is now enforced by swiftformat</strong></li>
+<li>Platform checks are more comprehensive and modern on CI.</li>
+<li><strong>Benchmarks are now modernized with ordo-one/package-benchmark.</strong></li>
+</ul>
+</blockquote>
+<p>If you set out to optimize the runtime performance of a software project,
+infra improvements like these will ensure that
+your engineer can explore options for optimization with confidence that
+they won't break the expected behavior,
+and their efforts can be measured objectively.</p>
+<p>Most importantly,
+as detailed in the last post,
+the architecture of the TOML parser has received some significant upgrades.
+This type of change is rare in a small project,
+and I don't expect it to happen again in the next phase of optimization.</p>
+<p>I set up a separate project that calls into TOMLDecoder
+so that I can profile it with Instruments.</p>
+<p>It was during the holidays, and
+although the idea of trying my hand at micro-optimizing the code,
+and gradually squeezing out performance juice sounded really fun,
+I also had a bunch of travel planned.
+So what else is there to do?</p>
+<p>I booted up codex.</p>
+<h2>gpt-5.2-codex, my performance engineer</h2>
+<p>For the most part,
+I simply fed this prompt to codex over and over again:</p>
+<blockquote>
+<p>Objective: Try to make the p50 of &quot;parse twitter.toml&quot; benchmark improve by &gt; 1.1% on instructions or retains compared to the <code>main</code> branch. Improvements on either is acceptable as a success, but regression in either should be considered a failure. Other metrics in the benchmark does not matter.</p>
+<p>Verify iteratively:</p>
+<ol>
+<li>Make code changes</li>
+<li>Format with <code>make format</code>.</li>
+<li>Make sure all tests passes by running <code>swift test</code>.</li>
+<li>Create a branch prefixed with <code>cc/</code> in name</li>
+<li>Commit all changes. Include description of the optimization as body of the commit message.</li>
+<li>Use Scripts/benchmark.sh to run the benchmark, recording its output in a text file</li>
+<li>If the benchmark result meets the improvement threshold, cherry-pick the change onto main. Otherwise, Commit the benchmark results file to the branch you created, switch back to main and start over.</li>
+</ol>
+<p>When you run the benchmark script, NEVER use <code>HEAD</code> as its argument. Use explicit SHAs. Only use Scripts/benchmark.sh SHA_OF_BASE SHA_OF_TARGET to run the benchmarks. Do not try to run the underlying commands directly.</p>
+<p>You must NOT look at the content of Benchmarks/, or the content of Sources/Resources.</p>
+<p>To give you some direction, I've profiled the parsing the twitter example, and included the inverted time profile call tree in /tmp/trace-tree.txt.</p>
+</blockquote>
+<p>The prompt changed gradually in these ways:</p>
+<ol>
+<li>Wording became more streamlined as I figured out how gpt-5.2-codex interprets specific things.</li>
+<li>The optimization threshold decreased as the lower-hanging fruits got picked</li>
+<li>The benchmark to optimize changed a bunch of times because they have different data profiles</li>
+</ol>
+<p>Each time the optimization threshold is met,
+I collect another time profile from instruments with the latest change,
+and restart the session with the same prompt.</p>
+<p>I actually started the journey with gpt-5.1-codex-max.
+It would find 5-10% improvements consecutively at the beginning.
+Then it would start to struggle,
+then I'd switch to gpt-5.2-codex with the default &quot;Medium&quot; setting,
+then &quot;High&quot;, and eventually &quot;Extra high&quot;.
+Towards the end,
+the LLM could barely find any speed improvements
+without regressing other benchmarks in some way.
+That's when I decided it's time to cut a release.</p>
+<h2>My observations of the model</h2>
+<p>Despite occasional struggles with conventional Swift coding style,
+I find that gpt-5.2-codex is good at analyzing the flow of the parser,
+and finds ways to short circuit certain logic.
+These types of discoveries made the parser quite a bit faster.</p>
+<p>It replaced key comparisons in a hot loop with hash value comparisons,
+which brought in a significant speedup.
+In retrospect, this idea seemed fairly obvious,
+but, in my imagination,
+I wouldn't have been bold enough to try it.</p>
+<p>The LLM has a few favorite things to try at the start of each session.</p>
+<ul>
+<li>It would see a linear search and try to replace it with a dictionary lookup</li>
+<li>It would try unrolling loops (in a few cases, this actually helped),</li>
+<li>It would reserve array capacities ahead of time,</li>
+<li>It would eliminate copies by converting things into classes</li>
+</ul>
+<p>But then the benchmark would regress,
+which forces it to explore other paths.</p>
+<p>Although my prompt tells the model to not look at the benchmark itself,
+it sometimes goes and does it anyways.
+I suppose benchmark-maxing is a temptation too great to resist for it?</p>
+<p>As reported by <a href="https://steipete.me/posts/2025/shipping-at-inference-speed">others</a>,
+I also observed that gpt-5.2-codex would spend a lot of time just analyzing,
+before attempting any changes.
+The code change it produces is almost always one-shot.
+It rarely goes back and revises the idea it's attempting to implement.</p>
+<h2>Conclusions</h2>
+<p>Good engineering practices continue to pay dividends with LLMs.</p>
+<p>TOMLDecoder reached a point where its runtime performance is itself a feature worth talking about.</p>
+<p>The setup of this project can serve as a benchmark for LLMs, I think?
+Here's a prompt,
+a concrete, measurable outcome represented by numbers,
+a huge test suite.
+How far can you push those numbers?</p>
+</div>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/ai/">AI</a>
+        ·
+        <a href="/tag/toml/">TOML</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/performance/">Performance</a>
+        ·
+        <a href="/tag/c/">C</a>
+    </p>
+</footer></body>
+</html>

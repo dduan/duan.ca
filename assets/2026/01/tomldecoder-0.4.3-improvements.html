@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+        }
+        .charts-row {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .chart-container {
+            width: 100%;
+        }
+        canvas {
+            max-height: 600px;
+        }
+        .chart-container h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #000 !important;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #232323;
+            }
+            .chart-container h3 {
+                color: #fff !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="charts-row">
+        <div class="chart-container">
+            <h3>Instructions (Millions)</h3>
+            <canvas id="chart_Instructions_M_1" data-filename="Instructions__M"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3>Wall Clock Time (ms)</h3>
+            <canvas id="chart_Time_wall_clock_ms_2" data-filename="Time_wall_clock__ms"></canvas>
+        </div>
+    </div>
+    <script>
+        new Chart(document.getElementById('chart_Instructions_M_1'), {
+            type: 'line',
+            data: {
+                labels: ["ea5de1aa", "6b272b43", "bcaa83e6", "82da0808", "873cdf24", "cd0aba8a", "d273c054", "eebdcd15", "b8f4d3f1", "71af6c07", "f5870142", "9716f246", "1c8ba1da", "89eddf2d", "fda769d4", "5e2d1ba2", "535b291b", "bd6fe9eb", "d90be6ef", "1c5c1f0a", "5beb94cf", "3dbb4902", "1de93d04", "fc4d2a5b", "02565665", "ffef5146", "d7be8da0", "c1ac2351", "60511aed", "5d61c188", "6ada1e3a", "ff278ec4", "defdcae4", "3fc1bb32", "fcba9f55"],
+                datasets: [{"label": "parse canada.toml", "data": [300.0, 300.0, 300.0, 303.0, 289.0, 286.0, 275.0, 273.0, 272.0, 276.0, 272.0, 271.0, 261.0, 263.0, 261.0, 261.0, 246.0, 241.0, 196.0, 177.0, 193.0, 184.0, 184.0, 186.0, 186.0, 185.0, 173.0, 167.0, 168.0, 169.0, 169.0, 165.0, 169.0, 169.0, 167.0], "borderColor": "rgba(54, 162, 235, 1)", "backgroundColor": "rgba(54, 162, 235, 0.2)", "borderWidth": 2, "pointRadius": 5, "pointHoverRadius": 7, "borderDash": []}, {"label": "parse twitter.toml", "data": [62.0, 62.0, 62.0, 62.0, 56.0, 56.0, 54.0, 52.0, 39.0, 39.0, 39.0, 37.0, 35.0, 35.0, 35.0, 34.0, 34.0, 34.0, 34.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 30.0, 29.0, 29.0, 29.0], "borderColor": "rgba(255, 99, 132, 1)", "backgroundColor": "rgba(255, 99, 132, 0.2)", "borderWidth": 2, "pointRadius": 5, "pointHoverRadius": 7, "borderDash": []}]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Instructions (M)"
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Commit (chronological order)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + 'M instructions';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('chart_Time_wall_clock_ms_2'), {
+            type: 'line',
+            data: {
+                labels: ["ea5de1aa", "6b272b43", "bcaa83e6", "82da0808", "873cdf24", "cd0aba8a", "d273c054", "eebdcd15", "b8f4d3f1", "71af6c07", "f5870142", "9716f246", "1c8ba1da", "89eddf2d", "fda769d4", "5e2d1ba2", "535b291b", "bd6fe9eb", "d90be6ef", "1c5c1f0a", "5beb94cf", "3dbb4902", "1de93d04", "fc4d2a5b", "02565665", "ffef5146", "d7be8da0", "c1ac2351", "60511aed", "5d61c188", "6ada1e3a", "ff278ec4", "defdcae4", "3fc1bb32", "fcba9f55"],
+                datasets: [{"label": "parse canada.toml", "data": [20.0, 20.0, 21.0, 20.0, 18.0, 18.0, 18.0, 18.0, 17.0, 17.0, 17.0, 17.0, 17.0, 17.0, 17.0, 17.0, 17.0, 16.0, 13.0, 13.0, 13.0, 13.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 11.0, 12.0, 12.0, 12.0, 12.0, 12.0, 11.0], "borderColor": "rgba(54, 162, 235, 1)", "backgroundColor": "rgba(54, 162, 235, 0.2)", "borderWidth": 2, "pointRadius": 5, "pointHoverRadius": 7, "borderDash": []}, {"label": "parse twitter.toml", "data": [4.211, 4.131, 4.157, 4.045, 3.391, 3.406, 3.33, 3.117, 2.556, 2.552, 2.572, 2.443, 2.284, 2.271, 2.284, 2.185, 2.171, 2.195, 2.331, 1.919, 1.922, 1.919, 1.904, 1.908, 1.914, 1.918, 1.919, 1.927, 1.908, 1.924, 1.91, 1.912, 1.867, 1.83, 1.835], "borderColor": "rgba(255, 99, 132, 1)", "backgroundColor": "rgba(255, 99, 132, 0.2)", "borderWidth": 2, "pointRadius": 5, "pointHoverRadius": 7, "borderDash": []}]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Time (ms)"
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Commit (chronological order)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y.toFixed(3) + ' ms';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    <script>
+        function sendHeight() {
+            const height = document.body.scrollHeight;
+            window.parent.postMessage({ type: 'resize', height: height }, '*');
+        }
+
+        setTimeout(sendHeight, 100);
+        window.addEventListener('resize', sendHeight);
+    </script>
+</body>
+</html>

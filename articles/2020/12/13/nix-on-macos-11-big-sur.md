@@ -57,7 +57,7 @@ sh <(curl -L https://nixos.org/nix/install)
 
 #### 5. You are done! Try it out. I ran this little [example] as a test and things appears to work as expected.
 
-[example]: https://nix.dev/tutorials/dev-environment.html
+[example]: https://web.archive.org/web/20201130222947/https://nix.dev/tutorials/dev-environment.html
 
 ### Bonus: using Nix in Fish shell
 

@@ -85,6 +85,6 @@ breaking the shackles on their hand is a good thing to try.
 [1]: https://github.com/gitlabhq/gitlabhq/issues/1298 "Gitlab Issue: Closed"
 [2]: http://git-scm.com/book/en/Git-Branching
 [3]: http://nvie.com/posts/a-successful-git-branching-model
-[4]: http://gitlabhq.com
+[4]: http://about.gitlab.com
 
 

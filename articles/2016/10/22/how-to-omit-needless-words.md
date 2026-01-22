@@ -77,7 +77,7 @@ the scripts yourself, I've made a little tool for it [here][needless].
 "CG" in `CGSize`. That's covered by the tool as well.)
 
 
-[prepositions]: https://www.englishclub.com/grammar/prepositions-list.htm
+[prepositions]: https://web.archive.org/web/20161006012135/https://www.englishclub.com/grammar/prepositions-list.htm
 [needless]: https://github.com/dduan/needless
 
 ## Step 2: Update ##

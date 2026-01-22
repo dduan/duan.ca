@@ -187,4 +187,4 @@ Here's to less stressful deploys and more writing!
 [Askama]: https://github.com/djc/askama
 [syntect]: https://github.com/trishume/syntect
 [bat]: https://github.com/sharkdp/bat
-[include_bytes!]: https://doc.rust-lang.org/std/macro.include_bytes.html`
+[include_bytes!]: https://doc.rust-lang.org/std/macro.include_bytes.html

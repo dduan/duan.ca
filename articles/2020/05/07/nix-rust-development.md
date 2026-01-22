@@ -116,4 +116,4 @@ the future.
 [rustup]: https://rustup.rs/
 [RLS]: https://github.com/rust-lang/rls
 [Mozilla overlay]: https://github.com/mozilla/nixpkgs-mozilla
-[How I Start: Nix]: https://christine.website/blog/how-i-start-nix-2020-03-08
+[How I Start: Nix]: https://xeiaso.net/blog/how-i-start-nix-2020-03-08/

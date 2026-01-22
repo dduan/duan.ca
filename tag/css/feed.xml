@@ -111,7 +111,7 @@ SublimeText definition. So this is a configurable, extendible system. The
 generator includes 118 syntax definitions. Uncompressed, their files take up 5MB
 of disk space. As one can imagine, loading 5MB from 118 files each time the
 program runs is quite slow. Turns out, Rust has a standard library macro
-&#60;a href=&#34;https://doc.rust-lang.org/std/macro.include_bytes.html%60&#34;&#62;include_bytes!&#60;/a&#62; that solves this problem. &#60;a href=&#34;https://doc.rust-lang.org/std/macro.include_bytes.html%60&#34;&#62;include_bytes!&#60;/a&#62; embeds
+&#60;a href=&#34;https://doc.rust-lang.org/std/macro.include_bytes.html&#34;&#62;include_bytes!&#60;/a&#62; that solves this problem. &#60;a href=&#34;https://doc.rust-lang.org/std/macro.include_bytes.html&#34;&#62;include_bytes!&#60;/a&#62; embeds
 contents of a file as literals in source code, as if it&#39;s hand-written. syntect
 takes advantage of this feature by supporting serialization of its in-memory
 representation of syntaxes into bytes, and accepting in-line byte literals in

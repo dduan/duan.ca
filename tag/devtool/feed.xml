@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About DevTool</title>
+        <link>https://duan.ca/tag/devtool/</link>
+        <atom:link href="https://duan.ca/tag/devtool/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>My Xcode 6.2 And 6.3 Prediction</title>
+                <description>&#60;p&#62;We have a situation here: three versions of Xcode are available to devleopers as of this writing.&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;Xcode 6.1.1&#60;/li&#62;
+&#60;li&#62;Xcode 6.2 beta&#60;/li&#62;
+&#60;li&#62;Xcode 6.3 beta&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;6.2 is released with the purpose of making WatchKit availale.&#60;/p&#62;
+&#60;p&#62;6.3, so far, has been focused on Swift 1.2 and new Objective-C features, and a
+few non-language related features.&#60;/p&#62;
+&#60;p&#62;The fact that there are two betas indicates to me each will be followed up by
+an official release. So how?&#60;/p&#62;
+&#60;p&#62;My guess: there will be an official Xcode 6.2 release after Watch release. It doesn&#39;t make much sense to skip a minor version.&#60;/p&#62;
+&#60;p&#62;Then things get interesting. Watch is coming out in April. Shortly after that, we&#39;ll have WWDC. Usually, WWDC comes with major Xcode beta release. So ... what happens to version 6.3?&#60;/p&#62;
+&#60;p&#62;My guess: either we&#39;ll never get Xcode 6.3, or we won&#39;t get Xcode 7 this year.&#60;/p&#62;
+&#60;p&#62;The former make sense in the context that &#60;a href=&#34;http://9to5mac.com/2015/02/09/apples-ios-9-to-have-huge-stability-and-optimization-focus-after-years-of-feature-additions/&#34;&#62;Apple Is Focused on Stablity&#60;/a&#62;. Xcode needs some love on that front, let&#39;s face it!&#60;/p&#62;
+&#60;p&#62;On the other hand, no harm would be done if Apple market 6.3 as version 7 come WWDC. Afterall, Swift 1.2 is significant enough to justify a major version.&#60;/p&#62;
+</description>
+                <pubDate>Tue, 10 Feb 2015 02:09:50 -0800</pubDate>
+                <link>https://duan.ca/2015/02/10/my-xcode-62-and-63-prediction/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/02/10/my-xcode-62-and-63-prediction/</guid>
+            </item>
+            <item>
+                <title>Build And Run iOS Apps In Commmand Line</title>
+                <description>&#60;p&#62;Xcode is slow. Enough said. What&#39;s worse, sometimes I find myself
+relying too much on auto-completion with Cocoa Touch, a blessing and a curse!&#60;/p&#62;
+&#60;p&#62;So I searched for an alternative workflow in command line. The result was
+rather confusing: there are posts about using &#60;code&#62;xctool&#60;/code&#62; or &#60;code&#62;xcodebuild&#60;/code&#62; to
+build Xcode targets, using &#60;code&#62;ios-sim&#60;/code&#62;, &#60;code&#62;simctl&#60;/code&#62;  or &#60;code&#62;instruments&#60;/code&#62; to manage and
+manage or launch simulators. Most of the information is out of date.&#60;/p&#62;
+&#60;p&#62;Eventually though, I was able to piece together an answer for my needs.
+That is, given an iOS project set up with Xcode 6, I want to&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;build a target.&#60;/li&#62;
+&#60;li&#62;launch a iOS simulator.&#60;/li&#62;
+&#60;li&#62;install the built .app bundle to the launched simulator.&#60;/li&#62;
+&#60;li&#62;run the installed app.&#60;/li&#62;
+&#60;li&#62;uninstall the app from the simulator.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;All in command line, with Xcode &#60;em&#62;closed&#60;/em&#62;.&#60;/p&#62;
+&#60;p&#62;Before we proceed to the steps, you need to gather a few pieces of information:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;the Xcode build scheme of your choice (e.g. &#38;quot;AwesomeApp&#38;quot;).&#60;/li&#62;
+&#60;li&#62;your app bundle ID (e.g. &#38;quot;com.awesome.app&#38;quot;).&#60;/li&#62;
+&#60;li&#62;name of an existing simulator (e.g. &#38;quot;iPhone 6 Plus&#38;quot;). If you don&#39;t want to
+look it up in Xcode GUI, look for it in output of command &#60;code&#62;xcrun simctl list&#60;/code&#62; .&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Ready? Here we go.&#60;/p&#62;
+&#60;p&#62;(These commands should be run in the project folder).&#60;/p&#62;
+&#60;p&#62;Build the target:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcodebuild -scheme AwesomeApp -destination &#39;platform=iphonesimulator,name=iPhone 6 Plus&#39; -derivedDataPath build
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Launch the simulator:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcrun instruments -w &#39;iPhone 6 Plus&#39;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Install the bundle (after simulator is launched and target is built with
+previous commands):&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcrun simctl install booted build/Build/Products/Debug-iphonesimulator/AwesomeApp.app
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Launch the app in simulator (after it&#39;s installed with the previous command):&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcrun simctl launch booted com.awesome.app
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Uninstall the bundle:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcrun simctl uninstall booted com.awesome.app
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Quite a few parameters needs to be added for the build step if you have
+a comlex project. Please RTFMs. Write some script to automate the steps, if
+are a lazy typiest like me.&#60;/p&#62;
+</description>
+                <pubDate>Sat, 07 Feb 2015 20:35:02 -0800</pubDate>
+                <link>https://duan.ca/2015/02/07/build-and-run-ios-apps-in-commmand-line/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/02/07/build-and-run-ios-apps-in-commmand-line/</guid>
+            </item>
+    </channel>
+</rss>

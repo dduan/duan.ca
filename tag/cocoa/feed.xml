@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Cocoa</title>
+        <link>https://duan.ca/tag/cocoa/</link>
+        <atom:link href="https://duan.ca/tag/cocoa/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>tableView:didSelectRowAtIndexPath: In Two Lines</title>
+                <description>&#60;p&#62;You have a &#60;code&#62;UITableViewController&#60;/code&#62; with a couple of static cells, you want to
+invoke some code for each cell in the delegate. Here&#39;s a quick way to do it:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+    {
+        
+        SEL action = (SEL[]){@selector(method1), @selector(method2)}[indexPath.row];
+        ((void (*)(id, SEL))[self methodForSelector: action])(self, action);
+    }
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It&#39;s got everything you love about C and Objective-C: array literals, function
+pointers, casting, selectors and something called &#60;a href=&#34;http://www.cocoawithlove.com/2008/02/imp-of-current-method.html&#34;&#62;IMPs&#60;/a&#62;.&#60;/p&#62;
+&#60;p&#62;This piece of code maps selected cells to methods by putting methods by
+indexing selectors in a C array.&#60;/p&#62;
+&#60;p&#62;Why all the fuss on the second line? wouldn&#39;t a simple &#60;code&#62;performSelector:&#60;/code&#62;
+work? The short answer is: to show the compiler that we are responsible
+adults. You can read more about it [here](SO Answer);&#60;/p&#62;
+</description>
+                <pubDate>Sat, 03 May 2014 13:42:00 -0600</pubDate>
+                <link>https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/</link>
+                <guid isPermaLink="true">https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/</guid>
+            </item>
+    </channel>
+</rss>

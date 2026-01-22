@@ -86,7 +86,7 @@ internet, or local cache), load the expression it includes, mix in my
 customization, and execute it.&#60;/p&#62;
 &#60;p&#62;That marks the end of my search. I like the final solution because it&#39;s mostly
 &#38;quot;vanilla&#38;quot; Nix and doesn&#39;t require me to mess with a bunch of other tools. For
-solutions that do, read &#60;a href=&#34;https://christine.website/blog/how-i-start-nix-2020-03-08&#34;&#62;this&#60;/a&#62;.&#60;/p&#62;
+solutions that do, read &#60;a href=&#34;https://xeiaso.net/blog/how-i-start-nix-2020-03-08/&#34;&#62;this&#60;/a&#62;.&#60;/p&#62;
 &#60;hr /&#62;
 &#60;p&#62;At end of the day, my needs are pretty basic: consistency from rustup and
 convenience from nix-shell. I didn&#39;t need to pin the compiler to a specific Rust

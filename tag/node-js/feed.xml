@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Node.js</title>
+        <link>https://duan.ca/tag/node-js/</link>
+        <atom:link href="https://duan.ca/tag/node-js/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>CoffeeScript And Mountain Lion</title>
+                <description>&#60;p&#62;Here are the necessary steps to install CoffeeScript on
+Mac OS X 10.8 (Mountain Lion):&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;
+&#60;p&#62;Install &#60;a href=&#34;https://developer.apple.com/downloads/index.action&#34;&#62;Command Lion Tools for Xcode&#60;/a&#62;&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install Homebrew:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;ruby -e &#38;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&#38;quot;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install Node.js with Homebrew:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;brew install node
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install npm (the version comes with node doesn&#39;t install CoffeeScript
+properly for some reason):&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;curl https://npmjs.org/install.sh | sh
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install CoffeeScript with npm:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;npm install -g coffee-script
+# add environment variable to ~/.bashrc
+echo &#38;quot;export NODE_PATH=/usr/local/lib/node_modules&#38;quot;
+. ~/.bashrc
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Done!&#60;/p&#62;
+&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;I had to google around to figure out the environment variable and the issue
+with npm. Hopefully this will help some folks in the similar need.&#60;/p&#62;
+</description>
+                <pubDate>Wed, 28 Nov 2012 15:11:00 -0600</pubDate>
+                <link>https://duan.ca/2012/11/28/coffeescript-and-mountain-lion/</link>
+                <guid isPermaLink="true">https://duan.ca/2012/11/28/coffeescript-and-mountain-lion/</guid>
+            </item>
+    </channel>
+</rss>

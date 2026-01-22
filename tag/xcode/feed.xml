@@ -104,5 +104,98 @@ compile without change in compatibility mode.&#60;/p&#62;
                 <link>https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/</link>
                 <guid isPermaLink="true">https://duan.ca/2017/05/22/build-in-swift-compatibility-mode/</guid>
             </item>
+            <item>
+                <title>Dynamic Swift Framework Without Xcode</title>
+                <description>&#60;p&#62;I came up with this question recently:&#60;/p&#62;
+&#60;blockquote class=&#34;twitter-tweet&#34; lang=&#34;en&#34;&#62;&#60;p lang=&#34;en&#34; dir=&#34;ltr&#34;&#62;Can we even use Frameworks with &#60;a href=&#34;https://twitter.com/hashtag/Swiftlang?src=hash&#34;&#62;#Swiftlang&#60;/a&#62; on Linux?&#60;/p&#62;&#38;mdash; Daniel Duan (@daniel_duan) &#60;a href=&#34;https://twitter.com/daniel_duan/status/617470929241706496&#34;&#62;July 4, 2015&#60;/a&#62;&#60;/blockquote&#62; &#60;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&#62;&#60;/script&#62;
+&#60;p&#62;And I&#39;m going to give the answer in this post (spoiler alert: yes, sort of).&#60;/p&#62;
+&#60;p&#62;Here&#39;s the content of a framework created by Xcode:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2015/07/just-framework-structure.png&#34; alt=&#34;Just Framework Structure&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;Some of the files, such as &#60;code&#62;Info.plist&#60;/code&#62;, are obviously construct of Xcode.
+Play with &#60;code&#62;swiftc&#60;/code&#62; long enough, one would find that the &#60;code&#62;.swiftdoc&#60;/code&#62;s, the
+&#60;code&#62;.swiftmodule&#60;/code&#62;s and the one binary file came from the Swift compiler.&#60;/p&#62;
+&#60;p&#62;Instead of listing the relevant &#60;code&#62;swiftc&#60;/code&#62; command options, I&#39;ve created a &#60;a href=&#34;https://github.com/dduan/Swift-Framework-Without-Xcode&#34;&#62;sample project&#60;/a&#62; to demonstrate how one can complie and link to frameworks so that they can be &#60;code&#62;import&#60;/code&#62;ed in the application code. The key ingredient for achieving it lies in &#60;em&#62;Makefile&#60;/em&#62;. In summary, &#60;code&#62;swiftc&#60;/code&#62; can do these for us:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;generate a binary as a library/framework&#60;/li&#62;
+&#60;li&#62;emit a &#60;code&#62;.swiftmodule&#60;/code&#62; file, which Swift needs to understand that binary.&#60;/li&#62;
+&#60;li&#62;assign a path the Swift runtime needs to locate this framework.&#60;/li&#62;
+&#60;li&#62;compile source code that imports the framework, given that they exist in the paths relative to the app binary in step 3.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Based on these observations, it&#39;s not hard to imagine more sophisticated build systems, such as IDEs and package/dependency management systems.&#60;/p&#62;
+</description>
+                <pubDate>Sun, 05 Jul 2015 22:36:09 -0700</pubDate>
+                <link>https://duan.ca/2015/07/05/dynamic-swift-framework-without-xcode/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/07/05/dynamic-swift-framework-without-xcode/</guid>
+            </item>
+            <item>
+                <title>My Xcode 6.2 And 6.3 Prediction</title>
+                <description>&#60;p&#62;We have a situation here: three versions of Xcode are available to devleopers as of this writing.&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;Xcode 6.1.1&#60;/li&#62;
+&#60;li&#62;Xcode 6.2 beta&#60;/li&#62;
+&#60;li&#62;Xcode 6.3 beta&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;6.2 is released with the purpose of making WatchKit availale.&#60;/p&#62;
+&#60;p&#62;6.3, so far, has been focused on Swift 1.2 and new Objective-C features, and a
+few non-language related features.&#60;/p&#62;
+&#60;p&#62;The fact that there are two betas indicates to me each will be followed up by
+an official release. So how?&#60;/p&#62;
+&#60;p&#62;My guess: there will be an official Xcode 6.2 release after Watch release. It doesn&#39;t make much sense to skip a minor version.&#60;/p&#62;
+&#60;p&#62;Then things get interesting. Watch is coming out in April. Shortly after that, we&#39;ll have WWDC. Usually, WWDC comes with major Xcode beta release. So ... what happens to version 6.3?&#60;/p&#62;
+&#60;p&#62;My guess: either we&#39;ll never get Xcode 6.3, or we won&#39;t get Xcode 7 this year.&#60;/p&#62;
+&#60;p&#62;The former make sense in the context that &#60;a href=&#34;http://9to5mac.com/2015/02/09/apples-ios-9-to-have-huge-stability-and-optimization-focus-after-years-of-feature-additions/&#34;&#62;Apple Is Focused on Stablity&#60;/a&#62;. Xcode needs some love on that front, let&#39;s face it!&#60;/p&#62;
+&#60;p&#62;On the other hand, no harm would be done if Apple market 6.3 as version 7 come WWDC. Afterall, Swift 1.2 is significant enough to justify a major version.&#60;/p&#62;
+</description>
+                <pubDate>Tue, 10 Feb 2015 02:09:50 -0800</pubDate>
+                <link>https://duan.ca/2015/02/10/my-xcode-62-and-63-prediction/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/02/10/my-xcode-62-and-63-prediction/</guid>
+            </item>
+            <item>
+                <title>Generating Xcode Build Number From Git</title>
+                <description>&#60;p&#62;The build version number in an Xcode project (CFBundleVersion in Info.plist)
+must be a monotonically increasing string for each archive submitted to the
+App Store. Neglection of this requirement will result in an error during the
+binary upload. Some automation will help avoiding this issue.&#60;/p&#62;
+&#60;p&#62;First, we want to generate this version number from our version (&#60;em&#62;duh&#60;/em&#62;)
+control system (VCS) each time our target gets built. My VCS of choice is Git,
+users of other systems just need to get a increasing number from their code
+history. On a *nix system, this command will count the number of commits on
+&#39;develop&#39; branch up until HEAD:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    git rev-list develop | wc -l
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This is a very good candidate for our build number, for longer history
+generally correlates to later builds.&#60;/p&#62;
+&#60;p&#62;Next, we make Xcode automatically run this command and use its result as the
+build number.&#60;/p&#62;
+&#60;p&#62;Go to project navigator, select your build target under the project icon,
+click &#60;em&#62;Build Phases&#60;/em&#62;, select &#60;em&#62;Editor→Add Build Phase→Add Run Script Build
+Phase&#60;/em&#62; in the menu. Remove the content in editor of the new &#60;em&#62;Run Script&#60;/em&#62;
+phase and replace it with:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;revnum=`git rev-list develop | wc -l`
+echo &#38;quot;#define BUILD_NUMBER $revnum&#38;quot; &#38;gt; InfoPlist.h
+touch InfoPlist.h
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Go to build settings, change value of &#60;em&#62;Preprocess Info.plist File&#60;/em&#62; to &#38;quot;YES&#38;quot;.
+Add &#38;quot;InfoPlist.h&#38;quot; to &#60;em&#62;Info.plist Preprocessor Prefix File→release&#60;/em&#62;.&#60;/p&#62;
+&#60;p&#62;We ask Xcode to run our command and save its result as a &#38;quot;#define&#38;quot; in a header
+file when it builds the project. This is done so that we can replace the
+&#38;quot;hardcoded&#38;quot; build number with the name of the constant:&#60;/p&#62;
+&#60;p&#62;Open Info.plist, Double click the value of &#60;em&#62;Bundle Version&#60;/em&#62; and replace it with&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;BUILD_NUMBER
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;There&#39;s only one issue left: &#60;code&#62;BUILD_NUMBER&#60;/code&#62; is now saved in &#60;em&#62;InfoPlist.h&#60;/em&#62;. Its
+value comes from our commit history. So we want to exclude this piece of
+information as part of our commit history (I&#39;ll leave the reason as an exercise
+for the reader). Ignore this file by adding &#38;quot;InfoPlist.h&#38;quot; to &#60;em&#62;.gitignore&#60;/em&#62; (or
+that of your other VCS).&#60;/p&#62;
+&#60;p&#62;To recap, when you build the project now, Xcode will find out how many commits
+are in the history, define it in a header file as &#60;code&#62;BUILD_NUMBER&#60;/code&#62;, which gets
+used as the build number. As long as you keep with with version control, the
+build number problem goes away.&#60;/p&#62;
+</description>
+                <pubDate>Sun, 29 Sep 2013 15:50:50 -0600</pubDate>
+                <link>https://duan.ca/2013/09/29/generating-xcode-build-number-from-git/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/09/29/generating-xcode-build-number-from-git/</guid>
+            </item>
     </channel>
 </rss>

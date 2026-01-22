@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About PhoneGap</title>
+        <link>https://duan.ca/tag/phonegap/</link>
+        <atom:link href="https://duan.ca/tag/phonegap/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>Sencha Touch 2 and PhoneGap integration</title>
+                <description>&#60;p&#62;As one of my pet Sencha Touch project gets close to finish, I started
+looking into distribute it as native apps with Phonegap/Cordova.&#60;/p&#62;
+&#60;p&#62;One of the concerns in do so is the &#39;deviceready&#39; event provided by Phonegap,
+according to the documentation:&#60;/p&#62;
+&#60;blockquote&#62;
+&#60;p&#62;This is a very important event that every Cordova application should use.&#60;br /&#62;
+...&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;blockquote&#62;
+&#60;p&#62;The Cordova deviceready event fires once Cordova has fully loaded.
+After the device has fired, you can safely make calls to Cordova function.&#60;/p&#62;
+&#60;p&#62;Typically, you will want to attach an event listener with
+document.addEventListener once the HTML document&#39;s DOM has loaded.&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;In particular, the nice Sencha Touch microloader complicate the matter by
+being the sole Javascript file that&#39;s supposed to be included in &#60;code&#62;index.html&#60;/code&#62;
+and is in charge of starting the actual code of our apps. Yet we need the
+starting point of the code be a response to the &#60;code&#62;deviceready&#60;/code&#62; event.&#60;/p&#62;
+&#60;p&#62;After some googling, I found that most information on this matter is either
+inaccurate, incomplete or outdated, that is until I found &#60;a href=&#34;http://stackoverflow.com/a/10457158/243798&#34;&#62;this answer&#60;/a&#62; by
+&#60;a href=&#34;http://dougan.me&#34;&#62;Robert Dougan&#60;/a&#62; on StackOverflow:&#60;/p&#62;
+&#60;blockquote&#62;
+&#60;p&#62;Sencha Touch 2 will listen to that event and call your onReady/launch methods&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;therefore if you try listening to them in the launch method,
+it has already been fired.&#60;/li&#62;
+&#60;/ul&#62;
+&#60;p&#62;Just put your logic inside the launch method in your application.&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;To verify this claim, I dug into &#60;code&#62;sencha-touch-debug.js&#60;/code&#62; distributed with
+Sencha Touch 2.2 and found the following code:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;if (Ext.browser.is.PhoneGap &#38;amp;&#38;amp; !Ext.os.is.Desktop) {
+    if (!Ext.readyListenerAttached) {
+        Ext.readyListenerAttached = true;
+        document.addEventListener(&#39;deviceready&#39;, triggerFn, false);
+    }
+}
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It appears that the &#60;code&#62;deviceready&#60;/code&#62; event is taken into account here as long as
+&#60;code&#62;Ext.browser.is.PhoneGap&#60;/code&#62; is true in a mobile browser envronment, which, in the
+same source code, means:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;if (typeof window.PhoneGap != &#39;undefined&#39; ||
+    typeof window.Cordova != &#39;undefined&#39;  ||
+    typeof window.cordova != &#39;undefined&#39;) {
+    isWebView = true;
+    this.setFlag(&#39;PhoneGap&#39;);
+}
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Here, the global variable PhoneGap, cordova or Cordova needs to be defined to
+satisfy Sencha Touch 2&#39;s expectation of PhoneGap environment. Those globals
+are defined in the &#60;code&#62;cordova-x.y.x.js&#60;/code&#62; file included in the PhoneGap/Cordova
+project files.&#60;/p&#62;
+&#60;p&#62;So what needs to be done for the integration is simple (if not clear):&#60;/p&#62;
+&#60;p&#62;include &#60;code&#62;cordova-x.y.x.js&#60;/code&#62; in the js section of &#60;code&#62;app.json&#60;/code&#62; project file so that
+the microloader knows to load it up early:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;&#38;quot;js&#38;quot;: [
+    {
+        &#38;quot;path&#38;quot;: &#38;quot;path/to/cordova-x.y.z.js&#38;quot;,
+    },
+    {
+        &#38;quot;path&#38;quot;: &#38;quot;touch/sencha-touch.js&#38;quot;,
+        &#38;quot;x-bootstrap&#38;quot;: true
+    },
+    {
+        &#38;quot;path&#38;quot;: &#38;quot;app.js&#38;quot;,
+        &#38;quot;bundle&#38;quot;: true, 
+        &#38;quot;update&#38;quot;: &#38;quot;delta&#38;quot;
+    }
+],
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Run &#60;code&#62;sencha app build package&#60;/code&#62; and drop the files it produces to the &#60;code&#62;www&#60;/code&#62;
+folder in the PhoneGap project.&#60;/p&#62;
+&#60;p&#62;Compile, ship.&#60;/p&#62;
+</description>
+                <pubDate>Tue, 28 May 2013 15:24:30 -0600</pubDate>
+                <link>https://duan.ca/2013/05/28/sencha-touch-2-and-phonegap-integration/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/05/28/sencha-touch-2-and-phonegap-integration/</guid>
+            </item>
+            <item>
+                <title>Integrating Sencha Touch 2 and Cordova (pre-2.0)</title>
+                <description>&#60;h2&#62;&#38;quot;The Goals&#60;/h2&#62;
+&#60;ol&#62;
+&#60;li&#62;
+&#60;p&#62;Use Sencha Command to create and package an MVC-structured Sencha Touch 2
+project.&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Use Cordova/PhoneGap (1.9) to wrap the project to deliver it in the App
+Store.&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Leverage the APIs provided by Cordova/PhoneGap to give Sencha Touch 2
+project more native capabilities.&#60;/p&#62;
+&#60;/li&#62;
+&#60;/ol&#62;
+&#60;h2&#62;The Process&#60;/h2&#62;
+&#60;p&#62;Goal #1 and #2 can be achieved by &#60;a href=&#34;http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova&#34; title=&#34;Packaging Sencha Touch 2 with PhoneGap (Cordova)&#34;&#62;these steps well described by Robert Dougan
+&#60;/a&#62;. In essence, you need to create a normal Sencha Touch 2 project
+using Sencha Command; a Cordova (1.7 in Roberts post, but works fine with 1.9)
+project. Then tell Sencha Command to build in the &#60;code&#62;www&#60;/code&#62; folder, where Cordova
+looks for the HTML5 assets to package. Finally, build and deploy the Cordova
+project the usual way.&#60;/p&#62;
+&#60;p&#62;That, of course, is not the end of the story, otherwise you wouldn&#39;t be
+reading this. When you try to achive goal #3, that is, when you use the
+Cordova API in the Sencha Touch project, such as:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    navigator.notification.alert(
+        &#39;Winter is coming!&#39;,
+        noted, // callback function
+        &#39;be warned&#39;,
+        &#38;quot;&#38;quot;Yes M&#39;lord&#38;quot;&#38;quot;
+    );
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Sencha Command will report error and refuse to &#38;quot;&#38;quot;compile&#38;quot;&#38;quot; if you run&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    sencha app build package
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;because of the unknown namespace introduced by Cordova.&#60;/p&#62;
+&#60;p&#62;One way to workaround this problem is manually replacing the command, which
+involves compiling the SASS files, consolidate all Javascript dependencies
+into a single file, minify everything and move the result to the &#60;code&#62;www&#60;/code&#62;
+folder.&#60;/p&#62;
+&#60;p&#62;Doesn&#39;t sound fun, does it?&#60;/p&#62;
+&#60;p&#62;So, here&#39;s a trick to put Sencha Command back on track, use&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    if (!Ext.os.is.Desktop) {
+    }
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;to wrap around the Cordova API calls, so the previous example becomes&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    if (!Ext.os.is.Desktop) {
+        navigator.notification.alert(
+            // ...
+        );
+    }
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This way, Sencha Command will ignore the conditioned code block since its
+running on the desktop environment, therefore compiles like a charm. And the
+code will work as intended in emulator/device environment.&#60;/p&#62;
+&#60;p&#62;You are welcome.&#60;/p&#62;
+&#60;h2&#62;The Bonus&#60;/h2&#62;
+&#60;p&#62;Now that you are using Sencha Touch 2 and Cordova API (like a boss!), here&#39;s
+another tip to improve your workflow. When I&#39;m developing hybrid apps, I spend
+the majority of time editing Java(Coffee)script/(S)CSS files. But surely
+enough, there will come a period where I have to debug the packaged app in the
+emulator. Switching from my text editor (Vim) to Xcode and hitting ⌘r
+REALLY gets old.&#60;/p&#62;
+&#60;p&#62;Luckily, Cordova provides some command line alternatives. If
+you generate a Cordova project as described in
+&#60;a href=&#34;https://web.archive.org/web/20161025042756/http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova&#34; title=&#34;Cordova Command-Line Documentaion&#34;&#62;Cordova&#39;s documentaion&#60;/a&#62; like so:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;./path/to/cordova-ios/bin/create /path/to/project com.example.name Project
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;There&#39;ll be a folder called &#60;code&#62;cordova&#60;/code&#62; in the newly created project, which won&#39;t
+be in your project if you create it with Xcode with &#60;a href=&#34;http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova&#34; title=&#34;Packaging Sencha Touch 2 with PhoneGap (Cordova)&#34;&#62;Robert&#39;s method&#60;/a&#62;.
+In &#60;code&#62;cordova&#60;/code&#62; folder are three lovely Bash scripts that let&#39;s you compile the
+Xcode project (&#60;code&#62;debug&#60;/code&#62;, which also does the next thing), run the result in  an
+ios emulator (&#60;code&#62;emulate&#60;/code&#62;) and watch the logging information (&#60;code&#62;log&#60;/code&#62;).&#60;/p&#62;
+&#60;p&#62;Copy the folder to the path of &#60;code&#62;YourProject.xcodeproj&#60;/code&#62;, and boom! You can now
+quit Xcode and run the scripts in there directly from your terminal. (What I like to
+do is to use GNU Make to combine Sencha commands with those scripts so that
+I could just hit ⌘b in MacVim to make my latest code run in the simulator.)&#60;/p&#62;
+&#60;p&#62;Happy coding!&#60;/p&#62;
+</description>
+                <pubDate>Mon, 20 Aug 2012 19:09:34 -0600</pubDate>
+                <link>https://duan.ca/2012/08/20/integrating-sencha-touch-2-and-cordova-pre-20/</link>
+                <guid isPermaLink="true">https://duan.ca/2012/08/20/integrating-sencha-touch-2-and-cordova-pre-20/</guid>
+            </item>
+    </channel>
+</rss>

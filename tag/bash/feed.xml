@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Bash</title>
+        <link>https://duan.ca/tag/bash/</link>
+        <atom:link href="https://duan.ca/tag/bash/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>Sencha Touch Workflow with GNU Make and Tmux</title>
+                <description>&#60;p&#62;I throw this Makefile to the root directory of my Sencha Touch 2 projects for
+workflow automation.&#60;/p&#62;
+&#60;p&#62;Assuming you write in CoffeeScript and run Tmux in a terminal:&#60;/p&#62;
+&#60;p&#62;&#60;code&#62;make develop&#60;/code&#62; will put &#60;code&#62;compass&#60;/code&#62; and &#60;code&#62;coffee&#60;/code&#62; to watch mode, in addition to
+spawning a local web server with Python 3. The three commands will run in three
+separate Tmux panes.&#60;/p&#62;
+&#60;p&#62;&#60;code&#62;make watch&#60;/code&#62; does the same thing sans the server spawning.&#60;/p&#62;
+&#60;p&#62;&#60;code&#62;make&#60;/code&#62; simply compile coffee script files and sass files.&#60;/p&#62;
+&#60;p&#62;You can figure out the granular commands with some minimal knowledge of GNU
+Make.&#60;/p&#62;
+&#60;script src=&#34;https://gist.github.com/DaNmarner/5659003.js&#34;&#62;&#60;/script&#62;
+</description>
+                <pubDate>Mon, 27 May 2013 15:00:00 -0600</pubDate>
+                <link>https://duan.ca/2013/05/27/sencha-touch-workflow-with-gnu-make-and-tmux/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/05/27/sencha-touch-workflow-with-gnu-make-and-tmux/</guid>
+            </item>
+    </channel>
+</rss>

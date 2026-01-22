@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Terminal</title>
+        <link>https://duan.ca/tag/terminal/</link>
+        <atom:link href="https://duan.ca/tag/terminal/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>One Weird Trick To Make Vim Go Faster On Your Mac</title>
+                <description>&#60;p&#62;I noticed something strange today.&#60;/p&#62;
+&#60;p&#62;While playing with Ubuntu on a VirtualBox hosted by OS X Mavericks, Vim
+&#60;em&#62;seems&#60;/em&#62; much faster than it being in iTerms2. How could that be? So I took the
+following steps to test things out:&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;Installed exact configurations with Vundle on the VM.&#60;/li&#62;
+&#60;li&#62;Vim in Terminal.app&#60;/li&#62;
+&#60;li&#62;MacVim with GUI.&#60;/li&#62;
+&#60;/ul&#62;
+&#60;p&#62;Nope, Vim is still more responsive on Ubuntu. In fact, text input seem more
+responsive on this VM than the host OS in general! I thought I came to the
+light switching to OS X after using Linux as desktop for years, and now this?
+&#60;em&#62;&#60;a href=&#34;http://developer.android.com/reference/android/util/Log.html#wtf(java.lang.String,%20java.lang.Throwable)&#34;&#62;WTF&#60;/a&#62;?&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;Defeat and confused, I went to the Internet, and found &#60;a href=&#34;http://stackoverflow.com/questions/4489885/how-can-i-increase-cursor-speed-in-terminal&#34;&#62;something close to an
+answer&#60;/a&#62;. Under &#60;em&#62;System Preferences-Keyboard&#60;/em&#62;, drag the two slide
+widget (&#38;quot;Key Repeat&#38;quot; and &#38;quot;Deley Until Repeat&#38;quot;) to the right most. Suddenly,
+Vim become faster!&#60;/p&#62;
+&#60;p&#62;Turns out, key repeating is very important for Vim users.&#60;/p&#62;
+</description>
+                <pubDate>Fri, 02 May 2014 10:25:00 -0600</pubDate>
+                <link>https://duan.ca/2014/05/02/one-weird-trick-to-make-vim-go-faster-on-your-mac/</link>
+                <guid isPermaLink="true">https://duan.ca/2014/05/02/one-weird-trick-to-make-vim-go-faster-on-your-mac/</guid>
+            </item>
+    </channel>
+</rss>

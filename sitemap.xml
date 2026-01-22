@@ -127,6 +127,9 @@
         <loc>https://duan.ca/2018/01/06/cat-under-1-minute/</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2018/01/06/raw-coding-session-videos/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2017/12/30/hello-world-in-webassembly/</loc>
     </url>
     <url>
@@ -184,16 +187,85 @@
         <loc>https://duan.ca/2015/11/01/char-star-star-in-swift/</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2015/10/25/lets-play-llvm-in-swift-setup/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2015/07/12/swift-algebraic-data-types/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2015/07/05/dynamic-swift-framework-without-xcode/</loc>
     </url>
     <url>
         <loc>https://duan.ca/2015/07/04/lets-build-a-cat-in-swift-2/</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2015/04/22/neovim-swift-and-make/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2015/04/18/swift-function-fun-facts/</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2015/04/18/when-default-parameter-values-fall-short-in-swift/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2015/02/10/the-two-swifts/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2015/02/10/my-xcode-62-and-63-prediction/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2015/02/10/this-is-a-test/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2015/02/07/build-and-run-ios-apps-in-commmand-line/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2014/05/02/one-weird-trick-to-make-vim-go-faster-on-your-mac/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2014/04/23/installing-pyqt5-with-python-3-on-os-x/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2013/09/29/generating-xcode-build-number-from-git/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2013/05/28/sencha-touch-2-and-phonegap-integration/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2013/05/27/sencha-touch-workflow-with-gnu-make-and-tmux/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2013/05/19/dynamic-height-for-list-item-in-sencha-touch-2/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2013/01/14/sencha-touch-22-alpha-sass-bug-workaround/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2013/01/14/windows-phone-8-theme-in-sencha-touch-22/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2013/01/11/hello-world-the-hard-way-with-sencha-touch/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2012/11/29/mongodb-php-and-mountain-lion/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2012/11/28/coffeescript-and-mountain-lion/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2012/10/31/keep-git-social/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2012/10/27/windows-8-first-impression/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2012/09/30/testing-method-within-constructor-with-jasminejs/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/2012/08/20/integrating-sencha-touch-2-and-cordova-pre-20/</loc>
     </url>
     <url>
         <loc>https://duan.ca//</loc>
@@ -207,6 +279,12 @@
         <loc>https://duan.ca/DrString/</loc>
     </url><url>
         <loc>https://duan.ca/Markra/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag//</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag//feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/3d-printing/</loc>
@@ -237,6 +315,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/accessibility/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/bash/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/bash/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/c/</loc>
@@ -275,6 +359,18 @@
         <loc>https://duan.ca/tag/carthage/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/cocoa/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/cocoa/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/cocoa-touch/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/cocoa-touch/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/cocoapods/</loc>
     </url>
     <url>
@@ -285,6 +381,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/cocoapods/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/coffeescript/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/coffeescript/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/combine/</loc>
@@ -299,10 +401,22 @@
         <loc>https://duan.ca/tag/composable-architecture/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/cordova/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/cordova/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/dns/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/dns/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/devtool/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/devtool/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/digital-ocean/</loc>
@@ -327,6 +441,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/freecad/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/gnu-make/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/gnu-make/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/gpt/</loc>
@@ -455,6 +575,12 @@
         <loc>https://duan.ca/tag/mlir/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/mac/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/mac/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/make/</loc>
     </url>
     <url>
@@ -473,16 +599,40 @@
         <loc>https://duan.ca/tag/mastodon/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/microsoft/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/microsoft/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/minute-swift/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/minute-swift/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/mobile-development/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/mobile-development/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/mongodb/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/mongodb/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/naming/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/naming/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/neovim/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/neovim/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/nix/</loc>
@@ -503,16 +653,46 @@
         <loc>https://duan.ca/tag/nixpkgs/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/node-js/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/node-js/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/oop/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/oop/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/os-x/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/os-x/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/os-x-mountain-lion/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/os-x-mountain-lion/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/oss/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/oss/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/objective-c/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/objective-c/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/php/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/php/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/posix/</loc>
@@ -533,6 +713,12 @@
         <loc>https://duan.ca/tag/performance/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/phonegap/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/phonegap/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/programming-language/</loc>
     </url>
     <url>
@@ -545,10 +731,28 @@
         <loc>https://duan.ca/tag/protobuf/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/pyqt5/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/pyqt5/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/python/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/python/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/python-3/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/python-3/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/qt5/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/qt5/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/rls/</loc>
@@ -575,10 +779,22 @@
         <loc>https://duan.ca/tag/s-expression/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/sass/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/sass/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/scheme/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/scheme/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/sencha-touch/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/sencha-touch/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/software-scaling/</loc>
@@ -635,6 +851,18 @@
         <loc>https://duan.ca/tag/tui/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/terminal/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/terminal/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/tmux/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/tmux/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/tooling/</loc>
     </url>
     <url>
@@ -677,6 +905,18 @@
         <loc>https://duan.ca/tag/windows/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/windows-8/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/windows-8/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/windows-phone-8/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/windows-phone-8/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/xcode/</loc>
     </url>
     <url>
@@ -713,10 +953,40 @@
         <loc>https://duan.ca/tag/home-manager/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/homebrew/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/homebrew/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/ios/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/ios/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/iterm2/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/iterm2/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/jasmine-js/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/jasmine-js/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/javascript/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/javascript/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/llvm/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/llvm/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/macos/</loc>
@@ -735,6 +1005,18 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/science/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/swift/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/swift/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/testing/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/testing/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/tvos/</loc>

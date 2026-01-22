@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2013/09/29/generating-xcode-build-number-from-git/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Generating Xcode Build Number From Git">
+    <meta property="article:published_time" content="2013-09-29T15:50:50-06:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@daniel_duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Generating Xcode Build Number From Git</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2013/09/29/generating-xcode-build-number-from-git/">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
+</head>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="Generating Xcode Build Number From Git">
+    <meta itemprop="datePublished" content="2013-09-29T15:50:50-06:00">
+    <meta itemprop="dateModified" content="2013-09-29T15:50:50-06:00">
+    <link itemprop="url" href="https://duan.ca/2013/09/29/generating-xcode-build-number-from-git/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2013/09/29/generating-xcode-build-number-from-git/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="Xcode">
+    <meta itemprop="keywords" content="Git">
+    <meta itemprop="keywords" content="Cocoa Touch">
+    <h1>Generating Xcode Build Number From Git</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles/">Daniel Duan</a>
+            ·
+            <time datetime="2013-09-29T15:50:50-06:00">2013-09-29</time>
+        </p>
+    </nav>
+    <div itemprop="articleBody"><p>The build version number in an Xcode project (CFBundleVersion in Info.plist)
+must be a monotonically increasing string for each archive submitted to the
+App Store. Neglection of this requirement will result in an error during the
+binary upload. Some automation will help avoiding this issue.</p>
+<p>First, we want to generate this version number from our version (<em>duh</em>)
+control system (VCS) each time our target gets built. My VCS of choice is Git,
+users of other systems just need to get a increasing number from their code
+history. On a *nix system, this command will count the number of commits on
+'develop' branch up until HEAD:</p>
+<pre><code>    git rev-list develop | wc -l
+</code></pre>
+<p>This is a very good candidate for our build number, for longer history
+generally correlates to later builds.</p>
+<p>Next, we make Xcode automatically run this command and use its result as the
+build number.</p>
+<p>Go to project navigator, select your build target under the project icon,
+click <em>Build Phases</em>, select <em>Editor→Add Build Phase→Add Run Script Build
+Phase</em> in the menu. Remove the content in editor of the new <em>Run Script</em>
+phase and replace it with:</p>
+<pre><code>revnum=`git rev-list develop | wc -l`
+echo &quot;#define BUILD_NUMBER $revnum&quot; &gt; InfoPlist.h
+touch InfoPlist.h
+</code></pre>
+<p>Go to build settings, change value of <em>Preprocess Info.plist File</em> to &quot;YES&quot;.
+Add &quot;InfoPlist.h&quot; to <em>Info.plist Preprocessor Prefix File→release</em>.</p>
+<p>We ask Xcode to run our command and save its result as a &quot;#define&quot; in a header
+file when it builds the project. This is done so that we can replace the
+&quot;hardcoded&quot; build number with the name of the constant:</p>
+<p>Open Info.plist, Double click the value of <em>Bundle Version</em> and replace it with</p>
+<pre><code>BUILD_NUMBER
+</code></pre>
+<p>There's only one issue left: <code>BUILD_NUMBER</code> is now saved in <em>InfoPlist.h</em>. Its
+value comes from our commit history. So we want to exclude this piece of
+information as part of our commit history (I'll leave the reason as an exercise
+for the reader). Ignore this file by adding &quot;InfoPlist.h&quot; to <em>.gitignore</em> (or
+that of your other VCS).</p>
+<p>To recap, when you build the project now, Xcode will find out how many commits
+are in the history, define it in a header file as <code>BUILD_NUMBER</code>, which gets
+used as the build number. As long as you keep with with version control, the
+build number problem goes away.</p>
+</div>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/xcode/">Xcode</a>
+        ·
+        <a href="/tag/git/">Git</a>
+        ·
+        <a href="/tag/cocoa-touch/">Cocoa Touch</a>
+    </p>
+</footer></body>
+</html>

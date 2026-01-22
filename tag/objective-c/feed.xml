@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Objective-C</title>
+        <link>https://duan.ca/tag/objective-c/</link>
+        <atom:link href="https://duan.ca/tag/objective-c/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>Build And Run iOS Apps In Commmand Line</title>
+                <description>&#60;p&#62;Xcode is slow. Enough said. What&#39;s worse, sometimes I find myself
+relying too much on auto-completion with Cocoa Touch, a blessing and a curse!&#60;/p&#62;
+&#60;p&#62;So I searched for an alternative workflow in command line. The result was
+rather confusing: there are posts about using &#60;code&#62;xctool&#60;/code&#62; or &#60;code&#62;xcodebuild&#60;/code&#62; to
+build Xcode targets, using &#60;code&#62;ios-sim&#60;/code&#62;, &#60;code&#62;simctl&#60;/code&#62;  or &#60;code&#62;instruments&#60;/code&#62; to manage and
+manage or launch simulators. Most of the information is out of date.&#60;/p&#62;
+&#60;p&#62;Eventually though, I was able to piece together an answer for my needs.
+That is, given an iOS project set up with Xcode 6, I want to&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;build a target.&#60;/li&#62;
+&#60;li&#62;launch a iOS simulator.&#60;/li&#62;
+&#60;li&#62;install the built .app bundle to the launched simulator.&#60;/li&#62;
+&#60;li&#62;run the installed app.&#60;/li&#62;
+&#60;li&#62;uninstall the app from the simulator.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;All in command line, with Xcode &#60;em&#62;closed&#60;/em&#62;.&#60;/p&#62;
+&#60;p&#62;Before we proceed to the steps, you need to gather a few pieces of information:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;the Xcode build scheme of your choice (e.g. &#38;quot;AwesomeApp&#38;quot;).&#60;/li&#62;
+&#60;li&#62;your app bundle ID (e.g. &#38;quot;com.awesome.app&#38;quot;).&#60;/li&#62;
+&#60;li&#62;name of an existing simulator (e.g. &#38;quot;iPhone 6 Plus&#38;quot;). If you don&#39;t want to
+look it up in Xcode GUI, look for it in output of command &#60;code&#62;xcrun simctl list&#60;/code&#62; .&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Ready? Here we go.&#60;/p&#62;
+&#60;p&#62;(These commands should be run in the project folder).&#60;/p&#62;
+&#60;p&#62;Build the target:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcodebuild -scheme AwesomeApp -destination &#39;platform=iphonesimulator,name=iPhone 6 Plus&#39; -derivedDataPath build
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Launch the simulator:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcrun instruments -w &#39;iPhone 6 Plus&#39;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Install the bundle (after simulator is launched and target is built with
+previous commands):&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcrun simctl install booted build/Build/Products/Debug-iphonesimulator/AwesomeApp.app
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Launch the app in simulator (after it&#39;s installed with the previous command):&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcrun simctl launch booted com.awesome.app
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Uninstall the bundle:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcrun simctl uninstall booted com.awesome.app
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Quite a few parameters needs to be added for the build step if you have
+a comlex project. Please RTFMs. Write some script to automate the steps, if
+are a lazy typiest like me.&#60;/p&#62;
+</description>
+                <pubDate>Sat, 07 Feb 2015 20:35:02 -0800</pubDate>
+                <link>https://duan.ca/2015/02/07/build-and-run-ios-apps-in-commmand-line/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/02/07/build-and-run-ios-apps-in-commmand-line/</guid>
+            </item>
+            <item>
+                <title>tableView:didSelectRowAtIndexPath: In Two Lines</title>
+                <description>&#60;p&#62;You have a &#60;code&#62;UITableViewController&#60;/code&#62; with a couple of static cells, you want to
+invoke some code for each cell in the delegate. Here&#39;s a quick way to do it:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+    {
+        
+        SEL action = (SEL[]){@selector(method1), @selector(method2)}[indexPath.row];
+        ((void (*)(id, SEL))[self methodForSelector: action])(self, action);
+    }
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It&#39;s got everything you love about C and Objective-C: array literals, function
+pointers, casting, selectors and something called &#60;a href=&#34;http://www.cocoawithlove.com/2008/02/imp-of-current-method.html&#34;&#62;IMPs&#60;/a&#62;.&#60;/p&#62;
+&#60;p&#62;This piece of code maps selected cells to methods by putting methods by
+indexing selectors in a C array.&#60;/p&#62;
+&#60;p&#62;Why all the fuss on the second line? wouldn&#39;t a simple &#60;code&#62;performSelector:&#60;/code&#62;
+work? The short answer is: to show the compiler that we are responsible
+adults. You can read more about it [here](SO Answer);&#60;/p&#62;
+</description>
+                <pubDate>Sat, 03 May 2014 13:42:00 -0600</pubDate>
+                <link>https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/</link>
+                <guid isPermaLink="true">https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/</guid>
+            </item>
+    </channel>
+</rss>

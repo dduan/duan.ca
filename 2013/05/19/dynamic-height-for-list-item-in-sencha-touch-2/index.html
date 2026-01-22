@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2013/05/19/dynamic-height-for-list-item-in-sencha-touch-2/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Dynamic Height for List Item in Sencha Touch 2">
+    <meta property="article:published_time" content="2013-05-19T16:03:30-06:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@daniel_duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Dynamic Height for List Item in Sencha Touch 2</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2013/05/19/dynamic-height-for-list-item-in-sencha-touch-2/">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
+</head>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="Dynamic Height for List Item in Sencha Touch 2">
+    <meta itemprop="datePublished" content="2013-05-19T16:03:30-06:00">
+    <meta itemprop="dateModified" content="2013-05-19T16:03:30-06:00">
+    <link itemprop="url" href="https://duan.ca/2013/05/19/dynamic-height-for-list-item-in-sencha-touch-2/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2013/05/19/dynamic-height-for-list-item-in-sencha-touch-2/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="Sencha Touch">
+    <h1>Dynamic Height for List Item in Sencha Touch 2</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles/">Daniel Duan</a>
+            ·
+            <time datetime="2013-05-19T16:03:30-06:00">2013-05-19</time>
+        </p>
+    </nav>
+    <div itemprop="articleBody"><p>tl;dr: Set the <code>itemHeight</code> value to <code>auto</code> and you'll get list items
+with dynamic height in Sencha Touch 2.</p>
+<p>In the Ext.List component provided by Sencha Touch 2, all SimpleListItem
+(or ListItem) has the same height. This means if your items each has content
+of different height, the list would look awkward.</p>
+<p>Fear not! Here's a solution (and its discovery).</p>
+<p>Load up a Ext.List and inspect one of the item element with Chrome/Safari
+developer tool, you'll find its <code>element.style</code> has <code>height: 47px !important;</code>:</p>
+<p><img src="/assets/2013/05/height.png" alt="Default Height on List Item in Sencha Touch 2" /></p>
+<p>Here's the key: CSS properties under <code>element.style</code> are set by Javascript.
+In other words, any attempt to override this property in stylesheet will fail.
+(Try it by specifying a height value on <code>div.x-list-item</code>, or any other class
+you suspect, if you need some convincing).</p>
+<p>So, how do we fix this with Javascript? If you examine the documentaion,
+Ext.List has a config option <code>itemHeight</code> with a default value. You can set it
+to a value that works best with all potential heights of your item content,
+resulting in items with identical heights. Setting <code>itemHeight</code> to <code>auto</code>,
+however, will make each item container flow with its inner element, thus
+achive dynamic height.</p>
+</div>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/sencha-touch/">Sencha Touch</a>
+    </p>
+</footer></body>
+</html>

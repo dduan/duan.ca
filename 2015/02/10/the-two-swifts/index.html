@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2015/02/10/the-two-swifts/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="The Two Swifts">
+    <meta property="article:published_time" content="2015-02-10T10:50:16-08:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@daniel_duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>The Two Swifts</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2015/02/10/the-two-swifts/">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
+</head>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="The Two Swifts">
+    <meta itemprop="datePublished" content="2015-02-10T10:50:16-08:00">
+    <meta itemprop="dateModified" content="2015-02-10T10:50:16-08:00">
+    <link itemprop="url" href="https://duan.ca/2015/02/10/the-two-swifts/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2015/02/10/the-two-swifts/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="">
+    <h1>The Two Swifts</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles/">Daniel Duan</a>
+            ·
+            <time datetime="2015-02-10T10:50:16-08:00">2015-02-10</time>
+        </p>
+    </nav>
+    <div itemprop="articleBody"><p>onpatient 2.0 went live in App Store on September 27th 2014, 10 days after iOS
+8 was officially released. For the next few months, it was featured for
+HealthKit intergration on the App Store front page. In conversations during
+that period, people would ask me &quot;what was the experience like?&quot; What they
+referred to, of course, was the fact that I wrote that version in 100% Swift.</p>
+<p>I have a very different answer to that question now compared to the standard
+one I gave back then. I hope to explain to you, my dear readers, how my view
+on Swift has evolved since the beginning.</p>
+<h2>Swift The Puller</h2>
+<blockquote>
+<p>After you get used to a few nuances, it's Cocoa Touch after all.</p>
+</blockquote>
+<p>People kind of went &quot;huh&quot;, and didn't know how to respond to this answer, at
+the time when iOS 8 was just out. I think they were expecting horror stories.</p>
+<p>Well, they would have been right. One day <code>UIStoryboardSegue</code> would have an
+<code>identifier</code> of type <code>String!</code>, the next day it would become a <code>String?</code>. And
+the incomprehensible error message from Xcode made sure you woundn't figure it
+out with ease. This kind of changes would happen to your entire codebase each
+time a beta Xcode was released. Compunding with these implementation bugs,
+API changes and poor tooling, was the fact that you had to learn a new
+programming lanauge. If you and your family's livelihood depends direclty on
+the software you put out, avoiding that whole situation was (and is) the
+correct <em>business choice</em>.</p>
+<p>To me, however, all that was just plain <em>fun</em>. Within about a week, the
+strangeness of having <code>optional</code>s went away. It's kind of nice to have the
+compiler bark at you when something was unintialized. My old friends never
+left: ARC, auto-synthesized properties, blocks, protocols…</p>
+<p>As for the beta changes, they were only as often as the Xcode releases. Reading
+the release notes and a few careful inspections of the compile errors usually
+was enough to help you &quot;fix&quot; everything.</p>
+<p>A couple weeks in, Swift <em>disappeared</em>. I was just writing a brand new Cocoa
+Touch app. My attention was on architecture, user experience and patterns that
+works well with varies iOS APIs, business logic … We submitted the app on the
+first day it became possible.</p>
+<p>Turning back the clock to the ancient days when the world was <a href="http://arstechnica.com/apple/2010/06/copland-2010-revisited/">blissfully
+unaware</a> of Swift's existence. If one wanted to become a Mac
+or iOS developer, he/she would have gotten the advice along the lines of
+&quot;learning the Objective-C is easy, knowing the system API is harder&quot;. Well,
+that hasn't changed post-Swift. My experience building software with
+UIKit/Cocoa Touch applied 100% in building the 100% Swift App.</p>
+<p>Things did change when I went back to Objective-C after a couple months of
+writing Swift exclusively, however. The lack of type inference made typing
+cumbersome. The worst part is the missing concept of optionality on data
+types. <em>Every</em> object suddenly were <code>optional</code> in my eyes. I exprienced a
+sense of insecurity, as if I was driving in a foregn country with simular but
+significantly less respected traffic rules.</p>
+<h2>Swift The Pusher</h2>
+<blockquote>
+<p>I'm humbled and excited by the future because of what it's teaching me.</p>
+</blockquote>
+<p>By the time I shipped a few major feature updates in Swift, something had
+been lurking on the back of my mind: I had left a whole bunch of its features
+untouched, yet I seemed to have worked with it to some degree of success. What
+gives? The emerging Swift community has shown me the way since. Observe:</p>
+<p>Exhibit A, the following Swift function is frequently found in
+<a href="https://github.com/typelift/Swiftz/blob/master/Sources/Swiftz/Curry.swift">libraries</a> and <a href="http://www.objc.io/books/">books</a>, if not shipping code:</p>
+<pre><code>func curry&lt;A, B, C&gt;(f: (A, B) -&gt; C) -&gt; A -&gt; B -&gt; C {
+    return { x in { y in f(x,y)  }  }
+}
+</code></pre>
+<p>Currying is a simple concept. The fact that you can do it in Swift is nothing
+to write home about.</p>
+<p>What's striking to me, is how <em>succinct</em>, or, dare I say, <em>elegant</em> this can
+be expressed in Swift. In this short piece of code, you see generics, higher
+order functions, closures, type inference expressed on top of a strong type
+system…to form this basic construct found in functional programming. It's as
+if the language has been designed to enable it…</p>
+<p>which leads us to exhibit B:</p>
+<p>In a job <a href="http://clang-developers.42468.n3.nabble.com/ADVERTISEMENT-open-positions-in-Apple-s-Swift-compiler-team-td4039949.html">posting</a> for Apple's Swift compiler team, the following
+qualities are listed for Swift core library engineers (emphasis mine):</p>
+<blockquote>
+<ul>
+<li>A passion for making a difference in the lives of other programmers</li>
+<li>A deep understanding of generic programming principles</li>
+<li><strong>Experience with functional programming languages and/or idioms</strong></li>
+<li>Experience bridging languages, especially bridging dynamic languages with static ones</li>
+<li>Exposure to innovative and/or comprehensive library designs</li>
+</ul>
+</blockquote>
+<p>So in the Swift team's mind, an ideal &quot;customer&quot; of the language, the standard
+library authors being the most intimate ones, should be &quot;exploiting&quot; the
+language features to practice functional idioms. This detail stuck and
+ultimately inspired me to pick up <a href="http://www.objc.io/books/">Functional Programming in Swift</a>.
+The evidence piled on: <a href="http://www.objc.io/issue-16/">articles</a>, <a href="http://2014.funswiftconf.com">talks</a>
+and <a href="https://medium.com/swift-programming/2-functional-swift-c98be9533183">Blog</a> <a href="http://ijoshsmith.com/2014/11/30/getting-into-functional-programming-with-swift/">posts</a>. I realized that the
+language I've been using for several month has introduced the possiblity to do
+what the Haskell/Ocaml/Scala/F# folks do all day long (I won't discuss much
+functional programming in this post). The introduction has been gentle and
+could be safely ignored, but things like
+<a href="https://github.com/jeffh/Fox">automatically generated tests</a> and parser combinators got me
+hooked.</p>
+<p>I believe anyone who write code can benefit from knowing and appreciating the
+funtional paradigm. What's unique about Swift is that it's presented on
+Apple's huge developer eco-system. That means a huge part of our industry will
+benefit as Swift spread futher and futher. In that sense, it really stands out
+among all the other languages that enables functional programming.</p>
+</div>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag//"></a>
+    </p>
+</footer></body>
+</html>

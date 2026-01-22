@@ -50,7 +50,7 @@ After the migrator, your code may contain a mixture of these:&#60;/p&#62;
 func doStuff(forY y: Y) { … }
 &#60;/code&#62;&#60;/pre&#62;
 &#60;p&#62;In other words, the repeating word (&#60;code&#62;X&#60;/code&#62; or &#60;code&#62;Y&#60;/code&#62;) is preceded by a
-&#60;a href=&#34;https://www.englishclub.com/grammar/prepositions-list.htm&#34;&#62;preposition&#60;/a&#62;.&#60;/p&#62;
+&#60;a href=&#34;https://web.archive.org/web/20161006012135/https://www.englishclub.com/grammar/prepositions-list.htm&#34;&#62;preposition&#60;/a&#62;.&#60;/p&#62;
 &#60;p&#62;Finding these in a large code base is quite fun. If you don&#39;t feel like writing
 the scripts yourself, I&#39;ve made a little tool for it &#60;a href=&#34;https://github.com/dduan/needless&#34;&#62;here&#60;/a&#62;.&#60;/p&#62;
 &#60;p&#62;(Sometimes the repeating words aren&#39;t a exact match because of prefixes such as

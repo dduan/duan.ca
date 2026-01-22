@@ -33,7 +33,7 @@ name like &#60;code&#62;disk4&#60;/code&#62;.&#60;/p&#62;
 &#60;h4&#62;4. Install Nix the &#38;quot;normal&#38;quot; way&#60;/h4&#62;
 &#60;pre&#62;&#60;code&#62;sh &#38;lt;(curl -L https://nixos.org/nix/install)
 &#60;/code&#62;&#60;/pre&#62;
-&#60;h4&#62;5. You are done! Try it out. I ran this little &#60;a href=&#34;https://nix.dev/tutorials/dev-environment.html&#34;&#62;example&#60;/a&#62; as a test and things appears to work as expected.&#60;/h4&#62;
+&#60;h4&#62;5. You are done! Try it out. I ran this little &#60;a href=&#34;https://web.archive.org/web/20201130222947/https://nix.dev/tutorials/dev-environment.html&#34;&#62;example&#60;/a&#62; as a test and things appears to work as expected.&#60;/h4&#62;
 &#60;h3&#62;Bonus: using Nix in Fish shell&#60;/h3&#62;
 &#60;p&#62;As a fish user, I&#39;m used to fixing things up myself since software from non-fish users usually
 pretends fish doesn&#39;t exist. Anyways, in the final steps of its installation, Nix sets up a few

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2015/04/22/neovim-swift-and-make/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="NeoVim, Swift and Make">
+    <meta property="article:published_time" content="2015-04-22T11:46:17-07:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@daniel_duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>NeoVim, Swift and Make</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2015/04/22/neovim-swift-and-make/">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
+</head>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="NeoVim, Swift and Make">
+    <meta itemprop="datePublished" content="2015-04-22T11:46:17-07:00">
+    <meta itemprop="dateModified" content="2015-04-22T11:46:17-07:00">
+    <link itemprop="url" href="https://duan.ca/2015/04/22/neovim-swift-and-make/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2015/04/22/neovim-swift-and-make/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="NeoVim">
+    <meta itemprop="keywords" content="Vim">
+    <meta itemprop="keywords" content="Swift">
+    <meta itemprop="keywords" content="Make">
+    <h1>NeoVim, Swift and Make</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles/">Daniel Duan</a>
+            ·
+            <time datetime="2015-04-22T11:46:17-07:00">2015-04-22</time>
+        </p>
+    </nav>
+    <div itemprop="articleBody"><p>When it comes to Swift source code editing, nothing beats Xcode 6.3! That
+includes Xcode 6.2, which drove me to good'O Vim for a while.</p>
+<p>Except it's not the old Vim, I'm trying out <a href="http://neovim.org">NeoVim</a>. The
+most noticable difference in NeoVim compared to Vim is its recent
+addition of a built-in terminal.</p>
+<p>With the help of syntax highlighting and a Makefile, working with Swift this
+way turns out to be a fine alternative.</p>
+<p>(As a side benefit, I'm forced to use only local-context autocompletion. Now
+I can actually spell out full UIKit APIs 😉.)</p>
+<p>Here's a gif:</p>
+<p><img src="/assets/2015/04/demo.gif" alt="Make Swift NeoVim Demo" /></p>
+<p>Some details are easy to miss. I pressed <code>,m</code>, <code>,</code> being my binding for
+<code>&lt;leader&gt;</code>. A terminal session launched with the <code>make</code> command running. When
+that's done, I could press any key and the terminal pane was dismissed. Since
+<code>test</code> is the default target in my <code>Makefile</code>, the test suit for my Swift
+codes actually ran.</p>
+<p>Here's how the shortcut is set in <code>.nvimrc</code>:</p>
+<pre><code>if has('nvim')
+    nnoremap &lt;leader&gt;m :rightbelow vertical split &lt;bar&gt; :term make&lt;cr&gt;
+endif
+</code></pre>
+<p>The makefile is pretty straightforword if you've worked with <code>xcodebuild</code>.</p>
+<pre><code>test :
+    @xcodebuild test -project ProjectName.xcodeproj -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 6' | xcpretty
+
+clean :
+    @xcodebuild clean
+</code></pre>
+<p><a href="https://github.com/supermarin/xcpretty">xcpretty</a> is a nifty script that
+makes <code>xcodebuild</code>s output much more readable.</p>
+<p>Happy vimming, Swifties :)</p>
+</div>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/neovim/">NeoVim</a>
+        ·
+        <a href="/tag/vim/">Vim</a>
+        ·
+        <a href="/tag/swift/">Swift</a>
+        ·
+        <a href="/tag/make/">Make</a>
+    </p>
+</footer></body>
+</html>

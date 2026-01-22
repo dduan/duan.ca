@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About PyQt5</title>
+        <link>https://duan.ca/tag/pyqt5/</link>
+        <atom:link href="https://duan.ca/tag/pyqt5/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>Installing PyQt5 with Python 3 On OS X</title>
+                <description>&#60;p&#62;Today I installed PyQt5 on OS X 10.9. Turns out, it&#39;s not as straight-forward
+as one would think.&#60;/p&#62;
+&#60;p&#62;Using &#60;code&#62;homebrew&#60;/code&#62; will &#60;strong&#62;not&#60;/strong&#62; work:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    brew install PyQt5 --with-python3
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This is because of &#60;a href=&#34;https://github.com/Homebrew/homebrew/issues/25735&#34;&#62;an unfortunate choice&#60;/a&#62; made by the
+homebrew maintainer regarding Python 3.&#60;/p&#62;
+&#60;p&#62;So installing from &#60;a href=&#34;http://pyqt.sourceforge.net/Docs/PyQt5/installation.html&#34;&#62;source&#60;/a&#62; is the way to go. Following the
+installing instruction, you would download and install &#60;a href=&#34;https://web.archive.org/web/20140410074945/http://pyqt.sourceforge.net/Docs/sip4/installation.html&#34;&#62;sip&#60;/a&#62;
+first, the install &#60;a href=&#34;http://pyqt.sourceforge.net/Docs/PyQt5/installation.html&#34;&#62;PyQt5&#60;/a&#62; itself.&#60;/p&#62;
+&#60;p&#62;Except that&#39;s not enough. When you run &#60;code&#62;python configure.py&#60;/code&#62;, you see this
+error:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    error: Use the --qmake argument to explicitly specify a working Qt
+    qmake.
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It&#39;s pretty self-explanatory. &#60;code&#62;qmake&#60;/code&#62;, the build tool for qt is needed here.
+Install qt5 with homebrew and proceed:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    brew install qt5
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Afterwards, you should be able to import &#60;code&#62;PyQt5&#60;/code&#62; in a Python 3 REPL.&#60;/p&#62;
+</description>
+                <pubDate>Wed, 23 Apr 2014 10:36:00 -0600</pubDate>
+                <link>https://duan.ca/2014/04/23/installing-pyqt5-with-python-3-on-os-x/</link>
+                <guid isPermaLink="true">https://duan.ca/2014/04/23/installing-pyqt5-with-python-3-on-os-x/</guid>
+            </item>
+    </channel>
+</rss>

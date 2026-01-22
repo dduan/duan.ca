@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2012/08/20/integrating-sencha-touch-2-and-cordova-pre-20/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Integrating Sencha Touch 2 and Cordova (pre-2.0)">
+    <meta property="article:published_time" content="2012-08-20T19:09:34-06:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@daniel_duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Integrating Sencha Touch 2 and Cordova (pre-2.0)</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2012/08/20/integrating-sencha-touch-2-and-cordova-pre-20/">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
+</head>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="Integrating Sencha Touch 2 and Cordova (pre-2.0)">
+    <meta itemprop="datePublished" content="2012-08-20T19:09:34-06:00">
+    <meta itemprop="dateModified" content="2012-08-20T19:09:34-06:00">
+    <link itemprop="url" href="https://duan.ca/2012/08/20/integrating-sencha-touch-2-and-cordova-pre-20/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2012/08/20/integrating-sencha-touch-2-and-cordova-pre-20/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="Sencha Touch">
+    <meta itemprop="keywords" content="Cordova">
+    <meta itemprop="keywords" content="PhoneGap">
+    <meta itemprop="keywords" content="Mobile Development">
+    <h1>Integrating Sencha Touch 2 and Cordova (pre-2.0)</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles/">Daniel Duan</a>
+            ·
+            <time datetime="2012-08-20T19:09:34-06:00">2012-08-20</time>
+        </p>
+    </nav>
+    <div itemprop="articleBody"><h2>&quot;The Goals</h2>
+<ol>
+<li>
+<p>Use Sencha Command to create and package an MVC-structured Sencha Touch 2
+project.</p>
+</li>
+<li>
+<p>Use Cordova/PhoneGap (1.9) to wrap the project to deliver it in the App
+Store.</p>
+</li>
+<li>
+<p>Leverage the APIs provided by Cordova/PhoneGap to give Sencha Touch 2
+project more native capabilities.</p>
+</li>
+</ol>
+<h2>The Process</h2>
+<p>Goal #1 and #2 can be achieved by <a href="http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova" title="Packaging Sencha Touch 2 with PhoneGap (Cordova)">these steps well described by Robert Dougan
+</a>. In essence, you need to create a normal Sencha Touch 2 project
+using Sencha Command; a Cordova (1.7 in Roberts post, but works fine with 1.9)
+project. Then tell Sencha Command to build in the <code>www</code> folder, where Cordova
+looks for the HTML5 assets to package. Finally, build and deploy the Cordova
+project the usual way.</p>
+<p>That, of course, is not the end of the story, otherwise you wouldn't be
+reading this. When you try to achive goal #3, that is, when you use the
+Cordova API in the Sencha Touch project, such as:</p>
+<pre><code>    navigator.notification.alert(
+        'Winter is coming!',
+        noted, // callback function
+        'be warned',
+        &quot;&quot;Yes M'lord&quot;&quot;
+    );
+</code></pre>
+<p>Sencha Command will report error and refuse to &quot;&quot;compile&quot;&quot; if you run</p>
+<pre><code>    sencha app build package
+</code></pre>
+<p>because of the unknown namespace introduced by Cordova.</p>
+<p>One way to workaround this problem is manually replacing the command, which
+involves compiling the SASS files, consolidate all Javascript dependencies
+into a single file, minify everything and move the result to the <code>www</code>
+folder.</p>
+<p>Doesn't sound fun, does it?</p>
+<p>So, here's a trick to put Sencha Command back on track, use</p>
+<pre><code>    if (!Ext.os.is.Desktop) {
+    }
+</code></pre>
+<p>to wrap around the Cordova API calls, so the previous example becomes</p>
+<pre><code>    if (!Ext.os.is.Desktop) {
+        navigator.notification.alert(
+            // ...
+        );
+    }
+</code></pre>
+<p>This way, Sencha Command will ignore the conditioned code block since its
+running on the desktop environment, therefore compiles like a charm. And the
+code will work as intended in emulator/device environment.</p>
+<p>You are welcome.</p>
+<h2>The Bonus</h2>
+<p>Now that you are using Sencha Touch 2 and Cordova API (like a boss!), here's
+another tip to improve your workflow. When I'm developing hybrid apps, I spend
+the majority of time editing Java(Coffee)script/(S)CSS files. But surely
+enough, there will come a period where I have to debug the packaged app in the
+emulator. Switching from my text editor (Vim) to Xcode and hitting ⌘r
+REALLY gets old.</p>
+<p>Luckily, Cordova provides some command line alternatives. If
+you generate a Cordova project as described in
+<a href="https://web.archive.org/web/20161025042756/http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova" title="Cordova Command-Line Documentaion">Cordova's documentaion</a> like so:</p>
+<pre><code>./path/to/cordova-ios/bin/create /path/to/project com.example.name Project
+</code></pre>
+<p>There'll be a folder called <code>cordova</code> in the newly created project, which won't
+be in your project if you create it with Xcode with <a href="http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova" title="Packaging Sencha Touch 2 with PhoneGap (Cordova)">Robert's method</a>.
+In <code>cordova</code> folder are three lovely Bash scripts that let's you compile the
+Xcode project (<code>debug</code>, which also does the next thing), run the result in  an
+ios emulator (<code>emulate</code>) and watch the logging information (<code>log</code>).</p>
+<p>Copy the folder to the path of <code>YourProject.xcodeproj</code>, and boom! You can now
+quit Xcode and run the scripts in there directly from your terminal. (What I like to
+do is to use GNU Make to combine Sencha commands with those scripts so that
+I could just hit ⌘b in MacVim to make my latest code run in the simulator.)</p>
+<p>Happy coding!</p>
+</div>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/sencha-touch/">Sencha Touch</a>
+        ·
+        <a href="/tag/cordova/">Cordova</a>
+        ·
+        <a href="/tag/phonegap/">PhoneGap</a>
+        ·
+        <a href="/tag/mobile-development/">Mobile Development</a>
+    </p>
+</footer></body>
+</html>

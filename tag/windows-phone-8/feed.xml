@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Windows Phone 8</title>
+        <link>https://duan.ca/tag/windows-phone-8/</link>
+        <atom:link href="https://duan.ca/tag/windows-phone-8/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>Windows Phone 8 Theme in Sencha Touch 2.2</title>
+                <description>&#60;p&#62;Sencha Touch 2.2 Alpha shipped with Windows Phone 8/IE 10 support.
+And it&#39;s pretty impressive! Just take a look at the starter app under the
+original theme and the Windows Phone 8 theme:&#60;/p&#62;
+&#60;p&#62;The Default Theme:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2013/01/original-theme.png&#34; alt=&#34;Sencha Touch 2.2 default theme&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;WP8 Theme:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2013/01/wp8-theme.png&#34; alt=&#34;Sencha Touch 2.2 windows phone 8 theme&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;And it only takes a minute or two to get to the second screen.
+(if you have Sencha Cmd and Sencha Touch SDK 2.2 alpha ready). Here&#39;s how.&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;In SDK folder, generate the app with &#60;code&#62;sencha generate app Foo path/to/foo&#60;/code&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;/2013/01/14/Sencha-Touch-22-Alpha-Sass-Bug-Workaround.html&#34;&#62;Workaround&#60;/a&#62; the bug shipped in this alpha version. This won&#39;t be
+necessary once the bug has been fixed in the next release&#60;/li&#62;
+&#60;li&#62;Open &#60;code&#62;resources/sass/app.scss&#60;/code&#62; in the generated project folder )it should
+look like &#60;a href=&#34;https://gist.github.com/4533833&#34;&#62;this&#60;/a&#62; after step 2).
+Replace every appearance of the word &#60;em&#62;default&#60;/em&#62; to &#38;quot;windows&#38;quot;. Then run
+&#60;code&#62;compass compile resources/sass&#60;/code&#62; in the project root.&#60;/li&#62;
+&#60;li&#62;Serve the project in a web server (I usually do
+&#60;code&#62;python -m SimpleHTTPServer&#60;/code&#62;), fire up its url (localhost:800) and...&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Boom!&#60;/p&#62;
+</description>
+                <pubDate>Mon, 14 Jan 2013 13:45:00 -0600</pubDate>
+                <link>https://duan.ca/2013/01/14/windows-phone-8-theme-in-sencha-touch-22/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/01/14/windows-phone-8-theme-in-sencha-touch-22/</guid>
+            </item>
+    </channel>
+</rss>

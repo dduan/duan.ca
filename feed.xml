@@ -900,7 +900,7 @@ instance of Mastodon with a single user &#60;code&#62;@daniel&#60;/code&#62;. Th
 What database to use? How? What&#39;s the best way to host a Rails app? I need a email server? Where to host the
 media files I post?&#60;/p&#62;
 &#60;p&#62;There are a lot of step-by-step set-up tutorials on the internet. This post is, definitively, not one of
-those. But having gone through the process of &#60;a href=&#34;https://marketplace.digitalocean.com/apps/mastodon&#34;&#62;setting up an instance on DigitalOcean&#60;/a&#62;, I end up with a few
+those. But having gone through the process of &#60;a href=&#34;https://web.archive.org/web/20221219043954/https://marketplace.digitalocean.com/apps/mastodon&#34;&#62;setting up an instance on DigitalOcean&#60;/a&#62;, I end up with a few
 tips and tricks to share! Let&#39;s through them:&#60;/p&#62;
 &#60;ol&#62;
 &#60;li&#62;If you have a DigitalOcean account, setting a server up is as simple as searching up &#38;quot;Mastodon&#38;quot; in their
@@ -1552,7 +1552,7 @@ name like &#60;code&#62;disk4&#60;/code&#62;.&#60;/p&#62;
 &#60;h4&#62;4. Install Nix the &#38;quot;normal&#38;quot; way&#60;/h4&#62;
 &#60;pre&#62;&#60;code&#62;sh &#38;lt;(curl -L https://nixos.org/nix/install)
 &#60;/code&#62;&#60;/pre&#62;
-&#60;h4&#62;5. You are done! Try it out. I ran this little &#60;a href=&#34;https://nix.dev/tutorials/dev-environment.html&#34;&#62;example&#60;/a&#62; as a test and things appears to work as expected.&#60;/h4&#62;
+&#60;h4&#62;5. You are done! Try it out. I ran this little &#60;a href=&#34;https://web.archive.org/web/20201130222947/https://nix.dev/tutorials/dev-environment.html&#34;&#62;example&#60;/a&#62; as a test and things appears to work as expected.&#60;/h4&#62;
 &#60;h3&#62;Bonus: using Nix in Fish shell&#60;/h3&#62;
 &#60;p&#62;As a fish user, I&#39;m used to fixing things up myself since software from non-fish users usually
 pretends fish doesn&#39;t exist. Anyways, in the final steps of its installation, Nix sets up a few
@@ -2225,7 +2225,7 @@ internet, or local cache), load the expression it includes, mix in my
 customization, and execute it.&#60;/p&#62;
 &#60;p&#62;That marks the end of my search. I like the final solution because it&#39;s mostly
 &#38;quot;vanilla&#38;quot; Nix and doesn&#39;t require me to mess with a bunch of other tools. For
-solutions that do, read &#60;a href=&#34;https://christine.website/blog/how-i-start-nix-2020-03-08&#34;&#62;this&#60;/a&#62;.&#60;/p&#62;
+solutions that do, read &#60;a href=&#34;https://xeiaso.net/blog/how-i-start-nix-2020-03-08/&#34;&#62;this&#60;/a&#62;.&#60;/p&#62;
 &#60;hr /&#62;
 &#60;p&#62;At end of the day, my needs are pretty basic: consistency from rustup and
 convenience from nix-shell. I didn&#39;t need to pin the compiler to a specific Rust
@@ -2344,7 +2344,7 @@ SublimeText definition. So this is a configurable, extendible system. The
 generator includes 118 syntax definitions. Uncompressed, their files take up 5MB
 of disk space. As one can imagine, loading 5MB from 118 files each time the
 program runs is quite slow. Turns out, Rust has a standard library macro
-&#60;a href=&#34;https://doc.rust-lang.org/std/macro.include_bytes.html%60&#34;&#62;include_bytes!&#60;/a&#62; that solves this problem. &#60;a href=&#34;https://doc.rust-lang.org/std/macro.include_bytes.html%60&#34;&#62;include_bytes!&#60;/a&#62; embeds
+&#60;a href=&#34;https://doc.rust-lang.org/std/macro.include_bytes.html&#34;&#62;include_bytes!&#60;/a&#62; that solves this problem. &#60;a href=&#34;https://doc.rust-lang.org/std/macro.include_bytes.html&#34;&#62;include_bytes!&#60;/a&#62; embeds
 contents of a file as literals in source code, as if it&#39;s hand-written. syntect
 takes advantage of this feature by supporting serialization of its in-memory
 representation of syntaxes into bytes, and accepting in-line byte literals in
@@ -2887,6 +2887,24 @@ pattern matching as loop conditions. Enjoy!&#60;/p&#62;
                 <pubDate>Sat, 06 Jan 2018 18:34:39 -0800</pubDate>
                 <link>https://duan.ca/2018/01/06/cat-under-1-minute/</link>
                 <guid isPermaLink="true">https://duan.ca/2018/01/06/cat-under-1-minute/</guid>
+            </item>
+            <item>
+                <title>Raw Coding Sessions</title>
+                <description>&#60;p&#62;Planning, recording and editing a video is something I find very enjoyable to
+do. However, I enjoy just working on stuff as well. So I&#39;ll occassionally post
+videos of me doing just that: writing code, mumbling, with all my verbal ticks
+and bad habits left unedited. Not sure who these videos are for but why the heck
+not, amiright?&#60;/p&#62;
+&#60;p&#62;The first one was scheduled to publish today, so I guess I should post something
+about it.&#60;/p&#62;
+&#60;iframe width=&#34;560&#34; height=&#34;315&#34;
+src=&#34;https://www.youtube.com/embed/videoseries?list=PLuQ4I4VwboBw58RmXDbPGOUh4FQxyZ4UA&#34;
+frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34;
+allowfullscreen&#62;&#60;/iframe&#62;
+</description>
+                <pubDate>Sat, 06 Jan 2018 14:44:13 -0800</pubDate>
+                <link>https://duan.ca/2018/01/06/raw-coding-session-videos/</link>
+                <guid isPermaLink="true">https://duan.ca/2018/01/06/raw-coding-session-videos/</guid>
             </item>
             <item>
                 <title>Hello World In WebAssembly</title>
@@ -3708,7 +3726,7 @@ After the migrator, your code may contain a mixture of these:&#60;/p&#62;
 func doStuff(forY y: Y) { … }
 &#60;/code&#62;&#60;/pre&#62;
 &#60;p&#62;In other words, the repeating word (&#60;code&#62;X&#60;/code&#62; or &#60;code&#62;Y&#60;/code&#62;) is preceded by a
-&#60;a href=&#34;https://www.englishclub.com/grammar/prepositions-list.htm&#34;&#62;preposition&#60;/a&#62;.&#60;/p&#62;
+&#60;a href=&#34;https://web.archive.org/web/20161006012135/https://www.englishclub.com/grammar/prepositions-list.htm&#34;&#62;preposition&#60;/a&#62;.&#60;/p&#62;
 &#60;p&#62;Finding these in a large code base is quite fun. If you don&#39;t feel like writing
 the scripts yourself, I&#39;ve made a little tool for it &#60;a href=&#34;https://github.com/dduan/needless&#34;&#62;here&#60;/a&#62;.&#60;/p&#62;
 &#60;p&#62;(Sometimes the repeating words aren&#39;t a exact match because of prefixes such as
@@ -4093,6 +4111,94 @@ the infinite layers of indirections that pointers achieve.&#60;/p&#62;
                 <guid isPermaLink="true">https://duan.ca/2015/11/01/char-star-star-in-swift/</guid>
             </item>
             <item>
+                <title>Let&#39;s Play LLVM in Swift: Setup</title>
+                <description>&#60;p&#62;&#60;em&#62;The prospect of Swift being open-source excites me. In preparation for it, I
+decided to learn a little bit about LLVM. In the offical &#60;a href=&#34;http://llvm.org/docs/tutorial/index.html&#34;&#62;tutorial&#60;/a&#62;, C++
+and OCaml are used to create a programming language. So I asked myself: why not
+Swift? As you&#39;ll see in this post, Swift is as good as any language when it
+comes to leveraging LLVM.&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;LLVM is an &#38;quot;compiler infrastructure&#38;quot;. As a user, that translates to &#38;quot;a set of
+libraries to help us create programming language and tools&#38;quot;. Since this is
+not an introduction to the LLVM project, it suffices to say that LLVM makes
+creating programming language easy: give your language in &#60;a href=&#34;http://llvm.org/docs/LangRef.html&#34;&#62;LLVM IR&#60;/a&#62; form
+and you get the rest of a native/JIT language for free, optimization included!&#60;/p&#62;
+&#60;p&#62;LLVM&#39;s default API is in C++. In addition, it officially offers a C wrapper.
+Lucky for us, Swift is C-interoperable – no bridging necessary :)&#60;/p&#62;
+&#60;p&#62;Now we arrive at our goal for this post: create an Xcode project that can make
+calls into LLVM&#39;s C API, aka to compile this single line of code:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;let module = LLVMModuleCreateWithName(&#38;quot;my_module&#38;quot;)
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;I assume you have Xcode 7.1 installed on OS X 10.11, but no more.&#60;/p&#62;
+&#60;h2&#62;1. Getting LLVM&#60;/h2&#62;
+&#60;p&#62;There are a lot of materials on the internet dedicated to setting up an LLVM
+environment. As we are not working &#60;em&#62;on&#60;/em&#62; LLVM itself, and we are not on some
+crazy custom Linux environment (to be fair, it&#39;s trivial to set LLVM up on
+most major Linux distributions), the &#60;a href=&#34;http://llvm.org/releases/download.html&#34;&#62;pre-built Clang binaries&#60;/a&#62; is good
+enough. Download and unpack the .tar file somewhere handy in on your hard
+drive. For example, I put it at &#60;code&#62;$(HOME)/usr/local/clang-3.4&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;Aaaand we&#39;re done. We have LLVM.&#60;/p&#62;
+&#60;p&#62;&#60;em&#62;Sidenote: Xcode installs clang the compiler, but a lot of LLVM tools are
+missing. That&#39;s why we need a separate LLVM/Clang setup.&#60;/em&#62;&#60;/p&#62;
+&#60;h2&#62;2. Create an Xcode Project&#60;/h2&#62;
+&#60;p&#62;Create a new OS X - Command Line Tool Xcode project, choose Swift as it&#39;s
+language.&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2015/10/llvm-swift-01-create-cmd-project.png&#34; alt=&#34;Create A Command Line Xcode Project For LLVM&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;Accessing C stuff in Swift is the same as using your Objective-C
+classes. So we need to &#60;a href=&#34;https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html&#34;&#62;create a bridging header&#60;/a&#62;. (I usually create
+a Objective-C class so that Xcode prompts me for creating the header, then I
+delete the .h and .m files). The project layout is now:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2015/10/llvm-swift-02-bridging-header.png&#34; alt=&#34;Create a bridging header to import LLVM C libraries&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;Import the LLVM headers for its C interface. For our example, this is the
+entire bridging header:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;#import &#38;lt;llvm-c/Core.h&#38;gt;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It&#39;s probably a good time to replace content of &#60;code&#62;main.swift&#60;/code&#62; with our awesome
+LLVM IR-generating code:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;let module = LLVMModuleCreateWithName(&#38;quot;my_module&#38;quot;)
+&#60;/code&#62;&#60;/pre&#62;
+&#60;h2&#62;3. Teach Xcode About LLVM&#60;/h2&#62;
+&#60;p&#62;Our code would not compile at this point. Xcode complains that the LLVM header
+can not be found. Before you jump to the target build settings, allow me
+introduce &#60;code&#62;llvm-config&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;It turns out that the compliler flags for building a compiler can get complex
+pretty quickly. So LLVM comes with a command that generates them. For me it
+lives under &#60;code&#62;$(HOME)/usr/local/clang-3.4/bin&#60;/code&#62;. We can ask it for flags that
+compiles standard C++, links standard and core libraries like so:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;llvm-config --cxxflags --ldflags --system-libs --libs core
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;(As we use more and more LLVM libraries in the future, the list following
+&#60;code&#62;--libs&#60;/code&#62; will grow. &#60;code&#62;core&#60;/code&#62; is all we need to compile our example). To anyone
+who&#39;s used GCC/Clang in command line, the output should be pretty
+self-explanatory:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;-I/Users/drchrono/local/clang-3.4/include  -DNDEBUG -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -O3  -std=c++11 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -fno-common -Wcast-qual
+-L/Users/drchrono/local/clang-3.4/lib 
+-lLLVMCore -lLLVMSupport
+-lz -lpthread -ledit -lcurses -lm
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;I&#39;ll walk through how to ask Xcode to respect these.&#60;/p&#62;
+&#60;p&#62;First, go to build settings and set search paths for header files and
+libraries according to output from &#60;code&#62;llvm-config&#60;/code&#62;. For me that means:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2015/10/llvm-swift-03-header-search-path.png&#34; alt=&#34;Set LLVM header search path in Xcode&#34; /&#62;
+&#60;img src=&#34;/assets/2015/10/llvm-swift-04-library-search-path.png&#34; alt=&#34;Set LLVM library search path in Xcode&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;If you try to compile, now Xcode tells you some #define is missing. Again,
+we can find them in &#60;code&#62;llvm-config&#60;/code&#62;&#39;s result. Navigate to &#38;quot;Preprocessing&#38;quot; in
+build setting and add those values starting with &#60;code&#62;-D&#60;/code&#62;, with out the &#60;code&#62;-D&#60;/code&#62;:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2015/10/llvm-swift-05-macros.png&#34; alt=&#34;Set preprocessor macros&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;Remember to add these for both &#38;quot;Debug&#38;quot; and &#38;quot;Release&#38;quot;.&#60;/p&#62;
+&#60;p&#62;The last step is asking Xcode to link againt the LLVM libraries. Paste in the
+&#60;code&#62;-l&#60;/code&#62; flags from &#60;code&#62;llvm-config&#60;/code&#62; at &#38;quot;Other Linker Flags&#38;quot;:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2015/10/llvm-swift-06-link-libraries.png&#34; alt=&#34;Ask Xcode to link against LLVM libraries&#34; /&#62;&#60;/p&#62;
+&#60;h2&#62;4. Conclusion&#60;/h2&#62;
+&#60;p&#62;Now our Swift LLVM code compiles! Looking back, setting LLVM up with Xcode is
+no more special than setting up with any C libraries. Hopefully this post will
+cut down research time for some. Now go create awesome natively languages in
+Swift!&#60;/p&#62;
+</description>
+                <pubDate>Sun, 25 Oct 2015 11:53:15 -0700</pubDate>
+                <link>https://duan.ca/2015/10/25/lets-play-llvm-in-swift-setup/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/10/25/lets-play-llvm-in-swift-setup/</guid>
+            </item>
+            <item>
                 <title>Swift Algebraic Data Types</title>
                 <description>&#60;h2&#62;The Basics&#60;/h2&#62;
 &#60;p&#62;&#60;a href=&#34;https://en.wikipedia.org/wiki/Algebraic_data_type&#34;&#62;Algebraic Data Type&#60;/a&#62; is a fancy name for &#38;quot;a type creaded by combining other
@@ -4202,6 +4308,29 @@ aliases, such as:&#60;/p&#62;
                 <guid isPermaLink="true">https://duan.ca/2015/07/12/swift-algebraic-data-types/</guid>
             </item>
             <item>
+                <title>Dynamic Swift Framework Without Xcode</title>
+                <description>&#60;p&#62;I came up with this question recently:&#60;/p&#62;
+&#60;blockquote class=&#34;twitter-tweet&#34; lang=&#34;en&#34;&#62;&#60;p lang=&#34;en&#34; dir=&#34;ltr&#34;&#62;Can we even use Frameworks with &#60;a href=&#34;https://twitter.com/hashtag/Swiftlang?src=hash&#34;&#62;#Swiftlang&#60;/a&#62; on Linux?&#60;/p&#62;&#38;mdash; Daniel Duan (@daniel_duan) &#60;a href=&#34;https://twitter.com/daniel_duan/status/617470929241706496&#34;&#62;July 4, 2015&#60;/a&#62;&#60;/blockquote&#62; &#60;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&#62;&#60;/script&#62;
+&#60;p&#62;And I&#39;m going to give the answer in this post (spoiler alert: yes, sort of).&#60;/p&#62;
+&#60;p&#62;Here&#39;s the content of a framework created by Xcode:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2015/07/just-framework-structure.png&#34; alt=&#34;Just Framework Structure&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;Some of the files, such as &#60;code&#62;Info.plist&#60;/code&#62;, are obviously construct of Xcode.
+Play with &#60;code&#62;swiftc&#60;/code&#62; long enough, one would find that the &#60;code&#62;.swiftdoc&#60;/code&#62;s, the
+&#60;code&#62;.swiftmodule&#60;/code&#62;s and the one binary file came from the Swift compiler.&#60;/p&#62;
+&#60;p&#62;Instead of listing the relevant &#60;code&#62;swiftc&#60;/code&#62; command options, I&#39;ve created a &#60;a href=&#34;https://github.com/dduan/Swift-Framework-Without-Xcode&#34;&#62;sample project&#60;/a&#62; to demonstrate how one can complie and link to frameworks so that they can be &#60;code&#62;import&#60;/code&#62;ed in the application code. The key ingredient for achieving it lies in &#60;em&#62;Makefile&#60;/em&#62;. In summary, &#60;code&#62;swiftc&#60;/code&#62; can do these for us:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;generate a binary as a library/framework&#60;/li&#62;
+&#60;li&#62;emit a &#60;code&#62;.swiftmodule&#60;/code&#62; file, which Swift needs to understand that binary.&#60;/li&#62;
+&#60;li&#62;assign a path the Swift runtime needs to locate this framework.&#60;/li&#62;
+&#60;li&#62;compile source code that imports the framework, given that they exist in the paths relative to the app binary in step 3.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Based on these observations, it&#39;s not hard to imagine more sophisticated build systems, such as IDEs and package/dependency management systems.&#60;/p&#62;
+</description>
+                <pubDate>Sun, 05 Jul 2015 22:36:09 -0700</pubDate>
+                <link>https://duan.ca/2015/07/05/dynamic-swift-framework-without-xcode/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/07/05/dynamic-swift-framework-without-xcode/</guid>
+            </item>
+            <item>
                 <title>Let&#39;s Build A &#39;cat&#39; In Swift 2</title>
                 <description>&#60;p&#62;As a homework in one of the early college classes, I was asked to write unix
 commands such as &#60;code&#62;cat&#60;/code&#62; in C. Let&#39;s do that in Swift today! To make things
@@ -4277,6 +4406,44 @@ code:&#60;/p&#62;
                 <pubDate>Sat, 04 Jul 2015 20:56:19 -0700</pubDate>
                 <link>https://duan.ca/2015/07/04/lets-build-a-cat-in-swift-2/</link>
                 <guid isPermaLink="true">https://duan.ca/2015/07/04/lets-build-a-cat-in-swift-2/</guid>
+            </item>
+            <item>
+                <title>NeoVim, Swift and Make</title>
+                <description>&#60;p&#62;When it comes to Swift source code editing, nothing beats Xcode 6.3! That
+includes Xcode 6.2, which drove me to good&#39;O Vim for a while.&#60;/p&#62;
+&#60;p&#62;Except it&#39;s not the old Vim, I&#39;m trying out &#60;a href=&#34;http://neovim.org&#34;&#62;NeoVim&#60;/a&#62;. The
+most noticable difference in NeoVim compared to Vim is its recent
+addition of a built-in terminal.&#60;/p&#62;
+&#60;p&#62;With the help of syntax highlighting and a Makefile, working with Swift this
+way turns out to be a fine alternative.&#60;/p&#62;
+&#60;p&#62;(As a side benefit, I&#39;m forced to use only local-context autocompletion. Now
+I can actually spell out full UIKit APIs 😉.)&#60;/p&#62;
+&#60;p&#62;Here&#39;s a gif:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2015/04/demo.gif&#34; alt=&#34;Make Swift NeoVim Demo&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;Some details are easy to miss. I pressed &#60;code&#62;,m&#60;/code&#62;, &#60;code&#62;,&#60;/code&#62; being my binding for
+&#60;code&#62;&#38;lt;leader&#38;gt;&#60;/code&#62;. A terminal session launched with the &#60;code&#62;make&#60;/code&#62; command running. When
+that&#39;s done, I could press any key and the terminal pane was dismissed. Since
+&#60;code&#62;test&#60;/code&#62; is the default target in my &#60;code&#62;Makefile&#60;/code&#62;, the test suit for my Swift
+codes actually ran.&#60;/p&#62;
+&#60;p&#62;Here&#39;s how the shortcut is set in &#60;code&#62;.nvimrc&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;if has(&#39;nvim&#39;)
+    nnoremap &#38;lt;leader&#38;gt;m :rightbelow vertical split &#38;lt;bar&#38;gt; :term make&#38;lt;cr&#38;gt;
+endif
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;The makefile is pretty straightforword if you&#39;ve worked with &#60;code&#62;xcodebuild&#60;/code&#62;.&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;test :
+    @xcodebuild test -project ProjectName.xcodeproj -scheme SchemeName -destination &#39;platform=iOS Simulator,name=iPhone 6&#39; | xcpretty
+
+clean :
+    @xcodebuild clean
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;&#60;a href=&#34;https://github.com/supermarin/xcpretty&#34;&#62;xcpretty&#60;/a&#62; is a nifty script that
+makes &#60;code&#62;xcodebuild&#60;/code&#62;s output much more readable.&#60;/p&#62;
+&#60;p&#62;Happy vimming, Swifties :)&#60;/p&#62;
+</description>
+                <pubDate>Wed, 22 Apr 2015 11:46:17 -0700</pubDate>
+                <link>https://duan.ca/2015/04/22/neovim-swift-and-make/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/04/22/neovim-swift-and-make/</guid>
             </item>
             <item>
                 <title>Swift Function Fun Facts</title>
@@ -4424,8 +4591,756 @@ he/she pulls a prank on you.)&#60;/p&#62;
                 <guid isPermaLink="true">https://duan.ca/2015/04/18/swift-function-fun-facts/</guid>
             </item>
             <item>
+                <title>When Default Parameter Values Fall Short In Swift</title>
+                <description>&#60;p&#62;Swift supports default value for function parameters:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    func f(x=1, y=2, z=3) { return x * y + z }
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Functions defined in this way is extremely flexible as they allows the user to arbitrarily omit any parameters:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    f(y:6) // 9
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Today, however, I ran into a scenario where default values stopped working.&#60;/p&#62;
+&#60;p&#62;imagine a group of functions who share the same implementation function by supplying different values as its parameters. Furthermore, each of these functions also expose a same set of parameters.&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    func impl(x:String, a:Int, b:Int, c:Int, d:Int, f:Int, e:Int)
+
+&#60;/code&#62;&#60;/pre&#62;
+</description>
+                <pubDate>Sat, 18 Apr 2015 00:00:00 -0800</pubDate>
+                <link>https://duan.ca/2015/04/18/when-default-parameter-values-fall-short-in-swift/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/04/18/when-default-parameter-values-fall-short-in-swift/</guid>
+            </item>
+            <item>
+                <title>The Two Swifts</title>
+                <description>&#60;p&#62;onpatient 2.0 went live in App Store on September 27th 2014, 10 days after iOS
+8 was officially released. For the next few months, it was featured for
+HealthKit intergration on the App Store front page. In conversations during
+that period, people would ask me &#38;quot;what was the experience like?&#38;quot; What they
+referred to, of course, was the fact that I wrote that version in 100% Swift.&#60;/p&#62;
+&#60;p&#62;I have a very different answer to that question now compared to the standard
+one I gave back then. I hope to explain to you, my dear readers, how my view
+on Swift has evolved since the beginning.&#60;/p&#62;
+&#60;h2&#62;Swift The Puller&#60;/h2&#62;
+&#60;blockquote&#62;
+&#60;p&#62;After you get used to a few nuances, it&#39;s Cocoa Touch after all.&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;People kind of went &#38;quot;huh&#38;quot;, and didn&#39;t know how to respond to this answer, at
+the time when iOS 8 was just out. I think they were expecting horror stories.&#60;/p&#62;
+&#60;p&#62;Well, they would have been right. One day &#60;code&#62;UIStoryboardSegue&#60;/code&#62; would have an
+&#60;code&#62;identifier&#60;/code&#62; of type &#60;code&#62;String!&#60;/code&#62;, the next day it would become a &#60;code&#62;String?&#60;/code&#62;. And
+the incomprehensible error message from Xcode made sure you woundn&#39;t figure it
+out with ease. This kind of changes would happen to your entire codebase each
+time a beta Xcode was released. Compunding with these implementation bugs,
+API changes and poor tooling, was the fact that you had to learn a new
+programming lanauge. If you and your family&#39;s livelihood depends direclty on
+the software you put out, avoiding that whole situation was (and is) the
+correct &#60;em&#62;business choice&#60;/em&#62;.&#60;/p&#62;
+&#60;p&#62;To me, however, all that was just plain &#60;em&#62;fun&#60;/em&#62;. Within about a week, the
+strangeness of having &#60;code&#62;optional&#60;/code&#62;s went away. It&#39;s kind of nice to have the
+compiler bark at you when something was unintialized. My old friends never
+left: ARC, auto-synthesized properties, blocks, protocols…&#60;/p&#62;
+&#60;p&#62;As for the beta changes, they were only as often as the Xcode releases. Reading
+the release notes and a few careful inspections of the compile errors usually
+was enough to help you &#38;quot;fix&#38;quot; everything.&#60;/p&#62;
+&#60;p&#62;A couple weeks in, Swift &#60;em&#62;disappeared&#60;/em&#62;. I was just writing a brand new Cocoa
+Touch app. My attention was on architecture, user experience and patterns that
+works well with varies iOS APIs, business logic … We submitted the app on the
+first day it became possible.&#60;/p&#62;
+&#60;p&#62;Turning back the clock to the ancient days when the world was &#60;a href=&#34;http://arstechnica.com/apple/2010/06/copland-2010-revisited/&#34;&#62;blissfully
+unaware&#60;/a&#62; of Swift&#39;s existence. If one wanted to become a Mac
+or iOS developer, he/she would have gotten the advice along the lines of
+&#38;quot;learning the Objective-C is easy, knowing the system API is harder&#38;quot;. Well,
+that hasn&#39;t changed post-Swift. My experience building software with
+UIKit/Cocoa Touch applied 100% in building the 100% Swift App.&#60;/p&#62;
+&#60;p&#62;Things did change when I went back to Objective-C after a couple months of
+writing Swift exclusively, however. The lack of type inference made typing
+cumbersome. The worst part is the missing concept of optionality on data
+types. &#60;em&#62;Every&#60;/em&#62; object suddenly were &#60;code&#62;optional&#60;/code&#62; in my eyes. I exprienced a
+sense of insecurity, as if I was driving in a foregn country with simular but
+significantly less respected traffic rules.&#60;/p&#62;
+&#60;h2&#62;Swift The Pusher&#60;/h2&#62;
+&#60;blockquote&#62;
+&#60;p&#62;I&#39;m humbled and excited by the future because of what it&#39;s teaching me.&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;By the time I shipped a few major feature updates in Swift, something had
+been lurking on the back of my mind: I had left a whole bunch of its features
+untouched, yet I seemed to have worked with it to some degree of success. What
+gives? The emerging Swift community has shown me the way since. Observe:&#60;/p&#62;
+&#60;p&#62;Exhibit A, the following Swift function is frequently found in
+&#60;a href=&#34;https://github.com/typelift/Swiftz/blob/master/Sources/Swiftz/Curry.swift&#34;&#62;libraries&#60;/a&#62; and &#60;a href=&#34;http://www.objc.io/books/&#34;&#62;books&#60;/a&#62;, if not shipping code:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;func curry&#38;lt;A, B, C&#38;gt;(f: (A, B) -&#38;gt; C) -&#38;gt; A -&#38;gt; B -&#38;gt; C {
+    return { x in { y in f(x,y)  }  }
+}
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Currying is a simple concept. The fact that you can do it in Swift is nothing
+to write home about.&#60;/p&#62;
+&#60;p&#62;What&#39;s striking to me, is how &#60;em&#62;succinct&#60;/em&#62;, or, dare I say, &#60;em&#62;elegant&#60;/em&#62; this can
+be expressed in Swift. In this short piece of code, you see generics, higher
+order functions, closures, type inference expressed on top of a strong type
+system…to form this basic construct found in functional programming. It&#39;s as
+if the language has been designed to enable it…&#60;/p&#62;
+&#60;p&#62;which leads us to exhibit B:&#60;/p&#62;
+&#60;p&#62;In a job &#60;a href=&#34;http://clang-developers.42468.n3.nabble.com/ADVERTISEMENT-open-positions-in-Apple-s-Swift-compiler-team-td4039949.html&#34;&#62;posting&#60;/a&#62; for Apple&#39;s Swift compiler team, the following
+qualities are listed for Swift core library engineers (emphasis mine):&#60;/p&#62;
+&#60;blockquote&#62;
+&#60;ul&#62;
+&#60;li&#62;A passion for making a difference in the lives of other programmers&#60;/li&#62;
+&#60;li&#62;A deep understanding of generic programming principles&#60;/li&#62;
+&#60;li&#62;&#60;strong&#62;Experience with functional programming languages and/or idioms&#60;/strong&#62;&#60;/li&#62;
+&#60;li&#62;Experience bridging languages, especially bridging dynamic languages with static ones&#60;/li&#62;
+&#60;li&#62;Exposure to innovative and/or comprehensive library designs&#60;/li&#62;
+&#60;/ul&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;So in the Swift team&#39;s mind, an ideal &#38;quot;customer&#38;quot; of the language, the standard
+library authors being the most intimate ones, should be &#38;quot;exploiting&#38;quot; the
+language features to practice functional idioms. This detail stuck and
+ultimately inspired me to pick up &#60;a href=&#34;http://www.objc.io/books/&#34;&#62;Functional Programming in Swift&#60;/a&#62;.
+The evidence piled on: &#60;a href=&#34;http://www.objc.io/issue-16/&#34;&#62;articles&#60;/a&#62;, &#60;a href=&#34;http://2014.funswiftconf.com&#34;&#62;talks&#60;/a&#62;
+and &#60;a href=&#34;https://medium.com/swift-programming/2-functional-swift-c98be9533183&#34;&#62;Blog&#60;/a&#62; &#60;a href=&#34;http://ijoshsmith.com/2014/11/30/getting-into-functional-programming-with-swift/&#34;&#62;posts&#60;/a&#62;. I realized that the
+language I&#39;ve been using for several month has introduced the possiblity to do
+what the Haskell/Ocaml/Scala/F# folks do all day long (I won&#39;t discuss much
+functional programming in this post). The introduction has been gentle and
+could be safely ignored, but things like
+&#60;a href=&#34;https://github.com/jeffh/Fox&#34;&#62;automatically generated tests&#60;/a&#62; and parser combinators got me
+hooked.&#60;/p&#62;
+&#60;p&#62;I believe anyone who write code can benefit from knowing and appreciating the
+funtional paradigm. What&#39;s unique about Swift is that it&#39;s presented on
+Apple&#39;s huge developer eco-system. That means a huge part of our industry will
+benefit as Swift spread futher and futher. In that sense, it really stands out
+among all the other languages that enables functional programming.&#60;/p&#62;
+</description>
+                <pubDate>Tue, 10 Feb 2015 10:50:16 -0800</pubDate>
+                <link>https://duan.ca/2015/02/10/the-two-swifts/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/02/10/the-two-swifts/</guid>
+            </item>
+            <item>
+                <title>My Xcode 6.2 And 6.3 Prediction</title>
+                <description>&#60;p&#62;We have a situation here: three versions of Xcode are available to devleopers as of this writing.&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;Xcode 6.1.1&#60;/li&#62;
+&#60;li&#62;Xcode 6.2 beta&#60;/li&#62;
+&#60;li&#62;Xcode 6.3 beta&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;6.2 is released with the purpose of making WatchKit availale.&#60;/p&#62;
+&#60;p&#62;6.3, so far, has been focused on Swift 1.2 and new Objective-C features, and a
+few non-language related features.&#60;/p&#62;
+&#60;p&#62;The fact that there are two betas indicates to me each will be followed up by
+an official release. So how?&#60;/p&#62;
+&#60;p&#62;My guess: there will be an official Xcode 6.2 release after Watch release. It doesn&#39;t make much sense to skip a minor version.&#60;/p&#62;
+&#60;p&#62;Then things get interesting. Watch is coming out in April. Shortly after that, we&#39;ll have WWDC. Usually, WWDC comes with major Xcode beta release. So ... what happens to version 6.3?&#60;/p&#62;
+&#60;p&#62;My guess: either we&#39;ll never get Xcode 6.3, or we won&#39;t get Xcode 7 this year.&#60;/p&#62;
+&#60;p&#62;The former make sense in the context that &#60;a href=&#34;http://9to5mac.com/2015/02/09/apples-ios-9-to-have-huge-stability-and-optimization-focus-after-years-of-feature-additions/&#34;&#62;Apple Is Focused on Stablity&#60;/a&#62;. Xcode needs some love on that front, let&#39;s face it!&#60;/p&#62;
+&#60;p&#62;On the other hand, no harm would be done if Apple market 6.3 as version 7 come WWDC. Afterall, Swift 1.2 is significant enough to justify a major version.&#60;/p&#62;
+</description>
+                <pubDate>Tue, 10 Feb 2015 02:09:50 -0800</pubDate>
+                <link>https://duan.ca/2015/02/10/my-xcode-62-and-63-prediction/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/02/10/my-xcode-62-and-63-prediction/</guid>
+            </item>
+            <item>
+                <title>this is a test</title>
+                <description></description>
+                <pubDate>Tue, 10 Feb 2015 00:00:00 -0800</pubDate>
+                <link>https://duan.ca/2015/02/10/this-is-a-test/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/02/10/this-is-a-test/</guid>
+            </item>
+            <item>
+                <title>Build And Run iOS Apps In Commmand Line</title>
+                <description>&#60;p&#62;Xcode is slow. Enough said. What&#39;s worse, sometimes I find myself
+relying too much on auto-completion with Cocoa Touch, a blessing and a curse!&#60;/p&#62;
+&#60;p&#62;So I searched for an alternative workflow in command line. The result was
+rather confusing: there are posts about using &#60;code&#62;xctool&#60;/code&#62; or &#60;code&#62;xcodebuild&#60;/code&#62; to
+build Xcode targets, using &#60;code&#62;ios-sim&#60;/code&#62;, &#60;code&#62;simctl&#60;/code&#62;  or &#60;code&#62;instruments&#60;/code&#62; to manage and
+manage or launch simulators. Most of the information is out of date.&#60;/p&#62;
+&#60;p&#62;Eventually though, I was able to piece together an answer for my needs.
+That is, given an iOS project set up with Xcode 6, I want to&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;build a target.&#60;/li&#62;
+&#60;li&#62;launch a iOS simulator.&#60;/li&#62;
+&#60;li&#62;install the built .app bundle to the launched simulator.&#60;/li&#62;
+&#60;li&#62;run the installed app.&#60;/li&#62;
+&#60;li&#62;uninstall the app from the simulator.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;All in command line, with Xcode &#60;em&#62;closed&#60;/em&#62;.&#60;/p&#62;
+&#60;p&#62;Before we proceed to the steps, you need to gather a few pieces of information:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;the Xcode build scheme of your choice (e.g. &#38;quot;AwesomeApp&#38;quot;).&#60;/li&#62;
+&#60;li&#62;your app bundle ID (e.g. &#38;quot;com.awesome.app&#38;quot;).&#60;/li&#62;
+&#60;li&#62;name of an existing simulator (e.g. &#38;quot;iPhone 6 Plus&#38;quot;). If you don&#39;t want to
+look it up in Xcode GUI, look for it in output of command &#60;code&#62;xcrun simctl list&#60;/code&#62; .&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Ready? Here we go.&#60;/p&#62;
+&#60;p&#62;(These commands should be run in the project folder).&#60;/p&#62;
+&#60;p&#62;Build the target:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcodebuild -scheme AwesomeApp -destination &#39;platform=iphonesimulator,name=iPhone 6 Plus&#39; -derivedDataPath build
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Launch the simulator:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcrun instruments -w &#39;iPhone 6 Plus&#39;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Install the bundle (after simulator is launched and target is built with
+previous commands):&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcrun simctl install booted build/Build/Products/Debug-iphonesimulator/AwesomeApp.app
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Launch the app in simulator (after it&#39;s installed with the previous command):&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcrun simctl launch booted com.awesome.app
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Uninstall the bundle:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;xcrun simctl uninstall booted com.awesome.app
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Quite a few parameters needs to be added for the build step if you have
+a comlex project. Please RTFMs. Write some script to automate the steps, if
+are a lazy typiest like me.&#60;/p&#62;
+</description>
+                <pubDate>Sat, 07 Feb 2015 20:35:02 -0800</pubDate>
+                <link>https://duan.ca/2015/02/07/build-and-run-ios-apps-in-commmand-line/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/02/07/build-and-run-ios-apps-in-commmand-line/</guid>
+            </item>
+            <item>
+                <title>tableView:didSelectRowAtIndexPath: In Two Lines</title>
+                <description>&#60;p&#62;You have a &#60;code&#62;UITableViewController&#60;/code&#62; with a couple of static cells, you want to
+invoke some code for each cell in the delegate. Here&#39;s a quick way to do it:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+    {
+        
+        SEL action = (SEL[]){@selector(method1), @selector(method2)}[indexPath.row];
+        ((void (*)(id, SEL))[self methodForSelector: action])(self, action);
+    }
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It&#39;s got everything you love about C and Objective-C: array literals, function
+pointers, casting, selectors and something called &#60;a href=&#34;http://www.cocoawithlove.com/2008/02/imp-of-current-method.html&#34;&#62;IMPs&#60;/a&#62;.&#60;/p&#62;
+&#60;p&#62;This piece of code maps selected cells to methods by putting methods by
+indexing selectors in a C array.&#60;/p&#62;
+&#60;p&#62;Why all the fuss on the second line? wouldn&#39;t a simple &#60;code&#62;performSelector:&#60;/code&#62;
+work? The short answer is: to show the compiler that we are responsible
+adults. You can read more about it [here](SO Answer);&#60;/p&#62;
+</description>
+                <pubDate>Sat, 03 May 2014 13:42:00 -0600</pubDate>
+                <link>https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/</link>
+                <guid isPermaLink="true">https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/</guid>
+            </item>
+            <item>
+                <title>One Weird Trick To Make Vim Go Faster On Your Mac</title>
+                <description>&#60;p&#62;I noticed something strange today.&#60;/p&#62;
+&#60;p&#62;While playing with Ubuntu on a VirtualBox hosted by OS X Mavericks, Vim
+&#60;em&#62;seems&#60;/em&#62; much faster than it being in iTerms2. How could that be? So I took the
+following steps to test things out:&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;Installed exact configurations with Vundle on the VM.&#60;/li&#62;
+&#60;li&#62;Vim in Terminal.app&#60;/li&#62;
+&#60;li&#62;MacVim with GUI.&#60;/li&#62;
+&#60;/ul&#62;
+&#60;p&#62;Nope, Vim is still more responsive on Ubuntu. In fact, text input seem more
+responsive on this VM than the host OS in general! I thought I came to the
+light switching to OS X after using Linux as desktop for years, and now this?
+&#60;em&#62;&#60;a href=&#34;http://developer.android.com/reference/android/util/Log.html#wtf(java.lang.String,%20java.lang.Throwable)&#34;&#62;WTF&#60;/a&#62;?&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;Defeat and confused, I went to the Internet, and found &#60;a href=&#34;http://stackoverflow.com/questions/4489885/how-can-i-increase-cursor-speed-in-terminal&#34;&#62;something close to an
+answer&#60;/a&#62;. Under &#60;em&#62;System Preferences-Keyboard&#60;/em&#62;, drag the two slide
+widget (&#38;quot;Key Repeat&#38;quot; and &#38;quot;Deley Until Repeat&#38;quot;) to the right most. Suddenly,
+Vim become faster!&#60;/p&#62;
+&#60;p&#62;Turns out, key repeating is very important for Vim users.&#60;/p&#62;
+</description>
+                <pubDate>Fri, 02 May 2014 10:25:00 -0600</pubDate>
+                <link>https://duan.ca/2014/05/02/one-weird-trick-to-make-vim-go-faster-on-your-mac/</link>
+                <guid isPermaLink="true">https://duan.ca/2014/05/02/one-weird-trick-to-make-vim-go-faster-on-your-mac/</guid>
+            </item>
+            <item>
+                <title>Installing PyQt5 with Python 3 On OS X</title>
+                <description>&#60;p&#62;Today I installed PyQt5 on OS X 10.9. Turns out, it&#39;s not as straight-forward
+as one would think.&#60;/p&#62;
+&#60;p&#62;Using &#60;code&#62;homebrew&#60;/code&#62; will &#60;strong&#62;not&#60;/strong&#62; work:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    brew install PyQt5 --with-python3
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This is because of &#60;a href=&#34;https://github.com/Homebrew/homebrew/issues/25735&#34;&#62;an unfortunate choice&#60;/a&#62; made by the
+homebrew maintainer regarding Python 3.&#60;/p&#62;
+&#60;p&#62;So installing from &#60;a href=&#34;http://pyqt.sourceforge.net/Docs/PyQt5/installation.html&#34;&#62;source&#60;/a&#62; is the way to go. Following the
+installing instruction, you would download and install &#60;a href=&#34;https://web.archive.org/web/20140410074945/http://pyqt.sourceforge.net/Docs/sip4/installation.html&#34;&#62;sip&#60;/a&#62;
+first, the install &#60;a href=&#34;http://pyqt.sourceforge.net/Docs/PyQt5/installation.html&#34;&#62;PyQt5&#60;/a&#62; itself.&#60;/p&#62;
+&#60;p&#62;Except that&#39;s not enough. When you run &#60;code&#62;python configure.py&#60;/code&#62;, you see this
+error:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    error: Use the --qmake argument to explicitly specify a working Qt
+    qmake.
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It&#39;s pretty self-explanatory. &#60;code&#62;qmake&#60;/code&#62;, the build tool for qt is needed here.
+Install qt5 with homebrew and proceed:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    brew install qt5
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Afterwards, you should be able to import &#60;code&#62;PyQt5&#60;/code&#62; in a Python 3 REPL.&#60;/p&#62;
+</description>
+                <pubDate>Wed, 23 Apr 2014 10:36:00 -0600</pubDate>
+                <link>https://duan.ca/2014/04/23/installing-pyqt5-with-python-3-on-os-x/</link>
+                <guid isPermaLink="true">https://duan.ca/2014/04/23/installing-pyqt5-with-python-3-on-os-x/</guid>
+            </item>
+            <item>
+                <title>Generating Xcode Build Number From Git</title>
+                <description>&#60;p&#62;The build version number in an Xcode project (CFBundleVersion in Info.plist)
+must be a monotonically increasing string for each archive submitted to the
+App Store. Neglection of this requirement will result in an error during the
+binary upload. Some automation will help avoiding this issue.&#60;/p&#62;
+&#60;p&#62;First, we want to generate this version number from our version (&#60;em&#62;duh&#60;/em&#62;)
+control system (VCS) each time our target gets built. My VCS of choice is Git,
+users of other systems just need to get a increasing number from their code
+history. On a *nix system, this command will count the number of commits on
+&#39;develop&#39; branch up until HEAD:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    git rev-list develop | wc -l
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This is a very good candidate for our build number, for longer history
+generally correlates to later builds.&#60;/p&#62;
+&#60;p&#62;Next, we make Xcode automatically run this command and use its result as the
+build number.&#60;/p&#62;
+&#60;p&#62;Go to project navigator, select your build target under the project icon,
+click &#60;em&#62;Build Phases&#60;/em&#62;, select &#60;em&#62;Editor→Add Build Phase→Add Run Script Build
+Phase&#60;/em&#62; in the menu. Remove the content in editor of the new &#60;em&#62;Run Script&#60;/em&#62;
+phase and replace it with:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;revnum=`git rev-list develop | wc -l`
+echo &#38;quot;#define BUILD_NUMBER $revnum&#38;quot; &#38;gt; InfoPlist.h
+touch InfoPlist.h
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Go to build settings, change value of &#60;em&#62;Preprocess Info.plist File&#60;/em&#62; to &#38;quot;YES&#38;quot;.
+Add &#38;quot;InfoPlist.h&#38;quot; to &#60;em&#62;Info.plist Preprocessor Prefix File→release&#60;/em&#62;.&#60;/p&#62;
+&#60;p&#62;We ask Xcode to run our command and save its result as a &#38;quot;#define&#38;quot; in a header
+file when it builds the project. This is done so that we can replace the
+&#38;quot;hardcoded&#38;quot; build number with the name of the constant:&#60;/p&#62;
+&#60;p&#62;Open Info.plist, Double click the value of &#60;em&#62;Bundle Version&#60;/em&#62; and replace it with&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;BUILD_NUMBER
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;There&#39;s only one issue left: &#60;code&#62;BUILD_NUMBER&#60;/code&#62; is now saved in &#60;em&#62;InfoPlist.h&#60;/em&#62;. Its
+value comes from our commit history. So we want to exclude this piece of
+information as part of our commit history (I&#39;ll leave the reason as an exercise
+for the reader). Ignore this file by adding &#38;quot;InfoPlist.h&#38;quot; to &#60;em&#62;.gitignore&#60;/em&#62; (or
+that of your other VCS).&#60;/p&#62;
+&#60;p&#62;To recap, when you build the project now, Xcode will find out how many commits
+are in the history, define it in a header file as &#60;code&#62;BUILD_NUMBER&#60;/code&#62;, which gets
+used as the build number. As long as you keep with with version control, the
+build number problem goes away.&#60;/p&#62;
+</description>
+                <pubDate>Sun, 29 Sep 2013 15:50:50 -0600</pubDate>
+                <link>https://duan.ca/2013/09/29/generating-xcode-build-number-from-git/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/09/29/generating-xcode-build-number-from-git/</guid>
+            </item>
+            <item>
+                <title>Sencha Touch 2 and PhoneGap integration</title>
+                <description>&#60;p&#62;As one of my pet Sencha Touch project gets close to finish, I started
+looking into distribute it as native apps with Phonegap/Cordova.&#60;/p&#62;
+&#60;p&#62;One of the concerns in do so is the &#39;deviceready&#39; event provided by Phonegap,
+according to the documentation:&#60;/p&#62;
+&#60;blockquote&#62;
+&#60;p&#62;This is a very important event that every Cordova application should use.&#60;br /&#62;
+...&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;blockquote&#62;
+&#60;p&#62;The Cordova deviceready event fires once Cordova has fully loaded.
+After the device has fired, you can safely make calls to Cordova function.&#60;/p&#62;
+&#60;p&#62;Typically, you will want to attach an event listener with
+document.addEventListener once the HTML document&#39;s DOM has loaded.&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;In particular, the nice Sencha Touch microloader complicate the matter by
+being the sole Javascript file that&#39;s supposed to be included in &#60;code&#62;index.html&#60;/code&#62;
+and is in charge of starting the actual code of our apps. Yet we need the
+starting point of the code be a response to the &#60;code&#62;deviceready&#60;/code&#62; event.&#60;/p&#62;
+&#60;p&#62;After some googling, I found that most information on this matter is either
+inaccurate, incomplete or outdated, that is until I found &#60;a href=&#34;http://stackoverflow.com/a/10457158/243798&#34;&#62;this answer&#60;/a&#62; by
+&#60;a href=&#34;http://dougan.me&#34;&#62;Robert Dougan&#60;/a&#62; on StackOverflow:&#60;/p&#62;
+&#60;blockquote&#62;
+&#60;p&#62;Sencha Touch 2 will listen to that event and call your onReady/launch methods&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;therefore if you try listening to them in the launch method,
+it has already been fired.&#60;/li&#62;
+&#60;/ul&#62;
+&#60;p&#62;Just put your logic inside the launch method in your application.&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;To verify this claim, I dug into &#60;code&#62;sencha-touch-debug.js&#60;/code&#62; distributed with
+Sencha Touch 2.2 and found the following code:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;if (Ext.browser.is.PhoneGap &#38;amp;&#38;amp; !Ext.os.is.Desktop) {
+    if (!Ext.readyListenerAttached) {
+        Ext.readyListenerAttached = true;
+        document.addEventListener(&#39;deviceready&#39;, triggerFn, false);
+    }
+}
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It appears that the &#60;code&#62;deviceready&#60;/code&#62; event is taken into account here as long as
+&#60;code&#62;Ext.browser.is.PhoneGap&#60;/code&#62; is true in a mobile browser envronment, which, in the
+same source code, means:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;if (typeof window.PhoneGap != &#39;undefined&#39; ||
+    typeof window.Cordova != &#39;undefined&#39;  ||
+    typeof window.cordova != &#39;undefined&#39;) {
+    isWebView = true;
+    this.setFlag(&#39;PhoneGap&#39;);
+}
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Here, the global variable PhoneGap, cordova or Cordova needs to be defined to
+satisfy Sencha Touch 2&#39;s expectation of PhoneGap environment. Those globals
+are defined in the &#60;code&#62;cordova-x.y.x.js&#60;/code&#62; file included in the PhoneGap/Cordova
+project files.&#60;/p&#62;
+&#60;p&#62;So what needs to be done for the integration is simple (if not clear):&#60;/p&#62;
+&#60;p&#62;include &#60;code&#62;cordova-x.y.x.js&#60;/code&#62; in the js section of &#60;code&#62;app.json&#60;/code&#62; project file so that
+the microloader knows to load it up early:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;&#38;quot;js&#38;quot;: [
+    {
+        &#38;quot;path&#38;quot;: &#38;quot;path/to/cordova-x.y.z.js&#38;quot;,
+    },
+    {
+        &#38;quot;path&#38;quot;: &#38;quot;touch/sencha-touch.js&#38;quot;,
+        &#38;quot;x-bootstrap&#38;quot;: true
+    },
+    {
+        &#38;quot;path&#38;quot;: &#38;quot;app.js&#38;quot;,
+        &#38;quot;bundle&#38;quot;: true, 
+        &#38;quot;update&#38;quot;: &#38;quot;delta&#38;quot;
+    }
+],
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Run &#60;code&#62;sencha app build package&#60;/code&#62; and drop the files it produces to the &#60;code&#62;www&#60;/code&#62;
+folder in the PhoneGap project.&#60;/p&#62;
+&#60;p&#62;Compile, ship.&#60;/p&#62;
+</description>
+                <pubDate>Tue, 28 May 2013 15:24:30 -0600</pubDate>
+                <link>https://duan.ca/2013/05/28/sencha-touch-2-and-phonegap-integration/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/05/28/sencha-touch-2-and-phonegap-integration/</guid>
+            </item>
+            <item>
+                <title>Sencha Touch Workflow with GNU Make and Tmux</title>
+                <description>&#60;p&#62;I throw this Makefile to the root directory of my Sencha Touch 2 projects for
+workflow automation.&#60;/p&#62;
+&#60;p&#62;Assuming you write in CoffeeScript and run Tmux in a terminal:&#60;/p&#62;
+&#60;p&#62;&#60;code&#62;make develop&#60;/code&#62; will put &#60;code&#62;compass&#60;/code&#62; and &#60;code&#62;coffee&#60;/code&#62; to watch mode, in addition to
+spawning a local web server with Python 3. The three commands will run in three
+separate Tmux panes.&#60;/p&#62;
+&#60;p&#62;&#60;code&#62;make watch&#60;/code&#62; does the same thing sans the server spawning.&#60;/p&#62;
+&#60;p&#62;&#60;code&#62;make&#60;/code&#62; simply compile coffee script files and sass files.&#60;/p&#62;
+&#60;p&#62;You can figure out the granular commands with some minimal knowledge of GNU
+Make.&#60;/p&#62;
+&#60;script src=&#34;https://gist.github.com/DaNmarner/5659003.js&#34;&#62;&#60;/script&#62;
+</description>
+                <pubDate>Mon, 27 May 2013 15:00:00 -0600</pubDate>
+                <link>https://duan.ca/2013/05/27/sencha-touch-workflow-with-gnu-make-and-tmux/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/05/27/sencha-touch-workflow-with-gnu-make-and-tmux/</guid>
+            </item>
+            <item>
+                <title>Dynamic Height for List Item in Sencha Touch 2</title>
+                <description>&#60;p&#62;tl;dr: Set the &#60;code&#62;itemHeight&#60;/code&#62; value to &#60;code&#62;auto&#60;/code&#62; and you&#39;ll get list items
+with dynamic height in Sencha Touch 2.&#60;/p&#62;
+&#60;p&#62;In the Ext.List component provided by Sencha Touch 2, all SimpleListItem
+(or ListItem) has the same height. This means if your items each has content
+of different height, the list would look awkward.&#60;/p&#62;
+&#60;p&#62;Fear not! Here&#39;s a solution (and its discovery).&#60;/p&#62;
+&#60;p&#62;Load up a Ext.List and inspect one of the item element with Chrome/Safari
+developer tool, you&#39;ll find its &#60;code&#62;element.style&#60;/code&#62; has &#60;code&#62;height: 47px !important;&#60;/code&#62;:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2013/05/height.png&#34; alt=&#34;Default Height on List Item in Sencha Touch 2&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;Here&#39;s the key: CSS properties under &#60;code&#62;element.style&#60;/code&#62; are set by Javascript.
+In other words, any attempt to override this property in stylesheet will fail.
+(Try it by specifying a height value on &#60;code&#62;div.x-list-item&#60;/code&#62;, or any other class
+you suspect, if you need some convincing).&#60;/p&#62;
+&#60;p&#62;So, how do we fix this with Javascript? If you examine the documentaion,
+Ext.List has a config option &#60;code&#62;itemHeight&#60;/code&#62; with a default value. You can set it
+to a value that works best with all potential heights of your item content,
+resulting in items with identical heights. Setting &#60;code&#62;itemHeight&#60;/code&#62; to &#60;code&#62;auto&#60;/code&#62;,
+however, will make each item container flow with its inner element, thus
+achive dynamic height.&#60;/p&#62;
+</description>
+                <pubDate>Sun, 19 May 2013 16:03:30 -0600</pubDate>
+                <link>https://duan.ca/2013/05/19/dynamic-height-for-list-item-in-sencha-touch-2/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/05/19/dynamic-height-for-list-item-in-sencha-touch-2/</guid>
+            </item>
+            <item>
+                <title>Sencha Touch 2.2 Alpha Sass Bug Workaround</title>
+                <description>&#60;p&#62;Sencha &#60;a href=&#34;http://cdn.sencha.com/touch/alpha/touch-2.2.0-alpha.zip&#34;&#62;released&#60;/a&#62; a new version Sencha Touch with Windows Phone 8 support.
+But since it&#39;s an alpha, there are a few more things to do than what the
+&#60;a href=&#34;http://cdn.sencha.com/touch/alpha/2.2.0.52/release-notes.html&#34;&#62;release note&#60;/a&#62; says to get it working.&#60;/p&#62;
+&#60;p&#62;One thing I&#39;ve noticed is that when you generate a new app with&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;sencha generate app Foo path/to/foo
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;and make the changes to &#60;code&#62;resources/sass/app.scss&#60;/code&#62; according to the release
+note, &#60;code&#62;compass compile path/to/foo/resources/sass&#60;/code&#62; fails complaining a font
+file is missing:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;File not found or cannot be read: path/to/foo/resources/sass/stylesheets/fonts/pictos/pictos-web.woff
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;To fix this, copy the needed fonts to where it supposed to be:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;cd path/to/foo
+mkdir -p resources/sass/stylesheets/fonts/pictos
+cp touch/resources/themes/fonts/pictos/pictos-web.* resources/sass/stylesheets/fonts/pictos/
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;The next error you&#39;ll see from &#60;code&#62;compass compile&#60;/code&#62; is caused by the name changes
+to a few sass files in the framework. Long-story short, you need to change
+&#60;code&#62;resources/sass/app.scss&#60;/code&#62; to the following:&#60;/p&#62;
+&#60;script src=&#34;https://gist.github.com/4533833.js&#34;&#62;&#60;/script&#62;
+&#60;p&#62;and &#60;code&#62;compass&#60;/code&#62; should be happy from there.&#60;/p&#62;
+&#60;p&#62;While you are at it, why not checkout the magical Windows Phone 8 theme
+included in Sencha Touch 2.2 alpha.&#60;/p&#62;
+</description>
+                <pubDate>Mon, 14 Jan 2013 13:47:00 -0600</pubDate>
+                <link>https://duan.ca/2013/01/14/sencha-touch-22-alpha-sass-bug-workaround/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/01/14/sencha-touch-22-alpha-sass-bug-workaround/</guid>
+            </item>
+            <item>
+                <title>Windows Phone 8 Theme in Sencha Touch 2.2</title>
+                <description>&#60;p&#62;Sencha Touch 2.2 Alpha shipped with Windows Phone 8/IE 10 support.
+And it&#39;s pretty impressive! Just take a look at the starter app under the
+original theme and the Windows Phone 8 theme:&#60;/p&#62;
+&#60;p&#62;The Default Theme:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2013/01/original-theme.png&#34; alt=&#34;Sencha Touch 2.2 default theme&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;WP8 Theme:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2013/01/wp8-theme.png&#34; alt=&#34;Sencha Touch 2.2 windows phone 8 theme&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;And it only takes a minute or two to get to the second screen.
+(if you have Sencha Cmd and Sencha Touch SDK 2.2 alpha ready). Here&#39;s how.&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;In SDK folder, generate the app with &#60;code&#62;sencha generate app Foo path/to/foo&#60;/code&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;/2013/01/14/Sencha-Touch-22-Alpha-Sass-Bug-Workaround.html&#34;&#62;Workaround&#60;/a&#62; the bug shipped in this alpha version. This won&#39;t be
+necessary once the bug has been fixed in the next release&#60;/li&#62;
+&#60;li&#62;Open &#60;code&#62;resources/sass/app.scss&#60;/code&#62; in the generated project folder )it should
+look like &#60;a href=&#34;https://gist.github.com/4533833&#34;&#62;this&#60;/a&#62; after step 2).
+Replace every appearance of the word &#60;em&#62;default&#60;/em&#62; to &#38;quot;windows&#38;quot;. Then run
+&#60;code&#62;compass compile resources/sass&#60;/code&#62; in the project root.&#60;/li&#62;
+&#60;li&#62;Serve the project in a web server (I usually do
+&#60;code&#62;python -m SimpleHTTPServer&#60;/code&#62;), fire up its url (localhost:800) and...&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Boom!&#60;/p&#62;
+</description>
+                <pubDate>Mon, 14 Jan 2013 13:45:00 -0600</pubDate>
+                <link>https://duan.ca/2013/01/14/windows-phone-8-theme-in-sencha-touch-22/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/01/14/windows-phone-8-theme-in-sencha-touch-22/</guid>
+            </item>
+            <item>
+                <title>&#34;Hello, World!&#34; The Hard Way with Sencha Touch</title>
+                <description>&#60;p&#62;When I first got into the amazing Sencha Touch HTML5 framwork, it came across
+as a compilation of visual components that looks mobile, &#60;a href=&#34;http://compass-style.org&#34;&#62;easily themable&#60;/a&#62;,
+leverage the latest HTML5 technology to be efficient and, best
+of all, are created within the Javascript code as oppose to being shoved
+in to an HTML file and demand DOM tinkering later.&#60;/p&#62;
+&#60;p&#62;But a closer look would reveal a lot more goodies beyond those handy
+components in Sencha Touch. It offers &#60;a href=&#34;https://web.archive.org/web/20130117172701/http://docs.sencha.com/touch/2-1/#!/guide/class_system&#34;&#62;a class system&#60;/a&#62;, a &#60;a href=&#34;https://web.archive.org/web/20130120111258/http://www.sencha.com/learn/architecting-your-app-in-ext-js-4-part-1/&#34;&#62;M&#60;/a&#62;&#60;a href=&#34;https://web.archive.org/web/20130106185309/http://www.sencha.com/learn/architecting-your-app-in-ext-js-4-part-2&#34;&#62;V&#60;/a&#62;&#60;a href=&#34;https://web.archive.org/web/20130124092547/http://www.sencha.com/learn/architecting-your-app-in-ext-js-4-part-3/&#34;&#62;C&#60;/a&#62;&#60;a href=&#34;https://web.archive.org/web/20130109001131/http://www.sencha.com/blog/architecting-your-app-with-sencha-touch-2-mvc/&#34;&#62;pattern&#60;/a&#62;, tools that handles code dependency, compression and native
+packaging, etc. Albeit daunting, learning and embracing all of those offerings
+makes a quite enjoyable coding experience and rewards me with development
+effieciency overall.&#60;/p&#62;
+&#60;p&#62;Sometimes though, I need complete control of a visual component that doesn’t
+exist in the framework. How to make this work with everything mentioned above
+is implied in various tutorials posted by the Sencha team, but I couldn’t find
+a clear illustration of that, which is why I decided to write one here.&#60;/p&#62;
+&#60;p&#62;Here’s our goal: make a component that displays data from a model with our own
+custom HTML; manage it along with some provided components from the framework
+and follow the MVC pattern.&#60;/p&#62;
+&#60;p&#62;I assume you have the basics set up. I’m using Sencha Cmd 3.0.0.250, Sencha
+Touch SDK 2.1.0 and OS X Mountain Lion as of this writing.&#60;/p&#62;
+&#60;p&#62;Let’s start by generating a MVC-ready skeleton project called HelloWorld. Go to
+the SDK’s folder and type:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    sencha generate app HelloWorld ~/helloworld
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;replace the last parameter with the path you would like for the project files
+to stay. We’ll be working in this folder from now on.&#60;/p&#62;
+&#60;p&#62;In the skeleton project, a main view was created under &#60;code&#62;app/view/Main.js&#60;/code&#62; and
+declared as dependency for &#60;code&#62;app.js&#60;/code&#62;. An instance of it is created when the app
+finished loading. We’ll keep this setup as our main view. Let’s reduce&#60;code&#62;app/view/Main.js&#60;/code&#62; to a simplest possble form for our purposes:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    Ext.define(&#39;HelloWorld.view.Main&#39;, {
+      extend: &#39;Ext.Container&#39;,
+      config: {
+        items: [ { xtype: &#39;helloview&#39; } ]
+      }
+    });
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Following the convention, we name the class in corrispondance with its
+filepath within the &#60;code&#62;app&#60;/code&#62; folder (‘view/Main.js’ =&#38;gt; ‘view.Main’). All
+classes created with &#60;code&#62;Ext.define&#60;/code&#62; should follow this convention so that Sencha
+tools can relate code dependencies to file structure and do its magic for us.
+We’ll circle back to this.&#60;/p&#62;
+&#60;p&#62;Our main view will be a plain container and has a &#60;code&#62;helloview&#60;/code&#62; in it. An&#60;code&#62;Ext.Container&#60;/code&#62; has the ability to … contain stuff. Specifically, it can
+organize &#60;code&#62;Ext.Component&#60;/code&#62;s visually. &#60;code&#62;helloview&#60;/code&#62; will be that component. Let’s
+define it next.&#60;/p&#62;
+&#60;p&#62;Create the file &#60;code&#62;app/view/HelloView.js&#60;/code&#62; as the following:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    Ext.define(&#39;HelloWorld.view.HelloView&#39;, {
+      extend: &#39;Ext.Component&#39;,
+      xtype: &#39;helloview&#39;,
+      config: {
+        tpl: &#39;&#38;lt;div class=&#38;quot;greeting&#38;quot;&#38;gt;Hello, {name}!&#38;lt;/div&#38;gt;&#39;
+      }
+    });
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;As promised, &#60;code&#62;HelloWorld.view.HelloView&#60;/code&#62; is a &#60;code&#62;Ext.Component&#60;/code&#62;. We declare its&#60;code&#62;xtype&#60;/code&#62; to be the one we used in the main view. The really interesting part is
+its &#60;code&#62;tpl&#60;/code&#62; configuration. This is where our customization integrates with the
+rest of the Sencha Touch framework, so it’s worth dive into a bit deeper.&#60;/p&#62;
+&#60;p&#62;(&#60;em&#62;Caution&#60;/em&#62;: &#60;code&#62;tpl&#60;/code&#62; can not be mixed with &#60;code&#62;items&#60;/code&#62;, if you want standard components
+mixed in with yours, make them share a container and arrange a proper layout
+there.)&#60;/p&#62;
+&#60;p&#62;Take a look at the official &#60;a href=&#34;https://web.archive.org/web/20130117172701/http://docs.sencha.com/touch/2-1/#!/api/Ext.Component-cfg-tpl&#34;&#62;documentation for &#60;code&#62;tpl&#60;/code&#62;&#60;/a&#62;. It accepts an&#60;a href=&#34;https://web.archive.org/web/20130117172701/http://docs.sencha.com/touch/2-1/#!/api/Ext.XTemplate&#34;&#62;&#60;code&#62;Ext.XTemplate&#60;/code&#62;&#60;/a&#62;, which is basically free-range HTML plus some syntax to
+insert data provided to the component. Apply all your HTML skills here! For
+illustration purposes, we only throw in a basic &#60;code&#62;&#38;lt;div&#38;gt;&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;The &#60;code&#62;{name}&#60;/code&#62; part will be replaced by the actual data, which every&#60;code&#62;Ext.Component&#60;/code&#62; has as a configuration option by default. Being such option
+means two things:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;1. You can specify its value in the class definition, as we did for `tpl`.
+2. It gets a &#38;quot;getter/setter&#38;quot; that let you query/change its value at anytime
+    through the instance&#39;s existence.
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;We’ll use the setter for &#60;code&#62;data&#60;/code&#62; – &#60;code&#62;setData()&#60;/code&#62; to populate this field in the
+template later. &#60;code&#62;setData()&#60;/code&#62; accept one raw Javascript object and make its
+properties accessible to the template.&#60;/p&#62;
+&#60;p&#62;Next, let’s make a simplistic model in &#60;code&#62;app/model/Greetee.js&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    Ext.define(&#39;HelloWorld.model.Greetee&#39;, {
+      extend: &#39;Ext.data.Model&#39;,
+      config: {
+        fields: [&#39;name&#39;]
+      }
+    });
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;A model, with a field ‘name’. Hey, that’s &#60;code&#62;as simple as possible, but no simpler&#60;/code&#62;, Einstein would endorse it!&#60;/p&#62;
+&#60;p&#62;We won’t use any proxy or store in conjunction with the model because we
+only need to show how a customized view works within the Sencha Touch MVC
+pattern. Speaking of which, a controller does just that. So to tie everything
+togeter, here’s &#60;code&#62;app/controller/Main.js&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    Ext.define(&#39;HelloWorld.controller.Main&#39;, {
+      extend: &#39;Ext.app.Controller&#39;,
+      config: {
+        models: [&#39;Greetee&#39;],
+        views: [&#39;HelloView&#39;],
+        refs: {
+          helloView: &#39;.helloview&#39;
+        }
+      },
+      launch: function() {
+        var m = Ext.create(&#39;HelloWorld.model.Greetee&#39;, { name: &#39;World&#39; });
+        return this.getHelloView().setData(m.getData());
+      }
+    });
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;To get reference to the view components, Sencha Touch provide &#60;code&#62;refs&#60;/code&#62; in
+controllers, through which we map &#60;code&#62;hello&#60;/code&#62; to our customized component’s xtype.
+There are more details about this in the &#60;a href=&#34;https://web.archive.org/web/20130117172701/http://docs.sencha.com/touch/2-1/#!/guide/controllers&#34;&#62;offical documentation&#60;/a&#62;. We now
+can use &#60;code&#62;getHelloView()&#60;/code&#62; in other methods. &#60;code&#62;launch()&#60;/code&#62; gets invoked after
+everything gets loaded, and we tie the model and the view together here.&#60;/p&#62;
+&#60;p&#62;Again, a little imagination might help. By that I mean the data source of the
+model could be from a RESTful network API, a picture from a phone camera via
+Phonegap, a record from browser’s localstorage, etc. We simply created one in
+memory for illustration.&#60;/p&#62;
+&#60;p&#62;We use &#60;code&#62;getHelloView()&#60;/code&#62; to get reference to our &#60;code&#62;helloview&#60;/code&#62; instance, then use
+its &#60;code&#62;setData()&#60;/code&#62; to populate its template field. But we can’t pass in the model
+object directly (as mentioned above, a raw Javascript object is needed), so
+we convert it with its &#60;code&#62;getData()&#60;/code&#62; method.&#60;/p&#62;
+&#60;p&#62;Finally, we specify the &#60;code&#62;models&#60;/code&#62; and &#60;code&#62;views&#60;/code&#62; involved with this controller in&#60;code&#62;config&#60;/code&#62; so that the files of these classes gets loaded properly. For the same
+purpose, we need to open &#60;code&#62;app.js&#60;/code&#62; and add the following line into the object
+passed to &#60;code&#62;Ext.application()&#60;/code&#62; (which is a controller too):&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    controllers: [&#39;Main&#39;],
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This makes the framework aware of our &#60;code&#62;HelloWorld.controller.Main&#60;/code&#62;. It’s
+unnecessary to use the full class name becaue we followed the naming
+convention.&#60;/p&#62;
+&#60;p&#62;At this point, our code is complete. Go to the project folder in terminal
+and fire up a web server:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    python -m SimpleHTTPServer
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Open &#60;a href=&#34;http://localhost:8000&#34;&#62;http://localhost:8000&#60;/a&#62; in your browser and take a gander!&#60;/p&#62;
+&#60;p&#62;A screenshot of this app would be an overkill, if you follow along correctly,
+the phrase “Hello, World!” will show, and that’s all.&#60;/p&#62;
+&#60;p&#62;So this long-winded excercise results in not much. But I hope you won’t find
+it pointless. When I try to construct my app UI with Sencha Touch, I first try
+my best to make the Senche component work with the design. When breaking out
+and customize is inevitable, I try to stay within the framwork as much as
+possible to make the most out of it. What’s described in this article is a
+common way to do that.&#60;/p&#62;
+</description>
+                <pubDate>Fri, 11 Jan 2013 00:00:00 -0700</pubDate>
+                <link>https://duan.ca/2013/01/11/hello-world-the-hard-way-with-sencha-touch/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/01/11/hello-world-the-hard-way-with-sencha-touch/</guid>
+            </item>
+            <item>
+                <title>MongoDB, PHP And Mountain Lion</title>
+                <description>&#60;p&#62;Here are the necessary steps to make PHP work with MongoDB on vanilla
+Mac OS X 10.8 (Mountain Lion):&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;
+&#60;p&#62;Install &#60;a href=&#34;https://developer.apple.com/downloads/index.action&#34;&#62;Command Lion Tools for Xcode&#60;/a&#62;&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install Homebrew:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;ruby -e &#38;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&#38;quot;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Prioritize Homebrew&#39;s binaries in $PATH:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;echo &#38;quot;export /usr/local/bin:$PATH&#38;quot; &#38;gt;&#38;gt; ~/.bash_profile
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install PHP 5.4 with Homebrew:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;# Setup the tap for dependencies
+brew tap homebrew/dupes
+# This is the best 
+brew tap josegonzalez/homebrew-php
+# And install
+brew install php54
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install MongoDB with Homebrew&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;brew install mongodb
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install &#38;quot;PHP Driver&#38;quot; for MongoDB:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;sudo pecl install mongo
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Done.&#60;/p&#62;
+&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Now go run some PHP-MongoDB scripts with the build-in web server from
+PHP 5.4 like you normally would (don&#39;t forget to start &#60;code&#62;mongod&#60;/code&#62;) and everything
+should work.&#60;/p&#62;
+</description>
+                <pubDate>Thu, 29 Nov 2012 09:37:30 -0600</pubDate>
+                <link>https://duan.ca/2012/11/29/mongodb-php-and-mountain-lion/</link>
+                <guid isPermaLink="true">https://duan.ca/2012/11/29/mongodb-php-and-mountain-lion/</guid>
+            </item>
+            <item>
+                <title>CoffeeScript And Mountain Lion</title>
+                <description>&#60;p&#62;Here are the necessary steps to install CoffeeScript on
+Mac OS X 10.8 (Mountain Lion):&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;
+&#60;p&#62;Install &#60;a href=&#34;https://developer.apple.com/downloads/index.action&#34;&#62;Command Lion Tools for Xcode&#60;/a&#62;&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install Homebrew:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;ruby -e &#38;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&#38;quot;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install Node.js with Homebrew:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;brew install node
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install npm (the version comes with node doesn&#39;t install CoffeeScript
+properly for some reason):&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;curl https://npmjs.org/install.sh | sh
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install CoffeeScript with npm:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;npm install -g coffee-script
+# add environment variable to ~/.bashrc
+echo &#38;quot;export NODE_PATH=/usr/local/lib/node_modules&#38;quot;
+. ~/.bashrc
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Done!&#60;/p&#62;
+&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;I had to google around to figure out the environment variable and the issue
+with npm. Hopefully this will help some folks in the similar need.&#60;/p&#62;
+</description>
+                <pubDate>Wed, 28 Nov 2012 15:11:00 -0600</pubDate>
+                <link>https://duan.ca/2012/11/28/coffeescript-and-mountain-lion/</link>
+                <guid isPermaLink="true">https://duan.ca/2012/11/28/coffeescript-and-mountain-lion/</guid>
+            </item>
+            <item>
                 <title>Keep Git Social</title>
-                <description>&#60;p&#62;&#60;em&#62;A project I&#39;m working on uses &#60;a href=&#34;http://gitlabhq.com&#34;&#62;GitlabHQ&#60;/a&#62;, I think it is a cool open source
+                <description>&#60;p&#62;&#60;em&#62;A project I&#39;m working on uses &#60;a href=&#34;http://about.gitlab.com&#34;&#62;GitlabHQ&#60;/a&#62;, I think it is a cool open source
 project and the developers are doing an excellent job of making a sweet web
 interface for Git projects. However, as I found out today, &#60;a href=&#34;https://github.com/gitlabhq/gitlabhq/issues/1298&#34; title=&#34;Gitlab Issue: Closed&#34;&#62;my one issue&#60;/a&#62;
 with it was closed without fixing. And that&#39;s what finally propelled me to
@@ -4493,6 +5408,155 @@ breaking the shackles on their hand is a good thing to try.&#60;/p&#62;
                 <pubDate>Wed, 31 Oct 2012 10:02:30 -0600</pubDate>
                 <link>https://duan.ca/2012/10/31/keep-git-social/</link>
                 <guid isPermaLink="true">https://duan.ca/2012/10/31/keep-git-social/</guid>
+            </item>
+            <item>
+                <title>Windows 8 First Impression</title>
+                <description>&#60;p&#62;I use KDE on Arch Linux for 80% of the time, OS X the other 20%. But I
+got a copy of Windows 8 Pro for free as student so I decided to install it
+along with Visual Studio 2012 Ultimate so that if I ever need to develop on any
+Microsoft platforms, I&#39;ll have the environment ready. I jogged down these
+impression after about a 30 minutes trial.&#60;/p&#62;
+&#60;p&#62;What I didn&#39;t like:&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;I have to use a .iso file the hardway (in my case, burning it to an
+usb drive)even if I only wanted to upgrade from Windows 7.&#60;/li&#62;
+&#60;li&#62;When upgrading from Windows 7, only the free space is counted as usable
+for the new system, which means upgrading is not an option for I have a
+mere 26G partition reserved for Windows.&#60;/li&#62;
+&#60;li&#62;The old Mobile ATI graphic card driver stopped working after installation.&#60;/li&#62;
+&#60;li&#62;Apps don&#39;t share same session between the tile and deskop interface.&#60;/li&#62;
+&#60;li&#62;Contacts from different accounts (in my case, facebook and twitter) are
+mixed together and there doesn&#39;t seem to be an easy way to filter them.&#60;/li&#62;
+&#60;li&#62;I signed in with a Mircrosoft account for the operating system. But when
+I started Visual Studio, it asked me to sign in with the same account.&#60;/li&#62;
+&#60;/ul&#62;
+&#60;p&#62;What I did like:&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;The tile interface looked nice.&#60;/li&#62;
+&#60;li&#62;IE10 is fast. Looked particularly smooth under the tile interface.&#60;/li&#62;
+&#60;li&#62;For an old machine I installed it on, the whole system is very responsive.&#60;/li&#62;
+&#60;li&#62;The tile interface is not unintuitive. When in doubt, one of these actions
+always gets me where I wanted:
+&#60;ol&#62;
+&#60;li&#62;Mouse to upper-right corner.&#60;/li&#62;
+&#60;li&#62;Mouse to upper-left corner and then move down.&#60;/li&#62;
+&#60;li&#62;Press the Win key on keyboard.&#60;/li&#62;
+&#60;/ol&#62;
+&#60;/li&#62;
+&#60;/ul&#62;
+&#60;p&#62;I&#39;m not going to speculate on whether the general public will love or hate
+this version of Windows. But one thing is for sure: there is going to be an
+reaction. I can see it go both ways.&#60;/p&#62;
+</description>
+                <pubDate>Sat, 27 Oct 2012 23:59:59 -0600</pubDate>
+                <link>https://duan.ca/2012/10/27/windows-8-first-impression/</link>
+                <guid isPermaLink="true">https://duan.ca/2012/10/27/windows-8-first-impression/</guid>
+            </item>
+            <item>
+                <title>Testing Method Within Constructor With Jasmine.js</title>
+                <description>&#60;p&#62;How do you test whether a method is called witin the constructor of an object
+with Jasmine.js?&#60;/p&#62;
+&#60;p&#62;Turns out, you need to &#60;code&#62;spyOn()&#60;/code&#62; the &#38;quot;raw&#38;quot; reference of the &#38;quot;method&#38;quot;, which
+really just a function on the &#60;code&#62;prototype&#60;/code&#62; of your &#38;quot;class&#38;quot; object. An example
+will make it clear:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;// is &#39;load()&#39; getting called during construction?
+describe(&#38;quot;MyObject&#38;quot;, function() {
+  it(&#38;quot;should call load() during construction&#38;quot;, function() {
+    spyOn(MyObject.prototype, &#39;load&#39;);
+    new MyObject();
+    expect(MyObject.prototype.load).toHaveBeenCalled();
+  });
+}
+&#60;/code&#62;&#60;/pre&#62;
+</description>
+                <pubDate>Sun, 30 Sep 2012 00:00:00 -0600</pubDate>
+                <link>https://duan.ca/2012/09/30/testing-method-within-constructor-with-jasminejs/</link>
+                <guid isPermaLink="true">https://duan.ca/2012/09/30/testing-method-within-constructor-with-jasminejs/</guid>
+            </item>
+            <item>
+                <title>Integrating Sencha Touch 2 and Cordova (pre-2.0)</title>
+                <description>&#60;h2&#62;&#38;quot;The Goals&#60;/h2&#62;
+&#60;ol&#62;
+&#60;li&#62;
+&#60;p&#62;Use Sencha Command to create and package an MVC-structured Sencha Touch 2
+project.&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Use Cordova/PhoneGap (1.9) to wrap the project to deliver it in the App
+Store.&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Leverage the APIs provided by Cordova/PhoneGap to give Sencha Touch 2
+project more native capabilities.&#60;/p&#62;
+&#60;/li&#62;
+&#60;/ol&#62;
+&#60;h2&#62;The Process&#60;/h2&#62;
+&#60;p&#62;Goal #1 and #2 can be achieved by &#60;a href=&#34;http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova&#34; title=&#34;Packaging Sencha Touch 2 with PhoneGap (Cordova)&#34;&#62;these steps well described by Robert Dougan
+&#60;/a&#62;. In essence, you need to create a normal Sencha Touch 2 project
+using Sencha Command; a Cordova (1.7 in Roberts post, but works fine with 1.9)
+project. Then tell Sencha Command to build in the &#60;code&#62;www&#60;/code&#62; folder, where Cordova
+looks for the HTML5 assets to package. Finally, build and deploy the Cordova
+project the usual way.&#60;/p&#62;
+&#60;p&#62;That, of course, is not the end of the story, otherwise you wouldn&#39;t be
+reading this. When you try to achive goal #3, that is, when you use the
+Cordova API in the Sencha Touch project, such as:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    navigator.notification.alert(
+        &#39;Winter is coming!&#39;,
+        noted, // callback function
+        &#39;be warned&#39;,
+        &#38;quot;&#38;quot;Yes M&#39;lord&#38;quot;&#38;quot;
+    );
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Sencha Command will report error and refuse to &#38;quot;&#38;quot;compile&#38;quot;&#38;quot; if you run&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    sencha app build package
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;because of the unknown namespace introduced by Cordova.&#60;/p&#62;
+&#60;p&#62;One way to workaround this problem is manually replacing the command, which
+involves compiling the SASS files, consolidate all Javascript dependencies
+into a single file, minify everything and move the result to the &#60;code&#62;www&#60;/code&#62;
+folder.&#60;/p&#62;
+&#60;p&#62;Doesn&#39;t sound fun, does it?&#60;/p&#62;
+&#60;p&#62;So, here&#39;s a trick to put Sencha Command back on track, use&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    if (!Ext.os.is.Desktop) {
+    }
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;to wrap around the Cordova API calls, so the previous example becomes&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    if (!Ext.os.is.Desktop) {
+        navigator.notification.alert(
+            // ...
+        );
+    }
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This way, Sencha Command will ignore the conditioned code block since its
+running on the desktop environment, therefore compiles like a charm. And the
+code will work as intended in emulator/device environment.&#60;/p&#62;
+&#60;p&#62;You are welcome.&#60;/p&#62;
+&#60;h2&#62;The Bonus&#60;/h2&#62;
+&#60;p&#62;Now that you are using Sencha Touch 2 and Cordova API (like a boss!), here&#39;s
+another tip to improve your workflow. When I&#39;m developing hybrid apps, I spend
+the majority of time editing Java(Coffee)script/(S)CSS files. But surely
+enough, there will come a period where I have to debug the packaged app in the
+emulator. Switching from my text editor (Vim) to Xcode and hitting ⌘r
+REALLY gets old.&#60;/p&#62;
+&#60;p&#62;Luckily, Cordova provides some command line alternatives. If
+you generate a Cordova project as described in
+&#60;a href=&#34;https://web.archive.org/web/20161025042756/http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova&#34; title=&#34;Cordova Command-Line Documentaion&#34;&#62;Cordova&#39;s documentaion&#60;/a&#62; like so:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;./path/to/cordova-ios/bin/create /path/to/project com.example.name Project
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;There&#39;ll be a folder called &#60;code&#62;cordova&#60;/code&#62; in the newly created project, which won&#39;t
+be in your project if you create it with Xcode with &#60;a href=&#34;http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova&#34; title=&#34;Packaging Sencha Touch 2 with PhoneGap (Cordova)&#34;&#62;Robert&#39;s method&#60;/a&#62;.
+In &#60;code&#62;cordova&#60;/code&#62; folder are three lovely Bash scripts that let&#39;s you compile the
+Xcode project (&#60;code&#62;debug&#60;/code&#62;, which also does the next thing), run the result in  an
+ios emulator (&#60;code&#62;emulate&#60;/code&#62;) and watch the logging information (&#60;code&#62;log&#60;/code&#62;).&#60;/p&#62;
+&#60;p&#62;Copy the folder to the path of &#60;code&#62;YourProject.xcodeproj&#60;/code&#62;, and boom! You can now
+quit Xcode and run the scripts in there directly from your terminal. (What I like to
+do is to use GNU Make to combine Sencha commands with those scripts so that
+I could just hit ⌘b in MacVim to make my latest code run in the simulator.)&#60;/p&#62;
+&#60;p&#62;Happy coding!&#60;/p&#62;
+</description>
+                <pubDate>Mon, 20 Aug 2012 19:09:34 -0600</pubDate>
+                <link>https://duan.ca/2012/08/20/integrating-sencha-touch-2-and-cordova-pre-20/</link>
+                <guid isPermaLink="true">https://duan.ca/2012/08/20/integrating-sencha-touch-2-and-cordova-pre-20/</guid>
             </item>
     </channel>
 </rss>

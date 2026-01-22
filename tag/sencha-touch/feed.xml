@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Sencha Touch</title>
+        <link>https://duan.ca/tag/sencha-touch/</link>
+        <atom:link href="https://duan.ca/tag/sencha-touch/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>Sencha Touch 2 and PhoneGap integration</title>
+                <description>&#60;p&#62;As one of my pet Sencha Touch project gets close to finish, I started
+looking into distribute it as native apps with Phonegap/Cordova.&#60;/p&#62;
+&#60;p&#62;One of the concerns in do so is the &#39;deviceready&#39; event provided by Phonegap,
+according to the documentation:&#60;/p&#62;
+&#60;blockquote&#62;
+&#60;p&#62;This is a very important event that every Cordova application should use.&#60;br /&#62;
+...&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;blockquote&#62;
+&#60;p&#62;The Cordova deviceready event fires once Cordova has fully loaded.
+After the device has fired, you can safely make calls to Cordova function.&#60;/p&#62;
+&#60;p&#62;Typically, you will want to attach an event listener with
+document.addEventListener once the HTML document&#39;s DOM has loaded.&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;In particular, the nice Sencha Touch microloader complicate the matter by
+being the sole Javascript file that&#39;s supposed to be included in &#60;code&#62;index.html&#60;/code&#62;
+and is in charge of starting the actual code of our apps. Yet we need the
+starting point of the code be a response to the &#60;code&#62;deviceready&#60;/code&#62; event.&#60;/p&#62;
+&#60;p&#62;After some googling, I found that most information on this matter is either
+inaccurate, incomplete or outdated, that is until I found &#60;a href=&#34;http://stackoverflow.com/a/10457158/243798&#34;&#62;this answer&#60;/a&#62; by
+&#60;a href=&#34;http://dougan.me&#34;&#62;Robert Dougan&#60;/a&#62; on StackOverflow:&#60;/p&#62;
+&#60;blockquote&#62;
+&#60;p&#62;Sencha Touch 2 will listen to that event and call your onReady/launch methods&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;therefore if you try listening to them in the launch method,
+it has already been fired.&#60;/li&#62;
+&#60;/ul&#62;
+&#60;p&#62;Just put your logic inside the launch method in your application.&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;To verify this claim, I dug into &#60;code&#62;sencha-touch-debug.js&#60;/code&#62; distributed with
+Sencha Touch 2.2 and found the following code:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;if (Ext.browser.is.PhoneGap &#38;amp;&#38;amp; !Ext.os.is.Desktop) {
+    if (!Ext.readyListenerAttached) {
+        Ext.readyListenerAttached = true;
+        document.addEventListener(&#39;deviceready&#39;, triggerFn, false);
+    }
+}
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It appears that the &#60;code&#62;deviceready&#60;/code&#62; event is taken into account here as long as
+&#60;code&#62;Ext.browser.is.PhoneGap&#60;/code&#62; is true in a mobile browser envronment, which, in the
+same source code, means:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;if (typeof window.PhoneGap != &#39;undefined&#39; ||
+    typeof window.Cordova != &#39;undefined&#39;  ||
+    typeof window.cordova != &#39;undefined&#39;) {
+    isWebView = true;
+    this.setFlag(&#39;PhoneGap&#39;);
+}
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Here, the global variable PhoneGap, cordova or Cordova needs to be defined to
+satisfy Sencha Touch 2&#39;s expectation of PhoneGap environment. Those globals
+are defined in the &#60;code&#62;cordova-x.y.x.js&#60;/code&#62; file included in the PhoneGap/Cordova
+project files.&#60;/p&#62;
+&#60;p&#62;So what needs to be done for the integration is simple (if not clear):&#60;/p&#62;
+&#60;p&#62;include &#60;code&#62;cordova-x.y.x.js&#60;/code&#62; in the js section of &#60;code&#62;app.json&#60;/code&#62; project file so that
+the microloader knows to load it up early:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;&#38;quot;js&#38;quot;: [
+    {
+        &#38;quot;path&#38;quot;: &#38;quot;path/to/cordova-x.y.z.js&#38;quot;,
+    },
+    {
+        &#38;quot;path&#38;quot;: &#38;quot;touch/sencha-touch.js&#38;quot;,
+        &#38;quot;x-bootstrap&#38;quot;: true
+    },
+    {
+        &#38;quot;path&#38;quot;: &#38;quot;app.js&#38;quot;,
+        &#38;quot;bundle&#38;quot;: true, 
+        &#38;quot;update&#38;quot;: &#38;quot;delta&#38;quot;
+    }
+],
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Run &#60;code&#62;sencha app build package&#60;/code&#62; and drop the files it produces to the &#60;code&#62;www&#60;/code&#62;
+folder in the PhoneGap project.&#60;/p&#62;
+&#60;p&#62;Compile, ship.&#60;/p&#62;
+</description>
+                <pubDate>Tue, 28 May 2013 15:24:30 -0600</pubDate>
+                <link>https://duan.ca/2013/05/28/sencha-touch-2-and-phonegap-integration/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/05/28/sencha-touch-2-and-phonegap-integration/</guid>
+            </item>
+            <item>
+                <title>Sencha Touch Workflow with GNU Make and Tmux</title>
+                <description>&#60;p&#62;I throw this Makefile to the root directory of my Sencha Touch 2 projects for
+workflow automation.&#60;/p&#62;
+&#60;p&#62;Assuming you write in CoffeeScript and run Tmux in a terminal:&#60;/p&#62;
+&#60;p&#62;&#60;code&#62;make develop&#60;/code&#62; will put &#60;code&#62;compass&#60;/code&#62; and &#60;code&#62;coffee&#60;/code&#62; to watch mode, in addition to
+spawning a local web server with Python 3. The three commands will run in three
+separate Tmux panes.&#60;/p&#62;
+&#60;p&#62;&#60;code&#62;make watch&#60;/code&#62; does the same thing sans the server spawning.&#60;/p&#62;
+&#60;p&#62;&#60;code&#62;make&#60;/code&#62; simply compile coffee script files and sass files.&#60;/p&#62;
+&#60;p&#62;You can figure out the granular commands with some minimal knowledge of GNU
+Make.&#60;/p&#62;
+&#60;script src=&#34;https://gist.github.com/DaNmarner/5659003.js&#34;&#62;&#60;/script&#62;
+</description>
+                <pubDate>Mon, 27 May 2013 15:00:00 -0600</pubDate>
+                <link>https://duan.ca/2013/05/27/sencha-touch-workflow-with-gnu-make-and-tmux/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/05/27/sencha-touch-workflow-with-gnu-make-and-tmux/</guid>
+            </item>
+            <item>
+                <title>Dynamic Height for List Item in Sencha Touch 2</title>
+                <description>&#60;p&#62;tl;dr: Set the &#60;code&#62;itemHeight&#60;/code&#62; value to &#60;code&#62;auto&#60;/code&#62; and you&#39;ll get list items
+with dynamic height in Sencha Touch 2.&#60;/p&#62;
+&#60;p&#62;In the Ext.List component provided by Sencha Touch 2, all SimpleListItem
+(or ListItem) has the same height. This means if your items each has content
+of different height, the list would look awkward.&#60;/p&#62;
+&#60;p&#62;Fear not! Here&#39;s a solution (and its discovery).&#60;/p&#62;
+&#60;p&#62;Load up a Ext.List and inspect one of the item element with Chrome/Safari
+developer tool, you&#39;ll find its &#60;code&#62;element.style&#60;/code&#62; has &#60;code&#62;height: 47px !important;&#60;/code&#62;:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2013/05/height.png&#34; alt=&#34;Default Height on List Item in Sencha Touch 2&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;Here&#39;s the key: CSS properties under &#60;code&#62;element.style&#60;/code&#62; are set by Javascript.
+In other words, any attempt to override this property in stylesheet will fail.
+(Try it by specifying a height value on &#60;code&#62;div.x-list-item&#60;/code&#62;, or any other class
+you suspect, if you need some convincing).&#60;/p&#62;
+&#60;p&#62;So, how do we fix this with Javascript? If you examine the documentaion,
+Ext.List has a config option &#60;code&#62;itemHeight&#60;/code&#62; with a default value. You can set it
+to a value that works best with all potential heights of your item content,
+resulting in items with identical heights. Setting &#60;code&#62;itemHeight&#60;/code&#62; to &#60;code&#62;auto&#60;/code&#62;,
+however, will make each item container flow with its inner element, thus
+achive dynamic height.&#60;/p&#62;
+</description>
+                <pubDate>Sun, 19 May 2013 16:03:30 -0600</pubDate>
+                <link>https://duan.ca/2013/05/19/dynamic-height-for-list-item-in-sencha-touch-2/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/05/19/dynamic-height-for-list-item-in-sencha-touch-2/</guid>
+            </item>
+            <item>
+                <title>Sencha Touch 2.2 Alpha Sass Bug Workaround</title>
+                <description>&#60;p&#62;Sencha &#60;a href=&#34;http://cdn.sencha.com/touch/alpha/touch-2.2.0-alpha.zip&#34;&#62;released&#60;/a&#62; a new version Sencha Touch with Windows Phone 8 support.
+But since it&#39;s an alpha, there are a few more things to do than what the
+&#60;a href=&#34;http://cdn.sencha.com/touch/alpha/2.2.0.52/release-notes.html&#34;&#62;release note&#60;/a&#62; says to get it working.&#60;/p&#62;
+&#60;p&#62;One thing I&#39;ve noticed is that when you generate a new app with&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;sencha generate app Foo path/to/foo
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;and make the changes to &#60;code&#62;resources/sass/app.scss&#60;/code&#62; according to the release
+note, &#60;code&#62;compass compile path/to/foo/resources/sass&#60;/code&#62; fails complaining a font
+file is missing:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;File not found or cannot be read: path/to/foo/resources/sass/stylesheets/fonts/pictos/pictos-web.woff
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;To fix this, copy the needed fonts to where it supposed to be:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;cd path/to/foo
+mkdir -p resources/sass/stylesheets/fonts/pictos
+cp touch/resources/themes/fonts/pictos/pictos-web.* resources/sass/stylesheets/fonts/pictos/
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;The next error you&#39;ll see from &#60;code&#62;compass compile&#60;/code&#62; is caused by the name changes
+to a few sass files in the framework. Long-story short, you need to change
+&#60;code&#62;resources/sass/app.scss&#60;/code&#62; to the following:&#60;/p&#62;
+&#60;script src=&#34;https://gist.github.com/4533833.js&#34;&#62;&#60;/script&#62;
+&#60;p&#62;and &#60;code&#62;compass&#60;/code&#62; should be happy from there.&#60;/p&#62;
+&#60;p&#62;While you are at it, why not checkout the magical Windows Phone 8 theme
+included in Sencha Touch 2.2 alpha.&#60;/p&#62;
+</description>
+                <pubDate>Mon, 14 Jan 2013 13:47:00 -0600</pubDate>
+                <link>https://duan.ca/2013/01/14/sencha-touch-22-alpha-sass-bug-workaround/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/01/14/sencha-touch-22-alpha-sass-bug-workaround/</guid>
+            </item>
+            <item>
+                <title>Windows Phone 8 Theme in Sencha Touch 2.2</title>
+                <description>&#60;p&#62;Sencha Touch 2.2 Alpha shipped with Windows Phone 8/IE 10 support.
+And it&#39;s pretty impressive! Just take a look at the starter app under the
+original theme and the Windows Phone 8 theme:&#60;/p&#62;
+&#60;p&#62;The Default Theme:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2013/01/original-theme.png&#34; alt=&#34;Sencha Touch 2.2 default theme&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;WP8 Theme:&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2013/01/wp8-theme.png&#34; alt=&#34;Sencha Touch 2.2 windows phone 8 theme&#34; /&#62;&#60;/p&#62;
+&#60;p&#62;And it only takes a minute or two to get to the second screen.
+(if you have Sencha Cmd and Sencha Touch SDK 2.2 alpha ready). Here&#39;s how.&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;In SDK folder, generate the app with &#60;code&#62;sencha generate app Foo path/to/foo&#60;/code&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;/2013/01/14/Sencha-Touch-22-Alpha-Sass-Bug-Workaround.html&#34;&#62;Workaround&#60;/a&#62; the bug shipped in this alpha version. This won&#39;t be
+necessary once the bug has been fixed in the next release&#60;/li&#62;
+&#60;li&#62;Open &#60;code&#62;resources/sass/app.scss&#60;/code&#62; in the generated project folder )it should
+look like &#60;a href=&#34;https://gist.github.com/4533833&#34;&#62;this&#60;/a&#62; after step 2).
+Replace every appearance of the word &#60;em&#62;default&#60;/em&#62; to &#38;quot;windows&#38;quot;. Then run
+&#60;code&#62;compass compile resources/sass&#60;/code&#62; in the project root.&#60;/li&#62;
+&#60;li&#62;Serve the project in a web server (I usually do
+&#60;code&#62;python -m SimpleHTTPServer&#60;/code&#62;), fire up its url (localhost:800) and...&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Boom!&#60;/p&#62;
+</description>
+                <pubDate>Mon, 14 Jan 2013 13:45:00 -0600</pubDate>
+                <link>https://duan.ca/2013/01/14/windows-phone-8-theme-in-sencha-touch-22/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/01/14/windows-phone-8-theme-in-sencha-touch-22/</guid>
+            </item>
+            <item>
+                <title>&#34;Hello, World!&#34; The Hard Way with Sencha Touch</title>
+                <description>&#60;p&#62;When I first got into the amazing Sencha Touch HTML5 framwork, it came across
+as a compilation of visual components that looks mobile, &#60;a href=&#34;http://compass-style.org&#34;&#62;easily themable&#60;/a&#62;,
+leverage the latest HTML5 technology to be efficient and, best
+of all, are created within the Javascript code as oppose to being shoved
+in to an HTML file and demand DOM tinkering later.&#60;/p&#62;
+&#60;p&#62;But a closer look would reveal a lot more goodies beyond those handy
+components in Sencha Touch. It offers &#60;a href=&#34;https://web.archive.org/web/20130117172701/http://docs.sencha.com/touch/2-1/#!/guide/class_system&#34;&#62;a class system&#60;/a&#62;, a &#60;a href=&#34;https://web.archive.org/web/20130120111258/http://www.sencha.com/learn/architecting-your-app-in-ext-js-4-part-1/&#34;&#62;M&#60;/a&#62;&#60;a href=&#34;https://web.archive.org/web/20130106185309/http://www.sencha.com/learn/architecting-your-app-in-ext-js-4-part-2&#34;&#62;V&#60;/a&#62;&#60;a href=&#34;https://web.archive.org/web/20130124092547/http://www.sencha.com/learn/architecting-your-app-in-ext-js-4-part-3/&#34;&#62;C&#60;/a&#62;&#60;a href=&#34;https://web.archive.org/web/20130109001131/http://www.sencha.com/blog/architecting-your-app-with-sencha-touch-2-mvc/&#34;&#62;pattern&#60;/a&#62;, tools that handles code dependency, compression and native
+packaging, etc. Albeit daunting, learning and embracing all of those offerings
+makes a quite enjoyable coding experience and rewards me with development
+effieciency overall.&#60;/p&#62;
+&#60;p&#62;Sometimes though, I need complete control of a visual component that doesn’t
+exist in the framework. How to make this work with everything mentioned above
+is implied in various tutorials posted by the Sencha team, but I couldn’t find
+a clear illustration of that, which is why I decided to write one here.&#60;/p&#62;
+&#60;p&#62;Here’s our goal: make a component that displays data from a model with our own
+custom HTML; manage it along with some provided components from the framework
+and follow the MVC pattern.&#60;/p&#62;
+&#60;p&#62;I assume you have the basics set up. I’m using Sencha Cmd 3.0.0.250, Sencha
+Touch SDK 2.1.0 and OS X Mountain Lion as of this writing.&#60;/p&#62;
+&#60;p&#62;Let’s start by generating a MVC-ready skeleton project called HelloWorld. Go to
+the SDK’s folder and type:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    sencha generate app HelloWorld ~/helloworld
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;replace the last parameter with the path you would like for the project files
+to stay. We’ll be working in this folder from now on.&#60;/p&#62;
+&#60;p&#62;In the skeleton project, a main view was created under &#60;code&#62;app/view/Main.js&#60;/code&#62; and
+declared as dependency for &#60;code&#62;app.js&#60;/code&#62;. An instance of it is created when the app
+finished loading. We’ll keep this setup as our main view. Let’s reduce&#60;code&#62;app/view/Main.js&#60;/code&#62; to a simplest possble form for our purposes:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    Ext.define(&#39;HelloWorld.view.Main&#39;, {
+      extend: &#39;Ext.Container&#39;,
+      config: {
+        items: [ { xtype: &#39;helloview&#39; } ]
+      }
+    });
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Following the convention, we name the class in corrispondance with its
+filepath within the &#60;code&#62;app&#60;/code&#62; folder (‘view/Main.js’ =&#38;gt; ‘view.Main’). All
+classes created with &#60;code&#62;Ext.define&#60;/code&#62; should follow this convention so that Sencha
+tools can relate code dependencies to file structure and do its magic for us.
+We’ll circle back to this.&#60;/p&#62;
+&#60;p&#62;Our main view will be a plain container and has a &#60;code&#62;helloview&#60;/code&#62; in it. An&#60;code&#62;Ext.Container&#60;/code&#62; has the ability to … contain stuff. Specifically, it can
+organize &#60;code&#62;Ext.Component&#60;/code&#62;s visually. &#60;code&#62;helloview&#60;/code&#62; will be that component. Let’s
+define it next.&#60;/p&#62;
+&#60;p&#62;Create the file &#60;code&#62;app/view/HelloView.js&#60;/code&#62; as the following:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    Ext.define(&#39;HelloWorld.view.HelloView&#39;, {
+      extend: &#39;Ext.Component&#39;,
+      xtype: &#39;helloview&#39;,
+      config: {
+        tpl: &#39;&#38;lt;div class=&#38;quot;greeting&#38;quot;&#38;gt;Hello, {name}!&#38;lt;/div&#38;gt;&#39;
+      }
+    });
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;As promised, &#60;code&#62;HelloWorld.view.HelloView&#60;/code&#62; is a &#60;code&#62;Ext.Component&#60;/code&#62;. We declare its&#60;code&#62;xtype&#60;/code&#62; to be the one we used in the main view. The really interesting part is
+its &#60;code&#62;tpl&#60;/code&#62; configuration. This is where our customization integrates with the
+rest of the Sencha Touch framework, so it’s worth dive into a bit deeper.&#60;/p&#62;
+&#60;p&#62;(&#60;em&#62;Caution&#60;/em&#62;: &#60;code&#62;tpl&#60;/code&#62; can not be mixed with &#60;code&#62;items&#60;/code&#62;, if you want standard components
+mixed in with yours, make them share a container and arrange a proper layout
+there.)&#60;/p&#62;
+&#60;p&#62;Take a look at the official &#60;a href=&#34;https://web.archive.org/web/20130117172701/http://docs.sencha.com/touch/2-1/#!/api/Ext.Component-cfg-tpl&#34;&#62;documentation for &#60;code&#62;tpl&#60;/code&#62;&#60;/a&#62;. It accepts an&#60;a href=&#34;https://web.archive.org/web/20130117172701/http://docs.sencha.com/touch/2-1/#!/api/Ext.XTemplate&#34;&#62;&#60;code&#62;Ext.XTemplate&#60;/code&#62;&#60;/a&#62;, which is basically free-range HTML plus some syntax to
+insert data provided to the component. Apply all your HTML skills here! For
+illustration purposes, we only throw in a basic &#60;code&#62;&#38;lt;div&#38;gt;&#60;/code&#62;.&#60;/p&#62;
+&#60;p&#62;The &#60;code&#62;{name}&#60;/code&#62; part will be replaced by the actual data, which every&#60;code&#62;Ext.Component&#60;/code&#62; has as a configuration option by default. Being such option
+means two things:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;1. You can specify its value in the class definition, as we did for `tpl`.
+2. It gets a &#38;quot;getter/setter&#38;quot; that let you query/change its value at anytime
+    through the instance&#39;s existence.
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;We’ll use the setter for &#60;code&#62;data&#60;/code&#62; – &#60;code&#62;setData()&#60;/code&#62; to populate this field in the
+template later. &#60;code&#62;setData()&#60;/code&#62; accept one raw Javascript object and make its
+properties accessible to the template.&#60;/p&#62;
+&#60;p&#62;Next, let’s make a simplistic model in &#60;code&#62;app/model/Greetee.js&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    Ext.define(&#39;HelloWorld.model.Greetee&#39;, {
+      extend: &#39;Ext.data.Model&#39;,
+      config: {
+        fields: [&#39;name&#39;]
+      }
+    });
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;A model, with a field ‘name’. Hey, that’s &#60;code&#62;as simple as possible, but no simpler&#60;/code&#62;, Einstein would endorse it!&#60;/p&#62;
+&#60;p&#62;We won’t use any proxy or store in conjunction with the model because we
+only need to show how a customized view works within the Sencha Touch MVC
+pattern. Speaking of which, a controller does just that. So to tie everything
+togeter, here’s &#60;code&#62;app/controller/Main.js&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    Ext.define(&#39;HelloWorld.controller.Main&#39;, {
+      extend: &#39;Ext.app.Controller&#39;,
+      config: {
+        models: [&#39;Greetee&#39;],
+        views: [&#39;HelloView&#39;],
+        refs: {
+          helloView: &#39;.helloview&#39;
+        }
+      },
+      launch: function() {
+        var m = Ext.create(&#39;HelloWorld.model.Greetee&#39;, { name: &#39;World&#39; });
+        return this.getHelloView().setData(m.getData());
+      }
+    });
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;To get reference to the view components, Sencha Touch provide &#60;code&#62;refs&#60;/code&#62; in
+controllers, through which we map &#60;code&#62;hello&#60;/code&#62; to our customized component’s xtype.
+There are more details about this in the &#60;a href=&#34;https://web.archive.org/web/20130117172701/http://docs.sencha.com/touch/2-1/#!/guide/controllers&#34;&#62;offical documentation&#60;/a&#62;. We now
+can use &#60;code&#62;getHelloView()&#60;/code&#62; in other methods. &#60;code&#62;launch()&#60;/code&#62; gets invoked after
+everything gets loaded, and we tie the model and the view together here.&#60;/p&#62;
+&#60;p&#62;Again, a little imagination might help. By that I mean the data source of the
+model could be from a RESTful network API, a picture from a phone camera via
+Phonegap, a record from browser’s localstorage, etc. We simply created one in
+memory for illustration.&#60;/p&#62;
+&#60;p&#62;We use &#60;code&#62;getHelloView()&#60;/code&#62; to get reference to our &#60;code&#62;helloview&#60;/code&#62; instance, then use
+its &#60;code&#62;setData()&#60;/code&#62; to populate its template field. But we can’t pass in the model
+object directly (as mentioned above, a raw Javascript object is needed), so
+we convert it with its &#60;code&#62;getData()&#60;/code&#62; method.&#60;/p&#62;
+&#60;p&#62;Finally, we specify the &#60;code&#62;models&#60;/code&#62; and &#60;code&#62;views&#60;/code&#62; involved with this controller in&#60;code&#62;config&#60;/code&#62; so that the files of these classes gets loaded properly. For the same
+purpose, we need to open &#60;code&#62;app.js&#60;/code&#62; and add the following line into the object
+passed to &#60;code&#62;Ext.application()&#60;/code&#62; (which is a controller too):&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    controllers: [&#39;Main&#39;],
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This makes the framework aware of our &#60;code&#62;HelloWorld.controller.Main&#60;/code&#62;. It’s
+unnecessary to use the full class name becaue we followed the naming
+convention.&#60;/p&#62;
+&#60;p&#62;At this point, our code is complete. Go to the project folder in terminal
+and fire up a web server:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    python -m SimpleHTTPServer
+
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Open &#60;a href=&#34;http://localhost:8000&#34;&#62;http://localhost:8000&#60;/a&#62; in your browser and take a gander!&#60;/p&#62;
+&#60;p&#62;A screenshot of this app would be an overkill, if you follow along correctly,
+the phrase “Hello, World!” will show, and that’s all.&#60;/p&#62;
+&#60;p&#62;So this long-winded excercise results in not much. But I hope you won’t find
+it pointless. When I try to construct my app UI with Sencha Touch, I first try
+my best to make the Senche component work with the design. When breaking out
+and customize is inevitable, I try to stay within the framwork as much as
+possible to make the most out of it. What’s described in this article is a
+common way to do that.&#60;/p&#62;
+</description>
+                <pubDate>Fri, 11 Jan 2013 00:00:00 -0700</pubDate>
+                <link>https://duan.ca/2013/01/11/hello-world-the-hard-way-with-sencha-touch/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/01/11/hello-world-the-hard-way-with-sencha-touch/</guid>
+            </item>
+            <item>
+                <title>Integrating Sencha Touch 2 and Cordova (pre-2.0)</title>
+                <description>&#60;h2&#62;&#38;quot;The Goals&#60;/h2&#62;
+&#60;ol&#62;
+&#60;li&#62;
+&#60;p&#62;Use Sencha Command to create and package an MVC-structured Sencha Touch 2
+project.&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Use Cordova/PhoneGap (1.9) to wrap the project to deliver it in the App
+Store.&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Leverage the APIs provided by Cordova/PhoneGap to give Sencha Touch 2
+project more native capabilities.&#60;/p&#62;
+&#60;/li&#62;
+&#60;/ol&#62;
+&#60;h2&#62;The Process&#60;/h2&#62;
+&#60;p&#62;Goal #1 and #2 can be achieved by &#60;a href=&#34;http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova&#34; title=&#34;Packaging Sencha Touch 2 with PhoneGap (Cordova)&#34;&#62;these steps well described by Robert Dougan
+&#60;/a&#62;. In essence, you need to create a normal Sencha Touch 2 project
+using Sencha Command; a Cordova (1.7 in Roberts post, but works fine with 1.9)
+project. Then tell Sencha Command to build in the &#60;code&#62;www&#60;/code&#62; folder, where Cordova
+looks for the HTML5 assets to package. Finally, build and deploy the Cordova
+project the usual way.&#60;/p&#62;
+&#60;p&#62;That, of course, is not the end of the story, otherwise you wouldn&#39;t be
+reading this. When you try to achive goal #3, that is, when you use the
+Cordova API in the Sencha Touch project, such as:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    navigator.notification.alert(
+        &#39;Winter is coming!&#39;,
+        noted, // callback function
+        &#39;be warned&#39;,
+        &#38;quot;&#38;quot;Yes M&#39;lord&#38;quot;&#38;quot;
+    );
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Sencha Command will report error and refuse to &#38;quot;&#38;quot;compile&#38;quot;&#38;quot; if you run&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    sencha app build package
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;because of the unknown namespace introduced by Cordova.&#60;/p&#62;
+&#60;p&#62;One way to workaround this problem is manually replacing the command, which
+involves compiling the SASS files, consolidate all Javascript dependencies
+into a single file, minify everything and move the result to the &#60;code&#62;www&#60;/code&#62;
+folder.&#60;/p&#62;
+&#60;p&#62;Doesn&#39;t sound fun, does it?&#60;/p&#62;
+&#60;p&#62;So, here&#39;s a trick to put Sencha Command back on track, use&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    if (!Ext.os.is.Desktop) {
+    }
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;to wrap around the Cordova API calls, so the previous example becomes&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    if (!Ext.os.is.Desktop) {
+        navigator.notification.alert(
+            // ...
+        );
+    }
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This way, Sencha Command will ignore the conditioned code block since its
+running on the desktop environment, therefore compiles like a charm. And the
+code will work as intended in emulator/device environment.&#60;/p&#62;
+&#60;p&#62;You are welcome.&#60;/p&#62;
+&#60;h2&#62;The Bonus&#60;/h2&#62;
+&#60;p&#62;Now that you are using Sencha Touch 2 and Cordova API (like a boss!), here&#39;s
+another tip to improve your workflow. When I&#39;m developing hybrid apps, I spend
+the majority of time editing Java(Coffee)script/(S)CSS files. But surely
+enough, there will come a period where I have to debug the packaged app in the
+emulator. Switching from my text editor (Vim) to Xcode and hitting ⌘r
+REALLY gets old.&#60;/p&#62;
+&#60;p&#62;Luckily, Cordova provides some command line alternatives. If
+you generate a Cordova project as described in
+&#60;a href=&#34;https://web.archive.org/web/20161025042756/http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova&#34; title=&#34;Cordova Command-Line Documentaion&#34;&#62;Cordova&#39;s documentaion&#60;/a&#62; like so:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;./path/to/cordova-ios/bin/create /path/to/project com.example.name Project
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;There&#39;ll be a folder called &#60;code&#62;cordova&#60;/code&#62; in the newly created project, which won&#39;t
+be in your project if you create it with Xcode with &#60;a href=&#34;http://robertdougan.com/posts/packaging-sencha-touch-2-with-phonegap-cordova&#34; title=&#34;Packaging Sencha Touch 2 with PhoneGap (Cordova)&#34;&#62;Robert&#39;s method&#60;/a&#62;.
+In &#60;code&#62;cordova&#60;/code&#62; folder are three lovely Bash scripts that let&#39;s you compile the
+Xcode project (&#60;code&#62;debug&#60;/code&#62;, which also does the next thing), run the result in  an
+ios emulator (&#60;code&#62;emulate&#60;/code&#62;) and watch the logging information (&#60;code&#62;log&#60;/code&#62;).&#60;/p&#62;
+&#60;p&#62;Copy the folder to the path of &#60;code&#62;YourProject.xcodeproj&#60;/code&#62;, and boom! You can now
+quit Xcode and run the scripts in there directly from your terminal. (What I like to
+do is to use GNU Make to combine Sencha commands with those scripts so that
+I could just hit ⌘b in MacVim to make my latest code run in the simulator.)&#60;/p&#62;
+&#60;p&#62;Happy coding!&#60;/p&#62;
+</description>
+                <pubDate>Mon, 20 Aug 2012 19:09:34 -0600</pubDate>
+                <link>https://duan.ca/2012/08/20/integrating-sencha-touch-2-and-cordova-pre-20/</link>
+                <guid isPermaLink="true">https://duan.ca/2012/08/20/integrating-sencha-touch-2-and-cordova-pre-20/</guid>
+            </item>
+    </channel>
+</rss>

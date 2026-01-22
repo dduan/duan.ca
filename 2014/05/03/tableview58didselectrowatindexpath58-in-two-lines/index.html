@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="tableView:didSelectRowAtIndexPath: In Two Lines">
+    <meta property="article:published_time" content="2014-05-03T13:42:00-06:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@daniel_duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>tableView:didSelectRowAtIndexPath: In Two Lines</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
+</head>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="tableView:didSelectRowAtIndexPath: In Two Lines">
+    <meta itemprop="datePublished" content="2014-05-03T13:42:00-06:00">
+    <meta itemprop="dateModified" content="2014-05-03T13:42:00-06:00">
+    <link itemprop="url" href="https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="Cocoa">
+    <meta itemprop="keywords" content="Objective-C">
+    <meta itemprop="keywords" content="Cocoa Touch">
+    <meta itemprop="keywords" content="iOS">
+    <h1>tableView:didSelectRowAtIndexPath: In Two Lines</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles/">Daniel Duan</a>
+            ·
+            <time datetime="2014-05-03T13:42:00-06:00">2014-05-03</time>
+        </p>
+    </nav>
+    <div itemprop="articleBody"><p>You have a <code>UITableViewController</code> with a couple of static cells, you want to
+invoke some code for each cell in the delegate. Here's a quick way to do it:</p>
+<pre><code>    - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+    {
+        
+        SEL action = (SEL[]){@selector(method1), @selector(method2)}[indexPath.row];
+        ((void (*)(id, SEL))[self methodForSelector: action])(self, action);
+    }
+</code></pre>
+<p>It's got everything you love about C and Objective-C: array literals, function
+pointers, casting, selectors and something called <a href="http://www.cocoawithlove.com/2008/02/imp-of-current-method.html">IMPs</a>.</p>
+<p>This piece of code maps selected cells to methods by putting methods by
+indexing selectors in a C array.</p>
+<p>Why all the fuss on the second line? wouldn't a simple <code>performSelector:</code>
+work? The short answer is: to show the compiler that we are responsible
+adults. You can read more about it [here](SO Answer);</p>
+</div>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/cocoa/">Cocoa</a>
+        ·
+        <a href="/tag/objective-c/">Objective-C</a>
+        ·
+        <a href="/tag/cocoa-touch/">Cocoa Touch</a>
+        ·
+        <a href="/tag/ios/">iOS</a>
+    </p>
+</footer></body>
+</html>

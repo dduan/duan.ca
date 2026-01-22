@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2015/10/25/lets-play-llvm-in-swift-setup/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Let&#39;s Play LLVM in Swift: Setup">
+    <meta property="article:published_time" content="2015-10-25T11:53:15-07:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@daniel_duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Let&#39;s Play LLVM in Swift: Setup</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2015/10/25/lets-play-llvm-in-swift-setup/">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
+</head>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="Let&#39;s Play LLVM in Swift: Setup">
+    <meta itemprop="datePublished" content="2015-10-25T11:53:15-07:00">
+    <meta itemprop="dateModified" content="2015-10-25T11:53:15-07:00">
+    <link itemprop="url" href="https://duan.ca/2015/10/25/lets-play-llvm-in-swift-setup/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2015/10/25/lets-play-llvm-in-swift-setup/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="swift">
+    <meta itemprop="keywords" content="llvm">
+    <h1>Let&#39;s Play LLVM in Swift: Setup</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles/">Daniel Duan</a>
+            ·
+            <time datetime="2015-10-25T11:53:15-07:00">2015-10-25</time>
+        </p>
+    </nav>
+    <div itemprop="articleBody"><p><em>The prospect of Swift being open-source excites me. In preparation for it, I
+decided to learn a little bit about LLVM. In the offical <a href="http://llvm.org/docs/tutorial/index.html">tutorial</a>, C++
+and OCaml are used to create a programming language. So I asked myself: why not
+Swift? As you'll see in this post, Swift is as good as any language when it
+comes to leveraging LLVM.</em></p>
+<p>LLVM is an &quot;compiler infrastructure&quot;. As a user, that translates to &quot;a set of
+libraries to help us create programming language and tools&quot;. Since this is
+not an introduction to the LLVM project, it suffices to say that LLVM makes
+creating programming language easy: give your language in <a href="http://llvm.org/docs/LangRef.html">LLVM IR</a> form
+and you get the rest of a native/JIT language for free, optimization included!</p>
+<p>LLVM's default API is in C++. In addition, it officially offers a C wrapper.
+Lucky for us, Swift is C-interoperable – no bridging necessary :)</p>
+<p>Now we arrive at our goal for this post: create an Xcode project that can make
+calls into LLVM's C API, aka to compile this single line of code:</p>
+<pre><code>let module = LLVMModuleCreateWithName(&quot;my_module&quot;)
+</code></pre>
+<p>I assume you have Xcode 7.1 installed on OS X 10.11, but no more.</p>
+<h2>1. Getting LLVM</h2>
+<p>There are a lot of materials on the internet dedicated to setting up an LLVM
+environment. As we are not working <em>on</em> LLVM itself, and we are not on some
+crazy custom Linux environment (to be fair, it's trivial to set LLVM up on
+most major Linux distributions), the <a href="http://llvm.org/releases/download.html">pre-built Clang binaries</a> is good
+enough. Download and unpack the .tar file somewhere handy in on your hard
+drive. For example, I put it at <code>$(HOME)/usr/local/clang-3.4</code>.</p>
+<p>Aaaand we're done. We have LLVM.</p>
+<p><em>Sidenote: Xcode installs clang the compiler, but a lot of LLVM tools are
+missing. That's why we need a separate LLVM/Clang setup.</em></p>
+<h2>2. Create an Xcode Project</h2>
+<p>Create a new OS X - Command Line Tool Xcode project, choose Swift as it's
+language.</p>
+<p><img src="/assets/2015/10/llvm-swift-01-create-cmd-project.png" alt="Create A Command Line Xcode Project For LLVM" /></p>
+<p>Accessing C stuff in Swift is the same as using your Objective-C
+classes. So we need to <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html">create a bridging header</a>. (I usually create
+a Objective-C class so that Xcode prompts me for creating the header, then I
+delete the .h and .m files). The project layout is now:</p>
+<p><img src="/assets/2015/10/llvm-swift-02-bridging-header.png" alt="Create a bridging header to import LLVM C libraries" /></p>
+<p>Import the LLVM headers for its C interface. For our example, this is the
+entire bridging header:</p>
+<pre><code>#import &lt;llvm-c/Core.h&gt;
+</code></pre>
+<p>It's probably a good time to replace content of <code>main.swift</code> with our awesome
+LLVM IR-generating code:</p>
+<pre><code>let module = LLVMModuleCreateWithName(&quot;my_module&quot;)
+</code></pre>
+<h2>3. Teach Xcode About LLVM</h2>
+<p>Our code would not compile at this point. Xcode complains that the LLVM header
+can not be found. Before you jump to the target build settings, allow me
+introduce <code>llvm-config</code>.</p>
+<p>It turns out that the compliler flags for building a compiler can get complex
+pretty quickly. So LLVM comes with a command that generates them. For me it
+lives under <code>$(HOME)/usr/local/clang-3.4/bin</code>. We can ask it for flags that
+compiles standard C++, links standard and core libraries like so:</p>
+<pre><code>llvm-config --cxxflags --ldflags --system-libs --libs core
+</code></pre>
+<p>(As we use more and more LLVM libraries in the future, the list following
+<code>--libs</code> will grow. <code>core</code> is all we need to compile our example). To anyone
+who's used GCC/Clang in command line, the output should be pretty
+self-explanatory:</p>
+<pre><code>-I/Users/drchrono/local/clang-3.4/include  -DNDEBUG -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -O3  -std=c++11 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -fno-common -Wcast-qual
+-L/Users/drchrono/local/clang-3.4/lib 
+-lLLVMCore -lLLVMSupport
+-lz -lpthread -ledit -lcurses -lm
+</code></pre>
+<p>I'll walk through how to ask Xcode to respect these.</p>
+<p>First, go to build settings and set search paths for header files and
+libraries according to output from <code>llvm-config</code>. For me that means:</p>
+<p><img src="/assets/2015/10/llvm-swift-03-header-search-path.png" alt="Set LLVM header search path in Xcode" />
+<img src="/assets/2015/10/llvm-swift-04-library-search-path.png" alt="Set LLVM library search path in Xcode" /></p>
+<p>If you try to compile, now Xcode tells you some #define is missing. Again,
+we can find them in <code>llvm-config</code>'s result. Navigate to &quot;Preprocessing&quot; in
+build setting and add those values starting with <code>-D</code>, with out the <code>-D</code>:</p>
+<p><img src="/assets/2015/10/llvm-swift-05-macros.png" alt="Set preprocessor macros" /></p>
+<p>Remember to add these for both &quot;Debug&quot; and &quot;Release&quot;.</p>
+<p>The last step is asking Xcode to link againt the LLVM libraries. Paste in the
+<code>-l</code> flags from <code>llvm-config</code> at &quot;Other Linker Flags&quot;:</p>
+<p><img src="/assets/2015/10/llvm-swift-06-link-libraries.png" alt="Ask Xcode to link against LLVM libraries" /></p>
+<h2>4. Conclusion</h2>
+<p>Now our Swift LLVM code compiles! Looking back, setting LLVM up with Xcode is
+no more special than setting up with any C libraries. Hopefully this post will
+cut down research time for some. Now go create awesome natively languages in
+Swift!</p>
+</div>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/swift/">swift</a>
+        ·
+        <a href="/tag/llvm/">llvm</a>
+    </p>
+</footer></body>
+</html>

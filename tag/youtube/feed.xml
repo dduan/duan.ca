@@ -79,6 +79,24 @@ pattern matching as loop conditions. Enjoy!&#60;/p&#62;
                 <guid isPermaLink="true">https://duan.ca/2018/01/06/cat-under-1-minute/</guid>
             </item>
             <item>
+                <title>Raw Coding Sessions</title>
+                <description>&#60;p&#62;Planning, recording and editing a video is something I find very enjoyable to
+do. However, I enjoy just working on stuff as well. So I&#39;ll occassionally post
+videos of me doing just that: writing code, mumbling, with all my verbal ticks
+and bad habits left unedited. Not sure who these videos are for but why the heck
+not, amiright?&#60;/p&#62;
+&#60;p&#62;The first one was scheduled to publish today, so I guess I should post something
+about it.&#60;/p&#62;
+&#60;iframe width=&#34;560&#34; height=&#34;315&#34;
+src=&#34;https://www.youtube.com/embed/videoseries?list=PLuQ4I4VwboBw58RmXDbPGOUh4FQxyZ4UA&#34;
+frameborder=&#34;0&#34; gesture=&#34;media&#34; allow=&#34;encrypted-media&#34;
+allowfullscreen&#62;&#60;/iframe&#62;
+</description>
+                <pubDate>Sat, 06 Jan 2018 14:44:13 -0800</pubDate>
+                <link>https://duan.ca/2018/01/06/raw-coding-session-videos/</link>
+                <guid isPermaLink="true">https://duan.ca/2018/01/06/raw-coding-session-videos/</guid>
+            </item>
+            <item>
                 <title>Hello World In WebAssembly</title>
                 <description>&#60;p&#62;Every now and then, I check on the progress of Web Assembly. I did it again
 around the time of this post and finally found enough tutorials, examples, and

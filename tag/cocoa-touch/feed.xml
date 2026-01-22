@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Cocoa Touch</title>
+        <link>https://duan.ca/tag/cocoa-touch/</link>
+        <atom:link href="https://duan.ca/tag/cocoa-touch/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>tableView:didSelectRowAtIndexPath: In Two Lines</title>
+                <description>&#60;p&#62;You have a &#60;code&#62;UITableViewController&#60;/code&#62; with a couple of static cells, you want to
+invoke some code for each cell in the delegate. Here&#39;s a quick way to do it:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+    {
+        
+        SEL action = (SEL[]){@selector(method1), @selector(method2)}[indexPath.row];
+        ((void (*)(id, SEL))[self methodForSelector: action])(self, action);
+    }
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;It&#39;s got everything you love about C and Objective-C: array literals, function
+pointers, casting, selectors and something called &#60;a href=&#34;http://www.cocoawithlove.com/2008/02/imp-of-current-method.html&#34;&#62;IMPs&#60;/a&#62;.&#60;/p&#62;
+&#60;p&#62;This piece of code maps selected cells to methods by putting methods by
+indexing selectors in a C array.&#60;/p&#62;
+&#60;p&#62;Why all the fuss on the second line? wouldn&#39;t a simple &#60;code&#62;performSelector:&#60;/code&#62;
+work? The short answer is: to show the compiler that we are responsible
+adults. You can read more about it [here](SO Answer);&#60;/p&#62;
+</description>
+                <pubDate>Sat, 03 May 2014 13:42:00 -0600</pubDate>
+                <link>https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/</link>
+                <guid isPermaLink="true">https://duan.ca/2014/05/03/tableview58didselectrowatindexpath58-in-two-lines/</guid>
+            </item>
+            <item>
+                <title>Generating Xcode Build Number From Git</title>
+                <description>&#60;p&#62;The build version number in an Xcode project (CFBundleVersion in Info.plist)
+must be a monotonically increasing string for each archive submitted to the
+App Store. Neglection of this requirement will result in an error during the
+binary upload. Some automation will help avoiding this issue.&#60;/p&#62;
+&#60;p&#62;First, we want to generate this version number from our version (&#60;em&#62;duh&#60;/em&#62;)
+control system (VCS) each time our target gets built. My VCS of choice is Git,
+users of other systems just need to get a increasing number from their code
+history. On a *nix system, this command will count the number of commits on
+&#39;develop&#39; branch up until HEAD:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;    git rev-list develop | wc -l
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;This is a very good candidate for our build number, for longer history
+generally correlates to later builds.&#60;/p&#62;
+&#60;p&#62;Next, we make Xcode automatically run this command and use its result as the
+build number.&#60;/p&#62;
+&#60;p&#62;Go to project navigator, select your build target under the project icon,
+click &#60;em&#62;Build Phases&#60;/em&#62;, select &#60;em&#62;Editor→Add Build Phase→Add Run Script Build
+Phase&#60;/em&#62; in the menu. Remove the content in editor of the new &#60;em&#62;Run Script&#60;/em&#62;
+phase and replace it with:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;revnum=`git rev-list develop | wc -l`
+echo &#38;quot;#define BUILD_NUMBER $revnum&#38;quot; &#38;gt; InfoPlist.h
+touch InfoPlist.h
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Go to build settings, change value of &#60;em&#62;Preprocess Info.plist File&#60;/em&#62; to &#38;quot;YES&#38;quot;.
+Add &#38;quot;InfoPlist.h&#38;quot; to &#60;em&#62;Info.plist Preprocessor Prefix File→release&#60;/em&#62;.&#60;/p&#62;
+&#60;p&#62;We ask Xcode to run our command and save its result as a &#38;quot;#define&#38;quot; in a header
+file when it builds the project. This is done so that we can replace the
+&#38;quot;hardcoded&#38;quot; build number with the name of the constant:&#60;/p&#62;
+&#60;p&#62;Open Info.plist, Double click the value of &#60;em&#62;Bundle Version&#60;/em&#62; and replace it with&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;BUILD_NUMBER
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;There&#39;s only one issue left: &#60;code&#62;BUILD_NUMBER&#60;/code&#62; is now saved in &#60;em&#62;InfoPlist.h&#60;/em&#62;. Its
+value comes from our commit history. So we want to exclude this piece of
+information as part of our commit history (I&#39;ll leave the reason as an exercise
+for the reader). Ignore this file by adding &#38;quot;InfoPlist.h&#38;quot; to &#60;em&#62;.gitignore&#60;/em&#62; (or
+that of your other VCS).&#60;/p&#62;
+&#60;p&#62;To recap, when you build the project now, Xcode will find out how many commits
+are in the history, define it in a header file as &#60;code&#62;BUILD_NUMBER&#60;/code&#62;, which gets
+used as the build number. As long as you keep with with version control, the
+build number problem goes away.&#60;/p&#62;
+</description>
+                <pubDate>Sun, 29 Sep 2013 15:50:50 -0600</pubDate>
+                <link>https://duan.ca/2013/09/29/generating-xcode-build-number-from-git/</link>
+                <guid isPermaLink="true">https://duan.ca/2013/09/29/generating-xcode-build-number-from-git/</guid>
+            </item>
+    </channel>
+</rss>

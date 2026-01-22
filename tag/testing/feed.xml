@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About testing</title>
+        <link>https://duan.ca/tag/testing/</link>
+        <atom:link href="https://duan.ca/tag/testing/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>Testing Method Within Constructor With Jasmine.js</title>
+                <description>&#60;p&#62;How do you test whether a method is called witin the constructor of an object
+with Jasmine.js?&#60;/p&#62;
+&#60;p&#62;Turns out, you need to &#60;code&#62;spyOn()&#60;/code&#62; the &#38;quot;raw&#38;quot; reference of the &#38;quot;method&#38;quot;, which
+really just a function on the &#60;code&#62;prototype&#60;/code&#62; of your &#38;quot;class&#38;quot; object. An example
+will make it clear:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;// is &#39;load()&#39; getting called during construction?
+describe(&#38;quot;MyObject&#38;quot;, function() {
+  it(&#38;quot;should call load() during construction&#38;quot;, function() {
+    spyOn(MyObject.prototype, &#39;load&#39;);
+    new MyObject();
+    expect(MyObject.prototype.load).toHaveBeenCalled();
+  });
+}
+&#60;/code&#62;&#60;/pre&#62;
+</description>
+                <pubDate>Sun, 30 Sep 2012 00:00:00 -0600</pubDate>
+                <link>https://duan.ca/2012/09/30/testing-method-within-constructor-with-jasminejs/</link>
+                <guid isPermaLink="true">https://duan.ca/2012/09/30/testing-method-within-constructor-with-jasminejs/</guid>
+            </item>
+    </channel>
+</rss>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About </title>
+        <link>https://duan.ca/tag//</link>
+        <atom:link href="https://duan.ca/tag//feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>The Two Swifts</title>
+                <description>&#60;p&#62;onpatient 2.0 went live in App Store on September 27th 2014, 10 days after iOS
+8 was officially released. For the next few months, it was featured for
+HealthKit intergration on the App Store front page. In conversations during
+that period, people would ask me &#38;quot;what was the experience like?&#38;quot; What they
+referred to, of course, was the fact that I wrote that version in 100% Swift.&#60;/p&#62;
+&#60;p&#62;I have a very different answer to that question now compared to the standard
+one I gave back then. I hope to explain to you, my dear readers, how my view
+on Swift has evolved since the beginning.&#60;/p&#62;
+&#60;h2&#62;Swift The Puller&#60;/h2&#62;
+&#60;blockquote&#62;
+&#60;p&#62;After you get used to a few nuances, it&#39;s Cocoa Touch after all.&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;People kind of went &#38;quot;huh&#38;quot;, and didn&#39;t know how to respond to this answer, at
+the time when iOS 8 was just out. I think they were expecting horror stories.&#60;/p&#62;
+&#60;p&#62;Well, they would have been right. One day &#60;code&#62;UIStoryboardSegue&#60;/code&#62; would have an
+&#60;code&#62;identifier&#60;/code&#62; of type &#60;code&#62;String!&#60;/code&#62;, the next day it would become a &#60;code&#62;String?&#60;/code&#62;. And
+the incomprehensible error message from Xcode made sure you woundn&#39;t figure it
+out with ease. This kind of changes would happen to your entire codebase each
+time a beta Xcode was released. Compunding with these implementation bugs,
+API changes and poor tooling, was the fact that you had to learn a new
+programming lanauge. If you and your family&#39;s livelihood depends direclty on
+the software you put out, avoiding that whole situation was (and is) the
+correct &#60;em&#62;business choice&#60;/em&#62;.&#60;/p&#62;
+&#60;p&#62;To me, however, all that was just plain &#60;em&#62;fun&#60;/em&#62;. Within about a week, the
+strangeness of having &#60;code&#62;optional&#60;/code&#62;s went away. It&#39;s kind of nice to have the
+compiler bark at you when something was unintialized. My old friends never
+left: ARC, auto-synthesized properties, blocks, protocols…&#60;/p&#62;
+&#60;p&#62;As for the beta changes, they were only as often as the Xcode releases. Reading
+the release notes and a few careful inspections of the compile errors usually
+was enough to help you &#38;quot;fix&#38;quot; everything.&#60;/p&#62;
+&#60;p&#62;A couple weeks in, Swift &#60;em&#62;disappeared&#60;/em&#62;. I was just writing a brand new Cocoa
+Touch app. My attention was on architecture, user experience and patterns that
+works well with varies iOS APIs, business logic … We submitted the app on the
+first day it became possible.&#60;/p&#62;
+&#60;p&#62;Turning back the clock to the ancient days when the world was &#60;a href=&#34;http://arstechnica.com/apple/2010/06/copland-2010-revisited/&#34;&#62;blissfully
+unaware&#60;/a&#62; of Swift&#39;s existence. If one wanted to become a Mac
+or iOS developer, he/she would have gotten the advice along the lines of
+&#38;quot;learning the Objective-C is easy, knowing the system API is harder&#38;quot;. Well,
+that hasn&#39;t changed post-Swift. My experience building software with
+UIKit/Cocoa Touch applied 100% in building the 100% Swift App.&#60;/p&#62;
+&#60;p&#62;Things did change when I went back to Objective-C after a couple months of
+writing Swift exclusively, however. The lack of type inference made typing
+cumbersome. The worst part is the missing concept of optionality on data
+types. &#60;em&#62;Every&#60;/em&#62; object suddenly were &#60;code&#62;optional&#60;/code&#62; in my eyes. I exprienced a
+sense of insecurity, as if I was driving in a foregn country with simular but
+significantly less respected traffic rules.&#60;/p&#62;
+&#60;h2&#62;Swift The Pusher&#60;/h2&#62;
+&#60;blockquote&#62;
+&#60;p&#62;I&#39;m humbled and excited by the future because of what it&#39;s teaching me.&#60;/p&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;By the time I shipped a few major feature updates in Swift, something had
+been lurking on the back of my mind: I had left a whole bunch of its features
+untouched, yet I seemed to have worked with it to some degree of success. What
+gives? The emerging Swift community has shown me the way since. Observe:&#60;/p&#62;
+&#60;p&#62;Exhibit A, the following Swift function is frequently found in
+&#60;a href=&#34;https://github.com/typelift/Swiftz/blob/master/Sources/Swiftz/Curry.swift&#34;&#62;libraries&#60;/a&#62; and &#60;a href=&#34;http://www.objc.io/books/&#34;&#62;books&#60;/a&#62;, if not shipping code:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;func curry&#38;lt;A, B, C&#38;gt;(f: (A, B) -&#38;gt; C) -&#38;gt; A -&#38;gt; B -&#38;gt; C {
+    return { x in { y in f(x,y)  }  }
+}
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Currying is a simple concept. The fact that you can do it in Swift is nothing
+to write home about.&#60;/p&#62;
+&#60;p&#62;What&#39;s striking to me, is how &#60;em&#62;succinct&#60;/em&#62;, or, dare I say, &#60;em&#62;elegant&#60;/em&#62; this can
+be expressed in Swift. In this short piece of code, you see generics, higher
+order functions, closures, type inference expressed on top of a strong type
+system…to form this basic construct found in functional programming. It&#39;s as
+if the language has been designed to enable it…&#60;/p&#62;
+&#60;p&#62;which leads us to exhibit B:&#60;/p&#62;
+&#60;p&#62;In a job &#60;a href=&#34;http://clang-developers.42468.n3.nabble.com/ADVERTISEMENT-open-positions-in-Apple-s-Swift-compiler-team-td4039949.html&#34;&#62;posting&#60;/a&#62; for Apple&#39;s Swift compiler team, the following
+qualities are listed for Swift core library engineers (emphasis mine):&#60;/p&#62;
+&#60;blockquote&#62;
+&#60;ul&#62;
+&#60;li&#62;A passion for making a difference in the lives of other programmers&#60;/li&#62;
+&#60;li&#62;A deep understanding of generic programming principles&#60;/li&#62;
+&#60;li&#62;&#60;strong&#62;Experience with functional programming languages and/or idioms&#60;/strong&#62;&#60;/li&#62;
+&#60;li&#62;Experience bridging languages, especially bridging dynamic languages with static ones&#60;/li&#62;
+&#60;li&#62;Exposure to innovative and/or comprehensive library designs&#60;/li&#62;
+&#60;/ul&#62;
+&#60;/blockquote&#62;
+&#60;p&#62;So in the Swift team&#39;s mind, an ideal &#38;quot;customer&#38;quot; of the language, the standard
+library authors being the most intimate ones, should be &#38;quot;exploiting&#38;quot; the
+language features to practice functional idioms. This detail stuck and
+ultimately inspired me to pick up &#60;a href=&#34;http://www.objc.io/books/&#34;&#62;Functional Programming in Swift&#60;/a&#62;.
+The evidence piled on: &#60;a href=&#34;http://www.objc.io/issue-16/&#34;&#62;articles&#60;/a&#62;, &#60;a href=&#34;http://2014.funswiftconf.com&#34;&#62;talks&#60;/a&#62;
+and &#60;a href=&#34;https://medium.com/swift-programming/2-functional-swift-c98be9533183&#34;&#62;Blog&#60;/a&#62; &#60;a href=&#34;http://ijoshsmith.com/2014/11/30/getting-into-functional-programming-with-swift/&#34;&#62;posts&#60;/a&#62;. I realized that the
+language I&#39;ve been using for several month has introduced the possiblity to do
+what the Haskell/Ocaml/Scala/F# folks do all day long (I won&#39;t discuss much
+functional programming in this post). The introduction has been gentle and
+could be safely ignored, but things like
+&#60;a href=&#34;https://github.com/jeffh/Fox&#34;&#62;automatically generated tests&#60;/a&#62; and parser combinators got me
+hooked.&#60;/p&#62;
+&#60;p&#62;I believe anyone who write code can benefit from knowing and appreciating the
+funtional paradigm. What&#39;s unique about Swift is that it&#39;s presented on
+Apple&#39;s huge developer eco-system. That means a huge part of our industry will
+benefit as Swift spread futher and futher. In that sense, it really stands out
+among all the other languages that enables functional programming.&#60;/p&#62;
+</description>
+                <pubDate>Tue, 10 Feb 2015 10:50:16 -0800</pubDate>
+                <link>https://duan.ca/2015/02/10/the-two-swifts/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/02/10/the-two-swifts/</guid>
+            </item>
+            <item>
+                <title>this is a test</title>
+                <description></description>
+                <pubDate>Tue, 10 Feb 2015 00:00:00 -0800</pubDate>
+                <link>https://duan.ca/2015/02/10/this-is-a-test/</link>
+                <guid isPermaLink="true">https://duan.ca/2015/02/10/this-is-a-test/</guid>
+            </item>
+    </channel>
+</rss>

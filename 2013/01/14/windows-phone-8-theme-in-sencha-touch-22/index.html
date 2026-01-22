@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2013/01/14/windows-phone-8-theme-in-sencha-touch-22/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Windows Phone 8 Theme in Sencha Touch 2.2">
+    <meta property="article:published_time" content="2013-01-14T13:45:00-06:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@daniel_duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Windows Phone 8 Theme in Sencha Touch 2.2</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2013/01/14/windows-phone-8-theme-in-sencha-touch-22/">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
+</head>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="Windows Phone 8 Theme in Sencha Touch 2.2">
+    <meta itemprop="datePublished" content="2013-01-14T13:45:00-06:00">
+    <meta itemprop="dateModified" content="2013-01-14T13:45:00-06:00">
+    <link itemprop="url" href="https://duan.ca/2013/01/14/windows-phone-8-theme-in-sencha-touch-22/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2013/01/14/windows-phone-8-theme-in-sencha-touch-22/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="Sencha Touch">
+    <meta itemprop="keywords" content="Windows Phone 8">
+    <h1>Windows Phone 8 Theme in Sencha Touch 2.2</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles/">Daniel Duan</a>
+            ·
+            <time datetime="2013-01-14T13:45:00-06:00">2013-01-14</time>
+        </p>
+    </nav>
+    <div itemprop="articleBody"><p>Sencha Touch 2.2 Alpha shipped with Windows Phone 8/IE 10 support.
+And it's pretty impressive! Just take a look at the starter app under the
+original theme and the Windows Phone 8 theme:</p>
+<p>The Default Theme:</p>
+<p><img src="/assets/2013/01/original-theme.png" alt="Sencha Touch 2.2 default theme" /></p>
+<p>WP8 Theme:</p>
+<p><img src="/assets/2013/01/wp8-theme.png" alt="Sencha Touch 2.2 windows phone 8 theme" /></p>
+<p>And it only takes a minute or two to get to the second screen.
+(if you have Sencha Cmd and Sencha Touch SDK 2.2 alpha ready). Here's how.</p>
+<ol>
+<li>In SDK folder, generate the app with <code>sencha generate app Foo path/to/foo</code></li>
+<li><a href="/2013/01/14/Sencha-Touch-22-Alpha-Sass-Bug-Workaround.html">Workaround</a> the bug shipped in this alpha version. This won't be
+necessary once the bug has been fixed in the next release</li>
+<li>Open <code>resources/sass/app.scss</code> in the generated project folder )it should
+look like <a href="https://gist.github.com/4533833">this</a> after step 2).
+Replace every appearance of the word <em>default</em> to &quot;windows&quot;. Then run
+<code>compass compile resources/sass</code> in the project root.</li>
+<li>Serve the project in a web server (I usually do
+<code>python -m SimpleHTTPServer</code>), fire up its url (localhost:800) and...</li>
+</ol>
+<p>Boom!</p>
+</div>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/sencha-touch/">Sencha Touch</a>
+        ·
+        <a href="/tag/windows-phone-8/">Windows Phone 8</a>
+    </p>
+</footer></body>
+</html>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Mac</title>
+        <link>https://duan.ca/tag/mac/</link>
+        <atom:link href="https://duan.ca/tag/mac/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>MongoDB, PHP And Mountain Lion</title>
+                <description>&#60;p&#62;Here are the necessary steps to make PHP work with MongoDB on vanilla
+Mac OS X 10.8 (Mountain Lion):&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;
+&#60;p&#62;Install &#60;a href=&#34;https://developer.apple.com/downloads/index.action&#34;&#62;Command Lion Tools for Xcode&#60;/a&#62;&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install Homebrew:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;ruby -e &#38;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&#38;quot;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Prioritize Homebrew&#39;s binaries in $PATH:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;echo &#38;quot;export /usr/local/bin:$PATH&#38;quot; &#38;gt;&#38;gt; ~/.bash_profile
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install PHP 5.4 with Homebrew:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;# Setup the tap for dependencies
+brew tap homebrew/dupes
+# This is the best 
+brew tap josegonzalez/homebrew-php
+# And install
+brew install php54
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install MongoDB with Homebrew&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;brew install mongodb
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install &#38;quot;PHP Driver&#38;quot; for MongoDB:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;sudo pecl install mongo
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Done.&#60;/p&#62;
+&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;Now go run some PHP-MongoDB scripts with the build-in web server from
+PHP 5.4 like you normally would (don&#39;t forget to start &#60;code&#62;mongod&#60;/code&#62;) and everything
+should work.&#60;/p&#62;
+</description>
+                <pubDate>Thu, 29 Nov 2012 09:37:30 -0600</pubDate>
+                <link>https://duan.ca/2012/11/29/mongodb-php-and-mountain-lion/</link>
+                <guid isPermaLink="true">https://duan.ca/2012/11/29/mongodb-php-and-mountain-lion/</guid>
+            </item>
+            <item>
+                <title>CoffeeScript And Mountain Lion</title>
+                <description>&#60;p&#62;Here are the necessary steps to install CoffeeScript on
+Mac OS X 10.8 (Mountain Lion):&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;
+&#60;p&#62;Install &#60;a href=&#34;https://developer.apple.com/downloads/index.action&#34;&#62;Command Lion Tools for Xcode&#60;/a&#62;&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install Homebrew:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;ruby -e &#38;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)&#38;quot;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install Node.js with Homebrew:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;brew install node
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install npm (the version comes with node doesn&#39;t install CoffeeScript
+properly for some reason):&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;curl https://npmjs.org/install.sh | sh
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Install CoffeeScript with npm:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;npm install -g coffee-script
+# add environment variable to ~/.bashrc
+echo &#38;quot;export NODE_PATH=/usr/local/lib/node_modules&#38;quot;
+. ~/.bashrc
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;Done!&#60;/p&#62;
+&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;I had to google around to figure out the environment variable and the issue
+with npm. Hopefully this will help some folks in the similar need.&#60;/p&#62;
+</description>
+                <pubDate>Wed, 28 Nov 2012 15:11:00 -0600</pubDate>
+                <link>https://duan.ca/2012/11/28/coffeescript-and-mountain-lion/</link>
+                <guid isPermaLink="true">https://duan.ca/2012/11/28/coffeescript-and-mountain-lion/</guid>
+            </item>
+    </channel>
+</rss>

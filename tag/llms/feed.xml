@@ -37,6 +37,13 @@ Bonus points if you benchmark against existing libraries,
 and beat them in performance.
 This has happened on every project I&#39;ve done.&#60;/p&#62;
 &#60;p&#62;Codex btw.&#60;/p&#62;
+&#60;p&#62;I should clarify:
+this is not serious software engineering.
+The goal is having fun.
+Although the end result usually is really useful,
+and because of robust unit testing + benchmarking,
+it might be good enough to use in production.&#60;/p&#62;
+&#60;p&#62;We&#39;ll find out.&#60;/p&#62;
 &#60;p&#62;My favorite idle game in 2026 so far.&#60;/p&#62;
 </description>
                 <pubDate>Sat, 24 Jan 2026 11:52:04 -0800</pubDate>

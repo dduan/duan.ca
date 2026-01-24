@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Daniel Duan">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://duan.ca/2026/01/24/idle-coding/">
+    <meta property="og:site_name" content="Daniel Duan's Website">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Idle coding">
+    <meta property="article:published_time" content="2026-01-24T11:52:04-08:00"><meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@daniel_duan">
+    <meta name="twitter:creator" content="@daniel_duan">
+    <meta name="apple-mobile-web-app-title" content="Daniel Duan">
+    <title>Idle coding</title>
+    <link rel="alternate" type="application/rss+xml" title="Daniel Duan's Website" href="/feed.xml">
+    <link rel="canonical" href="https://duan.ca/2026/01/24/idle-coding/">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/dduan.svg" type="image/svg+xml">
+</head>
+<body><article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content="Idle coding">
+    <meta itemprop="datePublished" content="2026-01-24T11:52:04-08:00">
+    <meta itemprop="dateModified" content="2026-01-24T11:52:04-08:00">
+    <link itemprop="url" href="https://duan.ca/2026/01/24/idle-coding/">
+    <link itemprop="mainEntityOfPage" href="https://duan.ca/2026/01/24/idle-coding/">
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <div itemprop="publisher" itemscope itemtype="https://schema.org/Person">
+        <meta itemprop="name" content="Daniel Duan">
+        <link itemprop="url" href="https://duan.ca/">
+    </div>
+    <meta itemprop="keywords" content="Codex">
+    <meta itemprop="keywords" content="LLMs">
+    <meta itemprop="keywords" content="AI">
+    <meta itemprop="keywords" content="Programming">
+    <h1>Idle coding</h1>
+    <nav>
+        <p class="metainfo article-meta">
+            <a href="/articles/">Daniel Duan</a>
+            ·
+            <time datetime="2026-01-24T11:52:04-08:00">2026-01-24</time>
+        </p>
+    </nav>
+    <div itemprop="articleBody"><p>I've discovered a new hobby.
+It involves creating non-trivial libraries from scratch.
+(Not UI slop!)
+Except I don't write any code in editors.
+An agent does all of it.</p>
+<p>It goes like this:</p>
+<p>Set up an infinite loop so the coding agent:</p>
+<ol>
+<li>has a clear guard for correctness (unit tests)</li>
+<li>has an objectively measurable, pass/fail outcome (performance benchmarks)</li>
+<li>has tools for styling (dead-code tool, formatter)</li>
+<li>leaves artifacts for future instances (commit changes on a branch, writes failure_analysis_SHA.md)</li>
+</ol>
+<p>... and watch number go up.</p>
+<p>You'll need a robust prompt, then just feed it to a single agent, over and over. No need to convince the agent instance it needs to repeat (doesn't hurt to try, but they usually give up after a while).</p>
+<p>It's more fun if you ask for a success artifact (benchmark_success_SHA.tsv) and have a script that monitors for new ones. I run this script with @steipete's VibeTunnel so I can watch the number go up on my phone.</p>
+<p>It may take some setup to get going.
+For example,
+at the beginning you want to import a large number of unit tests.
+You'll want to source some input for benchmarking.
+You'll want some infrastructure (SwiftPM project, Scripts directory, git).</p>
+<p>But quickly,
+it becomes an <a href="https://en.wikipedia.org/wiki/Incremental_game">idle game</a>.
+At first,
+you'll watch the number of unit tests go from 100% fail to 100% pass.
+Then,
+the performance benchmarks.
+Bonus points if you benchmark against existing libraries,
+and beat them in performance.
+This has happened on every project I've done.</p>
+<p>Codex btw.</p>
+<p>My favorite idle game in 2026 so far.</p>
+</div>
+</article>
+<footer>
+    <hr />
+    <p class="metainfo article-meta">
+        <a href="/articles/">More Articles</a>
+        ·
+        <a href="/tag/codex/">Codex</a>
+        ·
+        <a href="/tag/llms/">LLMs</a>
+        ·
+        <a href="/tag/ai/">AI</a>
+        ·
+        <a href="/tag/programming/">Programming</a>
+    </p>
+</footer></body>
+</html>

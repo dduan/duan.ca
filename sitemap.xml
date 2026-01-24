@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2026/01/24/idle-coding/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2026/01/01/TOMLDecoder-Is-Faster-Than-C/</loc>
     </url>
     <url>
@@ -383,6 +386,12 @@
         <loc>https://duan.ca/tag/cocoapods/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/codex/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/codex/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/coffeescript/</loc>
     </url>
     <url>
@@ -551,6 +560,12 @@
         <loc>https://duan.ca/tag/llm/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/llms/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/llms/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/llvm/</loc>
     </url>
     <url>
@@ -717,6 +732,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/phonegap/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/programming/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/programming/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/programming-language/</loc>

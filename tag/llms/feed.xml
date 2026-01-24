@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About LLMs</title>
+        <link>https://duan.ca/tag/llms/</link>
+        <atom:link href="https://duan.ca/tag/llms/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>Idle coding</title>
+                <description>&#60;p&#62;I&#39;ve discovered a new hobby.
+It involves creating non-trivial libraries from scratch.
+(Not UI slop!)
+Except I don&#39;t write any code in editors.
+An agent does all of it.&#60;/p&#62;
+&#60;p&#62;It goes like this:&#60;/p&#62;
+&#60;p&#62;Set up an infinite loop so the coding agent:&#60;/p&#62;
+&#60;ol&#62;
+&#60;li&#62;has a clear guard for correctness (unit tests)&#60;/li&#62;
+&#60;li&#62;has an objectively measurable, pass/fail outcome (performance benchmarks)&#60;/li&#62;
+&#60;li&#62;has tools for styling (dead-code tool, formatter)&#60;/li&#62;
+&#60;li&#62;leaves artifacts for future instances (commit changes on a branch, writes failure_analysis_SHA.md)&#60;/li&#62;
+&#60;/ol&#62;
+&#60;p&#62;... and watch number go up.&#60;/p&#62;
+&#60;p&#62;You&#39;ll need a robust prompt, then just feed it to a single agent, over and over. No need to convince the agent instance it needs to repeat (doesn&#39;t hurt to try, but they usually give up after a while).&#60;/p&#62;
+&#60;p&#62;It&#39;s more fun if you ask for a success artifact (benchmark_success_SHA.tsv) and have a script that monitors for new ones. I run this script with @steipete&#39;s VibeTunnel so I can watch the number go up on my phone.&#60;/p&#62;
+&#60;p&#62;It may take some setup to get going.
+For example,
+at the beginning you want to import a large number of unit tests.
+You&#39;ll want to source some input for benchmarking.
+You&#39;ll want some infrastructure (SwiftPM project, Scripts directory, git).&#60;/p&#62;
+&#60;p&#62;But quickly,
+it becomes an &#60;a href=&#34;https://en.wikipedia.org/wiki/Incremental_game&#34;&#62;idle game&#60;/a&#62;.
+At first,
+you&#39;ll watch the number of unit tests go from 100% fail to 100% pass.
+Then,
+the performance benchmarks.
+Bonus points if you benchmark against existing libraries,
+and beat them in performance.
+This has happened on every project I&#39;ve done.&#60;/p&#62;
+&#60;p&#62;Codex btw.&#60;/p&#62;
+&#60;p&#62;My favorite idle game in 2026 so far.&#60;/p&#62;
+</description>
+                <pubDate>Sat, 24 Jan 2026 11:52:04 -0800</pubDate>
+                <link>https://duan.ca/2026/01/24/idle-coding/</link>
+                <guid isPermaLink="true">https://duan.ca/2026/01/24/idle-coding/</guid>
+            </item>
+    </channel>
+</rss>

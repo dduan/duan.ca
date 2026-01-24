@@ -22,6 +22,7 @@ An agent does all of it.&#60;/p&#62;
 &#60;p&#62;... and watch number go up.&#60;/p&#62;
 &#60;p&#62;You&#39;ll need a robust prompt, then just feed it to a single agent, over and over. No need to convince the agent instance it needs to repeat (doesn&#39;t hurt to try, but they usually give up after a while).&#60;/p&#62;
 &#60;p&#62;It&#39;s more fun if you ask for a success artifact (benchmark_success_SHA.tsv) and have a script that monitors for new ones. I run this script with @steipete&#39;s VibeTunnel so I can watch the number go up on my phone.&#60;/p&#62;
+&#60;p&#62;&#60;img src=&#34;/assets/2026/01/idle_monitoring.jpeg&#34; alt=&#34;monitoring benchmark progress in terminal&#34; /&#62;&#60;/p&#62;
 &#60;p&#62;It may take some setup to get going.
 For example,
 at the beginning you want to import a large number of unit tests.

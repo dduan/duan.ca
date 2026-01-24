@@ -12,7 +12,7 @@ It involves creating non-trivial libraries from scratch.
 Except I don&#39;t write any code in editors.
 An agent does all of it.&#60;/p&#62;
 &#60;p&#62;It goes like this:&#60;/p&#62;
-&#60;p&#62;Set up an infinite loop so the coding agent:&#60;/p&#62;
+&#60;p&#62;Set up an infinite loop so the coding agent that...&#60;/p&#62;
 &#60;ol&#62;
 &#60;li&#62;has a clear guard for correctness (unit tests)&#60;/li&#62;
 &#60;li&#62;has an objectively measurable, pass/fail outcome (performance benchmarks)&#60;/li&#62;

@@ -23,6 +23,8 @@ You'll need a robust prompt, then just feed it to a single agent, over and over.
 
 It's more fun if you ask for a success artifact (benchmark_success_SHA.tsv) and have a script that monitors for new ones. I run this script with @steipete's VibeTunnel so I can watch the number go up on my phone.
 
+![monitoring benchmark progress in terminal](/assets/2026/01/idle_monitoring.jpeg)
+
 It may take some setup to get going.
 For example,
 at the beginning you want to import a large number of unit tests.

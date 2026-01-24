@@ -41,4 +41,13 @@ This has happened on every project I've done.
 
 Codex btw.
 
+I should clarify:
+this is not serious software engineering.
+The goal is having fun.
+Although the end result usually is really useful,
+and because of robust unit testing + benchmarking,
+it might be good enough to use in production.
+
+We'll find out.
+
 My favorite idle game in 2026 so far.

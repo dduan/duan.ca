@@ -1,6 +1,6 @@
 # Idle coding
 2026-01-24T11:52:04-08:00
-tags: Codex, LLMs, AI, Programming
+tags: Codex, LLM, AI, Programming
 
 I've discovered a new hobby.
 It involves creating non-trivial libraries from scratch.

@@ -10,7 +10,7 @@ An agent does all of it.
 
 It goes like this:
 
-Set up an infinite loop so the coding agent:
+Set up an infinite loop so the coding agent that...
 
 1. has a clear guard for correctness (unit tests)
 2. has an objectively measurable, pass/fail outcome (performance benchmarks)

@@ -4784,13 +4784,6 @@ an official release. So how?&#60;/p&#62;
                 <guid isPermaLink="true">https://duan.ca/2015/02/10/my-xcode-62-and-63-prediction/</guid>
             </item>
             <item>
-                <title>this is a test</title>
-                <description></description>
-                <pubDate>Tue, 10 Feb 2015 00:00:00 -0800</pubDate>
-                <link>https://duan.ca/2015/02/10/this-is-a-test/</link>
-                <guid isPermaLink="true">https://duan.ca/2015/02/10/this-is-a-test/</guid>
-            </item>
-            <item>
                 <title>Build And Run iOS Apps In Commmand Line</title>
                 <description>&#60;p&#62;Xcode is slow. Enough said. What&#39;s worse, sometimes I find myself
 relying too much on auto-completion with Cocoa Touch, a blessing and a curse!&#60;/p&#62;

@@ -4,6 +4,9 @@
         <loc>https://duan.ca/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/2026/11/21/ubuntu-on-hp-omnibook-ultra-16/</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/2026/01/24/idle-coding/</loc>
     </url>
     <url>
@@ -268,17 +271,17 @@
         <loc>https://duan.ca/2012/08/20/integrating-sencha-touch-2-and-cordova-pre-20/</loc>
     </url>
     <url>
-        <loc>https://duan.ca/projects/</loc>
-    </url><url>
         <loc>https://duan.ca//</loc>
     </url><url>
         <loc>https://duan.ca/Markra/</loc>
     </url><url>
-        <loc>https://duan.ca/DrString/</loc>
-    </url><url>
         <loc>https://duan.ca/DrString/release-notes/</loc>
     </url><url>
         <loc>https://duan.ca/DrString/privacy/</loc>
+    </url><url>
+        <loc>https://duan.ca/DrString/</loc>
+    </url><url>
+        <loc>https://duan.ca/projects/</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag//</loc>
@@ -303,6 +306,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/api-design-guidelines/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/arm/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/arm/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/ast/</loc>
@@ -629,6 +638,12 @@
         <loc>https://duan.ca/tag/mongodb/feed.xml</loc>
     </url>
     <url>
+        <loc>https://duan.ca/tag/nvidia/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/nvidia/feed.xml</loc>
+    </url>
+    <url>
         <loc>https://duan.ca/tag/naming/</loc>
     </url>
     <url>
@@ -891,6 +906,12 @@
     </url>
     <url>
         <loc>https://duan.ca/tag/twitter/feed.xml</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/ubuntu/</loc>
+    </url>
+    <url>
+        <loc>https://duan.ca/tag/ubuntu/feed.xml</loc>
     </url>
     <url>
         <loc>https://duan.ca/tag/unix/</loc>

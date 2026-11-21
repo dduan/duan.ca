@@ -35,3 +35,26 @@ pre, pre code {
   font-size: 90%;
   color: rgb(255, 212, 140);
 }
+
+table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-family: sans-serif;
+  font-size: 90%;
+  margin: 1em 0;
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.35em 0.6em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+th {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+summary {
+  cursor: pointer;
+  font-family: sans-serif;
+}

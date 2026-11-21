@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Daniel Duan's Articles About Ubuntu</title>
+        <link>https://duan.ca/tag/ubuntu/</link>
+        <atom:link href="https://duan.ca/tag/ubuntu/feed.xml" rel="self" type="application/rss+xml" />
+            <item>
+                <title>Ubuntu on the HP OmniBook Ultra 16 (RTX Spark N1X)</title>
+                <description>&#60;p&#62;&#60;em&#62;Tested in November 2026 on the HP OmniBook Ultra Laptop 16-bk0xxx (board 8E6A), BIOS F.06&#60;/em&#62;&#60;/p&#62;
+&#60;p&#62;Ubuntu 26.04 runs well on the HP OmniBook Ultra 16, but out of the box the GPU, speakers and battery don&#39;t work. You can fix all three in an afternoon with packages and two community workarounds. This post covers what I hit, how I fixed each problem, and what still doesn&#39;t work.&#60;/p&#62;
+&#60;p&#62;The laptop uses NVIDIA&#39;s &#60;strong&#62;RTX Spark N1X&#60;/strong&#62;: an Arm chip (10 Cortex-X925 and 10 Cortex-A725 cores) with a Blackwell GPU, plus MediaTek Wi-Fi and audio. Support for this hardware is very new, and most of the fixes below aren&#39;t in Ubuntu yet.&#60;/p&#62;
+&#60;h2&#62;At a glance&#60;/h2&#62;
+&#60;table&#62;
+&#60;thead&#62;&#60;tr&#62;&#60;th&#62;Area&#60;/th&#62;&#60;th&#62;Out of the box&#60;/th&#62;&#60;th&#62;After the fixes&#60;/th&#62;&#60;/tr&#62;&#60;/thead&#62;
+&#60;tbody&#62;
+&#60;tr&#62;&#60;td&#62;Wi-Fi, Bluetooth, SSD, card reader&#60;/td&#62;&#60;td&#62;Works&#60;/td&#62;&#60;td&#62;Works&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;Webcam (5MP + IR), touchpad, touchscreen, keyboard&#60;/td&#62;&#60;td&#62;Works&#60;/td&#62;&#60;td&#62;Works&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;NVIDIA GPU, brightness, external displays&#60;/td&#62;&#60;td&#62;Basic framebuffer only&#60;/td&#62;&#60;td&#62;Works (driver 595)&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;Speakers, headphone jack, internal mic&#60;/td&#62;&#60;td&#62;&#34;Dummy Output&#34;&#60;/td&#62;&#60;td&#62;Works (speakers sound thinner than on Windows)&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;Battery, charger, lid, thermals, USB-C ports&#60;/td&#62;&#60;td&#62;Not detected&#60;/td&#62;&#60;td&#62;Works&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;Fan speed reading&#60;/td&#62;&#60;td&#62;Stuck at 0 RPM&#60;/td&#62;&#60;td&#62;Live reading&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;Keyboard backlight control&#60;/td&#62;&#60;td&#62;None&#60;/td&#62;&#60;td&#62;None (the Fn key may still work)&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;Thunderbolt / USB4&#60;/td&#62;&#60;td&#62;Not working&#60;/td&#62;&#60;td&#62;Not working&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;Hibernate&#60;/td&#62;&#60;td&#62;Not supported&#60;/td&#62;&#60;td&#62;Not supported&#60;/td&#62;&#60;/tr&#62;
+&#60;/tbody&#62;
+&#60;/table&#62;
+&#60;h2&#62;Which Ubuntu and kernel to use&#60;/h2&#62;
+&#60;p&#62;Use &#60;strong&#62;Ubuntu 26.04 LTS (arm64)&#60;/strong&#62; with the &#60;strong&#62;&#60;code&#62;linux-nvidia-bos&#60;/code&#62;&#60;/strong&#62; kernel. I ran &#60;code&#62;7.0.0-2024-nvidia-bos&#60;/code&#62;. This NVIDIA-specific kernel includes the N1X platform support: the MediaTek audio and SoundWire drivers, the bridge to the embedded controller, and USB.&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;&#60;strong&#62;Kernel packages:&#60;/strong&#62; &#60;code&#62;linux-image-nvidia-bos&#60;/code&#62; and &#60;code&#62;linux-headers-nvidia-bos&#60;/code&#62;. My install already had them. Check with &#60;code&#62;uname -r&#60;/code&#62;, which should end in &#60;code&#62;-nvidia-bos&#60;/code&#62;.&#60;/li&#62;
+&#60;li&#62;&#60;strong&#62;Stay on this kernel flavour.&#60;/strong&#62; The NVIDIA driver modules and the audio stack are built for it. Don&#39;t switch to the generic kernel.&#60;/li&#62;
+&#60;li&#62;&#60;strong&#62;Secure Boot can stay on.&#60;/strong&#62; Everything below works with it. The only cost is enrolling one signing key (MOK) for the battery module.&#60;/li&#62;
+&#60;li&#62;&#60;strong&#62;Update everything first:&#60;/strong&#62; &#60;code&#62;sudo apt update &#38;amp;&#38;amp; sudo apt full-upgrade&#60;/code&#62;, then reboot. There&#39;s no BIOS update to install: on F.06, &#60;code&#62;fwupdmgr&#60;/code&#62; finds nothing for this machine.&#60;/li&#62;
+&#60;/ul&#62;
+&#60;h2&#62;What works out of the box&#60;/h2&#62;
+&#60;table&#62;
+&#60;thead&#62;&#60;tr&#62;&#60;th&#62;Hardware&#60;/th&#62;&#60;th&#62;Driver&#60;/th&#62;&#60;th&#62;Notes&#60;/th&#62;&#60;/tr&#62;&#60;/thead&#62;
+&#60;tbody&#62;
+&#60;tr&#62;&#60;td&#62;MediaTek MT7925 Wi-Fi 7&#60;/td&#62;&#60;td&#62;&#60;code&#62;mt7925e&#60;/code&#62;&#60;/td&#62;&#60;td&#62;The log says &#60;code&#62;sar cnt = 0&#60;/code&#62; (no HP power-limit table). Harmless&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;MediaTek Bluetooth&#60;/td&#62;&#60;td&#62;&#60;code&#62;btusb&#60;/code&#62;&#60;/td&#62;&#60;td&#62;&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;KIOXIA 1 TB NVMe SSD&#60;/td&#62;&#60;td&#62;&#60;code&#62;nvme&#60;/code&#62;&#60;/td&#62;&#60;td&#62;&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;HP 5MP camera + IR camera&#60;/td&#62;&#60;td&#62;&#60;code&#62;uvcvideo&#60;/code&#62;&#60;/td&#62;&#60;td&#62;Face unlock with the IR camera needs extra software (e.g. Howdy)&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;Realtek RTS525A card reader&#60;/td&#62;&#60;td&#62;&#60;code&#62;rtsx_pci&#60;/code&#62;&#60;/td&#62;&#60;td&#62;&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;Synaptics touchpad, ELAN touchscreen, keyboard&#60;/td&#62;&#60;td&#62;HID&#60;/td&#62;&#60;td&#62;&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;HDMI/DisplayPort audio&#60;/td&#62;&#60;td&#62;&#60;code&#62;snd_hda_codec_tegrahdmi&#60;/code&#62;&#60;/td&#62;&#60;td&#62;&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;TPM 2.0&#60;/td&#62;&#60;td&#62;&#60;/td&#62;&#60;td&#62;&#60;/td&#62;&#60;/tr&#62;
+&#60;/tbody&#62;
+&#60;/table&#62;
+&#60;h2&#62;What&#39;s broken out of the box&#60;/h2&#62;
+&#60;ol&#62;
+&#60;li&#62;
+&#60;p&#62;&#60;strong&#62;GPU (&#60;code&#62;10de:2e03&#60;/code&#62;): no driver.&#60;/strong&#62; The desktop runs on &#60;code&#62;simpledrm&#60;/code&#62;, a basic framebuffer. That means no acceleration, no brightness control, and no external monitors.&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;&#60;strong&#62;Sound: &#38;quot;Dummy Output&#38;quot; only.&#60;/strong&#62; The hardware is four Cirrus CS35L56 speaker amps and a CS42L43 headset/mic chip, on MediaTek&#39;s &#60;code&#62;mt8901&#60;/code&#62; SoundWire controller. The kernel drivers load fine. What&#39;s missing is the ALSA audio profile (UCM) that tells PipeWire how to route sound, so PipeWire falls back to a dummy device.&#60;/p&#62;
+&#60;/li&#62;
+&#60;li&#62;
+&#60;p&#62;&#60;strong&#62;Battery, charger, lid, thermals, fan and USB-C: not detected.&#60;/strong&#62; &#60;code&#62;/sys/class/power_supply/&#60;/code&#62; is empty and the lid state reads &#60;code&#62;unsupported&#60;/code&#62;. The kernel log repeats this firmware error dozens of times per boot:&#60;/p&#62;
+&#60;pre&#62;&#60;code&#62;ACPI BIOS Error (bug): AE_AML_BUFFER_LIMIT, Field [DATA] at bit offset/length 208/400 exceeds size of target Buffer (512 bits)
+ACPI Error: Aborting method \_SB.FFA0.RBUF due to previous error (AE_AML_BUFFER_LIMIT)
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;HP&#39;s firmware defines a 50-byte field inside a 64-byte buffer, 26 bytes in, so it runs 12 bytes past the end. That method (&#60;code&#62;\_SB.FFA0.RBUF&#60;/code&#62;) handles &#60;strong&#62;every&#60;/strong&#62; read from the embedded controller. So everything that talks to the controller fails: battery, AC adapter, thermal zone, fan, USB-C, lid, and one of the GPU&#39;s firmware calls.&#60;/p&#62;
+&#60;p&#62;This also breaks power-based settings. With no AC adapter detected, GNOME and systemd assume you&#39;re always plugged in, so the &#38;quot;on battery&#38;quot; sleep timeout never applies.&#60;/p&#62;
+&#60;/li&#62;
+&#60;/ol&#62;
+&#60;h2&#62;Fix 1: NVIDIA GPU driver&#60;/h2&#62;
+&#60;p&#62;Install the open-kernel driver together with the prebuilt modules for the &#60;code&#62;nvidia-bos&#60;/code&#62; kernel:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-bash&#34;&#62;sudo apt install --no-install-recommends nvidia-driver-595-open linux-modules-nvidia-595-open-nvidia-bos
+sudo reboot
+&#60;/code&#62;&#60;/pre&#62;
+&#60;ul&#62;
+&#60;li&#62;The &#60;code&#62;linux-modules-nvidia-*-nvidia-bos&#60;/code&#62; package contains modules Canonical has already signed. That means &#60;strong&#62;no DKMS build and no MOK enrollment&#60;/strong&#62;, even with Secure Boot on.&#60;/li&#62;
+&#60;li&#62;&#60;code&#62;ubuntu-drivers&#60;/code&#62; doesn&#39;t suggest this driver, and the N1X&#39;s ID (&#60;code&#62;2e03&#60;/code&#62;) isn&#39;t on the driver&#39;s list of supported GPUs. Only the DGX Spark&#39;s GB10 (&#60;code&#62;2e12&#60;/code&#62;) is listed. It still binds and works fine: &#60;code&#62;nvidia-smi&#60;/code&#62; reports &#60;em&#62;NVIDIA RTX Spark N1X (6144-core Blackwell RTX GPU)&#60;/em&#62; with CUDA 13.2.&#60;/li&#62;
+&#60;li&#62;Afterwards you get the built-in panel as &#60;code&#62;eDP-1&#60;/code&#62;, the HDMI and USB-C display outputs, and an &#60;code&#62;nvidia_0&#60;/code&#62; backlight, so brightness keys and the slider work.&#60;/li&#62;
+&#60;li&#62;One harmless leftover in the log: &#60;code&#62;NVRM: osCallACPI_DSM: Error during 0x3 DSM subfunction 0x10&#60;/code&#62;. That&#39;s the same firmware bug and goes away after Fix 3.&#60;/li&#62;
+&#60;/ul&#62;
+&#60;p&#62;&#60;strong&#62;If you get a black screen:&#60;/strong&#62; pick &#60;em&#62;Advanced options → recovery mode&#60;/em&#62; in the boot menu (GRUB), then run &#60;code&#62;apt purge &#39;nvidia-*&#39;&#60;/code&#62;.&#60;/p&#62;
+&#60;h2&#62;Fix 2: Speakers and microphone&#60;/h2&#62;
+&#60;p&#62;NVIDIA has submitted an audio profile for this sound chip, but it isn&#39;t merged yet: &#60;a href=&#34;https://github.com/alsa-project/alsa-ucm-conf/pull/862&#34;&#62;alsa-ucm-conf PR #862&#60;/a&#62;. It covers six N1X laptop layouts. The OmniBook Ultra 16 is the one with four CS35L56 amps on link 0 and a CS42L43 on link 1. Ubuntu&#39;s own &#60;code&#62;alsa-ucm-conf&#60;/code&#62; (1.2.15.3-1ubuntu1.7 at the time of writing) doesn&#39;t include it yet.&#60;/p&#62;
+&#60;p&#62;You can install it for your user only, without touching &#60;code&#62;/usr&#60;/code&#62;. Build a private profile folder that links to the system&#39;s files, add the new profile, and point PipeWire at it with &#60;code&#62;ALSA_CONFIG_UCM2&#60;/code&#62;:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-bash&#34;&#62;#!/usr/bin/env bash
+set -euo pipefail
+SHA=c22cf4c960c7f68e13420140e6ec38f1e0ce70b5   # PR #862 head as of 2026-11-21
+RAW=https://raw.githubusercontent.com/dcemin-nv/alsa-ucm-conf/$SHA/ucm2
+U=$HOME/.config/alsa/ucm2; SYS=/usr/share/alsa/ucm2
+
+mkdir -p &#38;quot;$U/conf.d&#38;quot; &#38;quot;$U/MediaTek/mt8901-soundwir&#38;quot; &#38;quot;$U/conf.d/mt8901-soundwir&#38;quot;
+for e in &#38;quot;$SYS&#38;quot;/*; do b=$(basename &#38;quot;$e&#38;quot;); case $b in conf.d|MediaTek) ;; *) ln -sfn &#38;quot;$e&#38;quot; &#38;quot;$U/$b&#38;quot;;; esac; done
+for e in &#38;quot;$SYS&#38;quot;/conf.d/*;   do ln -sfn &#38;quot;$e&#38;quot; &#38;quot;$U/conf.d/&#38;quot;; done
+for e in &#38;quot;$SYS&#38;quot;/MediaTek/*; do ln -sfn &#38;quot;$e&#38;quot; &#38;quot;$U/MediaTek/&#38;quot;; done
+
+for f in mt8901-soundwir.conf HiFi-cs35l56x4-cs42l43.conf HiFi-cs42l43-cs35l56x4.conf \
+         HiFi-cs42l43-cs35l56x2.conf HiFi-rt1320x2-rt712.conf HiFi-rt1320x2-rt712-refboard.conf \
+         HiFi-rt1321x2-rt713.conf; do
+  curl -sSfo &#38;quot;$U/MediaTek/mt8901-soundwir/$f&#38;quot; &#38;quot;$RAW/MediaTek/mt8901-soundwir/$f&#38;quot;
+done
+ln -sfn ../../MediaTek/mt8901-soundwir/mt8901-soundwir.conf &#38;quot;$U/conf.d/mt8901-soundwir/mt8901-soundwir.conf&#38;quot;
+
+for s in pipewire wireplumber; do
+  mkdir -p ~/.config/systemd/user/$s.service.d
+  printf &#39;[Service]\nEnvironment=ALSA_CONFIG_UCM2=%%h/.config/alsa/ucm2\n&#39; &#38;gt; ~/.config/systemd/user/$s.service.d/10-alsa-ucm2.conf
+done
+mkdir -p ~/.config/environment.d
+echo &#39;ALSA_CONFIG_UCM2=${HOME}/.config/alsa/ucm2&#39; &#38;gt; ~/.config/environment.d/10-alsa-ucm2.conf
+
+systemctl --user daemon-reload
+systemctl --user restart wireplumber pipewire pipewire-pulse
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;Check that it loaded:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-bash&#34;&#62;ALSA_CONFIG_UCM2=~/.config/alsa/ucm2 alsaucm -c hw:mt8901soundwire list _verbs   # expect: HiFi
+wpctl status   # expect &#38;quot;Internal speakers&#38;quot;, &#38;quot;Headphone jack&#38;quot;, &#38;quot;Internal microphone array&#38;quot;
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;The profile chooses a layout based on which SoundWire devices are present. On this laptop &#60;code&#62;sdw:0:0:01fa:3556:01:0&#60;/code&#62; exists, so it picks &#60;code&#62;HiFi-cs35l56x4-cs42l43.conf&#60;/code&#62;.&#60;/p&#62;
+&#60;h3&#62;Fix the hissing microphone&#60;/h3&#62;
+&#60;p&#62;Once the mic works it records loud hiss, because &#60;strong&#62;PipeWire&#39;s 100% mic volume equals the CS42L43&#39;s maximum boost of +31.5 dB&#60;/strong&#62; (&#60;code&#62;Decimator 3/4 Volume&#60;/code&#62; = 191 of 191). At that level the mic&#39;s own noise is boosted until it clips, even in a silent room. I measured silence by mic volume:&#60;/p&#62;
+&#60;table&#62;
+&#60;thead&#62;&#60;tr&#62;&#60;th&#62;PipeWire mic volume&#60;/th&#62;&#60;th&#62;Hardware gain&#60;/th&#62;&#60;th&#62;Silent-room level&#60;/th&#62;&#60;/tr&#62;&#60;/thead&#62;
+&#60;tbody&#62;
+&#60;tr&#62;&#60;td&#62;100%&#60;/td&#62;&#60;td&#62;+31.5 dB&#60;/td&#62;&#60;td&#62;clipping, about 9% of samples at full scale&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;40%&#60;/td&#62;&#60;td&#62;+7.5 dB&#60;/td&#62;&#60;td&#62;steady, about −54 dBFS&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;30%&#60;/td&#62;&#60;td&#62;0 dB&#60;/td&#62;&#60;td&#62;about −62 dBFS&#60;/td&#62;&#60;/tr&#62;
+&#60;/tbody&#62;
+&#60;/table&#62;
+&#60;p&#62;Set it to about 40% and leave it there. WirePlumber remembers it:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-bash&#34;&#62;wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 0.4
+&#60;/code&#62;&#60;/pre&#62;
+&#60;h3&#62;Speaker caveat&#60;/h3&#62;
+&#60;p&#62;The speaker amps report &#60;code&#62;Cirrus Logic CS35L56 Rev B0 OTP3 fw:3.4.4 (patched=0)&#60;/code&#62;. That&#39;s because HP&#39;s tuning files for this laptop (subsystem &#60;code&#62;103c8e6a&#60;/code&#62;) aren&#39;t in &#60;code&#62;linux-firmware&#60;/code&#62;. Without them the amps run in a basic fallback mode, so expect the speakers to sound thinner and quieter than on Windows. There&#39;s no fix until HP or Cirrus submits the files.&#60;/p&#62;
+&#60;p&#62;&#60;strong&#62;When Ubuntu ships the profile&#60;/strong&#62;, remove the override so you get updates:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-bash&#34;&#62;rm -r ~/.config/alsa/ucm2 ~/.config/systemd/user/*/10-alsa-ucm2.conf ~/.config/environment.d/10-alsa-ucm2.conf
+&#60;/code&#62;&#60;/pre&#62;
+&#60;h2&#62;Fix 3: Battery, charger, lid, thermals and USB-C&#60;/h2&#62;
+&#60;p&#62;There&#39;s no BIOS fix yet. You also can&#39;t load corrected firmware tables (a DSDT override) at boot, because Secure Boot puts the kernel in lockdown, which blocks it. The workaround is &#60;strong&#62;&#60;code&#62;omnibook_ffa_fix&#60;/code&#62;&#60;/strong&#62;, a small community kernel module from &#60;a href=&#34;https://github.com/keejkrej/omarchy-omnibook-ultra-16&#34;&#62;keejkrej/omarchy-omnibook-ultra-16&#60;/a&#62; (root cause in &#60;a href=&#34;https://github.com/omacom/omarchy/issues/18112&#34;&#62;Omarchy issue #18112&#60;/a&#62;). It makes two in-memory fixes when it loads:&#60;/p&#62;
+&#60;ul&#62;
+&#60;li&#62;&#60;strong&#62;Firmware buffer bug:&#60;/strong&#62; it shrinks the oversized field in &#60;code&#62;\_SB.FFA0.RBUF&#60;/code&#62; from 400 to 304 bits, so it fits in the 64-byte buffer. Nothing ever reads that field, so this is safe.&#60;/li&#62;
+&#60;li&#62;&#60;strong&#62;Battery status:&#60;/strong&#62; it points &#60;code&#62;\_SB.BAT0._BST&#60;/code&#62; at HP&#39;s own &#60;code&#62;UPBS()&#60;/code&#62; method. As shipped, &#60;code&#62;_BST&#60;/code&#62; asks for NVIDIA&#39;s reference controller ID, which doesn&#39;t exist on HP&#39;s controller.&#60;/li&#62;
+&#60;/ul&#62;
+&#60;p&#62;After it loads, it re-probes the battery, AC adapter, thermal zone, USB-C and fan devices.&#60;/p&#62;
+&#60;p&#62;&#60;strong&#62;Read the source before you load it.&#60;/strong&#62; It works by changing the kernel&#39;s internal ACPI structures (ACPICA) directly, at hard-coded positions: &#60;code&#62;aml_start&#60;/code&#62; at +32 and &#60;code&#62;aml_length&#60;/code&#62; at +48 in &#60;code&#62;struct acpi_object_method&#60;/code&#62;. I checked these against Linux 7.0 (ACPICA 20251212) and they match. The module also checks the object&#39;s type before writing anything. Still, if a future kernel changes that structure, re-check it.&#60;/p&#62;
+&#60;p&#62;Install it with DKMS, so it&#39;s rebuilt for every kernel update:&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-bash&#34;&#62;sudo apt install build-essential dkms
+git clone https://github.com/keejkrej/omarchy-omnibook-ultra-16
+sudo mkdir -p /usr/src/omnibook-ffa-fix-1.0.0
+sudo cp omarchy-omnibook-ultra-16/kmod/{omnibook_ffa_fix.c,Makefile,dkms.conf} /usr/src/omnibook-ffa-fix-1.0.0/
+sudo dkms add -m omnibook-ffa-fix -v 1.0.0
+sudo dkms install -m omnibook-ffa-fix -v 1.0.0
+echo omnibook_ffa_fix | sudo tee /etc/modules-load.d/omnibook-ffa-fix.conf
+&#60;/code&#62;&#60;/pre&#62;
+&#60;h3&#62;Secure Boot: enroll the signing key&#60;/h3&#62;
+&#60;p&#62;DKMS signs the module with a local key, &#60;code&#62;/var/lib/shim-signed/mok/MOK.der&#60;/code&#62;. The kernel won&#39;t load it until that key is enrolled. Until then you&#39;ll see &#60;code&#62;Key was rejected by service&#60;/code&#62; and a failed &#60;code&#62;systemd-modules-load.service&#60;/code&#62;.&#60;/p&#62;
+&#60;pre&#62;&#60;code class=&#34;language-bash&#34;&#62;sudo mokutil --import /var/lib/shim-signed/mok/MOK.der   # choose a one-time password
+sudo reboot
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;&#60;strong&#62;Watch the screen during this reboot.&#60;/strong&#62; A blue &#38;quot;MOK management&#38;quot; screen appears and continues booting after about 10 seconds, which drops the request. I missed it the first time. Press a key straight away, then choose &#60;strong&#62;Enroll MOK → Continue → Yes&#60;/strong&#62;, type the password, and reboot. Check it worked with &#60;code&#62;mokutil --test-key /var/lib/shim-signed/mok/MOK.der&#60;/code&#62;, which should say &#38;quot;already enrolled&#38;quot;.&#60;/p&#62;
+&#60;h3&#62;Result&#60;/h3&#62;
+&#60;pre&#62;&#60;code&#62;omnibook_ffa_fix: Patched \_SB.FFA0.RBUF CreateField DATA bit length (0x0190 -&#38;gt; 0x0130 at +0x64)
+omnibook_ffa_fix: Redirected \_SB.BAT0._BST to evaluate \_SB.BAT0.UPBS()
+ACPI: battery: Slot [BAT0] (battery present)
+ACPI: AC: AC Adapter [ADP1] (on-line)
+ACPI: thermal: Thermal Zone [TZ01] (47 C)
+&#60;/code&#62;&#60;/pre&#62;
+&#60;pre&#62;&#60;code&#62;$ ls /sys/class/power_supply/
+ADP1  BAT0  ucsi-source-psy-USBC000:001  ucsi-source-psy-USBC000:002
+$ upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E &#39;state|percentage|energy-full&#39;
+    state:               charging
+    energy-full:         98.463 Wh
+    energy-full-design:  99.33 Wh
+    percentage:          35%
+&#60;/code&#62;&#60;/pre&#62;
+&#60;p&#62;The battery percentage, time remaining, charger detection, lid switch, the second thermal zone and both USB-C ports all work now. GNOME&#39;s AC and battery power settings behave properly again. You&#39;ll still see about 70 &#60;code&#62;AE_AML_BUFFER_LIMIT&#60;/code&#62; errors in the first 5 seconds of each boot, before the module loads. That&#39;s expected, and none appear after it.&#60;/p&#62;
+&#60;h2&#62;Fix 4: Fan speed reading&#60;/h2&#62;
+&#60;p&#62;With Fix 3 in place, the fan still reads 0 RPM, even under load. HP&#39;s &#60;code&#62;\_SB.FAN0._FST&#60;/code&#62; method only returns a stored value (&#60;code&#62;F1CS&#60;/code&#62;). That value is refreshed by &#60;code&#62;F1LS()&#60;/code&#62; only when the embedded controller sends a fan event, and all of those failed before the module loaded. I added a few lines to the module so &#60;code&#62;_FST&#60;/code&#62; calls &#60;code&#62;F1LS()&#60;/code&#62; first, which makes every read live. It applies on top of the module from Fix 3; bump &#60;code&#62;PACKAGE_VERSION&#60;/code&#62; in &#60;code&#62;dkms.conf&#60;/code&#62; to 1.1.0 when you reinstall.&#60;/p&#62;
+&#60;details&#62;
+&#60;summary&#62;&#60;code&#62;fan-speed.patch&#60;/code&#62; (applies to &#60;code&#62;kmod/omnibook_ffa_fix.c&#60;/code&#62;)&#60;/summary&#62;
+&#60;pre&#62;&#60;code class=&#34;language-diff&#34;&#62;--- a/omnibook_ffa_fix.c
++++ b/omnibook_ffa_fix.c
+@@ -67,6 +67,18 @@
+ static u8 *orig_bst_aml;
+ static u32 orig_bst_len;
+ 
++/*
++ * \_SB.FAN0._FST only returns F1CS, which F1LS() refreshes from the EC when
++ * an EC fan event arrives. Prepend a call to F1LS so every _FST read is live:
++ *   46 31 4c 53       F1LS ()   (resolved in the enclosing FAN0 scope)
++ */
++static const u8 fst_prefix_aml[] = { 0x46, 0x31, 0x4c, 0x53 };
++
++static void *fst_method_obj;
++static u8 *orig_fst_aml;
++static u32 orig_fst_len;
++static u8 *patched_fst_aml;
++
+ static struct delayed_work rescan_work;
+ static int rescan_attempts;
+ 
+@@ -159,6 +171,45 @@
+ 	return 0;
+ }
+ 
++static int patch_fst_aml(void)
++{
++	acpi_handle h;
++
++	if (ACPI_FAILURE(acpi_get_handle(NULL, &#38;quot;\\_SB.FAN0.F1LS&#38;quot;, &#38;amp;h))) {
++		pr_warn(&#38;quot;\\_SB.FAN0.F1LS not found, skipping _FST patch\n&#38;quot;);
++		return -ENODEV;
++	}
++
++	fst_method_obj = get_acpica_method_obj(&#38;quot;\\_SB.FAN0._FST&#38;quot;);
++	if (!fst_method_obj) {
++		pr_warn(&#38;quot;\\_SB.FAN0._FST not found, skipping _FST patch\n&#38;quot;);
++		return -ENODEV;
++	}
++
++	orig_fst_aml = *(u8 **)((u8 *)fst_method_obj + ACPICA_METHOD_AML_START_OFFSET);
++	orig_fst_len = *(u32 *)((u8 *)fst_method_obj + ACPICA_METHOD_AML_LEN_OFFSET);
++	if (!orig_fst_aml || !orig_fst_len || orig_fst_len &#38;gt; 4096) {
++		pr_warn(&#38;quot;\\_SB.FAN0._FST invalid AML pointer/length (%u)\n&#38;quot;, orig_fst_len);
++		orig_fst_aml = NULL;
++		return -EINVAL;
++	}
++
++	patched_fst_aml = kmalloc(sizeof(fst_prefix_aml) + orig_fst_len, GFP_KERNEL);
++	if (!patched_fst_aml) {
++		orig_fst_aml = NULL;
++		return -ENOMEM;
++	}
++	memcpy(patched_fst_aml, fst_prefix_aml, sizeof(fst_prefix_aml));
++	memcpy(patched_fst_aml + sizeof(fst_prefix_aml), orig_fst_aml, orig_fst_len);
++
++	*(u32 *)((u8 *)fst_method_obj + ACPICA_METHOD_AML_LEN_OFFSET) =
++		sizeof(fst_prefix_aml) + orig_fst_len;
++	*(u8 **)((u8 *)fst_method_obj + ACPICA_METHOD_AML_START_OFFSET) = patched_fst_aml;
++
++	pr_info(&#38;quot;Patched \\_SB.FAN0._FST to refresh fan speed via F1LS()\n&#38;quot;);
++	return 0;
++}
++
+ static void attach_platform_dev_by_name(const char *name)
+ {
+ 	struct device *dev;
+@@ -229,6 +280,7 @@
+ 		return ret;
+ 
+ 	patch_bst_aml();
++	patch_fst_aml();
+ 
+ 	INIT_DELAYED_WORK(&#38;amp;rescan_work, rescan_ffa_consumers);
+ 	rescan_ffa_consumers(&#38;amp;rescan_work.work);
+@@ -240,6 +292,12 @@
+ {
+ 	cancel_delayed_work_sync(&#38;amp;rescan_work);
+ 
++	if (fst_method_obj &#38;amp;&#38;amp; orig_fst_aml) {
++		*(u8 **)((u8 *)fst_method_obj + ACPICA_METHOD_AML_START_OFFSET) = orig_fst_aml;
++		*(u32 *)((u8 *)fst_method_obj + ACPICA_METHOD_AML_LEN_OFFSET) = orig_fst_len;
++	}
++	kfree(patched_fst_aml);
++
+ 	if (bst_method_obj &#38;amp;&#38;amp; orig_bst_aml) {
+ 		*(u8 **)((u8 *)bst_method_obj + ACPICA_METHOD_AML_START_OFFSET) = orig_bst_aml;
+ 		*(u32 *)((u8 *)bst_method_obj + ACPICA_METHOD_AML_LEN_OFFSET) = orig_bst_len;
+@@ -259,4 +317,5 @@
+ 
+ MODULE_LICENSE(&#38;quot;GPL&#38;quot;);
+ MODULE_AUTHOR(&#38;quot;keejkrej&#38;quot;);
+-MODULE_DESCRIPTION(&#38;quot;HP OmniBook Ultra 16-bk0xxx ACPI FF-A EC RBUF &#38;amp; Battery Fix&#38;quot;);
++MODULE_DESCRIPTION(&#38;quot;HP OmniBook Ultra 16-bk0xxx ACPI FF-A EC RBUF, Battery &#38;amp; Fan Speed Fix&#38;quot;);
++MODULE_VERSION(&#38;quot;1.1.0&#38;quot;);
+&#60;/code&#62;&#60;/pre&#62;
+&#60;/details&#62;
+&#60;p&#62;I ran all 20 cores flat out for 75 seconds to test it:&#60;/p&#62;
+&#60;table&#62;
+&#60;thead&#62;&#60;tr&#62;&#60;th&#62;Time&#60;/th&#62;&#60;th&#62;Fan (&#60;code&#62;fan_speed_rpm&#60;/code&#62;)&#60;/th&#62;&#60;th&#62;SoC / system temp&#60;/th&#62;&#60;/tr&#62;&#60;/thead&#62;
+&#60;tbody&#62;
+&#60;tr&#62;&#60;td&#62;Idle&#60;/td&#62;&#60;td&#62;0 RPM (the fan really is off)&#60;/td&#62;&#60;td&#62;51 °C / 52 °C&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;15 s&#60;/td&#62;&#60;td&#62;2658 RPM&#60;/td&#62;&#60;td&#62;98 °C / 97 °C&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;30–75 s&#60;/td&#62;&#60;td&#62;about 3990 RPM&#60;/td&#62;&#60;td&#62;95–98 °C&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;20 s after the test&#60;/td&#62;&#60;td&#62;3711 RPM&#60;/td&#62;&#60;td&#62;57 °C / 76 °C&#60;/td&#62;&#60;/tr&#62;
+&#60;/tbody&#62;
+&#60;/table&#62;
+&#60;h2&#62;What still doesn&#39;t work&#60;/h2&#62;
+&#60;table&#62;
+&#60;thead&#62;&#60;tr&#62;&#60;th&#62;Problem&#60;/th&#62;&#60;th&#62;What&#39;s going on&#60;/th&#62;&#60;th&#62;Outlook&#60;/th&#62;&#60;/tr&#62;&#60;/thead&#62;
+&#60;tbody&#62;
+&#60;tr&#62;&#60;td&#62;&#60;strong&#62;Keyboard backlight control&#60;/strong&#62;&#60;/td&#62;&#60;td&#62;Linux sees no keyboard backlight. I checked the firmware tables: HP gives the operating system no control, only a BIOS timeout setting. The embedded controller handles brightness, presumably via the Fn key.&#60;/td&#62;&#60;td&#62;No OS control until HP adds one. Try the Fn key.&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;&#60;strong&#62;Thunderbolt / USB4&#60;/strong&#62;&#60;/td&#62;&#60;td&#62;The USB4 driver loads but no USB4 controller ever appears, and the log shows &#60;code&#62;NVIDIA USB4 disable _DSM: returned 0x00 (failure)&#60;/code&#62;. Docks and enclosures that need USB4/Thunderbolt probably won&#39;t run at full speed.&#60;/td&#62;&#60;td&#62;Waiting on NVIDIA/HP. Ordinary USB-C devices and charging work.&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;&#60;strong&#62;USB-C alternate modes&#60;/strong&#62;&#60;/td&#62;&#60;td&#62;&#60;code&#62;ucsi_acpi: failed to register partner alt modes (-5)&#60;/code&#62;, &#60;code&#62;GET_CABLE_PROPERTY failed&#60;/code&#62;.&#60;/td&#62;&#60;td&#62;Video over USB-C to some docks may not work. Untested.&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;&#60;strong&#62;Speaker tuning&#60;/strong&#62;&#60;/td&#62;&#60;td&#62;No HP tuning files for the CS35L56 amps (&#60;code&#62;patched=0&#60;/code&#62;).&#60;/td&#62;&#60;td&#62;Waiting on &#60;code&#62;linux-firmware&#60;/code&#62;.&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;&#60;strong&#62;Hibernate&#60;/strong&#62;&#60;/td&#62;&#60;td&#62;There&#39;s no &#60;code&#62;/sys/power/disk&#60;/code&#62; on this platform.&#60;/td&#62;&#60;td&#62;Normal for Arm laptops.&#60;/td&#62;&#60;/tr&#62;
+&#60;tr&#62;&#60;td&#62;&#60;strong&#62;Slow ACPI warnings&#60;/strong&#62;&#60;/td&#62;&#60;td&#62;&#60;code&#62;workqueue: acpi_os_execute_deferred hogged CPU for &#38;gt;20000us&#60;/code&#62;: each embedded-controller call over the FF-A bridge takes over 20 ms.&#60;/td&#62;&#60;td&#62;Cosmetic. It may cost a little battery life.&#60;/td&#62;&#60;/tr&#62;
+&#60;/tbody&#62;
+&#60;/table&#62;
+&#60;p&#62;&#60;strong&#62;Not yet tested:&#60;/strong&#62; suspend/resume (I haven&#39;t run a sleep cycle yet), an external monitor over HDMI or USB-C, the headphone jack and headset mic with something plugged in, and the HP-specific function keys.&#60;/p&#62;
+&#60;h2&#62;Keeping it working&#60;/h2&#62;
+&#60;ul&#62;
+&#60;li&#62;&#60;strong&#62;After kernel updates:&#60;/strong&#62; DKMS rebuilds the battery module automatically. If the battery disappears after an update, check &#60;code&#62;dkms status&#60;/code&#62; and &#60;code&#62;journalctl -b -u systemd-modules-load&#60;/code&#62;.&#60;/li&#62;
+&#60;li&#62;&#60;strong&#62;When HP releases a BIOS that fixes &#60;code&#62;\_SB.FFA0.RBUF&#60;/code&#62;:&#60;/strong&#62; remove the module (&#60;code&#62;sudo dkms remove omnibook-ffa-fix/1.1.0 --all&#60;/code&#62; and delete &#60;code&#62;/etc/modules-load.d/omnibook-ffa-fix.conf&#60;/code&#62;), then reboot.&#60;/li&#62;
+&#60;li&#62;&#60;strong&#62;When Ubuntu&#39;s &#60;code&#62;alsa-ucm-conf&#60;/code&#62; includes &#60;code&#62;ucm2/MediaTek/mt8901-soundwir&#60;/code&#62;:&#60;/strong&#62; delete the per-user audio override (see Fix 2).&#60;/li&#62;
+&#60;/ul&#62;
+&#60;h2&#62;Sources&#60;/h2&#62;
+&#60;ul&#62;
+&#60;li&#62;&#60;a href=&#34;https://github.com/alsa-project/alsa-ucm-conf/pull/862&#34;&#62;alsa-ucm-conf PR #862&#60;/a&#62;: mt8901 SoundWire UCM profiles&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;https://github.com/NVIDIA/NV-Kernels/pull/567&#34;&#62;NVIDIA NV-Kernels PR #567&#60;/a&#62;: N1X audio kernel stack&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;https://github.com/omacom/omarchy/issues/18112&#34;&#62;Omarchy issue #18112&#60;/a&#62;: the &#60;code&#62;\_SB.FFA0.RBUF&#60;/code&#62; firmware bug on this model, with the root cause&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;https://github.com/keejkrej/omarchy-omnibook-ultra-16&#34;&#62;keejkrej/omarchy-omnibook-ultra-16&#60;/a&#62;: the &#60;code&#62;omnibook_ffa_fix&#60;/code&#62; module&#60;/li&#62;
+&#60;li&#62;&#60;a href=&#34;https://github.com/johannhartmann/asus-proart-p16-rtx-spark-linux&#34;&#62;johannhartmann/asus-proart-p16-rtx-spark-linux&#60;/a&#62;: related N1X work on the ASUS ProArt P16&#60;/li&#62;
+&#60;/ul&#62;
+</description>
+                <pubDate>Sat, 21 Nov 2026 03:05:20 -0800</pubDate>
+                <link>https://duan.ca/2026/11/21/ubuntu-on-hp-omnibook-ultra-16/</link>
+                <guid isPermaLink="true">https://duan.ca/2026/11/21/ubuntu-on-hp-omnibook-ultra-16/</guid>
+            </item>
+    </channel>
+</rss>

@@ -15,7 +15,7 @@ jobs:
     - name: Action
       run: ${{ matrix.action }}
   ubuntu:
-    name: Linux Build Tests
+    name: Linux x86_64 Build Tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -23,5 +23,16 @@ jobs:
           - make build
     steps:
     - uses: actions/checkout@v1
+    - name: Action
+      run: ${{ matrix.action }}
+  ubuntu-arm:
+    name: Linux aarch64 Build Tests
+    runs-on: ubuntu-24.04-arm
+    strategy:
+      matrix:
+        action:
+          - make build
+    steps:
+    - uses: actions/checkout@v4
     - name: Action
       run: ${{ matrix.action }}

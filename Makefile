@@ -1,9 +1,12 @@
 OS:=$(shell uname -s)
+ARCH:=$(shell uname -m)
+GENERATOR:=bin/generate-$(OS)-$(ARCH)
+
 build:
-	@bin/generate-$(OS) "https://duan.ca" ./ ./public
+	@$(GENERATOR) "https://duan.ca" ./ ./public
 
 build-local:
-	@bin/generate-$(OS) "http://localhost:8000" ./ ./public
+	@$(GENERATOR) "http://localhost:8000" ./ ./public
 
 serve: build-local
 	@cd public; python3 -m http.server

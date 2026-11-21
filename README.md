@@ -8,8 +8,10 @@ generic. That is, it in theory could generate other sites, if the sites follow
 the convention of the inputs and have similiar structures.
 
 The generator can be built to portable executables, which are checked in as part
-of the project in `/bin`. Adding content to the site shouldn't require
-rebuilding the executables.
+of the project in `/bin`, named `generate-$(uname -s)-$(uname -m)`:
+`generate-Darwin-arm64`, `generate-Linux-x86_64` and `generate-Linux-aarch64`
+(the Linux ones are static musl builds; see `generator/Makefile`). Adding
+content to the site shouldn't require rebuilding the executables.
 
 See  `make build` in `Makefile` for how to use the generator.
 
